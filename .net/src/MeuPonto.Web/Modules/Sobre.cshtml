@@ -1,0 +1,19 @@
+﻿@page
+@model SobreModel
+@{
+    ViewData["Title"] = "Sobre";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
+        <li class="breadcrumb-item active" aria-current="page">Sobre</li>
+    </ol>
+</nav>
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="text-center">
+    <h1 class="display-4">Meu Ponto</h1>
+    <p>Saiba mais em <a href="https://github.com/mardsystems/MeuPonto">Meu Ponto (Github)</a>.</p>
+</div>

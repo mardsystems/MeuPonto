@@ -1,0 +1,28 @@
+﻿# language: pt-br
+
+Funcionalidade: Apurar Folha
+	Para saber se trabalhei mais ou menos que o tempo previsto
+	Enquanto trabalhador
+	Eu quero apurar a folha de ponto
+
+Regra: Para toda entrada deverá existir uma saída
+
+Esquema do Cenário: Trabalhador registra a entrada e a saída do expediente
+	Dado que o trabalhador tem um perfil cadastrado com a seguinte jornada de trabalho semanal prevista:
+		| dia semana | tempo |
+		| Monday     | 08:00 |
+		| Tuesday    | 08:00 |
+		| Wednesday  | 08:00 |
+		| Thursday   | 08:00 |
+		| Friday     | 08:00 |
+	E que o trabalhador registrou a entrada no expediente às '<entrada>'
+	E que o trabalhador registrou a saída no expediente às '<saída>'
+	E que o trabalhador tem uma folha de ponto aberta na competência '2022/11'
+	Quando o trabalhador apurar a folha de ponto
+	Então o tempo total apurado da folha de ponto deverá ser de '<apurado>'
+
+Exemplos:
+	| entrada          | saída            | apurado |
+	| 27/11/2022 09:14 | 27/11/2022 11:30 | 02:16   |
+	| 27/11/2022 12:27 | 27/11/2022 18:03 | 05:36   |
+

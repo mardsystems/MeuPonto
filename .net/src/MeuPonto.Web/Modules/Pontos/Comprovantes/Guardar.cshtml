@@ -1,0 +1,164 @@
+﻿@page
+@model MeuPonto.Modules.Pontos.Comprovantes.GuardarComprovanteModel
+
+@{
+    ViewData["Title"] = "Guardar Comprovante de Ponto";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
+        <li class="breadcrumb-item"><a asp-page="/Pontos/Index">Pontos</a></li>
+        <li class="breadcrumb-item"><a asp-page="./Index">Comprovantes</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Guardar</li>
+    </ol>
+</nav>
+
+<h1>@ViewData["Title"] <span class="badge bg-secondary">Novo</span></h1>
+
+<div class="card">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page">
+                    <i class="bi bi-qr-code"></i>
+                    Guardar Comprovante
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row mb-3">
+                <label asp-for="Imagem" class="col-sm-3 col-form-label"></label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input asp-for="Imagem" class="form-control">
+                        <button class="btn btn-outline-secondary" name="command" value="Escanear">Escanear</button>
+                    </div>
+                    <span asp-validation-for="Imagem" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="Comprovante.TipoImagem" class="col-sm-3 col-form-label"></label>
+                <div class="col-sm-9">
+                    <select asp-for="Comprovante.TipoImagem" disabled class="form-select" asp-items="Html.GetEnumSelectList<TipoImagemEnum>()"></select>
+                    <input asp-for="Comprovante.TipoImagem" type="hidden" />
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="Comprovante.Numero" class="col-sm-3 col-form-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="Comprovante.Numero" class="form-control" />
+                    <span asp-validation-for="Comprovante.Numero" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-header">
+                    Ponto
+                </div>
+                <div class="row g-0">
+                    <div class="col-sm-3">
+                        @*<svg class="bd-placeholder-img img-fluid rounded-start" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title>PlacehSolder</title>
+                        <rect width="100%" height="100%" fill="#868e96"></rect>
+                        <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Apuração Mensal</text>
+                        </svg>*@
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <label asp-for="Ponto.PerfilId" class="col-sm-3 col-form-label"></label>
+                                <div class="col-sm-9">
+                                    <select asp-for="Ponto.PerfilId" class="form-select" asp-items="ViewBag.PerfilId"></select>
+                                    <span asp-validation-for="Ponto.PerfilId" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label asp-for="Ponto.DataHora" class="col-sm-3 col-form-label"></label>
+                                <div class="col-sm-9">
+                                    <input asp-for="Ponto.DataHora" class="form-control" />
+                                    <span asp-validation-for="Ponto.DataHora" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <fieldset class="row mb-3">
+                                <legend class="col-form-label col-sm-3 pt-0">Momento</legend>
+                                <div class="col-sm-9">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="Ponto.Momento" id="Ponto_Momento_Entrada" value="1">
+                                        <label class="form-check-label" for="Ponto_Momento_Entrada">
+                                            Entrada
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="Ponto.Momento" id="Ponto_Momento_Saida" value="2">
+                                        <label class="form-check-label" for="Ponto_Momento_Saida">
+                                            Saída
+                                        </label>
+                                    </div>
+                                    <div class="form-check disabled">
+                                        <input class="form-check-input" type="radio" name="Ponto.Momento" id="Ponto_Momento_Errado" value="3">
+                                        <label class="form-check-label" for="Ponto_Momento_Errado">
+                                            Errado
+                                        </label>
+                                    </div>
+                                    <span asp-validation-for="Ponto.Momento" class="text-danger"></span>
+                                </div>
+                            </fieldset>
+                            <fieldset class="row mb-3">
+                                <legend class="col-form-label col-sm-3 pt-0">Pausa</legend>
+                                <div class="col-sm-9">
+                                    <div class="btn-group" role="group" aria-label="Pausa">
+                                        <input type="radio" class="btn-check" name="Ponto.Pausa" id="Ponto_Pausa_Almoco" value="1" autocomplete="off">
+                                        <label class="btn btn-outline-primary" for="Ponto_Pausa_Almoco" title="Almoço">
+                                            <i class="bi bi-egg-fried"></i>
+                                        </label>
+                                        <input type="radio" class="btn-check" name="Ponto.Pausa" id="Ponto_Pausa_CafeLanche" value="2" autocomplete="off">
+                                        <label class="btn btn-outline-primary" for="Ponto_Pausa_CafeLanche" title="Café/Lanche">
+                                            <i class="bi bi-cup-hot"></i>
+                                        </label>
+                                        <input type="radio" class="btn-check" name="Ponto.Pausa" id="Ponto_Pausa_Banheiro" value="3" autocomplete="off">
+                                        <label class="btn btn-outline-primary" for="Ponto_Pausa_Banheiro" title="Banheiro">
+                                            <i class="bi bi-badge-wc"></i>
+                                        </label>
+                                        <input type="radio" class="btn-check" name="Ponto.Pausa" id="Ponto_Pausa_ConversaReuniao" value="4" autocomplete="off">
+                                        <label class="btn btn-outline-primary" for="Ponto_Pausa_ConversaReuniao" title="Conversa/Reunião">
+                                            <i class="bi bi-chat"></i>
+                                        </label>
+                                        <input type="radio" class="btn-check" name="Ponto.Pausa" id="Ponto_Pausa_Telefonema" value="5" autocomplete="off">
+                                        <label class="btn btn-outline-primary" for="Ponto_Pausa_Telefonema" title="Telefonema">
+                                            <i class="bi bi-telephone"></i>
+                                        </label>
+                                        <input type="radio" class="btn-check" name="Ponto.Pausa" id="Ponto_Pausa_Generica" value="6" autocomplete="off">
+                                        <label class="btn btn-outline-primary" for="Ponto_Pausa_Generica" title="Genérica">
+                                            <i class="bi bi-pause-fill"></i>
+                                        </label>
+                                    </div>
+                                    <span asp-validation-for="Ponto.Pausa" class="text-danger"></span>
+                                </div>
+                            </fieldset>
+                            <div class="row mb-3">
+                                <label asp-for="Ponto.Observacao" class="col-sm-3 col-form-label"></label>
+                                <div class="col-sm-9">
+                                    <textarea asp-for="Ponto.Observacao" class="form-control"></textarea>
+                                    <span asp-validation-for="Ponto.Observacao" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" value="Salvar" class="btn btn-primary">
+                <i class="bi bi-save"></i>
+                Salvar
+            </button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

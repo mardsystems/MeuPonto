@@ -1,0 +1,104 @@
+﻿@page
+@model MeuPonto.Modules.Perfis.Empresas.IndexModel
+
+@{
+    ViewData["Title"] = "Cadastro de Empresas";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
+        <li class="breadcrumb-item"><a asp-page="/Perfis/Index">Perfis</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Empresas</li>
+    </ol>
+</nav>
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="btn-group mb-3">
+    <a class="btn btn-primary Criacao Empresa" asp-page="./Criar">
+        <i class="bi bi-plus-circle"></i>
+        Criar Nova
+    </a>
+</div>
+
+<form class="table-responsive text-nowrap" method="get">
+    <table class="table table-striped align-middle mb-3 Empresas">
+        <thead class="table-light">
+            <tr>
+                <th>Ações</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Empresa[0].Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Empresa[0].Cnpj)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Empresa[0].InscricaoEstadual)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Empresa[0].Endereco)
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <div class="btn-group" role="group">
+                        <button type="submit" value="Filtrar" class="btn btn-secondary">
+                            <i class="bi bi-funnel"></i>
+                            Filtrar
+                        </button>
+                        <a class="btn btn-warning" asp-page="./Index">
+                            <i class="bi bi-x-circle"></i>
+                        </a>
+                    </div>
+
+                </th>
+                <th>
+                    <input asp-for="Nome" class="form-control" />
+                </th>
+                <th>
+                    <input asp-for="Cnpj" class="form-control" />
+                </th>
+                <th>
+                    <input asp-for="InscricaoEstadual" class="form-control" />
+                </th>
+                <th>
+                    <input asp-for="Endereco" class="form-control" />
+                </th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            @foreach (var item in Model.Empresa)
+            {
+                <tr data-id="@item.Id" data-name="@item.Nome">
+                    <td class="p-1" scope="row">
+                        <div class="btn-group" role="group">
+                            <a class="btn btn-link rounded-0 Detalhe" asp-page="./Detalhar" asp-route-id="@item.Id" title="Detalhar">
+                                <i class="bi bi-card-text"></i>
+                            </a>
+                            <a class="btn btn-link Edicao" asp-page="./Editar" asp-route-id="@item.Id" title="Editar">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <a class="btn btn-link text-danger rounded-0 Exclusao" asp-page="./Excluir" asp-route-id="@item.Id" title="Excluir">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cnpj)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InscricaoEstadual)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Endereco)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <partial name="_Pagination" model="Model.Pagination" />
+</form>
