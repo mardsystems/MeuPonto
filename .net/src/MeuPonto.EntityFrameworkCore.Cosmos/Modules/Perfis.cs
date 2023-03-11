@@ -6,6 +6,7 @@ using System.Linq;
 using System.DocumentModel;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace MeuPonto.Modules.Perfis
 {
@@ -21,7 +22,8 @@ namespace MeuPonto.Modules.Perfis
 
         [MaxLength(12)]
         public string? Pis { get; set; }
-        
+
+        [Required]
         public PerfilEmpresa Empresa { get; set; } = default!;
 
         //public virtual ICollection<Ponto> Pontos { get; set; }

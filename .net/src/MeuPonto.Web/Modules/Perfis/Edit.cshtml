@@ -49,8 +49,9 @@
                 <span asp-validation-for="Perfil.Empresa.Endereco" class="text-danger"></span>
             </div>
             <input type="hidden" asp-for="Perfil.Id" />
+            <input type="hidden" asp-for="Perfil.PartitionKey" />
             <input type="hidden" asp-for="Perfil.CreationDate" />
-            <input type="hidden" asp-for="Perfil.ETag" />
+            <input type="hidden" asp-for="Perfil.Version" />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

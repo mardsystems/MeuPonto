@@ -58,13 +58,13 @@ namespace MeuPonto
             app.MapRazorPages();
             app.MapControllers();
 
-            using (var scope = app.Services.CreateScope())
-            {
-                var db = scope.ServiceProvider.GetService<MeuPontoDbContext>();
+            //using (var scope = app.Services.CreateScope())
+            //{
+            //    var db = scope.ServiceProvider.GetService<MeuPontoDbContext>();
 
-                db.Database.EnsureDeleted();
-                db.Database.EnsureCreated();
-            }
+            //    db.Database.EnsureDeleted();
+            //    db.Database.EnsureCreated();
+            //}
 
             app.Run();
         }

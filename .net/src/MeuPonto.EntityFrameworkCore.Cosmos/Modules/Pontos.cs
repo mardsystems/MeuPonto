@@ -1,4 +1,5 @@
 ﻿using MeuPonto.Modules.Perfis;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,16 +20,15 @@ namespace MeuPonto.Modules.Pontos
         [Required]
         public Guid? PerfilId { get; set; }
 
-        public virtual PerfilRef? Perfil { get; set; }
+        public PontoPerfilRef? Perfil { get; set; }
 
         [MaxLength(255)]
         public string? Observacao { get; set; }
     }
 
-    public class PerfilRef
+    [Owned]
+    public class PontoPerfilRef
     {
-        public Guid? Id { get; set; }
-
         [Required]
         [MaxLength(30)]
         public string? Matricula { get; set; }
@@ -39,26 +39,32 @@ namespace MeuPonto.Modules.Pontos
         [Required]
         public Guid? PontoId { get; set; }
 
-        public virtual PontoRef? Ponto { get; set; } = default!;
+        public PontoRef? Ponto { get; set; }
 
         [MaxLength(16)]
         public string? Numero { get; set; }
 
-        [Required]
+        //[Required]
         public byte[]? Imagem { get; set; }
 
         [Required]
         public int? ImagemTipoId { get; set; }
 
-        public virtual PontoComprovanteImagemTipo? ImagemTipo { get; set; } = default!;
+        public PontoComprovanteImagemTipoRef? ImagemTipo { get; set; }
     }
 
+    [Owned]
     public class PontoRef
     {
-        public Guid? Id { get; set; }
-
         [Required]
         public DateTime? Data { get; set; }
+    }
+
+    [Owned]
+    public class PontoComprovanteImagemTipoRef
+    {
+        [MaxLength(255)]
+        public string Nome { get; set; } = default!;
     }
 
     public class PontoComprovanteImagemTipo

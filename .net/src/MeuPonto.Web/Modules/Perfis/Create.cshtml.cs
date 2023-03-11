@@ -25,15 +25,21 @@ namespace MeuPonto.Modules.Perfis
 
         [BindProperty]
         public Perfil Perfil { get; set; }
-        
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return Page();
             }
+
+            Perfil.Id = Guid.NewGuid();
+
+            Perfil.PartitionKey = User.Identity.Name; //Perfil.Empresa.Cnpj;
+
+            Perfil.CreationDate = DateTime.Now;
 
             _db.Perfis.Add(Perfil);
             await _db.SaveChangesAsync();

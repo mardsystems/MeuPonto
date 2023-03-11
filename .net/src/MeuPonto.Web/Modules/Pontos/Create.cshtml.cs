@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MeuPonto.Data;
+using MeuPonto.Modules.Perfis;
 
 namespace MeuPonto.Modules.Pontos
 {
@@ -35,6 +36,19 @@ namespace MeuPonto.Modules.Pontos
             {
                 return Page();
             }
+
+            Ponto.Id = Guid.NewGuid();
+
+            Ponto.PartitionKey = User.Identity.Name; //Ponto.Data.ToString();
+
+            Ponto.CreationDate = DateTime.Now;
+
+            var perfil = await _db.Perfis.FindAsync(Ponto.PerfilId, User.Identity.Name);
+
+            Ponto.Perfil = new PontoPerfilRef
+            {
+                Matricula = perfil?.Matricula
+            };
 
             _db.Pontos.Add(Ponto);
             await _db.SaveChangesAsync();
