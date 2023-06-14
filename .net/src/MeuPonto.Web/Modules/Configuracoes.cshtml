@@ -1,0 +1,149 @@
+﻿@page
+@model ConfiguracoesModel
+@{
+    ViewData["Title"] = "Configurações";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
+        <li class="breadcrumb-item active" aria-current="page">Configurações</li>
+    </ol>
+</nav>
+
+@*<h1>@ViewData["Title"]</h1>*@
+
+@if (Model.ResetSuccess)
+{
+    <div class="alert alert-success alert-dismissible fade show d-flex align-items-center mb-3" role="alert">
+        <i class="bi bi-check-circle-fill flex-shrink-0 me-2"></i>
+        <div>
+            Reset feito com sucesso.
+        </div>
+        @if (HttpContext.JavascriptIsEnabled())
+        {
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        }
+        else
+        {
+            <a class="btn-close" aria-label="Close" asp-page="."></a>
+        }
+    </div>
+}
+
+<ul class="list-group">
+    <environment names="Development,Staging">
+        <li class="list-group-item d-flex justify-content-between align-items-start gap-3 py-3">
+            @*<img src="https://github.com/twbs.png" alt="twbs" class="rounded-circle flex-shrink-0" width="32" height="32">*@
+            <div class="ms-2 me-auto">
+                <h6 class="mb-0">Reiniciar para configurações de fábrica</h6>
+                <p class="mb-0 opacity-50">Exclui e cria o banco de dados novamente.</p>
+            </div>
+            <span>
+                @if (HttpContext.JavascriptIsEnabled())
+                {
+                    <div class="row row-cols-lg-auto g-3 align-items-center">
+                        <div class="col-12">
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Reset
+                            </button>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <form class="row row-cols-lg-auto g-3 align-items-center" method="post">
+                        <div class="col-12">
+                            <input type="submit" class="btn btn-danger" name="AskConfirmation" value="Reset 2" />
+                        </div>
+                    </form>
+                }
+            </span>
+        </li>
+    </environment>
+    <li class="list-group-item d-flex justify-content-between align-items-start gap-3 py-3">
+        @*<img src="https://github.com/twbs.png" alt="twbs" class="rounded-circle flex-shrink-0" width="32" height="32">*@
+        <div class="ms-2 me-auto">
+            <h6 class="mb-0">Data/hora do servidor</h6>
+            @*<p class="mb-0 opacity-50">Some placeholder content in a paragraph that goes a little longer so it wraps to a new line.</p>*@
+        </div>
+        <span>
+            @(DateTime.Now.ToString("o"))
+        </span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-start gap-3 py-3">
+        @*<img src="https://github.com/twbs.png" alt="twbs" class="rounded-circle flex-shrink-0" width="32" height="32">*@
+        <div class="ms-2 me-auto">
+            <h6 class="mb-0">Cultura</h6>
+            @*<p class="mb-0 opacity-50">Some placeholder content in a paragraph.</p>*@
+        </div>
+        <span>
+            @(System.Globalization.CultureInfo.CurrentCulture.ToString())
+        </span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-start gap-3 py-3">
+        @*<img src="https://github.com/twbs.png" alt="twbs" class="rounded-circle flex-shrink-0" width="32" height="32">*@
+        <div class="ms-2 me-auto">
+            <h6 class="mb-0">Cultura da IU</h6>
+            @*<p class="mb-0 opacity-50">Some placeholder content in a paragraph.</p>*@
+        </div>
+        <span>
+            @(System.Globalization.CultureInfo.CurrentUICulture.ToString())
+        </span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-start gap-3 py-3">
+        @*<img src="https://github.com/twbs.png" alt="twbs" class="rounded-circle flex-shrink-0" width="32" height="32">*@
+        <div class="ms-2 me-auto">
+            <h6 class="mb-0">Javascript</h6>
+            @*<p class="mb-0 opacity-50">Some placeholder content in a paragraph.</p>*@
+        </div>
+        <span>
+            <form method="post">
+                @if (Model.Configuracoes.JavascriptIsEnabled)
+                {
+                    <button type="submit" name="JavascriptIsEnabled" value="false" class="btn btn-primary">
+                        Desativar
+                    </button>
+                }
+                else
+                {
+                    <button type="submit" name="JavascriptIsEnabled" value="true" class="btn btn-primary">
+                        Ativar
+                    </button>
+                }
+            </form>
+        </span>
+    </li>
+</ul>
+
+<div class="modal fade @(Model.AskResetConfirmation ? "show" : "")" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="@(Model.AskResetConfirmation ? "false": "true")" style="display: @(Model.AskResetConfirmation ? "block" : "none")">
+    <div class="modal-dialog">
+        <form class="modal-content" method="post">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Tem certeza?</h1>
+                @if (HttpContext.JavascriptIsEnabled())
+                {
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                }
+                else
+                {
+                    <a class="btn-close" aria-label="Close" asp-page="."></a>
+                }
+            </div>
+            <div class="modal-body">
+                Isso apagará todos os seus dados.
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" name="command" value="Reset">Sim</button>
+                @if (HttpContext.JavascriptIsEnabled())
+                {
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+                }
+                else
+                {
+                    <a class="btn btn-secondary" asp-page=".">Não</a>
+                }
+            </div>
+        </form>
+    </div>
+</div>

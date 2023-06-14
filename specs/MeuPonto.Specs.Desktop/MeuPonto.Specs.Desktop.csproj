@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+	<TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>MeuPonto</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="specflow.actions.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="specflow.actions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="6.2.0" />
+    <PackageReference Include="SpecFlow" Version="3.9.40" />
+    <PackageReference Include="SpecFlow.Actions.WindowsAppDriver" Version="0.1.136" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\.net\src\MeuPonto.EntityFrameworkCore.Sqlite\MeuPonto.EntityFrameworkCore.Sqlite.csproj" />
+    <ProjectReference Include="..\..\.net\tests\MeuPonto.EntityFrameworkCore.Sqlite.Tests\MeuPonto.EntityFrameworkCore.Sqlite.Tests.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Modules\Pontos\Comprovantes\" />
+    <Folder Include="Modules\Pontos\Folhas\" />
+  </ItemGroup>
+
+</Project>

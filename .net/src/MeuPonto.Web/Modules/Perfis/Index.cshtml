@@ -1,0 +1,176 @@
+﻿@page
+@model MeuPonto.Modules.Perfis.IndexModel
+
+@{
+    ViewData["Title"] = "Cadastro de Perfis";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
+        <li class="breadcrumb-item active" aria-current="page">Perfis</li>
+    </ol>
+</nav>
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
+    <div class="btn-group me-2" role="group" aria-label="First group">
+        <a class="btn btn-primary Criacao Perfil" asp-page="./Criar">
+            <i class="bi bi-plus-circle"></i>
+            Criar Novo
+        </a>
+    </div>
+    <div class="btn-group" role="group" aria-label="Second group">
+        <a class="btn btn-outline-secondary" asp-page="./Empresas/Index">Empresas</a>
+    </div>
+</div>
+
+<form class="table-responsive text-nowrap" method="get">
+    <table class="table table-striped align-middle mb-3 Perfis">
+        <thead class="table-light">
+            <tr>
+                <th rowspan="3">Ações</th>
+                <th rowspan="3">
+                    @Html.DisplayNameFor(model => model.Perfil[0].Nome)
+                </th>
+                <th rowspan="3">
+                    @Html.DisplayNameFor(model => model.Perfil[0].Ativo)
+                </th>
+                <th rowspan="3">
+                    @Html.DisplayNameFor(model => model.Perfil[0].Matricula)
+                </th>
+                <th rowspan="2">
+                    @Html.DisplayNameFor(model => model.Perfil[0].Empresa)
+                </th>
+                <th colspan="8">
+                    @Html.DisplayNameFor(model => model.Perfil[0].JornadaTrabalhoSemanalPrevista)
+                </th>
+            </tr>
+            <tr>
+                <th colspan="7">
+                    @Html.DisplayNameFor(model => model.Perfil[0].JornadaTrabalhoSemanalPrevista.Semana)
+                </th>
+                <th rowspan="2" class="text-primary">
+                    @Html.DisplayNameFor(model => model.Perfil[0].JornadaTrabalhoSemanalPrevista.TempoTotal)
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    @DayOfWeek.Sunday
+                </th>
+                <th>
+                    @DayOfWeek.Monday
+                </th>
+                <th>
+                    @DayOfWeek.Tuesday
+                </th>
+                <th>
+                    @DayOfWeek.Wednesday
+                </th>
+                <th>
+                    @DayOfWeek.Thursday
+                </th>
+                <th>
+                    @DayOfWeek.Friday
+                </th>
+                <th>
+                    @DayOfWeek.Saturday
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <div class="btn-group" role="group">
+                        <button type="submit" value="Filtrar" class="btn btn-secondary">
+                            <i class="bi bi-funnel"></i>
+                            Filtrar
+                        </button>
+                        <a class="btn btn-warning" asp-page="./Index">
+                            <i class="bi bi-x-circle"></i>
+                        </a>
+                    </div>
+
+                </th>
+                <th>
+                    <input asp-for="Nome" class="form-control" />
+                </th>
+                <th>
+                    <select asp-for="Ativo" class="form-select">
+                        <option value=""></option>
+                        <option value="true">Sim</option>
+                        <option value="false">Não</option>
+                    </select>
+                </th>
+                <th>
+                    <input asp-for="Matricula" class="form-control" />
+                </th>
+                <th>
+                    <select asp-for="EmpresaId" class="form-select" asp-items="ViewBag.EmpresaId"></select>
+                </th>
+                <th class="table-secondary" colspan="9">
+
+                </th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            @foreach (var item in Model.Perfil)
+            {
+                <tr data-id="@item.Id" data-name="@item.Nome">
+                    <td class="p-1" scope="row">
+                        <div class="btn-group" role="group">
+                            <a class="btn btn-link rounded-0 Detalhe" asp-page="./Detalhar" asp-route-id="@item.Id" title="Detalhar">
+                                <i class="bi bi-card-text"></i>
+                            </a>
+                            <a class="btn btn-link Edicao" asp-page="./Editar" asp-route-id="@item.Id" title="Editar">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <a class="btn btn-link text-danger rounded-0 Exclusao" asp-page="./Excluir" asp-route-id="@item.Id" title="Excluir">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ativo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Matricula)
+                    </td>
+                    <td>
+                        <a class="text-decoration-none" asp-page="/Perfis/Empresas/Detalhar" asp-route-id="@item.EmpresaId" title="Detalhar Empresa" target="_blank">
+                            @Html.DisplayFor(modelItem => item.Empresa.Nome)
+                            <i class="bi bi-link-45deg"></i>
+                        </a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JornadaTrabalhoSemanalPrevista.Semana[0].Tempo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JornadaTrabalhoSemanalPrevista.Semana[1].Tempo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JornadaTrabalhoSemanalPrevista.Semana[2].Tempo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JornadaTrabalhoSemanalPrevista.Semana[3].Tempo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JornadaTrabalhoSemanalPrevista.Semana[4].Tempo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JornadaTrabalhoSemanalPrevista.Semana[5].Tempo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JornadaTrabalhoSemanalPrevista.Semana[6].Tempo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JornadaTrabalhoSemanalPrevista.TempoTotal)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <partial name="_Pagination" model="Model.Pagination" />
+</form>

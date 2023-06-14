@@ -1,0 +1,126 @@
+﻿@page
+@model MeuPonto.Modules.Perfis.Empresas.ExcluirModel
+
+@{
+    ViewData["Title"] = "Excluir Empresa";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
+        <li class="breadcrumb-item"><a asp-page="/Perfis/Index">Perfis</a></li>
+        <li class="breadcrumb-item"><a asp-page="./Index">Empresas</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Excluir</li>
+    </ol>
+</nav>
+
+<h1>@ViewData["Title"] <span class="badge bg-secondary">@Html.DisplayFor(model => model.Empresa.Nome)</span></h1>
+
+<div class="card">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="me-1">
+                <a class="btn btn-primary" asp-page="./Criar">
+                    <i class="bi bi-plus-circle"></i>
+                    Criar Nova
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-page="./Detalhar" asp-route-id="@Model.Empresa?.Id">
+                    <i class="bi bi-card-text"></i>
+                    <span class="d-none d-sm-inline">Detalhar</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-page="./Editar" asp-route-id="@Model.Empresa?.Id">
+                    <i class="bi bi-pencil"></i>
+                    <span class="d-none d-sm-inline">Editar</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-danger active" aria-current="page">
+                    <i class="bi bi-trash"></i>
+                    Excluir
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-danger" role="alert">
+            Tem certeza que deseja excluir isso?
+        </div>
+        <dl class="row g-3 Empresa">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Empresa.Nome)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Empresa.Nome)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Empresa.Cnpj)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Empresa.Cnpj)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Empresa.InscricaoEstadual)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Empresa.InscricaoEstadual)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Empresa.Endereco)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Empresa.Endereco)
+            </dd>
+        </dl>
+        <div class="accordion mb-3" id="accordionDetalhes">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDetalhesTecnicos" aria-expanded="false" aria-controls="collapseDetalhesTecnicos">
+                        Detalhes Técnicos
+                    </button>
+                </h2>
+                <div id="collapseDetalhesTecnicos" class="accordion-collapse collapse" data-bs-parent="#accordionDetalhes">
+                    <div class="accordion-body">
+                        <dl class="row g-3">
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.Empresa.Id)
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Html.DisplayFor(model => model.Empresa.Id)
+                            </dd>
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.Empresa.PartitionKey)
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Html.DisplayFor(model => model.Empresa.PartitionKey)
+                            </dd>
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.Empresa.CreationDate)
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Html.DisplayFor(model => model.Empresa.CreationDate)
+                            </dd>
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.Empresa.Version)
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Html.DisplayFor(model => model.Empresa.Version)
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <form method="post">
+            <input type="hidden" asp-for="Empresa.Id" />
+            <button type="submit" value="Excluir" class="btn btn-danger">
+                <i class="bi bi-trash"></i>
+                Excluir
+            </button>
+        </form>
+    </div>
+</div>

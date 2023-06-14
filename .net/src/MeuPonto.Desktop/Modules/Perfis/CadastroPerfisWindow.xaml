@@ -1,0 +1,153 @@
+﻿<Window
+    x:Class="MeuPonto.Modules.Perfis.CadastroPerfisWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MeuPonto.Modules.Perfis"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:perfis="clr-namespace:MeuPonto.Modules.Perfis;assembly=MeuPonto.EntityFrameworkCore.Sqlite"
+    xmlns:system="clr-namespace:System;assembly=System.Xaml.Extensions"
+    Title="Cadastro de Perfis"
+    Width="800"
+    Height="450"
+    Loaded="Window_Loaded"
+    Unloaded="Window_Unloaded"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <ResourceDictionary>
+            <CollectionViewSource x:Key="perfisViewSource" d:DesignSource="{d:DesignInstance {x:Type perfis:Perfil}, CreateList=True}" />
+            <CollectionViewSource x:Key="semanaViewSource" Source="{Binding JornadaTrabalhoSemanalPrevista.Semana, Source={StaticResource perfisViewSource}}" />
+            <!--<CollectionViewSource x:Key="recursoTiposViewSource" d:DesignSource="{d:DesignInstance {x:Type perfis:PerfilRecursoTipo}, CreateList=False}" />-->
+            <Image x:Key="Save" Source="/Resources/saveHS.png" />
+            <Image x:Key="SaveAll" Source="/Resources/saveAllHS.png" />
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Menu Grid.ColumnSpan="2" VerticalAlignment="Top">
+            <MenuItem AutomationProperties.AutomationId="registroMenuItem" Header="Registro">
+                <MenuItem Header="Novo Perfil ..." />
+                <Separator />
+                <MenuItem Header="Salvar" InputGestureText="Ctrl+S" />
+                <Separator />
+                <MenuItem Header="Fechar" />
+            </MenuItem>
+        </Menu>
+        <ToolBar Grid.Row="1">
+            <Button x:Name="novoPerfilButton" Click="novoPerfilButton_Click">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Novo Perfil ..." />
+                </StackPanel>
+            </Button>
+            <Separator />
+            <Button
+                x:Name="saveButton"
+                Height="24"
+                Click="SaveButton_Click"
+                Content="{StaticResource Save}"
+                ToolTip="Salvar" />
+        </ToolBar>
+        <Grid
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+            Margin="0"
+            DataContext="{StaticResource perfisViewSource}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <DataGrid
+                x:Name="perfilViewModelDataGrid"
+                Grid.Row="2"
+                AutoGenerateColumns="False"
+                AutomationProperties.Name="Grade de Perfis"
+                EnableRowVirtualization="False"
+                ItemsSource="{Binding}"
+                RowDetailsVisibilityMode="VisibleWhenSelected"
+                VirtualizingPanel.IsVirtualizing="False">
+                <!--<DataGrid.RowValidationRules>
+                    <local:PerfilValidationRule ValidationStep="UpdatedValue"/>
+                </DataGrid.RowValidationRules>-->
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        x:Name="nomeColumn"
+                        Width="*"
+                        AutomationProperties.Name="Nome do Perfil"
+                        Binding="{Binding Nome}"
+                        Header="Nome" />
+                    <DataGridCheckBoxColumn
+                        x:Name="ativoColumn"
+                        Width="100"
+                        Binding="{Binding Ativo}"
+                        Header="Ativo" />
+                    <DataGridTextColumn
+                        x:Name="matriculaColumn"
+                        Width="100"
+                        Binding="{Binding Matricula}"
+                        Header="Matrícula" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <GridSplitter
+                Grid.Column="1"
+                Width="5"
+                HorizontalAlignment="Stretch" />
+            <GroupBox
+                Grid.RowSpan="2"
+                Grid.Column="2"
+                Margin="0,-9,0,0"
+                Header="Perfil">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <TextBox
+                        x:Name="nomeTextBox"
+                        AutomationProperties.AutomationId="nomeTextBox"
+                        AutomationProperties.Name="nomeTextBox"
+                        Text="{Binding Nome}" />
+                    <GroupBox
+                        Grid.Row="2"
+                        Margin="0,-2,0,0"
+                        Header="Jornada Trabalho Semanal Prevista">
+                        <GroupBox
+                            Margin="0,-2,0,0"
+                            DataContext="{StaticResource semanaViewSource}"
+                            Header="Semana">
+                            <ItemsControl ItemsSource="{Binding Source={StaticResource semanaViewSource}}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="100" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label Content="{Binding DiaSemana}" />
+                                            <TextBox
+                                                Grid.Column="1"
+                                                AutomationProperties.AutomationId="tempoTextBox"
+                                                Text="{Binding Tempo}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </GroupBox>
+                    </GroupBox>
+                </Grid>
+            </GroupBox>
+        </Grid>
+        <StatusBar
+            Grid.Row="3"
+            Grid.ColumnSpan="2"
+            VerticalAlignment="Bottom">
+            <Label x:Name="statusBarLabel" Content="Pronto." />
+        </StatusBar>
+    </Grid>
+</Window>
