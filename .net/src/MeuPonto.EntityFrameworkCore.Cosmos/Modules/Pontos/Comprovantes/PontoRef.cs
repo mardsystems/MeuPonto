@@ -5,7 +5,7 @@ using System.ComponentModel;
 namespace MeuPonto.Modules.Pontos.Comprovantes;
 
 [Owned]
-public class PontoRef : Ponto_
+public class PontoRef : Concepts.Ponto
 {
     [Required]
     [DisplayName("Perfil")]
@@ -13,7 +13,7 @@ public class PontoRef : Ponto_
 
     [DisplayName("Perfil")]
     public PerfilRef? Perfil { get; set; }
-    Perfil_? Ponto_.Perfil => Perfil;
+    Concepts.Perfil? Concepts.Ponto.Perfil => Perfil;
 
     [Required]
     [DisplayName("Data/Hora")]
@@ -23,9 +23,13 @@ public class PontoRef : Ponto_
     [Required]
     [DisplayName("Momento")]
     public MomentoEnum? Momento { get; set; }
-    Momento_? Ponto_.Momento => Momento == null ? null : new Momento(Momento.Value);
+    Concepts.Momento? Concepts.Ponto.Momento => Momento == null ? null : new Momento(Momento.Value);
 
     [DisplayName("Pausa")]
     public PausaEnum? Pausa { get; set; }
-    Pausa_? Ponto_.Pausa => Pausa == null ? null : new Pausa(Pausa.Value);
+    Concepts.Pausa? Concepts.Ponto.Pausa => Pausa == null ? null : new Pausa(Pausa.Value);
+
+    bool Concepts.Ponto.Estimado => throw new NotImplementedException();
+
+    string? Concepts.Ponto.Observacao => throw new NotImplementedException();
 }

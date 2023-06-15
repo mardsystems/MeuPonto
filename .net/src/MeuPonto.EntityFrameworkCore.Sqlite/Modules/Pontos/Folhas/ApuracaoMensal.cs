@@ -4,11 +4,11 @@ using System.ComponentModel;
 namespace MeuPonto.Modules.Pontos.Folhas;
 
 [Owned]
-public class ApuracaoMensal : ApuracaoMensal_
+public class ApuracaoMensal : Concepts.ApuracaoMensal
 {
     [DisplayName("Dias")]
     public IList<ApuracaoDiaria> Dias { get; set; }
-    IList<ApuracaoDiaria_> ApuracaoMensal_.Dias => Dias.Cast<ApuracaoDiaria_>().ToList();
+    IList<Concepts.ApuracaoDiaria> Concepts.ApuracaoMensal.Dias => Dias.Cast<Concepts.ApuracaoDiaria>().ToList();
 
     [DisplayName("Total Dias")]
     public int TotalDias { get => Dias.Count; }

@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace MeuPonto.Modules.Perfis;
 
-public class Perfil : DocumentEntity, Perfil_
+public class Perfil : DocumentEntity, Concepts.Perfil
 {
     [Required]
     [MinLength(3)]
@@ -24,11 +24,11 @@ public class Perfil : DocumentEntity, Perfil_
 
     [DisplayName("Empresa")]
     public EmpresaRef? Empresa { get; set; }
-    Empresa_? Perfil_.Empresa => Empresa;
+    Concepts.Empresa? Concepts.Perfil.Empresa => Empresa;
 
     [DisplayName("Jornada Trabalho Semanal Prevista")]
     public virtual JornadaTrabalhoSemanal JornadaTrabalhoSemanalPrevista { get; set; } = default!;
-    JornadaTrabalhoSemanal_ Perfil_.JornadaTrabalhoSemanalPrevista => JornadaTrabalhoSemanalPrevista;
+    Concepts.JornadaTrabalhoSemanal Concepts.Perfil.JornadaTrabalhoSemanalPrevista => JornadaTrabalhoSemanalPrevista;
 
     public Perfil()
     {

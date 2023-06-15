@@ -1,6 +1,6 @@
-﻿namespace MeuPonto.Modules.Pontos.Folhas;
+﻿namespace MeuPonto.Concepts;
 
-public interface ApuracaoDiaria_
+public interface ApuracaoDiaria
 {
     int? Dia { get; }
     TimeSpan? TempoPrevisto { get; }

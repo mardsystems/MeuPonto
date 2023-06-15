@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MeuPonto.Modules.Pontos.Folhas;
 
-public class Folha : GlobalTableEntity, Folha_
+public class Folha : GlobalTableEntity, Concepts.Folha
 {
     [Required]
     [DisplayName("Perfil")]
@@ -12,7 +12,7 @@ public class Folha : GlobalTableEntity, Folha_
 
     [DisplayName("Perfil")]
     public Perfil? Perfil { get; set; }
-    Perfil_? Folha_.Perfil => Perfil;
+    Concepts.Perfil? Concepts.Folha.Perfil => Perfil;
 
     [Required]
     [DisplayName("Competência")]
@@ -22,7 +22,7 @@ public class Folha : GlobalTableEntity, Folha_
     [Required]
     [DisplayName("Status")]
     public StatusEnum? Status { get; set; }
-    Status_? Folha_.Status => Status == null ? null : new Status(Status.Value);
+    Concepts.Status? Concepts.Folha.Status => Status == null ? null : new Status(Status.Value);
 
     [MinLength(3)]
     [MaxLength(255)]
@@ -31,7 +31,7 @@ public class Folha : GlobalTableEntity, Folha_
 
     [DisplayName("Apuração Mensal")]
     public ApuracaoMensal ApuracaoMensal { get; set; }
-    ApuracaoMensal_ Folha_.ApuracaoMensal => throw new NotImplementedException();
+    Concepts.ApuracaoMensal Concepts.Folha.ApuracaoMensal => throw new NotImplementedException();
 
     public Folha()
     {

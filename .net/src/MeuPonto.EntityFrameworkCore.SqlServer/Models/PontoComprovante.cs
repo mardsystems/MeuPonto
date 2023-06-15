@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MeuPonto.Models;
 
-public class Comprovante : IdentityTableEntity, Comprovante_
+public class Comprovante : IdentityTableEntity, Concepts.Comprovante
 {
     [Required]
     [DisplayName("Ponto")]
@@ -12,7 +12,7 @@ public class Comprovante : IdentityTableEntity, Comprovante_
 
     [DisplayName("Ponto")]
     public Ponto? Ponto { get; set; }
-    Ponto_? Comprovante_.Ponto => Ponto;
+    Concepts.Ponto? Concepts.Comprovante.Ponto => Ponto;
 
     [MaxLength(16)]
     [DisplayName("Número")]
@@ -27,7 +27,7 @@ public class Comprovante : IdentityTableEntity, Comprovante_
     public TipoImagemEnum? TipoImagem { get; set; }
     public int? ImagemTipoId { get; set; }
     public PontoComprovanteImagemTipo? ImagemTipo { get; set; }
-    TipoImagem_? Comprovante_.TipoImagem => ImagemTipo;
+    Concepts.TipoImagem? Concepts.Comprovante.TipoImagem => ImagemTipo;
 
     public Comprovante()
     {

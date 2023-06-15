@@ -2,7 +2,7 @@
 
 namespace MeuPonto.Modules.Pontos;
 
-public class Pausa : Pausa_
+public class Pausa : Concepts.Pausa
 {
     private readonly PausaEnum _pausa;
 

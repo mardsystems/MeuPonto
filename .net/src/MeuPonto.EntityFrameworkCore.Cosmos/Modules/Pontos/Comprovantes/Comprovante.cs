@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MeuPonto.Modules.Pontos.Comprovantes;
 
-public class Comprovante : DocumentEntity, Comprovante_
+public class Comprovante : DocumentEntity, Concepts.Comprovante
 {
     [Required]
     [DisplayName("Ponto")]
@@ -11,7 +11,7 @@ public class Comprovante : DocumentEntity, Comprovante_
 
     [DisplayName("Ponto")]
     public PontoRef? Ponto { get; set; }
-    Ponto_? Comprovante_.Ponto => Ponto;
+    Concepts.Ponto? Concepts.Comprovante.Ponto => Ponto;
 
     [MaxLength(16)]
     [DisplayName("Número")]
@@ -24,5 +24,5 @@ public class Comprovante : DocumentEntity, Comprovante_
     [Required]
     [DisplayName("Tipo Imagem")]
     public TipoImagemEnum? TipoImagem { get; set; }
-    TipoImagem_? Comprovante_.TipoImagem => TipoImagem == null ? null : new TipoImagem(TipoImagem.Value);
+    Concepts.TipoImagem? Concepts.Comprovante.TipoImagem => TipoImagem == null ? null : new TipoImagem(TipoImagem.Value);
 }

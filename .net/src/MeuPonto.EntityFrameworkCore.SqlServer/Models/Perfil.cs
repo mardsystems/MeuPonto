@@ -1,10 +1,9 @@
-﻿using MeuPonto.Modules.Perfis;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace MeuPonto.Models;
 
-public class Perfil : IdentityTableEntity, Perfil_, MeuPonto.Modules.Pontos.Perfil_
+public class Perfil : IdentityTableEntity, Concepts.Perfil
 {
     [Required]
     [MinLength(3)]
@@ -25,15 +24,14 @@ public class Perfil : IdentityTableEntity, Perfil_, MeuPonto.Modules.Pontos.Perf
 
     [DisplayName("Empresa")]
     public PerfilEmpresa? Empresa { get; set; }
-    Empresa_? Perfil_.Empresa => (Empresa_)Empresa;
+    Concepts.Empresa? Concepts.Perfil.Empresa => (Concepts.Empresa)Empresa;
 
-    //[DisplayName("Jornada Trabalho Semanal Prevista")]
-    //public virtual JornadaTrabalhoSemanal JornadaTrabalhoSemanalPrevista { get; set; } = default!;
-    //JornadaTrabalhoSemanal_ Perfil_.JornadaTrabalhoSemanalPrevista => JornadaTrabalhoSemanalPrevista;
-    public JornadaTrabalhoSemanal_ JornadaTrabalhoSemanalPrevista => throw new NotImplementedException();
+    [DisplayName("Jornada Trabalho Semanal Prevista")]
+    public virtual PerfilJornadaTrabalhoSemanal JornadaTrabalhoSemanalPrevista { get; set; } = default!;
+    Concepts.JornadaTrabalhoSemanal Concepts.Perfil.JornadaTrabalhoSemanalPrevista => JornadaTrabalhoSemanalPrevista;
 
     public Perfil()
     {
-        //JornadaTrabalhoSemanalPrevista = new JornadaTrabalhoSemanal();
+        JornadaTrabalhoSemanalPrevista = new PerfilJornadaTrabalhoSemanal();
     }
 }

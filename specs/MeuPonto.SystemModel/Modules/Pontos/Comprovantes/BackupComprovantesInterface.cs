@@ -1,8 +1,10 @@
-﻿namespace MeuPonto.Modules.Pontos.Comprovantes;
+﻿using MeuPonto.Concepts;
+
+namespace MeuPonto.Modules.Pontos.Comprovantes;
 
 public interface BackupComprovantesInterface
 {
-    Task<Comprovante_> EscanearComprovante(Stream imagem, Comprovante_ comprovante, Pontos.Ponto_ ponto);
+    Task<Comprovante> EscanearComprovante(Stream imagem, Comprovante comprovante, Ponto ponto);
 
-    Task<Comprovante_> GuardarComprovante(Stream imagem, Comprovante_ comprovante, Pontos.Ponto_ ponto);
+    Task<Comprovante> GuardarComprovante(Stream imagem, Comprovante comprovante, Ponto ponto);
 }

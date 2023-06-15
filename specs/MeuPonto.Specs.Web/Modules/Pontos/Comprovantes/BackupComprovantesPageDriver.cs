@@ -26,7 +26,7 @@ public class BackupComprovantesPageDriver : BackupComprovantesInterface
         GuardarComprovanteAnchor.Should().NotBeNull("o backup de comprovantes deve ter um link para a guardar um comprovante");
     }
 
-    public async Task<Comprovante_> EscanearComprovante(Stream imagem, Comprovante_ comprovante, Pontos.Ponto_ ponto)
+    public async Task<Concepts.Comprovante> EscanearComprovante(Stream imagem, Concepts.Comprovante comprovante, Concepts.Ponto ponto)
     {
         await GoTo();
 
@@ -91,7 +91,7 @@ public class BackupComprovantesPageDriver : BackupComprovantesInterface
         return comprovanteEscaneado;
     }
 
-    public async Task<Comprovante_> GuardarComprovante(Stream imagem, Comprovante_ comprovante, Pontos.Ponto_ ponto)
+    public async Task<Concepts.Comprovante> GuardarComprovante(Stream imagem, Concepts.Comprovante comprovante, Concepts.Ponto ponto)
     {
         await GoTo();
 

@@ -4,7 +4,7 @@ using MeuPonto.Modules.Perfis.Empresas;
 
 namespace MeuPonto.Modules.Perfis;
 
-public class Perfil : GlobalTableEntity, Perfil_, Pontos.Perfil_
+public class Perfil : GlobalTableEntity, Concepts.Perfil
 {
     [Required]
     [MinLength(3)]
@@ -25,11 +25,11 @@ public class Perfil : GlobalTableEntity, Perfil_, Pontos.Perfil_
 
     [DisplayName("Empresa")]
     public Empresa? Empresa { get; set; }
-    Empresa_? Perfil_.Empresa => Empresa;
+    Concepts.Empresa? Concepts.Perfil.Empresa => Empresa;
 
     [DisplayName("Jornada Trabalho Semanal Prevista")]
     public virtual JornadaTrabalhoSemanal JornadaTrabalhoSemanalPrevista { get; set; } = default!;
-    JornadaTrabalhoSemanal_ Perfil_.JornadaTrabalhoSemanalPrevista => JornadaTrabalhoSemanalPrevista;
+    Concepts.JornadaTrabalhoSemanal Concepts.Perfil.JornadaTrabalhoSemanalPrevista => JornadaTrabalhoSemanalPrevista;
 
     public Perfil()
     {

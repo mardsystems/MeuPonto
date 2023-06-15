@@ -34,7 +34,7 @@ public class CadastroPerfisPageDriver : CadastroPerfisInterface
         CriacaoPerfilAnchor.Should().NotBeNull("a tela de perfis deve ter um link de criação de perfil");
     }
 
-    private void Identifica(Perfil_ perfil)
+    private void Identifica(Concepts.Perfil perfil)
     {
         var table = Document.GetTable("Perfis");
 
@@ -59,7 +59,7 @@ public class CadastroPerfisPageDriver : CadastroPerfisInterface
         ExclusaoPerfilAnchor.Should().NotBeNull("a lista de perfis deve ter um link de exclusão do perfil cadastrado");
     }
 
-    public async Task CriarPerfil(Perfil_ perfil)
+    public async Task CriarPerfil(Concepts.Perfil perfil)
     {
         await GoTo();
 
@@ -105,7 +105,7 @@ public class CadastroPerfisPageDriver : CadastroPerfisInterface
         //return perfilCadastrado;
     }
 
-    public async Task<Perfil_> DetalharPerfil(Perfil_ perfilCadastrado)
+    public async Task<Concepts.Perfil> DetalharPerfil(Concepts.Perfil perfilCadastrado)
     {
         await GoTo();
 
@@ -118,7 +118,7 @@ public class CadastroPerfisPageDriver : CadastroPerfisInterface
         return perfilDetalhado;
     }
 
-    public async Task EditarPerfil(Perfil_ perfilCadastrado)
+    public async Task EditarPerfil(Concepts.Perfil perfilCadastrado)
     {
         await GoTo();
 
@@ -189,7 +189,7 @@ public class CadastroPerfisPageDriver : CadastroPerfisInterface
         }
     }
 
-    public async Task ExcluirPerfil(Perfil_ perfilCadastrado)
+    public async Task ExcluirPerfil(Concepts.Perfil perfilCadastrado)
     {
         await GoTo();
 

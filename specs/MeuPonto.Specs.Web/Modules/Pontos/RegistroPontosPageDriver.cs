@@ -26,7 +26,7 @@ public class RegistroPontosPageDriver : RegistroPontosInterface
         MarcacaoPontoAnchor.Should().NotBeNull("o registro de pontos deve ter um link para a marcação de ponto");
     }
 
-    public async Task<Ponto_> MarcarPonto(Ponto_ ponto)
+    public async Task<Concepts.Ponto> MarcarPonto(Concepts.Ponto ponto)
     {
         await GoTo();
 

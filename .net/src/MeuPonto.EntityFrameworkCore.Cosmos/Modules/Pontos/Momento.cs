@@ -2,7 +2,7 @@
 
 namespace MeuPonto.Modules.Pontos;
 
-public class Momento : Momento_
+public class Momento : Concepts.Momento
 {
     private readonly MomentoEnum _momento;
 

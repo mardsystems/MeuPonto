@@ -1,8 +1,8 @@
-﻿namespace MeuPonto.Modules.Pontos.Folhas;
+﻿namespace MeuPonto.Concepts;
 
-public interface ApuracaoMensal_
+public interface ApuracaoMensal
 {
-    IList<ApuracaoDiaria_> Dias { get;}
+    IList<ApuracaoDiaria> Dias { get;}
     int TotalDias { get; }
     TimeSpan? TempoTotalPrevisto { get; }
     TimeSpan? TempoTotalApurado { get; }

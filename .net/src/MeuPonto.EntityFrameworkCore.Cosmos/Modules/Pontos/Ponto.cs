@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MeuPonto.Modules.Pontos;
 
-public class Ponto : DocumentEntity, Ponto_
+public class Ponto : DocumentEntity, Concepts.Ponto
 {
     [Required]
     [DisplayName("Perfil")]
@@ -11,7 +11,7 @@ public class Ponto : DocumentEntity, Ponto_
 
     [DisplayName("Perfil")]
     public PerfilRef? Perfil { get; set; }
-    Perfil_? Ponto_.Perfil => Perfil;
+    Concepts.Perfil? Concepts.Ponto.Perfil => Perfil;
 
     [Required]
     [DisplayName("Data/Hora")]
@@ -21,11 +21,11 @@ public class Ponto : DocumentEntity, Ponto_
     [Required]
     [DisplayName("Momento")]
     public MomentoEnum? Momento { get; set; }
-    Momento_? Ponto_.Momento => Momento == null ? null : new Momento(Momento.Value);
+    Concepts.Momento? Concepts.Ponto.Momento => Momento == null ? null : new Momento(Momento.Value);
 
     [DisplayName("Pausa")]
     public PausaEnum? Pausa { get; set; }
-    Pausa_? Ponto_.Pausa => Pausa == null ? null : new Pausa(Pausa.Value);
+    Concepts.Pausa? Concepts.Ponto.Pausa => Pausa == null ? null : new Pausa(Pausa.Value);
 
     [Required]
     [DisplayName("Estimado?")]

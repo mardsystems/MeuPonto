@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace MeuPonto.Modules.Perfis.Empresas;
 
-public class Empresa : GlobalTableEntity, Empresa_, Perfis.Empresa_
+public class Empresa : GlobalTableEntity, Concepts.Empresa
 {
     [Required]
     [MinLength(3)]

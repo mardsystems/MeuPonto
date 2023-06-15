@@ -1,8 +1,8 @@
-﻿using MeuPonto.Modules.Pontos.Folhas;
+﻿using MeuPonto.Concepts;
 
 namespace MeuPonto.Modules;
 
 public interface HomeInterface
 {
-    Task<Folha_> ApurarFolha(Folha_ folhaAberta);
+    Task<Folha> ApurarFolha(Folha folhaAberta);
 }

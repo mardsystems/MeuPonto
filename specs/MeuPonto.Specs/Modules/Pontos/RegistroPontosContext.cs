@@ -22,10 +22,10 @@ public class RegistroPontosContext
 
     public Ponto Ponto { get; set; }
 
-    public void Define(Ponto_ pontoRegistrado)
+    public void Define(Concepts.Ponto pontoRegistrado)
     {
         PontoRegistrado = pontoRegistrado;
     }
 
-    public Ponto_ PontoRegistrado { get; set; }
+    public Concepts.Ponto PontoRegistrado { get; set; }
 }

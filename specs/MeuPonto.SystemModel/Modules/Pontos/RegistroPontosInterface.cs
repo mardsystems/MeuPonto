@@ -1,6 +1,8 @@
-﻿namespace MeuPonto.Modules.Pontos;
+﻿using MeuPonto.Concepts;
+
+namespace MeuPonto.Modules.Pontos;
 
 public interface RegistroPontosInterface
 {
-    Task<Ponto_> MarcarPonto(Ponto_ ponto);
+    Task<Ponto> MarcarPonto(Ponto ponto);
 }

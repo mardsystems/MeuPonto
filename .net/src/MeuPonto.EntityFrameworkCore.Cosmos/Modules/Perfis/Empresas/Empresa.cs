@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace MeuPonto.Modules.Perfis.Empresas;
 
-public class Empresa : DocumentEntity, Empresa_
+public class Empresa : DocumentEntity, Concepts.Empresa
 {
     [Required]
     [MinLength(3)]

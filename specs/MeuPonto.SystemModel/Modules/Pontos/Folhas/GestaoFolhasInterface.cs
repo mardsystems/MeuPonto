@@ -1,8 +1,10 @@
-﻿namespace MeuPonto.Modules.Pontos.Folhas;
+﻿using MeuPonto.Concepts;
+
+namespace MeuPonto.Modules.Pontos.Folhas;
 
 public interface GestaoFolhasInterface
 {
-    Task<Folha_> AbrirFolha(Folha_ folha);
+    Task<Folha> AbrirFolha(Folha folha);
 
-    Task<Folha_> FecharFolha(Folha_ folhaAberta);
+    Task<Folha> FecharFolha(Folha folhaAberta);
 }

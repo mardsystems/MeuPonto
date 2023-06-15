@@ -1,6 +1,6 @@
 ﻿namespace MeuPonto.Modules.Pontos.Comprovantes;
 
-public class TipoImagem : TipoImagem_
+public class TipoImagem : Concepts.TipoImagem
 {
     private readonly TipoImagemEnum? _tipoImagemEnum;
 

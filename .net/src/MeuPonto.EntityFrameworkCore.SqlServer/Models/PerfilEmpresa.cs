@@ -1,10 +1,9 @@
-﻿using MeuPonto.Modules.Perfis.Empresas;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace MeuPonto.Models;
 
-public class PerfilEmpresa : IdentityTableEntity, Empresa_
+public class PerfilEmpresa : IdentityTableEntity, Concepts.Empresa
 {
     [Required]
     [MinLength(3)]

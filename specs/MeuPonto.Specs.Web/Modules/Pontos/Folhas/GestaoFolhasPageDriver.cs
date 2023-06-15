@@ -29,7 +29,7 @@ public class GestaoFolhasPageDriver : GestaoFolhasInterface
         AberturaFolhaAnchor.Should().NotBeNull("'a gestão de folhas deve ter um link para a abertura de uma folha'");
     }
 
-    private void Identifica(Folha_ folha)
+    private void Identifica(Concepts.Folha folha)
     {
         var table = Document.GetTable("Folhas");
 
@@ -42,7 +42,7 @@ public class GestaoFolhasPageDriver : GestaoFolhasInterface
         FechamentoFolhaAnchor.Should().NotBeNull("a gestão de folhas deve ter um link para o fechamento da folha");
     }
 
-    public async Task<Folha_> AbrirFolha(Folha_ folha)
+    public async Task<Concepts.Folha> AbrirFolha(Concepts.Folha folha)
     {
         await GoTo();
 
@@ -70,7 +70,7 @@ public class GestaoFolhasPageDriver : GestaoFolhasInterface
         return folhaAberta;
     }
 
-    public async Task<Folha_> FecharFolha(Folha_ folhaAberta)
+    public async Task<Concepts.Folha> FecharFolha(Concepts.Folha folhaAberta)
     {
         await GoTo();
 

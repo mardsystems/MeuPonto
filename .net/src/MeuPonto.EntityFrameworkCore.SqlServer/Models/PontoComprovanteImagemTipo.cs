@@ -1,9 +1,8 @@
-﻿using MeuPonto.Modules.Pontos.Comprovantes;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MeuPonto.Models;
 
-public class PontoComprovanteImagemTipo : TipoImagem_
+public class PontoComprovanteImagemTipo : Concepts.TipoImagem
 {
     public int Id { get; set; }
 

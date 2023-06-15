@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace MeuPonto.Modules;
 
-public class Trabalhador : Trabalhador_
+public class Trabalhador : Concepts.Trabalhador
 {
     public string UserName { get; set; }
 

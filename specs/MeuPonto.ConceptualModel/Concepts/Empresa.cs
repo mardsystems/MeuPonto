@@ -1,6 +1,6 @@
-﻿namespace MeuPonto.Modules.Perfis.Empresas;
+﻿namespace MeuPonto.Concepts;
 
-public interface Empresa_
+public interface Empresa
 {
     string? Nome { get; }
     string? Cnpj { get; }

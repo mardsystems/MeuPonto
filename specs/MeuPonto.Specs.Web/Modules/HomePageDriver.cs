@@ -49,7 +49,7 @@ public class HomePageDriver : HomeInterface
         //CriacaoPerfilAnchor.Should().NotBeNull("'a tela inicial deve ter um link para a criação de perfil'");
     }
 
-    public async Task<Folha_> ApurarFolha(Folha_ folhaAberta)
+    public async Task<Concepts.Folha> ApurarFolha(Concepts.Folha folhaAberta)
     {
         await GoTo();
 

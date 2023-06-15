@@ -1,9 +1,11 @@
-﻿namespace MeuPonto.Modules.Perfis;
+﻿using MeuPonto.Concepts;
+
+namespace MeuPonto.Modules.Perfis;
 
 public interface CadastroPerfisInterface
 {
-    Task CriarPerfil(Perfil_ perfil);
-    Task<Perfil_> DetalharPerfil(Perfil_ perfilCadastrado);
-    Task EditarPerfil(Perfil_ perfilCadastrado);
-    Task ExcluirPerfil(Perfil_ perfilCadastrado);
+    Task CriarPerfil(Perfil perfil);
+    Task<Perfil> DetalharPerfil(Perfil perfilCadastrado);
+    Task EditarPerfil(Perfil perfilCadastrado);
+    Task ExcluirPerfil(Perfil perfilCadastrado);
 }

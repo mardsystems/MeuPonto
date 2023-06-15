@@ -2,7 +2,7 @@
 
 namespace MeuPonto.Modules.Pontos.Folhas;
 
-public class Status : Status_
+public class Status : Concepts.Status
 {
     private readonly StatusEnum _status;
 

@@ -1,6 +1,6 @@
-﻿namespace MeuPonto.Modules;
+﻿namespace MeuPonto.Concepts;
 
-public interface Trabalhador_
+public interface Trabalhador
 {
     string UserName { get; }
     string? Nome { get; }

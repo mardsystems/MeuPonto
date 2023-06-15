@@ -25,7 +25,7 @@ public class CadastroPerfisAppDriver : CadastroPerfisInterface
         cadastroPerfisMenuItem.Click();
     }
 
-    public async Task CriarPerfil(Perfil_ perfil)
+    public async Task CriarPerfil(Concepts.Perfil perfil)
     {
         GoTo();
 
@@ -157,17 +157,17 @@ public class CadastroPerfisAppDriver : CadastroPerfisInterface
         Thread.Sleep(500);
     }
 
-    public Task<Perfil_> DetalharPerfil(Perfil_ perfilCadastrado)
+    public Task<Concepts.Perfil> DetalharPerfil(Concepts.Perfil perfilCadastrado)
     {
         throw new NotImplementedException();
     }
 
-    public Task EditarPerfil(Perfil_ perfilCadastrado)
+    public Task EditarPerfil(Concepts.Perfil perfilCadastrado)
     {
         throw new NotImplementedException();
     }
 
-    public Task ExcluirPerfil(Perfil_ perfilCadastrado)
+    public Task ExcluirPerfil(Concepts.Perfil perfilCadastrado)
     {
         throw new NotImplementedException();
     }

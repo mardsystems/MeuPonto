@@ -2,10 +2,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 
-namespace MeuPonto.Modules.Perfis;
+namespace MeuPonto.Models;
 
 [Owned]
-public class JornadaTrabalhoDiaria : Concepts.JornadaTrabalhoDiaria
+public class PerfilJornadaTrabalhoDiaria : Concepts.JornadaTrabalhoDiaria
 {
     [Required]
     [DisplayName("Dia Semana")]

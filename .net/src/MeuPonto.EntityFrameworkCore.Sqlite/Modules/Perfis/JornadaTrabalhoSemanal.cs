@@ -5,11 +5,11 @@ using System.ComponentModel;
 namespace MeuPonto.Modules.Perfis;
 
 [Owned]
-public class JornadaTrabalhoSemanal : JornadaTrabalhoSemanal_
+public class JornadaTrabalhoSemanal : Concepts.JornadaTrabalhoSemanal
 {
     [DisplayName("Semana")]
     public virtual IList<JornadaTrabalhoDiaria> Semana { get; set; } = default!;
-    IList<JornadaTrabalhoDiaria_> JornadaTrabalhoSemanal_.Semana => Semana.Cast<JornadaTrabalhoDiaria_>().ToList();
+    IList<Concepts.JornadaTrabalhoDiaria> Concepts.JornadaTrabalhoSemanal.Semana => Semana.Cast<Concepts.JornadaTrabalhoDiaria>().ToList();
 
     [DisplayName("Tempo Total")]
     [DisplayFormat(DataFormatString = "{0:d\\d\\ hh\\:mm}")]
