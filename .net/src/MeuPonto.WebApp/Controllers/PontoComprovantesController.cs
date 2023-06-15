@@ -18,7 +18,7 @@ public class PontoComprovantesController : Controller
     // GET: Comprovantes
     public async Task<IActionResult> Index()
     {
-        var meuPontoDbContext = _db.Comprovantes.Include(p => p.Ponto).Include(p => p.ImagemTipo);
+        var meuPontoDbContext = _db.Comprovantes.Include(p => p.Ponto).Include(p => p.TipoImagem);
         return View(await meuPontoDbContext.ToListAsync());
     }
 
@@ -32,7 +32,7 @@ public class PontoComprovantesController : Controller
 
         var comprovante = await _db.Comprovantes
             .Include(p => p.Ponto)
-            .Include(p => p.ImagemTipo)
+            .Include(p => p.TipoImagem)
             .FirstOrDefaultAsync(m => m.Id == id);
         if (comprovante == null)
         {
@@ -73,7 +73,7 @@ public class PontoComprovantesController : Controller
                 PontoId = model.PontoId,
                 Numero = model.Numero,
                 Imagem = imagem,
-                ImagemTipoId = model.ImagemTipoId
+                TipoImagemId = model.TipoImagemId
             };
 
             _db.Add(comprovante);
@@ -81,7 +81,7 @@ public class PontoComprovantesController : Controller
             return RedirectToAction(nameof(Index));
         }
         ViewData["PontoId"] = new SelectList(_db.Pontos, "Id", "Data", model.PontoId);
-        ViewData["ImagemTipoId"] = new SelectList(_db.PontoComprovanteImagemTipos, "Id", "Nome", model.ImagemTipoId);
+        ViewData["ImagemTipoId"] = new SelectList(_db.PontoComprovanteImagemTipos, "Id", "Nome", model.TipoImagemId);
         return View(model);
     }
 
@@ -99,14 +99,14 @@ public class PontoComprovantesController : Controller
             return NotFound();
         }
         ViewData["PontoId"] = new SelectList(_db.Pontos, "Id", "Data", comprovante.PontoId);
-        ViewData["ImagemTipoId"] = new SelectList(_db.PontoComprovanteImagemTipos, "Id", "Nome", comprovante.ImagemTipoId);
+        ViewData["ImagemTipoId"] = new SelectList(_db.PontoComprovanteImagemTipos, "Id", "Nome", (int)comprovante.TipoImagemId);
 
         var model = new PontoComprovanteViewModel()
         {
             Id = comprovante.Id,
             PontoId = comprovante.PontoId,
             Numero = comprovante.Numero,
-            ImagemTipoId = comprovante.ImagemTipoId,
+            TipoImagemId = comprovante.TipoImagemId,
             CreationDate = comprovante.CreationDate,
             Version = comprovante.Version
         };
@@ -143,7 +143,7 @@ public class PontoComprovantesController : Controller
                 PontoId = model.PontoId,
                 Numero = model.Numero,
                 Imagem = imagem,
-                ImagemTipoId = model.ImagemTipoId,
+                TipoImagemId = model.TipoImagemId,
                 CreationDate = model.CreationDate,
                 Version = model.Version
             };
@@ -167,7 +167,7 @@ public class PontoComprovantesController : Controller
             return RedirectToAction(nameof(Index));
         }
         ViewData["PontoId"] = new SelectList(_db.Pontos, "Id", "Data", model.PontoId);
-        ViewData["ImagemTipoId"] = new SelectList(_db.PontoComprovanteImagemTipos, "Id", "Nome", model.ImagemTipoId);
+        ViewData["ImagemTipoId"] = new SelectList(_db.PontoComprovanteImagemTipos, "Id", "Nome", model.TipoImagemId);
         return View(model);
     }
 
@@ -181,7 +181,7 @@ public class PontoComprovantesController : Controller
 
         var comprovante = await _db.Comprovantes
             .Include(p => p.Ponto)
-            .Include(p => p.ImagemTipo)
+            .Include(p => p.TipoImagem)
             .FirstOrDefaultAsync(m => m.Id == id);
         if (comprovante == null)
         {

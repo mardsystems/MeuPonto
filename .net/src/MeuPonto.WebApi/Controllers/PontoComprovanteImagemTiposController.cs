@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using MeuPonto.Data;
 using MeuPonto.Models;
+using MeuPonto.Modules.Pontos.Comprovantes;
 
 namespace MeuPonto.Controllers;
 
@@ -40,7 +41,7 @@ public class PontoComprovanteImagemTiposController : ControllerBase
     // PUT: api/PontoComprovanteImagemTipos/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutPontoComprovanteImagemTipo(int id, TipoImagem pontoComprovanteImagemTipo)
+    public async Task<IActionResult> PutPontoComprovanteImagemTipo(TipoImagemEnum id, TipoImagem pontoComprovanteImagemTipo)
     {
         if (id != pontoComprovanteImagemTipo.Id)
         {
@@ -109,7 +110,7 @@ public class PontoComprovanteImagemTiposController : ControllerBase
         return NoContent();
     }
 
-    private bool PontoComprovanteImagemTipoExists(int id)
+    private bool PontoComprovanteImagemTipoExists(TipoImagemEnum id)
     {
         return _db.PontoComprovanteImagemTipos.Any(e => e.Id == id);
     }

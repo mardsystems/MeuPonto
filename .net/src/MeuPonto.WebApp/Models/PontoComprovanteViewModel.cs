@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MeuPonto.Modules.Pontos.Comprovantes;
+using System.ComponentModel.DataAnnotations;
 
 namespace MeuPonto.Models;
 
@@ -23,7 +24,7 @@ public class PontoComprovanteViewModel
     public IFormFile? Imagem { get; set; }
 
     [Required]
-    public int? ImagemTipoId { get; set; }
+    public TipoImagemEnum? TipoImagemId { get; set; }
 
-    public virtual TipoImagem? ImagemTipo { get; set; }
+    public virtual TipoImagem? TipoImagem { get; set; }
 }

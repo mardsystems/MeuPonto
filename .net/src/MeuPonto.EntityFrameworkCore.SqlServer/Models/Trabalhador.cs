@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 
-namespace MeuPonto.Modules;
+namespace MeuPonto.Models;
 
 public class Trabalhador : Concepts.Trabalhador
 {

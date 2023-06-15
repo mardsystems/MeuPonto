@@ -1,11 +1,11 @@
-﻿using MeuPonto.Modules.Pontos.Comprovantes;
+﻿using MeuPonto.Modules.Pontos.Folhas;
 using System.ComponentModel.DataAnnotations;
 
 namespace MeuPonto.Models;
 
-public class TipoImagem : Concepts.TipoImagem
+public class Status : Concepts.Status
 {
-    public TipoImagemEnum Id { get; set; }
+    public StatusEnum Id { get; set; }
 
     [MaxLength(255)]
     public string? Nome { get; set; }

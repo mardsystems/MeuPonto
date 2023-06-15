@@ -21,12 +21,18 @@ public class Ponto : IdentityTableEntity, Concepts.Ponto
 
     [Required]
     [DisplayName("Momento")]
-    public MomentoEnum? Momento { get; set; }
-    Concepts.Momento? Concepts.Ponto.Momento => throw new NotImplementedException();
+    public MomentoEnum? MomentoId { get; set; }
+
+    [DisplayName("Momento")]
+    public Momento? Momento { get; set; }
+    Concepts.Momento? Concepts.Ponto.Momento => Momento;
 
     [DisplayName("Pausa")]
-    public PausaEnum? Pausa { get; set; }
-    Concepts.Pausa? Concepts.Ponto.Pausa => throw new NotImplementedException();
+    public PausaEnum? PausaId { get; set; }
+    
+    [DisplayName("Pausa")]
+    public Pausa? Pausa { get; set; }
+    Concepts.Pausa? Concepts.Ponto.Pausa => Pausa;
     
     [Required]
     [DisplayName("Estimado?")]

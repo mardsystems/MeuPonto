@@ -1,5 +1,4 @@
-﻿
-using MeuPonto.Models;
+﻿using MeuPonto.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace MeuPonto.Data;
@@ -23,8 +22,8 @@ public class MeuPontoDbContext : DbContext
         modelBuilder.Entity<TipoImagem>().Property(x => x.Id).ValueGeneratedNever();
 
         modelBuilder.Entity<TipoImagem>().HasData(
-            new TipoImagem { Id = (int)Enums.PontoComprovanteImagemTipo.Original, Nome = "Original" },
-            new TipoImagem { Id = (int)Enums.PontoComprovanteImagemTipo.Tratada, Nome = "Tratada" }
+            new TipoImagem { Id = Modules.Pontos.Comprovantes.TipoImagemEnum.Original, Nome = "Original" },
+            new TipoImagem { Id = Modules.Pontos.Comprovantes.TipoImagemEnum.Tratada, Nome = "Tratada" }
         );
     }
 

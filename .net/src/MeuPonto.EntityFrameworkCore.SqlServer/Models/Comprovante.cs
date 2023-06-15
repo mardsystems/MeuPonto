@@ -24,10 +24,11 @@ public class Comprovante : IdentityTableEntity, Concepts.Comprovante
 
     [Required]
     [DisplayName("Tipo Imagem")]
-    public TipoImagemEnum? TipoImagem { get; set; }
-    public int? ImagemTipoId { get; set; }
-    public TipoImagem? ImagemTipo { get; set; }
-    Concepts.TipoImagem? Concepts.Comprovante.TipoImagem => ImagemTipo;
+    public TipoImagemEnum? TipoImagemId { get; set; }
+
+    [DisplayName("Tipo Imagem")]
+    public TipoImagem? TipoImagem { get; set; }
+    Concepts.TipoImagem? Concepts.Comprovante.TipoImagem => TipoImagem;
 
     public Comprovante()
     {

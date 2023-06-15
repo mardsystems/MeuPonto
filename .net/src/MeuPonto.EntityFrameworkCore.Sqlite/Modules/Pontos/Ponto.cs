@@ -23,11 +23,11 @@ public class Ponto : GlobalTableEntity, Concepts.Ponto
     [Required]
     [DisplayName("Momento")]
     public MomentoEnum? Momento { get; set; }
-    Concepts.Momento? Concepts.Ponto.Momento => throw new NotImplementedException();
+    Concepts.Momento? Concepts.Ponto.Momento => Momento == null ? null : new Momento(Momento.Value);
 
     [DisplayName("Pausa")]
     public PausaEnum? Pausa { get; set; }
-    Concepts.Pausa? Concepts.Ponto.Pausa => throw new NotImplementedException();
+    Concepts.Pausa? Concepts.Ponto.Pausa => Pausa == null ? null : new Pausa(Pausa.Value);
 
     [Required]
     [DisplayName("Estimado?")]
