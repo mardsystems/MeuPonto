@@ -8,6 +8,7 @@ public static class GestaoFolhasStub
     {
         var folhaAberta = new Folha
         {
+            Perfil = perfil,
             PerfilId = perfil.Id,
             Competencia = competencia,
             Id = Guid.NewGuid(),
@@ -40,5 +41,12 @@ public static class GestaoFolhasStub
         folhaAberta.ApuracaoMensal.TempoTotalPeriodoAnterior = TimeSpan.Zero;
 
         return folhaAberta;
+    }
+
+    public static void QualificaCom(this Folha folha, Perfil perfil)
+    {
+        folha.Perfil = perfil;
+
+        folha.PerfilId = perfil.Id;
     }
 }

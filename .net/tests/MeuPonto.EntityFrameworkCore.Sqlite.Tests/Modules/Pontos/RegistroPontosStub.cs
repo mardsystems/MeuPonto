@@ -8,6 +8,7 @@ public static class RegistroPontosStub
     {
         var pontoEntrada = new Ponto
         {
+            Perfil = perfil,
             PerfilId = perfil.Id,
             DataHora = data,
             Momento = momento,
@@ -18,7 +19,7 @@ public static class RegistroPontosStub
         return pontoEntrada;
     }
 
-    public static void DefinePerfil(this Ponto ponto, Perfil perfil)
+    public static void QualificaCom(this Ponto ponto, Perfil perfil)
     {
         ponto.Perfil = perfil;
 
