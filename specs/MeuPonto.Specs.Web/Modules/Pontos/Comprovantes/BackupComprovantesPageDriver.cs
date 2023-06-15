@@ -85,8 +85,8 @@ public class BackupComprovantesPageDriver : BackupComprovantesInterface
                     Nome = form.GetSelect("Ponto.PerfilId").Value
                 },
                 DataHora = DateTime.Parse(form.GetInput("Ponto.DataHora").Value),
-                Momento = (MomentoEnum)Enum.Parse(typeof(MomentoEnum), momentoValue),
-                Pausa = string.IsNullOrEmpty(pausaValue) ? null : (PausaEnum)Enum.Parse(typeof(PausaEnum), pausaValue),
+                MomentoId = (MomentoEnum)Enum.Parse(typeof(MomentoEnum), momentoValue),
+                PausaId = string.IsNullOrEmpty(pausaValue) ? null : (PausaEnum)Enum.Parse(typeof(PausaEnum), pausaValue),
             }
         };
 
@@ -152,8 +152,8 @@ public class BackupComprovantesPageDriver : BackupComprovantesInterface
                     Nome = dl.GetDataListItem("Perfil").GetString()
                 },
                 DataHora = DateTime.Parse(dl.GetDataListItem("DataHora").GetString()),
-                Momento = (MomentoEnum)Enum.Parse(typeof(MomentoEnum), momentoValue),
-                Pausa = string.IsNullOrEmpty(pausaValue) ? null : (PausaEnum)Enum.Parse(typeof(PausaEnum), pausaValue),
+                MomentoId = (MomentoEnum)Enum.Parse(typeof(MomentoEnum), momentoValue),
+                PausaId = string.IsNullOrEmpty(pausaValue) ? null : (PausaEnum)Enum.Parse(typeof(PausaEnum), pausaValue),
             }
         };
 

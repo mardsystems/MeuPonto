@@ -22,7 +22,7 @@ public class AbrirFolhaModel : PageModel
 
         Folha = new Folha();
 
-        Folha.Status = StatusEnum.Aberta;
+        Folha.StatusId = StatusEnum.Aberta;
 
         return Page();
     }
@@ -52,7 +52,7 @@ public class AbrirFolhaModel : PageModel
 
         ViewData["PerfilId"] = new SelectList(_db.Perfis, "Id", "Nome");
 
-        Folha.Status = StatusEnum.Aberta;
+        Folha.StatusId = StatusEnum.Aberta;
 
         var perfil = await _db.Perfis.FindAsync(Folha.PerfilId, User.Identity.Name);
 

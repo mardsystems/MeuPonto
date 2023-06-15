@@ -11,7 +11,7 @@ public static class RegistroPontosStub
             Perfil = perfil,
             PerfilId = perfil.Id,
             DataHora = data,
-            Momento = momento,
+            MomentoId = momento,
             Id = Guid.NewGuid(),
             CreationDate = DateTime.Now
         };

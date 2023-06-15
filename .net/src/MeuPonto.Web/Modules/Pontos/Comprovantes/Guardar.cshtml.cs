@@ -23,7 +23,7 @@ public class GuardarComprovanteModel : PageModel
 
         Comprovante = new Comprovante();
 
-        Comprovante.TipoImagem = TipoImagemEnum.Original;
+        Comprovante.TipoImagemId = TipoImagemEnum.Original;
 
         ViewData["PerfilId"] = new SelectList(_db.Perfis, "Id", "Nome");
         return Page();
@@ -104,8 +104,8 @@ public class GuardarComprovanteModel : PageModel
                 DataHora = ponto?.DataHora,
                 PerfilId = ponto?.PerfilId,
                 Perfil = ponto?.Perfil,
-                Momento = ponto?.Momento,
-                Pausa = ponto?.Pausa
+                MomentoId = ponto?.MomentoId,
+                PausaId = ponto?.PausaId
             };
 
             byte[] imagem;
@@ -119,7 +119,7 @@ public class GuardarComprovanteModel : PageModel
 
             Comprovante.Imagem = imagem;
 
-            Comprovante.TipoImagem = TipoImagemEnum.Original;
+            Comprovante.TipoImagemId = TipoImagemEnum.Original;
 
             //var comprovante = new Comprovante()
             //{

@@ -14,7 +14,7 @@
     </ol>
 </nav>
 
-<h1>@ViewData["Title"] <span class="badge bg-secondary">@Html.DisplayFor(model => model.Comprovante.TipoImagem)</span></h1>
+<h1>@ViewData["Title"] <span class="badge bg-secondary">@Html.DisplayFor(model => model.Comprovante.TipoImagemId)</span></h1>
 
 <div class="card">
     <div class="card-header">
@@ -93,18 +93,18 @@
                                 </a>
                             </dd>
                             <dt class="col-sm-3 Momento">
-                                @Html.DisplayNameFor(model => model.Comprovante.Ponto.Momento)
+                                @Html.DisplayNameFor(model => model.Comprovante.Ponto.MomentoId)
                             </dt>
                             <dd class="col-sm-9 Momento">
-                                @Html.DisplayFor(model => model.Comprovante.Ponto.Momento)
-                                <input asp-for="Comprovante.Ponto.Momento" type="hidden" />
+                                @Html.DisplayFor(model => model.Comprovante.Ponto.MomentoId)
+                                <input asp-for="Comprovante.Ponto.MomentoId" type="hidden" />
                             </dd>
                             <dt class="col-sm-3 Pausa">
-                                @Html.DisplayNameFor(model => model.Comprovante.Ponto.Pausa)
+                                @Html.DisplayNameFor(model => model.Comprovante.Ponto.PausaId)
                             </dt>
                             <dd class="col-sm-9 Pausa">
-                                @Html.DisplayFor(model => model.Comprovante.Ponto.Pausa)
-                                <input asp-for="Comprovante.Ponto.Pausa" type="hidden" />
+                                @Html.DisplayFor(model => model.Comprovante.Ponto.PausaId)
+                                <input asp-for="Comprovante.Ponto.PausaId" type="hidden" />
                             </dd>
                         </dl>
                     </div>
@@ -119,10 +119,10 @@
                 <img src="data:image/png;base64,@Convert.ToBase64String(Model.Comprovante.Imagem)" width="100%" />
             </dd>
             <dt class="col-sm-3 TipoImagem">
-                @Html.DisplayNameFor(model => model.Comprovante.TipoImagem)
+                @Html.DisplayNameFor(model => model.Comprovante.TipoImagemId)
             </dt>
             <dd class="col-sm-9 TipoImagem">
-                @Html.DisplayFor(model => model.Comprovante.TipoImagem)
+                @Html.DisplayFor(model => model.Comprovante.TipoImagemId)
             </dd>
             <dt class="col-sm-3 Numero">
                 @Html.DisplayNameFor(model => model.Comprovante.Numero)

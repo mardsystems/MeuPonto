@@ -1,4 +1,4 @@
-﻿using MeuPonto.Modules.Pontos.Folhas;
+﻿using MeuPonto.Enums;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -8,7 +8,7 @@ public class Folha : GlobalTableEntity, Concepts.Folha
 {
     [Required]
     [DisplayName("Perfil")]
-    public Guid? PerfilId { get; set; }
+    public int? PerfilId { get; set; }
 
     [DisplayName("Perfil")]
     public Perfil? Perfil { get; set; }

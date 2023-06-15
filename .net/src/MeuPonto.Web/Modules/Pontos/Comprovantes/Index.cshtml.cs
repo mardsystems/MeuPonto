@@ -54,9 +54,9 @@ public class ComprovantesModel : PageModel
                 .Where(x => true
                     && (Ponto.PerfilId == null || x.Ponto.PerfilId == Ponto.PerfilId)
                     && (Ponto.DataHora == null || x.Ponto.DataHora == Ponto.DataHora)
-                    && (Ponto.Momento == null || x.Ponto.Momento == Ponto.Momento)
-                    && (Ponto.Pausa == null || x.Ponto.Pausa == Ponto.Pausa)
-                    && (TipoImagem == null || x.TipoImagem == TipoImagem)
+                    && (Ponto.Momento == null || x.Ponto.MomentoId == Ponto.Momento)
+                    && (Ponto.Pausa == null || x.Ponto.PausaId == Ponto.Pausa)
+                    && (TipoImagem == null || x.TipoImagemId == TipoImagem)
                     && (Numero == null || x.Numero == Numero))
                 .OrderByDescending(x => x.Ponto.DataHora)
                 .Skip((Pagination.PaginaAtual - 1) * Pagination.TamanhoPagina.Value)

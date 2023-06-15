@@ -8,9 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Modules\Perfis\" />
-    <Folder Include="Modules\Pontos\Comprovantes\" />
-    <Folder Include="Modules\Pontos\Folhas\" />
+    <ProjectReference Include="..\..\src\MeuPonto.EntityFrameworkCore.SqlServer\MeuPonto.EntityFrameworkCore.SqlServer.csproj" />
   </ItemGroup>
 
 </Project>

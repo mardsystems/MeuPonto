@@ -22,12 +22,12 @@ public class PontoRef : Concepts.Ponto
 
     [Required]
     [DisplayName("Momento")]
-    public MomentoEnum? Momento { get; set; }
-    Concepts.Momento? Concepts.Ponto.Momento => Momento == null ? null : new Momento(Momento.Value);
+    public MomentoEnum? MomentoId { get; set; }
+    Concepts.Momento? Concepts.Ponto.Momento => MomentoId == null ? null : new Momento(MomentoId.Value);
 
     [DisplayName("Pausa")]
-    public PausaEnum? Pausa { get; set; }
-    Concepts.Pausa? Concepts.Ponto.Pausa => Pausa == null ? null : new Pausa(Pausa.Value);
+    public PausaEnum? PausaId { get; set; }
+    Concepts.Pausa? Concepts.Ponto.Pausa => PausaId == null ? null : new Pausa(PausaId.Value);
 
     bool Concepts.Ponto.Estimado => throw new NotImplementedException();
 

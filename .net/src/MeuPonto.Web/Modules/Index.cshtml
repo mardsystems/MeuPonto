@@ -82,9 +82,9 @@
                     <div class="card-body">
                         <h5 class="card-title">
                             @Html.DisplayFor(model => model.Folha.Competencia)
-                            <span class="badge @(Model.Folha.Status == Pontos.Folhas.StatusEnum.Aberta ? "text-bg-warning" : "text-bg-success")"><i class="bi @(Model.Folha.Status == Pontos.Folhas.StatusEnum.Aberta ? "bi-file-earmark-fill" : "bi-file-earmark-lock-fill")"></i></span>
+                            <span class="badge @(Model.Folha.StatusId == Pontos.Folhas.StatusEnum.Aberta ? "text-bg-warning" : "text-bg-success")"><i class="bi @(Model.Folha.StatusId == Pontos.Folhas.StatusEnum.Aberta ? "bi-file-earmark-fill" : "bi-file-earmark-lock-fill")"></i></span>
                         </h5>
-                        @if (Model.Folha.Status == Pontos.Folhas.StatusEnum.Aberta)
+                        @if (Model.Folha.StatusId == Pontos.Folhas.StatusEnum.Aberta)
                         {
                             <p class="card-text">
                                 Esta folha de ponto está <b>aberta</b> e sendo apurada.
@@ -138,7 +138,7 @@
                         </li>
                     </ul>
                     <div class="card-body">
-                        @if (Model.Folha.Status == Pontos.Folhas.StatusEnum.Aberta)
+                        @if (Model.Folha.StatusId == Pontos.Folhas.StatusEnum.Aberta)
                         {
                             <a class="card-link text-decoration-none" asp-page="/Pontos/Folhas/Fechar" asp-route-id="@Model.Folha.Id">
                                 Fechar
@@ -358,50 +358,50 @@
                                         @foreach (var ponto in apuracaoDiaria.Pontos)
                                         {
                                             <li class="list-group-item">
-                                                @if (ponto.Momento == Pontos.MomentoEnum.Entrada)
+                                                @if (ponto.MomentoId == Pontos.MomentoEnum.Entrada)
                                                 {
                                                     <span class="text-success">
                                                         <i class="bi bi-box-arrow-in-down-right"></i>
                                                     </span>
                                                 }
-                                                else if (ponto.Momento == Pontos.MomentoEnum.Saida)
+                                                else if (ponto.MomentoId == Pontos.MomentoEnum.Saida)
                                                 {
                                                     <span class="text-danger">
                                                         <i class="bi bi-box-arrow-up-left"></i>
                                                     </span>
                                                 }
                                                 <a asp-page="/Pontos/Detalhar" asp-route-id="@ponto.Id" title="Detalhar Ponto">@ponto.DataHora.Value.ToString("HH:mm")</a>
-                                                @if (ponto.Pausa == Pontos.PausaEnum.Almoco)
+                                                @if (ponto.PausaId == Pontos.PausaEnum.Almoco)
                                                 {
                                                     <span>
                                                         <i class="bi bi-egg-fried"></i>
                                                     </span>
                                                 }
-                                                else if (ponto.Pausa == Pontos.PausaEnum.CafeLanche)
+                                                else if (ponto.PausaId == Pontos.PausaEnum.CafeLanche)
                                                 {
                                                     <span>
                                                         <i class="bi bi-cup-hot"></i>
                                                     </span>
                                                 }
-                                                else if (ponto.Pausa == Pontos.PausaEnum.Banheiro)
+                                                else if (ponto.PausaId == Pontos.PausaEnum.Banheiro)
                                                 {
                                                     <span>
                                                         <i class="bi bi-badge-wc"></i>
                                                     </span>
                                                 }
-                                                else if (ponto.Pausa == Pontos.PausaEnum.ConversaReuniao)
+                                                else if (ponto.PausaId == Pontos.PausaEnum.ConversaReuniao)
                                                 {
                                                     <span>
                                                         <i class="bi bi-chat"></i>
                                                     </span>
                                                 }
-                                                else if (ponto.Pausa == Pontos.PausaEnum.Telefonema)
+                                                else if (ponto.PausaId == Pontos.PausaEnum.Telefonema)
                                                 {
                                                     <span>
                                                         <i class="bi bi-telephone"></i>
                                                     </span>
                                                 }
-                                                else if (ponto.Pausa == Pontos.PausaEnum.Generica)
+                                                else if (ponto.PausaId == Pontos.PausaEnum.Generica)
                                                 {
                                                     <span>
                                                         <i class="bi bi-pause-fill"></i>

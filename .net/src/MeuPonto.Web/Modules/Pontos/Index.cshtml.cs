@@ -58,8 +58,8 @@ public class IndexModel : PageModel
                 .Where(x => true
                     && (PerfilId == null || x.PerfilId == PerfilId)
                     && (DataHora == null || x.DataHora == DataHora)
-                    && (Momento == null || x.Momento == Momento)
-                    && (Pausa == null || x.Pausa == Pausa)
+                    && (Momento == null || x.MomentoId == Momento)
+                    && (Pausa == null || x.PausaId == Pausa)
                     && (Estimado == null || x.Estimado == Estimado)
                     && (Observacao == null || x.Observacao.Contains(Observacao)))
                 .OrderByDescending(x => x.DataHora)

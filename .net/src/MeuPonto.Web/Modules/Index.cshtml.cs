@@ -193,7 +193,7 @@ public class IndexModel : PageModel
                         {
                             if (horaEntrada == null)
                             {
-                                if (pontoDoDia.Momento == MomentoEnum.Entrada)
+                                if (pontoDoDia.MomentoId == MomentoEnum.Entrada)
                                 {
                                     horaEntrada = pontoDoDia.DataHora;
                                 }
@@ -206,7 +206,7 @@ public class IndexModel : PageModel
                             }
                             else
                             {
-                                if (pontoDoDia.Momento == MomentoEnum.Saida)
+                                if (pontoDoDia.MomentoId == MomentoEnum.Saida)
                                 {
                                     var tempoRealizado = pontoDoDia.DataHora - horaEntrada;
 

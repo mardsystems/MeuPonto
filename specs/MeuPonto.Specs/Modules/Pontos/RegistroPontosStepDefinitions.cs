@@ -27,23 +27,23 @@ public class RegistroPontosStepDefinitions
     [Given(@"que é o momento de '([^']*)' do expediente")]
     public void GivenQueEOMomentoDeDoExpediente(MomentoEnum momento)
     {
-        _registroPontos.Ponto.Momento = momento;
+        _registroPontos.Ponto.MomentoId = momento;
     }
 
     [Given(@"que é o momento de '([^']*)' do expediente para o almoço")]
     public void GivenQueEOMomentoDeDoExpedienteParaOAlmoco(MomentoEnum momento)
     {
-        _registroPontos.Ponto.Momento = momento;
+        _registroPontos.Ponto.MomentoId = momento;
 
-        _registroPontos.Ponto.Pausa = PausaEnum.Almoco;
+        _registroPontos.Ponto.PausaId = PausaEnum.Almoco;
     }
 
     [Given(@"que é o momento de '([^']*)' do expediente da volta do almoço")]
     public void GivenQueEOMomentoDeDoExpedienteDaVoltaDoAlmoco(MomentoEnum momento)
     {
-        _registroPontos.Ponto.Momento = momento;
+        _registroPontos.Ponto.MomentoId = momento;
 
-        _registroPontos.Ponto.Pausa = PausaEnum.Almoco;
+        _registroPontos.Ponto.PausaId = PausaEnum.Almoco;
     }
 
     [Given(@"que o trabalhador anota a seguinte observação no ponto:")]

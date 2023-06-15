@@ -30,8 +30,8 @@ public class SeedHook
 
         var ponto = new Ponto
         {
-            Momento = MomentoEnum.Entrada,
-            Pausa = null
+            MomentoId = MomentoEnum.Entrada,
+            PausaId = null
         };
 
         registroPontos.Inicia(ponto);

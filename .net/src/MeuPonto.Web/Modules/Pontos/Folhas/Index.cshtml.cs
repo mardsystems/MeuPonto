@@ -52,7 +52,7 @@ public class FolhasModel : PageModel
                 .Where(x => true
                     && (PerfilId == null || x.PerfilId == PerfilId)
                     && (Competencia == null || x.Competencia == Competencia)
-                    && (Status == null || x.Status == Status)
+                    && (Status == null || x.StatusId == Status)
                     && (Observacao == null || x.Observacao.Contains(Observacao)))
                 .OrderByDescending(x => x.Competencia)
                 .Skip((Pagination.PaginaAtual - 1) * Pagination.TamanhoPagina.Value)

@@ -47,8 +47,8 @@ public class EditarComprovanteModel : PageModel
             PerfilId = Comprovante.Ponto?.PerfilId,
             Perfil = Comprovante.Ponto?.Perfil,
             DataHora = Comprovante.Ponto?.DataHora,
-            Momento = Comprovante.Ponto?.Momento,
-            Pausa = Comprovante.Ponto?.Pausa
+            MomentoId = Comprovante.Ponto?.MomentoId,
+            PausaId = Comprovante.Ponto?.PausaId
         };
 
         var comprovante = await _db.Comprovantes.FirstOrDefaultAsync(m => m.Id == Comprovante.Id);
@@ -82,7 +82,7 @@ public class EditarComprovanteModel : PageModel
         comprovante.Ponto = Comprovante.Ponto;
         comprovante.Numero = Comprovante.Numero;
         comprovante.Imagem = imagem;
-        comprovante.TipoImagem = Comprovante.TipoImagem;
+        comprovante.TipoImagemId = Comprovante.TipoImagemId;
 
         try
         {

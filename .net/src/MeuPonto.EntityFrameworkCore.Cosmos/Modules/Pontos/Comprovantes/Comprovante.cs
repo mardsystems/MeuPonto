@@ -23,6 +23,6 @@ public class Comprovante : DocumentEntity, Concepts.Comprovante
 
     [Required]
     [DisplayName("Tipo Imagem")]
-    public TipoImagemEnum? TipoImagem { get; set; }
-    Concepts.TipoImagem? Concepts.Comprovante.TipoImagem => TipoImagem == null ? null : new TipoImagem(TipoImagem.Value);
+    public TipoImagemEnum? TipoImagemId { get; set; }
+    Concepts.TipoImagem? Concepts.Comprovante.TipoImagem => TipoImagemId == null ? null : new TipoImagem(TipoImagemId.Value);
 }

@@ -1,4 +1,4 @@
-﻿using MeuPonto.Modules.Pontos.Folhas;
+﻿using MeuPonto.Enums;
 using System.ComponentModel.DataAnnotations;
 
 namespace MeuPonto.Models;

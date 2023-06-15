@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\.net\src\MeuPonto.WebApi\MeuPonto.WebApi.csproj" />
+    <ProjectReference Include="..\..\.net\tests\MeuPonto.EntityFrameworkCore.SqlServer.Tests\MeuPonto.EntityFrameworkCore.SqlServer.Tests.csproj" />
   </ItemGroup>
 
 </Project>

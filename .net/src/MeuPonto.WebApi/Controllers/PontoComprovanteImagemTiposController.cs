@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using MeuPonto.Data;
 using MeuPonto.Models;
-using MeuPonto.Modules.Pontos.Comprovantes;
+using MeuPonto.Enums;
 
 namespace MeuPonto.Controllers;
 

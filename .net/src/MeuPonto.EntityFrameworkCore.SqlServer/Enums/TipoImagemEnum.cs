@@ -1,6 +1,6 @@
 ﻿namespace MeuPonto.Enums;
 
-public enum PontoComprovanteImagemTipo
+public enum TipoImagemEnum
 {
     Original = 1,
 

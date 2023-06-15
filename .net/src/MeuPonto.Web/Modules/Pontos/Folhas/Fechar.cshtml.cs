@@ -53,7 +53,7 @@ public class FecharFolhaModel : PageModel
 
             await Apurar(folha);
 
-            folha.Status = StatusEnum.Fechada;
+            folha.StatusId = StatusEnum.Fechada;
 
             await _db.SaveChangesAsync();
         }
@@ -103,7 +103,7 @@ public class FecharFolhaModel : PageModel
             {
                 if (horaEntrada == null)
                 {
-                    if (pontoDoDia.Momento == MomentoEnum.Entrada)
+                    if (pontoDoDia.MomentoId == MomentoEnum.Entrada)
                     {
                         horaEntrada = pontoDoDia.DataHora;
                     }
@@ -116,7 +116,7 @@ public class FecharFolhaModel : PageModel
                 }
                 else
                 {
-                    if (pontoDoDia.Momento == MomentoEnum.Saida)
+                    if (pontoDoDia.MomentoId == MomentoEnum.Saida)
                     {
                         var tempoRealizado = pontoDoDia.DataHora - horaEntrada;
 

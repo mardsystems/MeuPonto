@@ -1,6 +1,7 @@
-﻿using MeuPonto.Modules.Perfis;
+﻿using MeuPonto.Enums;
+using MeuPonto.Models;
 
-namespace MeuPonto.Modules.Pontos;
+namespace MeuPonto.Stubs;
 
 public static class RegistroPontosStub
 {
@@ -8,15 +9,11 @@ public static class RegistroPontosStub
     {
         var pontoEntrada = new Ponto
         {
-            Perfil = new PerfilRef
-            {
-                Nome = perfil.Nome
-            },
+            Perfil = perfil,
             PerfilId = perfil.Id,
             DataHora = data,
             MomentoId = momento,
-            Id = Guid.NewGuid(),
-            PartitionKey = "Test user",
+            Id = null,
             CreationDate = DateTime.Now
         };
 
@@ -25,10 +22,7 @@ public static class RegistroPontosStub
 
     public static void QualificaCom(this Ponto ponto, Perfil perfil)
     {
-        ponto.Perfil = new PerfilRef
-        {
-            Nome = perfil.Nome
-        };
+        ponto.Perfil = perfil;
 
         ponto.PerfilId = perfil.Id;
     }

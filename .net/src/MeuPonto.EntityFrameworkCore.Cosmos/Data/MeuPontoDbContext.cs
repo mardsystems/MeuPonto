@@ -71,8 +71,8 @@ public class MeuPontoDbContext : DbContext
                 comprovante.Ponto.PerfilId = pontoAlterado.PerfilId;
                 comprovante.Ponto.Perfil = pontoAlterado.Perfil;
                 comprovante.Ponto.DataHora = pontoAlterado.DataHora;
-                comprovante.Ponto.Momento = pontoAlterado.Momento;
-                comprovante.Ponto.Pausa = pontoAlterado.Pausa;
+                comprovante.Ponto.MomentoId = pontoAlterado.MomentoId;
+                comprovante.Ponto.PausaId = pontoAlterado.PausaId;
             }
         }
     }
@@ -121,7 +121,7 @@ public class MeuPontoDbContext : DbContext
             .ToContainer("Pontos")
             .HasPartitionKey(x => x.PartitionKey);
 
-        modelBuilder.Entity<Ponto>().Property(x => x.Pausa).HasConversion(new EnumToStringConverter<PausaEnum>());
+        modelBuilder.Entity<Ponto>().Property(x => x.PausaId).HasConversion(new EnumToStringConverter<PausaEnum>());
 
         modelBuilder.Entity<Ponto>().Property(x => x.Version).IsETagConcurrency();
 

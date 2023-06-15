@@ -69,7 +69,7 @@ public class MeuPontoDbContext : DbContext
         modelBuilder.Entity<Ponto>()
             .ToTable("Pontos");
 
-        modelBuilder.Entity<Ponto>().Property(x => x.Pausa).HasConversion(new EnumToStringConverter<PausaEnum>());
+        modelBuilder.Entity<Ponto>().Property(x => x.PausaId).HasConversion(new EnumToStringConverter<PausaEnum>());
 
         //modelBuilder.Entity<Ponto>().Property(x => x.Version).IsETagConcurrency();
 

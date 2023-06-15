@@ -79,8 +79,8 @@ public class RegistroPontosPageDriver : RegistroPontosInterface
                 Nome = dl.GetDataListItem("Perfil").GetString()
             },
             DataHora = DateTime.Parse(dl.GetDataListItem("DataHora").GetString()),
-            Momento = (MomentoEnum)Enum.Parse(typeof(MomentoEnum), momentoValue),
-            Pausa = string.IsNullOrEmpty(pausaValue) ? null : (PausaEnum)Enum.Parse(typeof(PausaEnum), pausaValue),
+            MomentoId = (MomentoEnum)Enum.Parse(typeof(MomentoEnum), momentoValue),
+            PausaId = string.IsNullOrEmpty(pausaValue) ? null : (PausaEnum)Enum.Parse(typeof(PausaEnum), pausaValue),
             Estimado = dl.GetDataListItem("Estimado").GetInput().IsChecked,
             Observacao = dl.GetDataListItem("Observacao").TextContent
         };

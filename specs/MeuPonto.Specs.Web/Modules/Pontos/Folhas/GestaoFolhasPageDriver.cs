@@ -114,7 +114,7 @@ public class GestaoFolhasPageDriver : GestaoFolhasInterface
                 Nome = dl.GetDataListItem("Perfil").GetString(),
             },
             Competencia = DateTime.ParseExact(dl.GetDataListItem("Competencia").GetString().Substring(0, 7), "yyyy/MM", CultureInfo.InvariantCulture),
-            Status = (StatusEnum)Enum.Parse(typeof(StatusEnum), dl.GetDataListItem("Status").GetString()),
+            StatusId = (StatusEnum)Enum.Parse(typeof(StatusEnum), dl.GetDataListItem("Status").GetString()),
             Observacao = dl.GetDataListItem("Observacao").GetString(),
             ApuracaoMensal = new ApuracaoMensal
             {

@@ -50,7 +50,7 @@ public class CriarFolhaModel : PageModel
             return Page();
         }
 
-        Folha.Status = StatusEnum.Aberta;
+        Folha.StatusId = StatusEnum.Aberta;
 
         var perfil = await _db.Perfis.FindAsync(Folha.PerfilId, User.Identity.Name);
 

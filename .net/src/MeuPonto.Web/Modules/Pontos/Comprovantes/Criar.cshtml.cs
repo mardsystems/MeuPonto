@@ -27,8 +27,8 @@ public class CriarComprovanteModel : PageModel
             DataHora = ponto?.DataHora,
             PerfilId = ponto?.PerfilId,
             Perfil = ponto?.Perfil,
-            Momento = ponto?.Momento,
-            Pausa = ponto?.Pausa
+            MomentoId = ponto?.MomentoId,
+            PausaId = ponto?.PausaId
         };
 
         return Page();
@@ -53,8 +53,8 @@ public class CriarComprovanteModel : PageModel
             DataHora = ponto?.DataHora,
             PerfilId = ponto?.PerfilId,
             Perfil = ponto?.Perfil,
-            Momento = ponto?.Momento,
-            Pausa = ponto?.Pausa
+            MomentoId = ponto?.MomentoId,
+            PausaId = ponto?.PausaId
         };
 
         if (!ModelState.IsValid)

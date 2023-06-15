@@ -41,11 +41,11 @@ public class GuardarComprovanteStepDefinitions
 
         _backupComprovantes.Define(file);
 
-        _backupComprovantes.Comprovante.TipoImagem = TipoImagemEnum.Original;
+        _backupComprovantes.Comprovante.TipoImagemId = TipoImagemEnum.Original;
 
         _backupComprovantes.Ponto.QualificaCom(perfil);
         _backupComprovantes.Ponto.DataHora = new DateTime(2023, 02, 17, 17, 07, 0);
-        _backupComprovantes.Ponto.Momento = MomentoEnum.Saida;
+        _backupComprovantes.Ponto.MomentoId = MomentoEnum.Saida;
     }
 
     [Given(@"que o trabalhador tem um comprovante de ponto guardado com a data '([^']*)'")]
@@ -76,11 +76,11 @@ public class GuardarComprovanteStepDefinitions
 
         _backupComprovantes.Define(file);
 
-        _backupComprovantes.Comprovante.TipoImagem = TipoImagemEnum.Original;
+        _backupComprovantes.Comprovante.TipoImagemId = TipoImagemEnum.Original;
 
         _backupComprovantes.Ponto.QualificaCom(perfil);
         _backupComprovantes.Ponto.DataHora = new DateTime(2023, 02, 17, 17, 07, 0);
-        _backupComprovantes.Ponto.Momento = MomentoEnum.Saida;
+        _backupComprovantes.Ponto.MomentoId = MomentoEnum.Saida;
     }
 
     [When(@"o trabalhador escanear o comprovante de ponto")]
