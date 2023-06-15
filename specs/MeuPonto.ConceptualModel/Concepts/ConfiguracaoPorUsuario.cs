@@ -1,6 +1,6 @@
-﻿namespace MeuPonto.Modules;
+﻿namespace MeuPonto.Concepts;
 
-public interface ConfiguracaoPorUsuario_
+public interface ConfiguracaoPorUsuario
 {
     string UserName { get; }
     bool JavascriptIsEnabled { get; }

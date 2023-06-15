@@ -55,7 +55,9 @@ public class HomePageDriver : HomeInterface
 
         var form = Document.GetForm();
 
-        form.GetSelect("PerfilId").GetOption(folhaAberta.Perfil.Nome).IsSelected = true;
+        var perfil = folhaAberta.EQualificadaPelo();
+
+        form.GetSelect("PerfilId").GetOption(perfil.Nome).IsSelected = true;
         form.GetInput("CompetenciaAno").Value = folhaAberta.Competencia.Value.ToString("yyyy");
         form.GetSelect("CompetenciaMes").Value = folhaAberta.Competencia.Value.ToString("MM");
 

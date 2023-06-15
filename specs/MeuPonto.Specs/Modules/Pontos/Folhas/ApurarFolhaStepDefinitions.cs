@@ -79,12 +79,16 @@ public class ApurarFolhaStepDefinitions
     [Then(@"o tempo total realizado deverá ser de '([^']*)'")]
     public void ThenOTempoTotalRealizadoDeveraSerDe(TimeSpan tempoTotalRealizado)
     {
-        _gestaoFolhas.FolhaAberta.ApuracaoMensal.TempoTotalApurado.Should().Be(tempoTotalRealizado);
+        var apuracaoMensal = _gestaoFolhas.FolhaAberta.Guarda();
+
+        apuracaoMensal.TempoTotalApurado.Should().Be(tempoTotalRealizado);
     }
 
     [Then(@"o tempo total apurado da folha de ponto deverá ser de '([^']*)'")]
     public void ThenOTempoTotalApuradoDaFolhaDePontoDeveraSerDe(TimeSpan tempoTotalApurado)
     {
-        _gestaoFolhas.FolhaAberta.ApuracaoMensal.TempoTotalApurado.Should().Be(tempoTotalApurado);
+        var apuracaoMensal = _gestaoFolhas.FolhaAberta.Guarda();
+
+        apuracaoMensal.TempoTotalApurado.Should().Be(tempoTotalApurado);
     }
 }

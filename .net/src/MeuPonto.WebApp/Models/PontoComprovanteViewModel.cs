@@ -25,5 +25,5 @@ public class PontoComprovanteViewModel
     [Required]
     public int? ImagemTipoId { get; set; }
 
-    public virtual PontoComprovanteImagemTipo? ImagemTipo { get; set; }
+    public virtual TipoImagem? ImagemTipo { get; set; }
 }

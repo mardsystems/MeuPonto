@@ -2,7 +2,7 @@
 
 namespace MeuPonto.Models;
 
-public class PontoComprovanteImagemTipo : Concepts.TipoImagem
+public class TipoImagem : Concepts.TipoImagem
 {
     public int Id { get; set; }
 

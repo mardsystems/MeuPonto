@@ -74,7 +74,7 @@ public class CadastroPerfisPageDriver : CadastroPerfisInterface
 
         foreach (var dayOfWeek in daysOfWeek)
         {
-            var jornadaTrabalhoDiaria = perfil.JornadaTrabalhoSemanalPrevista.Semana.SingleOrDefault(x => x.DiaSemana == dayOfWeek);
+            var jornadaTrabalhoDiaria = perfil.Preve().Semana.SingleOrDefault(x => x.DiaSemana == dayOfWeek);
 
             var i = (int)dayOfWeek;
 

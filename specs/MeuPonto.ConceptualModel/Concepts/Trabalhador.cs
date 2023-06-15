@@ -2,7 +2,10 @@
 
 public interface Trabalhador
 {
-    string UserName { get; }
     string? Nome { get; }
     string? Pis { get; }
+
+    Folha[] Gerencia();
+    Ponto[] Registra();
+    Perfil[] Cadastra();
 }

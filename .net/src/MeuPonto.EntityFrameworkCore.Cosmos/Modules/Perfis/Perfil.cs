@@ -24,11 +24,11 @@ public class Perfil : DocumentEntity, Concepts.Perfil
 
     [DisplayName("Empresa")]
     public EmpresaRef? Empresa { get; set; }
-    Concepts.Empresa? Concepts.Perfil.Empresa => Empresa;
+    Concepts.Empresa? Concepts.Perfil.Vincula() => Empresa;
 
     [DisplayName("Jornada Trabalho Semanal Prevista")]
     public virtual JornadaTrabalhoSemanal JornadaTrabalhoSemanalPrevista { get; set; } = default!;
-    Concepts.JornadaTrabalhoSemanal Concepts.Perfil.JornadaTrabalhoSemanalPrevista => JornadaTrabalhoSemanalPrevista;
+    Concepts.JornadaTrabalhoSemanal Concepts.Perfil.Preve() => JornadaTrabalhoSemanalPrevista;
 
     public Perfil()
     {

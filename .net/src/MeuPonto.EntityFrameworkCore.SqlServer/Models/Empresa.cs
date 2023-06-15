@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MeuPonto.Models;
 
-public class PerfilEmpresa : IdentityTableEntity, Concepts.Empresa
+public class Empresa : IdentityTableEntity, Concepts.Empresa
 {
     [Required]
     [MinLength(3)]

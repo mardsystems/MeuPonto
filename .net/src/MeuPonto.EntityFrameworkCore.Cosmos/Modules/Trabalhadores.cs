@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using MeuPonto.Concepts;
 
 namespace MeuPonto.Modules;
 
@@ -16,4 +17,19 @@ public class Trabalhador : Concepts.Trabalhador
     [StringLength(12)]
     [DisplayName("PIS")]
     public string? Pis { get; set; }
+
+    Perfil[] Concepts.Trabalhador.Cadastra()
+    {
+        throw new NotImplementedException();
+    }
+
+    Folha[] Concepts.Trabalhador.Gerencia()
+    {
+        throw new NotImplementedException();
+    }
+
+    Ponto[] Concepts.Trabalhador.Registra()
+    {
+        throw new NotImplementedException();
+    }
 }

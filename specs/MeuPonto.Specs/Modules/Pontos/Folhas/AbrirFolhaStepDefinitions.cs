@@ -82,7 +82,9 @@ public class AbrirFolhaStepDefinitions
     [Then(@"o perfil da folha de ponto deverá deverá ser '([^']*)'")]
     public void ThenOPerfilDaFolhaDePontoDeveraDeveraSer(string nome)
     {
-        _gestaoFolhas.FolhaAberta.Perfil.Nome.Should().Be(nome);
+        var perfil = _gestaoFolhas.FolhaAberta.EQualificadaPelo();
+
+        perfil.Nome.Should().Be(nome);
     }
 
     [Then(@"o status da folha de ponto deverá ser '([^']*)'")]
@@ -100,13 +102,17 @@ public class AbrirFolhaStepDefinitions
     [Then(@"a folha de ponto não deverá ter tempo total apurado")]
     public void ThenAFolhaDePontoNaoDeveraTerTempoTotalApurado()
     {
-        _gestaoFolhas.FolhaAberta.ApuracaoMensal.TempoTotalApurado.Should().BeNull();
+        var apuracaoMensal = _gestaoFolhas.FolhaAberta.Guarda();
+
+        apuracaoMensal.TempoTotalApurado.Should().BeNull();
     }
 
     [Then(@"a folha de ponto não deverá ter tempo total período anterior")]
     public void ThenAFolhaDePontoNaoDeveraTerTempoTotalPeriodoAnterior()
     {
-        _gestaoFolhas.FolhaAberta.ApuracaoMensal.TempoTotalPeriodoAnterior.Should().BeNull();
+        var apuracaoMensal = _gestaoFolhas.FolhaAberta.Guarda();
+
+        apuracaoMensal.TempoTotalPeriodoAnterior.Should().BeNull();
     }
 
     [Then(@"a folha de ponto deverá ter uma observação")]

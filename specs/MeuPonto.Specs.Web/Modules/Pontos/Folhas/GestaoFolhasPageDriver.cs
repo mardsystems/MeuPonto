@@ -50,9 +50,11 @@ public class GestaoFolhasPageDriver : GestaoFolhasInterface
 
         var form = Document.GetForm();
 
+        var perfil = folha.EQualificadaPelo();
+
         //var competencia = folha.Competencia.Value.ToString("yyyy-MM-dd\\THH:mm:ss");
 
-        form.GetSelect("Folha.PerfilId").GetOption(folha.Perfil.Nome).IsSelected = true;
+        form.GetSelect("Folha.PerfilId").GetOption(perfil.Nome).IsSelected = true;
         form.GetInput("CompetenciaAno").Value = folha.Competencia.Value.Year.ToString();
         form.GetSelect("CompetenciaMes").Value = folha.Competencia.Value.Month.ToString();
         form.GetTextArea("Folha.Observacao").Value = folha.Observacao;

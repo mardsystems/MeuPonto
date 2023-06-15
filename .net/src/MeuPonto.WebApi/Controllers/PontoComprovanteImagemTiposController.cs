@@ -18,14 +18,14 @@ public class PontoComprovanteImagemTiposController : ControllerBase
 
     // GET: api/PontoComprovanteImagemTipos
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<PontoComprovanteImagemTipo>>> GetPontoComprovanteImagemTipos()
+    public async Task<ActionResult<IEnumerable<TipoImagem>>> GetPontoComprovanteImagemTipos()
     {
         return await _db.PontoComprovanteImagemTipos.ToListAsync();
     }
 
     // GET: api/PontoComprovanteImagemTipos/5
     [HttpGet("{id}")]
-    public async Task<ActionResult<PontoComprovanteImagemTipo>> GetPontoComprovanteImagemTipo(int id)
+    public async Task<ActionResult<TipoImagem>> GetPontoComprovanteImagemTipo(int id)
     {
         var pontoComprovanteImagemTipo = await _db.PontoComprovanteImagemTipos.FindAsync(id);
 
@@ -40,7 +40,7 @@ public class PontoComprovanteImagemTiposController : ControllerBase
     // PUT: api/PontoComprovanteImagemTipos/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutPontoComprovanteImagemTipo(int id, PontoComprovanteImagemTipo pontoComprovanteImagemTipo)
+    public async Task<IActionResult> PutPontoComprovanteImagemTipo(int id, TipoImagem pontoComprovanteImagemTipo)
     {
         if (id != pontoComprovanteImagemTipo.Id)
         {
@@ -71,7 +71,7 @@ public class PontoComprovanteImagemTiposController : ControllerBase
     // POST: api/PontoComprovanteImagemTipos
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
-    public async Task<ActionResult<PontoComprovanteImagemTipo>> PostPontoComprovanteImagemTipo(PontoComprovanteImagemTipo pontoComprovanteImagemTipo)
+    public async Task<ActionResult<TipoImagem>> PostPontoComprovanteImagemTipo(TipoImagem pontoComprovanteImagemTipo)
     {
         _db.PontoComprovanteImagemTipos.Add(pontoComprovanteImagemTipo);
         try

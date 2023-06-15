@@ -13,7 +13,7 @@ public class Ponto : GlobalTableEntity, Concepts.Ponto
 
     [DisplayName("Perfil")]
     public Perfil? Perfil { get; set; }
-    Concepts.Perfil? Concepts.Ponto.Perfil => Perfil;
+    Concepts.Perfil? Concepts.Ponto.EQualificadoPelo() => Perfil;
 
     [Required]
     [DisplayName("Data/Hora")]
@@ -44,5 +44,10 @@ public class Ponto : GlobalTableEntity, Concepts.Ponto
     public Ponto()
     {
         Comprovantes = new List<Comprovante>();
+    }
+
+    Concepts.Comprovante[] Concepts.Ponto.Guarda()
+    {
+        throw new NotImplementedException();
     }
 }

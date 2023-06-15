@@ -5,10 +5,10 @@ using System.ComponentModel;
 namespace MeuPonto.Models;
 
 [Owned]
-public class PerfilJornadaTrabalhoSemanal : Concepts.JornadaTrabalhoSemanal
+public class JornadaTrabalhoSemanal : Concepts.JornadaTrabalhoSemanal
 {
     [DisplayName("Semana")]
-    public virtual IList<PerfilJornadaTrabalhoDiaria> Semana { get; set; } = default!;
+    public virtual IList<JornadaTrabalhoDiaria> Semana { get; set; } = default!;
     IList<Concepts.JornadaTrabalhoDiaria> Concepts.JornadaTrabalhoSemanal.Semana => Semana.Cast<Concepts.JornadaTrabalhoDiaria>().ToList();
 
     [DisplayName("Tempo Total")]
@@ -28,8 +28,8 @@ public class PerfilJornadaTrabalhoSemanal : Concepts.JornadaTrabalhoSemanal
         }
     }
 
-    public PerfilJornadaTrabalhoSemanal()
+    public JornadaTrabalhoSemanal()
     {
-        Semana = new List<PerfilJornadaTrabalhoDiaria>();
+        Semana = new List<JornadaTrabalhoDiaria>();
     }
 }

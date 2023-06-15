@@ -1,6 +1,6 @@
 ﻿namespace MeuPonto.Modules;
 
-public class ConfiguracaoPorUsuario
+public class ConfiguracaoPorUsuario : Concepts.ConfiguracaoPorUsuario
 {
     public string UserName { get; set; }
 

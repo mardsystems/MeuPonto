@@ -89,18 +89,24 @@ public class FecharFolhaStepDefinitions
     [Then(@"o tempo total apurado deverá ser '([^']*)'")]
     public void ThenOTempoTotalApuradoDeveraSer(TimeSpan tempoTotalApurado)
     {
-        _gestaoFolhas.FolhaAberta.ApuracaoMensal.TempoTotalApurado.Should().Be(tempoTotalApurado);
+        var apuracaoMensal = _gestaoFolhas.FolhaAberta.Guarda();
+
+        apuracaoMensal.TempoTotalApurado.Should().Be(tempoTotalApurado);
     }
 
     [Then(@"o tempo total período anterior deverá ser nulo")]
     public void ThenOTempoTotalPeriodoAnteriorDeveraSerNulo()
     {
-        _gestaoFolhas.FolhaAberta.ApuracaoMensal.TempoTotalPeriodoAnterior.Should().BeNull();
+        var apuracaoMensal = _gestaoFolhas.FolhaAberta.Guarda();
+
+        apuracaoMensal.TempoTotalPeriodoAnterior.Should().BeNull();
     }
 
     [Then(@"o tempo total período anterior deverá ser '([^']*)'")]
     public void ThenOTempoTotalPeriodoAnteriorDeveraSer(TimeSpan tempoTotalPeriodoAnterior)
     {
-        _gestaoFolhas.FolhaAberta.ApuracaoMensal.TempoTotalPeriodoAnterior.Should().Be(tempoTotalPeriodoAnterior);
+        var apuracaoMensal = _gestaoFolhas.FolhaAberta.Guarda();
+
+        apuracaoMensal.TempoTotalPeriodoAnterior.Should().Be(tempoTotalPeriodoAnterior);
     }
 }

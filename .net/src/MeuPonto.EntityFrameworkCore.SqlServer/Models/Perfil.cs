@@ -23,15 +23,15 @@ public class Perfil : IdentityTableEntity, Concepts.Perfil
     public Guid? EmpresaId { get; set; }
 
     [DisplayName("Empresa")]
-    public PerfilEmpresa? Empresa { get; set; }
-    Concepts.Empresa? Concepts.Perfil.Empresa => (Concepts.Empresa)Empresa;
+    public Empresa? Empresa { get; set; }
+    Concepts.Empresa? Concepts.Perfil.Vincula() => Empresa;
 
     [DisplayName("Jornada Trabalho Semanal Prevista")]
-    public virtual PerfilJornadaTrabalhoSemanal JornadaTrabalhoSemanalPrevista { get; set; } = default!;
-    Concepts.JornadaTrabalhoSemanal Concepts.Perfil.JornadaTrabalhoSemanalPrevista => JornadaTrabalhoSemanalPrevista;
+    public virtual JornadaTrabalhoSemanal JornadaTrabalhoSemanalPrevista { get; set; } = default!;
+    Concepts.JornadaTrabalhoSemanal Concepts.Perfil.Preve()=> JornadaTrabalhoSemanalPrevista;
 
     public Perfil()
     {
-        JornadaTrabalhoSemanalPrevista = new PerfilJornadaTrabalhoSemanal();
+        JornadaTrabalhoSemanalPrevista = new JornadaTrabalhoSemanal();
     }
 }

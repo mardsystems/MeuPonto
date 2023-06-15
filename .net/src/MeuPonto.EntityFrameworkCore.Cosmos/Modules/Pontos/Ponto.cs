@@ -11,7 +11,7 @@ public class Ponto : DocumentEntity, Concepts.Ponto
 
     [DisplayName("Perfil")]
     public PerfilRef? Perfil { get; set; }
-    Concepts.Perfil? Concepts.Ponto.Perfil => Perfil;
+    Concepts.Perfil? Concepts.Ponto.EQualificadoPelo() => Perfil;
 
     [Required]
     [DisplayName("Data/Hora")]
@@ -35,4 +35,9 @@ public class Ponto : DocumentEntity, Concepts.Ponto
     [MaxLength(255)]
     [DisplayName("Observação")]
     public string? Observacao { get; set; }
+
+    Concepts.Comprovante[] Concepts.Ponto.Guarda()
+    {
+        throw new NotImplementedException();
+    }
 }

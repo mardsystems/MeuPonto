@@ -26,7 +26,7 @@ public class Comprovante : IdentityTableEntity, Concepts.Comprovante
     [DisplayName("Tipo Imagem")]
     public TipoImagemEnum? TipoImagem { get; set; }
     public int? ImagemTipoId { get; set; }
-    public PontoComprovanteImagemTipo? ImagemTipo { get; set; }
+    public TipoImagem? ImagemTipo { get; set; }
     Concepts.TipoImagem? Concepts.Comprovante.TipoImagem => ImagemTipo;
 
     public Comprovante()

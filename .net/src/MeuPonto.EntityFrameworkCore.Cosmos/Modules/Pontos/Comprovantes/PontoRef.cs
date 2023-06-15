@@ -13,7 +13,7 @@ public class PontoRef : Concepts.Ponto
 
     [DisplayName("Perfil")]
     public PerfilRef? Perfil { get; set; }
-    Concepts.Perfil? Concepts.Ponto.Perfil => Perfil;
+    Concepts.Perfil? Concepts.Ponto.EQualificadoPelo() => Perfil;
 
     [Required]
     [DisplayName("Data/Hora")]
@@ -32,4 +32,9 @@ public class PontoRef : Concepts.Ponto
     bool Concepts.Ponto.Estimado => throw new NotImplementedException();
 
     string? Concepts.Ponto.Observacao => throw new NotImplementedException();
+
+    Concepts.Comprovante[] Concepts.Ponto.Guarda()
+    {
+        throw new NotImplementedException();
+    }
 }

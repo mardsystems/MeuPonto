@@ -20,16 +20,16 @@ public class MeuPontoDbContext : DbContext
         modelBuilder.Entity<Ponto>().Property(b => b.CreationDate).HasDefaultValueSql("getdate()");
         modelBuilder.Entity<Comprovante>().Property(b => b.CreationDate).HasDefaultValueSql("getdate()");
 
-        modelBuilder.Entity<PontoComprovanteImagemTipo>().Property(x => x.Id).ValueGeneratedNever();
+        modelBuilder.Entity<TipoImagem>().Property(x => x.Id).ValueGeneratedNever();
 
-        modelBuilder.Entity<PontoComprovanteImagemTipo>().HasData(
-            new PontoComprovanteImagemTipo { Id = (int)Enums.PontoComprovanteImagemTipo.Original, Nome = "Original" },
-            new PontoComprovanteImagemTipo { Id = (int)Enums.PontoComprovanteImagemTipo.Tratada, Nome = "Tratada" }
+        modelBuilder.Entity<TipoImagem>().HasData(
+            new TipoImagem { Id = (int)Enums.PontoComprovanteImagemTipo.Original, Nome = "Original" },
+            new TipoImagem { Id = (int)Enums.PontoComprovanteImagemTipo.Tratada, Nome = "Tratada" }
         );
     }
 
     public DbSet<Perfil> Perfis { get; set; }
     public DbSet<Ponto> Pontos { get; set; }
     public DbSet<Comprovante> Comprovantes { get; set; }
-    public DbSet<PontoComprovanteImagemTipo> PontoComprovanteImagemTipos { get; set; }
+    public DbSet<TipoImagem> PontoComprovanteImagemTipos { get; set; }
 }

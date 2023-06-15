@@ -34,7 +34,9 @@ public class RegistroPontosPageDriver : RegistroPontosInterface
 
         var form = Document.GetForm();
 
-        form.GetSelect("Ponto.PerfilId").GetOption(ponto.Perfil.Nome).IsSelected = true;
+        var perfil = ponto.EQualificadoPelo();
+
+        form.GetSelect("Ponto.PerfilId").GetOption(perfil.Nome).IsSelected = true;
         form.GetInput("Ponto.Momento", ponto.Momento.Nome).IsChecked = true;
         if (ponto.Pausa != null)
         {

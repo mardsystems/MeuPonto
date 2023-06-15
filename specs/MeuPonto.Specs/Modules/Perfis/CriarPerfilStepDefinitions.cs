@@ -114,20 +114,24 @@ public class CriarPerfilStepDefinitions
     [Then(@"a jornada de trabalho semanal prevista deverá ser:")]
     public void ThenAJornadaDeTrabalhoSemanalPrevistaDeveraSer(Table table)
     {
-        var jornadaTrabalhoSemanalPrevista = table.CreateInstance<(DayOfWeek diaSemana, TimeSpan tempo)>();
+        var jornadaTrabalhoSemanal = table.CreateInstance<(DayOfWeek diaSemana, TimeSpan tempo)>();
 
         //
 
-        var jornadaTrabalhoDiaria = _cadastroPerfis.PerfilCadastrado.JornadaTrabalhoSemanalPrevista.Semana.FirstOrDefault(x => x.DiaSemana == jornadaTrabalhoSemanalPrevista.diaSemana);
+        var jornadaTrabalhoSemanalPrevista = _cadastroPerfis.PerfilCadastrado.Preve();
+
+        var jornadaTrabalhoDiaria = jornadaTrabalhoSemanalPrevista.Semana.FirstOrDefault(x => x.DiaSemana == jornadaTrabalhoSemanal.diaSemana);
 
         jornadaTrabalhoDiaria.Should().NotBeNull();
 
-        jornadaTrabalhoDiaria.Tempo.Should().Be(jornadaTrabalhoSemanalPrevista.tempo, jornadaTrabalhoDiaria.DiaSemana.ToString());
+        jornadaTrabalhoDiaria.Tempo.Should().Be(jornadaTrabalhoSemanal.tempo, jornadaTrabalhoDiaria.DiaSemana.ToString());
     }
 
     [Then(@"o tempo total da jornada de trabalho semanal prevista deverá ser '([^']*)'")]
     public void ThenOTempoTotalDaJornadaDeTrabalhoSemanalPrevistaDeveraSer(TimeSpan tempoTotal)
     {
-        _cadastroPerfis.PerfilCadastrado.JornadaTrabalhoSemanalPrevista.TempoTotal.Should().Be(tempoTotal);
+        var jornadaTrabalhoSemanalPrevista = _cadastroPerfis.PerfilCadastrado.Preve();
+
+        jornadaTrabalhoSemanalPrevista.TempoTotal.Should().Be(tempoTotal);
     }
 }
