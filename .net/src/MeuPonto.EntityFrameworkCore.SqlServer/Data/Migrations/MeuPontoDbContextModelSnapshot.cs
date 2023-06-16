@@ -251,8 +251,8 @@ namespace MeuPonto.Data.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<string>("PausaId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("PausaId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("PerfilId")
                         .IsRequired()

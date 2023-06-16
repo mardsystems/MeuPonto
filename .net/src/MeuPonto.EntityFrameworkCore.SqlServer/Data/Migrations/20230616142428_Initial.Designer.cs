@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MeuPonto.Data.Migrations
 {
     [DbContext(typeof(MeuPontoDbContext))]
-    [Migration("20230616140459_Initial")]
+    [Migration("20230616142428_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -253,8 +253,8 @@ namespace MeuPonto.Data.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<string>("PausaId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("PausaId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("PerfilId")
                         .IsRequired()

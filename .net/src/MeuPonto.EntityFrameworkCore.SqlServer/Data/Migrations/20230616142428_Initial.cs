@@ -183,7 +183,7 @@ namespace MeuPonto.Data.Migrations
                     PerfilId = table.Column<int>(type: "int", nullable: false),
                     DataHora = table.Column<DateTime>(type: "datetime2", nullable: false),
                     MomentoId = table.Column<int>(type: "int", nullable: false),
-                    PausaId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    PausaId = table.Column<int>(type: "int", nullable: true),
                     Estimado = table.Column<bool>(type: "bit", nullable: false),
                     Observacao = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "getdate()"),

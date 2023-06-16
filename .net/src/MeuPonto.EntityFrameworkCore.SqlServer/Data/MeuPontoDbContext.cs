@@ -1,7 +1,6 @@
 ﻿using MeuPonto.Enums;
 using MeuPonto.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MeuPonto.Data;
 
@@ -48,8 +47,6 @@ public class MeuPontoDbContext : DbContext
 
         modelBuilder.Entity<Ponto>()
             .ToTable("Pontos");
-
-        modelBuilder.Entity<Ponto>().Property(x => x.PausaId).HasConversion(new EnumToStringConverter<PausaEnum>());
 
         modelBuilder.Entity<Ponto>().Property(b => b.CreationDate).HasDefaultValueSql("getdate()");
 
