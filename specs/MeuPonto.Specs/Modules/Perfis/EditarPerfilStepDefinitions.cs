@@ -24,9 +24,9 @@ public class EditarPerfilStepDefinitions
     }
 
     [When(@"o trabalhador editar o perfil")]
-    public async Task WhenOTrabalhadorEditarOPerfil()
+    public void WhenOTrabalhadorEditarOPerfil()
     {
-        await _cadastroPerfisInterface.EditarPerfil(_cadastroPerfis.Perfil);
+        _cadastroPerfisInterface.EditarPerfil(_cadastroPerfis.Perfil);
 
         var perfilEdidado = _db.Perfis.FirstOrDefault(x => x.Nome == _cadastroPerfis.Perfil.Nome);
 

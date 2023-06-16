@@ -35,7 +35,7 @@ public class AngleSharpContext
 
     public IHtmlDocument GetDocument(HttpResponseMessage response)
     {
-        var document = GetDocument(response);
+        var document = GetDocumentAsync(response).Result;
 
         return document;
     }

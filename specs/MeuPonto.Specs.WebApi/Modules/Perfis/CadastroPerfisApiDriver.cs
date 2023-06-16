@@ -5,39 +5,38 @@ namespace MeuPonto.Modules.Perfis;
 public class CadastroPerfisApiDriver : CadastroPerfisInterface
 {
     private readonly WebApiContext _webApiContext;
-    public ActionAttempt<Concepts.Perfil, Perfil> CriaPerfil { get; }
+    public ActionAttempt<Perfil, Perfil> CriaPerfil { get; }
 
     public CadastroPerfisApiDriver(WebApiContext webApiContext, ActionAttemptFactory actionAttemptFactory)
     {
         _webApiContext = webApiContext;
 
-        CriaPerfil = actionAttemptFactory.CreateWithStatusCheck<Concepts.Perfil, Perfil>(
+        CriaPerfil = actionAttemptFactory.CreateWithStatusCheck<Perfil, Perfil>(
             nameof(CriaPerfil),
-            perfil => webApiContext.ExecutePost<Perfil>("/api/Perfis", perfil));
+            perfil => webApiContext.ExecutePost<Perfil>("/api/Perfis", perfil),
+            System.Net.HttpStatusCode.Created);
     }
 
-    public async Task CriarPerfil(Concepts.Perfil perfil)
+    public void CriarPerfil(Concepts.Perfil perfil)
     {
-        CriaPerfil.Perform(perfil);
-
-        await Task.CompletedTask;
+        CriaPerfil.Perform((Perfil)perfil);
     }
 
-    public async Task<Concepts.Perfil> DetalharPerfil(Concepts.Perfil perfilCadastrado)
+    public Concepts.Perfil DetalharPerfil(Concepts.Perfil perfilCadastrado)
     {
         int perfilId = 0;
 
         var perfil = _webApiContext.ExecuteGet<Perfil>($"/api/Perfis/{perfilId}");
 
-        return await Task.FromResult(perfil);
+        return perfil;
     }
 
-    public Task EditarPerfil(Concepts.Perfil perfilCadastrado)
+    public void EditarPerfil(Concepts.Perfil perfilCadastrado)
     {
         throw new NotImplementedException();
     }
 
-    public Task ExcluirPerfil(Concepts.Perfil perfilCadastrado)
+    public void ExcluirPerfil(Concepts.Perfil perfilCadastrado)
     {
         throw new NotImplementedException();
     }

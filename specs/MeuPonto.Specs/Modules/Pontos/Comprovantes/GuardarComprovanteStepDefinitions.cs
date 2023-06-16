@@ -84,9 +84,9 @@ public class GuardarComprovanteStepDefinitions
     }
 
     [When(@"o trabalhador escanear o comprovante de ponto")]
-    public async Task WhenOTrabalhadorEscanearOComprovanteDePonto()
+    public void WhenOTrabalhadorEscanearOComprovanteDePonto()
     {
-        var comprovante = await _backupComprovantesInterface.EscanearComprovante(
+        var comprovante = _backupComprovantesInterface.EscanearComprovante(
             _backupComprovantes.Imagem,
             _backupComprovantes.Comprovante,
             _backupComprovantes.Ponto);
@@ -95,9 +95,9 @@ public class GuardarComprovanteStepDefinitions
     }
 
     [When(@"o trabalhador guardar o comprovante de ponto")]
-    public async Task WhenOTrabalhadorGuardarOComprovanteDePonto()
+    public void WhenOTrabalhadorGuardarOComprovanteDePonto()
     {
-        var comprovanteGuardado = await _backupComprovantesInterface.GuardarComprovante(
+        var comprovanteGuardado = _backupComprovantesInterface.GuardarComprovante(
             _backupComprovantes.Imagem,
             _backupComprovantes.Comprovante,
             _backupComprovantes.Ponto);

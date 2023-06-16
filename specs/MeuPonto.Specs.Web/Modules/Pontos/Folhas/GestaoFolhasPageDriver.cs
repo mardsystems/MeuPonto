@@ -20,9 +20,9 @@ public class GestaoFolhasPageDriver : GestaoFolhasInterface
         _angleSharp = angleSharp;
     }
 
-    public async Task GoTo()
+    public void GoTo()
     {
-        Document = await _angleSharp.GetDocumentAsync("/Pontos/Folhas");
+        Document = _angleSharp.GetDocument("/Pontos/Folhas");
 
         AberturaFolhaAnchor = Document.GetAnchor("Abertura.Folha");
 
@@ -42,11 +42,11 @@ public class GestaoFolhasPageDriver : GestaoFolhasInterface
         FechamentoFolhaAnchor.Should().NotBeNull("a gestão de folhas deve ter um link para o fechamento da folha");
     }
 
-    public async Task<Concepts.Folha> AbrirFolha(Concepts.Folha folha)
+    public Concepts.Folha AbrirFolha(Concepts.Folha folha)
     {
-        await GoTo();
+        GoTo();
 
-        Document = await _angleSharp.GetDocumentAsync(AberturaFolhaAnchor.Href);
+        Document = _angleSharp.GetDocument(AberturaFolhaAnchor.Href);
 
         var form = Document.GetForm();
 
@@ -61,34 +61,34 @@ public class GestaoFolhasPageDriver : GestaoFolhasInterface
 
         var submitButton = form.GetSubmitButton("button.btn-primary");
 
-        var resultPage = await _angleSharp.SendAsync(form, submitButton);
+        var resultPage = _angleSharp.Send(form, submitButton);
 
         resultPage.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
 
-        Document = await _angleSharp.GetDocumentAsync(resultPage);
+        Document = _angleSharp.GetDocument(resultPage);
 
         var folhaAberta = ObtemDetalhes();
 
         return folhaAberta;
     }
 
-    public async Task<Concepts.Folha> FecharFolha(Concepts.Folha folhaAberta)
+    public Concepts.Folha FecharFolha(Concepts.Folha folhaAberta)
     {
-        await GoTo();
+        GoTo();
 
         Identifica(folhaAberta);
 
-        Document = await _angleSharp.GetDocumentAsync(FechamentoFolhaAnchor.Href);
+        Document = _angleSharp.GetDocument(FechamentoFolhaAnchor.Href);
 
         var form = Document.GetForm();
 
         var submitButton = form.GetSubmitButton();
 
-        var resultPage = await _angleSharp.SendAsync(form, submitButton);
+        var resultPage = _angleSharp.Send(form, submitButton);
 
         resultPage.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
 
-        Document = await _angleSharp.GetDocumentAsync(resultPage);
+        Document = _angleSharp.GetDocument(resultPage);
 
         var folhaFechada = ObtemDetalhes();
 

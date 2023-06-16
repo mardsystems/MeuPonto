@@ -73,9 +73,9 @@ public class FecharFolhaStepDefinitions
     }
 
     [When(@"o trabalhador fechar a folha de ponto")]
-    public async Task WhenOTrabalhadorFecharAFolhaDePonto()
+    public void WhenOTrabalhadorFecharAFolhaDePonto()
     {
-        var folhaFechada = await _gestaoFolhasInterface.FecharFolha(_gestaoFolhas.Folha);
+        var folhaFechada = _gestaoFolhasInterface.FecharFolha(_gestaoFolhas.Folha);
 
         _gestaoFolhas.Define(folhaFechada);
     }

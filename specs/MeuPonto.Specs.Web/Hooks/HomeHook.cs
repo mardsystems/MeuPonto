@@ -13,8 +13,8 @@ public class HomeHook
     }
 
     [BeforeScenario(Order = 2)]
-    public async Task GoHome()
+    public void GoHome()
     {
-        await _homePageDriver.GoTo();
+        _homePageDriver.GoTo();
     }
 }

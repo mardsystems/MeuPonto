@@ -82,11 +82,11 @@ public class CriarPerfilStepDefinitions
     }
 
     [When(@"o trabalhador criar um perfil")]
-    public async Task WhenOTrabalhadorCriarUmPerfil()
+    public void WhenOTrabalhadorCriarUmPerfil()
     {
         //_cadastroPerfisInterface.GoTo();
 
-        await _cadastroPerfisInterface.CriarPerfil(_cadastroPerfis.Perfil);
+        _cadastroPerfisInterface.CriarPerfil(_cadastroPerfis.Perfil);
 
         var perfilCadastrado = _db.Perfis.FirstOrDefault(x => x.Nome == _cadastroPerfis.Perfil.Nome);
 

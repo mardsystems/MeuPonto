@@ -24,9 +24,9 @@ public class HomePageDriver : HomeInterface
         _angleSharp = angleSharp;
     }
 
-    public async Task GoTo()
+    public void GoTo()
     {
-        Document = await _angleSharp.GetDocumentAsync("/");
+        Document = _angleSharp.GetDocument("/");
 
         PerfisAnchor = Document.GetAnchor("Perfis");
 
@@ -49,9 +49,9 @@ public class HomePageDriver : HomeInterface
         //CriacaoPerfilAnchor.Should().NotBeNull("'a tela inicial deve ter um link para a criação de perfil'");
     }
 
-    public async Task<Concepts.Folha> ApurarFolha(Concepts.Folha folhaAberta)
+    public Concepts.Folha ApurarFolha(Concepts.Folha folhaAberta)
     {
-        await GoTo();
+        GoTo();
 
         var form = Document.GetForm();
 
@@ -63,11 +63,11 @@ public class HomePageDriver : HomeInterface
 
         var submitButton = form.GetSubmitButton();
 
-        var resultPage = await _angleSharp.SendAsync(form, submitButton);
+        var resultPage = _angleSharp.Send(form, submitButton);
 
         resultPage.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
 
-        Document = await _angleSharp.GetDocumentAsync(resultPage);
+        Document = _angleSharp.GetDocument(resultPage);
 
         var folhaApurada = IdentificaFolhaParaApuracao();
 

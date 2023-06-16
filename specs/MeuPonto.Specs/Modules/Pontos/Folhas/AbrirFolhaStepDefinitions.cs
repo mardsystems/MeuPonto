@@ -50,7 +50,7 @@ public class AbrirFolhaStepDefinitions
     }
 
     [When(@"o trabalhador abrir uma folha de ponto")]
-    public async Task WhenOTrabalhadorAbrirUmaFolhaDePonto()
+    public void WhenOTrabalhadorAbrirUmaFolhaDePonto()
     {
         if (_gestaoFolhas.Folha.Perfil == null)
         {
@@ -61,14 +61,14 @@ public class AbrirFolhaStepDefinitions
                 perfil = CadastroPerfisStub.ObtemPerfil();
 
                 _db.Perfis.Add(perfil);
-                await _db.SaveChangesAsync();
+                _db.SaveChanges();
             }
 
             _gestaoFolhas.Folha.QualificaCom(perfil);
         }
 
 
-        var folhaAberta = await _gestaoFolhasInterface.AbrirFolha(_gestaoFolhas.Folha);
+        var folhaAberta = _gestaoFolhasInterface.AbrirFolha(_gestaoFolhas.Folha);
 
         _gestaoFolhas.Define(folhaAberta);
     }

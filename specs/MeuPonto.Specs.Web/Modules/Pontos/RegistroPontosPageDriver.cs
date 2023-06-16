@@ -17,20 +17,20 @@ public class RegistroPontosPageDriver : RegistroPontosInterface
         _angleSharp = angleSharp;
     }
 
-    public async Task GoTo()
+    public void GoTo()
     {
-        Document = await _angleSharp.GetDocumentAsync("/Pontos");
+        Document = _angleSharp.GetDocument("/Pontos");
 
         MarcacaoPontoAnchor = Document.GetAnchor("Marcacao.Ponto");
 
         MarcacaoPontoAnchor.Should().NotBeNull("o registro de pontos deve ter um link para a marcação de ponto");
     }
 
-    public async Task<Concepts.Ponto> MarcarPonto(Concepts.Ponto ponto)
+    public Concepts.Ponto MarcarPonto(Concepts.Ponto ponto)
     {
-        await GoTo();
+        GoTo();
 
-        Document = await _angleSharp.GetDocumentAsync(MarcacaoPontoAnchor.Href);
+        Document = _angleSharp.GetDocument(MarcacaoPontoAnchor.Href);
 
         var form = Document.GetForm();
 
@@ -46,11 +46,11 @@ public class RegistroPontosPageDriver : RegistroPontosInterface
 
         var submitButton = form.GetSubmitButton();
 
-        var resultPage = await _angleSharp.SendAsync(form, submitButton);
+        var resultPage = _angleSharp.Send(form, submitButton);
 
         resultPage.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
 
-        Document = await _angleSharp.GetDocumentAsync(resultPage);
+        Document = _angleSharp.GetDocument(resultPage);
 
         var pontoRegistrado = ObtemDetalhes();
 

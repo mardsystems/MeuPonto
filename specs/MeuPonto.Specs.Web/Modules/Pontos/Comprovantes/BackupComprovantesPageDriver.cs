@@ -17,20 +17,20 @@ public class BackupComprovantesPageDriver : BackupComprovantesInterface
         _angleSharp = angleSharp;
     }
 
-    public async Task GoTo()
+    public void GoTo()
     {
-        Document = await _angleSharp.GetDocumentAsync("/Pontos/Comprovantes");
+        Document = _angleSharp.GetDocument("/Pontos/Comprovantes");
 
         GuardarComprovanteAnchor = Document.GetAnchor("Guardar.Comprovante");
 
         GuardarComprovanteAnchor.Should().NotBeNull("o backup de comprovantes deve ter um link para a guardar um comprovante");
     }
 
-    public async Task<Concepts.Comprovante> EscanearComprovante(Stream imagem, Concepts.Comprovante comprovante, Concepts.Ponto ponto)
+    public Concepts.Comprovante EscanearComprovante(Stream imagem, Concepts.Comprovante comprovante, Concepts.Ponto ponto)
     {
-        await GoTo();
+        GoTo();
 
-        Document = await _angleSharp.GetDocumentAsync(GuardarComprovanteAnchor.Href);
+        Document = _angleSharp.GetDocument(GuardarComprovanteAnchor.Href);
 
         var form = Document.GetForm();
 
@@ -53,11 +53,11 @@ public class BackupComprovantesPageDriver : BackupComprovantesInterface
 
             var submitButton = form.GetSubmitButton();
 
-            var resultPage = await _angleSharp.SendAsync(form, submitButton);
+            var resultPage = _angleSharp.Send(form, submitButton);
 
             resultPage.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
 
-            Document = await _angleSharp.GetDocumentAsync(resultPage);
+            Document = _angleSharp.GetDocument(resultPage);
         }
 
         var comprovanteEscaneado = ObtemResultadoEscanearComprovante();
@@ -93,11 +93,11 @@ public class BackupComprovantesPageDriver : BackupComprovantesInterface
         return comprovanteEscaneado;
     }
 
-    public async Task<Concepts.Comprovante> GuardarComprovante(Stream imagem, Concepts.Comprovante comprovante, Concepts.Ponto ponto)
+    public Concepts.Comprovante GuardarComprovante(Stream imagem, Concepts.Comprovante comprovante, Concepts.Ponto ponto)
     {
-        await GoTo();
+        GoTo();
 
-        Document = await _angleSharp.GetDocumentAsync(GuardarComprovanteAnchor.Href);
+        Document = _angleSharp.GetDocument(GuardarComprovanteAnchor.Href);
 
         var form = Document.GetForm();
 
@@ -120,11 +120,11 @@ public class BackupComprovantesPageDriver : BackupComprovantesInterface
 
             var submitButton = form.GetSubmitButton("button.btn-primary");
 
-            var resultPage = await _angleSharp.SendAsync(form, submitButton);
+            var resultPage = _angleSharp.Send(form, submitButton);
 
             resultPage.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
 
-            Document = await _angleSharp.GetDocumentAsync(resultPage);
+            Document = _angleSharp.GetDocument(resultPage);
         }
 
         var comprovanteGuardado = ObtemDetalhes();

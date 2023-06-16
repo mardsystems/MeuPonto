@@ -4,5 +4,5 @@ namespace MeuPonto.Modules;
 
 public interface HomeInterface
 {
-    Task<Folha> ApurarFolha(Folha folhaAberta);
+    Folha ApurarFolha(Folha folhaAberta);
 }

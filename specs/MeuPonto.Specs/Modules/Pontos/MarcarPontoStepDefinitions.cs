@@ -44,7 +44,7 @@ public class MarcarPontoStepDefinitions
     }
 
     [When(@"o trabalhador marcar o ponto")]
-    public async Task WhenOTrabalhadorMarcarOPonto()
+    public void WhenOTrabalhadorMarcarOPonto()
     {
         if (_registroPontos.Ponto.PerfilId == null)
         {
@@ -55,13 +55,13 @@ public class MarcarPontoStepDefinitions
                 perfil = CadastroPerfisStub.ObtemPerfil();
 
                 _db.Perfis.Add(perfil);
-                await _db.SaveChangesAsync();
+                _db.SaveChanges();
             }
 
             _registroPontos.Ponto.QualificaCom(perfil);
         }
 
-        var pontoMarcado = await _registroPontosInterface.MarcarPonto(_registroPontos.Ponto);
+        var pontoMarcado = _registroPontosInterface.MarcarPonto(_registroPontos.Ponto);
 
         _registroPontos.Define(pontoMarcado);
     }

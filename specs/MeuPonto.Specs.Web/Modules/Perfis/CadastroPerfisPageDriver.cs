@@ -23,9 +23,9 @@ public class CadastroPerfisPageDriver : CadastroPerfisInterface
         _angleSharp = angleSharp;
     }
 
-    public async Task GoTo()
+    public void GoTo()
     {
-        Document = await _angleSharp.GetDocumentAsync("/Perfis");
+        Document = _angleSharp.GetDocument("/Perfis");
 
         //
 
@@ -59,11 +59,11 @@ public class CadastroPerfisPageDriver : CadastroPerfisInterface
         ExclusaoPerfilAnchor.Should().NotBeNull("a lista de perfis deve ter um link de exclusão do perfil cadastrado");
     }
 
-    public async Task CriarPerfil(Concepts.Perfil perfil)
+    public void CriarPerfil(Concepts.Perfil perfil)
     {
-        await GoTo();
+        GoTo();
 
-        Document = await _angleSharp.GetDocumentAsync(CriacaoPerfilAnchor.Href);
+        Document = _angleSharp.GetDocument(CriacaoPerfilAnchor.Href);
 
         var form = Document.GetForm();
 
@@ -90,11 +90,11 @@ public class CadastroPerfisPageDriver : CadastroPerfisInterface
 
         var submitButton = form.GetSubmitButton();
 
-        var resultPage = await _angleSharp.SendAsync(form, submitButton);
+        var resultPage = _angleSharp.Send(form, submitButton);
 
         resultPage.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
 
-        Document = await _angleSharp.GetDocumentAsync(resultPage);
+        Document = _angleSharp.GetDocument(resultPage);
         
         var hasErrors = Document.GetValidationErrors().Any();
 
@@ -105,26 +105,26 @@ public class CadastroPerfisPageDriver : CadastroPerfisInterface
         //return perfilCadastrado;
     }
 
-    public async Task<Concepts.Perfil> DetalharPerfil(Concepts.Perfil perfilCadastrado)
+    public Concepts.Perfil DetalharPerfil(Concepts.Perfil perfilCadastrado)
     {
-        await GoTo();
+        GoTo();
 
         Identifica(perfilCadastrado);
 
-        Document = await _angleSharp.GetDocumentAsync(DetalhePerfilAnchor.Href);
+        Document = _angleSharp.GetDocument(DetalhePerfilAnchor.Href);
 
-        var perfilDetalhado = await ObtemDetalhes();
+        var perfilDetalhado = ObtemDetalhes();
 
         return perfilDetalhado;
     }
 
-    public async Task EditarPerfil(Concepts.Perfil perfilCadastrado)
+    public void EditarPerfil(Concepts.Perfil perfilCadastrado)
     {
-        await GoTo();
+        GoTo();
 
         Identifica(perfilCadastrado);
 
-        Document = await _angleSharp.GetDocumentAsync(EdicaoPerfilAnchor.Href);
+        Document = _angleSharp.GetDocument(EdicaoPerfilAnchor.Href);
 
         var form = Document.GetForm();
 
@@ -132,11 +132,11 @@ public class CadastroPerfisPageDriver : CadastroPerfisInterface
 
         var submitButton = form.GetSubmitButton();
 
-        var resultPage = await _angleSharp.SendAsync(form, submitButton);
+        var resultPage = _angleSharp.Send(form, submitButton);
 
         resultPage.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
 
-        Document = await _angleSharp.GetDocumentAsync(resultPage);
+        Document = _angleSharp.GetDocument(resultPage);
 
         var hasErrors = Document.GetValidationErrors().Any();
 
@@ -147,7 +147,7 @@ public class CadastroPerfisPageDriver : CadastroPerfisInterface
         //return perfilEditado;
     }
 
-    private async Task<Perfil> ObtemDetalhes()
+    private Perfil ObtemDetalhes()
     {
         var hasErrors = Document.GetValidationErrors().Any();
 
@@ -189,19 +189,19 @@ public class CadastroPerfisPageDriver : CadastroPerfisInterface
         }
     }
 
-    public async Task ExcluirPerfil(Concepts.Perfil perfilCadastrado)
+    public void ExcluirPerfil(Concepts.Perfil perfilCadastrado)
     {
-        await GoTo();
+        GoTo();
 
         Identifica(perfilCadastrado);
 
-        Document = await _angleSharp.GetDocumentAsync(ExclusaoPerfilAnchor.Href);
+        Document = _angleSharp.GetDocument(ExclusaoPerfilAnchor.Href);
 
         var form = Document.GetForm();
 
         var submitButton = form.GetSubmitButton();
 
-        var resultPage = await _angleSharp.SendAsync(form, submitButton);
+        var resultPage = _angleSharp.Send(form, submitButton);
 
         resultPage.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
     }

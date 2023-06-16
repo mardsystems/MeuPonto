@@ -69,9 +69,9 @@ public class ApurarFolhaStepDefinitions
     }
 
     [When(@"o trabalhador apurar a folha de ponto")]
-    public async Task WhenOTrabalhadorApurarAFolhaDePonto()
+    public void WhenOTrabalhadorApurarAFolhaDePonto()
     {
-        var folhaApurada = await _homeInterface.ApurarFolha(_gestaoFolhas.Folha);
+        var folhaApurada = _homeInterface.ApurarFolha(_gestaoFolhas.Folha);
 
         _gestaoFolhas.Define(folhaApurada);
     }
