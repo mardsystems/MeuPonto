@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using MeuPonto.Modules.Shared;
 
-namespace MeuPonto.Modules.Perfis.Empresas;
+namespace MeuPonto.Modules.Perfis.Empregadores;
 
 public class IndexModel : PageModel
 {
@@ -32,7 +32,7 @@ public class IndexModel : PageModel
     [BindProperty(SupportsGet = true)]
     public string? Endereco { get; set; }
 
-    public IList<Empresa> Empresa { get; set; } = default!;
+    public IList<Empregador> Empregadores { get; set; } = default!;
 
     [BindProperty(SupportsGet = true)]
     public int? PaginaAtual { get; set; }
@@ -41,13 +41,13 @@ public class IndexModel : PageModel
 
     public async Task OnGetAsync()
     {
-        var totalRegistros = await _db.Empresas.CountAsync();
+        var totalRegistros = await _db.Empregadores.CountAsync();
 
         Pagination = new PaginationModel(totalRegistros, PaginaAtual ?? 1);
 
-        if (_db.Empresas != null)
+        if (_db.Empregadores != null)
         {
-            Empresa = await _db.Empresas
+            Empregadores = await _db.Empregadores
                 .Where(x => true
                     && (Nome == null || x.Nome == Nome)
                     && (Cnpj == null || x.Cnpj == Cnpj)

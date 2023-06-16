@@ -1,43 +1,43 @@
 ﻿@page
-@model MeuPonto.Modules.Perfis.Empresas.IndexModel
+@model MeuPonto.Modules.Perfis.Empregadores.IndexModel
 
 @{
-    ViewData["Title"] = "Cadastro de Empresas";
+    ViewData["Title"] = "Cadastro de Empregadores";
 }
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
         <li class="breadcrumb-item"><a asp-page="/Perfis/Index">Perfis</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Empresas</li>
+        <li class="breadcrumb-item active" aria-current="page">Empregadores</li>
     </ol>
 </nav>
 
 <h1>@ViewData["Title"]</h1>
 
 <div class="btn-group mb-3">
-    <a class="btn btn-primary Criacao Empresa" asp-page="./Criar">
+    <a class="btn btn-primary Criacao Empregador" asp-page="./Criar">
         <i class="bi bi-plus-circle"></i>
         Criar Nova
     </a>
 </div>
 
 <form class="table-responsive text-nowrap" method="get">
-    <table class="table table-striped align-middle mb-3 Empresas">
+    <table class="table table-striped align-middle mb-3 Empregadores">
         <thead class="table-light">
             <tr>
                 <th>Ações</th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Empresa[0].Nome)
+                    @Html.DisplayNameFor(model => model.Empregadores[0].Nome)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Empresa[0].Cnpj)
+                    @Html.DisplayNameFor(model => model.Empregadores[0].Cnpj)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Empresa[0].InscricaoEstadual)
+                    @Html.DisplayNameFor(model => model.Empregadores[0].InscricaoEstadual)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Empresa[0].Endereco)
+                    @Html.DisplayNameFor(model => model.Empregadores[0].Endereco)
                 </th>
             </tr>
             <tr>
@@ -68,7 +68,7 @@
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            @foreach (var item in Model.Empresa)
+            @foreach (var item in Model.Empregadores)
             {
                 <tr data-id="@item.Id" data-name="@item.Nome">
                     <td class="p-1" scope="row">

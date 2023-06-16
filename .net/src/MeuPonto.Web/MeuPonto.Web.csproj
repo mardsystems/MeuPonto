@@ -34,11 +34,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Modules\Perfis\Empresas\Criar.cshtml" />
-    <None Include="Modules\Perfis\Empresas\Detalhar.cshtml" />
-    <None Include="Modules\Perfis\Empresas\Editar.cshtml" />
-    <None Include="Modules\Perfis\Empresas\Excluir.cshtml" />
-    <None Include="Modules\Perfis\Empresas\Index.cshtml" />
+    <None Include="Modules\Perfis\Empregadores\Criar.cshtml" />
+    <None Include="Modules\Perfis\Empregadores\Detalhar.cshtml" />
+    <None Include="Modules\Perfis\Empregadores\Editar.cshtml" />
+    <None Include="Modules\Perfis\Empregadores\Excluir.cshtml" />
+    <None Include="Modules\Perfis\Empregadores\Index.cshtml" />
   </ItemGroup>
 
 </Project>

@@ -1,9 +1,9 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
-namespace MeuPonto.Models;
+namespace MeuPonto.Modules.Perfis.Empregadores;
 
-public class Empresa : IdentityTableEntity, Concepts.Empresa
+public class Empregador : DocumentEntity, Concepts.Empregador
 {
     [Required]
     [MinLength(3)]
@@ -15,6 +15,11 @@ public class Empresa : IdentityTableEntity, Concepts.Empresa
     [StringLength(14)]
     [DisplayName("CNPJ")]
     public string? Cnpj { get; set; }
+
+    //[Required]
+    [StringLength(11)]
+    [DisplayName("CPF")]
+    public string? Cpf { get; set; }
 
     [StringLength(12)]
     [DisplayName("Inscrição Estadual")]

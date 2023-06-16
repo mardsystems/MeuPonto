@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace MeuPonto.Modules.Perfis.Empresas;
+namespace MeuPonto.Modules.Perfis.Empregadores;
 
 public class EditarModel : PageModel
 {
@@ -14,7 +14,7 @@ public class EditarModel : PageModel
     }
 
     [BindProperty]
-    public Empresa Empresa { get; set; } = default!;
+    public Empregador Empregador { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {
@@ -23,12 +23,12 @@ public class EditarModel : PageModel
             return NotFound();
         }
 
-        var empresa =  await _db.Empresas.FirstOrDefaultAsync(m => m.Id == id);
-        if (empresa == null)
+        var empregador =  await _db.Empregadores.FirstOrDefaultAsync(m => m.Id == id);
+        if (empregador == null)
         {
             return NotFound();
         }
-        Empresa = empresa;
+        Empregador = empregador;
         return Page();
     }
 
@@ -41,7 +41,7 @@ public class EditarModel : PageModel
             return Page();
         }
 
-        _db.Attach(Empresa).State = EntityState.Modified;
+        _db.Attach(Empregador).State = EntityState.Modified;
 
         try
         {
@@ -49,7 +49,7 @@ public class EditarModel : PageModel
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!EmpresaExists(Empresa.Id))
+            if (!EmpregadorExists(Empregador.Id))
             {
                 return NotFound();
             }
@@ -59,10 +59,10 @@ public class EditarModel : PageModel
             }
         }
 
-        return RedirectToPage("./Detalhar", new { id = Empresa.Id });
+        return RedirectToPage("./Detalhar", new { id = Empregador.Id });
     }
 
-    private bool EmpresaExists(Guid? id)
+    private bool EmpregadorExists(Guid? id)
     {
       return _db.Perfis.Any(e => e.Id == id);
     }

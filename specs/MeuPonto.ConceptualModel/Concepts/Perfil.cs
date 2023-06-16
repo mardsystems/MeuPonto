@@ -6,6 +6,6 @@ public interface Perfil
     bool Ativo { get; }
     string? Matricula { get; }
 
-    Empresa? Vincula();
+    Empregador? Vincula();
     JornadaTrabalhoSemanal Preve();
 }

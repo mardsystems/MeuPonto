@@ -22,7 +22,7 @@ public class CriarModel : PageModel
 
         };
 
-        ViewData["EmpresaId"] = new SelectList(_db.Empresas, "Id", "Nome").AddEmptyValue();
+        ViewData["EmpregadorId"] = new SelectList(_db.Empregadores, "Id", "Nome").AddEmptyValue();
 
         var daysOfWeek = Enum.GetValues<DayOfWeek>();
 
@@ -53,16 +53,15 @@ public class CriarModel : PageModel
 
         Perfil.Id = Guid.NewGuid();
 
-        Perfil.PartitionKey = User.Identity.Name; //Perfil.Empresa.Cnpj;
+        Perfil.PartitionKey = User.Identity.Name;
 
         Perfil.CreationDate = DateTime.Now;
 
-        var empresa = await _db.Empresas.FindAsync(Perfil.EmpresaId, User.Identity.Name);
+        var empregador = await _db.Empregadores.FindAsync(Perfil.EmpregadorId, User.Identity.Name);
 
-        Perfil.Empresa = new EmpresaRef
+        Perfil.Empregador = new EmpregadorRef
         {
-            Nome = empresa?.Nome,
-            Cnpj = empresa?.Cnpj
+            Nome = empregador?.Nome,
         };
 
         try

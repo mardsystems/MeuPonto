@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
-using MeuPonto.Modules.Perfis.Empresas;
+using MeuPonto.Modules.Perfis.Empregadores;
 
 namespace MeuPonto.Modules.Perfis;
 
@@ -20,12 +20,12 @@ public class Perfil : GlobalTableEntity, Concepts.Perfil
     [DisplayName("Matrícula")]
     public string? Matricula { get; set; }
 
-    [DisplayName("Empresa")]
-    public Guid? EmpresaId { get; set; }
+    [DisplayName("Empregador")]
+    public Guid? EmpregadorId { get; set; }
 
-    [DisplayName("Empresa")]
-    public Empresa? Empresa { get; set; }
-    Concepts.Empresa? Concepts.Perfil.Vincula() => Empresa;
+    [DisplayName("Empregador")]
+    public Empregador? Empregador { get; set; }
+    Concepts.Empregador? Concepts.Perfil.Vincula() => Empregador;
 
     [DisplayName("Jornada Trabalho Semanal Prevista")]
     public virtual JornadaTrabalhoSemanal JornadaTrabalhoSemanalPrevista { get; set; } = default!;

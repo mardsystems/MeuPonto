@@ -1,6 +1,6 @@
 ﻿using MeuPonto.Modules;
 using MeuPonto.Modules.Perfis;
-using MeuPonto.Modules.Perfis.Empresas;
+using MeuPonto.Modules.Perfis.Empregadores;
 using MeuPonto.Modules.Pontos;
 using MeuPonto.Modules.Pontos.Comprovantes;
 using MeuPonto.Modules.Pontos.Folhas;
@@ -19,19 +19,18 @@ public class MeuPontoDbContext : DbContext
 
     private void MeuPontoDbContext_SavingChanges(object? sender, SavingChangesEventArgs e)
     {
-        var empresasAlteradas = ChangeTracker
-            .Entries<Empresa>()
+        var empregadoresAlterados = ChangeTracker
+            .Entries<Empregador>()
             .Where(x => x.State == EntityState.Modified)
             .Select(x => x.Entity);
 
-        foreach (var empresaAlterada in empresasAlteradas)
+        foreach (var empregadorAlterado in empregadoresAlterados)
         {
-            var perfis = Perfis.Where(x => x.EmpresaId == empresaAlterada.Id);
+            var perfis = Perfis.Where(x => x.EmpregadorId == empregadorAlterado.Id);
 
             foreach (var perfil in perfis)
             {
-                perfil.Empresa.Nome = empresaAlterada.Nome;
-                perfil.Empresa.Cnpj = empresaAlterada.Cnpj;
+                perfil.Empregador.Nome = empregadorAlterado.Nome;
             }
         }
 
@@ -81,11 +80,11 @@ public class MeuPontoDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<Empresa>()
+        modelBuilder.Entity<Empregador>()
             .ToContainer("Perfis")
             .HasPartitionKey(x => x.PartitionKey);
 
-        modelBuilder.Entity<Empresa>().Property(x => x.Version).IsETagConcurrency();
+        modelBuilder.Entity<Empregador>().Property(x => x.Version).IsETagConcurrency();
 
         modelBuilder.Entity<Perfil>()
             .ToContainer("Perfis")
@@ -143,7 +142,7 @@ public class MeuPontoDbContext : DbContext
     }
 
     public DbSet<Perfil> Perfis { get; set; }
-    public DbSet<Empresa> Empresas { get; set; }
+    public DbSet<Empregador> Empregadores { get; set; }
     public DbSet<Folha> Folhas { get; set; }
     public DbSet<Ponto> Pontos { get; set; }
     public DbSet<Comprovante> Comprovantes { get; set; }

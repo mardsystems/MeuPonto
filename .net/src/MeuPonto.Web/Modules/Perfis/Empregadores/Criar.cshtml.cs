@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace MeuPonto.Modules.Perfis.Empresas;
+namespace MeuPonto.Modules.Perfis.Empregadores;
 
 public class CriarModel : PageModel
 {
@@ -18,7 +18,7 @@ public class CriarModel : PageModel
     }
 
     [BindProperty]
-    public Empresa Empresa { get; set; }
+    public Empregador Empregador { get; set; }
 
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync()
@@ -28,15 +28,15 @@ public class CriarModel : PageModel
             return Page();
         }
 
-        Empresa.Id = Guid.NewGuid();
+        Empregador.Id = Guid.NewGuid();
 
-        Empresa.PartitionKey = User.Identity.Name; //Empresa.Empresa.Cnpj;
+        Empregador.PartitionKey = User.Identity.Name;
 
-        Empresa.CreationDate = DateTime.Now;
+        Empregador.CreationDate = DateTime.Now;
 
         try
         {
-            _db.Empresas.Add(Empresa);
+            _db.Empregadores.Add(Empregador);
             await _db.SaveChangesAsync();
         }
         catch (Exception _)
@@ -44,6 +44,6 @@ public class CriarModel : PageModel
             throw;
         }
 
-        return RedirectToPage("./Detalhar", new { id = Empresa.Id });
+        return RedirectToPage("./Detalhar", new { id = Empregador.Id });
     }
 }

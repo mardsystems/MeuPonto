@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace MeuPonto.Modules.Perfis.Empresas;
+namespace MeuPonto.Modules.Perfis.Empregadores;
 
 public class DetalharModel : PageModel
 {
@@ -13,7 +13,7 @@ public class DetalharModel : PageModel
         _db = db;
     }
 
-  public Empresa Empresa { get; set; }
+  public Empregador Empregador { get; set; }
 
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {
@@ -22,14 +22,14 @@ public class DetalharModel : PageModel
             return NotFound();
         }
 
-        var empresa = await _db.Empresas.FirstOrDefaultAsync(m => m.Id == id);
-        if (empresa == null)
+        var empregador = await _db.Empregadores.FirstOrDefaultAsync(m => m.Id == id);
+        if (empregador == null)
         {
             return NotFound();
         }
         else 
         {
-            Empresa = empresa;
+            Empregador = empregador;
         }
         return Page();
     }

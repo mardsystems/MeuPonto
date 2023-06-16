@@ -1,6 +1,6 @@
 ﻿using MeuPonto.Modules;
 using MeuPonto.Modules.Perfis;
-using MeuPonto.Modules.Perfis.Empresas;
+using MeuPonto.Modules.Perfis.Empregadores;
 using MeuPonto.Modules.Pontos;
 using MeuPonto.Modules.Pontos.Comprovantes;
 using MeuPonto.Modules.Pontos.Folhas;
@@ -33,10 +33,8 @@ public class MeuPontoDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<Empresa>()
-            .ToTable("Empresas");
-
-        //modelBuilder.Entity<Empresa>().Property(x => x.Version).IsETagConcurrency();
+        modelBuilder.Entity<Empregador>()
+            .ToTable("Empregadores");
 
         modelBuilder.Entity<Perfil>()
             .ToTable("Perfis");
@@ -87,7 +85,7 @@ public class MeuPontoDbContext : DbContext
             .HasNoKey();
     }
 
-    public DbSet<Empresa> Empresas { get; set; }
+    public DbSet<Empregador> Empregadores { get; set; }
     public DbSet<Perfil> Perfis { get; set; }
     public DbSet<Folha> Folhas { get; set; }
     public DbSet<Ponto> Pontos { get; set; }

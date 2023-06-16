@@ -32,7 +32,7 @@ public class EditarModel : PageModel
         }
         Perfil = perfil;
         
-        ViewData["EmpresaId"] = new SelectList(_db.Empresas, "Id", "Nome").AddEmptyValue();
+        ViewData["EmpregadorId"] = new SelectList(_db.Empregadores, "Id", "Nome").AddEmptyValue();
 
         return Page();
     }
@@ -46,12 +46,11 @@ public class EditarModel : PageModel
             return Page();
         }
 
-        var empresa = await _db.Empresas.FindAsync(Perfil.EmpresaId, User.Identity.Name);
+        var empregador = await _db.Empregadores.FindAsync(Perfil.EmpregadorId, User.Identity.Name);
 
-        Perfil.Empresa = new EmpresaRef
+        Perfil.Empregador = new EmpregadorRef
         {
-            Nome = empresa?.Nome,
-            Cnpj = empresa?.Cnpj
+            Nome = empregador?.Nome
         };
 
         _db.Attach(Perfil).State = EntityState.Modified;

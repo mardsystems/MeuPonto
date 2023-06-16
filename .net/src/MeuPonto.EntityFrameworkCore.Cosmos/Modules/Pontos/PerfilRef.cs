@@ -22,7 +22,7 @@ public class PerfilRef : Concepts.Perfil
         throw new NotImplementedException();
     }
 
-    Empresa? Perfil.Vincula()
+    Empregador? Perfil.Vincula()
     {
         throw new NotImplementedException();
     }

@@ -64,12 +64,12 @@
             <dd class="col-sm-9 Matricula">
                 @Html.DisplayFor(model => model.Perfil.Matricula)
             </dd>
-            <dt class="col-sm-3 Empresa">
-                @Html.DisplayNameFor(model => model.Perfil.Empresa)
+            <dt class="col-sm-3 Empregador">
+                @Html.DisplayNameFor(model => model.Perfil.Empregador)
             </dt>
-            <dd class="col-sm-9 Empresa">
-                <a class="text-decoration-none" asp-page="/Perfis/Empresas/Detalhar" asp-route-id="@Model.Perfil.EmpresaId" title="Detalhar Empresa" target="_blank">
-                    @Html.DisplayFor(model => model.Perfil.Empresa.Nome)
+            <dd class="col-sm-9 Empregador">
+                <a class="text-decoration-none" asp-page="/Perfis/Empregadores/Detalhar" asp-route-id="@Model.Perfil.EmpregadorId" title="Detalhar Empregador" target="_blank">
+                    @Html.DisplayFor(model => model.Perfil.Empregador.Nome)
                     <i class="bi bi-link-45deg"></i>
                 </a>
             </dd>

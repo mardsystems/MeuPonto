@@ -1,20 +1,20 @@
 ﻿@page
-@model MeuPonto.Modules.Perfis.Empresas.ExcluirModel
+@model MeuPonto.Modules.Perfis.Empregadores.DetalharModel
 
 @{
-    ViewData["Title"] = "Excluir Empresa";
+    ViewData["Title"] = "Detalhar Empregador";
 }
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
         <li class="breadcrumb-item"><a asp-page="/Perfis/Index">Perfis</a></li>
-        <li class="breadcrumb-item"><a asp-page="./Index">Empresas</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Excluir</li>
+        <li class="breadcrumb-item"><a asp-page="./Index">Empregadores</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Detalhar</li>
     </ol>
 </nav>
 
-<h1>@ViewData["Title"] <span class="badge bg-secondary">@Html.DisplayFor(model => model.Empresa.Nome)</span></h1>
+<h1>@ViewData["Title"] <span class="badge bg-secondary">@Html.DisplayFor(model => model.Empregador.Nome)</span></h1>
 
 <div class="card">
     <div class="card-header">
@@ -26,56 +26,53 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" asp-page="./Detalhar" asp-route-id="@Model.Empresa?.Id">
+                <a class="nav-link active" aria-current="page">
                     <i class="bi bi-card-text"></i>
-                    <span class="d-none d-sm-inline">Detalhar</span>
+                    Detalhar
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" asp-page="./Editar" asp-route-id="@Model.Empresa?.Id">
+                <a class="nav-link" asp-page="./Editar" asp-route-id="@Model.Empregador?.Id">
                     <i class="bi bi-pencil"></i>
                     <span class="d-none d-sm-inline">Editar</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-danger active" aria-current="page">
+                <a class="nav-link text-danger" asp-page="./Excluir" asp-route-id="@Model.Empregador?.Id">
                     <i class="bi bi-trash"></i>
-                    Excluir
+                    <span class="d-none d-sm-inline">Excluir</span>
                 </a>
             </li>
         </ul>
     </div>
     <div class="card-body">
-        <div class="alert alert-danger" role="alert">
-            Tem certeza que deseja excluir isso?
-        </div>
-        <dl class="row g-3 Empresa">
+        <dl class="row g-3 Empregador">
             <dt class="col-sm-3">
-                @Html.DisplayNameFor(model => model.Empresa.Nome)
+                @Html.DisplayNameFor(model => model.Empregador.Nome)
             </dt>
             <dd class="col-sm-9">
-                @Html.DisplayFor(model => model.Empresa.Nome)
+                @Html.DisplayFor(model => model.Empregador.Nome)
             </dd>
             <dt class="col-sm-3">
-                @Html.DisplayNameFor(model => model.Empresa.Cnpj)
+                @Html.DisplayNameFor(model => model.Empregador.Cnpj)
             </dt>
             <dd class="col-sm-9">
-                @Html.DisplayFor(model => model.Empresa.Cnpj)
+                @Html.DisplayFor(model => model.Empregador.Cnpj)
             </dd>
             <dt class="col-sm-3">
-                @Html.DisplayNameFor(model => model.Empresa.InscricaoEstadual)
+                @Html.DisplayNameFor(model => model.Empregador.InscricaoEstadual)
             </dt>
             <dd class="col-sm-9">
-                @Html.DisplayFor(model => model.Empresa.InscricaoEstadual)
+                @Html.DisplayFor(model => model.Empregador.InscricaoEstadual)
             </dd>
             <dt class="col-sm-3">
-                @Html.DisplayNameFor(model => model.Empresa.Endereco)
+                @Html.DisplayNameFor(model => model.Empregador.Endereco)
             </dt>
             <dd class="col-sm-9">
-                @Html.DisplayFor(model => model.Empresa.Endereco)
+                @Html.DisplayFor(model => model.Empregador.Endereco)
             </dd>
         </dl>
-        <div class="accordion mb-3" id="accordionDetalhes">
+        <div class="accordion" id="accordionDetalhes">
             <div class="accordion-item">
                 <h2 class="accordion-header">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDetalhesTecnicos" aria-expanded="false" aria-controls="collapseDetalhesTecnicos">
@@ -86,41 +83,33 @@
                     <div class="accordion-body">
                         <dl class="row g-3">
                             <dt class="col-sm-3">
-                                @Html.DisplayNameFor(model => model.Empresa.Id)
+                                @Html.DisplayNameFor(model => model.Empregador.Id)
                             </dt>
                             <dd class="col-sm-9">
-                                @Html.DisplayFor(model => model.Empresa.Id)
+                                @Html.DisplayFor(model => model.Empregador.Id)
                             </dd>
                             <dt class="col-sm-3">
-                                @Html.DisplayNameFor(model => model.Empresa.PartitionKey)
+                                @Html.DisplayNameFor(model => model.Empregador.PartitionKey)
                             </dt>
                             <dd class="col-sm-9">
-                                @Html.DisplayFor(model => model.Empresa.PartitionKey)
+                                @Html.DisplayFor(model => model.Empregador.PartitionKey)
                             </dd>
                             <dt class="col-sm-3">
-                                @Html.DisplayNameFor(model => model.Empresa.CreationDate)
+                                @Html.DisplayNameFor(model => model.Empregador.CreationDate)
                             </dt>
                             <dd class="col-sm-9">
-                                @Html.DisplayFor(model => model.Empresa.CreationDate)
+                                @Html.DisplayFor(model => model.Empregador.CreationDate)
                             </dd>
                             <dt class="col-sm-3">
-                                @Html.DisplayNameFor(model => model.Empresa.Version)
+                                @Html.DisplayNameFor(model => model.Empregador.Version)
                             </dt>
                             <dd class="col-sm-9">
-                                @Html.DisplayFor(model => model.Empresa.Version)
+                                @Html.DisplayFor(model => model.Empregador.Version)
                             </dd>
                         </dl>
                     </div>
                 </div>
             </div>
         </div>
-
-        <form method="post">
-            <input type="hidden" asp-for="Empresa.Id" />
-            <button type="submit" value="Excluir" class="btn btn-danger">
-                <i class="bi bi-trash"></i>
-                Excluir
-            </button>
-        </form>
     </div>
 </div>

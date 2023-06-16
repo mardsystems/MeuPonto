@@ -30,7 +30,7 @@ public class IndexModel : PageModel
     public string? Matricula { get; set; }
 
     [BindProperty(SupportsGet = true)]
-    public Guid? EmpresaId { get; set; }
+    public Guid? EmpregadorId { get; set; }
 
     public IList<Perfil> Perfil { get; set; } = default!;
 
@@ -41,7 +41,7 @@ public class IndexModel : PageModel
 
     public async Task OnGetAsync()
     {
-        ViewData["EmpresaId"] = new SelectList(_db.Empresas, "Id", "Nome").AddEmptyValue();
+        ViewData["EmpregadorId"] = new SelectList(_db.Empregadores, "Id", "Nome").AddEmptyValue();
 
         var totalRegistros = await _db.Perfis.CountAsync();
 
@@ -54,7 +54,7 @@ public class IndexModel : PageModel
                     && (Nome == null || x.Nome == Nome)
                     && (Ativo == null || x.Ativo == Ativo)
                     && (Matricula == null || x.Matricula == Matricula)
-                    && (EmpresaId == null || x.EmpresaId == EmpresaId))
+                    && (EmpregadorId == null || x.EmpregadorId == EmpregadorId))
                 .OrderByDescending(x => x.Nome)
                 .Skip((Pagination.PaginaAtual - 1) * Pagination.TamanhoPagina.Value)
                 .Take(Pagination.TamanhoPagina.Value)

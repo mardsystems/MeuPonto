@@ -17,8 +17,8 @@ public class MeuPontoDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<Empresa>()
-            .ToTable("Empresas");
+        modelBuilder.Entity<Empregador>()
+            .ToTable("Empregadores");
 
         modelBuilder.Entity<Perfil>()
             .ToTable("Perfis");
@@ -74,7 +74,7 @@ public class MeuPontoDbContext : DbContext
             .HasNoKey();
     }
 
-    public DbSet<Empresa> Empresas { get; set; }
+    public DbSet<Empregador> Empregadores { get; set; }
     public DbSet<Perfil> Perfis { get; set; }
     public DbSet<Folha> Folhas { get; set; }
     public DbSet<Ponto> Pontos { get; set; }

@@ -19,12 +19,12 @@ public class Perfil : DocumentEntity, Concepts.Perfil
     [DisplayName("Matrícula")]
     public string? Matricula { get; set; }
 
-    [DisplayName("Empresa")]
-    public Guid? EmpresaId { get; set; }
+    [DisplayName("Empregador")]
+    public Guid? EmpregadorId { get; set; }
 
-    [DisplayName("Empresa")]
-    public EmpresaRef? Empresa { get; set; }
-    Concepts.Empresa? Concepts.Perfil.Vincula() => Empresa;
+    [DisplayName("Empregador")]
+    public EmpregadorRef? Empregador { get; set; }
+    Concepts.Empregador? Concepts.Perfil.Vincula() => Empregador;
 
     [DisplayName("Jornada Trabalho Semanal Prevista")]
     public virtual JornadaTrabalhoSemanal JornadaTrabalhoSemanalPrevista { get; set; } = default!;

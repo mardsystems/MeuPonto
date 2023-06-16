@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace MeuPonto.Modules.Perfis.Empresas;
+namespace MeuPonto.Modules.Perfis.Empregadores;
 
 public class ExcluirModel : PageModel
 {
@@ -14,7 +14,7 @@ public class ExcluirModel : PageModel
     }
 
     [BindProperty]
-    public Empresa Empresa { get; set; }
+    public Empregador Empregador { get; set; }
 
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {
@@ -23,15 +23,15 @@ public class ExcluirModel : PageModel
             return NotFound();
         }
 
-        var empresa = await _db.Empresas.FirstOrDefaultAsync(m => m.Id == id);
+        var empregador = await _db.Empregadores.FirstOrDefaultAsync(m => m.Id == id);
 
-        if (empresa == null)
+        if (empregador == null)
         {
             return NotFound();
         }
         else
         {
-            Empresa = empresa;
+            Empregador = empregador;
         }
         return Page();
     }
@@ -45,12 +45,12 @@ public class ExcluirModel : PageModel
 
         try
         {
-            var empresa = await _db.Empresas.FindAsync(id, User.Identity.Name);
+            var empregador = await _db.Empregadores.FindAsync(id, User.Identity.Name);
 
-            if (empresa != null)
+            if (empregador != null)
             {
-                Empresa = empresa;
-                _db.Empresas.Remove(Empresa);
+                Empregador = empregador;
+                _db.Empregadores.Remove(Empregador);
                 await _db.SaveChangesAsync();
             }
 

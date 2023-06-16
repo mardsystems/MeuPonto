@@ -22,7 +22,7 @@
         </a>
     </div>
     <div class="btn-group" role="group" aria-label="Second group">
-        <a class="btn btn-outline-secondary" asp-page="./Empresas/Index">Empresas</a>
+        <a class="btn btn-outline-secondary" asp-page="./Empregadores/Index">Empregadores</a>
     </div>
 </div>
 
@@ -41,7 +41,7 @@
                     @Html.DisplayNameFor(model => model.Perfil[0].Matricula)
                 </th>
                 <th rowspan="2">
-                    @Html.DisplayNameFor(model => model.Perfil[0].Empresa)
+                    @Html.DisplayNameFor(model => model.Perfil[0].Empregador)
                 </th>
                 <th colspan="8">
                     @Html.DisplayNameFor(model => model.Perfil[0].JornadaTrabalhoSemanalPrevista)
@@ -105,7 +105,7 @@
                     <input asp-for="Matricula" class="form-control" />
                 </th>
                 <th>
-                    <select asp-for="EmpresaId" class="form-select" asp-items="ViewBag.EmpresaId"></select>
+                    <select asp-for="EmpregadorId" class="form-select" asp-items="ViewBag.EmpregadorId"></select>
                 </th>
                 <th class="table-secondary" colspan="9">
 
@@ -139,8 +139,8 @@
                         @Html.DisplayFor(modelItem => item.Matricula)
                     </td>
                     <td>
-                        <a class="text-decoration-none" asp-page="/Perfis/Empresas/Detalhar" asp-route-id="@item.EmpresaId" title="Detalhar Empresa" target="_blank">
-                            @Html.DisplayFor(modelItem => item.Empresa.Nome)
+                        <a class="text-decoration-none" asp-page="/Perfis/Empregadores/Detalhar" asp-route-id="@item.EmpregadorId" title="Detalhar Empregador" target="_blank">
+                            @Html.DisplayFor(modelItem => item.Empregador.Nome)
                             <i class="bi bi-link-45deg"></i>
                         </a>
                     </td>

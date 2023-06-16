@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 
-namespace MeuPonto.Modules.Perfis.Empresas;
+namespace MeuPonto.Modules.Perfis.Empregadores;
 
-public class Empresa : GlobalTableEntity, Concepts.Empresa
+public class Empregador : GlobalTableEntity, Concepts.Empregador
 {
     [Required]
     [MinLength(3)]
@@ -15,6 +15,11 @@ public class Empresa : GlobalTableEntity, Concepts.Empresa
     [StringLength(14)]
     [DisplayName("CNPJ")]
     public string? Cnpj { get; set; }
+
+    //[Required]
+    [StringLength(11)]
+    [DisplayName("CPF")]
+    public string? Cpf { get; set; }
 
     [StringLength(12)]
     [DisplayName("Inscrição Estadual")]
