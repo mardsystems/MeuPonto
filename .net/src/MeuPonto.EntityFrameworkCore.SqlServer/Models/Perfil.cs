@@ -20,7 +20,7 @@ public class Perfil : IdentityTableEntity, Concepts.Perfil
     public string? Matricula { get; set; }
 
     [DisplayName("Empregador")]
-    public Guid? EmpregadorId { get; set; }
+    public int? EmpregadorId { get; set; }
 
     [DisplayName("Empregador")]
     public Empregador? Empregador { get; set; }

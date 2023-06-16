@@ -7,11 +7,11 @@ namespace MeuPonto.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class PontoComprovantesController : ControllerBase
+public class ComprovantesController : ControllerBase
 {
     private readonly MeuPontoDbContext _db;
 
-    public PontoComprovantesController(MeuPontoDbContext db)
+    public ComprovantesController(MeuPontoDbContext db)
     {
         _db = db;
     }
