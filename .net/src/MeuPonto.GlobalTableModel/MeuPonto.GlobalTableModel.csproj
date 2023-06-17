@@ -8,13 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Cosmos" Version="6.0.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="6.0.13" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\specs\MeuPonto.ConceptualModel\MeuPonto.ConceptualModel.csproj" />
-    <ProjectReference Include="..\..\..\specs\MeuPonto.SystemModel\MeuPonto.SystemModel.csproj" />
-    <ProjectReference Include="..\MeuPonto.DocumentModel\MeuPonto.DocumentModel.csproj" />
     <ProjectReference Include="..\System.Extensions\System.Extensions.csproj" />
   </ItemGroup>
 
