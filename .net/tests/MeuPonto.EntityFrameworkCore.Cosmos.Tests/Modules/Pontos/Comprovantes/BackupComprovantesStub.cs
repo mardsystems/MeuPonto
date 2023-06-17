@@ -2,12 +2,12 @@
 
 public static class BackupComprovantesStub
 {
-    public static Comprovante ObtemComprovante(Ponto ponto)
+    public static Comprovante ObtemComprovante(Pontos.Ponto ponto)
     {
         var comprovante = new Comprovante
         {
             PontoId = ponto.Id,
-            Ponto = new PontoRef
+            Ponto = new Ponto
             {
                 PerfilId = ponto.PerfilId,
                 DataHora = ponto.DataHora,

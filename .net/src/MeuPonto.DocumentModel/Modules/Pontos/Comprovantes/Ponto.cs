@@ -5,15 +5,15 @@ using System.ComponentModel;
 namespace MeuPonto.Modules.Pontos.Comprovantes;
 
 [Owned]
-public class PontoRef : Concepts.Ponto
+public class Ponto : Concepts.Ponto
 {
     [Required]
     [DisplayName("Perfil")]
     public Guid? PerfilId { get; set; }
 
     [DisplayName("Perfil")]
-    public PerfilRef? Perfil { get; set; }
-    Concepts.Perfil? Concepts.Ponto.EQualificadoPelo() => Perfil;
+    public Perfil? Perfil { get; set; }
+    Concepts.Perfil? Concepts.Ponto.Perfil => Perfil;
 
     [Required]
     [DisplayName("Data/Hora")]
@@ -32,9 +32,4 @@ public class PontoRef : Concepts.Ponto
     bool Concepts.Ponto.Estimado => throw new NotImplementedException();
 
     string? Concepts.Ponto.Observacao => throw new NotImplementedException();
-
-    Concepts.Comprovante[] Concepts.Ponto.Guarda()
-    {
-        throw new NotImplementedException();
-    }
 }

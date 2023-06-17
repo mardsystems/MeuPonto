@@ -67,7 +67,7 @@ public class EditarFolhaModel : PageModel
 
         var perfil = await _db.Perfis.FindAsync(Folha.PerfilId, User.Identity.Name);
 
-        Folha.Perfil = new PerfilRef
+        Folha.Perfil = new Perfil
         {
             Nome = perfil?.Nome
         };
@@ -117,7 +117,7 @@ public class EditarFolhaModel : PageModel
         }
     }
 
-    private void ConfirmarCompetencia(Perfil? perfil)
+    private void ConfirmarCompetencia(Perfis.Perfil? perfil)
     {
         Folha.ApuracaoMensal.Dias.Clear();
 

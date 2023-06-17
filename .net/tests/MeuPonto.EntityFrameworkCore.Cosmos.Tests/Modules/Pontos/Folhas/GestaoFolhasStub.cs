@@ -4,11 +4,11 @@ namespace MeuPonto.Modules.Pontos.Folhas;
 
 public static class GestaoFolhasStub
 {
-    public static Folha ObtemFolhaAbertaFrom(Perfil perfil, DateTime competencia)
+    public static Folha ObtemFolhaAbertaFrom(Perfis.Perfil perfil, DateTime competencia)
     {
         var folhaAberta = new Folha
         {
-            Perfil = new PerfilRef
+            Perfil = new Perfil
             {
                 Nome = perfil.Nome
             },
@@ -47,9 +47,9 @@ public static class GestaoFolhasStub
         return folhaAberta;
     }
 
-    public static void QualificaCom(this Folha folha, Perfil perfil)
+    public static void QualificaCom(this Folha folha, Perfis.Perfil perfil)
     {
-        folha.Perfil = new PerfilRef
+        folha.Perfil = new Perfil
         {
             Nome = perfil.Nome
         };

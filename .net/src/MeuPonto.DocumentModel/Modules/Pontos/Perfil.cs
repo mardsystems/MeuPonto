@@ -6,7 +6,7 @@ using MeuPonto.Concepts;
 namespace MeuPonto.Modules.Pontos;
 
 [Owned]
-public class PerfilRef : Concepts.Perfil
+public class Perfil : Concepts.Perfil
 {
     [Required]
     [MaxLength(30)]
@@ -17,12 +17,12 @@ public class PerfilRef : Concepts.Perfil
 
     string? Concepts.Perfil.Matricula => throw new NotImplementedException();
 
-    JornadaTrabalhoSemanal Perfil.Preve()
+    JornadaTrabalhoSemanal Concepts.Perfil.Preve()
     {
         throw new NotImplementedException();
     }
 
-    Empregador? Perfil.Vincula()
+    Empregador? Concepts.Perfil.Vincula()
     {
         throw new NotImplementedException();
     }

@@ -37,7 +37,7 @@ public class GuardarComprovanteModel : PageModel
     public IFormFile? Imagem { get; set; }
 
     [BindProperty]
-    public Ponto Ponto { get; set; }
+    public Pontos.Ponto Ponto { get; set; }
 
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync(string? command)
@@ -80,10 +80,7 @@ public class GuardarComprovanteModel : PageModel
 
             var perfil = await _db.Perfis.FindAsync(Ponto.PerfilId, User.Identity.Name);
 
-            Ponto.Perfil = new PerfilRef
-            {
-                Nome = perfil?.Nome
-            };
+            perfil.QualificaPonto(Ponto);
 
             _db.Pontos.Add(Ponto);
 
@@ -99,7 +96,7 @@ public class GuardarComprovanteModel : PageModel
 
             Comprovante.PontoId = ponto.Id;
 
-            Comprovante.Ponto = new PontoRef
+            Comprovante.Ponto = new Ponto
             {
                 DataHora = ponto?.DataHora,
                 PerfilId = ponto?.PerfilId,

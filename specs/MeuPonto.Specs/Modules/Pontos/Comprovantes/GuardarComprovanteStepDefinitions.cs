@@ -43,7 +43,7 @@ public class GuardarComprovanteStepDefinitions
 
         _backupComprovantes.Comprovante.TipoImagemId = TipoImagemEnum.Original;
 
-        _backupComprovantes.Ponto.QualificaCom(perfil);
+        perfil.QualificaPonto(_backupComprovantes.Ponto);
         _backupComprovantes.Ponto.DataHora = new DateTime(2023, 02, 17, 17, 07, 0);
         _backupComprovantes.Ponto.MomentoId = MomentoEnum.Saida;
     }
@@ -56,8 +56,15 @@ public class GuardarComprovanteStepDefinitions
         _db.Perfis.Add(perfil);
         await _db.SaveChangesAsync();
 
-        var ponto = RegistroPontosStub.ObtemPonto(perfil, data, MomentoEnum.Entrada);
+        var transaction = new TransactionContext("Test user");
 
+        var ponto = PontoFactory.CriaPonto(transaction);
+
+        perfil.QualificaPonto(ponto);
+        
+        ponto.DataHora = data;
+        ponto.MomentoId = MomentoEnum.Entrada;
+        
         var comprovante = BackupComprovantesStub.ObtemComprovante(ponto);
 
         _db.Comprovantes.Add(comprovante);
@@ -78,7 +85,7 @@ public class GuardarComprovanteStepDefinitions
 
         _backupComprovantes.Comprovante.TipoImagemId = TipoImagemEnum.Original;
 
-        _backupComprovantes.Ponto.QualificaCom(perfil);
+        perfil.QualificaPonto(_backupComprovantes.Ponto);
         _backupComprovantes.Ponto.DataHora = new DateTime(2023, 02, 17, 17, 07, 0);
         _backupComprovantes.Ponto.MomentoId = MomentoEnum.Saida;
     }

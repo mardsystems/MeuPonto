@@ -10,7 +10,7 @@ public class Folha : DocumentEntity, Concepts.Folha
     public Guid? PerfilId { get; set; }
 
     [DisplayName("Perfil")]
-    public PerfilRef? Perfil { get; set; }
+    public Perfil? Perfil { get; set; }
     Concepts.Perfil? Concepts.Folha.EQualificadaPelo() => Perfil;
 
     [Required]

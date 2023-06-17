@@ -36,9 +36,16 @@ public class ApurarFolhaStepDefinitions
     [Given(@"que o trabalhador registrou a entrada no expediente às '([^']*)'")]
     public async Task GivenQueOTrabalhadorRegistrouAEntradaNoExpedienteAs(DateTime entrada)
     {
+        var transaction = new TransactionContext("Test user");
+
         var perfil = _db.Perfis.FirstOrDefault();
 
-        var pontoEntrada = RegistroPontosStub.ObtemPonto(perfil, entrada, MomentoEnum.Entrada);
+        var pontoEntrada = PontoFactory.CriaPonto(transaction);
+
+        perfil.QualificaPonto(pontoEntrada);
+
+        pontoEntrada.DataHora = entrada;
+        pontoEntrada.MomentoId = MomentoEnum.Entrada;
 
         _db.Pontos.Add(pontoEntrada);
         await _db.SaveChangesAsync();
@@ -47,9 +54,16 @@ public class ApurarFolhaStepDefinitions
     [Given(@"que o trabalhador registrou a saída no expediente às '([^']*)'")]
     public async Task GivenQueOTrabalhadorRegistrouASaidaNoExpedienteAs(DateTime saida)
     {
+        var transaction = new TransactionContext("Test user");
+
         var perfil = _db.Perfis.FirstOrDefault();
 
-        var pontoSaida = RegistroPontosStub.ObtemPonto(perfil, saida, MomentoEnum.Saida);
+        var pontoSaida = PontoFactory.CriaPonto(transaction);
+
+        perfil.QualificaPonto(pontoSaida);
+
+        pontoSaida.DataHora = saida;
+        pontoSaida.MomentoId = MomentoEnum.Saida;
 
         _db.Pontos.Add(pontoSaida);
         await _db.SaveChangesAsync();

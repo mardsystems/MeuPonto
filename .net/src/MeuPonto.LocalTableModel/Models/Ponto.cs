@@ -12,8 +12,8 @@ public class Ponto : IdentityTableEntity, Concepts.Ponto
 
     [DisplayName("Perfil")]
     public Perfil? Perfil { get; set; }
-    Concepts.Perfil? Concepts.Ponto.EQualificadoPelo() => Perfil;
-    
+    Concepts.Perfil? Concepts.Ponto.Perfil => Perfil;
+
     [Required]
     [DisplayName("Data/Hora")]
     [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm}")]
@@ -49,10 +49,5 @@ public class Ponto : IdentityTableEntity, Concepts.Ponto
     public Ponto()
     {
         Comprovantes = new List<Comprovante>();
-    }
-
-    Concepts.Comprovante[] Concepts.Ponto.Guarda()
-    {
-        throw new NotImplementedException();
     }
 }

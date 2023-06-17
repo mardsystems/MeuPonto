@@ -57,6 +57,8 @@ public class FecharFolhaStepDefinitions
     [Given(@"que os pontos registrados foram:")]
     public async Task GivenQueOsPontosRegistradosForam(Table table)
     {
+        var transaction = new TransactionContext("Test user");
+
         var perfil = _db.Perfis.FirstOrDefault();
 
         var pontos = table.Rows.Select(row =>
@@ -65,7 +67,14 @@ public class FecharFolhaStepDefinitions
 
             var momento = (MomentoEnum)Enum.Parse(typeof(MomentoEnum), row["momento"]);
 
-            return RegistroPontosStub.ObtemPonto(perfil, dataHora, momento);
+            var ponto = PontoFactory.CriaPonto(transaction);
+
+            perfil.QualificaPonto(ponto);
+
+            ponto.DataHora = dataHora;
+            ponto.MomentoId = momento;
+
+            return ponto;
         });
 
         _db.Pontos.AddRange(pontos);

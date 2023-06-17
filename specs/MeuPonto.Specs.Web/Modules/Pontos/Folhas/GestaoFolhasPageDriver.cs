@@ -109,7 +109,7 @@ public class GestaoFolhasPageDriver : GestaoFolhasInterface
 
         var folhaAberta = new Folha
         {
-            Perfil = new PerfilRef
+            Perfil = new Perfil
             {
                 Nome = dl.GetDataListItem("Perfil").GetString(),
             },

@@ -34,15 +34,13 @@ public class BackupComprovantesPageDriver : BackupComprovantesInterface
 
         var form = Document.GetForm();
 
-        var perfil = ponto.EQualificadoPelo();
-
         using (var fileEntry = new FileEntry("Arquivo", "jpg", imagem))
         {
             form.GetInput("Imagem").Files.Add(fileEntry);
             form.GetSelect("Comprovante.TipoImagemId").GetOption(comprovante.TipoImagem.Nome).IsSelected = true;
             form.GetInput("Comprovante.Numero").Value = comprovante.Numero;
 
-            form.GetSelect("Ponto.PerfilId").GetOption(perfil.Nome).IsSelected = true;
+            form.GetSelect("Ponto.PerfilId").GetOption(ponto.Perfil.Nome).IsSelected = true;
             form.GetInput("Ponto.DataHora").Value = ponto.DataHora.Value.ToString("yyyy-MM-dd\\THH:mm:ss");
             form.GetInput("Ponto.MomentoId", ponto.Momento.Nome).IsChecked = true;
             if (ponto.Pausa != null)
@@ -78,9 +76,9 @@ public class BackupComprovantesPageDriver : BackupComprovantesInterface
 
         var comprovanteEscaneado = new Comprovante
         {
-            Ponto = new PontoRef
+            Ponto = new Ponto
             {
-                Perfil = new PerfilRef
+                Perfil = new Perfil
                 {
                     Nome = form.GetSelect("Ponto.PerfilId").Value
                 },
@@ -101,15 +99,13 @@ public class BackupComprovantesPageDriver : BackupComprovantesInterface
 
         var form = Document.GetForm();
 
-        var perfil = ponto.EQualificadoPelo();
-
         using (var fileEntry = new FileEntry("Arquivo", "jpg", imagem))
         {
             form.GetInput("Imagem").Files.Add(fileEntry);
             form.GetSelect("Comprovante.TipoImagemId").GetOption(comprovante.TipoImagem.Nome).IsSelected = true;
             form.GetInput("Comprovante.Numero").Value = comprovante.Numero;
 
-            form.GetSelect("Ponto.PerfilId").GetOption(perfil.Nome).IsSelected = true;
+            form.GetSelect("Ponto.PerfilId").GetOption(ponto.Perfil.Nome).IsSelected = true;
             form.GetInput("Ponto.DataHora").Value = ponto.DataHora.Value.ToString("yyyy-MM-dd\\THH:mm:ss");
             form.GetInput("Ponto.MomentoId", ponto.Momento.Nome).IsChecked = true;
             if (ponto.Pausa != null)
@@ -145,9 +141,9 @@ public class BackupComprovantesPageDriver : BackupComprovantesInterface
 
         var comprovanteGuardado = new Comprovante
         {
-            Ponto = new PontoRef
+            Ponto = new Ponto
             {
-                Perfil = new PerfilRef
+                Perfil = new Perfil
                 {
                     Nome = dl.GetDataListItem("Perfil").GetString()
                 },

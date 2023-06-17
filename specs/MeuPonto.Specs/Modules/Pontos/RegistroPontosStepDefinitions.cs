@@ -55,9 +55,7 @@ public class RegistroPontosStepDefinitions
     [Then(@"o perfil do ponto deverá deverá ser '([^']*)'")]
     public void ThenOPerfilDoPontoDeveraDeveraSer(string nome)
     {
-        var perfil = _registroPontos.PontoRegistrado.EQualificadoPelo();
-
-        perfil.Nome.Should().Be(nome);
+        _registroPontos.PontoRegistrado.Perfil.Nome.Should().Be(nome);
     }
 
     [Then(@"a data do ponto deverá ser '([^']*)'")]

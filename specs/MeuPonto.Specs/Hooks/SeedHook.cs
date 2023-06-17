@@ -1,8 +1,10 @@
 ﻿using BoDi;
+using MeuPonto.Modules;
 using MeuPonto.Modules.Perfis;
 using MeuPonto.Modules.Pontos;
 using MeuPonto.Modules.Pontos.Comprovantes;
 using MeuPonto.Modules.Pontos.Folhas;
+using Microsoft.Azure.Cosmos;
 
 namespace MeuPonto.Hooks;
 
@@ -21,18 +23,18 @@ public class SeedHook
         BackupComprovantesContext backupComprovantes,
         GestaoFolhasContext gestaoFolhas)
     {
-        var perfil = new Perfil
+        var transaction = new TransactionContext("Test user");
+
+        var perfil = new Modules.Perfis.Perfil
         {
             Nome = "Test user",
         };
 
         cadastroPerfis.Inicia(perfil);
 
-        var ponto = new Ponto
-        {
-            MomentoId = MomentoEnum.Entrada,
-            PausaId = null
-        };
+        var ponto = PontoFactory.CriaPonto(transaction);
+
+        ponto.MomentoId = MomentoEnum.Entrada;
 
         registroPontos.Inicia(ponto);
 

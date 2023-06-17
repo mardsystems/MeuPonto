@@ -21,7 +21,9 @@ public class MarcarModel : PageModel
 
     public IActionResult OnGet()
     {
-        Ponto = new Ponto();
+        var transaction = new TransactionContext(User.Identity.Name);
+
+        Ponto = PontoFactory.CriaPonto(transaction);
 
         Ponto.DataHora = _dateTimeSnapshot.GetDateTimeUntilMinutes();
 
@@ -51,10 +53,7 @@ public class MarcarModel : PageModel
 
         var perfil = await _db.Perfis.FindAsync(Ponto.PerfilId, User.Identity.Name);
 
-        Ponto.Perfil = new PerfilRef
-        {
-            Nome = perfil?.Nome
-        };
+        perfil.QualificaPonto(Ponto);
 
         _db.Pontos.Add(Ponto);
         await _db.SaveChangesAsync();

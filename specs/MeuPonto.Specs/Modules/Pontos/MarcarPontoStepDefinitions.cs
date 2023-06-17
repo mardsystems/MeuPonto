@@ -40,13 +40,13 @@ public class MarcarPontoStepDefinitions
     {
         var perfil = _db.Perfis.FirstOrDefault(x => x.Nome == nome);
 
-        _registroPontos.Ponto.QualificaCom(perfil);
+        perfil.QualificaPonto(_registroPontos.Ponto);
     }
 
     [When(@"o trabalhador marcar o ponto")]
     public void WhenOTrabalhadorMarcarOPonto()
     {
-        if (_registroPontos.Ponto.PerfilId == null)
+        if (_registroPontos.Ponto.EstaSemQualificacao())
         {
             var perfil = _db.Perfis.FirstOrDefault();
 
@@ -58,7 +58,7 @@ public class MarcarPontoStepDefinitions
                 _db.SaveChanges();
             }
 
-            _registroPontos.Ponto.QualificaCom(perfil);
+            perfil.QualificaPonto(_registroPontos.Ponto);
         }
 
         var pontoMarcado = _registroPontosInterface.MarcarPonto(_registroPontos.Ponto);

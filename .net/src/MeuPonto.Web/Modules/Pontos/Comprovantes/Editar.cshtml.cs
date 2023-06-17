@@ -42,7 +42,7 @@ public class EditarComprovanteModel : PageModel
     {
         if (ModelState.ContainsKey($"{nameof(Comprovante)}.{nameof(Comprovante.Imagem)}")) ModelState.Remove($"{nameof(Comprovante)}.{nameof(Comprovante.Imagem)}");
 
-        var pontoRef = new PontoRef
+        var pontoRef = new Ponto
         {
             PerfilId = Comprovante.Ponto?.PerfilId,
             Perfil = Comprovante.Ponto?.Perfil,

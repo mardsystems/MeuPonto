@@ -1,5 +1,4 @@
 ﻿using MeuPonto.Modules;
-using MeuPonto.Modules.Perfis;
 using MeuPonto.Modules.Perfis.Empregadores;
 using MeuPonto.Modules.Pontos;
 using MeuPonto.Modules.Pontos.Comprovantes;
@@ -35,7 +34,7 @@ public class MeuPontoDbContext : DbContext
         }
 
         var perfilsAlterados = ChangeTracker
-        .Entries<Perfil>()
+        .Entries<Modules.Perfis.Perfil>()
         .Where(x => x.State == EntityState.Modified)
         .Select(x => x.Entity);
 
@@ -57,7 +56,7 @@ public class MeuPontoDbContext : DbContext
         }
 
         var pontosAlterados = ChangeTracker
-            .Entries<Ponto>()
+            .Entries<Modules.Pontos.Ponto>()
             .Where(x => x.State == EntityState.Modified)
             .Select(x => x.Entity);
 
@@ -86,14 +85,14 @@ public class MeuPontoDbContext : DbContext
 
         modelBuilder.Entity<Empregador>().Property(x => x.Version).IsETagConcurrency();
 
-        modelBuilder.Entity<Perfil>()
+        modelBuilder.Entity<Modules.Perfis.Perfil>()
             .ToContainer("Perfis")
             .HasPartitionKey(x => x.PartitionKey);
         //.HasKey(x => new { x.Id, x.PartitionKey });
 
-        modelBuilder.Entity<Perfil>().Property(x => x.Version).IsETagConcurrency();
+        modelBuilder.Entity<Modules.Perfis.Perfil>().Property(x => x.Version).IsETagConcurrency();
 
-        modelBuilder.Entity<Perfil>().OwnsOne(a => a.JornadaTrabalhoSemanalPrevista, x =>
+        modelBuilder.Entity<Modules.Perfis.Perfil>().OwnsOne(a => a.JornadaTrabalhoSemanalPrevista, x =>
         {
             x.OwnsMany(b => b.Semana, y =>
             {
@@ -116,13 +115,13 @@ public class MeuPontoDbContext : DbContext
             });
         });
 
-        modelBuilder.Entity<Ponto>()
+        modelBuilder.Entity<Modules.Pontos.Ponto>()
             .ToContainer("Pontos")
             .HasPartitionKey(x => x.PartitionKey);
 
-        modelBuilder.Entity<Ponto>().Property(x => x.PausaId).HasConversion(new EnumToStringConverter<PausaEnum>());
+        modelBuilder.Entity<Modules.Pontos.Ponto>().Property(x => x.PausaId).HasConversion(new EnumToStringConverter<PausaEnum>());
 
-        modelBuilder.Entity<Ponto>().Property(x => x.Version).IsETagConcurrency();
+        modelBuilder.Entity<Modules.Pontos.Ponto>().Property(x => x.Version).IsETagConcurrency();
 
         modelBuilder.Entity<Comprovante>()
             .ToContainer("Pontos")
@@ -141,10 +140,10 @@ public class MeuPontoDbContext : DbContext
             .HasKey(x => x.UserName);
     }
 
-    public DbSet<Perfil> Perfis { get; set; }
+    public DbSet<Modules.Perfis.Perfil> Perfis { get; set; }
     public DbSet<Empregador> Empregadores { get; set; }
     public DbSet<Folha> Folhas { get; set; }
-    public DbSet<Ponto> Pontos { get; set; }
+    public DbSet<Modules.Pontos.Ponto> Pontos { get; set; }
     public DbSet<Comprovante> Comprovantes { get; set; }
     public DbSet<Trabalhador> Trabalhadores { get; set; }
     public DbSet<ConfiguracaoPorUsuario> Configuracoes { get; set; }

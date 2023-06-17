@@ -10,8 +10,8 @@ public class Ponto : DocumentEntity, Concepts.Ponto
     public Guid? PerfilId { get; set; }
 
     [DisplayName("Perfil")]
-    public PerfilRef? Perfil { get; set; }
-    Concepts.Perfil? Concepts.Ponto.EQualificadoPelo() => Perfil;
+    public Perfil? Perfil { get; set; }
+    Concepts.Perfil? Concepts.Ponto.Perfil => Perfil;
 
     [Required]
     [DisplayName("Data/Hora")]
@@ -35,9 +35,4 @@ public class Ponto : DocumentEntity, Concepts.Ponto
     [MaxLength(255)]
     [DisplayName("Observação")]
     public string? Observacao { get; set; }
-
-    Concepts.Comprovante[] Concepts.Ponto.Guarda()
-    {
-        throw new NotImplementedException();
-    }
 }

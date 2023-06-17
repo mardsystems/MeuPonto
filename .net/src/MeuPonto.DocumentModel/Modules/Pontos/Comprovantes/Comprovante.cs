@@ -10,7 +10,7 @@ public class Comprovante : DocumentEntity, Concepts.Comprovante
     public Guid? PontoId { get; set; }
 
     [DisplayName("Ponto")]
-    public PontoRef? Ponto { get; set; }
+    public Ponto? Ponto { get; set; }
     Concepts.Ponto? Concepts.Comprovante.Ponto => Ponto;
 
     [MaxLength(16)]

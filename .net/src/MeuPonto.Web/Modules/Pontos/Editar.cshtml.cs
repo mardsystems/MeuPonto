@@ -46,10 +46,7 @@ public class EditarModel : PageModel
 
         var perfil = await _db.Perfis.FindAsync(Ponto.PerfilId, User.Identity.Name);
 
-        Ponto.Perfil = new PerfilRef
-        {
-            Nome = perfil?.Nome
-        };
+        perfil.QualificaPonto(Ponto);
 
         _db.Attach(Ponto).State = EntityState.Modified;
 

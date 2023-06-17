@@ -22,7 +22,7 @@ public class CriarComprovanteModel : PageModel
 
         var ponto = await _db.Pontos.FindAsync(PontoId, User.Identity.Name);
 
-        Comprovante.Ponto = new PontoRef
+        Comprovante.Ponto = new Ponto
         {
             DataHora = ponto?.DataHora,
             PerfilId = ponto?.PerfilId,
@@ -48,7 +48,7 @@ public class CriarComprovanteModel : PageModel
 
         var ponto = await _db.Pontos.FindAsync(PontoId, User.Identity.Name);
 
-        Comprovante.Ponto = new PontoRef
+        Comprovante.Ponto = new Ponto
         {
             DataHora = ponto?.DataHora,
             PerfilId = ponto?.PerfilId,
