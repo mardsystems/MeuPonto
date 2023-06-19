@@ -59,7 +59,7 @@ public class CriarModel : PageModel
 
         var empregador = await _db.Empregadores.FindAsync(Perfil.EmpregadorId, User.Identity.Name);
 
-        Perfil.Empregador = new EmpregadorRef
+        Perfil.Empregador = new Empregador
         {
             Nome = empregador?.Nome,
         };

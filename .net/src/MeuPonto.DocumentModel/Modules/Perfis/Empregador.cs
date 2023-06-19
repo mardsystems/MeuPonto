@@ -6,7 +6,7 @@ using MeuPonto.Concepts;
 namespace MeuPonto.Modules.Perfis;
 
 [Owned]
-public class EmpregadorRef : Concepts.Empregador
+public class Empregador : Concepts.Empregador
 {
     [Required]
     [MinLength(3)]
@@ -14,9 +14,9 @@ public class EmpregadorRef : Concepts.Empregador
     [DisplayName("Nome")]
     public string? Nome { get; set; }
 
-    string? Empregador.Cnpj => throw new NotImplementedException();
+    string? Concepts.Empregador.Cnpj => throw new NotImplementedException();
 
-    string? Empregador.Cpf => throw new NotImplementedException();
+    string? Concepts.Empregador.Cpf => throw new NotImplementedException();
 
     string? Concepts.Empregador.Endereco => throw new NotImplementedException();
 

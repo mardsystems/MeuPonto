@@ -2,11 +2,11 @@
 
 public static class PontoFactory
 {
-    public static Ponto CriaPonto(TransactionContext transaction)
+    public static Ponto CriaPonto(TransactionContext transaction, Guid? id = null)
     {
         var ponto = new Ponto
         {
-            Id = transaction.Id,
+            Id = id ?? Guid.NewGuid(),
             PartitionKey = transaction.UserName,
             CreationDate = transaction.DateTime
         };
