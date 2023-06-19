@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MeuPonto.Models;
 
-public class Perfil : IdentityTableEntity, Concepts.Perfil
+public class Perfil : LocalTableEntity, Concepts.Perfil
 {
     [Required]
     [MinLength(3)]

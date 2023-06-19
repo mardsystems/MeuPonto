@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MeuPonto.Models;
 
-public class Comprovante : IdentityTableEntity, Concepts.Comprovante
+public class Comprovante : LocalTableEntity, Concepts.Comprovante
 {
     [Required]
     [DisplayName("Ponto")]

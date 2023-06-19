@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MeuPonto.Models;
 
-public class Ponto : IdentityTableEntity, Concepts.Ponto
+public class Ponto : LocalTableEntity, Concepts.Ponto
 {
     [Required]
     [DisplayName("Perfil")]
