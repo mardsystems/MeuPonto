@@ -45,7 +45,6 @@ public class CriarPerfilStepDefinitions
     [Given(@"que o trabalhador é o '([^']*)'")]
     public void GivenQueOTrabalhadorEO(string nome)
     {
-        _cadastroPerfis.Perfil.Matricula = "0001";
         _cadastroPerfis.Perfil.Nome = nome;
     }
 
@@ -56,11 +55,11 @@ public class CriarPerfilStepDefinitions
 
         var daysOfWeek = Enum.GetValues<DayOfWeek>();
 
-        for (int i = (int)dayOfWeekInicio; i <= (int)dayOfWeekTermino; i++)
+        for (int i = (int)dayOfWeekInicio - 1; i < (int)dayOfWeekTermino; i++)
         {
             var dayOfWeek = daysOfWeek[i];
 
-            AdicionaJornadaTrabalhoDiaria(_cadastroPerfis.Perfil.JornadaTrabalhoSemanalPrevista, dayOfWeek, tempo);
+            _cadastroPerfis.Perfil.JornadaTrabalhoSemanalPrevista.Semana[i].Tempo = tempo;
         }
     }
 
@@ -69,16 +68,9 @@ public class CriarPerfilStepDefinitions
     {
         var tempo = (horaTermino - horaInicio);
 
-        AdicionaJornadaTrabalhoDiaria(_cadastroPerfis.Perfil.JornadaTrabalhoSemanalPrevista, dayOfWeek, tempo);
-    }
+        var i = (int)dayOfWeek - 1;
 
-    private static void AdicionaJornadaTrabalhoDiaria(JornadaTrabalhoSemanal jornadaTrabalhoSemanal, DayOfWeek dayOfWeek, TimeSpan tempo)
-    {
-        jornadaTrabalhoSemanal.Semana.Add(new JornadaTrabalhoDiaria
-        {
-            DiaSemana = dayOfWeek,
-            Tempo = tempo
-        });
+        _cadastroPerfis.Perfil.JornadaTrabalhoSemanalPrevista.Semana[i].Tempo = tempo;
     }
 
     [When(@"o trabalhador criar um perfil")]
@@ -112,19 +104,11 @@ public class CriarPerfilStepDefinitions
     }
 
     [Then(@"a jornada de trabalho semanal prevista deverá ser:")]
-    public void ThenAJornadaDeTrabalhoSemanalPrevistaDeveraSer(Table table)
+    public void ThenAJornadaDeTrabalhoSemanalPrevistaDeveraSer(Table jornadaTrabalhoSemanal)
     {
-        var jornadaTrabalhoSemanal = table.CreateInstance<(DayOfWeek diaSemana, TimeSpan tempo)>();
-
-        //
-
         var jornadaTrabalhoSemanalPrevista = _cadastroPerfis.PerfilCadastrado.Preve();
 
-        var jornadaTrabalhoDiaria = jornadaTrabalhoSemanalPrevista.Semana.FirstOrDefault(x => x.DiaSemana == jornadaTrabalhoSemanal.diaSemana);
-
-        jornadaTrabalhoDiaria.Should().NotBeNull();
-
-        jornadaTrabalhoDiaria.Tempo.Should().Be(jornadaTrabalhoSemanal.tempo, jornadaTrabalhoDiaria.DiaSemana.ToString());
+        jornadaTrabalhoSemanal.CompareToSet(jornadaTrabalhoSemanalPrevista.Semana);
     }
 
     [Then(@"o tempo total da jornada de trabalho semanal prevista deverá ser '([^']*)'")]

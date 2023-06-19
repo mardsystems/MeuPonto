@@ -65,8 +65,10 @@ public class GuardarComprovanteStepDefinitions
         
         ponto.DataHora = data;
         ponto.MomentoId = MomentoEnum.Entrada;
-        
-        var comprovante = BackupComprovantesStub.ObtemComprovante(ponto);
+
+        var comprovante = ComprovanteFactory.CriaComprovante(transaction);
+
+        comprovante.ComprovaPonto(ponto);
 
         _db.Comprovantes.Add(comprovante);
         await _db.SaveChangesAsync();

@@ -29,12 +29,14 @@ Cenário: Trabalhador cria um perfil com uma jornada de trabalho prevista de 40 
 	E que o horário de trabalho é de 'Monday' a 'Friday' das '09:00' às '18:00' com '01:00' de almoço
 	Quando o trabalhador criar um perfil
 	Então a jornada de trabalho semanal prevista deverá ser:
-		| dia semana | tempo |
-		| Monday     | 08:00 |
-		| Tuesday    | 08:00 |
-		| Wednesday  | 08:00 |
-		| Thursday   | 08:00 |
-		| Friday     | 08:00 |
+		| dia semana | tempo    |
+		| Sunday     | 00:00:00 |
+		| Monday     | 08:00:00 |
+		| Tuesday    | 08:00:00 |
+		| Wednesday  | 08:00:00 |
+		| Thursday   | 08:00:00 |
+		| Friday     | 08:00:00 |
+		| Saturday   | 00:00:00 |
 	E o tempo total da jornada de trabalho semanal prevista deverá ser '1.16:00'
 
 Cenário: Trabalhador cria um perfil com uma jornada de trabalho prevista de 44 horas semanais (incluindo sábado)
@@ -43,11 +45,12 @@ Cenário: Trabalhador cria um perfil com uma jornada de trabalho prevista de 44 
 	E que o horário de trabalho de 'Saturday' é das '08:00' às '12:00'
 	Quando o trabalhador criar um perfil
 	Então a jornada de trabalho semanal prevista deverá ser:
-		| dia semana | tempo |
-		| Monday     | 08:00 |
-		| Tuesday    | 08:00 |
-		| Wednesday  | 08:00 |
-		| Thursday   | 08:00 |
-		| Friday     | 08:00 |
-		| Saturday   | 04:00 |
+		| dia semana | tempo    |
+		| Sunday     | 00:00:00 |
+		| Monday     | 08:00:00 |
+		| Tuesday    | 08:00:00 |
+		| Wednesday  | 08:00:00 |
+		| Thursday   | 08:00:00 |
+		| Friday     | 08:00:00 |
+		| Saturday   | 04:00:00 |
 	E o tempo total da jornada de trabalho semanal prevista deverá ser '1.20:00'

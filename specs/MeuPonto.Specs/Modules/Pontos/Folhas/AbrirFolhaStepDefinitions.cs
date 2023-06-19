@@ -39,7 +39,7 @@ public class AbrirFolhaStepDefinitions
     {
         var perfil = _db.Perfis.FirstOrDefault(x => x.Nome == nome);
 
-        _gestaoFolhas.Folha.QualificaCom(perfil);
+        perfil.QualificaFolha(_gestaoFolhas.Folha);
     }
 
     [Given(@"que o trabalhador deseja apurar a folha de ponto da competência '([^']*)'")]
@@ -69,7 +69,7 @@ public class AbrirFolhaStepDefinitions
                 _db.SaveChanges();
             }
 
-            _gestaoFolhas.Folha.QualificaCom(perfil);
+            perfil.QualificaFolha(_gestaoFolhas.Folha);
         }
 
 
@@ -107,17 +107,13 @@ public class AbrirFolhaStepDefinitions
     [Then(@"a folha de ponto não deverá ter tempo total apurado")]
     public void ThenAFolhaDePontoNaoDeveraTerTempoTotalApurado()
     {
-        var apuracaoMensal = _gestaoFolhas.FolhaAberta.Guarda();
-
-        apuracaoMensal.TempoTotalApurado.Should().BeNull();
+        _gestaoFolhas.FolhaAberta.ApuracaoMensal.TempoTotalApurado.Should().BeNull();
     }
 
     [Then(@"a folha de ponto não deverá ter tempo total período anterior")]
     public void ThenAFolhaDePontoNaoDeveraTerTempoTotalPeriodoAnterior()
     {
-        var apuracaoMensal = _gestaoFolhas.FolhaAberta.Guarda();
-
-        apuracaoMensal.TempoTotalPeriodoAnterior.Should().BeNull();
+        _gestaoFolhas.FolhaAberta.ApuracaoMensal.TempoTotalPeriodoAnterior.Should().BeNull();
     }
 
     [Then(@"a folha de ponto deverá ter uma observação")]

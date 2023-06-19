@@ -2,11 +2,11 @@
 
 public interface Folha
 {
+    ApuracaoMensal ApuracaoMensal { get; }
     DateTime? Competencia { get; }
     Status? Status { get; }
     string? Observacao { get; }
 
-    ApuracaoMensal Guarda();
     Ponto[] Apura();
     Perfil EQualificadaPelo();
 }

@@ -75,7 +75,7 @@ public class SeedHook
 
         registroPontos.Inicia(ponto);
 
-        var comprovante = new Comprovante();
+        var comprovante = ComprovanteFactory.CriaComprovante(transaction);
 
         backupComprovantes.Inicia(comprovante);
 
@@ -83,11 +83,39 @@ public class SeedHook
 
         var hoje = DateTime.Today;
 
-        var folhaNova = new Folha
-        {
-            Competencia = new DateTime(hoje.Year, hoje.Month, 1)
-        };
+        var competencia = new DateTime(hoje.Year, hoje.Month, 1);
 
-        gestaoFolhas.Inicia(folhaNova);
+        var folha = FolhaFactory.CriaFolha(transaction);
+
+        perfil.QualificaFolha(folha);
+
+        folha.Competencia = competencia;
+
+        var competenciaAtual = competencia;
+
+        var competenciaPosterior = competenciaAtual.AddMonths(1);
+
+        var dias = (competenciaPosterior - competenciaAtual).Days;
+
+        for (int dia = 1; dia <= dias; dia++)
+        {
+            var data = competenciaAtual.AddDays(dia - 1);
+
+            var apuracaoDiaria = new ApuracaoDiaria
+            {
+                Dia = dia,
+                TempoPrevisto = perfil.JornadaTrabalhoSemanalPrevista.Semana.Single(x => x.DiaSemana == data.DayOfWeek).Tempo,
+                TempoApurado = null,
+                DiferencaTempo = null,
+                Feriado = false,
+                Falta = false
+            };
+
+            folha.ApuracaoMensal.Dias.Add(apuracaoDiaria);
+        }
+
+        folha.ApuracaoMensal.TempoTotalPeriodoAnterior = TimeSpan.Zero;
+
+        gestaoFolhas.Inicia(folha);
     }
 }

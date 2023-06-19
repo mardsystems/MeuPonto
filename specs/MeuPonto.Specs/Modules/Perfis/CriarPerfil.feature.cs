@@ -223,24 +223,30 @@ this.ScenarioInitialize(scenarioInfo);
                             "dia semana",
                             "tempo"});
                 table1.AddRow(new string[] {
+                            "Sunday",
+                            "00:00:00"});
+                table1.AddRow(new string[] {
                             "Monday",
-                            "08:00"});
+                            "08:00:00"});
                 table1.AddRow(new string[] {
                             "Tuesday",
-                            "08:00"});
+                            "08:00:00"});
                 table1.AddRow(new string[] {
                             "Wednesday",
-                            "08:00"});
+                            "08:00:00"});
                 table1.AddRow(new string[] {
                             "Thursday",
-                            "08:00"});
+                            "08:00:00"});
                 table1.AddRow(new string[] {
                             "Friday",
-                            "08:00"});
+                            "08:00:00"});
+                table1.AddRow(new string[] {
+                            "Saturday",
+                            "00:00:00"});
 #line 31
  testRunner.Then("a jornada de trabalho semanal prevista deverá ser:", ((string)(null)), table1, "Então ");
 #line hidden
-#line 38
+#line 40
  testRunner.And("o tempo total da jornada de trabalho semanal prevista deverá ser \'1.16:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
             }
@@ -258,7 +264,7 @@ this.ScenarioInitialize(scenarioInfo);
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador cria um perfil com uma jornada de trabalho prevista de 44 horas seman" +
                     "ais (incluindo sábado)", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 40
+#line 42
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -278,44 +284,47 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 41
+#line 43
  testRunner.Given("que o trabalhador não tem nenhum perfil cadastrado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
-#line 42
+#line 44
  testRunner.And("que o horário de trabalho é de \'Monday\' a \'Friday\' das \'09:00\' às \'18:00\' com \'01" +
                         ":00\' de almoço", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-#line 43
+#line 45
  testRunner.And("que o horário de trabalho de \'Saturday\' é das \'08:00\' às \'12:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-#line 44
+#line 46
  testRunner.When("o trabalhador criar um perfil", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
                 TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                             "dia semana",
                             "tempo"});
                 table2.AddRow(new string[] {
+                            "Sunday",
+                            "00:00:00"});
+                table2.AddRow(new string[] {
                             "Monday",
-                            "08:00"});
+                            "08:00:00"});
                 table2.AddRow(new string[] {
                             "Tuesday",
-                            "08:00"});
+                            "08:00:00"});
                 table2.AddRow(new string[] {
                             "Wednesday",
-                            "08:00"});
+                            "08:00:00"});
                 table2.AddRow(new string[] {
                             "Thursday",
-                            "08:00"});
+                            "08:00:00"});
                 table2.AddRow(new string[] {
                             "Friday",
-                            "08:00"});
+                            "08:00:00"});
                 table2.AddRow(new string[] {
                             "Saturday",
-                            "04:00"});
-#line 45
+                            "04:00:00"});
+#line 47
  testRunner.Then("a jornada de trabalho semanal prevista deverá ser:", ((string)(null)), table2, "Então ");
 #line hidden
-#line 53
+#line 56
  testRunner.And("o tempo total da jornada de trabalho semanal prevista deverá ser \'1.20:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
             }

@@ -30,7 +30,7 @@ public class Folha : DocumentEntity, Concepts.Folha
 
     [DisplayName("Apuração Mensal")]
     public ApuracaoMensal ApuracaoMensal { get; set; }
-    Concepts.ApuracaoMensal Concepts.Folha.Guarda() => ApuracaoMensal;
+    Concepts.ApuracaoMensal Concepts.Folha.ApuracaoMensal => ApuracaoMensal;
 
     Concepts.Ponto[] Concepts.Folha.Apura() => throw new NotImplementedException();
 

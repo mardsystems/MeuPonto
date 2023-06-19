@@ -72,14 +72,10 @@ public class ApurarFolhaStepDefinitions
     [Given(@"que o trabalhador tem uma folha de ponto aberta na competência '([^']*)'")]
     public async Task GivenQueOTrabalhadorTemUmaFolhaDePontoAbertaNaCompetencia(DateTime competencia)
     {
-        var perfil = _db.Perfis.FirstOrDefault();
+        _gestaoFolhas.Folha.Competencia = competencia;
 
-        var folhaAberta = GestaoFolhasStub.ObtemFolhaAbertaFrom(perfil, competencia);
-
-        _db.Folhas.Add(folhaAberta);
+        _db.Folhas.Add(_gestaoFolhas.Folha);
         await _db.SaveChangesAsync();
-
-        _gestaoFolhas.ConsideraQueExiste(folhaAberta);
     }
 
     [When(@"o trabalhador apurar a folha de ponto")]
@@ -93,16 +89,12 @@ public class ApurarFolhaStepDefinitions
     [Then(@"o tempo total realizado deverá ser de '([^']*)'")]
     public void ThenOTempoTotalRealizadoDeveraSerDe(TimeSpan tempoTotalRealizado)
     {
-        var apuracaoMensal = _gestaoFolhas.FolhaAberta.Guarda();
-
-        apuracaoMensal.TempoTotalApurado.Should().Be(tempoTotalRealizado);
+        _gestaoFolhas.FolhaAberta.ApuracaoMensal.TempoTotalApurado.Should().Be(tempoTotalRealizado);
     }
 
     [Then(@"o tempo total apurado da folha de ponto deverá ser de '([^']*)'")]
     public void ThenOTempoTotalApuradoDaFolhaDePontoDeveraSerDe(TimeSpan tempoTotalApurado)
     {
-        var apuracaoMensal = _gestaoFolhas.FolhaAberta.Guarda();
-
-        apuracaoMensal.TempoTotalApurado.Should().Be(tempoTotalApurado);
+        _gestaoFolhas.FolhaAberta.ApuracaoMensal.TempoTotalApurado.Should().Be(tempoTotalApurado);
     }
 }

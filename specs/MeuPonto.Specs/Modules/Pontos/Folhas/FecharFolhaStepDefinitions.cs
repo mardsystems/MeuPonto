@@ -38,21 +38,21 @@ public class FecharFolhaStepDefinitions
     [Given(@"que o trabalhador tem uma folha de ponto aberta")]
     public async Task GivenQueOTrabalhadorTemUmaFolhaDePontoAberta()
     {
-        _db.Perfis.Add(_cadastroPerfis.Perfil);
+        _db.Folhas.Add(_gestaoFolhas.Folha);
         await _db.SaveChangesAsync();
+    }
 
-        var competencia = new DateTime(2022, 11, 1);
+    [Given(@"que o trabalhador tem uma folha de ponto aberta na competência")]
+    public async Task GivenQueOTrabalhadorTemUmaFolhaDePontoAbertaNaCompetencia(DateTime competencia)
+    {
+        _gestaoFolhas.Folha.Competencia = competencia;
 
-        var folhaAberta = GestaoFolhasStub.ObtemFolhaAbertaFrom(_cadastroPerfis.Perfil, competencia);
-
-        _db.Folhas.Add(folhaAberta);
+        _db.Folhas.Add(_gestaoFolhas.Folha);
         await _db.SaveChangesAsync();
-
-        _gestaoFolhas.ConsideraQueExiste(folhaAberta);
     }
 
     [Given(@"que o ano/mês é '([^']*)'")]
-    public void GivenQueOAnoMesE(string competencia)
+    public void GivenQueOAnoMesE(string anoMes)
     {
 
     }
@@ -62,8 +62,6 @@ public class FecharFolhaStepDefinitions
     {
         var transaction = new TransactionContext("Test user");
 
-        var perfil = _db.Perfis.FirstOrDefault();
-
         var pontos = table.Rows.Select(row =>
         {
             var dataHora = DateTime.Parse(row["data/hora"]);
@@ -72,7 +70,7 @@ public class FecharFolhaStepDefinitions
 
             var ponto = PontoFactory.CriaPonto(transaction, Guid.NewGuid());
 
-            perfil.QualificaPonto(ponto);
+            _cadastroPerfis.Perfil.QualificaPonto(ponto);
 
             ponto.DataHora = dataHora;
             ponto.MomentoId = momento;
@@ -101,24 +99,18 @@ public class FecharFolhaStepDefinitions
     [Then(@"o tempo total apurado deverá ser '([^']*)'")]
     public void ThenOTempoTotalApuradoDeveraSer(TimeSpan tempoTotalApurado)
     {
-        var apuracaoMensal = _gestaoFolhas.FolhaAberta.Guarda();
-
-        apuracaoMensal.TempoTotalApurado.Should().Be(tempoTotalApurado);
+        _gestaoFolhas.FolhaAberta.ApuracaoMensal.TempoTotalApurado.Should().Be(tempoTotalApurado);
     }
 
     [Then(@"o tempo total período anterior deverá ser nulo")]
     public void ThenOTempoTotalPeriodoAnteriorDeveraSerNulo()
     {
-        var apuracaoMensal = _gestaoFolhas.FolhaAberta.Guarda();
-
-        apuracaoMensal.TempoTotalPeriodoAnterior.Should().BeNull();
+        _gestaoFolhas.FolhaAberta.ApuracaoMensal.TempoTotalPeriodoAnterior.Should().BeNull();
     }
 
     [Then(@"o tempo total período anterior deverá ser '([^']*)'")]
     public void ThenOTempoTotalPeriodoAnteriorDeveraSer(TimeSpan tempoTotalPeriodoAnterior)
     {
-        var apuracaoMensal = _gestaoFolhas.FolhaAberta.Guarda();
-
-        apuracaoMensal.TempoTotalPeriodoAnterior.Should().Be(tempoTotalPeriodoAnterior);
+        _gestaoFolhas.FolhaAberta.ApuracaoMensal.TempoTotalPeriodoAnterior.Should().Be(tempoTotalPeriodoAnterior);
     }
 }

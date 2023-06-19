@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <Folder Include="Modules\Perfis\" />
+    <Folder Include="Modules\Pontos\Comprovantes\" />
   </ItemGroup>
 
 </Project>

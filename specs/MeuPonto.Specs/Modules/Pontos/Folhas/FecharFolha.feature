@@ -7,7 +7,7 @@ Funcionalidade: Fechar Folha
 	Eu quero fechar a folha de ponto
 
 Contexto:
-	Dado que o trabalhador tem uma folha de ponto aberta
+	Dado que o trabalhador tem uma folha de ponto aberta na competência '2022/11'
 	E que o ano/mês é '2022/11'
 
 Regra: O fechamento deve ser representado por um status
