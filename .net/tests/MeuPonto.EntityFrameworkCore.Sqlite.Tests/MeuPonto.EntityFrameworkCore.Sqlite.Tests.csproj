@@ -11,4 +11,8 @@
     <ProjectReference Include="..\..\src\MeuPonto.EntityFrameworkCore.Sqlite\MeuPonto.EntityFrameworkCore.Sqlite.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Modules\Perfis\" />
+  </ItemGroup>
+
 </Project>

@@ -12,12 +12,15 @@ public class GuardarComprovanteStepDefinitions
 
     private readonly BackupComprovantesInterface _backupComprovantesInterface;
 
+    private readonly CadastroPerfisContext _cadastroPerfis;
+
     private readonly MeuPontoDbContext _db;
 
     public GuardarComprovanteStepDefinitions(
         ScenarioContext scenario,
         BackupComprovantesContext backupComprovantes,
         BackupComprovantesInterface backupComprovantesInterface,
+        CadastroPerfisContext cadastroPerfis,
         MeuPontoDbContext db)
     {
         _scenario = scenario;
@@ -26,15 +29,15 @@ public class GuardarComprovanteStepDefinitions
 
         _backupComprovantesInterface = backupComprovantesInterface;
 
+        _cadastroPerfis = cadastroPerfis;
+
         _db = db;
     }
 
     [Given(@"que o trabalhador tem um comprovante de ponto com a data '([^']*)'")]
     public async Task GivenQueOTrabalhadorTemUmComprovanteDePontoComAData(DateTime data)
     {
-        var perfil = CadastroPerfisStub.ObtemPerfil();
-
-        _db.Perfis.Add(perfil);
+        _db.Perfis.Add(_cadastroPerfis.Perfil);
         await _db.SaveChangesAsync();
 
         var file = new FileStream("C:\\temp\\20230222_104351.jpg", FileMode.Open);
@@ -43,7 +46,7 @@ public class GuardarComprovanteStepDefinitions
 
         _backupComprovantes.Comprovante.TipoImagemId = TipoImagemEnum.Original;
 
-        perfil.QualificaPonto(_backupComprovantes.Ponto);
+        _cadastroPerfis.Perfil.QualificaPonto(_backupComprovantes.Ponto);
         _backupComprovantes.Ponto.DataHora = new DateTime(2023, 02, 17, 17, 07, 0);
         _backupComprovantes.Ponto.MomentoId = MomentoEnum.Saida;
     }
@@ -51,16 +54,14 @@ public class GuardarComprovanteStepDefinitions
     [Given(@"que o trabalhador tem um comprovante de ponto guardado com a data '([^']*)'")]
     public async Task GivenQueOTrabalhadorTemUmComprovanteDePontoGuardadoComAData(DateTime data)
     {
-        var perfil = CadastroPerfisStub.ObtemPerfil();
-
-        _db.Perfis.Add(perfil);
+        _db.Perfis.Add(_cadastroPerfis.Perfil);
         await _db.SaveChangesAsync();
 
         var transaction = new TransactionContext("Test user");
 
         var ponto = PontoFactory.CriaPonto(transaction);
 
-        perfil.QualificaPonto(ponto);
+        _cadastroPerfis.Perfil.QualificaPonto(ponto);
         
         ponto.DataHora = data;
         ponto.MomentoId = MomentoEnum.Entrada;
@@ -74,9 +75,7 @@ public class GuardarComprovanteStepDefinitions
     [Given(@"que o trabalhador escaneou um comprovante de ponto com a data '([^']*)'")]
     public async Task GivenQueOTrabalhadorEscaneouUmComprovanteDePontoComAData(string p0)
     {
-        var perfil = CadastroPerfisStub.ObtemPerfil();
-
-        _db.Perfis.Add(perfil);
+        _db.Perfis.Add(_cadastroPerfis.Perfil);
         await _db.SaveChangesAsync();
 
         var file = new FileStream("C:\\temp\\20230222_104351.jpg", FileMode.Open);
@@ -85,7 +84,7 @@ public class GuardarComprovanteStepDefinitions
 
         _backupComprovantes.Comprovante.TipoImagemId = TipoImagemEnum.Original;
 
-        perfil.QualificaPonto(_backupComprovantes.Ponto);
+        _cadastroPerfis.Perfil.QualificaPonto(_backupComprovantes.Ponto);
         _backupComprovantes.Ponto.DataHora = new DateTime(2023, 02, 17, 17, 07, 0);
         _backupComprovantes.Ponto.MomentoId = MomentoEnum.Saida;
     }

@@ -13,12 +13,15 @@ public class FecharFolhaStepDefinitions
 
     private readonly GestaoFolhasInterface _gestaoFolhasInterface;
 
+    private readonly CadastroPerfisContext _cadastroPerfis;
+
     private readonly MeuPontoDbContext _db;
 
     public FecharFolhaStepDefinitions(
         ScenarioContext scenario,
         GestaoFolhasContext gestaoFolhas,
         GestaoFolhasInterface gestaoFolhasInterface,
+        CadastroPerfisContext cadastroPerfis,
         MeuPontoDbContext db)
     {
         _scenario = scenario;
@@ -27,20 +30,20 @@ public class FecharFolhaStepDefinitions
 
         _gestaoFolhasInterface = gestaoFolhasInterface;
 
+        _cadastroPerfis = cadastroPerfis;
+
         _db = db;
     }
 
     [Given(@"que o trabalhador tem uma folha de ponto aberta")]
     public async Task GivenQueOTrabalhadorTemUmaFolhaDePontoAberta()
     {
-        var perfil = CadastroPerfisStub.ObtemPerfil();
-
-        _db.Perfis.Add(perfil);
+        _db.Perfis.Add(_cadastroPerfis.Perfil);
         await _db.SaveChangesAsync();
 
         var competencia = new DateTime(2022, 11, 1);
 
-        var folhaAberta = GestaoFolhasStub.ObtemFolhaAbertaFrom(perfil, competencia);
+        var folhaAberta = GestaoFolhasStub.ObtemFolhaAbertaFrom(_cadastroPerfis.Perfil, competencia);
 
         _db.Folhas.Add(folhaAberta);
         await _db.SaveChangesAsync();

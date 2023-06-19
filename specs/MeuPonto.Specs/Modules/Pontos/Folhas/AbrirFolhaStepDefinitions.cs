@@ -12,12 +12,15 @@ public class AbrirFolhaStepDefinitions
 
     private readonly GestaoFolhasInterface _gestaoFolhasInterface;
 
+    private readonly CadastroPerfisContext _cadastroPerfis;
+
     private readonly MeuPontoDbContext _db;
 
     public AbrirFolhaStepDefinitions(
         ScenarioContext scenario,
         GestaoFolhasContext gestaoFolhas,
         GestaoFolhasInterface gestaoFolhasInterface,
+        CadastroPerfisContext cadastroPerfis,
         MeuPontoDbContext db)
     {
         _scenario = scenario;
@@ -25,6 +28,8 @@ public class AbrirFolhaStepDefinitions
         _gestaoFolhas = gestaoFolhas;
 
         _gestaoFolhasInterface = gestaoFolhasInterface;
+
+        _cadastroPerfis = cadastroPerfis;
 
         _db = db;
     }
@@ -58,7 +63,7 @@ public class AbrirFolhaStepDefinitions
 
             if (perfil == default)
             {
-                perfil = CadastroPerfisStub.ObtemPerfil();
+                perfil = _cadastroPerfis.Perfil;
 
                 _db.Perfis.Add(perfil);
                 _db.SaveChanges();

@@ -12,12 +12,15 @@ public class MarcarPontoStepDefinitions
 
     private readonly RegistroPontosInterface _registroPontosInterface;
 
+    private readonly CadastroPerfisContext _cadastroPerfis;
+
     private readonly MeuPontoDbContext _db;
 
     public MarcarPontoStepDefinitions(
         ScenarioContext scenario,
         RegistroPontosContext registroPontos,
         RegistroPontosInterface registroPontosInterface,
+        CadastroPerfisContext cadastroPerfis,
         MeuPontoDbContext db)
     {
         _scenario = scenario;
@@ -25,6 +28,8 @@ public class MarcarPontoStepDefinitions
         _registroPontos = registroPontos;
 
         _registroPontosInterface = registroPontosInterface;
+
+        _cadastroPerfis = cadastroPerfis;
 
         _db = db;
     }
@@ -52,7 +57,7 @@ public class MarcarPontoStepDefinitions
 
             if (perfil == default)
             {
-                perfil = CadastroPerfisStub.ObtemPerfil();
+                perfil = _cadastroPerfis.Perfil;
 
                 _db.Perfis.Add(perfil);
                 _db.SaveChanges();

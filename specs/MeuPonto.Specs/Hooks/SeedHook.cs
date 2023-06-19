@@ -1,10 +1,8 @@
 ﻿using BoDi;
-using MeuPonto.Modules;
 using MeuPonto.Modules.Perfis;
 using MeuPonto.Modules.Pontos;
 using MeuPonto.Modules.Pontos.Comprovantes;
 using MeuPonto.Modules.Pontos.Folhas;
-using Microsoft.Azure.Cosmos;
 
 namespace MeuPonto.Hooks;
 
@@ -25,9 +23,48 @@ public class SeedHook
     {
         var transaction = new TransactionContext("Test user");
 
-        var perfil = new Modules.Perfis.Perfil
+        var perfil = PerfilFactory.CriaPerfil(transaction);
+
+        perfil.Nome = "Test user";
+        perfil.JornadaTrabalhoSemanalPrevista = new JornadaTrabalhoSemanal
         {
-            Nome = "Test user",
+            Semana = new List<JornadaTrabalhoDiaria>(new[]{
+                    new JornadaTrabalhoDiaria
+                    {
+                        DiaSemana = DayOfWeek.Monday,
+                        Tempo = new TimeSpan(8,0,0)
+                    },
+                    new JornadaTrabalhoDiaria
+                    {
+                        DiaSemana = DayOfWeek.Tuesday,
+                        Tempo = new TimeSpan(8,0,0)
+                    },
+                    new JornadaTrabalhoDiaria
+                    {
+                        DiaSemana = DayOfWeek.Wednesday,
+                        Tempo = new TimeSpan(8,0,0)
+                    },
+                    new JornadaTrabalhoDiaria
+                    {
+                        DiaSemana = DayOfWeek.Thursday,
+                        Tempo = new TimeSpan(8,0,0)
+                    },
+                    new JornadaTrabalhoDiaria
+                    {
+                        DiaSemana = DayOfWeek.Friday,
+                        Tempo = new TimeSpan(8,0,0)
+                    },
+                    new JornadaTrabalhoDiaria
+                    {
+                        DiaSemana = DayOfWeek.Saturday,
+                        Tempo = new TimeSpan(0,0,0)
+                    },
+                    new JornadaTrabalhoDiaria
+                    {
+                        DiaSemana = DayOfWeek.Sunday,
+                        Tempo = new TimeSpan(0,0,0)
+                    }
+                })
         };
 
         cadastroPerfis.Inicia(perfil);

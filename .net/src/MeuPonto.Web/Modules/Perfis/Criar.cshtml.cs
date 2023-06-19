@@ -17,10 +17,9 @@ public class CriarModel : PageModel
 
     public IActionResult OnGet()
     {
-        Perfil = new Perfil
-        {
+        var transaction = new TransactionContext(User.Identity.Name);
 
-        };
+        Perfil = PerfilFactory.CriaPerfil(transaction);
 
         ViewData["EmpregadorId"] = new SelectList(_db.Empregadores, "Id", "Nome").AddEmptyValue();
 
