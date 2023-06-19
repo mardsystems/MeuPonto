@@ -25,16 +25,14 @@ public class CriarModel : PageModel
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync()
     {
+        var transaction = new TransactionContext(User.Identity.Name);
+
         if (!ModelState.IsValid)
         {
             return Page();
         }
 
-        Ponto.Id = Guid.NewGuid();
-
-        Ponto.PartitionKey = User.Identity.Name; //Ponto.Data.ToString();
-
-        Ponto.CreationDate = DateTime.Now;
+        Ponto.RecontextualizaPonto(transaction);
 
         var perfil = await _db.Perfis.FindAsync(Ponto.PerfilId, User.Identity.Name);
 

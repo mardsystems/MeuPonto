@@ -1,5 +1,4 @@
 using MeuPonto.Data;
-using Microsoft.Azure.Cosmos;
 using TechTalk.SpecFlow.Assist;
 
 namespace MeuPonto.Modules.Perfis;

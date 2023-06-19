@@ -16,12 +16,9 @@ public class GuardarComprovanteModel : PageModel
 
     public IActionResult OnGet()
     {
-        //Ponto.Id = Guid.NewGuid();
+        var transaction = new TransactionContext(User.Identity.Name);
 
-        //Comprovante.PontoId = Ponto.Id;
-        //Comprovante.Id = Guid.NewGuid();
-
-        Comprovante = new Comprovante();
+        Comprovante = ComprovanteFactory.CriaComprovante(transaction);
 
         Comprovante.TipoImagemId = TipoImagemEnum.Original;
 
@@ -42,6 +39,10 @@ public class GuardarComprovanteModel : PageModel
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync(string? command)
     {
+        var transaction = new TransactionContext(User.Identity.Name);
+
+        Comprovante.RecontextualizaComprovante(transaction);
+
         if (ModelState.ContainsKey($"{nameof(Comprovante)}.{nameof(Comprovante.PontoId)}")) ModelState.Remove($"{nameof(Comprovante)}.{nameof(Comprovante.PontoId)}");
 
         if (ModelState.ContainsKey($"{nameof(Comprovante)}.{nameof(Comprovante.Imagem)}")) ModelState.Remove($"{nameof(Comprovante)}.{nameof(Comprovante.Imagem)}");
@@ -68,42 +69,17 @@ public class GuardarComprovanteModel : PageModel
         }
         else
         {
-            var agora = DateTime.Now;
-
-            //
-
-            Ponto.Id = Guid.NewGuid();
-
-            Ponto.PartitionKey = User.Identity.Name; //Ponto.Data.ToString();
-
-            Ponto.CreationDate = agora;
+            Ponto.RecontextualizaPonto(transaction);
 
             var perfil = await _db.Perfis.FindAsync(Ponto.PerfilId, User.Identity.Name);
 
             perfil.QualificaPonto(Ponto);
 
-            _db.Pontos.Add(Ponto);
+            //_db.Pontos.Add(Ponto);
 
             //
 
-            Comprovante.Id = Guid.NewGuid();
-
-            Comprovante.PartitionKey = User.Identity.Name;
-
-            Comprovante.CreationDate = agora;
-
-            var ponto = Ponto;
-
-            Comprovante.PontoId = ponto.Id;
-
-            Comprovante.Ponto = new Ponto
-            {
-                DataHora = ponto?.DataHora,
-                PerfilId = ponto?.PerfilId,
-                Perfil = ponto?.Perfil,
-                MomentoId = ponto?.MomentoId,
-                PausaId = ponto?.PausaId
-            };
+            Comprovante.ComprovaPonto(Ponto);
 
             byte[] imagem;
 

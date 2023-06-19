@@ -18,9 +18,11 @@ public class AbrirFolhaModel : PageModel
 
     public IActionResult OnGet()
     {
+        var transaction = new TransactionContext(User.Identity.Name);
+
         ViewData["PerfilId"] = new SelectList(_db.Perfis, "Id", "Nome");
 
-        Folha = new Folha();
+        Folha = FolhaFactory.CriaFolha(transaction);
 
         Folha.StatusId = StatusEnum.Aberta;
 
@@ -43,6 +45,10 @@ public class AbrirFolhaModel : PageModel
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync(string? command)
     {
+        var transaction = new TransactionContext(User.Identity.Name);
+
+        Folha.RecontextualizaFolha(transaction);
+
         if (ModelState.ContainsKey($"{nameof(Folha)}.{nameof(Folha.Competencia)}")) ModelState.Remove($"{nameof(Folha)}.{nameof(Folha.Competencia)}");
 
         if (!ModelState.IsValid)
@@ -76,12 +82,6 @@ public class AbrirFolhaModel : PageModel
         }
         else
         {
-            Folha.Id = Guid.NewGuid();
-
-            Folha.PartitionKey = User.Identity.Name;
-
-            Folha.CreationDate = DateTime.Now;
-
             ConfirmarCompetencia(perfil);
 
             _db.Folhas.Add(Folha);

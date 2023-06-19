@@ -1,4 +1,5 @@
 ﻿using MeuPonto.Helpers;
+using MeuPonto.Modules.Perfis.Empregadores;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;

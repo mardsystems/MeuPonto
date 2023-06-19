@@ -25,7 +25,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\.net\src\MeuPonto.EntityFrameworkCore.Sqlite\MeuPonto.EntityFrameworkCore.Sqlite.csproj" />
-    <ProjectReference Include="..\..\.net\tests\MeuPonto.EntityFrameworkCore.Sqlite.Tests\MeuPonto.EntityFrameworkCore.Sqlite.Tests.csproj" />
   </ItemGroup>
 
   <ItemGroup>

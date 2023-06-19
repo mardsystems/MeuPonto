@@ -7,7 +7,6 @@ public static class FolhaFactory
         var folha = new Folha
         {
             Id = id ?? Guid.NewGuid(),
-            PartitionKey = transaction.UserName,
             CreationDate = transaction.DateTime
         };
 
@@ -17,7 +16,6 @@ public static class FolhaFactory
     public static void RecontextualizaFolha(this Folha folha, TransactionContext transaction, Guid? id = null)
     {
         folha.Id = folha.Id ?? id ?? Guid.NewGuid();
-        folha.PartitionKey = transaction.UserName;
         folha.CreationDate = transaction.DateTime;
     }
 }

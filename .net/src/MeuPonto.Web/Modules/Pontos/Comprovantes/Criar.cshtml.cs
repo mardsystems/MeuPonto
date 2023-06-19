@@ -18,18 +18,13 @@ public class CriarComprovanteModel : PageModel
 
     public async Task<IActionResult> OnGet()
     {
-        Comprovante = new Comprovante();
+        var transaction = new TransactionContext(User.Identity.Name);
+
+        Comprovante = ComprovanteFactory.CriaComprovante(transaction);
 
         var ponto = await _db.Pontos.FindAsync(PontoId, User.Identity.Name);
 
-        Comprovante.Ponto = new Ponto
-        {
-            DataHora = ponto?.DataHora,
-            PerfilId = ponto?.PerfilId,
-            Perfil = ponto?.Perfil,
-            MomentoId = ponto?.MomentoId,
-            PausaId = ponto?.PausaId
-        };
+        Comprovante.ComprovaPonto(ponto);
 
         return Page();
     }
@@ -44,29 +39,20 @@ public class CriarComprovanteModel : PageModel
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync()
     {
+        var transaction = new TransactionContext(User.Identity.Name);
+
+        Comprovante.RecontextualizaComprovante(transaction);
+
         if (ModelState.ContainsKey($"{nameof(Comprovante)}.{nameof(Comprovante.Imagem)}")) ModelState.Remove($"{nameof(Comprovante)}.{nameof(Comprovante.Imagem)}");
 
         var ponto = await _db.Pontos.FindAsync(PontoId, User.Identity.Name);
 
-        Comprovante.Ponto = new Ponto
-        {
-            DataHora = ponto?.DataHora,
-            PerfilId = ponto?.PerfilId,
-            Perfil = ponto?.Perfil,
-            MomentoId = ponto?.MomentoId,
-            PausaId = ponto?.PausaId
-        };
+        Comprovante.ComprovaPonto(ponto);
 
         if (!ModelState.IsValid)
         {
             return Page();
         }
-
-        Comprovante.Id = Guid.NewGuid();
-
-        Comprovante.PartitionKey = User.Identity.Name;
-
-        Comprovante.CreationDate = DateTime.Now;
 
         byte[] imagem;
 

@@ -1,4 +1,5 @@
 ﻿using MeuPonto.Helpers;
+using MeuPonto.Modules.Perfis.Empregadores;
 using MeuPonto.Modules.Pontos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -45,16 +46,14 @@ public class CriarModel : PageModel
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync()
     {
+        var transaction = new TransactionContext(User.Identity.Name);
+
         if (!ModelState.IsValid)
         {
             return Page();
         }
 
-        Perfil.Id = Guid.NewGuid();
-
-        Perfil.PartitionKey = User.Identity.Name;
-
-        Perfil.CreationDate = DateTime.Now;
+        Perfil.RecontextualizaPerfil(transaction);
 
         var empregador = await _db.Empregadores.FindAsync(Perfil.EmpregadorId, User.Identity.Name);
 

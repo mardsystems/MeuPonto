@@ -13,4 +13,11 @@ public static class PontoFactory
 
         return ponto;
     }
+
+    public static void RecontextualizaPonto(this Ponto ponto, TransactionContext transaction, Guid? id = null)
+    {
+        ponto.Id = ponto.Id ?? id ?? Guid.NewGuid();
+        ponto.PartitionKey = transaction.UserName;
+        ponto.CreationDate = transaction.DateTime;
+    }
 }

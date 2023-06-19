@@ -23,16 +23,14 @@ public class CriarModel : PageModel
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync()
     {
+        var transaction = new TransactionContext(User.Identity.Name);
+
+        Empregador.RecontextualizaEmpregador(transaction);
+
         if (!ModelState.IsValid)
         {
             return Page();
         }
-
-        Empregador.Id = Guid.NewGuid();
-
-        Empregador.PartitionKey = User.Identity.Name;
-
-        Empregador.CreationDate = DateTime.Now;
 
         try
         {
