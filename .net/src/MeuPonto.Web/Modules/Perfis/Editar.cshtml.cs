@@ -50,12 +50,12 @@ public class EditarModel : PageModel
             return Page();
         }
 
-        var empregador = await _db.Empregadores.FindAsync(Perfil.EmpregadorId, User.Identity.Name);
-
-        Perfil.Empregador = new Empregador
+        if (Perfil.EmpregadorId.HasValue)
         {
-            Nome = empregador?.Nome
-        };
+            var empregador = await _db.Empregadores.FindAsync(Perfil.EmpregadorId, User.Identity.Name);
+
+            Perfil.VinculaEmpregador(empregador);
+        }
 
         try
         {

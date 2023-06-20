@@ -1,9 +1,5 @@
-﻿using MeuPonto.Modules;
-using MeuPonto.Modules.Perfis;
-using MeuPonto.Modules.Perfis.Empregadores;
-using MeuPonto.Modules.Pontos;
-using MeuPonto.Modules.Pontos.Comprovantes;
-using MeuPonto.Modules.Pontos.Folhas;
+﻿using MeuPonto.Enums;
+using MeuPonto.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace MeuPonto.Data;
@@ -59,12 +55,12 @@ public class MeuPontoDbContext : DbContext
 
         modelBuilder.Entity<Comprovante>().Property(b => b.CreationDate).HasDefaultValueSql("getdate()");
 
-        //modelBuilder.Entity<TipoImagem>().Property(x => x.Id).ValueGeneratedNever();
+        modelBuilder.Entity<TipoImagem>().Property(x => x.Id).ValueGeneratedNever();
 
-        //modelBuilder.Entity<TipoImagem>().HasData(
-        //    new TipoImagem { Id = TipoImagemEnum.Original, Nome = "Original" },
-        //    new TipoImagem { Id = TipoImagemEnum.Tratada, Nome = "Tratada" }
-        //);
+        modelBuilder.Entity<TipoImagem>().HasData(
+            new TipoImagem { Id = TipoImagemEnum.Original, Nome = "Original" },
+            new TipoImagem { Id = TipoImagemEnum.Tratada, Nome = "Tratada" }
+        );
 
         modelBuilder.Entity<Trabalhador>()
             .ToTable("Trabalhadores")

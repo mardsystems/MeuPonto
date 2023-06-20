@@ -59,10 +59,7 @@ public class CriarFolhaModel : PageModel
 
         var perfil = await _db.Perfis.FindAsync(Folha.PerfilId, User.Identity.Name);
 
-        Folha.Perfil = new Perfil
-        {
-            Nome = perfil?.Nome
-        };
+        perfil.QualificaFolha(Folha);
 
         if (command == "ConfirmarCompetencia")
         {

@@ -1,4 +1,5 @@
 ﻿using MeuPonto.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace MeuPonto.Cache;
@@ -25,7 +26,7 @@ public class CacheMiddleware
     {
         var javascriptIsEnabled = await _cache.GetOrCreateAsync("JavascriptIsEnabled", async entry =>
         {
-            var configuracoes = await db.Configuracoes.FindAsync(context.User.Identity.Name);
+            var configuracoes = await db.Configuracoes.FirstOrDefaultAsync(); //FindAsync(context.User.Identity.Name);
 
             if (configuracoes == null)
             {

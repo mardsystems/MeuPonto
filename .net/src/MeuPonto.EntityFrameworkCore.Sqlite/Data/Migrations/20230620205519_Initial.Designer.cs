@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MeuPonto.Data.Migrations
 {
     [DbContext(typeof(MeuPontoDbContext))]
-    [Migration("20230602140236_Initial")]
+    [Migration("20230620205519_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,7 +31,7 @@ namespace MeuPonto.Data.Migrations
                     b.ToTable("Configuracoes", (string)null);
                 });
 
-            modelBuilder.Entity("MeuPonto.Modules.Perfis.Empresas.Empresa", b =>
+            modelBuilder.Entity("MeuPonto.Modules.Perfis.Empregadores.Empregador", b =>
                 {
                     b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd()
@@ -39,6 +39,10 @@ namespace MeuPonto.Data.Migrations
 
                     b.Property<string>("Cnpj")
                         .HasMaxLength(14)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Cpf")
+                        .HasMaxLength(11)
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("CreationDate")
@@ -64,7 +68,7 @@ namespace MeuPonto.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Empresas", (string)null);
+                    b.ToTable("Empregadores", (string)null);
                 });
 
             modelBuilder.Entity("MeuPonto.Modules.Perfis.Perfil", b =>
@@ -79,7 +83,7 @@ namespace MeuPonto.Data.Migrations
                     b.Property<DateTime?>("CreationDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("EmpresaId")
+                    b.Property<Guid?>("EmpregadorId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Matricula")
@@ -98,7 +102,7 @@ namespace MeuPonto.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmpresaId");
+                    b.HasIndex("EmpregadorId");
 
                     b.ToTable("Perfis", (string)null);
                 });
@@ -124,7 +128,7 @@ namespace MeuPonto.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("TipoImagem")
+                    b.Property<int>("TipoImagemId")
                         .HasColumnType("INTEGER");
 
                     b.Property<byte[]>("Version")
@@ -160,7 +164,7 @@ namespace MeuPonto.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Status")
+                    b.Property<int>("StatusId")
                         .HasColumnType("INTEGER");
 
                     b.Property<byte[]>("Version")
@@ -191,14 +195,14 @@ namespace MeuPonto.Data.Migrations
                     b.Property<bool>("Estimado")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Momento")
+                    b.Property<int>("MomentoId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Observacao")
                         .HasMaxLength(255)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Pausa")
+                    b.Property<string>("PausaId")
                         .HasColumnType("TEXT");
 
                     b.Property<Guid?>("PerfilId")
@@ -237,9 +241,9 @@ namespace MeuPonto.Data.Migrations
 
             modelBuilder.Entity("MeuPonto.Modules.Perfis.Perfil", b =>
                 {
-                    b.HasOne("MeuPonto.Modules.Perfis.Empresas.Empresa", "Empresa")
+                    b.HasOne("MeuPonto.Modules.Perfis.Empregadores.Empregador", "Empregador")
                         .WithMany()
-                        .HasForeignKey("EmpresaId");
+                        .HasForeignKey("EmpregadorId");
 
                     b.OwnsOne("MeuPonto.Modules.Perfis.JornadaTrabalhoSemanal", "JornadaTrabalhoSemanalPrevista", b1 =>
                         {
@@ -276,7 +280,7 @@ namespace MeuPonto.Data.Migrations
                             b1.Navigation("Semana");
                         });
 
-                    b.Navigation("Empresa");
+                    b.Navigation("Empregador");
 
                     b.Navigation("JornadaTrabalhoSemanalPrevista")
                         .IsRequired();

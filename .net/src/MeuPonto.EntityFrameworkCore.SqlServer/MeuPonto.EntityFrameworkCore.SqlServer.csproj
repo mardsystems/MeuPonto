@@ -17,8 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\specs\MeuPonto.ConceptualModel\MeuPonto.ConceptualModel.csproj" />
-    <ProjectReference Include="..\..\..\specs\MeuPonto.SystemModel\MeuPonto.SystemModel.csproj" />
-    <ProjectReference Include="..\MeuPonto.LocalTableModel\MeuPonto.LocalTableModel.csproj" />
+    <ProjectReference Include="..\MeuPonto.GlobalTableModel\MeuPonto.GlobalTableModel.csproj" />
     <ProjectReference Include="..\System.Extensions\System.Extensions.csproj" />
   </ItemGroup>
 

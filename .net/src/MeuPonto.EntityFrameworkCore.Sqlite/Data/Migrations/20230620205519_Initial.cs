@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -20,12 +21,13 @@ namespace MeuPonto.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Empresas",
+                name: "Empregadores",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Nome = table.Column<string>(type: "TEXT", maxLength: 36, nullable: false),
                     Cnpj = table.Column<string>(type: "TEXT", maxLength: 14, nullable: true),
+                    Cpf = table.Column<string>(type: "TEXT", maxLength: 11, nullable: true),
                     InscricaoEstadual = table.Column<string>(type: "TEXT", maxLength: 12, nullable: true),
                     Endereco = table.Column<string>(type: "TEXT", maxLength: 36, nullable: true),
                     CreationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
@@ -33,7 +35,7 @@ namespace MeuPonto.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Empresas", x => x.Id);
+                    table.PrimaryKey("PK_Empregadores", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -56,7 +58,7 @@ namespace MeuPonto.Data.Migrations
                     Nome = table.Column<string>(type: "TEXT", maxLength: 36, nullable: false),
                     Ativo = table.Column<bool>(type: "INTEGER", nullable: false),
                     Matricula = table.Column<string>(type: "TEXT", maxLength: 30, nullable: true),
-                    EmpresaId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    EmpregadorId = table.Column<Guid>(type: "TEXT", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
                     Version = table.Column<byte[]>(type: "BLOB", rowVersion: true, nullable: true)
                 },
@@ -64,9 +66,9 @@ namespace MeuPonto.Data.Migrations
                 {
                     table.PrimaryKey("PK_Perfis", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Perfis_Empresas_EmpresaId",
-                        column: x => x.EmpresaId,
-                        principalTable: "Empresas",
+                        name: "FK_Perfis_Empregadores_EmpregadorId",
+                        column: x => x.EmpregadorId,
+                        principalTable: "Empregadores",
                         principalColumn: "Id");
                 });
 
@@ -77,7 +79,7 @@ namespace MeuPonto.Data.Migrations
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     PerfilId = table.Column<Guid>(type: "TEXT", nullable: false),
                     Competencia = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Status = table.Column<int>(type: "INTEGER", nullable: false),
+                    StatusId = table.Column<int>(type: "INTEGER", nullable: false),
                     Observacao = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
                     ApuracaoMensal_TempoTotalPrevisto = table.Column<TimeSpan>(type: "TEXT", nullable: true),
                     ApuracaoMensal_TempoTotalApurado = table.Column<TimeSpan>(type: "TEXT", nullable: true),
@@ -123,8 +125,8 @@ namespace MeuPonto.Data.Migrations
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     PerfilId = table.Column<Guid>(type: "TEXT", nullable: false),
                     DataHora = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Momento = table.Column<int>(type: "INTEGER", nullable: false),
-                    Pausa = table.Column<string>(type: "TEXT", nullable: true),
+                    MomentoId = table.Column<int>(type: "INTEGER", nullable: false),
+                    PausaId = table.Column<string>(type: "TEXT", nullable: true),
                     Estimado = table.Column<bool>(type: "INTEGER", nullable: false),
                     Observacao = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
                     CreationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
@@ -173,7 +175,7 @@ namespace MeuPonto.Data.Migrations
                     PontoId = table.Column<Guid>(type: "TEXT", nullable: false),
                     Numero = table.Column<string>(type: "TEXT", maxLength: 16, nullable: true),
                     Imagem = table.Column<byte[]>(type: "BLOB", nullable: false),
-                    TipoImagem = table.Column<int>(type: "INTEGER", nullable: false),
+                    TipoImagemId = table.Column<int>(type: "INTEGER", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
                     Version = table.Column<byte[]>(type: "BLOB", rowVersion: true, nullable: true)
                 },
@@ -199,9 +201,9 @@ namespace MeuPonto.Data.Migrations
                 column: "PerfilId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Perfis_EmpresaId",
+                name: "IX_Perfis_EmpregadorId",
                 table: "Perfis",
-                column: "EmpresaId");
+                column: "EmpregadorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Pontos_PerfilId",
@@ -236,7 +238,7 @@ namespace MeuPonto.Data.Migrations
                 name: "Perfis");
 
             migrationBuilder.DropTable(
-                name: "Empresas");
+                name: "Empregadores");
         }
     }
 }

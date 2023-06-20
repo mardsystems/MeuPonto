@@ -14,10 +14,23 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
-        var endpointUri = builder.Configuration.GetConnectionString("EndpointUri") ?? throw new InvalidOperationException("EndpointUri not found.");
-        var primaryKey = builder.Configuration.GetConnectionString("PrimaryKey") ?? throw new InvalidOperationException("PrimaryKey not found.");
-        builder.Services.AddDbContext<MeuPontoDbContext>(options =>
-            options.UseCosmos(endpointUri, primaryKey, databaseName: "MeuPonto"));
+
+        {
+            var endpointUri = builder.Configuration.GetConnectionString("EndpointUri") ?? throw new InvalidOperationException("EndpointUri not found.");
+            var primaryKey = builder.Configuration.GetConnectionString("PrimaryKey") ?? throw new InvalidOperationException("PrimaryKey not found.");
+
+            builder.Services.AddDbContext<MeuPontoDbContext>(options =>
+                options.UseCosmos(endpointUri, primaryKey, databaseName: "MeuPonto"));
+        }
+
+        {
+            //var basePath = Directory.GetCurrentDirectory();
+            //var dataSource = Path.Combine(basePath, "MeuPonto.db");
+
+            //builder.Services.AddDbContext<MeuPontoDbContext>(options =>
+            //    options.UseSqlite($"Data Source={dataSource}", b => b.MigrationsAssembly("MeuPonto.EntityFrameworkCore.Sqlite")));
+        }
+
         builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
         builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
@@ -69,15 +82,15 @@ public class Program
         app.MapRazorPages();
         app.MapControllers();
 
-        app.UseMiddleware<CacheMiddleware>();
-
         //using (var scope = app.Services.CreateScope())
         //{
         //    var db = scope.ServiceProvider.GetService<MeuPontoDbContext>();
 
         //    db.Database.EnsureDeleted();
-        //    db.Database.EnsureCreated();
+        //    db.Database.Migrate();
         //}
+
+        app.UseMiddleware<CacheMiddleware>();
 
         app.Run();
     }

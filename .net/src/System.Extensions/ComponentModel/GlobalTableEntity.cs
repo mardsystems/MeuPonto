@@ -4,7 +4,7 @@ namespace System.ComponentModel;
 
 public abstract class GlobalTableEntity
 {
-    [Required]
+    //[Required]
     public Guid? Id { get; set; }
 
     public DateTime? CreationDate { get; set; }
