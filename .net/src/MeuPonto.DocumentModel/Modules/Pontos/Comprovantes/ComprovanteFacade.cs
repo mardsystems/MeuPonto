@@ -6,8 +6,11 @@ public static class ComprovanteFacade
     {
         comprovante.Ponto = new Ponto
         {
-            PerfilId = ponto.PerfilId,
-            DataHora = ponto.DataHora,
+            PerfilId = ponto?.PerfilId,
+            DataHora = ponto?.DataHora,
+            Perfil = ponto?.Perfil,
+            MomentoId = ponto?.MomentoId,
+            PausaId = ponto?.PausaId
         };
 
         comprovante.PontoId = ponto.Id;

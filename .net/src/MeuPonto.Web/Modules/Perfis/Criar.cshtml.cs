@@ -1,6 +1,4 @@
 ﻿using MeuPonto.Helpers;
-using MeuPonto.Modules.Perfis.Empregadores;
-using MeuPonto.Modules.Pontos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -48,12 +46,12 @@ public class CriarModel : PageModel
     {
         var transaction = new TransactionContext(User.Identity.Name);
 
+        Perfil.RecontextualizaPerfil(transaction);
+
         if (!ModelState.IsValid)
         {
             return Page();
         }
-
-        Perfil.RecontextualizaPerfil(transaction);
 
         var empregador = await _db.Empregadores.FindAsync(Perfil.EmpregadorId, User.Identity.Name);
 

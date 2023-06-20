@@ -1,5 +1,4 @@
 ﻿using MeuPonto.Helpers;
-using MeuPonto.Modules.Perfis.Empregadores;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -42,6 +41,10 @@ public class EditarModel : PageModel
     // For more details, see https://aka.ms/RazorPagesCRUD.
     public async Task<IActionResult> OnPostAsync()
     {
+        var transaction = new TransactionContext(User.Identity.Name);
+
+        Perfil.RecontextualizaPerfil(transaction);
+
         if (!ModelState.IsValid)
         {
             return Page();
@@ -54,10 +57,10 @@ public class EditarModel : PageModel
             Nome = empregador?.Nome
         };
 
-        _db.Attach(Perfil).State = EntityState.Modified;
-
         try
         {
+            _db.Attach(Perfil).State = EntityState.Modified;
+
             await _db.SaveChangesAsync();
         }
         catch (DbUpdateConcurrencyException)
@@ -70,6 +73,10 @@ public class EditarModel : PageModel
             {
                 throw;
             }
+        }
+        catch(Exception _)
+        {
+
         }
 
         return RedirectToPage("./Detalhar", new { id = Perfil.Id });

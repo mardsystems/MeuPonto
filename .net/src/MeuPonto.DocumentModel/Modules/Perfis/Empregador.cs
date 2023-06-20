@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
-using MeuPonto.Concepts;
 
 namespace MeuPonto.Modules.Perfis;
 

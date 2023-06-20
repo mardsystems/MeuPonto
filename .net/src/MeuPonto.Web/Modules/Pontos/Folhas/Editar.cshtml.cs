@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
-using MeuPonto.Modules.Perfis;
 
 namespace MeuPonto.Modules.Pontos.Folhas;
 

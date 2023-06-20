@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
-using MeuPonto.Modules.Perfis;
 
 namespace MeuPonto.Modules.Pontos.Folhas;
 
