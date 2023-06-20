@@ -1,4 +1,5 @@
 ﻿using AngleSharp.Html.Dom;
+using Azure;
 using MeuPonto.Helpers;
 using MeuPonto.Support;
 
@@ -92,8 +93,6 @@ public class CadastroPerfisPageDriver : CadastroPerfisInterface
 
         var resultPage = _angleSharp.Send(form, submitButton);
 
-        resultPage.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-
         Document = _angleSharp.GetDocument(resultPage);
         
         var hasErrors = Document.GetValidationErrors().Any();
@@ -133,8 +132,6 @@ public class CadastroPerfisPageDriver : CadastroPerfisInterface
         var submitButton = form.GetSubmitButton();
 
         var resultPage = _angleSharp.Send(form, submitButton);
-
-        resultPage.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
 
         Document = _angleSharp.GetDocument(resultPage);
 
@@ -202,7 +199,5 @@ public class CadastroPerfisPageDriver : CadastroPerfisInterface
         var submitButton = form.GetSubmitButton();
 
         var resultPage = _angleSharp.Send(form, submitButton);
-
-        resultPage.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
     }
 }

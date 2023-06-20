@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MeuPonto.Data;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 
@@ -6,9 +7,9 @@ namespace MeuPonto.Modules.Pontos.Comprovantes;
 
 public class CriarComprovanteModel : PageModel
 {
-    private readonly Data.MeuPontoDbContext _db;
+    private readonly MeuPontoDbContext _db;
 
-    public CriarComprovanteModel(Data.MeuPontoDbContext db)
+    public CriarComprovanteModel(MeuPontoDbContext db)
     {
         _db = db;
     }
@@ -22,7 +23,7 @@ public class CriarComprovanteModel : PageModel
 
         Comprovante = ComprovanteFactory.CriaComprovante(transaction);
 
-        var ponto = await _db.Pontos.FindAsync(PontoId, User.Identity.Name);
+        var ponto = await _db.Pontos.FindByIdAsync(PontoId, User.Identity.Name);
 
         Comprovante.ComprovaPonto(ponto);
 
@@ -45,7 +46,7 @@ public class CriarComprovanteModel : PageModel
 
         if (ModelState.ContainsKey($"{nameof(Comprovante)}.{nameof(Comprovante.Imagem)}")) ModelState.Remove($"{nameof(Comprovante)}.{nameof(Comprovante.Imagem)}");
 
-        var ponto = await _db.Pontos.FindAsync(PontoId, User.Identity.Name);
+        var ponto = await _db.Pontos.FindByIdAsync(PontoId, User.Identity.Name);
 
         Comprovante.ComprovaPonto(ponto);
 

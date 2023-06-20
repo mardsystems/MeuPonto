@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MeuPonto.Data;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,9 +7,9 @@ namespace MeuPonto.Modules.Pontos.Comprovantes;
 
 public class ExcluirComprovanteModel : PageModel
 {
-    private readonly Data.MeuPontoDbContext _db;
+    private readonly MeuPontoDbContext _db;
 
-    public ExcluirComprovanteModel(Data.MeuPontoDbContext db)
+    public ExcluirComprovanteModel(MeuPontoDbContext db)
     {
         _db = db;
     }
@@ -42,7 +43,7 @@ public class ExcluirComprovanteModel : PageModel
         {
             return NotFound();
         }
-        var comprovante = await _db.Comprovantes.FindAsync(id, User.Identity.Name);
+        var comprovante = await _db.Comprovantes.FindByIdAsync(id, User.Identity.Name);
 
         if (comprovante != null)
         {

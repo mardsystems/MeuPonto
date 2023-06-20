@@ -24,7 +24,10 @@ public class DetalharFolhaModel : PageModel
             return NotFound();
         }
 
-        var folha = await _db.Folhas.FirstOrDefaultAsync(m => m.Id == id);
+        var folha = await _db.Folhas
+            .Include(x => x.Perfil)
+            .FirstOrDefaultAsync(x => x.Id == id);
+
         if (folha == null)
         {
             return NotFound();

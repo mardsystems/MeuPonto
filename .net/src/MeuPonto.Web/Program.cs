@@ -24,8 +24,8 @@ public class Program
         }
 
         {
-            //var basePath = Directory.GetCurrentDirectory();
-            //var dataSource = Path.Combine(basePath, "MeuPonto.db");
+            var basePath = Directory.GetCurrentDirectory();
+            var dataSource = Path.Combine(basePath, "MeuPonto.db");
 
             //builder.Services.AddDbContext<MeuPontoDbContext>(options =>
             //    options.UseSqlite($"Data Source={dataSource}", b => b.MigrationsAssembly("MeuPonto.EntityFrameworkCore.Sqlite")));

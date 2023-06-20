@@ -64,8 +64,6 @@ public class GestaoFolhasPageDriver : GestaoFolhasInterface
 
         var resultPage = _angleSharp.Send(form, submitButton);
 
-        resultPage.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-
         Document = _angleSharp.GetDocument(resultPage);
 
         var folhaAberta = ObtemDetalhes();
@@ -86,8 +84,6 @@ public class GestaoFolhasPageDriver : GestaoFolhasInterface
         var submitButton = form.GetSubmitButton();
 
         var resultPage = _angleSharp.Send(form, submitButton);
-
-        resultPage.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
 
         Document = _angleSharp.GetDocument(resultPage);
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MeuPonto.Data;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,9 +7,9 @@ namespace MeuPonto.Modules.Pontos.Folhas;
 
 public class FecharFolhaModel : PageModel
 {
-    private readonly Data.MeuPontoDbContext _db;
+    private readonly MeuPontoDbContext _db;
 
-    public FecharFolhaModel(Data.MeuPontoDbContext db)
+    public FecharFolhaModel(MeuPontoDbContext db)
     {
         _db = db;
     }
@@ -48,7 +49,7 @@ public class FecharFolhaModel : PageModel
 
         try
         {
-            var folha = await _db.Folhas.FindAsync(id, User.Identity.Name);
+            var folha = await _db.Folhas.FindByIdAsync(id, User.Identity.Name);
 
             await Apurar(folha);
 

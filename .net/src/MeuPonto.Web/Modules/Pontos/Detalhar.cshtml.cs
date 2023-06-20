@@ -25,7 +25,10 @@ public class DetalharModel : PageModel
             return NotFound();
         }
 
-        var ponto = await _db.Pontos.FirstOrDefaultAsync(m => m.Id == id);
+        var ponto = await _db.Pontos
+            .Include(x => x.Perfil)
+            .FirstOrDefaultAsync(m => m.Id == id);
+
         if (ponto == null)
         {
             return NotFound();
@@ -38,8 +41,8 @@ public class DetalharModel : PageModel
         if (_db.Comprovantes != null)
         {
             Comprovantes = await _db.Comprovantes
-                .Include(p => p.Ponto)
-                .Where(p => p.PontoId == id)
+                .Include(x => x.Ponto)
+                .Where(x => x.PontoId == id)
                 .ToListAsync();
         }
 

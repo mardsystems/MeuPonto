@@ -3,6 +3,7 @@ using AngleSharp.Html.Dom;
 using AngleSharp.Io;
 using AngleSharp;
 using System.Net.Http.Headers;
+using Azure;
 
 namespace MeuPonto.Support;
 
@@ -98,7 +99,7 @@ public class AngleSharpContext
         return SendAsync(form, submitButton, formValues);
     }
 
-    public Task<HttpResponseMessage> SendAsync(
+    public async Task<HttpResponseMessage> SendAsync(
         IHtmlFormElement form,
         IHtmlElement submitButton,
         IEnumerable<KeyValuePair<string, string>> formValues)
@@ -129,7 +130,13 @@ public class AngleSharpContext
                 submission.Content.Headers.TryAddWithoutValidation(header.Key, header.Value);
             }
 
-            return _httpClient.SendAsync(submission);
+            var response = await _httpClient.SendAsync(submission);
+
+            var content = await response.Content.ReadAsStringAsync();
+
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK, content);
+
+            return response;
         }
         else
         {

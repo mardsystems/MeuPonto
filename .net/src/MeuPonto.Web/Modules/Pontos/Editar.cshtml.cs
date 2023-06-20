@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MeuPonto.Data;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -7,9 +8,9 @@ namespace MeuPonto.Modules.Pontos;
 
 public class EditarModel : PageModel
 {
-    private readonly Data.MeuPontoDbContext _db;
+    private readonly MeuPontoDbContext _db;
 
-    public EditarModel(Data.MeuPontoDbContext db)
+    public EditarModel(MeuPontoDbContext db)
     {
         _db = db;
     }
@@ -44,7 +45,7 @@ public class EditarModel : PageModel
             return Page();
         }
 
-        var perfil = await _db.Perfis.FindAsync(Ponto.PerfilId, User.Identity.Name);
+        var perfil = await _db.Perfis.FindByIdAsync(Ponto.PerfilId, User.Identity.Name);
 
         perfil.QualificaPonto(Ponto);
 

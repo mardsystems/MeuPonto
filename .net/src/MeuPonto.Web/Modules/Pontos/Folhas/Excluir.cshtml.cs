@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MeuPonto.Data;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,9 +7,9 @@ namespace MeuPonto.Modules.Pontos.Folhas;
 
 public class ExcluirFolhaModel : PageModel
 {
-    private readonly Data.MeuPontoDbContext _db;
+    private readonly MeuPontoDbContext _db;
 
-    public ExcluirFolhaModel(Data.MeuPontoDbContext db)
+    public ExcluirFolhaModel(MeuPontoDbContext db)
     {
         _db = db;
     }
@@ -42,7 +43,7 @@ public class ExcluirFolhaModel : PageModel
         {
             return NotFound();
         }
-        var folha = await _db.Folhas.FindAsync(id, User.Identity.Name);
+        var folha = await _db.Folhas.FindByIdAsync(id, User.Identity.Name);
 
         if (folha != null)
         {

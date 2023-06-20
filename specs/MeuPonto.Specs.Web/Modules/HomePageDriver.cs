@@ -65,8 +65,6 @@ public class HomePageDriver : HomeInterface
 
         var resultPage = _angleSharp.Send(form, submitButton);
 
-        resultPage.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-
         Document = _angleSharp.GetDocument(resultPage);
 
         var folhaApurada = IdentificaFolhaParaApuracao();

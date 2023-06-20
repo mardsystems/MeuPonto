@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MeuPonto.Data;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -6,12 +7,12 @@ namespace MeuPonto.Modules.Pontos;
 
 public class MarcarModel : PageModel
 {
-    private readonly Data.MeuPontoDbContext _db;
+    private readonly MeuPontoDbContext _db;
 
     private readonly DateTimeSnapshot _dateTimeSnapshot;
 
     public MarcarModel(
-        Data.MeuPontoDbContext db,
+        MeuPontoDbContext db,
         DateTimeSnapshot dateTimeSnapshot)
     {
         _db = db;
@@ -49,7 +50,7 @@ public class MarcarModel : PageModel
 
         Ponto.RecontextualizaPonto(transaction);
 
-        var perfil = await _db.Perfis.FindAsync(Ponto.PerfilId, User.Identity.Name);
+        var perfil = await _db.Perfis.FindByIdAsync(Ponto.PerfilId, User.Identity.Name);
 
         perfil.QualificaPonto(Ponto);
 

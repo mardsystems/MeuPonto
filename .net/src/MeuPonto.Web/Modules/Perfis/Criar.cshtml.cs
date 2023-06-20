@@ -1,4 +1,5 @@
-﻿using MeuPonto.Helpers;
+﻿using MeuPonto.Data;
+using MeuPonto.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -7,9 +8,9 @@ namespace MeuPonto.Modules.Perfis;
 
 public class CriarModel : PageModel
 {
-    private readonly Data.MeuPontoDbContext _db;
+    private readonly MeuPontoDbContext _db;
 
-    public CriarModel(Data.MeuPontoDbContext db)
+    public CriarModel(MeuPontoDbContext db)
     {
         _db = db;
     }
@@ -55,7 +56,7 @@ public class CriarModel : PageModel
 
         if (Perfil.EmpregadorId.HasValue)
         {
-            var empregador = await _db.Empregadores.FindAsync(Perfil.EmpregadorId, User.Identity.Name);
+            var empregador = await _db.Empregadores.FindByIdAsync(Perfil.EmpregadorId, User.Identity.Name);
 
             Perfil.VinculaEmpregador(empregador);
         }

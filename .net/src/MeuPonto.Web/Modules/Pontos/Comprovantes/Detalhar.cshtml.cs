@@ -13,7 +13,7 @@ public class DetalharComprovanteModel : PageModel
         _db = db;
     }
 
-  public Comprovante Comprovante { get; set; }
+    public Comprovante Comprovante { get; set; }
 
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {
@@ -22,12 +22,15 @@ public class DetalharComprovanteModel : PageModel
             return NotFound();
         }
 
-        var comprovante = await _db.Comprovantes.FirstOrDefaultAsync(m => m.Id == id);
+        var comprovante = await _db.Comprovantes
+            .Include(x => x.Ponto)
+            .FirstOrDefaultAsync(x => x.Id == id);
+
         if (comprovante == null)
         {
             return NotFound();
         }
-        else 
+        else
         {
             Comprovante = comprovante;
         }

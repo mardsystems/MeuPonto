@@ -89,19 +89,11 @@ public class CadastroPerfisStepDefinitions
 
             if (jornadaTrabalhoDiaria == default)
             {
-                _cadastroPerfis.Perfil.JornadaTrabalhoSemanalPrevista.Semana.Add(new JornadaTrabalhoDiaria
-                {
-                    DiaSemana = dayOfWeek,
-                    Tempo = new TimeSpan(0, 0, 0)
-                });
+                _cadastroPerfis.Perfil.JornadaTrabalhoSemanalPrevista.Semana[i].Tempo = new TimeSpan(0, 0, 0);
             }
             else
             {
-                _cadastroPerfis.Perfil.JornadaTrabalhoSemanalPrevista.Semana.Add(new JornadaTrabalhoDiaria
-                {
-                    DiaSemana = dayOfWeek,
-                    Tempo = jornadaTrabalhoDiaria.tempo
-                });
+                _cadastroPerfis.Perfil.JornadaTrabalhoSemanalPrevista.Semana[i].Tempo = jornadaTrabalhoDiaria.tempo;
             }
         }
 

@@ -118,37 +118,43 @@ this.ScenarioInitialize(scenarioInfo);
                             "dia semana",
                             "tempo"});
                 table3.AddRow(new string[] {
+                            "Sunday",
+                            "00:00:00"});
+                table3.AddRow(new string[] {
                             "Monday",
-                            "08:00"});
+                            "08:00:00"});
                 table3.AddRow(new string[] {
                             "Tuesday",
-                            "08:00"});
+                            "08:00:00"});
                 table3.AddRow(new string[] {
                             "Wednesday",
-                            "08:00"});
+                            "08:00:00"});
                 table3.AddRow(new string[] {
                             "Thursday",
-                            "08:00"});
+                            "08:00:00"});
                 table3.AddRow(new string[] {
                             "Friday",
-                            "08:00"});
+                            "08:00:00"});
+                table3.AddRow(new string[] {
+                            "Saturday",
+                            "00:00:00"});
 #line 11
  testRunner.Given("que o trabalhador tem um perfil cadastrado com a seguinte jornada de trabalho sem" +
                         "anal prevista:", ((string)(null)), table3, "Dado ");
 #line hidden
-#line 18
+#line 20
  testRunner.And(string.Format("que o trabalhador registrou a entrada no expediente às \'{0}\'", entrada), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-#line 19
+#line 21
  testRunner.And(string.Format("que o trabalhador registrou a saída no expediente às \'{0}\'", saida), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-#line 20
+#line 22
  testRunner.And("que o trabalhador tem uma folha de ponto aberta na competência \'2022/11\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-#line 21
+#line 23
  testRunner.When("o trabalhador apurar a folha de ponto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
-#line 22
+#line 24
  testRunner.Then(string.Format("o tempo total apurado da folha de ponto deverá ser de \'{0}\'", apurado), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
             }

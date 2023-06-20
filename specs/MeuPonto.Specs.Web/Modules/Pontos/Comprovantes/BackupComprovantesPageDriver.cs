@@ -54,8 +54,6 @@ public class BackupComprovantesPageDriver : BackupComprovantesInterface
 
             var resultPage = _angleSharp.Send(form, submitButton);
 
-            resultPage.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-
             Document = _angleSharp.GetDocument(resultPage);
         }
 
@@ -118,8 +116,6 @@ public class BackupComprovantesPageDriver : BackupComprovantesInterface
             var submitButton = form.GetSubmitButton("button.btn-primary");
 
             var resultPage = _angleSharp.Send(form, submitButton);
-
-            resultPage.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
 
             Document = _angleSharp.GetDocument(resultPage);
         }

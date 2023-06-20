@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MeuPonto.Data;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -6,9 +7,9 @@ namespace MeuPonto.Modules.Pontos;
 
 public class CriarModel : PageModel
 {
-    private readonly Data.MeuPontoDbContext _db;
+    private readonly MeuPontoDbContext _db;
 
-    public CriarModel(Data.MeuPontoDbContext db)
+    public CriarModel(MeuPontoDbContext db)
     {
         _db = db;
     }
@@ -34,7 +35,7 @@ public class CriarModel : PageModel
 
         Ponto.RecontextualizaPonto(transaction);
 
-        var perfil = await _db.Perfis.FindAsync(Ponto.PerfilId, User.Identity.Name);
+        var perfil = await _db.Perfis.FindByIdAsync(Ponto.PerfilId, User.Identity.Name);
 
         perfil.QualificaPonto(Ponto);
 

@@ -3,14 +3,15 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using MeuPonto.Data;
 
 namespace MeuPonto.Modules.Pontos.Folhas;
 
 public class CriarFolhaModel : PageModel
 {
-    private readonly Data.MeuPontoDbContext _db;
+    private readonly MeuPontoDbContext _db;
 
-    public CriarFolhaModel(Data.MeuPontoDbContext db)
+    public CriarFolhaModel(MeuPontoDbContext db)
     {
         _db = db;
     }
@@ -57,7 +58,7 @@ public class CriarFolhaModel : PageModel
 
         Folha.StatusId = StatusEnum.Aberta;
 
-        var perfil = await _db.Perfis.FindAsync(Folha.PerfilId, User.Identity.Name);
+        var perfil = await _db.Perfis.FindByIdAsync(Folha.PerfilId, User.Identity.Name);
 
         perfil.QualificaFolha(Folha);
 

@@ -72,6 +72,7 @@ public class ApurarFolhaStepDefinitions
     [Given(@"que o trabalhador tem uma folha de ponto aberta na competência '([^']*)'")]
     public async Task GivenQueOTrabalhadorTemUmaFolhaDePontoAbertaNaCompetencia(DateTime competencia)
     {
+        _gestaoFolhas.Folha.StatusId = StatusEnum.Aberta;
         _gestaoFolhas.Folha.Competencia = competencia;
 
         _db.Folhas.Add(_gestaoFolhas.Folha);

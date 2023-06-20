@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MeuPonto.Data;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,9 +7,9 @@ namespace MeuPonto.Modules.Perfis;
 
 public class ExcluirModel : PageModel
 {
-    private readonly Data.MeuPontoDbContext _db;
+    private readonly MeuPontoDbContext _db;
 
-    public ExcluirModel(Data.MeuPontoDbContext db)
+    public ExcluirModel(MeuPontoDbContext db)
     {
         _db = db;
     }
@@ -45,7 +46,7 @@ public class ExcluirModel : PageModel
 
         try
         {
-            var perfil = await _db.Perfis.FindAsync(id, User.Identity.Name);
+            var perfil = await _db.Perfis.FindByIdAsync(id, User.Identity.Name);
 
             if (perfil != null)
             {
