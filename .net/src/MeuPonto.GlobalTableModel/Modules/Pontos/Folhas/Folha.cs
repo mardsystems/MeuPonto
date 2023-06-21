@@ -22,7 +22,10 @@ public class Folha : GlobalTableEntity, Concepts.Folha
     [Required]
     [DisplayName("Status")]
     public StatusEnum? StatusId { get; set; }
-    Concepts.Status? Concepts.Folha.Status => StatusId == null ? null : new Status(StatusId.Value);
+    
+    [DisplayName("Status")]
+    public Status? Status { get; set; }
+    string? Concepts.Folha.Status => StatusId?.GetDisplayName();
 
     [MinLength(3)]
     [MaxLength(255)]

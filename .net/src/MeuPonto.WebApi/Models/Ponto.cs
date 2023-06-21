@@ -25,14 +25,14 @@ public class Ponto : LocalTableEntity, Concepts.Ponto
 
     [DisplayName("Momento")]
     public Momento? Momento { get; set; }
-    Concepts.Momento? Concepts.Ponto.Momento => Momento;
+    string? Concepts.Ponto.Momento => Momento?.Nome;
 
     [DisplayName("Pausa")]
     public PausaEnum? PausaId { get; set; }
     
     [DisplayName("Pausa")]
     public Pausa? Pausa { get; set; }
-    Concepts.Pausa? Concepts.Ponto.Pausa => Pausa;
+    string? Concepts.Ponto.Pausa => Pausa?.Nome;
     
     [Required]
     [DisplayName("Estimado?")]

@@ -25,7 +25,7 @@ public class Folha : GlobalTableEntity, Concepts.Folha
 
     [DisplayName("Status")]
     public Status? Status { get; set; }
-    Concepts.Status? Concepts.Folha.Status => Status;
+    string? Concepts.Folha.Status => Status?.Nome;
 
     [MinLength(3)]
     [MaxLength(255)]

@@ -1,20 +1,12 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace MeuPonto.Modules.Pontos;
 
-public class Pausa : Concepts.Pausa
+public class Pausa
 {
-    private readonly PausaEnum _pausa;
+    public PausaEnum Id { get; set; }
 
-    public Pausa(PausaEnum pausa)
-    {
-        _pausa = pausa;
-    }
-
-    public string? Nome => _pausa.GetDisplayName();
-
-    public override string ToString()
-    {
-        return Nome;
-    }
+    [MaxLength(255)]
+    public string? Nome { get; set; }
 }

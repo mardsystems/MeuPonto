@@ -67,13 +67,13 @@ public class RegistroPontosStepDefinitions
     [Then(@"o momento do ponto deverá ser de '([^']*)'")]
     public void ThenOMomentoDoPontoDeveraSerDe(string momento)
     {
-        _registroPontos.PontoRegistrado.Momento.Nome.Should().Be(momento);
+        _registroPontos.PontoRegistrado.Momento.Should().Be(momento);
     }
 
     [Then(@"o ponto deverá indicar que é almoço")]
     public void ThenOPontoDeveraIndicarQueEAlmoco()
     {
-        _registroPontos.PontoRegistrado.Pausa.Nome.Should().Be(PausaEnum.Almoco.GetDisplayName());
+        _registroPontos.PontoRegistrado.Pausa.Should().Be(PausaEnum.Almoco.GetDisplayName());
     }
 
     [Then(@"o ponto deverá indicar que não é almoço")]

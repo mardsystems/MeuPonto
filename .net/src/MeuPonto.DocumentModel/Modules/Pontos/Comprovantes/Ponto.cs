@@ -23,11 +23,11 @@ public class Ponto : Concepts.Ponto
     [Required]
     [DisplayName("Momento")]
     public MomentoEnum? MomentoId { get; set; }
-    Concepts.Momento? Concepts.Ponto.Momento => MomentoId == null ? null : new Momento(MomentoId.Value);
+    string? Concepts.Ponto.Momento => MomentoId?.GetDisplayName();
 
     [DisplayName("Pausa")]
     public PausaEnum? PausaId { get; set; }
-    Concepts.Pausa? Concepts.Ponto.Pausa => PausaId == null ? null : new Pausa(PausaId.Value);
+    string? Concepts.Ponto.Pausa => PausaId?.GetDisplayName();
 
     bool Concepts.Ponto.Estimado => throw new NotImplementedException();
 

@@ -1,20 +1,11 @@
-﻿using System.ComponentModel;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MeuPonto.Modules.Pontos;
 
-public class Momento : Concepts.Momento
+public class Momento
 {
-    private readonly MomentoEnum _momento;
+    public MomentoEnum Id { get; set; }
 
-    public Momento(MomentoEnum momento)
-    {
-        _momento = momento;
-    }
-
-    public string? Nome => _momento.GetDisplayName();
-
-    public override string ToString()
-    {
-        return Nome;
-    }
+    [MaxLength(255)]
+    public string? Nome { get; set; }
 }

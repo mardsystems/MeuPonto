@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MeuPonto.Models;
 
-public class TipoImagem : Concepts.TipoImagem
+public class TipoImagem
 {
     public TipoImagemEnum Id { get; set; }
 

@@ -5,7 +5,6 @@ using MeuPonto.Modules.Pontos;
 using MeuPonto.Modules.Pontos.Comprovantes;
 using MeuPonto.Modules.Pontos.Folhas;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MeuPonto.Data;
 
@@ -39,8 +38,6 @@ public class MeuPontoDbContext : DbContext
         modelBuilder.Entity<Perfil>()
             .ToTable("Perfis");
 
-        //modelBuilder.Entity<Perfil>().Property(x => x.Version).IsETagConcurrency();
-
         modelBuilder.Entity<Perfil>().OwnsOne(a => a.JornadaTrabalhoSemanalPrevista, x =>
         {
             x.OwnsMany(b => b.Semana, y =>
@@ -52,8 +49,6 @@ public class MeuPontoDbContext : DbContext
 
         modelBuilder.Entity<Folha>()
             .ToTable("Folhas");
-
-        //modelBuilder.Entity<Folha>().Property(x => x.Version).IsETagConcurrency();
 
         modelBuilder.Entity<Folha>().OwnsOne(a => a.ApuracaoMensal, x =>
         {
@@ -67,14 +62,8 @@ public class MeuPontoDbContext : DbContext
         modelBuilder.Entity<Ponto>()
             .ToTable("Pontos");
 
-        modelBuilder.Entity<Ponto>().Property(x => x.PausaId).HasConversion(new EnumToStringConverter<PausaEnum>());
-
-        //modelBuilder.Entity<Ponto>().Property(x => x.Version).IsETagConcurrency();
-
         modelBuilder.Entity<Comprovante>()
             .ToTable("Comprovantes");
-
-        //modelBuilder.Entity<Comprovante>().Property(x => x.Version).IsETagConcurrency();
 
         modelBuilder.Entity<Trabalhador>()
             .ToTable("Trabalhadores")
@@ -83,6 +72,44 @@ public class MeuPontoDbContext : DbContext
         modelBuilder.Entity<ConfiguracaoPorUsuario>()
             .ToTable("Configuracoes")
             .HasNoKey();
+
+        //
+
+        modelBuilder.Entity<Status>().Property(x => x.Id).ValueGeneratedNever();
+        modelBuilder.Entity<Momento>().Property(x => x.Id).ValueGeneratedNever();
+        modelBuilder.Entity<Pausa>().Property(x => x.Id).ValueGeneratedNever();
+        modelBuilder.Entity<TipoImagem>().Property(x => x.Id).ValueGeneratedNever();
+
+        //
+
+        modelBuilder.Entity<Status>().HasData(
+            new Status { Id = StatusEnum.Aberta, Nome = "Aberta" },
+            new Status { Id = StatusEnum.Fechada, Nome = "Fechada" }
+        );
+
+        modelBuilder.Entity<Momento>().HasData(
+            new Momento { Id = MomentoEnum.Entrada, Nome = "Entrada" },
+            new Momento { Id = MomentoEnum.Saida, Nome = "Saída" },
+            new Momento { Id = MomentoEnum.Errado, Nome = "Errado" }
+        );
+
+        modelBuilder.Entity<Pausa>().HasData(
+            new Pausa { Id = PausaEnum.Almoco, Nome = "Almoço" },
+            new Pausa { Id = PausaEnum.CafeLanche, Nome = "Café/Lanche" },
+            new Pausa { Id = PausaEnum.Banheiro, Nome = "Banheiro" },
+            new Pausa { Id = PausaEnum.ConversaReuniao, Nome = "Conversa/Reunião" },
+            new Pausa { Id = PausaEnum.Telefonema, Nome = "Telefonema" },
+            new Pausa { Id = PausaEnum.Generica, Nome = "Genérica" }
+        );
+
+        modelBuilder.Entity<TipoImagem>().HasData(
+            new TipoImagem { Id = TipoImagemEnum.Original, Nome = "Original" },
+            new TipoImagem { Id = TipoImagemEnum.Tratada, Nome = "Tratada" }
+        );
+
+        //
+        
+        //modelBuilder.Entity<Ponto>().Property(x => x.PausaId).HasConversion(new EnumToStringConverter<PausaEnum>());
     }
 
     public DbSet<Empregador> Empregadores { get; set; }

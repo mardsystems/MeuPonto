@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MeuPonto.Models;
 
-public class Momento : Concepts.Momento
+public class Momento
 {
     public MomentoEnum Id { get; set; }
 

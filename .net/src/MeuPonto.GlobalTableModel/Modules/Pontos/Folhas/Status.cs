@@ -1,20 +1,11 @@
-﻿using System.ComponentModel;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MeuPonto.Modules.Pontos.Folhas;
 
-public class Status : Concepts.Status
+public class Status
 {
-    private readonly StatusEnum _status;
+    public StatusEnum Id { get; set; }
 
-    public Status(StatusEnum status)
-    {
-        _status = status;
-    }
-
-    public string? Nome => _status.GetDisplayName();
-
-    public override string ToString()
-    {
-        return Nome;
-    }
+    [MaxLength(255)]
+    public string? Nome { get; set; }
 }

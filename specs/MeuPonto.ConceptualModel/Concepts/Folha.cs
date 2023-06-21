@@ -4,7 +4,7 @@ public interface Folha
 {
     ApuracaoMensal ApuracaoMensal { get; }
     DateTime? Competencia { get; }
-    Status? Status { get; }
+    string? Status { get; }
     string? Observacao { get; }
 
     Ponto[] Apura();

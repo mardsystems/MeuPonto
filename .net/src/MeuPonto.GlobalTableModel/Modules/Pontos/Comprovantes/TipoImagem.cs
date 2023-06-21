@@ -1,13 +1,11 @@
-﻿namespace MeuPonto.Modules.Pontos.Comprovantes;
+﻿using System.ComponentModel.DataAnnotations;
 
-public class TipoImagem : Concepts.TipoImagem
+namespace MeuPonto.Modules.Pontos.Comprovantes;
+
+public class TipoImagem
 {
-    private readonly TipoImagemEnum? _tipoImagemEnum;
+    public TipoImagemEnum Id { get; set; }
 
-    public TipoImagem(TipoImagemEnum? tipoImagemEnum)
-    {
-        _tipoImagemEnum = tipoImagemEnum;
-    }
-
-    public string? Nome => _tipoImagemEnum.ToString();
+    [MaxLength(255)]
+    public string? Nome { get; set; }
 }

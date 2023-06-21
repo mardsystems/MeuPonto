@@ -24,5 +24,8 @@ public class Comprovante : GlobalTableEntity, Concepts.Comprovante
     [Required]
     [DisplayName("Tipo Imagem")]
     public TipoImagemEnum? TipoImagemId { get; set; }
-    Concepts.TipoImagem? Concepts.Comprovante.TipoImagem => new TipoImagem(TipoImagemId);
+
+    [DisplayName("Tipo Imagem")]
+    public TipoImagem? TipoImagem { get; set; }
+    string? Concepts.Comprovante.TipoImagem => TipoImagemId?.GetDisplayName();
 }

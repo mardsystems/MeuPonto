@@ -21,7 +21,7 @@ public class Folha : DocumentEntity, Concepts.Folha
     [Required]
     [DisplayName("Status")]
     public StatusEnum? StatusId { get; set; }
-    Concepts.Status? Concepts.Folha.Status => StatusId == null ? null : new Status(StatusId.Value);
+    string? Concepts.Folha.Status => StatusId?.GetDisplayName();
 
     [MinLength(3)]
     [MaxLength(255)]

@@ -3,6 +3,7 @@ using System;
 using MeuPonto.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -15,16 +16,20 @@ namespace MeuPonto.Data.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "6.0.13");
+            modelBuilder
+                .HasAnnotation("ProductVersion", "6.0.14")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
             modelBuilder.Entity("MeuPonto.Modules.ConfiguracaoPorUsuario", b =>
                 {
                     b.Property<bool>("JavascriptIsEnabled")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bit");
 
                     b.Property<string>("UserName")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.ToTable("Configuracoes", (string)null);
                 });
@@ -33,36 +38,36 @@ namespace MeuPonto.Data.Migrations
                 {
                     b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Cnpj")
                         .HasMaxLength(14)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(14)");
 
                     b.Property<string>("Cpf")
                         .HasMaxLength(11)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(11)");
 
                     b.Property<DateTime?>("CreationDate")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Endereco")
                         .HasMaxLength(36)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(36)");
 
                     b.Property<string>("InscricaoEstadual")
                         .HasMaxLength(12)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(12)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(36)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(36)");
 
                     b.Property<byte[]>("Version")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("BLOB");
+                        .HasColumnType("rowversion");
 
                     b.HasKey("Id");
 
@@ -73,30 +78,32 @@ namespace MeuPonto.Data.Migrations
                 {
                     b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Ativo")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("CreationDate")
-                        .HasColumnType("TEXT");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<Guid?>("EmpregadorId")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Matricula")
                         .HasMaxLength(30)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(36)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(36)");
 
                     b.Property<byte[]>("Version")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("BLOB");
+                        .HasColumnType("rowversion");
 
                     b.HasKey("Id");
 
@@ -109,30 +116,32 @@ namespace MeuPonto.Data.Migrations
                 {
                     b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("CreationDate")
-                        .HasColumnType("TEXT");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<byte[]>("Imagem")
                         .IsRequired()
-                        .HasColumnType("BLOB");
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Numero")
                         .HasMaxLength(16)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(16)");
 
                     b.Property<Guid?>("PontoId")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("TipoImagemId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<byte[]>("Version")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("BLOB");
+                        .HasColumnType("rowversion");
 
                     b.HasKey("Id");
 
@@ -146,11 +155,11 @@ namespace MeuPonto.Data.Migrations
             modelBuilder.Entity("MeuPonto.Modules.Pontos.Comprovantes.TipoImagem", b =>
                 {
                     b.Property<int>("Id")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("Nome")
                         .HasMaxLength(255)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
 
@@ -173,30 +182,30 @@ namespace MeuPonto.Data.Migrations
                 {
                     b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("Competencia")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("CreationDate")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Observacao")
                         .HasMaxLength(255)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<Guid?>("PerfilId")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("StatusId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<byte[]>("Version")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("BLOB");
+                        .HasColumnType("rowversion");
 
                     b.HasKey("Id");
 
@@ -210,11 +219,11 @@ namespace MeuPonto.Data.Migrations
             modelBuilder.Entity("MeuPonto.Modules.Pontos.Folhas.Status", b =>
                 {
                     b.Property<int>("Id")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("Nome")
                         .HasMaxLength(255)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
 
@@ -236,11 +245,11 @@ namespace MeuPonto.Data.Migrations
             modelBuilder.Entity("MeuPonto.Modules.Pontos.Momento", b =>
                 {
                     b.Property<int>("Id")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("Nome")
                         .HasMaxLength(255)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
 
@@ -267,11 +276,11 @@ namespace MeuPonto.Data.Migrations
             modelBuilder.Entity("MeuPonto.Modules.Pontos.Pausa", b =>
                 {
                     b.Property<int>("Id")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("Nome")
                         .HasMaxLength(255)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
 
@@ -314,36 +323,38 @@ namespace MeuPonto.Data.Migrations
                 {
                     b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("CreationDate")
-                        .HasColumnType("TEXT");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<DateTime?>("DataHora")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("Estimado")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bit");
 
                     b.Property<int>("MomentoId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("Observacao")
                         .HasMaxLength(255)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<int?>("PausaId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<Guid?>("PerfilId")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<byte[]>("Version")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("BLOB");
+                        .HasColumnType("rowversion");
 
                     b.HasKey("Id");
 
@@ -361,15 +372,15 @@ namespace MeuPonto.Data.Migrations
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(36)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(36)");
 
                     b.Property<string>("Pis")
                         .HasMaxLength(12)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(12)");
 
                     b.Property<string>("UserName")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.ToTable("Trabalhadores", (string)null);
                 });
@@ -383,7 +394,7 @@ namespace MeuPonto.Data.Migrations
                     b.OwnsOne("MeuPonto.Modules.Perfis.JornadaTrabalhoSemanal", "JornadaTrabalhoSemanalPrevista", b1 =>
                         {
                             b1.Property<Guid>("PerfilId")
-                                .HasColumnType("TEXT");
+                                .HasColumnType("uniqueidentifier");
 
                             b1.HasKey("PerfilId");
 
@@ -395,14 +406,14 @@ namespace MeuPonto.Data.Migrations
                             b1.OwnsMany("MeuPonto.Modules.Perfis.JornadaTrabalhoDiaria", "Semana", b2 =>
                                 {
                                     b2.Property<Guid>("PerfilId")
-                                        .HasColumnType("TEXT");
+                                        .HasColumnType("uniqueidentifier");
 
                                     b2.Property<int>("DiaSemana")
-                                        .HasColumnType("INTEGER");
+                                        .HasColumnType("int");
 
                                     b2.Property<TimeSpan?>("Tempo")
                                         .IsRequired()
-                                        .HasColumnType("TEXT");
+                                        .HasColumnType("time");
 
                                     b2.HasKey("PerfilId", "DiaSemana");
 
@@ -457,19 +468,19 @@ namespace MeuPonto.Data.Migrations
                     b.OwnsOne("MeuPonto.Modules.Pontos.Folhas.ApuracaoMensal", "ApuracaoMensal", b1 =>
                         {
                             b1.Property<Guid>("FolhaId")
-                                .HasColumnType("TEXT");
+                                .HasColumnType("uniqueidentifier");
 
-                            b1.Property<TimeSpan?>("DiferencaTempoTotal")
-                                .HasColumnType("TEXT");
+                            b1.Property<long?>("DiferencaTempoTotal")
+                                .HasColumnType("bigint");
 
-                            b1.Property<TimeSpan?>("TempoTotalApurado")
-                                .HasColumnType("TEXT");
+                            b1.Property<long?>("TempoTotalApurado")
+                                .HasColumnType("bigint");
 
-                            b1.Property<TimeSpan?>("TempoTotalPeriodoAnterior")
-                                .HasColumnType("TEXT");
+                            b1.Property<long?>("TempoTotalPeriodoAnterior")
+                                .HasColumnType("bigint");
 
-                            b1.Property<TimeSpan?>("TempoTotalPrevisto")
-                                .HasColumnType("TEXT");
+                            b1.Property<long?>("TempoTotalPrevisto")
+                                .HasColumnType("bigint");
 
                             b1.HasKey("FolhaId");
 
@@ -481,30 +492,28 @@ namespace MeuPonto.Data.Migrations
                             b1.OwnsMany("MeuPonto.Modules.Pontos.Folhas.ApuracaoDiaria", "Dias", b2 =>
                                 {
                                     b2.Property<Guid>("FolhaId")
-                                        .HasColumnType("TEXT");
+                                        .HasColumnType("uniqueidentifier");
 
                                     b2.Property<int?>("Dia")
-                                        .ValueGeneratedOnAdd()
-                                        .HasColumnType("INTEGER");
+                                        .HasColumnType("int");
 
-                                    b2.Property<TimeSpan?>("DiferencaTempo")
-                                        .HasColumnType("TEXT");
+                                    b2.Property<long?>("DiferencaTempo")
+                                        .HasColumnType("bigint");
 
                                     b2.Property<bool>("Falta")
-                                        .HasColumnType("INTEGER");
+                                        .HasColumnType("bit");
 
                                     b2.Property<bool>("Feriado")
-                                        .HasColumnType("INTEGER");
+                                        .HasColumnType("bit");
 
-                                    b2.Property<TimeSpan?>("TempoAbonado")
-                                        .HasColumnType("TEXT");
+                                    b2.Property<long?>("TempoAbonado")
+                                        .HasColumnType("bigint");
 
-                                    b2.Property<TimeSpan?>("TempoApurado")
-                                        .HasColumnType("TEXT");
+                                    b2.Property<long?>("TempoApurado")
+                                        .HasColumnType("bigint");
 
-                                    b2.Property<TimeSpan?>("TempoPrevisto")
-                                        .IsRequired()
-                                        .HasColumnType("TEXT");
+                                    b2.Property<long>("TempoPrevisto")
+                                        .HasColumnType("bigint");
 
                                     b2.HasKey("FolhaId", "Dia");
 

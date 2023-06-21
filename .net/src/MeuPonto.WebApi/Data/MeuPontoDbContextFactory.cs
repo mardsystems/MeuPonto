@@ -8,7 +8,7 @@ internal class MeuPontoDbContextFactory : IDesignTimeDbContextFactory<MeuPontoDb
     public MeuPontoDbContext CreateDbContext(string[] args)
     {
         var optionsBuilder = new DbContextOptionsBuilder<MeuPontoDbContext>();
-        optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=MeuPonto;Trusted_Connection=True;MultipleActiveResultSets=true");
+        optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=MeuPonto-Local;Trusted_Connection=True;MultipleActiveResultSets=true");
 
         return new MeuPontoDbContext(optionsBuilder.Options);
     }

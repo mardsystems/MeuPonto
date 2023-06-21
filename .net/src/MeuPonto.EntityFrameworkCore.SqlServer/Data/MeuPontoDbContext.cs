@@ -26,8 +26,6 @@ public class MeuPontoDbContext : DbContext
         modelBuilder.Entity<Perfil>()
             .ToTable("Perfis");
 
-        modelBuilder.Entity<Perfil>().Property(b => b.CreationDate).HasDefaultValueSql("getdate()");
-
         modelBuilder.Entity<Perfil>().OwnsOne(a => a.JornadaTrabalhoSemanalPrevista, x =>
         {
             x.OwnsMany(b => b.Semana, y =>
@@ -46,25 +44,26 @@ public class MeuPontoDbContext : DbContext
             {
                 y.WithOwner().HasForeignKey("FolhaId");
                 y.HasKey("FolhaId", "Dia");
+
+                y.Property(x => x.Dia).ValueGeneratedNever();
+
+                y.Property(x => x.TempoPrevisto).HasConversion<long>();
+                y.Property(x => x.TempoApurado).HasConversion<long>();
+                y.Property(x => x.DiferencaTempo).HasConversion<long>();
+                y.Property(x => x.TempoAbonado).HasConversion<long>();
             });
+
+            x.Property(x => x.TempoTotalPrevisto).HasConversion<long>();
+            x.Property(x => x.TempoTotalApurado).HasConversion<long>();
+            x.Property(x => x.DiferencaTempoTotal).HasConversion<long>();
+            x.Property(x => x.TempoTotalPeriodoAnterior).HasConversion<long>();
         });
 
         modelBuilder.Entity<Ponto>()
             .ToTable("Pontos");
 
-        modelBuilder.Entity<Ponto>().Property(b => b.CreationDate).HasDefaultValueSql("getdate()");
-
         modelBuilder.Entity<Comprovante>()
             .ToTable("Comprovantes");
-
-        modelBuilder.Entity<Comprovante>().Property(b => b.CreationDate).HasDefaultValueSql("getdate()");
-
-        //modelBuilder.Entity<TipoImagem>().Property(x => x.Id).ValueGeneratedNever();
-
-        //modelBuilder.Entity<TipoImagem>().HasData(
-        //    new TipoImagem { Id = TipoImagemEnum.Original, Nome = "Original" },
-        //    new TipoImagem { Id = TipoImagemEnum.Tratada, Nome = "Tratada" }
-        //);
 
         modelBuilder.Entity<Trabalhador>()
             .ToTable("Trabalhadores")
@@ -73,6 +72,50 @@ public class MeuPontoDbContext : DbContext
         modelBuilder.Entity<ConfiguracaoPorUsuario>()
             .ToTable("Configuracoes")
             .HasNoKey();
+
+        //
+
+        modelBuilder.Entity<Perfil>().Property(b => b.CreationDate).HasDefaultValueSql("getdate()");
+        modelBuilder.Entity<Ponto>().Property(b => b.CreationDate).HasDefaultValueSql("getdate()");
+        modelBuilder.Entity<Comprovante>().Property(b => b.CreationDate).HasDefaultValueSql("getdate()");
+
+        //
+
+        modelBuilder.Entity<Status>().Property(x => x.Id).ValueGeneratedNever();
+        modelBuilder.Entity<Momento>().Property(x => x.Id).ValueGeneratedNever();
+        modelBuilder.Entity<Pausa>().Property(x => x.Id).ValueGeneratedNever();
+        modelBuilder.Entity<TipoImagem>().Property(x => x.Id).ValueGeneratedNever();
+
+        //
+
+        modelBuilder.Entity<Status>().HasData(
+            new Status { Id = StatusEnum.Aberta, Nome = "Aberta" },
+            new Status { Id = StatusEnum.Fechada, Nome = "Fechada" }
+        );
+
+        modelBuilder.Entity<Momento>().HasData(
+            new Momento { Id = MomentoEnum.Entrada, Nome = "Entrada" },
+            new Momento { Id = MomentoEnum.Saida, Nome = "Saída" },
+            new Momento { Id = MomentoEnum.Errado, Nome = "Errado" }
+        );
+
+        modelBuilder.Entity<Pausa>().HasData(
+            new Pausa { Id = PausaEnum.Almoco, Nome = "Almoço" },
+            new Pausa { Id = PausaEnum.CafeLanche, Nome = "Café/Lanche" },
+            new Pausa { Id = PausaEnum.Banheiro, Nome = "Banheiro" },
+            new Pausa { Id = PausaEnum.ConversaReuniao, Nome = "Conversa/Reunião" },
+            new Pausa { Id = PausaEnum.Telefonema, Nome = "Telefonema" },
+            new Pausa { Id = PausaEnum.Generica, Nome = "Genérica" }
+        );
+
+        modelBuilder.Entity<TipoImagem>().HasData(
+            new TipoImagem { Id = TipoImagemEnum.Original, Nome = "Original" },
+            new TipoImagem { Id = TipoImagemEnum.Tratada, Nome = "Tratada" }
+        );
+
+        //
+
+        //modelBuilder.Entity<Ponto>().Property(x => x.PausaId).HasConversion(new EnumToStringConverter<PausaEnum>());
     }
 
     public DbSet<Empregador> Empregadores { get; set; }

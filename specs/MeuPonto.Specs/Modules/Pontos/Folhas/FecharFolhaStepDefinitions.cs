@@ -93,7 +93,7 @@ public class FecharFolhaStepDefinitions
     [Then(@"a folha de ponto deverá ser fechada")]
     public void ThenAFolhaDePontoDeveraSerFechada()
     {
-        _gestaoFolhas.FolhaAberta.Status.Nome.Should().Be(StatusEnum.Fechada.GetDisplayName());
+        _gestaoFolhas.FolhaAberta.Status.Should().Be(StatusEnum.Fechada.GetDisplayName());
     }
 
     [Then(@"o tempo total apurado deverá ser '([^']*)'")]

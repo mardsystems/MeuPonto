@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MeuPonto.Models;
 
-public class Status : Concepts.Status
+public class Status
 {
     public StatusEnum Id { get; set; }
 

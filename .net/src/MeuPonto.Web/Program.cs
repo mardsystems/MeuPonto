@@ -31,6 +31,13 @@ public class Program
             //    options.UseSqlite($"Data Source={dataSource}", b => b.MigrationsAssembly("MeuPonto.EntityFrameworkCore.Sqlite")));
         }
 
+        {
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
+            //builder.Services.AddDbContext<MeuPontoDbContext>(options =>
+            //    options.UseSqlServer(connectionString, b => b.MigrationsAssembly("MeuPonto.EntityFrameworkCore.SqlServer")));
+        }
+
         builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
         builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)

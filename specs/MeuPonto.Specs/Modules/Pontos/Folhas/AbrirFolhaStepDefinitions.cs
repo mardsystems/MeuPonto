@@ -95,7 +95,7 @@ public class AbrirFolhaStepDefinitions
     [Then(@"o status da folha de ponto deverá ser '([^']*)'")]
     public void ThenOStatusDaFolhaDePontoDeveraSer(string status)
     {
-        _gestaoFolhas.FolhaAberta.Status.Nome.Should().Be(status);
+        _gestaoFolhas.FolhaAberta.Status.Should().Be(status);
     }
 
     [Then(@"a folha de ponto deverá ter '([^']*)' dias")]

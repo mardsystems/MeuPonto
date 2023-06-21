@@ -38,15 +38,15 @@ public class BackupComprovantesPageDriver : BackupComprovantesInterface
         using (var fileEntry = new FileEntry("Arquivo", "jpg", imagem))
         {
             form.GetInput("Imagem").Files.Add(fileEntry);
-            form.GetSelect("Comprovante.TipoImagemId").GetOption(comprovante.TipoImagem.Nome).IsSelected = true;
+            form.GetSelect("Comprovante.TipoImagemId").GetOption(comprovante.TipoImagem).IsSelected = true;
             form.GetInput("Comprovante.Numero").Value = comprovante.Numero;
 
             form.GetSelect("Ponto.PerfilId").GetOption(ponto.Perfil.Nome).IsSelected = true;
             form.GetInput("Ponto.DataHora").Value = ponto.DataHora.Value.ToString("yyyy-MM-dd\\THH:mm:ss");
-            form.GetInput("Ponto.MomentoId", ponto.Momento.Nome).IsChecked = true;
+            form.GetInput("Ponto.MomentoId", ponto.Momento).IsChecked = true;
             if (ponto.Pausa != null)
             {
-                form.GetInput("Ponto.PausaId", ponto.Pausa.Nome).IsChecked = true;
+                form.GetInput("Ponto.PausaId", ponto.Pausa).IsChecked = true;
             }
             form.GetTextArea("Ponto.Observacao").Value = ponto.Observacao;
 
@@ -101,15 +101,15 @@ public class BackupComprovantesPageDriver : BackupComprovantesInterface
         using (var fileEntry = new FileEntry("Arquivo", "jpg", imagem))
         {
             form.GetInput("Imagem").Files.Add(fileEntry);
-            form.GetSelect("Comprovante.TipoImagemId").GetOption(comprovante.TipoImagem.Nome).IsSelected = true;
+            form.GetSelect("Comprovante.TipoImagemId").GetOption(comprovante.TipoImagem).IsSelected = true;
             form.GetInput("Comprovante.Numero").Value = comprovante.Numero;
 
             form.GetSelect("Ponto.PerfilId").GetOption(ponto.Perfil.Nome).IsSelected = true;
             form.GetInput("Ponto.DataHora").Value = ponto.DataHora.Value.ToString("yyyy-MM-dd\\THH:mm:ss");
-            form.GetInput("Ponto.MomentoId", ponto.Momento.Nome).IsChecked = true;
+            form.GetInput("Ponto.MomentoId", ponto.Momento).IsChecked = true;
             if (ponto.Pausa != null)
             {
-                form.GetInput("Ponto.PausaId", ponto.Pausa.Nome).IsChecked = true;
+                form.GetInput("Ponto.PausaId", ponto.Pausa).IsChecked = true;
             }
             form.GetTextArea("Ponto.Observacao").Value = ponto.Observacao;
 

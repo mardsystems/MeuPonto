@@ -28,7 +28,7 @@ public class Comprovante : LocalTableEntity, Concepts.Comprovante
 
     [DisplayName("Tipo Imagem")]
     public TipoImagem? TipoImagem { get; set; }
-    Concepts.TipoImagem? Concepts.Comprovante.TipoImagem => TipoImagem;
+    string? Concepts.Comprovante.TipoImagem => TipoImagem?.Nome;
 
     public Comprovante()
     {
