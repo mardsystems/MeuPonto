@@ -23,7 +23,7 @@ public class Perfil : DocumentEntity, Concepts.Perfil
     public Guid? EmpregadorId { get; set; }
 
     [DisplayName("Empregador")]
-    public Empregador? Empregador { get; set; }
+    public EmpregadorRef? Empregador { get; set; }
     Concepts.Empregador? Concepts.Perfil.Vincula() => Empregador;
 
     [DisplayName("Jornada Trabalho Semanal Prevista")]

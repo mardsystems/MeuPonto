@@ -71,7 +71,7 @@ public class RegistroPontosPageDriver : RegistroPontosInterface
 
         var pontoRegistrado = new Ponto
         {
-            Perfil = new Perfil
+            Perfil = new PerfilRef
             {
                 Nome = dl.GetDataListItem("Perfil").GetString()
             },

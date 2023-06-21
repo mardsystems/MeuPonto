@@ -10,7 +10,7 @@ public class Ponto : DocumentEntity, Concepts.Ponto
     public Guid? PerfilId { get; set; }
 
     [DisplayName("Perfil")]
-    public Perfil? Perfil { get; set; }
+    public PerfilRef? Perfil { get; set; }
     Concepts.Perfil? Concepts.Ponto.Perfil => Perfil;
 
     [Required]

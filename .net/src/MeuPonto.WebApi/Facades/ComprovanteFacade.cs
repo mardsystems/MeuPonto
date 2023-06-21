@@ -1,10 +1,12 @@
-﻿namespace MeuPonto.Modules.Pontos.Comprovantes;
+﻿using MeuPonto.Models;
+
+namespace MeuPonto.Facades;
 
 public static class ComprovanteFacade
 {
-    public static void ComprovaPonto(this Comprovante comprovante, Pontos.Ponto ponto)
+    public static void ComprovaPonto(this Comprovante comprovante, Ponto ponto)
     {
-        comprovante.Ponto = new PontoRef
+        comprovante.Ponto = new Ponto
         {
             PerfilId = ponto?.PerfilId,
             DataHora = ponto?.DataHora,

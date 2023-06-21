@@ -1,12 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
-using MeuPonto.Concepts;
 
 namespace MeuPonto.Modules.Pontos;
 
 [Owned]
-public class Perfil : Concepts.Perfil
+public class PerfilRef : Concepts.Perfil
 {
     [Required]
     [MaxLength(30)]
@@ -17,12 +16,12 @@ public class Perfil : Concepts.Perfil
 
     string? Concepts.Perfil.Matricula => throw new NotImplementedException();
 
-    JornadaTrabalhoSemanal Concepts.Perfil.Preve()
+    Concepts.JornadaTrabalhoSemanal Concepts.Perfil.Preve()
     {
         throw new NotImplementedException();
     }
 
-    Empregador? Concepts.Perfil.Vincula()
+    Concepts.Empregador? Concepts.Perfil.Vincula()
     {
         throw new NotImplementedException();
     }

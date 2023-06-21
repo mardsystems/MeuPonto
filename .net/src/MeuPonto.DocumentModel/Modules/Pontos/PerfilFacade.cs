@@ -1,10 +1,12 @@
-﻿namespace MeuPonto.Modules.Pontos;
+﻿using MeuPonto.Modules.Perfis;
+
+namespace MeuPonto.Modules.Pontos;
 
 public static class PerfilFacade
 {
-    public static void QualificaPonto(this Perfis.Perfil perfil, Ponto ponto)
+    public static void QualificaPonto(this Perfil perfil, Ponto ponto)
     {
-        ponto.Perfil = new Perfil
+        ponto.Perfil = new PerfilRef
         {
             Nome = perfil.Nome
         };

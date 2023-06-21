@@ -68,7 +68,7 @@ public class FecharFolhaStepDefinitions
 
             var momento = (MomentoEnum)Enum.Parse(typeof(MomentoEnum), row["momento"]);
 
-            var ponto = PontoFactory.CriaPonto(transaction, Guid.NewGuid());
+            var ponto = PontoFactory.CriaPonto(transaction);
 
             _cadastroPerfis.Perfil.QualificaPonto(ponto);
 

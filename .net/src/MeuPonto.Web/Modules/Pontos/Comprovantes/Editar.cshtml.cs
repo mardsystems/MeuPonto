@@ -42,21 +42,10 @@ public class EditarComprovanteModel : PageModel
     {
         if (ModelState.ContainsKey($"{nameof(Comprovante)}.{nameof(Comprovante.Imagem)}")) ModelState.Remove($"{nameof(Comprovante)}.{nameof(Comprovante.Imagem)}");
 
-        var pontoRef = new Ponto
-        {
-            PerfilId = Comprovante.Ponto?.PerfilId,
-            Perfil = Comprovante.Ponto?.Perfil,
-            DataHora = Comprovante.Ponto?.DataHora,
-            MomentoId = Comprovante.Ponto?.MomentoId,
-            PausaId = Comprovante.Ponto?.PausaId
-        };
-
         var comprovante = await _db.Comprovantes.FirstOrDefaultAsync(m => m.Id == Comprovante.Id);
 
         if (!ModelState.IsValid)
         {
-            Comprovante.Ponto = pontoRef;
-
             Comprovante.Imagem = comprovante.Imagem;
 
             return Page();

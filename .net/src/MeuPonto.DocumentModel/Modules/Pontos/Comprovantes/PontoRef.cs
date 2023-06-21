@@ -5,14 +5,14 @@ using System.ComponentModel;
 namespace MeuPonto.Modules.Pontos.Comprovantes;
 
 [Owned]
-public class Ponto : Concepts.Ponto
+public class PontoRef : Concepts.Ponto
 {
     [Required]
     [DisplayName("Perfil")]
     public Guid? PerfilId { get; set; }
 
     [DisplayName("Perfil")]
-    public Perfil? Perfil { get; set; }
+    public PerfilRef? Perfil { get; set; }
     Concepts.Perfil? Concepts.Ponto.Perfil => Perfil;
 
     [Required]

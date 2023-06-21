@@ -20,7 +20,7 @@ public class BackupComprovantesContext
         Comprovante = comprovante;
     }
 
-    public void Inicia(Pontos.Ponto ponto)
+    public void Inicia(Ponto ponto)
     {
         Ponto = ponto;
     }
@@ -34,7 +34,7 @@ public class BackupComprovantesContext
 
     public Comprovante Comprovante { get; private set; }
 
-    public Pontos.Ponto Ponto { get; private set; }
+    public Ponto Ponto { get; private set; }
 
     public void Define(Concepts.Comprovante comprovante)
     {

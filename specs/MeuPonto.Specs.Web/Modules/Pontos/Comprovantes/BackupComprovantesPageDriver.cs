@@ -75,9 +75,9 @@ public class BackupComprovantesPageDriver : BackupComprovantesInterface
 
         var comprovanteEscaneado = new Comprovante
         {
-            Ponto = new Ponto
+            Ponto = new PontoRef
             {
-                Perfil = new Perfil
+                Perfil = new PerfilRef
                 {
                     Nome = form.GetSelect("Ponto.PerfilId").Value
                 },
@@ -138,9 +138,9 @@ public class BackupComprovantesPageDriver : BackupComprovantesInterface
 
         var comprovanteGuardado = new Comprovante
         {
-            Ponto = new Ponto
+            Ponto = new PontoRef
             {
-                Perfil = new Perfil
+                Perfil = new PerfilRef
                 {
                     Nome = dl.GetDataListItem("Perfil").GetString()
                 },

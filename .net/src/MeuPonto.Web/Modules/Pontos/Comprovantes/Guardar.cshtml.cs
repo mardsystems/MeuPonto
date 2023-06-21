@@ -35,7 +35,7 @@ public class GuardarComprovanteModel : PageModel
     public IFormFile? Imagem { get; set; }
 
     [BindProperty]
-    public Pontos.Ponto Ponto { get; set; }
+    public Ponto Ponto { get; set; }
 
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync(string? command)
