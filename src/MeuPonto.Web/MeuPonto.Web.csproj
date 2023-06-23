@@ -7,6 +7,7 @@
     <UserSecretsId>aspnet-MeuPonto-a092c9dd-ee53-439b-a59c-b03af725fbcc</UserSecretsId>
 	<DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
     <RootNamespace>MeuPonto</RootNamespace>
+	<WebProject_DirectoryAccessLevelKey>0</WebProject_DirectoryAccessLevelKey>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,6 +20,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Identity.Web" Version="1.24.1" />
     <PackageReference Include="Microsoft.Identity.Web.UI" Version="1.16.0" />
+	<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.16" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,6 +41,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MeuPonto.EntityFrameworkCore.Cosmos\MeuPonto.EntityFrameworkCore.Cosmos.csproj" />
+    <ProjectReference Include="..\MeuPonto.Web_App\MeuPonto.Web_App.csproj">
+      <Aliases></Aliases>
+    </ProjectReference>
   </ItemGroup>
 
 </Project>

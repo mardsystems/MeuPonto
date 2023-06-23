@@ -71,7 +71,11 @@ public class Program
         app.UseRequestLocalization(localizationOptions);
 
         // Configure the HTTP request pipeline.
-        if (!app.Environment.IsDevelopment())
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseWebAssemblyDebugging();
+        }
+        else
         {
             app.UseExceptionHandler("/Error");
             // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
@@ -79,6 +83,9 @@ public class Program
         }
 
         app.UseHttpsRedirection();
+
+
+        app.UseBlazorFrameworkFiles();
         app.UseStaticFiles();
 
         app.UseRouting();
@@ -88,6 +95,7 @@ public class Program
 
         app.MapRazorPages();
         app.MapControllers();
+        app.MapFallbackToFile("app/index.html");
 
         //using (var scope = app.Services.CreateScope())
         //{
