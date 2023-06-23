@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\.net\src\MeuPonto.Web\MeuPonto.Web.csproj" />
+    <ProjectReference Include="..\..\src\MeuPonto.Web\MeuPonto.Web.csproj" />
     <ProjectReference Include="..\MeuPonto.SystemModel\MeuPonto.SystemModel.csproj" />
   </ItemGroup>
 

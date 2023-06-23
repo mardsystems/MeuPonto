@@ -19,31 +19,31 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "7 - Recursos", "7 - Recurso
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.Extensions", ".net\src\System.Extensions\System.Extensions.csproj", "{D7547D16-4A37-4105-8117-DD5B1BFE5290}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.Extensions", "src\System.Extensions\System.Extensions.csproj", "{D7547D16-4A37-4105-8117-DD5B1BFE5290}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data Services", "Data Services", "{8E30F4E5-F7AE-42E1-9C28-DD719E6316FC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration Services", "Integration Services", "{A1BE6DF6-2713-4E69-ABB0-C3CBBBA39FC0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeuPonto.EntityFrameworkCore.SqlServer", ".net\src\MeuPonto.EntityFrameworkCore.SqlServer\MeuPonto.EntityFrameworkCore.SqlServer.csproj", "{1F0DF724-F874-47C5-AF5D-008B06355C96}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeuPonto.EntityFrameworkCore.SqlServer", "src\MeuPonto.EntityFrameworkCore.SqlServer\MeuPonto.EntityFrameworkCore.SqlServer.csproj", "{1F0DF724-F874-47C5-AF5D-008B06355C96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeuPonto.WinForms", ".net\src\MeuPonto.WinForms\MeuPonto.WinForms.csproj", "{8D1EC29B-1AD9-4EC5-8EAD-76121F74B4B0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeuPonto.WinForms", "src\MeuPonto.WinForms\MeuPonto.WinForms.csproj", "{8D1EC29B-1AD9-4EC5-8EAD-76121F74B4B0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeuPonto.EntityFrameworkCore.Cosmos", ".net\src\MeuPonto.EntityFrameworkCore.Cosmos\MeuPonto.EntityFrameworkCore.Cosmos.csproj", "{869E2EBA-74BF-429A-B79C-6338D1510A9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeuPonto.EntityFrameworkCore.Cosmos", "src\MeuPonto.EntityFrameworkCore.Cosmos\MeuPonto.EntityFrameworkCore.Cosmos.csproj", "{869E2EBA-74BF-429A-B79C-6338D1510A9B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeuPonto.Web", ".net\src\MeuPonto.Web\MeuPonto.Web.csproj", "{0949F008-34E0-48AE-84FB-738069731F0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeuPonto.Web", "src\MeuPonto.Web\MeuPonto.Web.csproj", "{0949F008-34E0-48AE-84FB-738069731F0E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 - Especificação", "0 - Especificação", "{96AC4030-DACF-4EDF-87A5-46C0C4834F8A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeuPonto.Specs", "specs\MeuPonto.Specs\MeuPonto.Specs.csproj", "{76329E4D-7AE1-46C7-9D8C-432E541AA4E5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeuPonto.Web.Tests", ".net\tests\MeuPonto.Web.Tests\MeuPonto.Web.Tests.csproj", "{E3DC65FC-BF57-46FE-9C06-600A2E71D90F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeuPonto.Web.Tests", "tests\MeuPonto.Web.Tests\MeuPonto.Web.Tests.csproj", "{E3DC65FC-BF57-46FE-9C06-600A2E71D90F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeuPonto.EntityFrameworkCore.Sqlite", ".net\src\MeuPonto.EntityFrameworkCore.Sqlite\MeuPonto.EntityFrameworkCore.Sqlite.csproj", "{6EBCC26B-41AD-4C64-B87B-52AF1475515B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeuPonto.EntityFrameworkCore.Sqlite", "src\MeuPonto.EntityFrameworkCore.Sqlite\MeuPonto.EntityFrameworkCore.Sqlite.csproj", "{6EBCC26B-41AD-4C64-B87B-52AF1475515B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeuPonto.Desktop", ".net\src\MeuPonto.Desktop\MeuPonto.Desktop.csproj", "{8A01260C-C083-4296-B6F5-01E1FCEA3CA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeuPonto.Desktop", "src\MeuPonto.Desktop\MeuPonto.Desktop.csproj", "{8A01260C-C083-4296-B6F5-01E1FCEA3CA5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.Xaml.Extensions", ".net\src\System.Xaml.Extensions\System.Xaml.Extensions.csproj", "{B40192ED-5654-4615-8EA9-57C34E082615}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.Xaml.Extensions", "src\System.Xaml.Extensions\System.Xaml.Extensions.csproj", "{B40192ED-5654-4615-8EA9-57C34E082615}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeuPonto.Specs.Web", "specs\MeuPonto.Specs.Web\MeuPonto.Specs.Web.csproj", "{EE2128E2-AF82-4C33-9026-1B19964C0B31}"
 EndProject
@@ -59,19 +59,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Table-Driven", "Table-Drive
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Table-Driven", "Table-Driven", "{E3F7140A-7182-44AC-B973-009CC2419087}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeuPonto.Mobile", ".net\src\MeuPonto.Mobile\MeuPonto.Mobile.csproj", "{81266EE2-E13A-409E-86BD-360C138DCA77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeuPonto.Mobile", "src\MeuPonto.Mobile\MeuPonto.Mobile.csproj", "{81266EE2-E13A-409E-86BD-360C138DCA77}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeuPonto.Specs.WebApi", "specs\MeuPonto.Specs.WebApi\MeuPonto.Specs.WebApi.csproj", "{6A898C52-A010-479F-8443-5A3D0AC54786}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeuPonto.WebApi", ".net\src\MeuPonto.WebApi\MeuPonto.WebApi.csproj", "{38EF1922-BA5D-40B2-821D-D8FDA417DAD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeuPonto.WebApi", "src\MeuPonto.WebApi\MeuPonto.WebApi.csproj", "{38EF1922-BA5D-40B2-821D-D8FDA417DAD6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Global", "Global", "{7AB03659-E09F-4B6A-848C-8276D9ED31DD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Local", "Local", "{CC538074-51DB-436A-9C1E-115C19D7AC69}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeuPonto.DocumentModel", ".net\src\MeuPonto.DocumentModel\MeuPonto.DocumentModel.csproj", "{92123B87-4D25-41D7-A6F6-2B30165962D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeuPonto.DocumentModel", "src\MeuPonto.DocumentModel\MeuPonto.DocumentModel.csproj", "{92123B87-4D25-41D7-A6F6-2B30165962D3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeuPonto.GlobalTableModel", ".net\src\MeuPonto.GlobalTableModel\MeuPonto.GlobalTableModel.csproj", "{A57CAE0B-EE9A-444F-A8D6-9DAC9EEB4D7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeuPonto.GlobalTableModel", "src\MeuPonto.GlobalTableModel\MeuPonto.GlobalTableModel.csproj", "{A57CAE0B-EE9A-444F-A8D6-9DAC9EEB4D7A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data-Driven", "Data-Driven", "{6780E7FC-3DE6-48F2-8B39-74D2E786139D}"
 EndProject
