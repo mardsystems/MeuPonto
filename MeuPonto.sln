@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-2-3 - Apresentação-Aplicação-Solução", "1-2-3 - Apresentação-Aplicação-Solução", "{C06148F4-15C2-44AF-9C80-F633DCAF3920}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Solução", "1 - Solução", "{C06148F4-15C2-44AF-9C80-F633DCAF3920}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Infraestrutura", "4 - Infraestrutura", "{A6839E73-8B9E-4684-84E6-E09A1F974B52}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Infraestrutura", "2 - Infraestrutura", "{A6839E73-8B9E-4684-84E6-E09A1F974B52}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Cross-Cutting", "5 - Cross-Cutting", "{323BFDAC-6243-4C15-A95B-32B138DD8FB0}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Cross-Cutting", "3 - Cross-Cutting", "{323BFDAC-6243-4C15-A95B-32B138DD8FB0}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6 - Dependências Externas", "6 - Dependências Externas", "{DE0F06B2-680C-4A67-AFD8-15B3436C0EA9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Dependências Externas", "4 - Dependências Externas", "{DE0F06B2-680C-4A67-AFD8-15B3436C0EA9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "7 - Recursos", "7 - Recursos", "{5F885708-58C7-498C-8B8F-AEB59FA757A5}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Recursos", "5 - Recursos", "{5F885708-58C7-498C-8B8F-AEB59FA757A5}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		.gitattributes = .gitattributes
@@ -75,7 +75,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeuPonto.GlobalTableModel",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data-Driven", "Data-Driven", "{6780E7FC-3DE6-48F2-8B39-74D2E786139D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeuPonto.Web_App", "src\MeuPonto.Web_App\MeuPonto.Web_App.csproj", "{3968994B-2704-4C62-AADF-FA867A05C60C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeuPonto.Web_App", "src\MeuPonto.Web_App\MeuPonto.Web_App.csproj", "{3968994B-2704-4C62-AADF-FA867A05C60C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -23,7 +23,7 @@ public class MeuPontoDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        var dataSource = "C:\\github\\MeuPonto\\.net\\src\\MeuPonto.Desktop\\bin\\Debug\\net6.0-windows\\MeuPonto.db";
+        var dataSource = "C:\\github\\MeuPonto\\src\\MeuPonto.Desktop\\bin\\Debug\\net6.0-windows\\MeuPonto.db";
 
         optionsBuilder.UseSqlite($"Data Source={dataSource}");
     }

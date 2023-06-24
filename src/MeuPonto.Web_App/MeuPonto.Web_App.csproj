@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MeuPonto.EntityFrameworkCore.Cosmos\MeuPonto.EntityFrameworkCore.Cosmos.csproj" />
+    <ProjectReference Include="..\MeuPonto.DocumentModel\MeuPonto.DocumentModel.csproj" />
   </ItemGroup>
 
   <ItemGroup>

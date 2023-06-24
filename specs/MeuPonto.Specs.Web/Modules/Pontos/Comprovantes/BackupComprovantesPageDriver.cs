@@ -75,9 +75,9 @@ public class BackupComprovantesPageDriver : BackupComprovantesInterface
 
         var comprovanteEscaneado = new Comprovante
         {
-            Ponto = new PontoRef
+            Ponto = new()
             {
-                Perfil = new PerfilRef
+                Perfil = new()
                 {
                     Nome = form.GetSelect("Ponto.PerfilId").Value
                 },
@@ -86,6 +86,8 @@ public class BackupComprovantesPageDriver : BackupComprovantesInterface
                 PausaId = string.IsNullOrEmpty(pausaValue) ? null : (PausaEnum)Enum.Parse(typeof(PausaEnum), pausaValue),
             }
         };
+
+
 
         return comprovanteEscaneado;
     }
@@ -138,9 +140,9 @@ public class BackupComprovantesPageDriver : BackupComprovantesInterface
 
         var comprovanteGuardado = new Comprovante
         {
-            Ponto = new PontoRef
+            Ponto = new()
             {
-                Perfil = new PerfilRef
+                Perfil = new()
                 {
                     Nome = dl.GetDataListItem("Perfil").GetString()
                 },
