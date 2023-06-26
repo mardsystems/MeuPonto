@@ -14,14 +14,7 @@ public class PerfilRef : Concepts.Perfil
 
     bool Concepts.Perfil.Ativo => throw new NotImplementedException();
 
-    string? Concepts.Perfil.Matricula => throw new NotImplementedException();
-
-    Concepts.JornadaTrabalhoSemanal Concepts.Perfil.Preve()
-    {
-        throw new NotImplementedException();
-    }
-
-    Concepts.Empregador? Concepts.Perfil.Vincula()
+    Concepts.Contrato? Concepts.Perfil.IdentificaVinculo()
     {
         throw new NotImplementedException();
     }

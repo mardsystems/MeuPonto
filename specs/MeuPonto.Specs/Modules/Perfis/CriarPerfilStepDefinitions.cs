@@ -94,7 +94,7 @@ public class CriarPerfilStepDefinitions
     [Then(@"a matrícula do perfil deverá ser '([^']*)'")]
     public void ThenAMatriculaDoPerfilDeveraSer(string matricula)
     {
-        _cadastroPerfis.PerfilCadastrado.Matricula.Should().Be(matricula);
+        _cadastroPerfis.PerfilCadastrado.IdentificaVinculo().Matricula.Should().Be(matricula);
     }
 
     [Then(@"o nome do perfil deverá ser '([^']*)'")]
@@ -106,7 +106,7 @@ public class CriarPerfilStepDefinitions
     [Then(@"a jornada de trabalho semanal prevista deverá ser:")]
     public void ThenAJornadaDeTrabalhoSemanalPrevistaDeveraSer(Table jornadaTrabalhoSemanal)
     {
-        var jornadaTrabalhoSemanalPrevista = _cadastroPerfis.PerfilCadastrado.Preve();
+        var jornadaTrabalhoSemanalPrevista = _cadastroPerfis.PerfilCadastrado.IdentificaVinculo().Preve();
 
         jornadaTrabalhoSemanal.CompareToSet(jornadaTrabalhoSemanalPrevista.Semana);
     }
@@ -114,7 +114,7 @@ public class CriarPerfilStepDefinitions
     [Then(@"o tempo total da jornada de trabalho semanal prevista deverá ser '([^']*)'")]
     public void ThenOTempoTotalDaJornadaDeTrabalhoSemanalPrevistaDeveraSer(TimeSpan tempoTotal)
     {
-        var jornadaTrabalhoSemanalPrevista = _cadastroPerfis.PerfilCadastrado.Preve();
+        var jornadaTrabalhoSemanalPrevista = _cadastroPerfis.PerfilCadastrado.IdentificaVinculo().Preve();
 
         jornadaTrabalhoSemanalPrevista.TempoTotal.Should().Be(tempoTotal);
     }

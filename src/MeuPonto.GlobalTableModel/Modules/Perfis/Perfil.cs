@@ -4,7 +4,7 @@ using MeuPonto.Modules.Perfis.Empregadores;
 
 namespace MeuPonto.Modules.Perfis;
 
-public class Perfil : GlobalTableEntity, Concepts.Perfil
+public class Perfil : GlobalTableEntity, Concepts.Perfil, Concepts.Contrato
 {
     [Required]
     [MinLength(3)]
@@ -25,11 +25,13 @@ public class Perfil : GlobalTableEntity, Concepts.Perfil
 
     [DisplayName("Empregador")]
     public Empregador? Empregador { get; set; }
-    Concepts.Empregador? Concepts.Perfil.Vincula() => Empregador;
+    Concepts.Empregador? Concepts.Contrato.Vincula() => Empregador;
 
     [DisplayName("Jornada Trabalho Semanal Prevista")]
     public virtual JornadaTrabalhoSemanal JornadaTrabalhoSemanalPrevista { get; set; } = default!;
-    Concepts.JornadaTrabalhoSemanal Concepts.Perfil.Preve() => JornadaTrabalhoSemanalPrevista;
+    Concepts.JornadaTrabalhoSemanal Concepts.Contrato.Preve() => JornadaTrabalhoSemanalPrevista;
+
+    Concepts.Contrato Concepts.Perfil.IdentificaVinculo() => this;
 
     public Perfil()
     {
