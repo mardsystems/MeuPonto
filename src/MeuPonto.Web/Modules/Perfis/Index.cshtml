@@ -139,10 +139,13 @@
                         @Html.DisplayFor(modelItem => item.Matricula)
                     </td>
                     <td>
-                        <a class="text-decoration-none" asp-page="/Perfis/Empregadores/Detalhar" asp-route-id="@item.EmpregadorId" title="Detalhar Empregador" target="_blank">
-                            @Html.DisplayFor(modelItem => item.Empregador.Nome)
-                            <i class="bi bi-link-45deg"></i>
-                        </a>
+                        @if (item.Empregador != null)
+                        {
+                            <a class="text-decoration-none" asp-page="/Perfis/Empregadores/Detalhar" asp-route-id="@item.EmpregadorId" title="Detalhar Empregador" target="_blank">
+                                @Html.DisplayFor(modelItem => item.Empregador.Nome)
+                                <i class="bi bi-link-45deg"></i>
+                            </a>
+                        }
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.JornadaTrabalhoSemanalPrevista.Semana[0].Tempo)
