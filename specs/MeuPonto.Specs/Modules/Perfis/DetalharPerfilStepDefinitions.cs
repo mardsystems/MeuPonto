@@ -17,9 +17,9 @@ public class DetalharPerfilStepDefinitions
     }
 
     [When(@"o trabalhador detalhar o perfil")]
-    public async Task WhenOTrabalhadorDetalharOPerfil()
+    public void WhenOTrabalhadorDetalharOPerfil()
     {
-        var perfilDetalhado = await _cadastroPerfisInterface.DetalharPerfil(_cadastroPerfis.Perfil);
+        var perfilDetalhado = _cadastroPerfisInterface.DetalharPerfil(_cadastroPerfis.Perfil);
 
         _cadastroPerfis.Define(perfilDetalhado);
     }

@@ -55,6 +55,8 @@ public class WebHook : IClassFixture<MeuPontoWebFactory<Program>>
 
         objectContainer.RegisterInstanceAs(_httpClient);
 
+        //
+
         _serviceScope = webFactory.Services.CreateScope();
 
         var scopedServices = _serviceScope.ServiceProvider;

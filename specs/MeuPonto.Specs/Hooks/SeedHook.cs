@@ -21,22 +21,61 @@ public class SeedHook
         BackupComprovantesContext backupComprovantes,
         GestaoFolhasContext gestaoFolhas)
     {
-        var perfil = new Perfil
+        var transaction = new TransactionContext("Test user");
+
+        var perfil = PerfilFactory.CriaPerfil(transaction);
+
+        perfil.Nome = "Test user";
+        perfil.JornadaTrabalhoSemanalPrevista = new JornadaTrabalhoSemanal
         {
-            Nome = "Test user",
+            Semana = new List<JornadaTrabalhoDiaria>(new[]{
+                    new JornadaTrabalhoDiaria
+                    {
+                        DiaSemana = DayOfWeek.Monday,
+                        Tempo = new TimeSpan(8,0,0)
+                    },
+                    new JornadaTrabalhoDiaria
+                    {
+                        DiaSemana = DayOfWeek.Tuesday,
+                        Tempo = new TimeSpan(8,0,0)
+                    },
+                    new JornadaTrabalhoDiaria
+                    {
+                        DiaSemana = DayOfWeek.Wednesday,
+                        Tempo = new TimeSpan(8,0,0)
+                    },
+                    new JornadaTrabalhoDiaria
+                    {
+                        DiaSemana = DayOfWeek.Thursday,
+                        Tempo = new TimeSpan(8,0,0)
+                    },
+                    new JornadaTrabalhoDiaria
+                    {
+                        DiaSemana = DayOfWeek.Friday,
+                        Tempo = new TimeSpan(8,0,0)
+                    },
+                    new JornadaTrabalhoDiaria
+                    {
+                        DiaSemana = DayOfWeek.Saturday,
+                        Tempo = new TimeSpan(0,0,0)
+                    },
+                    new JornadaTrabalhoDiaria
+                    {
+                        DiaSemana = DayOfWeek.Sunday,
+                        Tempo = new TimeSpan(0,0,0)
+                    }
+                })
         };
 
         cadastroPerfis.Inicia(perfil);
 
-        var ponto = new Ponto
-        {
-            Momento = MomentoEnum.Entrada,
-            Pausa = null
-        };
+        var ponto = PontoFactory.CriaPonto(transaction);
+
+        ponto.MomentoId = MomentoEnum.Entrada;
 
         registroPontos.Inicia(ponto);
 
-        var comprovante = new Comprovante();
+        var comprovante = ComprovanteFactory.CriaComprovante(transaction);
 
         backupComprovantes.Inicia(comprovante);
 
@@ -44,11 +83,39 @@ public class SeedHook
 
         var hoje = DateTime.Today;
 
-        var folhaNova = new Folha
-        {
-            Competencia = new DateTime(hoje.Year, hoje.Month, 1)
-        };
+        var competencia = new DateTime(hoje.Year, hoje.Month, 1);
 
-        gestaoFolhas.Inicia(folhaNova);
+        var folha = FolhaFactory.CriaFolha(transaction);
+
+        perfil.QualificaFolha(folha);
+
+        folha.Competencia = competencia;
+
+        var competenciaAtual = competencia;
+
+        var competenciaPosterior = competenciaAtual.AddMonths(1);
+
+        var dias = (competenciaPosterior - competenciaAtual).Days;
+
+        for (int dia = 1; dia <= dias; dia++)
+        {
+            var data = competenciaAtual.AddDays(dia - 1);
+
+            var apuracaoDiaria = new ApuracaoDiaria
+            {
+                Dia = dia,
+                TempoPrevisto = perfil.JornadaTrabalhoSemanalPrevista.Semana.Single(x => x.DiaSemana == data.DayOfWeek).Tempo,
+                TempoApurado = null,
+                DiferencaTempo = null,
+                Feriado = false,
+                Falta = false
+            };
+
+            folha.ApuracaoMensal.Dias.Add(apuracaoDiaria);
+        }
+
+        folha.ApuracaoMensal.TempoTotalPeriodoAnterior = TimeSpan.Zero;
+
+        gestaoFolhas.Inicia(folha);
     }
 }

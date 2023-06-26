@@ -24,9 +24,9 @@ public class HomePageDriver : HomeInterface
         _angleSharp = angleSharp;
     }
 
-    public async Task GoTo()
+    public void GoTo()
     {
-        Document = await _angleSharp.GetDocumentAsync("/");
+        Document = _angleSharp.GetDocument("/");
 
         PerfisAnchor = Document.GetAnchor("Perfis");
 
@@ -49,23 +49,23 @@ public class HomePageDriver : HomeInterface
         //CriacaoPerfilAnchor.Should().NotBeNull("'a tela inicial deve ter um link para a criação de perfil'");
     }
 
-    public async Task<Folha_> ApurarFolha(Folha_ folhaAberta)
+    public Concepts.Folha ApurarFolha(Concepts.Folha folhaAberta)
     {
-        await GoTo();
+        GoTo();
 
         var form = Document.GetForm();
 
-        form.GetSelect("PerfilId").GetOption(folhaAberta.Perfil.Nome).IsSelected = true;
+        var perfil = folhaAberta.EQualificadaPelo();
+
+        form.GetSelect("PerfilId").GetOption(perfil.Nome).IsSelected = true;
         form.GetInput("CompetenciaAno").Value = folhaAberta.Competencia.Value.ToString("yyyy");
         form.GetSelect("CompetenciaMes").Value = folhaAberta.Competencia.Value.ToString("MM");
 
         var submitButton = form.GetSubmitButton();
 
-        var resultPage = await _angleSharp.SendAsync(form, submitButton);
+        var resultPage = _angleSharp.Send(form, submitButton);
 
-        resultPage.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-
-        Document = await _angleSharp.GetDocumentAsync(resultPage);
+        Document = _angleSharp.GetDocument(resultPage);
 
         var folhaApurada = IdentificaFolhaParaApuracao();
 

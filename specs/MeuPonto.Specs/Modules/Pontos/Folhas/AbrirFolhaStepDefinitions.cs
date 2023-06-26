@@ -12,12 +12,15 @@ public class AbrirFolhaStepDefinitions
 
     private readonly GestaoFolhasInterface _gestaoFolhasInterface;
 
+    private readonly CadastroPerfisContext _cadastroPerfis;
+
     private readonly MeuPontoDbContext _db;
 
     public AbrirFolhaStepDefinitions(
         ScenarioContext scenario,
         GestaoFolhasContext gestaoFolhas,
         GestaoFolhasInterface gestaoFolhasInterface,
+        CadastroPerfisContext cadastroPerfis,
         MeuPontoDbContext db)
     {
         _scenario = scenario;
@@ -25,6 +28,8 @@ public class AbrirFolhaStepDefinitions
         _gestaoFolhas = gestaoFolhas;
 
         _gestaoFolhasInterface = gestaoFolhasInterface;
+
+        _cadastroPerfis = cadastroPerfis;
 
         _db = db;
     }
@@ -34,7 +39,7 @@ public class AbrirFolhaStepDefinitions
     {
         var perfil = _db.Perfis.FirstOrDefault(x => x.Nome == nome);
 
-        _gestaoFolhas.Folha.QualificaCom(perfil);
+        perfil.QualificaFolha(_gestaoFolhas.Folha);
     }
 
     [Given(@"que o trabalhador deseja apurar a folha de ponto da competência '([^']*)'")]
@@ -50,7 +55,7 @@ public class AbrirFolhaStepDefinitions
     }
 
     [When(@"o trabalhador abrir uma folha de ponto")]
-    public async Task WhenOTrabalhadorAbrirUmaFolhaDePonto()
+    public void WhenOTrabalhadorAbrirUmaFolhaDePonto()
     {
         if (_gestaoFolhas.Folha.Perfil == null)
         {
@@ -58,17 +63,17 @@ public class AbrirFolhaStepDefinitions
 
             if (perfil == default)
             {
-                perfil = CadastroPerfisStub.ObtemPerfil();
+                perfil = _cadastroPerfis.Perfil;
 
                 _db.Perfis.Add(perfil);
-                await _db.SaveChangesAsync();
+                _db.SaveChanges();
             }
 
-            _gestaoFolhas.Folha.QualificaCom(perfil);
+            perfil.QualificaFolha(_gestaoFolhas.Folha);
         }
 
 
-        var folhaAberta = await _gestaoFolhasInterface.AbrirFolha(_gestaoFolhas.Folha);
+        var folhaAberta = _gestaoFolhasInterface.AbrirFolha(_gestaoFolhas.Folha);
 
         _gestaoFolhas.Define(folhaAberta);
     }
@@ -82,13 +87,15 @@ public class AbrirFolhaStepDefinitions
     [Then(@"o perfil da folha de ponto deverá deverá ser '([^']*)'")]
     public void ThenOPerfilDaFolhaDePontoDeveraDeveraSer(string nome)
     {
-        _gestaoFolhas.FolhaAberta.Perfil.Nome.Should().Be(nome);
+        var perfil = _gestaoFolhas.FolhaAberta.EQualificadaPelo();
+
+        perfil.Nome.Should().Be(nome);
     }
 
     [Then(@"o status da folha de ponto deverá ser '([^']*)'")]
     public void ThenOStatusDaFolhaDePontoDeveraSer(string status)
     {
-        _gestaoFolhas.FolhaAberta.Status.Nome.Should().Be(status);
+        _gestaoFolhas.FolhaAberta.Status.Should().Be(status);
     }
 
     [Then(@"a folha de ponto deverá ter '([^']*)' dias")]

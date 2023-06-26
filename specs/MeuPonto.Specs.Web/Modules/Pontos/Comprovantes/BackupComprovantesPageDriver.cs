@@ -1,5 +1,6 @@
 ﻿using AngleSharp.Html.Dom;
 using MeuPonto.Helpers;
+using MeuPonto.Modules.Perfis;
 using MeuPonto.Support;
 
 namespace MeuPonto.Modules.Pontos.Comprovantes;
@@ -17,45 +18,43 @@ public class BackupComprovantesPageDriver : BackupComprovantesInterface
         _angleSharp = angleSharp;
     }
 
-    public async Task GoTo()
+    public void GoTo()
     {
-        Document = await _angleSharp.GetDocumentAsync("/Pontos/Comprovantes");
+        Document = _angleSharp.GetDocument("/Pontos/Comprovantes");
 
         GuardarComprovanteAnchor = Document.GetAnchor("Guardar.Comprovante");
 
         GuardarComprovanteAnchor.Should().NotBeNull("o backup de comprovantes deve ter um link para a guardar um comprovante");
     }
 
-    public async Task<Comprovante_> EscanearComprovante(Stream imagem, Comprovante_ comprovante, Pontos.Ponto_ ponto)
+    public Concepts.Comprovante EscanearComprovante(Stream imagem, Concepts.Comprovante comprovante, Concepts.Ponto ponto)
     {
-        await GoTo();
+        GoTo();
 
-        Document = await _angleSharp.GetDocumentAsync(GuardarComprovanteAnchor.Href);
+        Document = _angleSharp.GetDocument(GuardarComprovanteAnchor.Href);
 
         var form = Document.GetForm();
 
         using (var fileEntry = new FileEntry("Arquivo", "jpg", imagem))
         {
             form.GetInput("Imagem").Files.Add(fileEntry);
-            form.GetSelect("Comprovante.TipoImagem").GetOption(comprovante.TipoImagem.Nome).IsSelected = true;
+            form.GetSelect("Comprovante.TipoImagemId").GetOption(comprovante.TipoImagem).IsSelected = true;
             form.GetInput("Comprovante.Numero").Value = comprovante.Numero;
 
             form.GetSelect("Ponto.PerfilId").GetOption(ponto.Perfil.Nome).IsSelected = true;
             form.GetInput("Ponto.DataHora").Value = ponto.DataHora.Value.ToString("yyyy-MM-dd\\THH:mm:ss");
-            form.GetInput("Ponto.Momento", ponto.Momento.Nome).IsChecked = true;
+            form.GetInput("Ponto.MomentoId", ponto.Momento).IsChecked = true;
             if (ponto.Pausa != null)
             {
-                form.GetInput("Ponto.Pausa", ponto.Pausa.Nome).IsChecked = true;
+                form.GetInput("Ponto.PausaId", ponto.Pausa).IsChecked = true;
             }
             form.GetTextArea("Ponto.Observacao").Value = ponto.Observacao;
 
             var submitButton = form.GetSubmitButton();
 
-            var resultPage = await _angleSharp.SendAsync(form, submitButton);
+            var resultPage = _angleSharp.Send(form, submitButton);
 
-            resultPage.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-
-            Document = await _angleSharp.GetDocumentAsync(resultPage);
+            Document = _angleSharp.GetDocument(resultPage);
         }
 
         var comprovanteEscaneado = ObtemResultadoEscanearComprovante();
@@ -71,56 +70,56 @@ public class BackupComprovantesPageDriver : BackupComprovantesInterface
 
         var form = Document.GetForm();
 
-        var momentoValue = form.GetInput("Ponto.Momento").Value;
-        var pausaValue = form.GetInput("Ponto.Pausa").Value;
+        var momentoValue = form.GetInput("Ponto.MomentoId").Value;
+        var pausaValue = form.GetInput("Ponto.PausaId").Value;
 
         var comprovanteEscaneado = new Comprovante
         {
-            Ponto = new PontoRef
+            Ponto = new()
             {
-                Perfil = new PerfilRef
+                Perfil = new()
                 {
                     Nome = form.GetSelect("Ponto.PerfilId").Value
                 },
                 DataHora = DateTime.Parse(form.GetInput("Ponto.DataHora").Value),
-                Momento = (MomentoEnum)Enum.Parse(typeof(MomentoEnum), momentoValue),
-                Pausa = string.IsNullOrEmpty(pausaValue) ? null : (PausaEnum)Enum.Parse(typeof(PausaEnum), pausaValue),
+                MomentoId = (MomentoEnum)Enum.Parse(typeof(MomentoEnum), momentoValue),
+                PausaId = string.IsNullOrEmpty(pausaValue) ? null : (PausaEnum)Enum.Parse(typeof(PausaEnum), pausaValue),
             }
         };
+
+
 
         return comprovanteEscaneado;
     }
 
-    public async Task<Comprovante_> GuardarComprovante(Stream imagem, Comprovante_ comprovante, Pontos.Ponto_ ponto)
+    public Concepts.Comprovante GuardarComprovante(Stream imagem, Concepts.Comprovante comprovante, Concepts.Ponto ponto)
     {
-        await GoTo();
+        GoTo();
 
-        Document = await _angleSharp.GetDocumentAsync(GuardarComprovanteAnchor.Href);
+        Document = _angleSharp.GetDocument(GuardarComprovanteAnchor.Href);
 
         var form = Document.GetForm();
 
         using (var fileEntry = new FileEntry("Arquivo", "jpg", imagem))
         {
             form.GetInput("Imagem").Files.Add(fileEntry);
-            form.GetSelect("Comprovante.TipoImagem").GetOption(comprovante.TipoImagem.Nome).IsSelected = true;
+            form.GetSelect("Comprovante.TipoImagemId").GetOption(comprovante.TipoImagem).IsSelected = true;
             form.GetInput("Comprovante.Numero").Value = comprovante.Numero;
 
             form.GetSelect("Ponto.PerfilId").GetOption(ponto.Perfil.Nome).IsSelected = true;
             form.GetInput("Ponto.DataHora").Value = ponto.DataHora.Value.ToString("yyyy-MM-dd\\THH:mm:ss");
-            form.GetInput("Ponto.Momento", ponto.Momento.Nome).IsChecked = true;
+            form.GetInput("Ponto.MomentoId", ponto.Momento).IsChecked = true;
             if (ponto.Pausa != null)
             {
-                form.GetInput("Ponto.Pausa", ponto.Pausa.Nome).IsChecked = true;
+                form.GetInput("Ponto.PausaId", ponto.Pausa).IsChecked = true;
             }
             form.GetTextArea("Ponto.Observacao").Value = ponto.Observacao;
 
             var submitButton = form.GetSubmitButton("button.btn-primary");
 
-            var resultPage = await _angleSharp.SendAsync(form, submitButton);
+            var resultPage = _angleSharp.Send(form, submitButton);
 
-            resultPage.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-
-            Document = await _angleSharp.GetDocumentAsync(resultPage);
+            Document = _angleSharp.GetDocument(resultPage);
         }
 
         var comprovanteGuardado = ObtemDetalhes();
@@ -141,15 +140,15 @@ public class BackupComprovantesPageDriver : BackupComprovantesInterface
 
         var comprovanteGuardado = new Comprovante
         {
-            Ponto = new PontoRef
+            Ponto = new()
             {
-                Perfil = new PerfilRef
+                Perfil = new()
                 {
                     Nome = dl.GetDataListItem("Perfil").GetString()
                 },
                 DataHora = DateTime.Parse(dl.GetDataListItem("DataHora").GetString()),
-                Momento = (MomentoEnum)Enum.Parse(typeof(MomentoEnum), momentoValue),
-                Pausa = string.IsNullOrEmpty(pausaValue) ? null : (PausaEnum)Enum.Parse(typeof(PausaEnum), pausaValue),
+                MomentoId = (MomentoEnum)Enum.Parse(typeof(MomentoEnum), momentoValue),
+                PausaId = string.IsNullOrEmpty(pausaValue) ? null : (PausaEnum)Enum.Parse(typeof(PausaEnum), pausaValue),
             }
         };
 

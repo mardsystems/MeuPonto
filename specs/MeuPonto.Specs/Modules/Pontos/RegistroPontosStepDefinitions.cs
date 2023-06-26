@@ -27,23 +27,23 @@ public class RegistroPontosStepDefinitions
     [Given(@"que é o momento de '([^']*)' do expediente")]
     public void GivenQueEOMomentoDeDoExpediente(MomentoEnum momento)
     {
-        _registroPontos.Ponto.Momento = momento;
+        _registroPontos.Ponto.MomentoId = momento;
     }
 
     [Given(@"que é o momento de '([^']*)' do expediente para o almoço")]
     public void GivenQueEOMomentoDeDoExpedienteParaOAlmoco(MomentoEnum momento)
     {
-        _registroPontos.Ponto.Momento = momento;
+        _registroPontos.Ponto.MomentoId = momento;
 
-        _registroPontos.Ponto.Pausa = PausaEnum.Almoco;
+        _registroPontos.Ponto.PausaId = PausaEnum.Almoco;
     }
 
     [Given(@"que é o momento de '([^']*)' do expediente da volta do almoço")]
     public void GivenQueEOMomentoDeDoExpedienteDaVoltaDoAlmoco(MomentoEnum momento)
     {
-        _registroPontos.Ponto.Momento = momento;
+        _registroPontos.Ponto.MomentoId = momento;
 
-        _registroPontos.Ponto.Pausa = PausaEnum.Almoco;
+        _registroPontos.Ponto.PausaId = PausaEnum.Almoco;
     }
 
     [Given(@"que o trabalhador anota a seguinte observação no ponto:")]
@@ -67,13 +67,13 @@ public class RegistroPontosStepDefinitions
     [Then(@"o momento do ponto deverá ser de '([^']*)'")]
     public void ThenOMomentoDoPontoDeveraSerDe(string momento)
     {
-        _registroPontos.PontoRegistrado.Momento.Nome.Should().Be(momento);
+        _registroPontos.PontoRegistrado.Momento.Should().Be(momento);
     }
 
     [Then(@"o ponto deverá indicar que é almoço")]
     public void ThenOPontoDeveraIndicarQueEAlmoco()
     {
-        _registroPontos.PontoRegistrado.Pausa.Nome.Should().Be(PausaEnum.Almoco.GetDisplayName());
+        _registroPontos.PontoRegistrado.Pausa.Should().Be(PausaEnum.Almoco.GetDisplayName());
     }
 
     [Then(@"o ponto deverá indicar que não é almoço")]

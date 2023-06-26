@@ -1,0 +1,131 @@
+﻿@page
+@model MeuPonto.Modules.Perfis.CriarModel
+
+@{
+    ViewData["Title"] = "Criar Perfil";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
+        <li class="breadcrumb-item"><a asp-page="./Index">Perfis</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Criar</li>
+    </ol>
+</nav>
+
+<h1>@ViewData["Title"] <span class="badge bg-secondary">Novo</span></h1>
+
+<div class="card">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" asp-page="./Criar">
+                    <i class="bi bi-plus-circle"></i>
+                    Criar Novo
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row mb-3">
+                <label asp-for="Perfil.Nome" class="col-sm-3 col-form-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="Perfil.Nome" class="form-control" />
+                    <span asp-validation-for="Perfil.Nome" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-9 offset-sm-3">
+                    <div class="form-check">
+                        <input type="checkbox" asp-for="Perfil.Ativo" class="form-check-input" />
+                        <label asp-for="Perfil.Ativo" class="form-check-label"></label>
+                    </div>
+                    <span asp-validation-for="Perfil.Ativo" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="Perfil.Matricula" class="col-sm-3 col-form-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="Perfil.Matricula" class="form-control" />
+                    <span asp-validation-for="Perfil.Matricula" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="Perfil.EmpregadorId" class="col-sm-3 col-form-label"></label>
+                <div class="col-sm-9">
+                    <select asp-for="Perfil.EmpregadorId" class="form-select" asp-items="ViewBag.EmpregadorId"></select>
+                    <span asp-validation-for="Perfil.EmpregadorId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-header">
+                    Jornada Trabalho Semanal Prevista
+                </div>
+                <div class="row g-0">
+                    <div class="col-sm-3">
+                        @*<svg class="bd-placeholder-img img-fluid rounded-start" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title>PlacehSolder</title>
+                        <rect width="100%" height="100%" fill="#868e96"></rect>
+                        <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Apuração Mensal</text>
+                        </svg>*@
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="card-body">
+                            <div class="accordion mb-3" id="accordionJornadaTrabalhoSemanalPrevista">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSemana" aria-expanded="false" aria-controls="collapseSemana">
+                                            @Html.DisplayNameFor(model => model.Perfil.JornadaTrabalhoSemanalPrevista.Semana)
+                                        </button>
+                                    </h2>
+                                    <div id="collapseSemana" class="accordion-collapse collapse" data-bs-parent="#accordionJornadaTrabalhoSemanalPrevista">
+                                        <div class="accordion-body">
+                                            @for (int i = 0; i < Model.Perfil.JornadaTrabalhoSemanalPrevista.Semana.Count; i++)
+                                            {
+                                                <input asp-for="Perfil.JornadaTrabalhoSemanalPrevista.Semana[i].DiaSemana" type="hidden" />
+                                                <div class="row mb-3">
+                                                    <label asp-for="Perfil.JornadaTrabalhoSemanalPrevista.Semana[i].Tempo" class="col-sm-3 col-form-label">
+                                                        @Model.Perfil.JornadaTrabalhoSemanalPrevista.Semana[i].DiaSemana
+                                                    </label>
+                                                    <div class="col-sm-9">
+                                                        <input asp-for="Perfil.JornadaTrabalhoSemanalPrevista.Semana[i].Tempo" class="form-control" />
+                                                        <span asp-validation-for="Perfil.JornadaTrabalhoSemanalPrevista.Semana[i].Tempo" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button value="Totalizar" class="btn btn-secondary">
+                                <i class="bi bi-save"></i>
+                                Totalizar
+                            </button>
+                            <div class="row">
+                                <label asp-for="Perfil.JornadaTrabalhoSemanalPrevista.TempoTotal" class="col-sm-3 col-form-label"></label>
+                                <div class="col-sm-9">
+                                    <div class="input-group">
+                                        <input asp-for="Perfil.JornadaTrabalhoSemanalPrevista.TempoTotal" class="form-control" disabled />
+                                        <button class="btn btn-outline-secondary" name="command" value="RecalcularTempoTotal">Recalcular</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" value="Salvar" class="btn btn-primary">
+                <i class="bi bi-save"></i>
+                Criar
+            </button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

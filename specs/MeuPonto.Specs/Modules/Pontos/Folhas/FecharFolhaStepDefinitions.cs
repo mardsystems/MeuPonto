@@ -13,12 +13,15 @@ public class FecharFolhaStepDefinitions
 
     private readonly GestaoFolhasInterface _gestaoFolhasInterface;
 
+    private readonly CadastroPerfisContext _cadastroPerfis;
+
     private readonly MeuPontoDbContext _db;
 
     public FecharFolhaStepDefinitions(
         ScenarioContext scenario,
         GestaoFolhasContext gestaoFolhas,
         GestaoFolhasInterface gestaoFolhasInterface,
+        CadastroPerfisContext cadastroPerfis,
         MeuPontoDbContext db)
     {
         _scenario = scenario;
@@ -27,29 +30,29 @@ public class FecharFolhaStepDefinitions
 
         _gestaoFolhasInterface = gestaoFolhasInterface;
 
+        _cadastroPerfis = cadastroPerfis;
+
         _db = db;
     }
 
     [Given(@"que o trabalhador tem uma folha de ponto aberta")]
     public async Task GivenQueOTrabalhadorTemUmaFolhaDePontoAberta()
     {
-        var perfil = CadastroPerfisStub.ObtemPerfil();
-
-        _db.Perfis.Add(perfil);
+        _db.Folhas.Add(_gestaoFolhas.Folha);
         await _db.SaveChangesAsync();
+    }
 
-        var competencia = new DateTime(2022, 11, 1);
+    [Given(@"que o trabalhador tem uma folha de ponto aberta na competência")]
+    public async Task GivenQueOTrabalhadorTemUmaFolhaDePontoAbertaNaCompetencia(DateTime competencia)
+    {
+        _gestaoFolhas.Folha.Competencia = competencia;
 
-        var folhaAberta = GestaoFolhasStub.ObtemFolhaAbertaFrom(perfil, competencia);
-
-        _db.Folhas.Add(folhaAberta);
+        _db.Folhas.Add(_gestaoFolhas.Folha);
         await _db.SaveChangesAsync();
-
-        _gestaoFolhas.ConsideraQueExiste(folhaAberta);
     }
 
     [Given(@"que o ano/mês é '([^']*)'")]
-    public void GivenQueOAnoMesE(string competencia)
+    public void GivenQueOAnoMesE(string anoMes)
     {
 
     }
@@ -57,7 +60,7 @@ public class FecharFolhaStepDefinitions
     [Given(@"que os pontos registrados foram:")]
     public async Task GivenQueOsPontosRegistradosForam(Table table)
     {
-        var perfil = _db.Perfis.FirstOrDefault();
+        var transaction = new TransactionContext("Test user");
 
         var pontos = table.Rows.Select(row =>
         {
@@ -65,7 +68,14 @@ public class FecharFolhaStepDefinitions
 
             var momento = (MomentoEnum)Enum.Parse(typeof(MomentoEnum), row["momento"]);
 
-            return RegistroPontosStub.ObtemPonto(perfil, dataHora, momento);
+            var ponto = PontoFactory.CriaPonto(transaction);
+
+            _cadastroPerfis.Perfil.QualificaPonto(ponto);
+
+            ponto.DataHora = dataHora;
+            ponto.MomentoId = momento;
+
+            return ponto;
         });
 
         _db.Pontos.AddRange(pontos);
@@ -73,9 +83,9 @@ public class FecharFolhaStepDefinitions
     }
 
     [When(@"o trabalhador fechar a folha de ponto")]
-    public async Task WhenOTrabalhadorFecharAFolhaDePonto()
+    public void WhenOTrabalhadorFecharAFolhaDePonto()
     {
-        var folhaFechada = await _gestaoFolhasInterface.FecharFolha(_gestaoFolhas.Folha);
+        var folhaFechada = _gestaoFolhasInterface.FecharFolha(_gestaoFolhas.Folha);
 
         _gestaoFolhas.Define(folhaFechada);
     }
@@ -83,7 +93,7 @@ public class FecharFolhaStepDefinitions
     [Then(@"a folha de ponto deverá ser fechada")]
     public void ThenAFolhaDePontoDeveraSerFechada()
     {
-        _gestaoFolhas.FolhaAberta.Status.Nome.Should().Be(StatusEnum.Fechada.GetDisplayName());
+        _gestaoFolhas.FolhaAberta.Status.Should().Be(StatusEnum.Fechada.GetDisplayName());
     }
 
     [Then(@"o tempo total apurado deverá ser '([^']*)'")]

@@ -1,5 +1,6 @@
 ﻿using AngleSharp.Html.Dom;
 using MeuPonto.Helpers;
+using MeuPonto.Modules.Perfis;
 using MeuPonto.Support;
 using System.Globalization;
 
@@ -20,16 +21,16 @@ public class GestaoFolhasPageDriver : GestaoFolhasInterface
         _angleSharp = angleSharp;
     }
 
-    public async Task GoTo()
+    public void GoTo()
     {
-        Document = await _angleSharp.GetDocumentAsync("/Pontos/Folhas");
+        Document = _angleSharp.GetDocument("/Pontos/Folhas");
 
         AberturaFolhaAnchor = Document.GetAnchor("Abertura.Folha");
 
         AberturaFolhaAnchor.Should().NotBeNull("'a gestão de folhas deve ter um link para a abertura de uma folha'");
     }
 
-    private void Identifica(Folha_ folha)
+    private void Identifica(Concepts.Folha folha)
     {
         var table = Document.GetTable("Folhas");
 
@@ -42,51 +43,49 @@ public class GestaoFolhasPageDriver : GestaoFolhasInterface
         FechamentoFolhaAnchor.Should().NotBeNull("a gestão de folhas deve ter um link para o fechamento da folha");
     }
 
-    public async Task<Folha_> AbrirFolha(Folha_ folha)
+    public Concepts.Folha AbrirFolha(Concepts.Folha folha)
     {
-        await GoTo();
+        GoTo();
 
-        Document = await _angleSharp.GetDocumentAsync(AberturaFolhaAnchor.Href);
+        Document = _angleSharp.GetDocument(AberturaFolhaAnchor.Href);
 
         var form = Document.GetForm();
 
+        var perfil = folha.EQualificadaPelo();
+
         //var competencia = folha.Competencia.Value.ToString("yyyy-MM-dd\\THH:mm:ss");
 
-        form.GetSelect("Folha.PerfilId").GetOption(folha.Perfil.Nome).IsSelected = true;
+        form.GetSelect("Folha.PerfilId").GetOption(perfil.Nome).IsSelected = true;
         form.GetInput("CompetenciaAno").Value = folha.Competencia.Value.Year.ToString();
         form.GetSelect("CompetenciaMes").Value = folha.Competencia.Value.Month.ToString();
         form.GetTextArea("Folha.Observacao").Value = folha.Observacao;
 
         var submitButton = form.GetSubmitButton("button.btn-primary");
 
-        var resultPage = await _angleSharp.SendAsync(form, submitButton);
+        var resultPage = _angleSharp.Send(form, submitButton);
 
-        resultPage.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-
-        Document = await _angleSharp.GetDocumentAsync(resultPage);
+        Document = _angleSharp.GetDocument(resultPage);
 
         var folhaAberta = ObtemDetalhes();
 
         return folhaAberta;
     }
 
-    public async Task<Folha_> FecharFolha(Folha_ folhaAberta)
+    public Concepts.Folha FecharFolha(Concepts.Folha folhaAberta)
     {
-        await GoTo();
+        GoTo();
 
         Identifica(folhaAberta);
 
-        Document = await _angleSharp.GetDocumentAsync(FechamentoFolhaAnchor.Href);
+        Document = _angleSharp.GetDocument(FechamentoFolhaAnchor.Href);
 
         var form = Document.GetForm();
 
         var submitButton = form.GetSubmitButton();
 
-        var resultPage = await _angleSharp.SendAsync(form, submitButton);
+        var resultPage = _angleSharp.Send(form, submitButton);
 
-        resultPage.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-
-        Document = await _angleSharp.GetDocumentAsync(resultPage);
+        Document = _angleSharp.GetDocument(resultPage);
 
         var folhaFechada = ObtemDetalhes();
 
@@ -107,12 +106,12 @@ public class GestaoFolhasPageDriver : GestaoFolhasInterface
 
         var folhaAberta = new Folha
         {
-            Perfil = new PerfilRef
+            Perfil = new()
             {
                 Nome = dl.GetDataListItem("Perfil").GetString(),
             },
             Competencia = DateTime.ParseExact(dl.GetDataListItem("Competencia").GetString().Substring(0, 7), "yyyy/MM", CultureInfo.InvariantCulture),
-            Status = (StatusEnum)Enum.Parse(typeof(StatusEnum), dl.GetDataListItem("Status").GetString()),
+            StatusId = (StatusEnum)Enum.Parse(typeof(StatusEnum), dl.GetDataListItem("Status").GetString()),
             Observacao = dl.GetDataListItem("Observacao").GetString(),
             ApuracaoMensal = new ApuracaoMensal
             {

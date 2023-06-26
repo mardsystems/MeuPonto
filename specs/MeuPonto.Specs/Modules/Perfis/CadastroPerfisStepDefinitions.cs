@@ -41,49 +41,92 @@ public class CadastroPerfisStepDefinitions
     [Given(@"que o trabalhador já tem um perfil cadastrado")]
     public async Task GivenQueOTrabalhadorTemUmPerfilCadastrado()
     {
-        var perfil = CadastroPerfisStub.ObtemPerfil();
-
-        _db.Perfis.Add(perfil);
+        _db.Perfis.Add(_cadastroPerfis.Perfil);
         await _db.SaveChangesAsync();
-
-        _cadastroPerfis.ConsideraQueExiste(perfil);
     }
 
     [Given(@"que o trabalhador tem um perfil cadastrado com o nome '([^']*)'")]
     [Given(@"que o trabalhador já tem um perfil cadastrado com o nome '([^']*)'")]
     public async Task GivenQueOTrabalhadorTemUmPerfilCadastradoComONome(string nome)
     {
-        var perfil = CadastroPerfisStub.ObtemPerfilComNome(nome);
+        _cadastroPerfis.Perfil.Nome = nome;
 
-        _db.Perfis.Add(perfil);
+        _db.Perfis.Add(_cadastroPerfis.Perfil);
         await _db.SaveChangesAsync();
-
-        _cadastroPerfis.ConsideraQueExiste(perfil);
     }
 
     [Given(@"que o trabalhador tem um perfil cadastrado com a matrícula '([^']*)'")]
     [Given(@"que o trabalhador já tem um perfil cadastrado com a matrícula '([^']*)'")]
     public async Task GivenQueOTrabalhadorTemUmPerfilCadastradoComAMatricula(string matricula)
     {
-        var perfil = CadastroPerfisStub.ObtemPerfilComMatricula(matricula);
+        _cadastroPerfis.Perfil.Matricula = matricula;
 
-        _db.Perfis.Add(perfil);
+        _db.Perfis.Add(_cadastroPerfis.Perfil);
         await _db.SaveChangesAsync();
-
-        _cadastroPerfis.ConsideraQueExiste(perfil);
     }
 
     [Given(@"que o trabalhador tem um perfil cadastrado com a seguinte jornada de trabalho semanal prevista:")]
     public async Task GivenQueOTrabalhadorTemUmPerfilCadastradoComASeguinteJornadaDeTrabalhoSemanalPrevista(Table table)
     {
+        DefineJornadaTrabalhoSemanalPrevistaDe(table);
+
+        _db.Perfis.Add(_cadastroPerfis.Perfil);
+        await _db.SaveChangesAsync();
+    }
+
+
+    public void DefineJornadaTrabalhoSemanalPrevistaDe(Table table)
+    {
         var semana = table.CreateSet<(DayOfWeek diaSemana, TimeSpan tempo)>();
 
-        var perfil = CadastroPerfisStub.ObtemPerfilComJornadaTrabalhoSemanalPrevistaDe(semana);
+        var daysOfWeek = Enum.GetValues<DayOfWeek>();
 
-        _db.Perfis.Add(perfil);
-        await _db.SaveChangesAsync();
+        foreach (var dayOfWeek in daysOfWeek)
+        {
+            var jornadaTrabalhoDiaria = semana.SingleOrDefault(x => x.diaSemana == dayOfWeek);
 
-        _cadastroPerfis.ConsideraQueExiste(perfil);
+            var i = (int)dayOfWeek;
+
+            if (jornadaTrabalhoDiaria == default)
+            {
+                _cadastroPerfis.Perfil.JornadaTrabalhoSemanalPrevista.Semana[i].Tempo = new TimeSpan(0, 0, 0);
+            }
+            else
+            {
+                _cadastroPerfis.Perfil.JornadaTrabalhoSemanalPrevista.Semana[i].Tempo = jornadaTrabalhoDiaria.tempo;
+            }
+        }
+
+        //_db.Perfis.Add(perfil);
+        //await _db.SaveChangesAsync();
+
+        ////
+
+        //var document = await _angleSharp.GetDocumentAsync("/");
+
+        ////
+
+        //var perfisAnchor = (IHtmlAnchorElement)document.QuerySelector("a.perfis");
+
+        //perfisAnchor.Should().NotBeNull("a tela inicial deve ter um link para os perfis");
+
+        //_scenario["perfisAnchor"] = perfisAnchor;
+
+        ////
+
+        //var marcacaoPontoAnchor = (IHtmlAnchorElement)document.QuerySelector("a.marcacao.ponto");
+
+        //marcacaoPontoAnchor.Should().NotBeNull("a tela inicial deve ter um link de marcação de ponto");
+
+        //_scenario["marcacaoPontoAnchor"] = marcacaoPontoAnchor;
+
+        ////
+
+        //var aberturaFolhaPontoAnchor = (IHtmlAnchorElement)document.QuerySelector("a.abertura.folha.ponto");
+
+        //aberturaFolhaPontoAnchor.Should().NotBeNull("a tela inicial deve ter um link de abertura de folha de ponto");
+
+        //_scenario["aberturaFolhaPontoAnchor"] = aberturaFolhaPontoAnchor;
     }
 
     [Given(@"que o trabalhador identifica na lista o perfil cadastrado")]

@@ -36,10 +36,10 @@ public class BackupComprovantesContext
 
     public Ponto Ponto { get; private set; }
 
-    public void Define(Comprovante_ comprovante)
+    public void Define(Concepts.Comprovante comprovante)
     {
         ComprovanteGuardado = comprovante;
     }
 
-    public Comprovante_ ComprovanteGuardado { get; private set; }
+    public Concepts.Comprovante ComprovanteGuardado { get; private set; }
 }

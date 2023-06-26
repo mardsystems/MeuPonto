@@ -81,7 +81,7 @@ namespace MeuPonto.Modules.Pontos.Folhas
 #line 9
 #line hidden
 #line 10
- testRunner.Given("que o trabalhador tem uma folha de ponto aberta", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+ testRunner.Given("que o trabalhador tem uma folha de ponto aberta na competência \'2022/11\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
 #line 11
  testRunner.And("que o ano/mês é \'2022/11\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");

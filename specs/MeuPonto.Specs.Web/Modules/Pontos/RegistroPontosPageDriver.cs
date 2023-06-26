@@ -1,5 +1,6 @@
 ﻿using AngleSharp.Html.Dom;
 using MeuPonto.Helpers;
+using MeuPonto.Modules.Perfis;
 using MeuPonto.Support;
 
 namespace MeuPonto.Modules.Pontos;
@@ -17,38 +18,36 @@ public class RegistroPontosPageDriver : RegistroPontosInterface
         _angleSharp = angleSharp;
     }
 
-    public async Task GoTo()
+    public void GoTo()
     {
-        Document = await _angleSharp.GetDocumentAsync("/Pontos");
+        Document = _angleSharp.GetDocument("/Pontos");
 
         MarcacaoPontoAnchor = Document.GetAnchor("Marcacao.Ponto");
 
         MarcacaoPontoAnchor.Should().NotBeNull("o registro de pontos deve ter um link para a marcação de ponto");
     }
 
-    public async Task<Ponto_> MarcarPonto(Ponto_ ponto)
+    public Concepts.Ponto MarcarPonto(Concepts.Ponto ponto)
     {
-        await GoTo();
+        GoTo();
 
-        Document = await _angleSharp.GetDocumentAsync(MarcacaoPontoAnchor.Href);
+        Document = _angleSharp.GetDocument(MarcacaoPontoAnchor.Href);
 
         var form = Document.GetForm();
 
         form.GetSelect("Ponto.PerfilId").GetOption(ponto.Perfil.Nome).IsSelected = true;
-        form.GetInput("Ponto.Momento", ponto.Momento.Nome).IsChecked = true;
+        form.GetInput("Ponto.MomentoId", ponto.Momento).IsChecked = true;
         if (ponto.Pausa != null)
         {
-            form.GetInput("Ponto.Pausa", ponto.Pausa.Nome).IsChecked = true;
+            form.GetInput("Ponto.PausaId", ponto.Pausa).IsChecked = true;
         }
         form.GetTextArea("Ponto.Observacao").Value = ponto.Observacao;
 
         var submitButton = form.GetSubmitButton();
 
-        var resultPage = await _angleSharp.SendAsync(form, submitButton);
+        var resultPage = _angleSharp.Send(form, submitButton);
 
-        resultPage.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-
-        Document = await _angleSharp.GetDocumentAsync(resultPage);
+        Document = _angleSharp.GetDocument(resultPage);
 
         var pontoRegistrado = ObtemDetalhes();
 
@@ -72,13 +71,13 @@ public class RegistroPontosPageDriver : RegistroPontosInterface
 
         var pontoRegistrado = new Ponto
         {
-            Perfil = new PerfilRef
+            Perfil = new()
             {
                 Nome = dl.GetDataListItem("Perfil").GetString()
             },
             DataHora = DateTime.Parse(dl.GetDataListItem("DataHora").GetString()),
-            Momento = (MomentoEnum)Enum.Parse(typeof(MomentoEnum), momentoValue),
-            Pausa = string.IsNullOrEmpty(pausaValue) ? null : (PausaEnum)Enum.Parse(typeof(PausaEnum), pausaValue),
+            MomentoId = (MomentoEnum)Enum.Parse(typeof(MomentoEnum), momentoValue),
+            PausaId = string.IsNullOrEmpty(pausaValue) ? null : (PausaEnum)Enum.Parse(typeof(PausaEnum), pausaValue),
             Estimado = dl.GetDataListItem("Estimado").GetInput().IsChecked,
             Observacao = dl.GetDataListItem("Observacao").TextContent
         };

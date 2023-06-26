@@ -17,8 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\.net\src\MeuPonto.Web\MeuPonto.Web.csproj" />
-    <ProjectReference Include="..\..\.net\tests\MeuPonto.EntityFrameworkCore.Cosmos.Tests\MeuPonto.EntityFrameworkCore.Cosmos.Tests.csproj" />
+    <ProjectReference Include="..\..\src\MeuPonto.Web\MeuPonto.Web.csproj" />
     <ProjectReference Include="..\MeuPonto.SystemModel\MeuPonto.SystemModel.csproj" />
   </ItemGroup>
 

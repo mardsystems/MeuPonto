@@ -24,9 +24,9 @@ public class ExcluirPerfilStepDefinitions
     }
 
     [When(@"o trabalhador excluir o perfil")]
-    public async Task WhenOTrabalhadorExcluirOPerfil()
+    public void WhenOTrabalhadorExcluirOPerfil()
     {
-        await _cadastroPerfisInterface.ExcluirPerfil(_cadastroPerfis.Perfil);
+        _cadastroPerfisInterface.ExcluirPerfil(_cadastroPerfis.Perfil);
     }
 
     [Then(@"o perfil deverá ser excluído")]

@@ -12,12 +12,15 @@ public class MarcarPontoStepDefinitions
 
     private readonly RegistroPontosInterface _registroPontosInterface;
 
+    private readonly CadastroPerfisContext _cadastroPerfis;
+
     private readonly MeuPontoDbContext _db;
 
     public MarcarPontoStepDefinitions(
         ScenarioContext scenario,
         RegistroPontosContext registroPontos,
         RegistroPontosInterface registroPontosInterface,
+        CadastroPerfisContext cadastroPerfis,
         MeuPontoDbContext db)
     {
         _scenario = scenario;
@@ -25,6 +28,8 @@ public class MarcarPontoStepDefinitions
         _registroPontos = registroPontos;
 
         _registroPontosInterface = registroPontosInterface;
+
+        _cadastroPerfis = cadastroPerfis;
 
         _db = db;
     }
@@ -40,28 +45,28 @@ public class MarcarPontoStepDefinitions
     {
         var perfil = _db.Perfis.FirstOrDefault(x => x.Nome == nome);
 
-        _registroPontos.Ponto.QualificaCom(perfil);
+        perfil.QualificaPonto(_registroPontos.Ponto);
     }
 
     [When(@"o trabalhador marcar o ponto")]
-    public async Task WhenOTrabalhadorMarcarOPonto()
+    public void WhenOTrabalhadorMarcarOPonto()
     {
-        if (_registroPontos.Ponto.PerfilId == null)
+        if (_registroPontos.Ponto.EstaSemQualificacao())
         {
             var perfil = _db.Perfis.FirstOrDefault();
 
             if (perfil == default)
             {
-                perfil = CadastroPerfisStub.ObtemPerfil();
+                perfil = _cadastroPerfis.Perfil;
 
                 _db.Perfis.Add(perfil);
-                await _db.SaveChangesAsync();
+                _db.SaveChanges();
             }
 
-            _registroPontos.Ponto.QualificaCom(perfil);
+            perfil.QualificaPonto(_registroPontos.Ponto);
         }
 
-        var pontoMarcado = await _registroPontosInterface.MarcarPonto(_registroPontos.Ponto);
+        var pontoMarcado = _registroPontosInterface.MarcarPonto(_registroPontos.Ponto);
 
         _registroPontos.Define(pontoMarcado);
     }

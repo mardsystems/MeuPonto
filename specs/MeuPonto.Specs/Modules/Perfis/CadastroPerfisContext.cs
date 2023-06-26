@@ -24,10 +24,10 @@ public class CadastroPerfisContext
 
     public Perfil Perfil { get; private set; }
 
-    public void Define(Perfil_ perfilCadastrado)
+    public void Define(Concepts.Perfil perfilCadastrado)
     {
         PerfilCadastrado = perfilCadastrado;
     }
 
-    public Perfil_ PerfilCadastrado { get; private set; }
+    public Concepts.Perfil PerfilCadastrado { get; private set; }
 }

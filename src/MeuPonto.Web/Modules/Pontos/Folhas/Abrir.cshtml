@@ -1,0 +1,234 @@
+﻿@page
+@model MeuPonto.Modules.Pontos.Folhas.AbrirFolhaModel
+
+@{
+    ViewData["Title"] = "Abrir Folha de Ponto";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
+        <li class="breadcrumb-item"><a asp-page="/Pontos/Index">Pontos</a></li>
+        <li class="breadcrumb-item"><a asp-page="./Index">Folhas</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Abrir</li>
+    </ol>
+</nav>
+
+<h1>@ViewData["Title"] <span class="badge bg-secondary">Nova</span> <span class="badge @(Model.Folha.StatusId == Pontos.Folhas.StatusEnum.Aberta ? "text-bg-warning" : "text-bg-success")"><i class="bi @(Model.Folha.StatusId == Pontos.Folhas.StatusEnum.Aberta ? "bi-file-earmark-fill" : "bi-file-earmark-lock-fill")"></i></span></h1>
+
+<div class="card">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page">
+                    <i class="bi bi-file-earmark-plus"></i>
+                    Abrir Folha
+                </a>
+            </li>
+        </ul>
+    </div>
+    <form class="card-body" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row mb-3">
+            <label asp-for="Folha.PerfilId" class="col-sm-3 col-form-label"></label>
+            <div class="col-sm-9">
+                <select asp-for="Folha.PerfilId" class="form-select" asp-items="ViewBag.PerfilId"></select>
+                <span asp-validation-for="Folha.PerfilId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <span class="col-sm-3 col-form-label">Competência</span>
+            <div class="col-sm-9">
+                <div class="input-group">
+                    <label asp-for="CompetenciaAno" class="input-group-text"></label>
+                    <input asp-for="CompetenciaAno" class="form-control" placeholder="Ano" />
+                    <label asp-for="CompetenciaMes" class="input-group-text"></label>
+                    <select asp-for="CompetenciaMes" class="form-select">
+                        <option value="" disabled selected>Mês</option>
+                        <option value="1">01 (janeiro)</option>
+                        <option value="2">02 (fevereiro)</option>
+                        <option value="3">03 (março)</option>
+                        <option value="4">04 (abril)</option>
+                        <option value="5">05 (maio)</option>
+                        <option value="6">06 (junho)</option>
+                        <option value="7">07 (julho)</option>
+                        <option value="8">08 (agosto)</option>
+                        <option value="9">09 (setembro)</option>
+                        <option value="10">10 (outubro)</option>
+                        <option value="11">11 (novembro)</option>
+                        <option value="12">12 (dezembro)</option>
+                    </select>
+                    <button class="btn btn-outline-secondary" name="command" value="ConfirmarCompetencia">Confirmar</button>
+                </div>
+                <span asp-validation-for="CompetenciaAno" class="text-danger"></span>
+                <span asp-validation-for="CompetenciaMes" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label asp-for="Folha.StatusId" class="col-sm-3 col-form-label"></label>
+            <div class="col-sm-9">
+                <select asp-for="Folha.StatusId" disabled class="form-select" asp-items="Html.GetEnumSelectList<StatusEnum>()"></select>
+                <input asp-for="Folha.StatusId" type="hidden" />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label asp-for="Folha.Observacao" class="col-sm-3 col-form-label"></label>
+            <div class="col-sm-9">
+                <textarea asp-for="Folha.Observacao" class="form-control"></textarea>
+                <span asp-validation-for="Folha.Observacao" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="card mb-3">
+            <div class="card-header">
+                Apuração Mensal
+            </div>
+            <div class="row g-0">
+                <div class="col-sm-3">
+                    @*<svg class="bd-placeholder-img img-fluid rounded-start" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <title>PlacehSolder</title>
+                    <rect width="100%" height="100%" fill="#868e96"></rect>
+                    <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Apuração Mensal</text>
+                    </svg>*@
+                </div>
+                <div class="col-sm-9">
+                    <div class="card-body">
+                        @if (Model.Folha.ApuracaoMensal.Dias.Count > 0)
+                        {
+                            <div class="accordion mb-3" id="accordionApuracaoMensal">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDias" aria-expanded="false" aria-controls="collapseDias">
+                                            @Html.DisplayNameFor(model => model.Folha.ApuracaoMensal.Dias)
+                                        </button>
+                                    </h2>
+                                    <div id="collapseDias" class="accordion-collapse collapse" data-bs-parent="#accordionApuracaoMensal">
+                                        <div class="accordion-body">
+                                            @for (int i = 0; i < Model.Folha.ApuracaoMensal.Dias.Count; i++)
+                                            {
+                                                <input asp-for="Folha.ApuracaoMensal.Dias[i].Dia" type="hidden" />
+                                                <div class="card mb-3">
+                                                    <div class="card-header">
+                                                        Dia @(Model.Folha.ApuracaoMensal.Dias[i].Dia)
+                                                    </div>
+                                                    <div class="row g-0">
+                                                        <div class="col-sm-0 col-md-3">
+                                                            @*<svg class="bd-placeholder-img img-fluid rounded-start" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                                    <title>Placeholder</title>
+                                                    <rect width="100%" height="100%" fill="#868e96"></rect>
+                                                    <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Apuração Mensal</text>
+                                                    </svg>*@
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-9">
+                                                            <div class="card-body">
+                                                                <div class="row mb-3">
+                                                                    <label asp-for="Folha.ApuracaoMensal.Dias[i].TempoPrevisto" class="col-sm-7 col-lg-5 col-form-label"></label>
+                                                                    <div class="col-sm-4">
+                                                                        <input asp-for="Folha.ApuracaoMensal.Dias[i].TempoPrevisto" class="form-control" />
+                                                                        <span asp-validation-for="Folha.ApuracaoMensal.Dias[i].TempoPrevisto" class="text-danger"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row mb-3">
+                                                                    <label asp-for="Folha.ApuracaoMensal.Dias[i].TempoApurado" class="col-sm-7 col-lg-5 col-form-label"></label>
+                                                                    <div class="col-sm-4">
+                                                                        <input asp-for="Folha.ApuracaoMensal.Dias[i].TempoApurado" class="form-control" />
+                                                                        <span asp-validation-for="Folha.ApuracaoMensal.Dias[i].TempoApurado" class="text-danger"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row mb-3">
+                                                                    <label asp-for="Folha.ApuracaoMensal.Dias[i].DiferencaTempo" class="col-sm-7 col-lg-5 col-form-label"></label>
+                                                                    <div class="col-sm-4">
+                                                                        <input asp-for="Folha.ApuracaoMensal.Dias[i].DiferencaTempo" class="form-control" />
+                                                                        <span asp-validation-for="Folha.ApuracaoMensal.Dias[i].DiferencaTempo" class="text-danger"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row mb-3">
+                                                                    <label asp-for="Folha.ApuracaoMensal.Dias[i].TempoAbonado" class="col-sm-7 col-lg-5 col-form-label"></label>
+                                                                    <div class="col-sm-4">
+                                                                        <input asp-for="Folha.ApuracaoMensal.Dias[i].TempoAbonado" class="form-control" />
+                                                                        <span asp-validation-for="Folha.ApuracaoMensal.Dias[i].TempoAbonado" class="text-danger"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row mb-3">
+                                                                    <div class="col-sm-4 offset-sm-7 offset-lg-5">
+                                                                        <div class="form-check">
+                                                                            <input type="checkbox" asp-for="Folha.ApuracaoMensal.Dias[i].Feriado" class="form-check-input" />
+                                                                            <label asp-for="Folha.ApuracaoMensal.Dias[i].Feriado" class="form-check-label"></label>
+                                                                        </div>
+                                                                        <span asp-validation-for="Folha.ApuracaoMensal.Dias[i].Feriado" class="text-danger"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-sm-4 offset-sm-7 offset-lg-5">
+                                                                        <div class="form-check">
+                                                                            <input type="checkbox" asp-for="Folha.ApuracaoMensal.Dias[i].Falta" class="form-check-input" />
+                                                                            <label asp-for="Folha.ApuracaoMensal.Dias[i].Falta" class="form-check-label"></label>
+                                                                        </div>
+                                                                        <span asp-validation-for="Folha.ApuracaoMensal.Dias[i].Falta" class="text-danger"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="alert alert-warning mb-3" role="alert">
+                                Confirme a competência para visualizar os dias do mês.
+                            </div>
+                        }
+                        <button value="Totalizar" class="btn btn-secondary">
+                            <i class="bi bi-save"></i>
+                            Totalizar
+                        </button>
+                        <div class="row mb-3">
+                            <label asp-for="Folha.ApuracaoMensal.TotalDias" class="col-sm-8 col-lg-5 col-form-label"></label>
+                            <div class="col-sm-4 col-lg-7">
+                                <input asp-for="Folha.ApuracaoMensal.TotalDias" class="form-control" disabled />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label asp-for="Folha.ApuracaoMensal.TempoTotalPrevisto" class="col-sm-8 col-lg-5 col-form-label"></label>
+                            <div class="col-sm-4 col-lg-7">
+                                <input asp-for="Folha.ApuracaoMensal.TempoTotalPrevisto" class="form-control" disabled />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label asp-for="Folha.ApuracaoMensal.TempoTotalApurado" class="col-sm-8 col-lg-5 col-form-label"></label>
+                            <div class="col-sm-4 col-lg-7">
+                                <input asp-for="Folha.ApuracaoMensal.TempoTotalApurado" class="form-control" disabled />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label asp-for="Folha.ApuracaoMensal.DiferencaTempoTotal" class="col-sm-8 col-lg-5 col-form-label"></label>
+                            <div class="col-sm-4 col-lg-7">
+                                <input asp-for="Folha.ApuracaoMensal.DiferencaTempoTotal" class="form-control" disabled />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label asp-for="Folha.ApuracaoMensal.TempoTotalPeriodoAnterior" class="col-sm-8 col-lg-5 col-form-label"></label>
+                            <div class="col-sm-4 col-lg-7">
+                                <input asp-for="Folha.ApuracaoMensal.TempoTotalPeriodoAnterior" class="form-control" disabled />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="submit" value="Salvar" class="btn btn-primary">
+            <i class="bi bi-save"></i>
+            Salvar
+        </button>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

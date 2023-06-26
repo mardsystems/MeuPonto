@@ -25,7 +25,7 @@ public class CadastroPerfisAppDriver : CadastroPerfisInterface
         cadastroPerfisMenuItem.Click();
     }
 
-    public async Task CriarPerfil(Perfil_ perfil)
+    public void CriarPerfil(Concepts.Perfil perfil)
     {
         GoTo();
 
@@ -128,7 +128,7 @@ public class CadastroPerfisAppDriver : CadastroPerfisInterface
 
         foreach (var dayOfWeek in daysOfWeek)
         {
-            var jornadaTrabalhoDiaria = perfil.JornadaTrabalhoSemanalPrevista.Semana.SingleOrDefault(x => x.DiaSemana == dayOfWeek);
+            var jornadaTrabalhoDiaria = perfil.Preve().Semana.SingleOrDefault(x => x.DiaSemana == dayOfWeek);
 
             var i = (int)dayOfWeek;
 
@@ -157,17 +157,17 @@ public class CadastroPerfisAppDriver : CadastroPerfisInterface
         Thread.Sleep(500);
     }
 
-    public Task<Perfil_> DetalharPerfil(Perfil_ perfilCadastrado)
+    public Concepts.Perfil DetalharPerfil(Concepts.Perfil perfilCadastrado)
     {
         throw new NotImplementedException();
     }
 
-    public Task EditarPerfil(Perfil_ perfilCadastrado)
+    public void EditarPerfil(Concepts.Perfil perfilCadastrado)
     {
         throw new NotImplementedException();
     }
 
-    public Task ExcluirPerfil(Perfil_ perfilCadastrado)
+    public void ExcluirPerfil(Concepts.Perfil perfilCadastrado)
     {
         throw new NotImplementedException();
     }

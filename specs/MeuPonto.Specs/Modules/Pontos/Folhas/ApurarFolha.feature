@@ -9,12 +9,14 @@ Regra: Para toda entrada deverá existir uma saída
 
 Esquema do Cenário: Trabalhador registra a entrada e a saída do expediente
 	Dado que o trabalhador tem um perfil cadastrado com a seguinte jornada de trabalho semanal prevista:
-		| dia semana | tempo |
-		| Monday     | 08:00 |
-		| Tuesday    | 08:00 |
-		| Wednesday  | 08:00 |
-		| Thursday   | 08:00 |
-		| Friday     | 08:00 |
+		| dia semana | tempo    |
+		| Sunday     | 00:00:00 |
+		| Monday     | 08:00:00 |
+		| Tuesday    | 08:00:00 |
+		| Wednesday  | 08:00:00 |
+		| Thursday   | 08:00:00 |
+		| Friday     | 08:00:00 |
+		| Saturday   | 00:00:00 |
 	E que o trabalhador registrou a entrada no expediente às '<entrada>'
 	E que o trabalhador registrou a saída no expediente às '<saída>'
 	E que o trabalhador tem uma folha de ponto aberta na competência '2022/11'
