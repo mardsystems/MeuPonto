@@ -69,13 +69,13 @@ public class CadastroPerfisPageDriver : CadastroPerfisInterface
         var form = Document.GetForm();
 
         form.GetInput("Perfil.Nome").Value = perfil.Nome;
-        form.GetInput("Perfil.Matricula").Value = perfil.Matricula;
+        form.GetInput("Perfil.Matricula").Value = perfil.IdentificaVinculo().Matricula;
 
         var daysOfWeek = Enum.GetValues<DayOfWeek>();
 
         foreach (var dayOfWeek in daysOfWeek)
         {
-            var jornadaTrabalhoDiaria = perfil.Preve().Semana.SingleOrDefault(x => x.DiaSemana == dayOfWeek);
+            var jornadaTrabalhoDiaria = perfil.IdentificaVinculo().Preve().Semana.SingleOrDefault(x => x.DiaSemana == dayOfWeek);
 
             var i = (int)dayOfWeek;
 
@@ -127,7 +127,7 @@ public class CadastroPerfisPageDriver : CadastroPerfisInterface
 
         var form = Document.GetForm();
 
-        form.GetInput("Perfil.Matricula").Value = perfilCadastrado.Matricula;
+        form.GetInput("Perfil.Matricula").Value = perfilCadastrado.IdentificaVinculo().Matricula;
 
         var submitButton = form.GetSubmitButton();
 

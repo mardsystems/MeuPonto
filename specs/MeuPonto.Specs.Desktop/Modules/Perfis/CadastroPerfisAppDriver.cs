@@ -78,7 +78,7 @@ public class CadastroPerfisAppDriver : CadastroPerfisInterface
 
         z.SendKeys(perfil.Nome);
 
-        if (perfil.Matricula != null)
+        if (perfil.IdentificaVinculo().Matricula != null)
         {
             y[7].Click();
 
@@ -86,7 +86,7 @@ public class CadastroPerfisAppDriver : CadastroPerfisInterface
 
             z = x[x.Count - 2].FindElementByClassName("TextBox");
 
-            z.SendKeys(perfil.Matricula);
+            z.SendKeys(perfil.IdentificaVinculo().Matricula);
         }
 
         z.SendKeys(Keys.Enter);
@@ -128,7 +128,7 @@ public class CadastroPerfisAppDriver : CadastroPerfisInterface
 
         foreach (var dayOfWeek in daysOfWeek)
         {
-            var jornadaTrabalhoDiaria = perfil.Preve().Semana.SingleOrDefault(x => x.DiaSemana == dayOfWeek);
+            var jornadaTrabalhoDiaria = perfil.IdentificaVinculo().Preve().Semana.SingleOrDefault(x => x.DiaSemana == dayOfWeek);
 
             var i = (int)dayOfWeek;
 
