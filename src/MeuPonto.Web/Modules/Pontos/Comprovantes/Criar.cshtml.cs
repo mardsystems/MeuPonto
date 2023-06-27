@@ -23,10 +23,6 @@ public class CriarComprovanteModel : PageModel
 
         Comprovante = ComprovanteFactory.CriaComprovante(transaction);
 
-        var ponto = await _db.Pontos.FindByIdAsync(PontoId, User.Identity.Name);
-
-        Comprovante.ComprovaPonto(ponto);
-
         return Page();
     }
 
