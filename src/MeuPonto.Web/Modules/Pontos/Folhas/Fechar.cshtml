@@ -65,7 +65,7 @@
         </ul>
     </div>
     <div class="card-body">
-        <div class="alert alert-danger" role="alert">
+        <div class="alert alert-warning" role="alert">
             Tem certeza que deseja fechar essa folha de ponto?
         </div>
         <dl class="row g-3 Folha">
@@ -263,8 +263,8 @@
         </div>
         <form method="post">
             <input type="hidden" asp-for="Folha.Id" />
-            <button type="submit" value="Fechar" class="btn btn-danger">
-                <i class="bi bi-trash"></i>
+            <button type="submit" value="Fechar" class="btn btn-primary">
+                <i class="bi bi-file-earmark-check"></i>
                 Fechar
             </button>
         </form>
