@@ -76,7 +76,9 @@ public class GuardarComprovanteModel : PageModel
 
             perfil.QualificaPonto(Ponto);
 
-            //_db.Pontos.Add(Ponto);
+            _db.Pontos.Add(Ponto);
+
+            await _db.SaveChangesAsync();
 
             //
 
