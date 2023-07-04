@@ -4,7 +4,7 @@ using MeuPonto.Modules.Perfis;
 namespace MeuPonto.Modules.Pontos.Comprovantes;
 
 [Binding]
-public class GuardarComprovanteStepDefinitions
+public class BackupComprovantesStepDefinitions
 {
     private readonly ScenarioContext _scenario;
 
@@ -16,7 +16,7 @@ public class GuardarComprovanteStepDefinitions
 
     private readonly MeuPontoDbContext _db;
 
-    public GuardarComprovanteStepDefinitions(
+    public BackupComprovantesStepDefinitions(
         ScenarioContext scenario,
         BackupComprovantesContext backupComprovantes,
         BackupComprovantesInterface backupComprovantesInterface,
@@ -91,6 +91,8 @@ public class GuardarComprovanteStepDefinitions
         _backupComprovantes.Ponto.MomentoId = MomentoEnum.Saida;
     }
 
+    #region Guardar Comprovante
+
     [When(@"o trabalhador escanear o comprovante de ponto")]
     public void WhenOTrabalhadorEscanearOComprovanteDePonto()
     {
@@ -118,6 +120,8 @@ public class GuardarComprovanteStepDefinitions
     {
         _backupComprovantes.ComprovanteGuardado.Should().NotBeNull();
     }
+
+    #endregion
 
     [Then(@"a data do ponto do comprovante deverá ser '([^']*)'")]
     public void ThenADataDoPontoDoComprovanteDeveraSer(DateTime data)
