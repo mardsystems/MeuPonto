@@ -1,11 +1,6 @@
 ﻿# language: pt-br
 
-Funcionalidade: Marcar Ponto
-	Para registrar meu momento de entrada e de saída do expediente
-	E saber se eu estava indo almoçar ou não
-	E anotar qualquer observação feita
-	Enquanto trabalhador
-	Eu quero marcar o ponto
+Funcionalidade: Registro Pontos
 
 Regra: Perfil qualifica o ponto
 
