@@ -40,7 +40,7 @@ namespace MeuPonto.Modules.Pontos.Folhas
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("pt-br"), "Modules/Pontos/Folhas", "Gestao Folhas", null, ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("pt-br"), "Modules/Pontos/Folhas", "Gestão Folhas", null, ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -81,7 +81,7 @@ namespace MeuPonto.Modules.Pontos.Folhas
         }
         
         [Xunit.SkippableFactAttribute(DisplayName="Trabalhador abre uma folha de ponto usando seu único perfil")]
-        [Xunit.TraitAttribute("FeatureTitle", "Gestao Folhas")]
+        [Xunit.TraitAttribute("FeatureTitle", "Gestão Folhas")]
         [Xunit.TraitAttribute("Description", "Trabalhador abre uma folha de ponto usando seu único perfil")]
         public virtual void TrabalhadorAbreUmaFolhaDePontoUsandoSeuUnicoPerfil()
         {
@@ -128,7 +128,7 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [Xunit.SkippableFactAttribute(DisplayName="Trabalhador abre uma folha ponto para o mês de novembro de 2022")]
-        [Xunit.TraitAttribute("FeatureTitle", "Gestao Folhas")]
+        [Xunit.TraitAttribute("FeatureTitle", "Gestão Folhas")]
         [Xunit.TraitAttribute("Description", "Trabalhador abre uma folha ponto para o mês de novembro de 2022")]
         public virtual void TrabalhadorAbreUmaFolhaPontoParaOMesDeNovembroDe2022()
         {
@@ -188,7 +188,7 @@ this.ScenarioInitialize(scenarioInfo);
         
         [Xunit.SkippableFactAttribute(DisplayName="Trabalhador abre uma folha de ponto anotando que deve confirmar os feriados do mê" +
             "s")]
-        [Xunit.TraitAttribute("FeatureTitle", "Gestao Folhas")]
+        [Xunit.TraitAttribute("FeatureTitle", "Gestão Folhas")]
         [Xunit.TraitAttribute("Description", "Trabalhador abre uma folha de ponto anotando que deve confirmar os feriados do mê" +
             "s")]
         public virtual void TrabalhadorAbreUmaFolhaDePontoAnotandoQueDeveConfirmarOsFeriadosDoMes()
@@ -237,7 +237,7 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [Xunit.SkippableTheoryAttribute(DisplayName="Trabalhador registra a entrada e a saída do expediente")]
-        [Xunit.TraitAttribute("FeatureTitle", "Gestao Folhas")]
+        [Xunit.TraitAttribute("FeatureTitle", "Gestão Folhas")]
         [Xunit.TraitAttribute("Description", "Trabalhador registra a entrada e a saída do expediente")]
         [Xunit.InlineDataAttribute("27/11/2022 09:14", "27/11/2022 11:30", "02:16", new string[0])]
         [Xunit.InlineDataAttribute("27/11/2022 12:27", "27/11/2022 18:03", "05:36", new string[0])]
@@ -317,7 +317,7 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [Xunit.SkippableFactAttribute(DisplayName="Trabalhador confirma que uma folha de ponto aberta foi fechada")]
-        [Xunit.TraitAttribute("FeatureTitle", "Gestao Folhas")]
+        [Xunit.TraitAttribute("FeatureTitle", "Gestão Folhas")]
         [Xunit.TraitAttribute("Description", "Trabalhador confirma que uma folha de ponto aberta foi fechada")]
         public virtual void TrabalhadorConfirmaQueUmaFolhaDePontoAbertaFoiFechada()
         {
@@ -364,7 +364,7 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [Xunit.SkippableFactAttribute(DisplayName="Trabalhador guarda a apuração mensal dos pontos registrados")]
-        [Xunit.TraitAttribute("FeatureTitle", "Gestao Folhas")]
+        [Xunit.TraitAttribute("FeatureTitle", "Gestão Folhas")]
         [Xunit.TraitAttribute("Description", "Trabalhador guarda a apuração mensal dos pontos registrados")]
         public virtual void TrabalhadorGuardaAApuracaoMensalDosPontosRegistrados()
         {

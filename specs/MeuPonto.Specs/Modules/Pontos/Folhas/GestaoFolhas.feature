@@ -1,6 +1,6 @@
 ﻿# language: pt-br
 
-Funcionalidade: Gestao Folhas
+Funcionalidade: Gestão Folhas
 	
 Regra: Perfil qualifica a folha de ponto
 
