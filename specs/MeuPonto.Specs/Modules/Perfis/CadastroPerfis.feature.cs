@@ -179,12 +179,14 @@ this.ScenarioInitialize(scenarioInfo);
         [Xunit.SkippableFactAttribute(DisplayName="Trabalhador edita um perfil para corrigir um erro de digitação na matrícula")]
         [Xunit.TraitAttribute("FeatureTitle", "Cadastro Perfis")]
         [Xunit.TraitAttribute("Description", "Trabalhador edita um perfil para corrigir um erro de digitação na matrícula")]
+        [Xunit.TraitAttribute("Category", "wip")]
         public virtual void TrabalhadorEditaUmPerfilParaCorrigirUmErroDeDigitacaoNaMatricula()
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = new string[] {
+                    "wip"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador edita um perfil para corrigir um erro de digitação na matrícula", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 21
+#line 22
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -204,22 +206,22 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 22
+#line 23
  testRunner.Given("que o trabalhador tem um perfil cadastrado com a matrícula \'0001\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
-#line 23
+#line 24
  testRunner.And("que o trabalhador identifica na lista o perfil cadastrado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-#line 24
+#line 25
  testRunner.And("que a matrícula do trabalhador é \'0002\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-#line 25
+#line 26
  testRunner.When("o trabalhador editar o perfil", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
-#line 26
+#line 27
  testRunner.Then("o perfil deverá ser editado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
-#line 27
+#line 28
  testRunner.And("a matrícula do perfil deverá ser \'0002\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
             }
@@ -231,13 +233,15 @@ this.ScenarioInitialize(scenarioInfo);
         [Xunit.TraitAttribute("FeatureTitle", "Cadastro Perfis")]
         [Xunit.TraitAttribute("Description", "Trabalhador cria um perfil com uma jornada de trabalho prevista de 40 horas seman" +
             "ais")]
+        [Xunit.TraitAttribute("Category", "wip")]
         public virtual void TrabalhadorCriaUmPerfilComUmaJornadaDeTrabalhoPrevistaDe40HorasSemanais()
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = new string[] {
+                    "wip"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador cria um perfil com uma jornada de trabalho prevista de 40 horas seman" +
                     "ais", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 31
+#line 33
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -257,14 +261,14 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 32
+#line 34
  testRunner.Given("que o trabalhador não tem nenhum perfil cadastrado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
-#line 33
+#line 35
  testRunner.And("que o horário de trabalho é de \'Monday\' a \'Friday\' das \'09:00\' às \'18:00\' com \'01" +
                         ":00\' de almoço", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-#line 34
+#line 36
  testRunner.When("o trabalhador criar um perfil", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
                 TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
@@ -291,10 +295,10 @@ this.ScenarioInitialize(scenarioInfo);
                 table1.AddRow(new string[] {
                             "Saturday",
                             "00:00:00"});
-#line 35
+#line 37
  testRunner.Then("a jornada de trabalho semanal prevista deverá ser:", ((string)(null)), table1, "Então ");
 #line hidden
-#line 44
+#line 46
  testRunner.And("o tempo total da jornada de trabalho semanal prevista deverá ser \'1.16:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
             }
@@ -306,13 +310,15 @@ this.ScenarioInitialize(scenarioInfo);
         [Xunit.TraitAttribute("FeatureTitle", "Cadastro Perfis")]
         [Xunit.TraitAttribute("Description", "Trabalhador cria um perfil com uma jornada de trabalho prevista de 44 horas seman" +
             "ais (incluindo sábado)")]
+        [Xunit.TraitAttribute("Category", "wip")]
         public virtual void TrabalhadorCriaUmPerfilComUmaJornadaDeTrabalhoPrevistaDe44HorasSemanaisIncluindoSabado()
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = new string[] {
+                    "wip"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador cria um perfil com uma jornada de trabalho prevista de 44 horas seman" +
                     "ais (incluindo sábado)", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 46
+#line 49
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -332,17 +338,17 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 47
+#line 50
  testRunner.Given("que o trabalhador não tem nenhum perfil cadastrado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
-#line 48
+#line 51
  testRunner.And("que o horário de trabalho é de \'Monday\' a \'Friday\' das \'09:00\' às \'18:00\' com \'01" +
                         ":00\' de almoço", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-#line 49
+#line 52
  testRunner.And("que o horário de trabalho de \'Saturday\' é das \'08:00\' às \'12:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-#line 50
+#line 53
  testRunner.When("o trabalhador criar um perfil", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
                 TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -369,10 +375,10 @@ this.ScenarioInitialize(scenarioInfo);
                 table2.AddRow(new string[] {
                             "Saturday",
                             "04:00:00"});
-#line 51
+#line 54
  testRunner.Then("a jornada de trabalho semanal prevista deverá ser:", ((string)(null)), table2, "Então ");
 #line hidden
-#line 60
+#line 63
  testRunner.And("o tempo total da jornada de trabalho semanal prevista deverá ser \'1.20:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
             }
@@ -382,12 +388,14 @@ this.ScenarioInitialize(scenarioInfo);
         [Xunit.SkippableFactAttribute(DisplayName="Trabalhador identifica na lista de perfis um perfil que não era necessário")]
         [Xunit.TraitAttribute("FeatureTitle", "Cadastro Perfis")]
         [Xunit.TraitAttribute("Description", "Trabalhador identifica na lista de perfis um perfil que não era necessário")]
+        [Xunit.TraitAttribute("Category", "wip")]
         public virtual void TrabalhadorIdentificaNaListaDePerfisUmPerfilQueNaoEraNecessario()
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = new string[] {
+                    "wip"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador identifica na lista de perfis um perfil que não era necessário", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 64
+#line 68
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -407,16 +415,16 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 65
+#line 69
  testRunner.Given("que o trabalhador tem um perfil cadastrado com a matrícula \'0001\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
-#line 66
+#line 70
  testRunner.And("que o trabalhador identifica na lista o perfil cadastrado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-#line 67
+#line 71
  testRunner.When("o trabalhador excluir o perfil", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
-#line 68
+#line 72
  testRunner.Then("o perfil deverá ser excluído", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
             }
