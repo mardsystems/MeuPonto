@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace MeuPonto.Modules.Pontos.Folhas
+namespace MeuPonto.Modules.Pontos.Comprovantes
 {
     using TechTalk.SpecFlow;
     using System;
@@ -19,7 +19,7 @@ namespace MeuPonto.Modules.Pontos.Folhas
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class FecharFolhaFeature : object, Xunit.IClassFixture<FecharFolhaFeature.FixtureData>, System.IDisposable
+    public partial class BackupComprovantesFeature : object, Xunit.IClassFixture<BackupComprovantesFeature.FixtureData>, System.IDisposable
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -28,10 +28,10 @@ namespace MeuPonto.Modules.Pontos.Folhas
         
         private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
-#line 1 "FecharFolha.feature"
+#line 1 "BackupComprovantes.feature"
 #line hidden
         
-        public FecharFolhaFeature(FecharFolhaFeature.FixtureData fixtureData, MeuPonto_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public BackupComprovantesFeature(BackupComprovantesFeature.FixtureData fixtureData, MeuPonto_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
             this.TestInitialize();
@@ -40,8 +40,7 @@ namespace MeuPonto.Modules.Pontos.Folhas
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("pt-br"), "Modules/Pontos/Folhas", "Fechar Folha", "\tPara guardar a apuração mensal\r\n\tE não permitir futuras alterações do ponto\r\n\tEn" +
-                    "quanto trabalhador\r\n\tEu quero fechar a folha de ponto", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("pt-br"), "Modules/Pontos/Comprovantes", "Backup Comprovantes", null, ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -76,32 +75,22 @@ namespace MeuPonto.Modules.Pontos.Folhas
             testRunner.CollectScenarioErrors();
         }
         
-        public virtual void FeatureBackground()
-        {
-#line 9
-#line hidden
-#line 10
- testRunner.Given("que o trabalhador tem uma folha de ponto aberta na competência \'2022/11\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
-#line hidden
-#line 11
- testRunner.And("que o ano/mês é \'2022/11\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
-#line hidden
-        }
-        
         void System.IDisposable.Dispose()
         {
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Trabalhador confirma que uma folha de ponto aberta foi fechada")]
-        [Xunit.TraitAttribute("FeatureTitle", "Fechar Folha")]
-        [Xunit.TraitAttribute("Description", "Trabalhador confirma que uma folha de ponto aberta foi fechada")]
-        public virtual void TrabalhadorConfirmaQueUmaFolhaDePontoAbertaFoiFechada()
+        [Xunit.SkippableFactAttribute(DisplayName="Sistema reconhece a data/hora no comprovante de ponto")]
+        [Xunit.TraitAttribute("FeatureTitle", "Backup Comprovantes")]
+        [Xunit.TraitAttribute("Description", "Sistema reconhece a data/hora no comprovante de ponto")]
+        [Xunit.TraitAttribute("Category", "formulated")]
+        public virtual void SistemaReconheceADataHoraNoComprovanteDePonto()
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = new string[] {
+                    "formulated"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador confirma que uma folha de ponto aberta foi fechada", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 15
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Sistema reconhece a data/hora no comprovante de ponto", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 8
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -122,30 +111,29 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 9
-this.FeatureBackground();
+ testRunner.Given("que o trabalhador tem um comprovante de ponto com a data \'17/02/2023 17:07\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
-#line 16
- testRunner.When("o trabalhador fechar a folha de ponto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
+#line 10
+ testRunner.When("o trabalhador escanear o comprovante de ponto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
-#line 17
- testRunner.Then("a folha de ponto deverá ser fechada", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
-#line hidden
-#line 18
- testRunner.And("o status da folha de ponto deverá ser \'Fechada\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+#line 11
+ testRunner.Then("a data do ponto do comprovante deverá ser \'17/02/2023 17:07\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Trabalhador guarda a apuração mensal dos pontos registrados")]
-        [Xunit.TraitAttribute("FeatureTitle", "Fechar Folha")]
-        [Xunit.TraitAttribute("Description", "Trabalhador guarda a apuração mensal dos pontos registrados")]
-        public virtual void TrabalhadorGuardaAApuracaoMensalDosPontosRegistrados()
+        [Xunit.SkippableFactAttribute(DisplayName="Trabalhador guarda o comprovante de ponto")]
+        [Xunit.TraitAttribute("FeatureTitle", "Backup Comprovantes")]
+        [Xunit.TraitAttribute("Description", "Trabalhador guarda o comprovante de ponto")]
+        [Xunit.TraitAttribute("Category", "formulated")]
+        public virtual void TrabalhadorGuardaOComprovanteDePonto()
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = new string[] {
+                    "formulated"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador guarda a apuração mensal dos pontos registrados", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 22
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador guarda o comprovante de ponto", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 16
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -165,38 +153,17 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 9
-this.FeatureBackground();
+#line 17
+ testRunner.Given("que o trabalhador escaneou um comprovante de ponto com a data \'17/02/2023 17:07\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
-                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
-                            "data/hora",
-                            "momento"});
-                table4.AddRow(new string[] {
-                            "27/11/2022 09:14",
-                            "Entrada"});
-                table4.AddRow(new string[] {
-                            "27/11/2022 11:30",
-                            "Saida"});
-                table4.AddRow(new string[] {
-                            "27/11/2022 12:27",
-                            "Entrada"});
-                table4.AddRow(new string[] {
-                            "27/11/2022 18:03",
-                            "Saida"});
-#line 23
- testRunner.Given("que os pontos registrados foram:", ((string)(null)), table4, "Dado ");
+#line 18
+ testRunner.When("o trabalhador guardar o comprovante de ponto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
-#line 29
- testRunner.When("o trabalhador fechar a folha de ponto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
+#line 19
+ testRunner.Then("o comprovante de ponto deverá ser guardado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
-#line 30
- testRunner.Then("a folha de ponto deverá ser fechada", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
-#line hidden
-#line 31
- testRunner.And("o tempo total apurado deverá ser \'07:52\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
-#line hidden
-#line 32
- testRunner.But("o tempo total período anterior deverá ser nulo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Mas ");
+#line 20
+ testRunner.And("a data do ponto do comprovante deverá ser \'17/02/2023 17:07\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -209,12 +176,12 @@ this.FeatureBackground();
             
             public FixtureData()
             {
-                FecharFolhaFeature.FeatureSetup();
+                BackupComprovantesFeature.FeatureSetup();
             }
             
             void System.IDisposable.Dispose()
             {
-                FecharFolhaFeature.FeatureTearDown();
+                BackupComprovantesFeature.FeatureTearDown();
             }
         }
     }

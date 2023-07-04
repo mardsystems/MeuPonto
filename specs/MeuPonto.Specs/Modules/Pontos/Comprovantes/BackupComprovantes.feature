@@ -1,10 +1,6 @@
 ﻿# language: pt-br
 
-Funcionalidade: Guardar Comprovante
-	Para preservar o meu comprovante de ponto
-	E saber o tempo total trabalhado
-	Enquanto trabalhador
-	Eu quero guardar o meu comprovante
+Funcionalidade: Backup Comprovantes
 
 Regra: Escaneamento de comprovante de ponto
 

@@ -1,10 +1,6 @@
 ﻿# language: pt-br
 
-Funcionalidade: Criar Perfil
-	Para identificar o meu vínculo com o empregador
-	E saber o tempo total previsto de trabalho na minha folha de ponto
-	Enquanto trabalhador
-	Eu quero criar um perfil
+Funcionalidade: Cadastro Perfis
 
 Regra: Identificação do vínculo do trabalhador com o empregador
 
@@ -21,6 +17,14 @@ Cenário: Trabalhador cria um perfil para identificar seu novo vínculo com o em
 	Quando o trabalhador criar um perfil
 	Então um perfil deverá ser cadastrado
 	E o nome do perfil deverá ser 'Marcelo - Ateliex - Consultor'
+
+Cenário: Trabalhador edita um perfil para corrigir um erro de digitação na matrícula
+	Dado que o trabalhador tem um perfil cadastrado com a matrícula '0001'
+	E que o trabalhador identifica na lista o perfil cadastrado
+	E que a matrícula do trabalhador é '0002'
+	Quando o trabalhador editar o perfil
+	Então o perfil deverá ser editado
+	E a matrícula do perfil deverá ser '0002'
 
 Regra: Tempo Total = Tempo Monday + Tempo Tuesday + Tempo Wednesday + Tempo Thursday + Tempo Friday + Tempo Saturday + Tempo Sunday
 
@@ -54,3 +58,11 @@ Cenário: Trabalhador cria um perfil com uma jornada de trabalho prevista de 44 
 		| Friday     | 08:00:00 |
 		| Saturday   | 04:00:00 |
 	E o tempo total da jornada de trabalho semanal prevista deverá ser '1.20:00'
+
+Regra: Remoção de perfil
+	
+Cenário: Trabalhador identifica na lista de perfis um perfil que não era necessário
+	Dado que o trabalhador tem um perfil cadastrado com a matrícula '0001'
+	E que o trabalhador identifica na lista o perfil cadastrado
+	Quando o trabalhador excluir o perfil
+	Então o perfil deverá ser excluído
