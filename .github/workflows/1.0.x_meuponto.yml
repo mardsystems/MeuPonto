@@ -51,7 +51,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'app-meuponto-prod-01'
+          app-name: 'meuponto'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_BED64CDDE7B84740AA56AD814DD5DF36 }}
           package: .
