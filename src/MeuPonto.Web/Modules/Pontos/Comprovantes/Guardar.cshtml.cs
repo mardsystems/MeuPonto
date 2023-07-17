@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
 
 namespace MeuPonto.Modules.Pontos.Comprovantes;
 
@@ -17,7 +18,9 @@ public class GuardarComprovanteModel : PageModel
 
     public IActionResult OnGet()
     {
-        var transaction = new TransactionContext(User.Identity.Name);
+        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
+
+        var transaction = new TransactionContext(nameIdentifier.Value);
 
         Comprovante = ComprovanteFactory.CriaComprovante(transaction);
 
@@ -40,7 +43,9 @@ public class GuardarComprovanteModel : PageModel
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync(string? command)
     {
-        var transaction = new TransactionContext(User.Identity.Name);
+        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
+
+        var transaction = new TransactionContext(nameIdentifier.Value);
 
         Comprovante.RecontextualizaComprovante(transaction);
 
@@ -72,7 +77,7 @@ public class GuardarComprovanteModel : PageModel
         {
             Ponto.RecontextualizaPonto(transaction);
 
-            var perfil = await _db.Perfis.FindByIdAsync(Ponto.PerfilId, User.Identity.Name);
+            var perfil = await _db.Perfis.FindByIdAsync(Ponto.PerfilId, nameIdentifier.Value);
 
             perfil.QualificaPonto(Ponto);
 

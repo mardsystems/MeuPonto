@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Security.Claims;
 
 namespace MeuPonto.Modules.Pontos;
 
@@ -22,7 +23,9 @@ public class MarcarModel : PageModel
 
     public IActionResult OnGet()
     {
-        var transaction = new TransactionContext(User.Identity.Name);
+        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
+
+        var transaction = new TransactionContext(nameIdentifier.Value);
 
         Ponto = PontoFactory.CriaPonto(transaction);
 
@@ -39,7 +42,9 @@ public class MarcarModel : PageModel
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync()
     {
-        var transaction = new TransactionContext(User.Identity.Name);
+        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
+
+        var transaction = new TransactionContext(nameIdentifier.Value);
 
         if (!ModelState.IsValid)
         {
@@ -50,7 +55,7 @@ public class MarcarModel : PageModel
 
         Ponto.RecontextualizaPonto(transaction);
 
-        var perfil = await _db.Perfis.FindByIdAsync(Ponto.PerfilId, User.Identity.Name);
+        var perfil = await _db.Perfis.FindByIdAsync(Ponto.PerfilId, nameIdentifier.Value);
 
         perfil.QualificaPonto(Ponto);
 

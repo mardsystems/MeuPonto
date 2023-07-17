@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
 
 namespace MeuPonto.Modules.Pontos.Comprovantes;
 
@@ -19,7 +20,9 @@ public class CriarComprovanteModel : PageModel
 
     public async Task<IActionResult> OnGet()
     {
-        var transaction = new TransactionContext(User.Identity.Name);
+        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
+
+        var transaction = new TransactionContext(nameIdentifier.Value);
 
         Comprovante = ComprovanteFactory.CriaComprovante(transaction);
 
@@ -36,13 +39,15 @@ public class CriarComprovanteModel : PageModel
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync()
     {
-        var transaction = new TransactionContext(User.Identity.Name);
+        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
+
+        var transaction = new TransactionContext(nameIdentifier.Value);
 
         Comprovante.RecontextualizaComprovante(transaction);
 
         if (ModelState.ContainsKey($"{nameof(Comprovante)}.{nameof(Comprovante.Imagem)}")) ModelState.Remove($"{nameof(Comprovante)}.{nameof(Comprovante.Imagem)}");
 
-        var ponto = await _db.Pontos.FindByIdAsync(PontoId, User.Identity.Name);
+        var ponto = await _db.Pontos.FindByIdAsync(PontoId, nameIdentifier.Value);
 
         Comprovante.ComprovaPonto(ponto);
 

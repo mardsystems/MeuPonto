@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using MeuPonto.Data;
+using System.Security.Claims;
 
 namespace MeuPonto.Modules.Pontos.Folhas;
 
@@ -18,7 +19,9 @@ public class CriarFolhaModel : PageModel
 
     public IActionResult OnGet()
     {
-        var transaction = new TransactionContext(User.Identity.Name);
+        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
+
+        var transaction = new TransactionContext(nameIdentifier.Value);
 
         ViewData["PerfilId"] = new SelectList(_db.Perfis, "Id", "Nome");
 
@@ -43,7 +46,9 @@ public class CriarFolhaModel : PageModel
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync(string? command)
     {
-        var transaction = new TransactionContext(User.Identity.Name);
+        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
+
+        var transaction = new TransactionContext(nameIdentifier.Value);
 
         Folha.RecontextualizaFolha(transaction);
 
@@ -58,7 +63,7 @@ public class CriarFolhaModel : PageModel
 
         Folha.StatusId = StatusEnum.Aberta;
 
-        var perfil = await _db.Perfis.FindByIdAsync(Folha.PerfilId, User.Identity.Name);
+        var perfil = await _db.Perfis.FindByIdAsync(Folha.PerfilId, nameIdentifier.Value);
 
         perfil.QualificaFolha(Folha);
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Security.Claims;
 
 namespace MeuPonto.Modules.Perfis.Empregadores;
 
@@ -23,7 +24,9 @@ public class CriarModel : PageModel
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync()
     {
-        var transaction = new TransactionContext(User.Identity.Name);
+        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
+
+        var transaction = new TransactionContext(nameIdentifier.Value);
 
         Empregador.RecontextualizaEmpregador(transaction);
 

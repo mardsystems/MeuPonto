@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace MeuPonto.Modules.Pontos.Comprovantes;
 
@@ -43,7 +44,9 @@ public class ExcluirComprovanteModel : PageModel
         {
             return NotFound();
         }
-        var comprovante = await _db.Comprovantes.FindByIdAsync(id, User.Identity.Name);
+        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
+
+        var comprovante = await _db.Comprovantes.FindByIdAsync(id, nameIdentifier.Value);
 
         if (comprovante != null)
         {

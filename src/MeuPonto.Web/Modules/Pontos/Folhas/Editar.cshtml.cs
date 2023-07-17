@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using MeuPonto.Data;
+using System.Security.Claims;
 
 namespace MeuPonto.Modules.Pontos.Folhas;
 
@@ -63,9 +64,11 @@ public class EditarFolhaModel : PageModel
             ViewData["PerfilId"] = new SelectList(_db.Perfis, "Id", "Nome");
 
             return Page();
-        }        
+        }
 
-        var perfil = await _db.Perfis.FindByIdAsync(Folha.PerfilId, User.Identity.Name);
+        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
+
+        var perfil = await _db.Perfis.FindByIdAsync(Folha.PerfilId, nameIdentifier.Value);
 
         perfil.QualificaFolha(Folha);
 

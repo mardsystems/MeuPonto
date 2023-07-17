@@ -3,6 +3,7 @@ using MeuPonto.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Security.Claims;
 
 namespace MeuPonto.Modules.Perfis;
 
@@ -17,7 +18,9 @@ public class CriarModel : PageModel
 
     public IActionResult OnGet()
     {
-        var transaction = new TransactionContext(User.Identity.Name);
+        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
+
+        var transaction = new TransactionContext(nameIdentifier.Value);
 
         Perfil = PerfilFactory.CriaPerfil(transaction);
 
@@ -45,7 +48,9 @@ public class CriarModel : PageModel
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync()
     {
-        var transaction = new TransactionContext(User.Identity.Name);
+        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
+
+        var transaction = new TransactionContext(nameIdentifier.Value);
 
         Perfil.RecontextualizaPerfil(transaction);
 
@@ -56,7 +61,7 @@ public class CriarModel : PageModel
 
         if (Perfil.EmpregadorId.HasValue)
         {
-            var empregador = await _db.Empregadores.FindByIdAsync(Perfil.EmpregadorId, User.Identity.Name);
+            var empregador = await _db.Empregadores.FindByIdAsync(Perfil.EmpregadorId, nameIdentifier.Value);
 
             Perfil.VinculaEmpregador(empregador);
         }

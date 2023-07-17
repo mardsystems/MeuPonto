@@ -3,6 +3,7 @@ using MeuPonto.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Caching.Memory;
+using System.Security.Claims;
 
 namespace MeuPonto.Modules;
 
@@ -43,7 +44,9 @@ public class ConfiguracoesModel : PageModel
     {
         ResetSuccess = false;
 
-        Configuracoes = await _db.Configuracoes.FindAsync(User.Identity.Name);
+        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
+
+        Configuracoes = await _db.Configuracoes.FindAsync(nameIdentifier.Value);
 
         if (Configuracoes == null)
         {
@@ -71,13 +74,15 @@ public class ConfiguracoesModel : PageModel
             ResetSuccess = true;
         }
 
-        var configuracoes = await _db.Configuracoes.FindAsync(User.Identity.Name);
+        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
+
+        var configuracoes = await _db.Configuracoes.FindAsync(nameIdentifier.Value);
 
         if (configuracoes == null)
         {
             configuracoes = new ConfiguracaoPorUsuario
             {
-                UserName = User.Identity.Name,
+                UserName = nameIdentifier.Value,
                 JavascriptIsEnabled = JavascriptIsEnabled
             };
 

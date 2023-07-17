@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace MeuPonto.Modules.Pontos;
 
@@ -43,7 +44,9 @@ public class ExcluirModel : PageModel
         {
             return NotFound();
         }
-        var ponto = await _db.Pontos.FindByIdAsync(id, User.Identity.Name);
+        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
+
+        var ponto = await _db.Pontos.FindByIdAsync(id, nameIdentifier.Value);
 
         if (ponto != null)
         {

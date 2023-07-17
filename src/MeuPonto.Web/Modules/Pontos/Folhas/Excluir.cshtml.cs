@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace MeuPonto.Modules.Pontos.Folhas;
 
@@ -43,7 +44,9 @@ public class ExcluirFolhaModel : PageModel
         {
             return NotFound();
         }
-        var folha = await _db.Folhas.FindByIdAsync(id, User.Identity.Name);
+        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
+
+        var folha = await _db.Folhas.FindByIdAsync(id, nameIdentifier.Value);
 
         if (folha != null)
         {
