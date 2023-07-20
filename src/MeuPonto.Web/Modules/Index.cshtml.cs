@@ -1,6 +1,7 @@
 ﻿using MeuPonto.Modules.Pontos;
 using MeuPonto.Modules.Pontos.Folhas;
 using MeuPonto.Modules.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -10,6 +11,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MeuPonto.Modules;
 
+[AllowAnonymous]
 public class IndexModel : PageModel
 {
     private readonly Data.MeuPontoDbContext _db;

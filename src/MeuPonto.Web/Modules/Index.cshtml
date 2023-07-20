@@ -9,439 +9,559 @@
         <li class="breadcrumb-item active" aria-current="page"><i class="bi bi-house"></i></li>
     </ol>
 </nav>
- 
+
 <h1>@ViewData["Title"]</h1>*@
 
-@if (ViewBag.HasPerfil)
+@if (User.Identity?.IsAuthenticated == true)
 {
-    <div class="d-grid gap-2 col-sm-10 col-md-8 col-lg-6 mx-auto mb-3">
-        <a class="btn btn-primary btn-lg Marcacao Ponto" asp-page="./Pontos/Marcar">
-            <i class="bi bi-check2-circle"></i>
-            Marcar Ponto
-        </a>
-        <a class="btn btn-primary btn-lg" asp-page="/Pontos/Comprovantes/Guardar">
-            <i class="bi bi-qr-code"></i>
-            Guardar Comprovante de Ponto
-        </a>
-    </div>
-
-    <div class="mb-3">
-        <form class="row row-cols-md-auto g-2 justify-content-md-center" method="get">
-            <div class="col-12">
-                <div class="input-group">
-                    <label asp-for="PerfilId" class="input-group-text"></label>
-                    <select asp-for="PerfilId" class="form-select" asp-items="ViewBag.PerfilId"></select>
-                </div>
-            </div>
-            <div action="col-12">
-                <div class="input-group">
-                    <label class="input-group-text">Competência</label>
-                    <label asp-for="CompetenciaAno" class="visually-hidden"></label>
-                    <input asp-for="CompetenciaAno" class="form-control" placeholder="Ano" />
-                    <label asp-for="CompetenciaMes" class="visually-hidden"></label>
-                    <select asp-for="CompetenciaMes" class="form-select">
-                        <option value="" disabled selected>Mês</option>
-                        <option value="1">01 (janeiro)</option>
-                        <option value="2">02 (fevereiro)</option>
-                        <option value="3">03 (março)</option>
-                        <option value="4">04 (abril)</option>
-                        <option value="5">05 (maio)</option>
-                        <option value="6">06 (junho)</option>
-                        <option value="7">07 (julho)</option>
-                        <option value="8">08 (agosto)</option>
-                        <option value="9">09 (setembro)</option>
-                        <option value="10">10 (outubro)</option>
-                        <option value="11">11 (novembro)</option>
-                        <option value="12">12 (dezembro)</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-12">
-                <button type="submit" class="btn btn-primary">
-                    <i class="bi bi-search"></i>
-                    Buscar
-                </button>
-            </div>
-        </form>
-    </div>
-    @if (Model.Folha == null)
+    if (ViewBag.HasPerfil)
     {
-        <div class="alert alert-info" role="alert">
-            Use a busca acima para <b>apurar uma folha de ponto</b>.
-            Se preferir, você também pode <a class="Abertura Folha" asp-page="/Pontos/Folhas/Abrir">abrir uma folha nova</a>.
-        </div>
-    }
-    else
-    {
-        <div class="row justify-content-md-center mb-4">
-            <div class="col col-md-6">
-                <div class="card folha2">
-                    <div class="card-header">
-                        Folha de Ponto
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            @Html.DisplayFor(model => model.Folha.Competencia)
-                            <span class="badge @(Model.Folha.StatusId == Pontos.Folhas.StatusEnum.Aberta ? "text-bg-warning" : "text-bg-success")"><i class="bi @(Model.Folha.StatusId == Pontos.Folhas.StatusEnum.Aberta ? "bi-file-earmark-fill" : "bi-file-earmark-lock-fill")"></i></span>
-                        </h5>
-                        @if (Model.Folha.StatusId == Pontos.Folhas.StatusEnum.Aberta)
-                        {
-                            <p class="card-text">
-                                Esta folha de ponto está <b>aberta</b> e sendo apurada.
-                            </p>
-                        }
-                        else
-                        {
-                            <p class="card-text">
-                                Esta folha de ponto está <b>fechada</b>.
-                            </p>
-                        }
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item d-flex justify-content-between align-items-start">
-                            <div class="ms-2 me-auto">
-                                <div class="fw-bold">
-                                    Tempo Total Previsto
-                                </div>
-                            </div>
-                            <span class="badge text-bg-secondary rounded-pill">
-                                @Html.DisplayFor(model => model.ApuracaoMensal.TempoTotalPrevisto)
-                            </span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-start">
-                            <div class="ms-2 me-auto">
-                                <div class="fw-bold">
-                                    Tempo Total Apurado
-                                </div>
-                            </div>
-                            <span class="badge rounded-pill bg-primary tempoTotalApurado">
-                                @Html.DisplayFor(model => model.ApuracaoMensal.TempoTotalApurado)
-                            </span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-start">
-                            <div class="ms-2 me-auto">
-                                <div class="fw-bold">
-                                    Diferença Tempo Total
-                                </div>
-                            </div>
-                            <span class="badge rounded-pill @(Model.ApuracaoMensal.DiferencaTempoTotal >= TimeSpan.Zero ? "bg-success": "bg-danger")">
-                                @Html.DisplayFor(model => model.ApuracaoMensal.DiferencaTempoTotal)
-                            </span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-start">
-                            <div class="ms-2 me-auto">
-                                <div class="fw-bold">
-                                    @Html.DisplayNameFor(model => model.Folha.Observacao)
-                                </div>
-                                @Html.DisplayFor(model => model.Folha.Observacao)
-                            </div>
-                        </li>
-                    </ul>
-                    <div class="card-body">
-                        @if (Model.Folha.StatusId == Pontos.Folhas.StatusEnum.Aberta)
-                        {
-                            <a class="card-link text-decoration-none" asp-page="/Pontos/Folhas/Fechar" asp-route-id="@Model.Folha.Id">
-                                Fechar
-                                <i class="bi bi-lock"></i>
-                            </a>
-                        }
-                        else
-                        {
-                            <a class="card-link text-decoration-none" asp-page="/Pontos/Folhas/Reabrir" asp-route-id="@Model.Folha.Id">
-                                Reabrir
-                                <i class="bi bi-unlock"></i>
-                            </a>
-                        }
-                        <a class="card-link text-decoration-none edicao" asp-page="/Pontos/Folhas/Editar" asp-route-id="@Model.Folha.Id">
-                            Editar
-                            <i class="bi bi-pencil"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card apuracaoMensal">
-                    <div class="card-header">
-                        Apuração Mensal
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item d-flex justify-content-between align-items-start">
-                            <div class="ms-2 me-auto">
-                                <div class="fw-bold">
-                                    @Html.DisplayNameFor(model => model.Folha.ApuracaoMensal.TempoTotalApurado)
-                                </div>
-                            </div>
-                            <span class="badge rounded-pill bg-primary">
-                                @Html.DisplayFor(model => model.Folha.ApuracaoMensal.TempoTotalApurado)
-                            </span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-start">
-                            <div class="ms-2 me-auto">
-                                <div class="fw-bold">
-                                    @Html.DisplayNameFor(model => model.Folha.ApuracaoMensal.TempoTotalPeriodoAnterior)
-                                </div>
-                            </div>
-                            <span class="badge rounded-pill text-bg-light">
-                                @Html.DisplayFor(model => model.Folha.ApuracaoMensal.TempoTotalPeriodoAnterior)
-                            </span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+        <div class="d-grid gap-2 col-sm-10 col-md-8 col-lg-6 mx-auto mb-3">
+            <a class="btn btn-primary btn-lg Marcacao Ponto" asp-page="./Pontos/Marcar">
+                <i class="bi bi-check2-circle"></i>
+                Marcar Ponto
+            </a>
+            <a class="btn btn-primary btn-lg" asp-page="/Pontos/Comprovantes/Guardar">
+                <i class="bi bi-qr-code"></i>
+                Guardar Comprovante de Ponto
+            </a>
         </div>
 
-        @for (int semanaIndex = 0; semanaIndex < Model.ApuracaoMensal.TotalSemanas; semanaIndex++)
+        <div class="mb-3">
+            <form class="row row-cols-md-auto g-2 justify-content-md-center" method="get">
+                <div class="col-12">
+                    <div class="input-group">
+                        <label asp-for="PerfilId" class="input-group-text"></label>
+                        <select asp-for="PerfilId" class="form-select" asp-items="ViewBag.PerfilId"></select>
+                    </div>
+                </div>
+                <div action="col-12">
+                    <div class="input-group">
+                        <label class="input-group-text">Competência</label>
+                        <label asp-for="CompetenciaAno" class="visually-hidden"></label>
+                        <input asp-for="CompetenciaAno" class="form-control" placeholder="Ano" />
+                        <label asp-for="CompetenciaMes" class="visually-hidden"></label>
+                        <select asp-for="CompetenciaMes" class="form-select">
+                            <option value="" disabled selected>Mês</option>
+                            <option value="1">01 (janeiro)</option>
+                            <option value="2">02 (fevereiro)</option>
+                            <option value="3">03 (março)</option>
+                            <option value="4">04 (abril)</option>
+                            <option value="5">05 (maio)</option>
+                            <option value="6">06 (junho)</option>
+                            <option value="7">07 (julho)</option>
+                            <option value="8">08 (agosto)</option>
+                            <option value="9">09 (setembro)</option>
+                            <option value="10">10 (outubro)</option>
+                            <option value="11">11 (novembro)</option>
+                            <option value="12">12 (dezembro)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-search"></i>
+                        Buscar
+                    </button>
+                </div>
+            </form>
+        </div>
+        @if (Model.Folha == null)
         {
-            var apuracaoSemanal = Model.ApuracaoMensal.Semanas[semanaIndex];
-
-            <div class="row row-cols-8 row-col-md-8 g-1 mb-1">
-                <div class="col">
-                    <div class="card apuracaoSemanal @(apuracaoSemanal.TempoPeriodo.Atual ? "border border-secondary border-2" : "")">
+            <div class="alert alert-info" role="alert">
+                Use a busca acima para <b>apurar uma folha de ponto</b>.
+                Se preferir, você também pode <a class="Abertura Folha" asp-page="/Pontos/Folhas/Abrir">abrir uma folha nova</a>.
+            </div>
+        }
+        else
+        {
+            <div class="row justify-content-md-center mb-4">
+                <div class="col col-md-6">
+                    <div class="card folha2">
                         <div class="card-header">
-                            Semana #@apuracaoSemanal.NumeroSemana
+                            Folha de Ponto
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                @Html.DisplayFor(model => model.Folha.Competencia)
+                                <span class="badge @(Model.Folha.StatusId == Pontos.Folhas.StatusEnum.Aberta ? "text-bg-warning" : "text-bg-success")"><i class="bi @(Model.Folha.StatusId == Pontos.Folhas.StatusEnum.Aberta ? "bi-file-earmark-fill" : "bi-file-earmark-lock-fill")"></i></span>
+                            </h5>
+                            @if (Model.Folha.StatusId == Pontos.Folhas.StatusEnum.Aberta)
+                            {
+                                <p class="card-text">
+                                    Esta folha de ponto está <b>aberta</b> e sendo apurada.
+                                </p>
+                            }
+                            else
+                            {
+                                <p class="card-text">
+                                    Esta folha de ponto está <b>fechada</b>.
+                                </p>
+                            }
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                 <div class="ms-2 me-auto">
                                     <div class="fw-bold">
-                                        Ap.
+                                        Tempo Total Previsto
                                     </div>
                                 </div>
-                                @if (apuracaoSemanal.TempoPeriodo.Futuro)
-                                {
-                                    <span class="badge rounded-pill text-bg-secondary">
-                                        @Html.DisplayFor(model => apuracaoSemanal.TempoTotalApurado)
-                                    </span>
-                                }
-                                else
-                                {
-                                    <span class="badge rounded-pill text-bg-primary">
-                                        @Html.DisplayFor(model => apuracaoSemanal.TempoTotalApurado)
-                                    </span>
-                                }
+                                <span class="badge text-bg-secondary rounded-pill">
+                                    @Html.DisplayFor(model => model.ApuracaoMensal.TempoTotalPrevisto)
+                                </span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                 <div class="ms-2 me-auto">
                                     <div class="fw-bold">
-                                        Dif.
+                                        Tempo Total Apurado
                                     </div>
                                 </div>
-                                @if (apuracaoSemanal.TempoPeriodo.Futuro)
-                                {
-                                    <span class="badge rounded-pill text-bg-secondary">
-                                        @Html.DisplayFor(model => apuracaoSemanal.DiferencaTempoTotal)
-                                    </span>
-                                }
-                                else
-                                {
-                                    <span class="badge rounded-pill @(apuracaoSemanal.DiferencaTempoTotal >= TimeSpan.Zero ? "text-bg-success" : "text-bg-danger")">
-                                        @Html.DisplayFor(model => apuracaoSemanal.DiferencaTempoTotal)
-                                    </span>
-                                }
+                                <span class="badge rounded-pill bg-primary tempoTotalApurado">
+                                    @Html.DisplayFor(model => model.ApuracaoMensal.TempoTotalApurado)
+                                </span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">
+                                        Diferença Tempo Total
+                                    </div>
+                                </div>
+                                <span class="badge rounded-pill @(Model.ApuracaoMensal.DiferencaTempoTotal >= TimeSpan.Zero ? "bg-success": "bg-danger")">
+                                    @Html.DisplayFor(model => model.ApuracaoMensal.DiferencaTempoTotal)
+                                </span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">
+                                        @Html.DisplayNameFor(model => model.Folha.Observacao)
+                                    </div>
+                                    @Html.DisplayFor(model => model.Folha.Observacao)
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="card-body">
+                            @if (Model.Folha.StatusId == Pontos.Folhas.StatusEnum.Aberta)
+                            {
+                                <a class="card-link text-decoration-none" asp-page="/Pontos/Folhas/Fechar" asp-route-id="@Model.Folha.Id">
+                                    Fechar
+                                    <i class="bi bi-lock"></i>
+                                </a>
+                            }
+                            else
+                            {
+                                <a class="card-link text-decoration-none" asp-page="/Pontos/Folhas/Reabrir" asp-route-id="@Model.Folha.Id">
+                                    Reabrir
+                                    <i class="bi bi-unlock"></i>
+                                </a>
+                            }
+                            <a class="card-link text-decoration-none edicao" asp-page="/Pontos/Folhas/Editar" asp-route-id="@Model.Folha.Id">
+                                Editar
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card apuracaoMensal">
+                        <div class="card-header">
+                            Apuração Mensal
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">
+                                        @Html.DisplayNameFor(model => model.Folha.ApuracaoMensal.TempoTotalApurado)
+                                    </div>
+                                </div>
+                                <span class="badge rounded-pill bg-primary">
+                                    @Html.DisplayFor(model => model.Folha.ApuracaoMensal.TempoTotalApurado)
+                                </span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">
+                                        @Html.DisplayNameFor(model => model.Folha.ApuracaoMensal.TempoTotalPeriodoAnterior)
+                                    </div>
+                                </div>
+                                <span class="badge rounded-pill text-bg-light">
+                                    @Html.DisplayFor(model => model.Folha.ApuracaoMensal.TempoTotalPeriodoAnterior)
+                                </span>
                             </li>
                         </ul>
                     </div>
                 </div>
+            </div>
 
-                @for (int diaSemanaIndex = 0; diaSemanaIndex < 7; diaSemanaIndex++)
-                {
-                    var diaIndex = (semanaIndex * 7) + diaSemanaIndex;
+            @for (int semanaIndex = 0; semanaIndex < Model.ApuracaoMensal.TotalSemanas; semanaIndex++)
+            {
+                var apuracaoSemanal = Model.ApuracaoMensal.Semanas[semanaIndex];
 
-                    if (diaIndex < (int)Model.ApuracaoMensal.PrimeiroDiaSemanaMes)
-                    {
-                        <div class="col">
-                        </div>
-                    }
-                    else if (diaIndex < Model.ApuracaoMensal.TotalDias + (int)Model.ApuracaoMensal.PrimeiroDiaSemanaMes)
-                    {
-                        var apuracaoDiaria = Model.ApuracaoMensal.Dias[diaIndex - (int)Model.ApuracaoMensal.PrimeiroDiaSemanaMes];
-
-                        <div class="col">
-                            <div class="card apuracaoDiaria @(apuracaoDiaria.TempoPeriodo.Atual ? "border border-primary border-2" : "") @(apuracaoDiaria.TempoPrevisto == TimeSpan.Zero ? "text-bg-secondary" : "")">
-                                <div class="card-header">
-                                    @apuracaoDiaria.DescricaoDia
-                                </div>
-                                <div class="card-body">
-                                    <h1 class="card-title d-flex justify-content-center">
-                                        @apuracaoDiaria.Dia
-                                    </h1>
-                                    <div class="card-text d-flex justify-content-center">
-                                        @if (apuracaoDiaria.Feriado)
-                                        {
-                                            <span class="badge text-bg-info">Feriado</span>
-                                        }
+                <div class="row row-cols-8 row-col-md-8 g-1 mb-1">
+                    <div class="col">
+                        <div class="card apuracaoSemanal @(apuracaoSemanal.TempoPeriodo.Atual ? "border border-secondary border-2" : "")">
+                            <div class="card-header">
+                                Semana #@apuracaoSemanal.NumeroSemana
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between align-items-start">
+                                    <div class="ms-2 me-auto">
+                                        <div class="fw-bold">
+                                            Ap.
+                                        </div>
                                     </div>
-                                </div>
-                                @if (apuracaoDiaria.TempoPrevisto != TimeSpan.Zero || apuracaoDiaria.TempoApurado != TimeSpan.Zero)
-                                {
-                                    <ol class="list-group list-group-flush">
-                                        <li class="list-group-item d-flex justify-content-between align-items-start">
-                                            <div class="ms-2 me-auto">
-                                                <div class="fw-bold">
-                                                    Ap.
-                                                </div>
-                                            </div>
-                                            @if (apuracaoDiaria.TempoPeriodo.Futuro)
+                                    @if (apuracaoSemanal.TempoPeriodo.Futuro)
+                                    {
+                                        <span class="badge rounded-pill text-bg-secondary">
+                                            @Html.DisplayFor(model => apuracaoSemanal.TempoTotalApurado)
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge rounded-pill text-bg-primary">
+                                            @Html.DisplayFor(model => apuracaoSemanal.TempoTotalApurado)
+                                        </span>
+                                    }
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-start">
+                                    <div class="ms-2 me-auto">
+                                        <div class="fw-bold">
+                                            Dif.
+                                        </div>
+                                    </div>
+                                    @if (apuracaoSemanal.TempoPeriodo.Futuro)
+                                    {
+                                        <span class="badge rounded-pill text-bg-secondary">
+                                            @Html.DisplayFor(model => apuracaoSemanal.DiferencaTempoTotal)
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge rounded-pill @(apuracaoSemanal.DiferencaTempoTotal >= TimeSpan.Zero ? "text-bg-success" : "text-bg-danger")">
+                                            @Html.DisplayFor(model => apuracaoSemanal.DiferencaTempoTotal)
+                                        </span>
+                                    }
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    @for (int diaSemanaIndex = 0; diaSemanaIndex < 7; diaSemanaIndex++)
+                    {
+                        var diaIndex = (semanaIndex * 7) + diaSemanaIndex;
+
+                        if (diaIndex < (int)Model.ApuracaoMensal.PrimeiroDiaSemanaMes)
+                        {
+                            <div class="col">
+                            </div>
+                        }
+                        else if (diaIndex < Model.ApuracaoMensal.TotalDias + (int)Model.ApuracaoMensal.PrimeiroDiaSemanaMes)
+                        {
+                            var apuracaoDiaria = Model.ApuracaoMensal.Dias[diaIndex - (int)Model.ApuracaoMensal.PrimeiroDiaSemanaMes];
+
+                            <div class="col">
+                                <div class="card apuracaoDiaria @(apuracaoDiaria.TempoPeriodo.Atual ? "border border-primary border-2" : "") @(apuracaoDiaria.TempoPrevisto == TimeSpan.Zero ? "text-bg-secondary" : "")">
+                                    <div class="card-header">
+                                        @apuracaoDiaria.DescricaoDia
+                                    </div>
+                                    <div class="card-body">
+                                        <h1 class="card-title d-flex justify-content-center">
+                                            @apuracaoDiaria.Dia
+                                        </h1>
+                                        <div class="card-text d-flex justify-content-center">
+                                            @if (apuracaoDiaria.Feriado)
                                             {
-                                                <span class="badge text-bg-secondary rounded-pill">
-                                                    @apuracaoDiaria.TempoApurado.ToString("hh\\:mm")
-                                                </span>
+                                                <span class="badge text-bg-info">Feriado</span>
                                             }
-                                            else if (apuracaoDiaria.TempoApuradoIdeterminado)
-                                            {
-                                                <span class="badge text-bg-warning rounded-pill">
-                                                    @apuracaoDiaria.TempoApurado.ToString("hh\\:mm")
-                                                </span>
-                                            }
-                                            else
-                                            {
-                                                <span class="badge rounded-pill bg-primary">
-                                                    @apuracaoDiaria.TempoApurado.ToString("hh\\:mm")
-                                                </span>
-                                            }
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-start">
-                                            <div class="ms-2 me-auto">
-                                                <div class="fw-bold">
-                                                    Dif.
-                                                </div>
-                                            </div>
-                                            @if (apuracaoDiaria.TempoPeriodo.Futuro)
-                                            {
-                                                <span class="badge text-bg-secondary rounded-pill">
-                                                    @apuracaoDiaria.DiferencaTempo.ToString("hh\\:mm")
-                                                </span>
-                                            }
-                                            else
-                                            {
-                                                if (apuracaoDiaria.DiferencaTempo >= TimeSpan.Zero)
-                                                {
-                                                    <span class="badge text-bg-success rounded-pill">
-                                                        @apuracaoDiaria.DiferencaTempo.ToString("hh\\:mm")
-                                                    </span>
-                                                }
-                                                else
-                                                {
-                                                    <span class="badge text-bg-danger rounded-pill">
-                                                        @apuracaoDiaria.DiferencaTempo.ToString("hh\\:mm")
-                                                    </span>
-                                                }
-                                            }
-                                        </li>
-                                        @if (apuracaoDiaria.TempoAbonado != TimeSpan.Zero)
-                                        {
+                                        </div>
+                                    </div>
+                                    @if (apuracaoDiaria.TempoPrevisto != TimeSpan.Zero || apuracaoDiaria.TempoApurado != TimeSpan.Zero)
+                                    {
+                                        <ol class="list-group list-group-flush">
                                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                                 <div class="ms-2 me-auto">
                                                     <div class="fw-bold">
-                                                        Ab.
+                                                        Ap.
                                                     </div>
                                                 </div>
                                                 @if (apuracaoDiaria.TempoPeriodo.Futuro)
                                                 {
                                                     <span class="badge text-bg-secondary rounded-pill">
-                                                        @apuracaoDiaria.TempoAbonado.ToString("hh\\:mm")
+                                                        @apuracaoDiaria.TempoApurado.ToString("hh\\:mm")
+                                                    </span>
+                                                }
+                                                else if (apuracaoDiaria.TempoApuradoIdeterminado)
+                                                {
+                                                    <span class="badge text-bg-warning rounded-pill">
+                                                        @apuracaoDiaria.TempoApurado.ToString("hh\\:mm")
                                                     </span>
                                                 }
                                                 else
                                                 {
-                                                    <span class="badge rounded-pill text-bg-info">
-                                                        @apuracaoDiaria.TempoAbonado.ToString("hh\\:mm")
+                                                    <span class="badge rounded-pill bg-primary">
+                                                        @apuracaoDiaria.TempoApurado.ToString("hh\\:mm")
                                                     </span>
                                                 }
                                             </li>
-                                        }
-                                    </ol>
-                                }
-                                @if (apuracaoDiaria.Pontos.Length > 0)
-                                {
-                                    <ul class="list-group list-group-flush">
-                                        @foreach (var ponto in apuracaoDiaria.Pontos)
-                                        {
-                                            <li class="list-group-item">
-                                                @if (ponto.MomentoId == Pontos.MomentoEnum.Entrada)
+                                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                                <div class="ms-2 me-auto">
+                                                    <div class="fw-bold">
+                                                        Dif.
+                                                    </div>
+                                                </div>
+                                                @if (apuracaoDiaria.TempoPeriodo.Futuro)
                                                 {
-                                                    <span class="text-success">
-                                                        <i class="bi bi-box-arrow-in-down-right"></i>
+                                                    <span class="badge text-bg-secondary rounded-pill">
+                                                        @apuracaoDiaria.DiferencaTempo.ToString("hh\\:mm")
                                                     </span>
                                                 }
-                                                else if (ponto.MomentoId == Pontos.MomentoEnum.Saida)
+                                                else
                                                 {
-                                                    <span class="text-danger">
-                                                        <i class="bi bi-box-arrow-up-left"></i>
-                                                    </span>
-                                                }
-                                                <a asp-page="/Pontos/Detalhar" asp-route-id="@ponto.Id" title="Detalhar Ponto">@ponto.DataHora.Value.ToString("HH:mm")</a>
-                                                @if (ponto.PausaId == Pontos.PausaEnum.Almoco)
-                                                {
-                                                    <span>
-                                                        <i class="bi bi-egg-fried"></i>
-                                                    </span>
-                                                }
-                                                else if (ponto.PausaId == Pontos.PausaEnum.CafeLanche)
-                                                {
-                                                    <span>
-                                                        <i class="bi bi-cup-hot"></i>
-                                                    </span>
-                                                }
-                                                else if (ponto.PausaId == Pontos.PausaEnum.Banheiro)
-                                                {
-                                                    <span>
-                                                        <i class="bi bi-badge-wc"></i>
-                                                    </span>
-                                                }
-                                                else if (ponto.PausaId == Pontos.PausaEnum.ConversaReuniao)
-                                                {
-                                                    <span>
-                                                        <i class="bi bi-chat"></i>
-                                                    </span>
-                                                }
-                                                else if (ponto.PausaId == Pontos.PausaEnum.Telefonema)
-                                                {
-                                                    <span>
-                                                        <i class="bi bi-telephone"></i>
-                                                    </span>
-                                                }
-                                                else if (ponto.PausaId == Pontos.PausaEnum.Generica)
-                                                {
-                                                    <span>
-                                                        <i class="bi bi-pause-fill"></i>
-                                                    </span>
-                                                }
-                                                @if (ponto.Observacao != null)
-                                                {
-                                                    <div class="oneline-comment">@ponto.Observacao</div>
+                                                    if (apuracaoDiaria.DiferencaTempo >= TimeSpan.Zero)
+                                                    {
+                                                        <span class="badge text-bg-success rounded-pill">
+                                                            @apuracaoDiaria.DiferencaTempo.ToString("hh\\:mm")
+                                                        </span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="badge text-bg-danger rounded-pill">
+                                                            @apuracaoDiaria.DiferencaTempo.ToString("hh\\:mm")
+                                                        </span>
+                                                    }
                                                 }
                                             </li>
-                                        }
-                                    </ul>
-                                }
+                                            @if (apuracaoDiaria.TempoAbonado != TimeSpan.Zero)
+                                            {
+                                                <li class="list-group-item d-flex justify-content-between align-items-start">
+                                                    <div class="ms-2 me-auto">
+                                                        <div class="fw-bold">
+                                                            Ab.
+                                                        </div>
+                                                    </div>
+                                                    @if (apuracaoDiaria.TempoPeriodo.Futuro)
+                                                    {
+                                                        <span class="badge text-bg-secondary rounded-pill">
+                                                            @apuracaoDiaria.TempoAbonado.ToString("hh\\:mm")
+                                                        </span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="badge rounded-pill text-bg-info">
+                                                            @apuracaoDiaria.TempoAbonado.ToString("hh\\:mm")
+                                                        </span>
+                                                    }
+                                                </li>
+                                            }
+                                        </ol>
+                                    }
+                                    @if (apuracaoDiaria.Pontos.Length > 0)
+                                    {
+                                        <ul class="list-group list-group-flush">
+                                            @foreach (var ponto in apuracaoDiaria.Pontos)
+                                            {
+                                                <li class="list-group-item">
+                                                    @if (ponto.MomentoId == Pontos.MomentoEnum.Entrada)
+                                                    {
+                                                        <span class="text-success">
+                                                            <i class="bi bi-box-arrow-in-down-right"></i>
+                                                        </span>
+                                                    }
+                                                    else if (ponto.MomentoId == Pontos.MomentoEnum.Saida)
+                                                    {
+                                                        <span class="text-danger">
+                                                            <i class="bi bi-box-arrow-up-left"></i>
+                                                        </span>
+                                                    }
+                                                    <a asp-page="/Pontos/Detalhar" asp-route-id="@ponto.Id" title="Detalhar Ponto">@ponto.DataHora.Value.ToString("HH:mm")</a>
+                                                    @if (ponto.PausaId == Pontos.PausaEnum.Almoco)
+                                                    {
+                                                        <span>
+                                                            <i class="bi bi-egg-fried"></i>
+                                                        </span>
+                                                    }
+                                                    else if (ponto.PausaId == Pontos.PausaEnum.CafeLanche)
+                                                    {
+                                                        <span>
+                                                            <i class="bi bi-cup-hot"></i>
+                                                        </span>
+                                                    }
+                                                    else if (ponto.PausaId == Pontos.PausaEnum.Banheiro)
+                                                    {
+                                                        <span>
+                                                            <i class="bi bi-badge-wc"></i>
+                                                        </span>
+                                                    }
+                                                    else if (ponto.PausaId == Pontos.PausaEnum.ConversaReuniao)
+                                                    {
+                                                        <span>
+                                                            <i class="bi bi-chat"></i>
+                                                        </span>
+                                                    }
+                                                    else if (ponto.PausaId == Pontos.PausaEnum.Telefonema)
+                                                    {
+                                                        <span>
+                                                            <i class="bi bi-telephone"></i>
+                                                        </span>
+                                                    }
+                                                    else if (ponto.PausaId == Pontos.PausaEnum.Generica)
+                                                    {
+                                                        <span>
+                                                            <i class="bi bi-pause-fill"></i>
+                                                        </span>
+                                                    }
+                                                    @if (ponto.Observacao != null)
+                                                    {
+                                                        <div class="oneline-comment">@ponto.Observacao</div>
+                                                    }
+                                                </li>
+                                            }
+                                        </ul>
+                                    }
+                                </div>
                             </div>
-                        </div>
+                        }
+                        else
+                        {
+                            <div class="col">
+                            </div>
+                        }
                     }
-                    else
-                    {
-                        <div class="col">
-                        </div>
-                    }
-                }
-            </div>
+                </div>
+            }
         }
+    }
+    else
+    {
+        <div class="d-grid gap-2 col-sm-10 col-md-8 col-lg-6 mx-auto mb-3">
+            <a class="btn btn-primary btn-lg criacao perfil" asp-page="/Perfis/Criar">
+                <i class="bi bi-plus-circle"></i>
+                Criar Novo Perfil
+            </a>
+        </div>
+
+        <div class="alert alert-warning mb-3" role="alert">
+            Você não tem nenhum perfil cadastrado.
+        </div>
+
+        <div class="alert alert-info" role="alert">
+            Crie um novo perfil para saber o tempo total previsto de trabalho na sua folha de ponto.
+        </div>
     }
 }
 else
 {
-    <div class="d-grid gap-2 col-sm-10 col-md-8 col-lg-6 mx-auto mb-3">
-        <a class="btn btn-primary btn-lg criacao perfil" asp-page="/Perfis/Criar">
-            <i class="bi bi-plus-circle"></i>
-            Criar Novo Perfil
-        </a>
-    </div>
+    <div>
+        <div class="px-4 my-5 text-center">
+            <h1 class="display-4 fw-bold">Conheça seu tempo</h1>
+            <div class="col-lg-6 mx-auto">
+                <p class="lead mb-4">Se você não tem acesso regular a sua folha de ponto ou deseja fazer um controle independente da sua jornada de trabalho pra saber se está trabalhando mais ou menos que o tempo previsto então saiba que esse sistema foi feito pra você.</p>
+                @*<div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+            <a class="btn btn-primary btn-lg px-4 me-sm-3" asp-page="/Pontos/Index">Registro de Pontos</a>
+            <a class="btn btn-outline-secondary btn-lg px-4" asp-page="/Perfis/Index">Cadastro de Perfis</a>
+            </div>*@
+            </div>
+            <div class="container px-5">
+                <img src="~/img/apuracao-folha.png" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Apuração de Folha" width="800" height="500" loading="lazy">
+            </div>
+        </div>
 
-    <div class="alert alert-warning mb-3" role="alert">
-        Você não tem nenhum perfil cadastrado.
-    </div>
+        <div class="px-4 my-5">
+            <h2 class="pb-2 border-bottom">Apuração de Folha</h2>
 
-    <div class="alert alert-info" role="alert">
-        Crie um novo perfil para saber o tempo total previsto de trabalho na sua folha de ponto.
+            <div class="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-5">
+                <div class="d-flex flex-column align-items-start gap-2">
+                    <h3 class="fw-bold">Saiba se você está trabalhando mais ou menos que o tempo previsto</h3>
+                    <p class="text-muted">O backup de comprovantes ou o registro independente de pontos permitem que uma folha de ponto seja apurada por você a qualquer momento.</p>
+                    <a href="https://github.com/mardsystems/MeuPonto/wiki/Features#gest%C3%A3o-de-folhas" target="_blank" class="btn btn-primary btn-lg" title="Documentação">Saiba mais</a>
+                </div>
+                <div class="row row-cols-1 row-cols-sm-2 g-4">
+                    <div class="d-flex flex-column gap-2">
+                        <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                            <i class="bi bi-collection"></i>
+                        </div>
+                        <h4 class="fw-semibold mb-0">Resumo diário, semanal e mensal</h4>
+                        <p class="text-muted">Tenha sempre o tempo previsto e apurado com a difereça total sempre a mão.</p>
+                    </div>
+
+                    <div class="d-flex flex-column gap-2">
+                        <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                            <i class="bi bi-lightbulb"></i>
+                        </div>
+                        <h4 class="fw-semibold mb-0">Totais inteligentes</h4>
+                        <p class="text-muted">Identificamos todas as inconsistências dos registros de ponto pra você.</p>
+                    </div>
+
+                    <div class="d-flex flex-column gap-2">
+                        <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <h4 class="fw-semibold mb-0">Separado por perfil</h4>
+                        <p class="text-muted">Tenha um perfil pra cada contrato ou relação de trabalho que você tiver.</p>
+                    </div>
+
+                    <div class="d-flex flex-column gap-2">
+                        <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                            <i class="bi bi-file-earmark-lock-fill"></i>
+                        </div>
+                        <h4 class="fw-semibold mb-0">Proteção contra alterações</h4>
+                        <p class="text-muted">Apurações salvas com seguraça e protegida quando fechada.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="px-4 my-5">
+            <h2 class="pb-2 border-bottom">A quem se destina</h2>
+            <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+                <div class="col d-flex align-items-start">
+                    <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                        <i class="bi bi-building"></i>
+                    </div>
+                    <div>
+                        <h3 class="fs-2">Trabalhadores de empresas</h3>
+                        <p>Funcionários de empresas, estagiários e todos os trabalhadores que prestam serviço para uma pessoa jurídica.</p>
+                        <a href="https://github.com/mardsystems/MeuPonto/wiki/Personas#marcelo" target="_blank" class="btn btn-primary">
+                            Persona Marcelo
+                        </a>
+                    </div>
+                </div>
+                <div class="col d-flex align-items-start">
+                    <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                        <i class="bi bi-house-door"></i>
+                    </div>
+                    <div>
+                        <h3 class="fs-2">Trabalhadores domésticos</h3>
+                        <p>Empregadas domésticas, motoristas e todos os trabalhadores que prestam serviço para uma pessoa física.</p>
+                        <a href="https://github.com/mardsystems/MeuPonto/wiki/Personas#maria" target="_blank" class="btn btn-primary">
+                            Persona Maria
+                        </a>
+                    </div>
+                </div>
+                <div class="col d-flex align-items-start">
+                    <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                        <i class="bi bi-car-front"></i>
+                    </div>
+                    <div>
+                        <h3 class="fs-2">Trabalhadores autônomos</h3>
+                        <p>Motoristas de aplicativo, taxistas e todos os trabalhadores que não estão subordinados a ninguém.</p>
+                        <a href="https://github.com/mardsystems/MeuPonto/wiki/Personas#julio" target="_blank" class="btn btn-primary">
+                            Persona Julio
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="px-4 py-5 my-5 text-center border-top">
+            <img class="d-block mx-auto mb-4" src="~/img/cash-coin.svg" alt="" width="72" height="72">
+            <h1 class="display-5 fw-bold">Investimento zero</h1>
+            <div class="col-lg-6 mx-auto">
+                <p class="lead mb-4">Todos esses benefícios estão sendo oferecidos <b>gratuitamente</b>, mas exibimos um discreto anúncio fixado no rodapé da página como esse que você está vendo. No futuro pretendemos oferecer a <b>opção</b> de remover esse anúncio por um custo acessível. Então não se preocupe!</p>
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                    <a class="btn btn-primary btn-lg px-4 gap-3" asp-area="MicrosoftIdentity" asp-controller="Account" asp-action="SignIn">Crie uma conta gratuita</a>
+                    <a class="btn btn-outline-secondary btn-lg px-4" href="mailto:mardsystems@gmail.com">Fale conosco</a>
+                </div>
+            </div>
+        </div>
     </div>
 }

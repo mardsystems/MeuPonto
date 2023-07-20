@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace MeuPonto.Modules;
 
+[AllowAnonymous]
 public class TermosModel : PageModel
 {
     private readonly ILogger<TermosModel> _logger;

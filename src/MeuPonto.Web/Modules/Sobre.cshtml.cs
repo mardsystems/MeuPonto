@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace MeuPonto.Modules;
 
+[AllowAnonymous]
 public class SobreModel : PageModel
 {
     private readonly ILogger<SobreModel> _logger;

@@ -28,14 +28,23 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link @Html.ActiveClass("/Pontos")" asp-page="/Pontos/Index">Pontos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link @Html.ActiveClass("/Perfis") Perfis" asp-area="" asp-page="/Perfis/Index">Perfis</a>
-                        </li>
-                    </ul>
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link @Html.ActiveClass("/Pontos")" asp-page="/Pontos/Index">Pontos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @Html.ActiveClass("/Perfis") Perfis" asp-area="" asp-page="/Perfis/Index">Perfis</a>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <span class="navbar-text flex-grow-1">
+                            Sistema de controle de ponto para trabalhadores
+                        </span>
+                    }
                     <partial name="_LoginPartial" />
                 </div>
             </div>
