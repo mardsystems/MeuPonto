@@ -55,11 +55,19 @@
             @RenderBody()
         </main>
     </div>
-
+@*
     <footer class="border-top footer text-muted pt-3">
-        <div class="container">
-            &copy; 2023 - Meu Ponto - <a asp-page="/Termos">Termos</a> - <a asp-page="/Privacidade">Privacidade</a> - <a asp-area="" asp-page="/Sobre">Sobre</a>
-        </div>
+
+    </footer>*@
+
+    <footer class="py-3 my-4">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item"><a class="nav-link px-2 text-body-secondary" asp-area="" asp-page="/Index">Home</a></li>
+            <li class="nav-item"><a class="nav-link px-2 text-body-secondary" asp-area="" asp-page="/Termos">Termos</a></li>
+            <li class="nav-item"><a class="nav-link px-2 text-body-secondary" asp-area="" asp-page="/Privacidade">Privacidade</a></li>
+            <li class="nav-item"><a class="nav-link px-2 text-body-secondary" asp-area="" asp-page="/Sobre">Sobre</a></li>
+        </ul>
+        <p class="text-center text-body-secondary">&copy; 2023 - Meu Ponto</p>
         <div class="navbar navbar-light bg-light fixed-bottom border-top">
             @switch (anuncioId)
             {
