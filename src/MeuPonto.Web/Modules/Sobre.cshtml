@@ -11,9 +11,82 @@
     </ol>
 </nav>
 
-<h1>@ViewData["Title"]</h1>
+@*<h1>@ViewData["Title"]</h1>*@
 
-<div class="text-center">
+@*<div class="text-center">
     <h1 class="display-4">Meu Ponto</h1>
     <p>Saiba mais em <a href="https://github.com/mardsystems/MeuPonto">Meu Ponto (Github)</a>.</p>
+</div>*@
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col">
+        <div class="card h-100">
+            <img src="~/img/meuponto.png" class="card-img-top" alt="Logo">
+            <div class="card-body">
+                <h5 class="card-title">Meu Ponto <span class="badge bg-dark">v1.0.x</span></h5>
+                <p class="card-text">Sistema de controle de ponto para trabalhadores.</p>
+                <a href="mailto:mardsystems@gmail.com?subject=Quero patrocinar o Meu Ponto" target="_blank" class="btn btn-secondary">
+                    Patrocinar
+                </a>
+            </div>
+            <div class="card-footer">
+                <span class="d-flex flex-row-reverse">
+                    <a href="https://github.com/mardsystems/MeuPonto" target="_blank" class="btn btn-sm btn-outline-secondary rounded-circle">
+                        <i class="bi bi-github"></i>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card h-100">
+            <img src="~/img/marcelo.jpg" class="card-img-top" alt="Foto">
+            <div class="card-body">
+                <h5 class="card-title">Marcelo Dias <span class="badge bg-primary">Autor</span></h5>
+                <p class="card-text">Desenvolvedor .NET Sênior.</p>
+                <div class="d-flex justify-content-between">
+                    <form action="https://www.paypal.com/donate" method="post" target="_blank">
+                        <input type="hidden" name="business" value="A3URPDNKV85C4" />
+                        <input type="hidden" name="no_recurring" value="0" />
+                        <input type="hidden" name="currency_code" value="BRL" />
+                        <input type="image" src="https://www.paypalobjects.com/pt_BR/BR/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Faça doações com o botão do PayPal" />
+                        <img alt="" border="0" src="https://www.paypal.com/pt_BR/i/scr/pixel.gif" width="1" height="1" />
+                    </form>
+                    <img src="~/img/qr-code-doacao.png" alt="QR code doação" />
+                </div>
+            </div>
+            <div class="card-footer">
+                <span class="d-flex flex-row-reverse">
+                    <a href="https://github.com/mardsystems" target="_blank" class="btn btn-sm btn-outline-secondary rounded-circle">
+                        <i class="bi bi-github"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/mardsystems" target="_blank" class="btn btn-sm btn-outline-secondary rounded-circle me-2">
+                        <i class="bi bi-linkedin"></i>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card h-100 border-primary">
+            <img src="~/img/ateliex.png" class="card-img-top" alt="Logo">
+            <div class="card-body">
+                <h5 class="card-title">Ateliex <span class="badge bg-secondary">Patrocinador</span></h5>
+                <p class="card-text">Construímos sistemas, ferramentas e aplicativos eficazes que ajudarão você a expandir seus negócios.</p>
+                <a href="https://ateliex.com.br/" target="_blank" class="btn btn-primary">
+                    Conhecer
+                </a>
+            </div>
+            <div class="card-footer">
+                <span class="d-flex flex-row-reverse">
+                    <a href="https://github.com/ateliex" target="_blank" class="btn btn-sm btn-outline-secondary rounded-circle">
+                        <i class="bi bi-github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/company/ateliex" target="_blank" class="btn btn-sm btn-outline-secondary rounded-circle me-2">
+                        <i class="bi bi-linkedin"></i>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </div>
 </div>
