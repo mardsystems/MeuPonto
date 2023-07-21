@@ -1,6 +1,8 @@
 using MeuPonto.Cache;
 using MeuPonto.Data;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
@@ -43,6 +45,30 @@ public class Program
         builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
             .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"));
 
+        builder.Services.Configure<OpenIdConnectOptions>(OpenIdConnectDefaults.AuthenticationScheme, options =>
+        {
+            var previousOptions = options.Events.OnRedirectToIdentityProvider;
+            options.Events.OnRedirectToIdentityProvider = async context =>
+            {
+                await previousOptions(context);
+
+                //https://github.com/Azure-Samples/active-directory-aspnetcore-webapp-openidconnect-v2/issues/399#issuecomment-681917473
+                context.ProtocolMessage.ResponseType = Microsoft.IdentityModel.Protocols.OpenIdConnect.OpenIdConnectResponseType.IdToken;
+            };
+
+            var onTokenValidated = options.Events.OnTokenValidated;
+
+            options.Events.OnTokenValidated = async context =>
+            {
+                onTokenValidated?.Invoke(context);
+            };
+
+            options.Events.OnRedirectToIdentityProviderForSignOut = async context =>
+            {
+
+            };
+        });
+
         builder.Services.AddAuthorization(options =>
         {
             // By default, all incoming requests will be authorized according to the default policy.
@@ -52,6 +78,13 @@ public class Program
             .AddRazorPages(options =>
             {
                 options.RootDirectory = "/Modules";
+            })
+            .AddMvcOptions(options =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                              .RequireAuthenticatedUser()
+                              .Build();
+                options.Filters.Add(new AuthorizeFilter(policy));
             })
             .AddViewOptions(options =>
             {
