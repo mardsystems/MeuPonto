@@ -46,7 +46,9 @@ public class ConfiguracoesModel : PageModel
 
         var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
 
-        Configuracoes = await _db.Configuracoes.FindAsync(nameIdentifier.Value);
+        var userId = Guid.Parse(nameIdentifier.Value);
+
+        Configuracoes = await _db.Configuracoes.FindAsync(userId);
 
         if (Configuracoes == null)
         {
@@ -76,13 +78,15 @@ public class ConfiguracoesModel : PageModel
 
         var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
 
-        var configuracoes = await _db.Configuracoes.FindAsync(nameIdentifier.Value);
+        var userId = Guid.Parse(nameIdentifier.Value);
+
+        var configuracoes = await _db.Configuracoes.FindAsync(userId);
 
         if (configuracoes == null)
         {
             configuracoes = new ConfiguracaoPorUsuario
             {
-                UserName = nameIdentifier.Value,
+                UserId = userId,
                 JavascriptIsEnabled = JavascriptIsEnabled
             };
 

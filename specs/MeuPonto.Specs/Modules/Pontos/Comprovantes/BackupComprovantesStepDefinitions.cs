@@ -57,7 +57,11 @@ public class BackupComprovantesStepDefinitions
         _db.Perfis.Add(_cadastroPerfis.Perfil);
         await _db.SaveChangesAsync();
 
-        var transaction = new TransactionContext("Test user");
+        var userId = Guid.NewGuid();
+
+        var userName = "Test user";
+
+        var transaction = new TransactionContext(userId, userName);
 
         var ponto = PontoFactory.CriaPonto(transaction);
 

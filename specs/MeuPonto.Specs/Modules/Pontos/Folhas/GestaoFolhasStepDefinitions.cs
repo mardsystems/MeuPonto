@@ -68,7 +68,11 @@ public class GestaoFolhasStepDefinitions
     [Given(@"que o trabalhador registrou a entrada no expediente às '([^']*)'")]
     public async Task GivenQueOTrabalhadorRegistrouAEntradaNoExpedienteAs(DateTime entrada)
     {
-        var transaction = new TransactionContext("Test user");
+        var userId = Guid.Parse("d2fc8313-9bdc-455c-bf29-ccf709a2a692");
+
+        var userName = "Test user";
+
+        var transaction = new TransactionContext(userId, userName);
 
         var perfil = _db.Perfis.FirstOrDefault();
 
@@ -86,7 +90,11 @@ public class GestaoFolhasStepDefinitions
     [Given(@"que o trabalhador registrou a saída no expediente às '([^']*)'")]
     public async Task GivenQueOTrabalhadorRegistrouASaidaNoExpedienteAs(DateTime saida)
     {
-        var transaction = new TransactionContext("Test user");
+        var userId = Guid.Parse("d2fc8313-9bdc-455c-bf29-ccf709a2a692");
+
+        var userName = "Test user";
+
+        var transaction = new TransactionContext(userId, userName);
 
         var perfil = _db.Perfis.FirstOrDefault();
 
@@ -134,7 +142,11 @@ public class GestaoFolhasStepDefinitions
     [Given(@"que os pontos registrados foram:")]
     public async Task GivenQueOsPontosRegistradosForam(Table table)
     {
-        var transaction = new TransactionContext("Test user");
+        var userId = Guid.Parse("d2fc8313-9bdc-455c-bf29-ccf709a2a692");
+
+        var userName = "Test user";
+
+        var transaction = new TransactionContext(userId, userName);
 
         var pontos = table.Rows.Select(row =>
         {

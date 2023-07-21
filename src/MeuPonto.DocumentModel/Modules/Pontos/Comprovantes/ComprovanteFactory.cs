@@ -7,7 +7,7 @@ public static class ComprovanteFactory
         var comprovante = new Comprovante
         {
             Id = id ?? Guid.NewGuid(),
-            PartitionKey = transaction.UserName,
+            PartitionKey = transaction.UserId.ToString(),
             CreationDate = transaction.DateTime
         };
 
@@ -17,7 +17,7 @@ public static class ComprovanteFactory
     public static void RecontextualizaComprovante(this Comprovante comprovante, TransactionContext transaction, Guid? id = null)
     {
         comprovante.Id = comprovante.Id ?? id ?? Guid.NewGuid();
-        comprovante.PartitionKey = transaction.UserName;
+        comprovante.PartitionKey = transaction.UserId.ToString();
         comprovante.CreationDate = transaction.DateTime;
     }
 }

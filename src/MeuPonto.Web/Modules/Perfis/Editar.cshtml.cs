@@ -44,7 +44,11 @@ public class EditarModel : PageModel
     {
         var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
 
-        var transaction = new TransactionContext(nameIdentifier.Value);
+        var userId = Guid.Parse(nameIdentifier.Value);
+
+        var userName = User.Identity.Name;
+
+        var transaction = new TransactionContext(userId, userName);
 
         Perfil.RecontextualizaPerfil(transaction);
 

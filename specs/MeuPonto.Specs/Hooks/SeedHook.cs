@@ -21,11 +21,15 @@ public class SeedHook
         BackupComprovantesContext backupComprovantes,
         GestaoFolhasContext gestaoFolhas)
     {
-        var transaction = new TransactionContext("Test user");
+        var userId = Guid.Parse("d2fc8313-9bdc-455c-bf29-ccf709a2a692");
+
+        var userName = "Test user";
+
+        var transaction = new TransactionContext(userId, userName);
 
         var perfil = PerfilFactory.CriaPerfil(transaction);
 
-        perfil.Nome = "Test user";
+        perfil.Nome = userName;
         perfil.JornadaTrabalhoSemanalPrevista = new JornadaTrabalhoSemanal
         {
             Semana = new List<JornadaTrabalhoDiaria>(new[]{

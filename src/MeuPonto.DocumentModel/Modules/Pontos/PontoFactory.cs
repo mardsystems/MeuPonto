@@ -7,7 +7,7 @@ public static class PontoFactory
         var ponto = new Ponto
         {
             Id = id ?? Guid.NewGuid(),
-            PartitionKey = transaction.UserName,
+            PartitionKey = transaction.UserId.ToString(),
             CreationDate = transaction.DateTime
         };
 
@@ -17,7 +17,7 @@ public static class PontoFactory
     public static void RecontextualizaPonto(this Ponto ponto, TransactionContext transaction, Guid? id = null)
     {
         ponto.Id = ponto.Id ?? id ?? Guid.NewGuid();
-        ponto.PartitionKey = transaction.UserName;
+        ponto.PartitionKey = transaction.UserId.ToString();
         ponto.CreationDate = transaction.DateTime;
     }
 }

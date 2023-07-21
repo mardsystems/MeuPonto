@@ -1,11 +1,14 @@
 using MeuPonto.Cache;
 using MeuPonto.Data;
+using MeuPonto.Modules.Perfis.Empregadores;
+using MeuPonto.Modules.Trabalhadores;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
+using System.Security.Claims;
 
 namespace MeuPonto;
 
@@ -61,6 +64,58 @@ public class Program
             options.Events.OnTokenValidated = async context =>
             {
                 onTokenValidated?.Invoke(context);
+
+                var db = context.HttpContext.RequestServices.GetService<MeuPontoDbContext>();
+
+                var nameIdentifier = context.Principal.FindFirst(ClaimTypes.NameIdentifier);
+
+                var userId = Guid.Parse(nameIdentifier.Value);
+
+                var trabalhadorExistente = await db.Trabalhadores.FirstOrDefaultAsync(m => m.UserId == userId);
+
+                var userName = context.Principal.GetDisplayName();
+
+                Trabalhador trabalhador;
+
+                var transaction = new TransactionContext(userId, userName);
+
+                if (trabalhadorExistente == default)
+                {
+                    trabalhador = TrabalhadorFactory.CriaTrabalhador(transaction);
+
+                    try
+                    {
+                        db.Trabalhadores.Add(trabalhador);
+                        await db.SaveChangesAsync();
+                    }
+                    catch (Exception _)
+                    {
+                        throw;
+                    }
+                }
+                else
+                {
+                    trabalhador = trabalhadorExistente;
+                }
+
+                var empregadorExistente = await db.Empregadores.FirstOrDefaultAsync(m => m.Id == userId);
+
+                if (empregadorExistente == default)
+                {
+                    var empregador = EmpregadorFactory.CriaEmpregador(transaction);
+
+                    empregador.Nome = $"{userName} (Você Mesmo)";
+
+                    try
+                    {
+                        db.Empregadores.Add(empregador);
+                        await db.SaveChangesAsync();
+                    }
+                    catch (Exception _)
+                    {
+                        throw;
+                    }
+                }
             };
 
             options.Events.OnRedirectToIdentityProviderForSignOut = async context =>
@@ -135,7 +190,7 @@ public class Program
         //    var db = scope.ServiceProvider.GetService<MeuPontoDbContext>();
 
         //    db.Database.EnsureDeleted();
-        //    db.Database.Migrate();
+        //    db.Database.EnsureCreated();
         //}
 
         app.UseMiddleware<CacheMiddleware>();

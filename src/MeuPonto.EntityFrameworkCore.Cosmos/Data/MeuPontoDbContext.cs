@@ -3,6 +3,7 @@ using MeuPonto.Modules.Perfis.Empregadores;
 using MeuPonto.Modules.Pontos;
 using MeuPonto.Modules.Pontos.Comprovantes;
 using MeuPonto.Modules.Pontos.Folhas;
+using MeuPonto.Modules.Trabalhadores;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
@@ -132,12 +133,12 @@ public class MeuPontoDbContext : DbContext
         modelBuilder.Entity<Trabalhador>()
             .ToContainer("Trabalhadores")
             .HasNoDiscriminator()
-            .HasKey(x => x.UserName);
+            .HasKey(x => x.UserId);
 
         modelBuilder.Entity<ConfiguracaoPorUsuario>()
             .ToContainer("Configuracoes")
             .HasNoDiscriminator()
-            .HasKey(x => x.UserName);
+            .HasKey(x => x.UserId);
     }
 
     public DbSet<Modules.Perfis.Perfil> Perfis { get; set; }
