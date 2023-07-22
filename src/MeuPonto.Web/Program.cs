@@ -102,7 +102,7 @@ public class Program
 
                 if (empregadorExistente == default)
                 {
-                    var empregador = EmpregadorFactory.CriaEmpregador(transaction);
+                    var empregador = EmpregadorFactory.CriaEmpregador(transaction, userId);
 
                     empregador.Nome = $"(Você Mesmo)";
 

@@ -137,6 +137,7 @@ public class MeuPontoDbContext : DbContext
         modelBuilder.Entity<Configuracoes>()
             .ToContainer("Configuracoes")
             .HasNoDiscriminator()
+            .HasPartitionKey(x => x.UserId)
             .HasKey(x => x.UserId);
     }
 
