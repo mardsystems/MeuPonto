@@ -23,9 +23,7 @@ public class CriarFolhaModel : PageModel
 
         var userId = Guid.Parse(nameIdentifier.Value);
 
-        var userName = User.Identity.Name;
-
-        var transaction = new TransactionContext(userId, userName);
+        var transaction = new TransactionContext(userId);
 
         ViewData["PerfilId"] = new SelectList(_db.Perfis, "Id", "Nome");
 
@@ -54,9 +52,7 @@ public class CriarFolhaModel : PageModel
 
         var userId = Guid.Parse(nameIdentifier.Value);
 
-        var userName = User.Identity.Name;
-
-        var transaction = new TransactionContext(userId, userName);
+        var transaction = new TransactionContext(userId);
 
         Folha.RecontextualizaFolha(transaction);
 

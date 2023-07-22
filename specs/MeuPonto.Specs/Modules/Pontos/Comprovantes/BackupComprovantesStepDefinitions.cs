@@ -59,9 +59,7 @@ public class BackupComprovantesStepDefinitions
 
         var userId = Guid.NewGuid();
 
-        var userName = "Test user";
-
-        var transaction = new TransactionContext(userId, userName);
+        var transaction = new TransactionContext(userId);
 
         var ponto = PontoFactory.CriaPonto(transaction);
 

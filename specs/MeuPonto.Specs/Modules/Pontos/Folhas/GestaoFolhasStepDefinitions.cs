@@ -70,9 +70,7 @@ public class GestaoFolhasStepDefinitions
     {
         var userId = Guid.Parse("d2fc8313-9bdc-455c-bf29-ccf709a2a692");
 
-        var userName = "Test user";
-
-        var transaction = new TransactionContext(userId, userName);
+        var transaction = new TransactionContext(userId);
 
         var perfil = _db.Perfis.FirstOrDefault();
 
@@ -92,9 +90,7 @@ public class GestaoFolhasStepDefinitions
     {
         var userId = Guid.Parse("d2fc8313-9bdc-455c-bf29-ccf709a2a692");
 
-        var userName = "Test user";
-
-        var transaction = new TransactionContext(userId, userName);
+        var transaction = new TransactionContext(userId);
 
         var perfil = _db.Perfis.FirstOrDefault();
 
@@ -144,9 +140,7 @@ public class GestaoFolhasStepDefinitions
     {
         var userId = Guid.Parse("d2fc8313-9bdc-455c-bf29-ccf709a2a692");
 
-        var userName = "Test user";
-
-        var transaction = new TransactionContext(userId, userName);
+        var transaction = new TransactionContext(userId);
 
         var pontos = table.Rows.Select(row =>
         {

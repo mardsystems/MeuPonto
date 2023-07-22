@@ -25,10 +25,6 @@ public class IndexModel : PageModel
     [BindProperty(SupportsGet = true)]
     public bool? Ativo { get; set; }
 
-    [MaxLength(30)]
-    [BindProperty(SupportsGet = true)]
-    public string? Matricula { get; set; }
-
     [BindProperty(SupportsGet = true)]
     public Guid? EmpregadorId { get; set; }
 
@@ -53,7 +49,6 @@ public class IndexModel : PageModel
                 .Where(x => true
                     && (Nome == null || x.Nome == Nome)
                     && (Ativo == null || x.Ativo == Ativo)
-                    && (Matricula == null || x.Matricula == Matricula)
                     && (EmpregadorId == null || x.EmpregadorId == EmpregadorId))
                 .OrderByDescending(x => x.Nome)
                 .Skip((Pagination.PaginaAtual - 1) * Pagination.TamanhoPagina.Value)

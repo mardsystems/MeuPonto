@@ -31,9 +31,6 @@
                 <th rowspan="3">
                     Ativo
                 </th>
-                <th rowspan="3">
-                    Matrícula
-                </th>
                 <th rowspan="2">
                     Empregador
                 </th>
@@ -94,9 +91,6 @@
                         <option value="false">Não</option>
                     </select>
                 </th>
-                <th>
-                    <input value="@Matricula" class="form-control" />
-                </th>
                 <th class="table-secondary" colspan="12">
 
                 </th>
@@ -124,9 +118,6 @@
                     </td>
                     <td>
                         @item.Ativo
-                    </td>
-                    <td>
-                        @item.Matricula
                     </td>
                     <td>
                         @item.Empregador.Nome
@@ -175,10 +166,6 @@
     [Parameter]
     [SupplyParameterFromQuery]
     public bool? Ativo { get; set; }
-
-    [Parameter]
-    [SupplyParameterFromQuery]
-    public string? Matricula { get; set; }
 
     private IList<Perfil> _perfis { get; set; } = default!;
 

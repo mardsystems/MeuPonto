@@ -15,10 +15,7 @@ public class Perfil : DocumentEntity, Concepts.Perfil, Concepts.Contrato
     [DisplayName("Ativo?")]
     public bool Ativo { get; set; }
 
-    [MaxLength(30)]
-    [DisplayName("Matrícula")]
-    public string? Matricula { get; set; }
-
+    //[Required]
     [DisplayName("Empregador")]
     public Guid? EmpregadorId { get; set; }
 

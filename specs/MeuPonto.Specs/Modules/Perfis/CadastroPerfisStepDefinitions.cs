@@ -49,17 +49,7 @@ public class CadastroPerfisStepDefinitions
     [Given(@"que o trabalhador já tem um perfil cadastrado com o nome '([^']*)'")]
     public async Task GivenQueOTrabalhadorTemUmPerfilCadastradoComONome(string nome)
     {
-        _cadastroPerfis.Perfil.Nome = nome;
-
-        _db.Perfis.Add(_cadastroPerfis.Perfil);
-        await _db.SaveChangesAsync();
-    }
-
-    [Given(@"que o trabalhador tem um perfil cadastrado com a matrícula '([^']*)'")]
-    [Given(@"que o trabalhador já tem um perfil cadastrado com a matrícula '([^']*)'")]
-    public async Task GivenQueOTrabalhadorTemUmPerfilCadastradoComAMatricula(string matricula)
-    {
-        _cadastroPerfis.Perfil.Matricula = matricula;
+        _cadastroPerfis.DefineNomePerfil(nome);
 
         _db.Perfis.Add(_cadastroPerfis.Perfil);
         await _db.SaveChangesAsync();
@@ -134,10 +124,10 @@ public class CadastroPerfisStepDefinitions
         //_cadastroPerfis.Identifica(_cadastroPerfis.PerfilCadastrado);
     }
 
-    [Given(@"que a matrícula do trabalhador é '([^']*)'")]
-    public void GivenQueAMatriculaDoTrabalhadorE(string matricula)
+    [Given(@"que o nome do trabalhador é '([^']*)'")]
+    public void GivenQueONomeDoTrabalhadorE(string nome)
     {
-        _cadastroPerfis.Perfil.Matricula = matricula;
+        _cadastroPerfis.Perfil.Nome = nome;
     }
 
     [Given(@"que o melhor nome que denota o vínculo entre o trabalhador e o empregador é '([^']*)'")]
@@ -205,7 +195,7 @@ public class CadastroPerfisStepDefinitions
     [When(@"o trabalhador detalhar o perfil")]
     public void WhenOTrabalhadorDetalharOPerfil()
     {
-        var perfilDetalhado = _cadastroPerfisInterface.DetalharPerfil(_cadastroPerfis.Perfil);
+        var perfilDetalhado = _cadastroPerfisInterface.DetalharPerfil(_cadastroPerfis.NomePerfil);
 
         _cadastroPerfis.Define(perfilDetalhado);
     }
@@ -223,7 +213,7 @@ public class CadastroPerfisStepDefinitions
     [When(@"o trabalhador editar o perfil")]
     public void WhenOTrabalhadorEditarOPerfil()
     {
-        _cadastroPerfisInterface.EditarPerfil(_cadastroPerfis.Perfil);
+        _cadastroPerfisInterface.EditarPerfil(_cadastroPerfis.NomePerfil, _cadastroPerfis.Perfil);
 
         var perfilEdidado = _db.Perfis.FirstOrDefault(x => x.Nome == _cadastroPerfis.Perfil.Nome);
 
@@ -243,24 +233,18 @@ public class CadastroPerfisStepDefinitions
     [When(@"o trabalhador excluir o perfil")]
     public void WhenOTrabalhadorExcluirOPerfil()
     {
-        _cadastroPerfisInterface.ExcluirPerfil(_cadastroPerfis.Perfil);
+        _cadastroPerfisInterface.ExcluirPerfil(_cadastroPerfis.NomePerfil);
     }
 
     [Then(@"o perfil deverá ser excluído")]
     public void ThenOPerfilDeveraSerExcluido()
     {
-        var perfil = _db.Perfis.FirstOrDefault(x => x.Matricula == _cadastroPerfis.Perfil.Matricula);
+        var perfil = _db.Perfis.FirstOrDefault(x => x.Nome == _cadastroPerfis.Perfil.Nome);
 
         perfil.Should().BeNull();
     }
 
     #endregion
-
-    [Then(@"a matrícula do perfil deverá ser '([^']*)'")]
-    public void ThenAMatriculaDoPerfilDeveraSer(string matricula)
-    {
-        _cadastroPerfis.PerfilCadastrado.IdentificaVinculo().Matricula.Should().Be(matricula);
-    }
 
     [Then(@"o nome do perfil deverá ser '([^']*)'")]
     public void ThenONomeDoPerfilDeveraSer(string nome)

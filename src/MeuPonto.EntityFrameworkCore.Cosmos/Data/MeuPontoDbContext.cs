@@ -132,10 +132,9 @@ public class MeuPontoDbContext : DbContext
 
         modelBuilder.Entity<Trabalhador>()
             .ToContainer("Trabalhadores")
-            .HasNoDiscriminator()
-            .HasKey(x => x.UserId);
+            .HasPartitionKey(x => x.PartitionKey);
 
-        modelBuilder.Entity<ConfiguracaoPorUsuario>()
+        modelBuilder.Entity<Configuracoes>()
             .ToContainer("Configuracoes")
             .HasNoDiscriminator()
             .HasKey(x => x.UserId);
@@ -147,5 +146,5 @@ public class MeuPontoDbContext : DbContext
     public DbSet<Modules.Pontos.Ponto> Pontos { get; set; }
     public DbSet<Comprovante> Comprovantes { get; set; }
     public DbSet<Trabalhador> Trabalhadores { get; set; }
-    public DbSet<ConfiguracaoPorUsuario> Configuracoes { get; set; }
+    public DbSet<Configuracoes> Configuracoes { get; set; }
 }

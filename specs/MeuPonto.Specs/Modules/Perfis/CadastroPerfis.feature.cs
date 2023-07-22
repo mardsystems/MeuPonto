@@ -176,16 +176,16 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Trabalhador edita um perfil para corrigir um erro de digitação na matrícula")]
+        [Xunit.SkippableFactAttribute(DisplayName="Trabalhador edita um perfil para corrigir um erro de digitação no nome")]
         [Xunit.TraitAttribute("FeatureTitle", "Cadastro Perfis")]
-        [Xunit.TraitAttribute("Description", "Trabalhador edita um perfil para corrigir um erro de digitação na matrícula")]
+        [Xunit.TraitAttribute("Description", "Trabalhador edita um perfil para corrigir um erro de digitação no nome")]
         [Xunit.TraitAttribute("Category", "wip")]
-        public virtual void TrabalhadorEditaUmPerfilParaCorrigirUmErroDeDigitacaoNaMatricula()
+        public virtual void TrabalhadorEditaUmPerfilParaCorrigirUmErroDeDigitacaoNoNome()
         {
             string[] tagsOfScenario = new string[] {
                     "wip"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador edita um perfil para corrigir um erro de digitação na matrícula", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador edita um perfil para corrigir um erro de digitação no nome", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 22
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -207,13 +207,13 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 23
- testRunner.Given("que o trabalhador tem um perfil cadastrado com a matrícula \'0001\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+ testRunner.Given("que o trabalhador tem um perfil cadastrado com o nome \'Marcello\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
 #line 24
  testRunner.And("que o trabalhador identifica na lista o perfil cadastrado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
 #line 25
- testRunner.And("que a matrícula do trabalhador é \'0002\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+ testRunner.And("que o nome do trabalhador é \'Marcelo\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
 #line 26
  testRunner.When("o trabalhador editar o perfil", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
@@ -222,7 +222,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Then("o perfil deverá ser editado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
 #line 28
- testRunner.And("a matrícula do perfil deverá ser \'0002\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+ testRunner.And("o nome do perfil deverá ser \'Marcelo\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -416,7 +416,7 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 69
- testRunner.Given("que o trabalhador tem um perfil cadastrado com a matrícula \'0001\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+ testRunner.Given("que o trabalhador tem um perfil cadastrado com o nome \'Marcelo - Ateliex\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
 #line 70
  testRunner.And("que o trabalhador identifica na lista o perfil cadastrado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");

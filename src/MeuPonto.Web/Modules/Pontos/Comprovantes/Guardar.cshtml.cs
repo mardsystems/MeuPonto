@@ -22,9 +22,7 @@ public class GuardarComprovanteModel : PageModel
 
         var userId = Guid.Parse(nameIdentifier.Value);
 
-        var userName = User.Identity.Name;
-
-        var transaction = new TransactionContext(userId, userName);
+        var transaction = new TransactionContext(userId);
 
         Comprovante = ComprovanteFactory.CriaComprovante(transaction);
 
@@ -51,9 +49,7 @@ public class GuardarComprovanteModel : PageModel
 
         var userId = Guid.Parse(nameIdentifier.Value);
 
-        var userName = User.Identity.Name;
-
-        var transaction = new TransactionContext(userId, userName);
+        var transaction = new TransactionContext(userId);
 
         Comprovante.RecontextualizaComprovante(transaction);
 

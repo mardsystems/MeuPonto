@@ -26,7 +26,7 @@ public class ConfiguracoesModel : PageModel
     public bool AskResetConfirmation { get; set; }
 
     [BindProperty]
-    public ConfiguracaoPorUsuario Configuracoes { get; set; } = default!;
+    public Configuracoes Configuracoes { get; set; } = default!;
 
     public ConfiguracoesModel(
         MeuPontoDbContext db,
@@ -52,7 +52,7 @@ public class ConfiguracoesModel : PageModel
 
         if (Configuracoes == null)
         {
-            Configuracoes = new ConfiguracaoPorUsuario();
+            Configuracoes = new Configuracoes();
         }
 
         return Page();
@@ -84,7 +84,7 @@ public class ConfiguracoesModel : PageModel
 
         if (configuracoes == null)
         {
-            configuracoes = new ConfiguracaoPorUsuario
+            configuracoes = new Configuracoes
             {
                 UserId = userId,
                 JavascriptIsEnabled = JavascriptIsEnabled

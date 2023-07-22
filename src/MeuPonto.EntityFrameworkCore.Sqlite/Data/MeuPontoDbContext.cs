@@ -69,7 +69,7 @@ public class MeuPontoDbContext : DbContext
             .ToTable("Trabalhadores")
             .HasNoKey();
 
-        modelBuilder.Entity<ConfiguracaoPorUsuario>()
+        modelBuilder.Entity<Configuracoes>()
             .ToTable("Configuracoes")
             .HasNoKey();
 
@@ -118,5 +118,5 @@ public class MeuPontoDbContext : DbContext
     public DbSet<Ponto> Pontos { get; set; }
     public DbSet<Comprovante> Comprovantes { get; set; }
     public DbSet<Trabalhador> Trabalhadores { get; set; }
-    public DbSet<ConfiguracaoPorUsuario> Configuracoes { get; set; }
+    public DbSet<Configuracoes> Configuracoes { get; set; }
 }

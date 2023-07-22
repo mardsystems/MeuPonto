@@ -40,9 +40,6 @@
                         @Html.DisplayNameFor(model => model.Perfil[0].Ativo)
                     </th>
                     <th rowspan="3">
-                        @Html.DisplayNameFor(model => model.Perfil[0].Matricula)
-                    </th>
-                    <th rowspan="3">
                         @Html.DisplayNameFor(model => model.Perfil[0].Empregador)
                     </th>
                     <th colspan="8">
@@ -104,9 +101,6 @@
                         </select>
                     </th>
                     <th>
-                        <input asp-for="Matricula" class="form-control" />
-                    </th>
-                    <th>
                         <select asp-for="EmpregadorId" class="form-select" asp-items="ViewBag.EmpregadorId"></select>
                     </th>
                     <th class="table-secondary" colspan="9">
@@ -136,9 +130,6 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Ativo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Matricula)
                         </td>
                         <td>
                             @if (item.Empregador != null)

@@ -30,15 +30,6 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Empregadores[0].Nome)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Empregadores[0].Cnpj)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Empregadores[0].InscricaoEstadual)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Empregadores[0].Endereco)
-                </th>
             </tr>
             <tr>
                 <th>
@@ -55,15 +46,6 @@
                 </th>
                 <th>
                     <input asp-for="Nome" class="form-control" />
-                </th>
-                <th>
-                    <input asp-for="Cnpj" class="form-control" />
-                </th>
-                <th>
-                    <input asp-for="InscricaoEstadual" class="form-control" />
-                </th>
-                <th>
-                    <input asp-for="Endereco" class="form-control" />
                 </th>
             </tr>
         </thead>
@@ -86,15 +68,6 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Nome)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Cnpj)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.InscricaoEstadual)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Endereco)
                     </td>
                 </tr>
             }

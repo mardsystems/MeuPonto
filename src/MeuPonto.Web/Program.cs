@@ -71,13 +71,13 @@ public class Program
 
                 var userId = Guid.Parse(nameIdentifier.Value);
 
-                var trabalhadorExistente = await db.Trabalhadores.FirstOrDefaultAsync(m => m.UserId == userId);
+                var trabalhadorExistente = await db.Trabalhadores.FirstOrDefaultAsync(m => m.Id == userId);
 
                 var userName = context.Principal.GetDisplayName();
 
                 Trabalhador trabalhador;
 
-                var transaction = new TransactionContext(userId, userName);
+                var transaction = new TransactionContext(userId);
 
                 if (trabalhadorExistente == default)
                 {
@@ -104,7 +104,7 @@ public class Program
                 {
                     var empregador = EmpregadorFactory.CriaEmpregador(transaction);
 
-                    empregador.Nome = $"{userName} (Você Mesmo)";
+                    empregador.Nome = $"(Você Mesmo)";
 
                     try
                     {

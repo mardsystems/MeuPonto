@@ -22,9 +22,7 @@ public class CriarModel : PageModel
 
         var userId = Guid.Parse(nameIdentifier.Value);
 
-        var userName = User.Identity.Name;
-
-        var transaction = new TransactionContext(userId, userName);
+        var transaction = new TransactionContext(userId);
 
         Perfil = PerfilFactory.CriaPerfil(transaction);
 
@@ -56,9 +54,7 @@ public class CriarModel : PageModel
 
         var userId = Guid.Parse(nameIdentifier.Value);
 
-        var userName = User.Identity.Name;
-
-        var transaction = new TransactionContext(userId, userName);
+        var transaction = new TransactionContext(userId);
 
         Perfil.RecontextualizaPerfil(transaction);
 

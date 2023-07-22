@@ -19,13 +19,13 @@ Cenário: Trabalhador cria um perfil para identificar seu novo vínculo com o em
 	E o nome do perfil deverá ser 'Marcelo - Ateliex - Consultor'
 
 @wip
-Cenário: Trabalhador edita um perfil para corrigir um erro de digitação na matrícula
-	Dado que o trabalhador tem um perfil cadastrado com a matrícula '0001'
+Cenário: Trabalhador edita um perfil para corrigir um erro de digitação no nome
+	Dado que o trabalhador tem um perfil cadastrado com o nome 'Marcello'
 	E que o trabalhador identifica na lista o perfil cadastrado
-	E que a matrícula do trabalhador é '0002'
+	E que o nome do trabalhador é 'Marcelo'
 	Quando o trabalhador editar o perfil
 	Então o perfil deverá ser editado
-	E a matrícula do perfil deverá ser '0002'
+	E o nome do perfil deverá ser 'Marcelo'
 
 Regra: Tempo Total = Tempo Monday + Tempo Tuesday + Tempo Wednesday + Tempo Thursday + Tempo Friday + Tempo Saturday + Tempo Sunday
 
@@ -66,7 +66,7 @@ Regra: Remoção de perfil
 	
 @wip
 Cenário: Trabalhador identifica na lista de perfis um perfil que não era necessário
-	Dado que o trabalhador tem um perfil cadastrado com a matrícula '0001'
+	Dado que o trabalhador tem um perfil cadastrado com o nome 'Marcelo - Ateliex'
 	E que o trabalhador identifica na lista o perfil cadastrado
 	Quando o trabalhador excluir o perfil
 	Então o perfil deverá ser excluído

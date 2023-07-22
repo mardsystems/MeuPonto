@@ -4,15 +4,11 @@ public class TransactionContext
 {
     public Guid UserId { get; }
 
-    public string UserName { get; }
-
     public DateTime DateTime { get; }
 
-    public TransactionContext(Guid userId, string userName)
+    public TransactionContext(Guid userId)
     {
         UserId = userId;
-
-        UserName = userName;
 
         DateTime = DateTime.Now;
     }

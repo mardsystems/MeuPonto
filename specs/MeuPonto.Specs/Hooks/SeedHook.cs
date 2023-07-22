@@ -25,7 +25,7 @@ public class SeedHook
 
         var userName = "Test user";
 
-        var transaction = new TransactionContext(userId, userName);
+        var transaction = new TransactionContext(userId);
 
         var perfil = PerfilFactory.CriaPerfil(transaction);
 

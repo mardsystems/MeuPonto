@@ -1,6 +1,6 @@
 ﻿namespace MeuPonto.Modules;
 
-public class ConfiguracaoPorUsuario : Concepts.ConfiguracaoPorUsuario
+public class Configuracoes
 {
     public Guid UserId { get; set; }
 

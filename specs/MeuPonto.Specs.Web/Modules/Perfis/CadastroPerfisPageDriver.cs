@@ -1,5 +1,4 @@
 ﻿using AngleSharp.Html.Dom;
-using Azure;
 using MeuPonto.Helpers;
 using MeuPonto.Support;
 
@@ -35,11 +34,11 @@ public class CadastroPerfisPageDriver : CadastroPerfisInterface
         CriacaoPerfilAnchor.Should().NotBeNull("a tela de perfis deve ter um link de criação de perfil");
     }
 
-    private void Identifica(Concepts.Perfil perfil)
+    private void Identifica(string nomePerfil)
     {
         var table = Document.GetTable("Perfis");
 
-        var tableRow = table.GetTableRowByDataName(perfil.Nome);
+        var tableRow = table.GetTableRowByDataName(nomePerfil);
 
         //
 
@@ -69,7 +68,6 @@ public class CadastroPerfisPageDriver : CadastroPerfisInterface
         var form = Document.GetForm();
 
         form.GetInput("Perfil.Nome").Value = perfil.Nome;
-        form.GetInput("Perfil.Matricula").Value = perfil.IdentificaVinculo().Matricula;
 
         var daysOfWeek = Enum.GetValues<DayOfWeek>();
 
@@ -104,11 +102,11 @@ public class CadastroPerfisPageDriver : CadastroPerfisInterface
         //return perfilCadastrado;
     }
 
-    public Concepts.Perfil DetalharPerfil(Concepts.Perfil perfilCadastrado)
+    public Concepts.Perfil DetalharPerfil(string nomePerfil)
     {
         GoTo();
 
-        Identifica(perfilCadastrado);
+        Identifica(nomePerfil);
 
         Document = _angleSharp.GetDocument(DetalhePerfilAnchor.Href);
 
@@ -117,17 +115,17 @@ public class CadastroPerfisPageDriver : CadastroPerfisInterface
         return perfilDetalhado;
     }
 
-    public void EditarPerfil(Concepts.Perfil perfilCadastrado)
+    public void EditarPerfil(string nomePerfil, Concepts.Perfil perfilCadastrado)
     {
         GoTo();
 
-        Identifica(perfilCadastrado);
+        Identifica(nomePerfil);
 
         Document = _angleSharp.GetDocument(EdicaoPerfilAnchor.Href);
 
         var form = Document.GetForm();
 
-        form.GetInput("Perfil.Matricula").Value = perfilCadastrado.IdentificaVinculo().Matricula;
+        form.GetInput("Perfil.Nome").Value = perfilCadastrado.Nome;
 
         var submitButton = form.GetSubmitButton();
 
@@ -155,7 +153,6 @@ public class CadastroPerfisPageDriver : CadastroPerfisInterface
         var perfilCadastrado = new Perfil
         {
             Nome = dl.GetDataListItem("Nome").GetString(),
-            Matricula = dl.GetDataListItem("Matricula").GetString(),
         };
 
         AdicionaJornadaTrabalhoDiaria(perfilCadastrado.JornadaTrabalhoSemanalPrevista, DayOfWeek.Sunday);
@@ -186,11 +183,11 @@ public class CadastroPerfisPageDriver : CadastroPerfisInterface
         }
     }
 
-    public void ExcluirPerfil(Concepts.Perfil perfilCadastrado)
+    public void ExcluirPerfil(string nomePerfil)
     {
         GoTo();
 
-        Identifica(perfilCadastrado);
+        Identifica(nomePerfil);
 
         Document = _angleSharp.GetDocument(ExclusaoPerfilAnchor.Href);
 

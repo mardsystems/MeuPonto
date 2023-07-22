@@ -12,13 +12,23 @@ public class BasicIntegrationTests
 
     [Theory]
     [InlineData("/")]
-    [InlineData("/Index")]
-    [InlineData("/Sobre")]
+    [InlineData("/Termos")]
     [InlineData("/Privacidade")]
+    [InlineData("/Sobre")]
+    [InlineData("/Configuracoes")]
     [InlineData("/Perfis")]
+    [InlineData("/Perfis/Criar")]
+    [InlineData("/Perfis/Empregadores")]
+    [InlineData("/Perfis/Empregadores/Criar")]
     [InlineData("/Pontos")]
+    [InlineData("/Pontos/Criar")]
+    [InlineData("/Pontos/Marcar")]
     [InlineData("/Pontos/Folhas")]
+    [InlineData("/Pontos/Folhas/Criar")]
+    [InlineData("/Pontos/Folhas/Abrir")]
     [InlineData("/Pontos/Comprovantes")]
+    [InlineData("/Pontos/Comprovantes/Criar")]
+    [InlineData("/Pontos/Comprovantes/Guardar")]
     public async Task Get_EndpointsReturnSuccessAndCorrectContentType(string url)
     {
         // Arrange
