@@ -46,6 +46,13 @@ public class IndexModel : PageModel
     {
         if (User.Identity.IsAuthenticated)
         {
+            if (Trabalhador.Default == null)
+            {
+                ViewData["HasPerfil"] = false;
+
+                return;
+            }
+
             var perfisSelectList = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
 
             ViewData["PerfilId"] = perfisSelectList;

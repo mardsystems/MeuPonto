@@ -32,14 +32,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Modules\Empregadores\Criar.cshtml" />
-    <None Include="Modules\Empregadores\Detalhar.cshtml" />
-    <None Include="Modules\Empregadores\Editar.cshtml" />
-    <None Include="Modules\Empregadores\Excluir.cshtml" />
-    <None Include="Modules\Empregadores\Index.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\MeuPonto.EntityFrameworkCore.Cosmos\MeuPonto.EntityFrameworkCore.Cosmos.csproj" />
     <ProjectReference Include="..\MeuPonto.Web_App\MeuPonto.Web_App.csproj">
       <Aliases></Aliases>
