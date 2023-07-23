@@ -1,5 +1,6 @@
 ﻿using MeuPonto.Data;
 using MeuPonto.Modules.Empregadores;
+using MeuPonto.Modules.Trabalhadores;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -48,9 +49,7 @@ public class ExcluirModel : PageModel
 
         try
         {
-            var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
-
-            var empregador = await _db.Empregadores.FindByIdAsync(id, nameIdentifier.Value);
+            var empregador = await _db.Empregadores.FindByIdAsync(id, Trabalhador.Default);
 
             if (empregador != null)
             {

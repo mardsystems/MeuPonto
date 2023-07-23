@@ -18,7 +18,7 @@ public class CriarModel : PageModel
 
     public IActionResult OnGet()
     {
-        ViewData["PerfilId"] = new SelectList(_db.Perfis, "Id", "Nome");
+        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
         return Page();
     }
 
@@ -41,7 +41,7 @@ public class CriarModel : PageModel
 
         Trabalhador.Default.RecontextualizaPonto(Ponto, transaction);
 
-        var perfil = await _db.Perfis.FindByIdAsync(Ponto.PerfilId, nameIdentifier.Value);
+        var perfil = await _db.Perfis.FindByIdAsync(Ponto.PerfilId, Trabalhador.Default);
 
         perfil.QualificaPonto(Ponto);
 

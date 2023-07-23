@@ -44,9 +44,8 @@ public class ExcluirComprovanteModel : PageModel
         {
             return NotFound();
         }
-        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
 
-        var comprovante = await _db.Comprovantes.FindByIdAsync(id, nameIdentifier.Value);
+        var comprovante = await _db.Comprovantes.FirstOrDefaultAsync(m => m.Id == id);
 
         if (comprovante != null)
         {

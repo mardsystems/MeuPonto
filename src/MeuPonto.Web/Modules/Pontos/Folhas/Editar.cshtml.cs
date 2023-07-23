@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using MeuPonto.Data;
 using System.Security.Claims;
+using MeuPonto.Modules.Trabalhadores;
 
 namespace MeuPonto.Modules.Pontos.Folhas;
 
@@ -49,7 +50,7 @@ public class EditarFolhaModel : PageModel
         
         CompetenciaMes = folha.Competencia.Value.Month;
 
-        ViewData["PerfilId"] = new SelectList(_db.Perfis, "Id", "Nome");
+        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
         return Page();
     }
 
@@ -61,14 +62,14 @@ public class EditarFolhaModel : PageModel
 
         if (!ModelState.IsValid)
         {
-            ViewData["PerfilId"] = new SelectList(_db.Perfis, "Id", "Nome");
+            ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
 
             return Page();
         }
 
         var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
 
-        var perfil = await _db.Perfis.FindByIdAsync(Folha.PerfilId, nameIdentifier.Value);
+        var perfil = await _db.Perfis.FindByIdAsync(Folha.PerfilId, Trabalhador.Default);
 
         perfil.QualificaFolha(Folha);
 
@@ -83,7 +84,7 @@ public class EditarFolhaModel : PageModel
 
             ConfirmarCompetencia(perfil);
 
-            ViewData["PerfilId"] = new SelectList(_db.Perfis, "Id", "Nome");
+            ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
 
             return Page();
         }

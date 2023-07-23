@@ -26,7 +26,7 @@ public class AbrirFolhaModel : PageModel
 
         var transaction = new TransactionContext(userId);
 
-        ViewData["PerfilId"] = new SelectList(_db.Perfis, "Id", "Nome");
+        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
 
         Folha = Trabalhador.Default.CriaFolha(transaction);
 
@@ -66,11 +66,11 @@ public class AbrirFolhaModel : PageModel
             return Page();
         }
 
-        ViewData["PerfilId"] = new SelectList(_db.Perfis, "Id", "Nome");
+        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
 
         Folha.StatusId = StatusEnum.Aberta;
 
-        var perfil = await _db.Perfis.FindByIdAsync(Folha.PerfilId, nameIdentifier.Value);
+        var perfil = await _db.Perfis.FindByIdAsync(Folha.PerfilId, Trabalhador.Default);
 
         perfil.QualificaFolha(Folha);
 

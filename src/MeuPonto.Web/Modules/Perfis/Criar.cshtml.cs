@@ -27,7 +27,7 @@ public class CriarModel : PageModel
 
         Perfil = Trabalhador.Default.CriaPerfil(transaction);
 
-        ViewData["EmpregadorId"] = new SelectList(_db.Empregadores, "Id", "Nome").AddEmptyValue();
+        ViewData["EmpregadorId"] = new SelectList(_db.Empregadores.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome").AddEmptyValue();
 
         var daysOfWeek = Enum.GetValues<DayOfWeek>();
 
@@ -66,7 +66,7 @@ public class CriarModel : PageModel
 
         if (Perfil.EmpregadorId.HasValue)
         {
-            var empregador = await _db.Empregadores.FindByIdAsync(Perfil.EmpregadorId, nameIdentifier.Value);
+            var empregador = await _db.Empregadores.FindByIdAsync(Perfil.EmpregadorId, Trabalhador.Default);
 
             Perfil.VinculaEmpregador(empregador);
         }

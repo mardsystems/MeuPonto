@@ -1,6 +1,7 @@
 ﻿using MeuPonto.Modules.Pontos;
 using MeuPonto.Modules.Pontos.Folhas;
 using MeuPonto.Modules.Shared;
+using MeuPonto.Modules.Trabalhadores;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -43,116 +44,129 @@ public class IndexModel : PageModel
 
     public async Task OnGet()
     {
-        var perfisSelectList = new SelectList(_db.Perfis, "Id", "Nome");
-
-        ViewData["PerfilId"] = perfisSelectList;
-
-        ViewData["HasPerfil"] = perfisSelectList.Any();
-
-        ApuracaoMensal = new ApuracaoMensalViewModel();
-
-        var hoje = DateTime.Today;
-
-        if (CompetenciaAno == null || CompetenciaMes == null)
+        if (User.Identity.IsAuthenticated)
         {
-            CompetenciaAno = hoje.Year;
+            var perfisSelectList = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
 
-            CompetenciaMes = hoje.Month;
-        }
-        else
-        {
-            var competencia = new DateTime(CompetenciaAno.Value, CompetenciaMes.Value, 1);
+            ViewData["PerfilId"] = perfisSelectList;
 
-            Folha = await _db.Folhas.FirstOrDefaultAsync(x => true
-                && x.PerfilId == PerfilId
-                && x.Competencia == competencia);
+            ViewData["HasPerfil"] = perfisSelectList.Any();
 
-            if (Folha != null)
+            ApuracaoMensal = new ApuracaoMensalViewModel();
+
+            var hoje = DateTime.Today;
+
+            if (CompetenciaAno == null || CompetenciaMes == null)
             {
-                var competenciaAtual = new DateTime(hoje.Year, hoje.Month, 1);
+                CompetenciaAno = hoje.Year;
 
-                var competenciaFolha = Folha.Competencia.Value;
+                CompetenciaMes = hoje.Month;
+            }
+            else
+            {
+                var competencia = new DateTime(CompetenciaAno.Value, CompetenciaMes.Value, 1);
 
-                var competenciaFolhaPosterior = competenciaFolha.AddMonths(1);
+                Folha = await _db.Folhas.FirstOrDefaultAsync(x => true
+                    && x.PerfilId == PerfilId
+                    && x.Competencia == competencia
+                    && x.TrabalhadorId == Trabalhador.Default.Id);
 
-                var pontos = await _db.Pontos
-                    .Where(x => x.DataHora >= competenciaFolha && x.DataHora < competenciaFolhaPosterior)
-                    .OrderByDescending(x => x.DataHora)
-                    .ToListAsync();
-
-                ApuracaoMensal.PrimeiroDiaSemanaMes = competenciaFolha.DayOfWeek;
-
-                var totalInteiroSemanas = (int)(competenciaFolhaPosterior - competenciaFolha).TotalDays / 7;
-
-                var restoDiasSemana = (competenciaFolhaPosterior - competenciaFolha).TotalDays % 7;
-
-                int totalSemanas;
-
-                if (restoDiasSemana == 0)
+                if (Folha != null)
                 {
-                    totalSemanas = totalInteiroSemanas;
-                }
-                else
-                {
-                    totalSemanas = totalInteiroSemanas + 1;
-                }
+                    var competenciaAtual = new DateTime(hoje.Year, hoje.Month, 1);
 
-                ApuracaoMensal.TempoTotalPrevisto = TimeSpan.Zero;
+                    var competenciaFolha = Folha.Competencia.Value;
 
-                ApuracaoMensal.TempoTotalApurado = TimeSpan.Zero;
+                    var competenciaFolhaPosterior = competenciaFolha.AddMonths(1);
 
-                ApuracaoMensal.DiferencaTempoTotal = TimeSpan.Zero;
+                    var pontos = await _db.Pontos
+                        .Where(x => true
+                            && x.DataHora >= competenciaFolha
+                            && x.DataHora < competenciaFolhaPosterior
+                            && x.TrabalhadorId == Trabalhador.Default.Id)
+                        .OrderByDescending(x => x.DataHora)
+                        .ToListAsync();
 
-                if (competenciaFolha < competenciaAtual)
-                {
-                    ApuracaoMensal.TempoPeriodo.Atual = false;
-                    ApuracaoMensal.TempoPeriodo.Passado = true;
-                    ApuracaoMensal.TempoPeriodo.Futuro = false;
-                }
-                else if (competenciaFolha == competenciaAtual)
-                {
-                    ApuracaoMensal.TempoPeriodo.Atual = true;
-                    ApuracaoMensal.TempoPeriodo.Passado = false;
-                    ApuracaoMensal.TempoPeriodo.Futuro = false;
-                }
-                else
-                {
-                    ApuracaoMensal.TempoPeriodo.Atual = false;
-                    ApuracaoMensal.TempoPeriodo.Passado = false;
-                    ApuracaoMensal.TempoPeriodo.Futuro = true;
-                }
+                    ApuracaoMensal.PrimeiroDiaSemanaMes = competenciaFolha.DayOfWeek;
 
-                for (int semanaIndex = 0; semanaIndex < totalSemanas; semanaIndex++)
-                {
-                    var numeroSemanaAtual = hoje.GetWeekNumber();
+                    var totalInteiroSemanas = (int)(competenciaFolhaPosterior - competenciaFolha).TotalDays / 7;
 
-                    var apuracaoSemanalModel = new ApuracaoSemanalViewModel
+                    var restoDiasSemana = (competenciaFolhaPosterior - competenciaFolha).TotalDays % 7;
+
+                    int totalSemanas;
+
+                    if (restoDiasSemana == 0)
                     {
-                        NumeroSemana = competenciaFolha.GetWeekNumber() + semanaIndex,
-                        TempoTotalPrevisto = TimeSpan.Zero,
-                        TempoTotalApurado = TimeSpan.Zero,
-                        DiferencaTempoTotal = TimeSpan.Zero,
-                    };
-
-                    if (ApuracaoMensal.TempoPeriodo.Passado)
-                    {
-                        apuracaoSemanalModel.TempoPeriodo.Atual = false;
-                        apuracaoSemanalModel.TempoPeriodo.Passado = true;
-                        apuracaoSemanalModel.TempoPeriodo.Futuro = false;
+                        totalSemanas = totalInteiroSemanas;
                     }
-                    else if (ApuracaoMensal.TempoPeriodo.Atual)
+                    else
                     {
-                        if (apuracaoSemanalModel.NumeroSemana < numeroSemanaAtual)
+                        totalSemanas = totalInteiroSemanas + 1;
+                    }
+
+                    ApuracaoMensal.TempoTotalPrevisto = TimeSpan.Zero;
+
+                    ApuracaoMensal.TempoTotalApurado = TimeSpan.Zero;
+
+                    ApuracaoMensal.DiferencaTempoTotal = TimeSpan.Zero;
+
+                    if (competenciaFolha < competenciaAtual)
+                    {
+                        ApuracaoMensal.TempoPeriodo.Atual = false;
+                        ApuracaoMensal.TempoPeriodo.Passado = true;
+                        ApuracaoMensal.TempoPeriodo.Futuro = false;
+                    }
+                    else if (competenciaFolha == competenciaAtual)
+                    {
+                        ApuracaoMensal.TempoPeriodo.Atual = true;
+                        ApuracaoMensal.TempoPeriodo.Passado = false;
+                        ApuracaoMensal.TempoPeriodo.Futuro = false;
+                    }
+                    else
+                    {
+                        ApuracaoMensal.TempoPeriodo.Atual = false;
+                        ApuracaoMensal.TempoPeriodo.Passado = false;
+                        ApuracaoMensal.TempoPeriodo.Futuro = true;
+                    }
+
+                    for (int semanaIndex = 0; semanaIndex < totalSemanas; semanaIndex++)
+                    {
+                        var numeroSemanaAtual = hoje.GetWeekNumber();
+
+                        var apuracaoSemanalModel = new ApuracaoSemanalViewModel
+                        {
+                            NumeroSemana = competenciaFolha.GetWeekNumber() + semanaIndex,
+                            TempoTotalPrevisto = TimeSpan.Zero,
+                            TempoTotalApurado = TimeSpan.Zero,
+                            DiferencaTempoTotal = TimeSpan.Zero,
+                        };
+
+                        if (ApuracaoMensal.TempoPeriodo.Passado)
                         {
                             apuracaoSemanalModel.TempoPeriodo.Atual = false;
                             apuracaoSemanalModel.TempoPeriodo.Passado = true;
                             apuracaoSemanalModel.TempoPeriodo.Futuro = false;
                         }
-                        else if (apuracaoSemanalModel.NumeroSemana == numeroSemanaAtual)
+                        else if (ApuracaoMensal.TempoPeriodo.Atual)
                         {
-                            apuracaoSemanalModel.TempoPeriodo.Atual = true;
-                            apuracaoSemanalModel.TempoPeriodo.Passado = false;
-                            apuracaoSemanalModel.TempoPeriodo.Futuro = false;
+                            if (apuracaoSemanalModel.NumeroSemana < numeroSemanaAtual)
+                            {
+                                apuracaoSemanalModel.TempoPeriodo.Atual = false;
+                                apuracaoSemanalModel.TempoPeriodo.Passado = true;
+                                apuracaoSemanalModel.TempoPeriodo.Futuro = false;
+                            }
+                            else if (apuracaoSemanalModel.NumeroSemana == numeroSemanaAtual)
+                            {
+                                apuracaoSemanalModel.TempoPeriodo.Atual = true;
+                                apuracaoSemanalModel.TempoPeriodo.Passado = false;
+                                apuracaoSemanalModel.TempoPeriodo.Futuro = false;
+                            }
+                            else
+                            {
+                                apuracaoSemanalModel.TempoPeriodo.Atual = false;
+                                apuracaoSemanalModel.TempoPeriodo.Passado = false;
+                                apuracaoSemanalModel.TempoPeriodo.Futuro = true;
+                            }
                         }
                         else
                         {
@@ -160,147 +174,141 @@ public class IndexModel : PageModel
                             apuracaoSemanalModel.TempoPeriodo.Passado = false;
                             apuracaoSemanalModel.TempoPeriodo.Futuro = true;
                         }
-                    }
-                    else
-                    {
-                        apuracaoSemanalModel.TempoPeriodo.Atual = false;
-                        apuracaoSemanalModel.TempoPeriodo.Passado = false;
-                        apuracaoSemanalModel.TempoPeriodo.Futuro = true;
-                    }
 
-                    for (int diaSemanaIndex = 0; diaSemanaIndex < 7; diaSemanaIndex++)
-                    {
-                        var diaIndex = (semanaIndex * 7) + diaSemanaIndex;
-
-                        if (diaIndex >= Folha.ApuracaoMensal.TotalDias)
+                        for (int diaSemanaIndex = 0; diaSemanaIndex < 7; diaSemanaIndex++)
                         {
-                            break;
-                        }
+                            var diaIndex = (semanaIndex * 7) + diaSemanaIndex;
 
-                        //
-
-                        var apuracaoDiaria = Folha.ApuracaoMensal.Dias[diaIndex];
-
-                        DateTime? horaEntrada = null;
-
-                        bool? tempoApuradoIndeterminado = null;
-
-                        TimeSpan? tempoApurado = TimeSpan.Zero;
-
-                        var pontosDoDia = pontos
-                            .Where(x => x.DataHora.Value.Day == apuracaoDiaria.Dia.Value)
-                            .OrderBy(x => x.DataHora);
-
-                        foreach (var pontoDoDia in pontosDoDia)
-                        {
-                            if (horaEntrada == null)
+                            if (diaIndex >= Folha.ApuracaoMensal.TotalDias)
                             {
-                                if (pontoDoDia.MomentoId == MomentoEnum.Entrada)
-                                {
-                                    horaEntrada = pontoDoDia.DataHora;
-                                }
-                                else
-                                {
-                                    tempoApuradoIndeterminado = true;
-
-                                    break;
-                                }
+                                break;
                             }
-                            else
-                            {
-                                if (pontoDoDia.MomentoId == MomentoEnum.Saida)
-                                {
-                                    var tempoRealizado = pontoDoDia.DataHora - horaEntrada;
 
-                                    if (tempoApurado == null)
+                            //
+
+                            var apuracaoDiaria = Folha.ApuracaoMensal.Dias[diaIndex];
+
+                            DateTime? horaEntrada = null;
+
+                            bool? tempoApuradoIndeterminado = null;
+
+                            TimeSpan? tempoApurado = TimeSpan.Zero;
+
+                            var pontosDoDia = pontos
+                                .Where(x => x.DataHora.Value.Day == apuracaoDiaria.Dia.Value)
+                                .OrderBy(x => x.DataHora);
+
+                            foreach (var pontoDoDia in pontosDoDia)
+                            {
+                                if (horaEntrada == null)
+                                {
+                                    if (pontoDoDia.MomentoId == MomentoEnum.Entrada)
                                     {
-                                        tempoApurado = tempoRealizado;
+                                        horaEntrada = pontoDoDia.DataHora;
                                     }
                                     else
                                     {
-                                        tempoApurado += tempoRealizado;
-                                    }
+                                        tempoApuradoIndeterminado = true;
 
-                                    horaEntrada = null;
+                                        break;
+                                    }
                                 }
                                 else
                                 {
-                                    tempoApuradoIndeterminado = true;
+                                    if (pontoDoDia.MomentoId == MomentoEnum.Saida)
+                                    {
+                                        var tempoRealizado = pontoDoDia.DataHora - horaEntrada;
 
-                                    break;
+                                        if (tempoApurado == null)
+                                        {
+                                            tempoApurado = tempoRealizado;
+                                        }
+                                        else
+                                        {
+                                            tempoApurado += tempoRealizado;
+                                        }
+
+                                        horaEntrada = null;
+                                    }
+                                    else
+                                    {
+                                        tempoApuradoIndeterminado = true;
+
+                                        break;
+                                    }
                                 }
+                            }
+
+                            var diferencaTempo = tempoApurado - (apuracaoDiaria.TempoPrevisto ?? TimeSpan.Zero);
+
+                            var data = competenciaFolha.AddDays(apuracaoDiaria.Dia.Value - 1);
+
+                            var apuracaoDiariaModel = new ApuracaoDiariaViewModel
+                            {
+                                Dia = apuracaoDiaria.Dia.Value,
+                                DiaSemana = data.DayOfWeek,
+                                DescricaoDia = data.ToString("dddd"),
+                                TempoPrevisto = apuracaoDiaria.TempoPrevisto ?? TimeSpan.Zero,
+                                TempoApurado = tempoApurado ?? TimeSpan.Zero,
+                                TempoApuradoIdeterminado = tempoApuradoIndeterminado ?? false,
+                                DiferencaTempo = diferencaTempo ?? TimeSpan.Zero,
+                                TempoAbonado = apuracaoDiaria.TempoAbonado ?? TimeSpan.Zero,
+                                Feriado = apuracaoDiaria.Feriado,
+                                Falta = apuracaoDiaria.Falta,
+                                Pontos = pontosDoDia.ToArray()
+                            };
+
+                            apuracaoDiaria.TempoApurado = apuracaoDiaria.TempoApurado ?? TimeSpan.Zero;
+
+                            apuracaoDiaria.DiferencaTempo = apuracaoDiaria.DiferencaTempo ?? TimeSpan.Zero;
+
+                            //
+
+                            apuracaoSemanalModel.TempoTotalPrevisto += apuracaoDiariaModel.TempoPrevisto;
+
+                            apuracaoSemanalModel.TempoTotalApurado += apuracaoDiariaModel.TempoApurado + apuracaoDiariaModel.TempoAbonado;
+
+                            apuracaoSemanalModel.DiferencaTempoTotal += apuracaoDiariaModel.DiferencaTempo + apuracaoDiariaModel.TempoAbonado;
+
+                            if (apuracaoDiaria.TempoPrevisto != TimeSpan.Zero)
+                            {
+                            }
+
+                            //
+
+                            ApuracaoMensal.Dias.Add(apuracaoDiariaModel);
+
+                            //
+
+
+                            if (data < hoje)
+                            {
+                                apuracaoDiariaModel.TempoPeriodo.Atual = false;
+                                apuracaoDiariaModel.TempoPeriodo.Passado = true;
+                                apuracaoDiariaModel.TempoPeriodo.Futuro = false;
+                            }
+                            else if (data == hoje)
+                            {
+                                apuracaoDiariaModel.TempoPeriodo.Atual = true;
+                                apuracaoDiariaModel.TempoPeriodo.Passado = false;
+                                apuracaoDiariaModel.TempoPeriodo.Futuro = false;
+                            }
+                            else
+                            {
+                                apuracaoDiariaModel.TempoPeriodo.Atual = false;
+                                apuracaoDiariaModel.TempoPeriodo.Passado = false;
+                                apuracaoDiariaModel.TempoPeriodo.Futuro = true;
                             }
                         }
 
-                        var diferencaTempo = tempoApurado - (apuracaoDiaria.TempoPrevisto ?? TimeSpan.Zero);
+                        ApuracaoMensal.TempoTotalPrevisto += apuracaoSemanalModel.TempoTotalPrevisto;
 
-                        var data = competenciaFolha.AddDays(apuracaoDiaria.Dia.Value - 1);
+                        ApuracaoMensal.TempoTotalApurado += apuracaoSemanalModel.TempoTotalApurado;
 
-                        var apuracaoDiariaModel = new ApuracaoDiariaViewModel
-                        {
-                            Dia = apuracaoDiaria.Dia.Value,
-                            DiaSemana = data.DayOfWeek,
-                            DescricaoDia = data.ToString("dddd"),
-                            TempoPrevisto = apuracaoDiaria.TempoPrevisto ?? TimeSpan.Zero,
-                            TempoApurado = tempoApurado ?? TimeSpan.Zero,
-                            TempoApuradoIdeterminado = tempoApuradoIndeterminado ?? false,
-                            DiferencaTempo = diferencaTempo ?? TimeSpan.Zero,
-                            TempoAbonado = apuracaoDiaria.TempoAbonado ?? TimeSpan.Zero,
-                            Feriado = apuracaoDiaria.Feriado,
-                            Falta = apuracaoDiaria.Falta,
-                            Pontos = pontosDoDia.ToArray()
-                        };
+                        ApuracaoMensal.DiferencaTempoTotal += apuracaoSemanalModel.DiferencaTempoTotal;
 
-                        apuracaoDiaria.TempoApurado = apuracaoDiaria.TempoApurado ?? TimeSpan.Zero;
-
-                        apuracaoDiaria.DiferencaTempo = apuracaoDiaria.DiferencaTempo ?? TimeSpan.Zero;
-
-                        //
-
-                        apuracaoSemanalModel.TempoTotalPrevisto += apuracaoDiariaModel.TempoPrevisto;
-
-                        apuracaoSemanalModel.TempoTotalApurado += apuracaoDiariaModel.TempoApurado + apuracaoDiariaModel.TempoAbonado;
-
-                        apuracaoSemanalModel.DiferencaTempoTotal += apuracaoDiariaModel.DiferencaTempo + apuracaoDiariaModel.TempoAbonado;
-
-                        if (apuracaoDiaria.TempoPrevisto != TimeSpan.Zero)
-                        {
-                        }
-
-                        //
-
-                        ApuracaoMensal.Dias.Add(apuracaoDiariaModel);
-
-                        //
-
-
-                        if (data < hoje)
-                        {
-                            apuracaoDiariaModel.TempoPeriodo.Atual = false;
-                            apuracaoDiariaModel.TempoPeriodo.Passado = true;
-                            apuracaoDiariaModel.TempoPeriodo.Futuro = false;
-                        }
-                        else if (data == hoje)
-                        {
-                            apuracaoDiariaModel.TempoPeriodo.Atual = true;
-                            apuracaoDiariaModel.TempoPeriodo.Passado = false;
-                            apuracaoDiariaModel.TempoPeriodo.Futuro = false;
-                        }
-                        else
-                        {
-                            apuracaoDiariaModel.TempoPeriodo.Atual = false;
-                            apuracaoDiariaModel.TempoPeriodo.Passado = false;
-                            apuracaoDiariaModel.TempoPeriodo.Futuro = true;
-                        }
+                        ApuracaoMensal.Semanas.Add(apuracaoSemanalModel);
                     }
-
-                    ApuracaoMensal.TempoTotalPrevisto += apuracaoSemanalModel.TempoTotalPrevisto;
-
-                    ApuracaoMensal.TempoTotalApurado += apuracaoSemanalModel.TempoTotalApurado;
-
-                    ApuracaoMensal.DiferencaTempoTotal += apuracaoSemanalModel.DiferencaTempoTotal;
-
-                    ApuracaoMensal.Semanas.Add(apuracaoSemanalModel);
                 }
             }
         }

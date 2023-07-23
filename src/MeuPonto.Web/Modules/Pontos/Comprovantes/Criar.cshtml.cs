@@ -2,6 +2,7 @@
 using MeuPonto.Modules.Trabalhadores;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 
@@ -52,7 +53,7 @@ public class CriarComprovanteModel : PageModel
 
         if (ModelState.ContainsKey($"{nameof(Comprovante)}.{nameof(Comprovante.Imagem)}")) ModelState.Remove($"{nameof(Comprovante)}.{nameof(Comprovante.Imagem)}");
 
-        var ponto = await _db.Pontos.FindByIdAsync(PontoId, nameIdentifier.Value);
+        var ponto = await _db.Pontos.FirstOrDefaultAsync(m => m.Id == PontoId);
 
         Comprovante.ComprovaPonto(ponto);
 

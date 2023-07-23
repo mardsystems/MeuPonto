@@ -44,9 +44,8 @@ public class ExcluirFolhaModel : PageModel
         {
             return NotFound();
         }
-        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
 
-        var folha = await _db.Folhas.FindByIdAsync(id, nameIdentifier.Value);
+        var folha = await _db.Folhas.FirstOrDefaultAsync(m => m.Id == id);
 
         if (folha != null)
         {

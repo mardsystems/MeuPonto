@@ -29,7 +29,7 @@ public class GuardarComprovanteModel : PageModel
 
         Comprovante.TipoImagemId = TipoImagemEnum.Original;
 
-        ViewData["PerfilId"] = new SelectList(_db.Perfis, "Id", "Nome");
+        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
         return Page();
     }
 
@@ -60,13 +60,13 @@ public class GuardarComprovanteModel : PageModel
 
         if (!ModelState.IsValid)
         {
-            ViewData["PerfilId"] = new SelectList(_db.Perfis, "Id", "Nome");
+            ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
             return Page();
         }
 
         if (command == "Escanear")
         {
-            ViewData["PerfilId"] = new SelectList(_db.Perfis, "Id", "Nome");
+            ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
 
             ModelState.Remove($"{nameof(Ponto)}.{nameof(Ponto.DataHora)}");
 
@@ -82,7 +82,7 @@ public class GuardarComprovanteModel : PageModel
         {
             Trabalhador.Default.RecontextualizaPonto(Ponto, transaction);
 
-            var perfil = await _db.Perfis.FindByIdAsync(Ponto.PerfilId, nameIdentifier.Value);
+            var perfil = await _db.Perfis.FindByIdAsync(Ponto.PerfilId, Trabalhador.Default);
 
             perfil.QualificaPonto(Ponto);
 

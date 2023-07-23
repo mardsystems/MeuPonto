@@ -46,7 +46,7 @@ public class ExcluirModel : PageModel
         }
         var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
 
-        var ponto = await _db.Pontos.FindByIdAsync(id, nameIdentifier.Value);
+        var ponto = await _db.Pontos.FirstOrDefaultAsync(m => m.Id == id);
 
         if (ponto != null)
         {

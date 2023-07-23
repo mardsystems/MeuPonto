@@ -34,7 +34,7 @@ public class MarcarModel : PageModel
 
         Ponto.DataHora = _dateTimeSnapshot.GetDateTimeUntilMinutes();
 
-        ViewData["PerfilId"] = new SelectList(_db.Perfis, "Id", "Nome");
+        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
 
         return Page();
     }
@@ -53,14 +53,14 @@ public class MarcarModel : PageModel
 
         if (!ModelState.IsValid)
         {
-            ViewData["PerfilId"] = new SelectList(_db.Perfis, "Id", "Nome");
+            ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
 
             return Page();
         }
 
         Trabalhador.Default.RecontextualizaPonto(Ponto, transaction);
 
-        var perfil = await _db.Perfis.FindByIdAsync(Ponto.PerfilId, nameIdentifier.Value);
+        var perfil = await _db.Perfis.FindByIdAsync(Ponto.PerfilId, Trabalhador.Default);
 
         perfil.QualificaPonto(Ponto);
 

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using MeuPonto.Modules.Shared;
+using MeuPonto.Modules.Trabalhadores;
 
 namespace MeuPonto.Modules.Empregadores;
 
@@ -37,7 +38,8 @@ public class IndexModel : PageModel
         {
             Empregadores = await _db.Empregadores
                 .Where(x => true
-                    && (Nome == null || x.Nome == Nome))
+                    && (Nome == null || x.Nome == Nome)
+                    && x.TrabalhadorId == Trabalhador.Default.Id)
                 .OrderByDescending(x => x.Nome)
                 .Skip((Pagination.PaginaAtual - 1) * Pagination.TamanhoPagina.Value)
                 .Take(Pagination.TamanhoPagina.Value)

@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@{
     var random = new Random();
 
     var anuncioId = random.Next(3) + 1;
@@ -22,6 +24,10 @@
                 <a class="navbar-brand" asp-area="" asp-page="/Index">
                     <img src="~/img/logo-32-32-dark.png" width="32" height="32" alt="Logo" />
                     Meu Ponto
+                    @if ((await AuthorizationService.AuthorizeAsync(User, "Admin")).Succeeded)
+                    {
+                        <span class="badge text-bg-secondary rounded-pill">Admin</span>
+                    }
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -58,7 +64,7 @@
             @RenderBody()
         </main>
     </div>
-@*
+    @*
     <footer class="border-top footer text-muted pt-3">
 
     </footer>*@

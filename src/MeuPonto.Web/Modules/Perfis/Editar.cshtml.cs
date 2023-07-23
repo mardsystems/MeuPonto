@@ -1,4 +1,5 @@
-﻿using MeuPonto.Helpers;
+﻿using MeuPonto.Data;
+using MeuPonto.Helpers;
 using MeuPonto.Modules.Trabalhadores;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -34,7 +35,7 @@ public class EditarModel : PageModel
         }
         Perfil = perfil;
 
-        ViewData["EmpregadorId"] = new SelectList(_db.Empregadores, "Id", "Nome").AddEmptyValue();
+        ViewData["EmpregadorId"] = new SelectList(_db.Empregadores.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome").AddEmptyValue();
 
         return Page();
     }
@@ -58,7 +59,7 @@ public class EditarModel : PageModel
 
         if (Perfil.EmpregadorId.HasValue)
         {
-            var empregador = await _db.Empregadores.FindAsync(Perfil.EmpregadorId, nameIdentifier.Value);
+            var empregador = await _db.Empregadores.FindByIdAsync(Perfil.EmpregadorId, Trabalhador.Default);
 
             Perfil.VinculaEmpregador(empregador);
         }

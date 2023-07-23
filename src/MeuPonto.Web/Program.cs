@@ -59,11 +59,11 @@ public class Program
                 context.ProtocolMessage.ResponseType = Microsoft.IdentityModel.Protocols.OpenIdConnect.OpenIdConnectResponseType.IdToken;
             };
 
-            var onOnTokenValidated = options.Events.OnTokenValidated;
+            var onTicketReceived = options.Events.OnTicketReceived;
 
-            options.Events.OnTokenValidated = async context =>
+            options.Events.OnTicketReceived = async context =>
             {
-                onOnTokenValidated?.Invoke(context);
+                onTicketReceived?.Invoke(context);
 
                 var db = context.HttpContext.RequestServices.GetService<MeuPontoDbContext>();
 
@@ -106,11 +106,17 @@ public class Program
                 Trabalhador.Default = null;
             };
         });
-
+        
         builder.Services.AddAuthorization(options =>
         {
             // By default, all incoming requests will be authorized according to the default policy.
             options.FallbackPolicy = options.DefaultPolicy;
+
+            var rolesSection = builder.Configuration.GetSection("Roles");
+
+            var userAdmin = rolesSection.GetValue<string>("Admin");
+
+            options.AddPolicy("Admin", policy => policy.RequireClaim(ClaimTypes.NameIdentifier, userAdmin));
         });
         builder.Services
             .AddRazorPages(options =>

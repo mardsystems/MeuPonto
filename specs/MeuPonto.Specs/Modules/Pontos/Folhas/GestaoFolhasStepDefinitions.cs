@@ -49,7 +49,7 @@ public class GestaoFolhasStepDefinitions
     [Given(@"que o trabalhador qualifica a folha com o perfil '([^']*)'")]
     public void GivenQueOTrabalhadorQualificaAFolhaComOPerfil(string nome)
     {
-        var perfil = _db.Perfis.FirstOrDefault(x => x.Nome == nome);
+        var perfil = _db.Perfis.FirstOrDefault(x => x.Nome == nome && x.TrabalhadorId == Trabalhador.Default.Id);
 
         perfil.QualificaFolha(_gestaoFolhas.Folha);
     }
@@ -73,7 +73,7 @@ public class GestaoFolhasStepDefinitions
 
         var transaction = new TransactionContext(userId);
 
-        var perfil = _db.Perfis.FirstOrDefault();
+        var perfil = _db.Perfis.FirstOrDefault(x => x.TrabalhadorId == Trabalhador.Default.Id);
 
         var pontoEntrada = Trabalhador.Default.CriaPonto(transaction);
 
@@ -93,7 +93,7 @@ public class GestaoFolhasStepDefinitions
 
         var transaction = new TransactionContext(userId);
 
-        var perfil = _db.Perfis.FirstOrDefault();
+        var perfil = _db.Perfis.FirstOrDefault(x => x.TrabalhadorId == Trabalhador.Default.Id);
 
         var pontoSaida = Trabalhador.Default.CriaPonto(transaction);
 
@@ -170,7 +170,7 @@ public class GestaoFolhasStepDefinitions
     {
         if (_gestaoFolhas.Folha.Perfil == null)
         {
-            var perfil = _db.Perfis.FirstOrDefault();
+            var perfil = _db.Perfis.FirstOrDefault(x => x.TrabalhadorId == Trabalhador.Default.Id);
 
             if (perfil == default)
             {
