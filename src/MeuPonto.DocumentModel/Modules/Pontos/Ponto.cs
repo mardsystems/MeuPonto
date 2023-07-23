@@ -35,4 +35,6 @@ public class Ponto : DocumentEntity, Concepts.Ponto
     [MaxLength(255)]
     [DisplayName("Observação")]
     public string? Observacao { get; set; }
+
+    public Guid? TrabalhadorId { get; set; }
 }

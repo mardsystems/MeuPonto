@@ -11,4 +11,6 @@ public class Empregador : DocumentEntity, Concepts.Empregador
     [MaxLength(36)]
     [DisplayName("Nome")]
     public string? Nome { get; set; }
+
+    public Guid? TrabalhadorId { get; set; }
 }

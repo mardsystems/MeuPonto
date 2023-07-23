@@ -1,5 +1,6 @@
 ﻿using MeuPonto.Data;
 using MeuPonto.Helpers;
+using MeuPonto.Modules.Trabalhadores;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -24,7 +25,7 @@ public class CriarModel : PageModel
 
         var transaction = new TransactionContext(userId);
 
-        Perfil = PerfilFactory.CriaPerfil(transaction);
+        Perfil = Trabalhador.Default.CriaPerfil(transaction);
 
         ViewData["EmpregadorId"] = new SelectList(_db.Empregadores, "Id", "Nome").AddEmptyValue();
 
@@ -56,7 +57,7 @@ public class CriarModel : PageModel
 
         var transaction = new TransactionContext(userId);
 
-        Perfil.RecontextualizaPerfil(transaction);
+        Trabalhador.Default.RecontextualizaPerfil(Perfil, transaction);
 
         if (!ModelState.IsValid)
         {

@@ -5,6 +5,8 @@ namespace MeuPonto.Modules.Trabalhadores;
 
 public class Trabalhador : DocumentEntity, Concepts.Trabalhador
 {
+    public static Trabalhador Default { get; set; }
+
     Perfil[] Concepts.Trabalhador.Cadastra()
     {
         throw new NotImplementedException();

@@ -1,5 +1,6 @@
 using MeuPonto.Data;
 using MeuPonto.Modules.Perfis;
+using MeuPonto.Modules.Trabalhadores;
 using System.ComponentModel;
 
 namespace MeuPonto.Modules.Pontos.Folhas;
@@ -74,7 +75,7 @@ public class GestaoFolhasStepDefinitions
 
         var perfil = _db.Perfis.FirstOrDefault();
 
-        var pontoEntrada = PontoFactory.CriaPonto(transaction);
+        var pontoEntrada = Trabalhador.Default.CriaPonto(transaction);
 
         perfil.QualificaPonto(pontoEntrada);
 
@@ -94,7 +95,7 @@ public class GestaoFolhasStepDefinitions
 
         var perfil = _db.Perfis.FirstOrDefault();
 
-        var pontoSaida = PontoFactory.CriaPonto(transaction);
+        var pontoSaida = Trabalhador.Default.CriaPonto(transaction);
 
         perfil.QualificaPonto(pontoSaida);
 
@@ -148,7 +149,7 @@ public class GestaoFolhasStepDefinitions
 
             var momento = (MomentoEnum)Enum.Parse(typeof(MomentoEnum), row["momento"]);
 
-            var ponto = PontoFactory.CriaPonto(transaction);
+            var ponto = Trabalhador.Default.CriaPonto(transaction);
 
             _cadastroPerfis.Perfil.QualificaPonto(ponto);
 

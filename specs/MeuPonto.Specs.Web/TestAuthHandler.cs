@@ -24,7 +24,7 @@ public class TestAuthHandler : AuthenticationHandler<AuthenticationSchemeOptions
         var ticket = new AuthenticationTicket(principal, "TestScheme");
 
         var result = AuthenticateResult.Success(ticket);
-
+        
         return Task.FromResult(result);
-    }
+    }    
 }

@@ -59,11 +59,11 @@ public class Program
                 context.ProtocolMessage.ResponseType = Microsoft.IdentityModel.Protocols.OpenIdConnect.OpenIdConnectResponseType.IdToken;
             };
 
-            var onTokenValidated = options.Events.OnTokenValidated;
+            var onOnTokenValidated = options.Events.OnTokenValidated;
 
             options.Events.OnTokenValidated = async context =>
             {
-                onTokenValidated?.Invoke(context);
+                onOnTokenValidated?.Invoke(context);
 
                 var db = context.HttpContext.RequestServices.GetService<MeuPontoDbContext>();
 
@@ -98,29 +98,12 @@ public class Program
                     trabalhador = trabalhadorExistente;
                 }
 
-                var empregadorExistente = await db.Empregadores.FirstOrDefaultAsync(m => m.Id == userId);
-
-                if (empregadorExistente == default)
-                {
-                    var empregador = EmpregadorFactory.CriaEmpregador(transaction, userId);
-
-                    empregador.Nome = $"(Você Mesmo)";
-
-                    try
-                    {
-                        db.Empregadores.Add(empregador);
-                        await db.SaveChangesAsync();
-                    }
-                    catch (Exception _)
-                    {
-                        throw;
-                    }
-                }
+                Trabalhador.Default = trabalhador;
             };
 
             options.Events.OnRedirectToIdentityProviderForSignOut = async context =>
             {
-
+                Trabalhador.Default = null;
             };
         });
 

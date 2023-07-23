@@ -25,4 +25,6 @@ public class Comprovante : DocumentEntity, Concepts.Comprovante
     [DisplayName("Tipo Imagem")]
     public TipoImagemEnum? TipoImagemId { get; set; }
     string? Concepts.Comprovante.TipoImagem => TipoImagemId?.GetDisplayName();
+
+    public Guid? TrabalhadorId { get; set; }
 }

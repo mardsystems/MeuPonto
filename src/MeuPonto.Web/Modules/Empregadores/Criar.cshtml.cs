@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MeuPonto.Modules.Trabalhadores;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Claims;
 
@@ -30,7 +31,7 @@ public class CriarModel : PageModel
 
         var transaction = new TransactionContext(userId);
 
-        Empregador.RecontextualizaEmpregador(transaction);
+        Trabalhador.Default.RecontextualizaEmpregador(Empregador, transaction);
 
         if (!ModelState.IsValid)
         {

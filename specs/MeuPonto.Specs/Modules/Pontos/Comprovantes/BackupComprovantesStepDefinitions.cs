@@ -1,5 +1,6 @@
 using MeuPonto.Data;
 using MeuPonto.Modules.Perfis;
+using MeuPonto.Modules.Trabalhadores;
 
 namespace MeuPonto.Modules.Pontos.Comprovantes;
 
@@ -61,14 +62,14 @@ public class BackupComprovantesStepDefinitions
 
         var transaction = new TransactionContext(userId);
 
-        var ponto = PontoFactory.CriaPonto(transaction);
+        var ponto = Trabalhador.Default.CriaPonto(transaction);
 
         _cadastroPerfis.Perfil.QualificaPonto(ponto);
         
         ponto.DataHora = data;
         ponto.MomentoId = MomentoEnum.Entrada;
 
-        var comprovante = ComprovanteFactory.CriaComprovante(transaction);
+        var comprovante = Trabalhador.Default.CriaComprovante(transaction);
 
         comprovante.ComprovaPonto(ponto);
 

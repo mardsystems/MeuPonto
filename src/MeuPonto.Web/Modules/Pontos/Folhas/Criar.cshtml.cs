@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using MeuPonto.Data;
 using System.Security.Claims;
+using MeuPonto.Modules.Trabalhadores;
 
 namespace MeuPonto.Modules.Pontos.Folhas;
 
@@ -27,7 +28,7 @@ public class CriarFolhaModel : PageModel
 
         ViewData["PerfilId"] = new SelectList(_db.Perfis, "Id", "Nome");
 
-        Folha = FolhaFactory.CriaFolha(transaction);
+        Folha = Trabalhador.Default.CriaFolha(transaction);
 
         return Page();
     }
@@ -54,7 +55,7 @@ public class CriarFolhaModel : PageModel
 
         var transaction = new TransactionContext(userId);
 
-        Folha.RecontextualizaFolha(transaction);
+        Trabalhador.Default.RecontextualizaFolha(Folha, transaction);
 
         if (ModelState.ContainsKey($"{nameof(Folha)}.{nameof(Folha.Competencia)}")) ModelState.Remove($"{nameof(Folha)}.{nameof(Folha.Competencia)}");
 

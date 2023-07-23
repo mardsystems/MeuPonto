@@ -1,4 +1,5 @@
 ﻿using MeuPonto.Helpers;
+using MeuPonto.Modules.Trabalhadores;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -26,13 +27,13 @@ public class EditarModel : PageModel
             return NotFound();
         }
 
-        var perfil =  await _db.Perfis.FirstOrDefaultAsync(m => m.Id == id);
+        var perfil = await _db.Perfis.FirstOrDefaultAsync(m => m.Id == id);
         if (perfil == null)
         {
             return NotFound();
         }
         Perfil = perfil;
-        
+
         ViewData["EmpregadorId"] = new SelectList(_db.Empregadores, "Id", "Nome").AddEmptyValue();
 
         return Page();
@@ -48,7 +49,7 @@ public class EditarModel : PageModel
 
         var transaction = new TransactionContext(userId);
 
-        Perfil.RecontextualizaPerfil(transaction);
+        Trabalhador.Default.RecontextualizaPerfil(Perfil, transaction);
 
         if (!ModelState.IsValid)
         {
@@ -79,7 +80,7 @@ public class EditarModel : PageModel
                 throw;
             }
         }
-        catch(Exception _)
+        catch (Exception _)
         {
 
         }
@@ -89,6 +90,6 @@ public class EditarModel : PageModel
 
     private bool PerfilExists(Guid? id)
     {
-      return _db.Perfis.Any(e => e.Id == id);
+        return _db.Perfis.Any(e => e.Id == id);
     }
 }

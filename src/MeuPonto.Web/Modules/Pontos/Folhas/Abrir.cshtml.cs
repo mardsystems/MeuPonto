@@ -1,4 +1,5 @@
 ﻿using MeuPonto.Data;
+using MeuPonto.Modules.Trabalhadores;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -27,7 +28,7 @@ public class AbrirFolhaModel : PageModel
 
         ViewData["PerfilId"] = new SelectList(_db.Perfis, "Id", "Nome");
 
-        Folha = FolhaFactory.CriaFolha(transaction);
+        Folha = Trabalhador.Default.CriaFolha(transaction);
 
         Folha.StatusId = StatusEnum.Aberta;
 
@@ -56,7 +57,7 @@ public class AbrirFolhaModel : PageModel
 
         var transaction = new TransactionContext(userId);
 
-        Folha.RecontextualizaFolha(transaction);
+        Trabalhador.Default.RecontextualizaFolha(Folha, transaction);
 
         if (ModelState.ContainsKey($"{nameof(Folha)}.{nameof(Folha.Competencia)}")) ModelState.Remove($"{nameof(Folha)}.{nameof(Folha.Competencia)}");
 
@@ -82,13 +83,13 @@ public class AbrirFolhaModel : PageModel
                 if (ModelState.ContainsKey(state.Key)) ModelState.Remove(state.Key);
             }
 
-            ConfirmarCompetencia(perfil);
+            Folha.ConfirmarCompetencia(perfil, CompetenciaAno.Value, CompetenciaMes.Value);
 
             return Page();
         }
         else
         {
-            ConfirmarCompetencia(perfil);
+            Folha.ConfirmarCompetencia(perfil, CompetenciaAno.Value, CompetenciaMes.Value);
 
             _db.Folhas.Add(Folha);
             await _db.SaveChangesAsync();
@@ -97,39 +98,4 @@ public class AbrirFolhaModel : PageModel
         }
     }
 
-    private void ConfirmarCompetencia(Perfis.Perfil? perfil)
-    {
-        Folha.ApuracaoMensal.Dias.Clear();
-
-        var competenciaAtual = new DateTime(CompetenciaAno.Value, CompetenciaMes.Value, 1);
-
-        Folha.Competencia = competenciaAtual;
-
-        var competenciaPosterior = competenciaAtual.AddMonths(1);
-
-        var dias = (competenciaPosterior - competenciaAtual).Days;
-
-        Folha.ApuracaoMensal.TempoTotalPrevisto = TimeSpan.Zero;
-
-        for (int dia = 1; dia <= dias; dia++)
-        {
-            var data = competenciaAtual.AddDays(dia - 1);
-
-            var apuracaoDiaria = new ApuracaoDiaria
-            {
-                Dia = dia,
-                TempoPrevisto = perfil.JornadaTrabalhoSemanalPrevista.Semana.Single(x => x.DiaSemana == data.DayOfWeek).Tempo,
-                TempoApurado = null,
-                DiferencaTempo = null,
-                Feriado = false,
-                Falta = false
-            };
-
-            Folha.ApuracaoMensal.Dias.Add(apuracaoDiaria);
-
-            Folha.ApuracaoMensal.TempoTotalPrevisto += apuracaoDiaria.TempoPrevisto;
-        }
-
-        Folha.ApuracaoMensal.TempoTotalPeriodoAnterior = TimeSpan.Zero;
-    }
 }

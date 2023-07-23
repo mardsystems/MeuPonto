@@ -1,23 +1,27 @@
-﻿namespace MeuPonto.Modules.Pontos.Comprovantes;
+﻿using MeuPonto.Modules.Trabalhadores;
+
+namespace MeuPonto.Modules.Pontos.Comprovantes;
 
 public static class ComprovanteFactory
 {
-    public static Comprovante CriaComprovante(TransactionContext transaction, Guid? id = null)
+    public static Comprovante CriaComprovante(this Trabalhador trabalhador, TransactionContext transaction, Guid? id = null)
     {
         var comprovante = new Comprovante
         {
             Id = id ?? Guid.NewGuid(),
-            PartitionKey = transaction.UserId.ToString(),
+            TrabalhadorId = trabalhador.Id,
+            PartitionKey = $"{trabalhador.Id}",
             CreationDate = transaction.DateTime
         };
 
         return comprovante;
     }
 
-    public static void RecontextualizaComprovante(this Comprovante comprovante, TransactionContext transaction, Guid? id = null)
+    public static void RecontextualizaComprovante(this Trabalhador trabalhador, Comprovante comprovante, TransactionContext transaction, Guid? id = null)
     {
         comprovante.Id = comprovante.Id ?? id ?? Guid.NewGuid();
-        comprovante.PartitionKey = transaction.UserId.ToString();
+        comprovante.TrabalhadorId = trabalhador.Id;
+        //comprovante.PartitionKey = $"{trabalhador.Id}|{comprovante.Ponto.DataHora:yyyy}";
         comprovante.CreationDate = transaction.DateTime;
     }
 }

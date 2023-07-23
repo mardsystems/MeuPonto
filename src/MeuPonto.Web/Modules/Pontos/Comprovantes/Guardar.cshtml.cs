@@ -1,4 +1,5 @@
 ﻿using MeuPonto.Data;
+using MeuPonto.Modules.Trabalhadores;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -24,7 +25,7 @@ public class GuardarComprovanteModel : PageModel
 
         var transaction = new TransactionContext(userId);
 
-        Comprovante = ComprovanteFactory.CriaComprovante(transaction);
+        Comprovante = Trabalhador.Default.CriaComprovante(transaction);
 
         Comprovante.TipoImagemId = TipoImagemEnum.Original;
 
@@ -51,7 +52,7 @@ public class GuardarComprovanteModel : PageModel
 
         var transaction = new TransactionContext(userId);
 
-        Comprovante.RecontextualizaComprovante(transaction);
+        Trabalhador.Default.RecontextualizaComprovante(Comprovante, transaction);
 
         if (ModelState.ContainsKey($"{nameof(Comprovante)}.{nameof(Comprovante.PontoId)}")) ModelState.Remove($"{nameof(Comprovante)}.{nameof(Comprovante.PontoId)}");
 
@@ -79,7 +80,7 @@ public class GuardarComprovanteModel : PageModel
         }
         else
         {
-            Ponto.RecontextualizaPonto(transaction);
+            Trabalhador.Default.RecontextualizaPonto(Ponto, transaction);
 
             var perfil = await _db.Perfis.FindByIdAsync(Ponto.PerfilId, nameIdentifier.Value);
 

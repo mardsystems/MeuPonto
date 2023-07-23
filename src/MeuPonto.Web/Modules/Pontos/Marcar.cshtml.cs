@@ -1,4 +1,5 @@
 ﻿using MeuPonto.Data;
+using MeuPonto.Modules.Trabalhadores;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -29,7 +30,7 @@ public class MarcarModel : PageModel
 
         var transaction = new TransactionContext(userId);
 
-        Ponto = PontoFactory.CriaPonto(transaction);
+        Ponto = Trabalhador.Default.CriaPonto(transaction);
 
         Ponto.DataHora = _dateTimeSnapshot.GetDateTimeUntilMinutes();
 
@@ -57,7 +58,7 @@ public class MarcarModel : PageModel
             return Page();
         }
 
-        Ponto.RecontextualizaPonto(transaction);
+        Trabalhador.Default.RecontextualizaPonto(Ponto, transaction);
 
         var perfil = await _db.Perfis.FindByIdAsync(Ponto.PerfilId, nameIdentifier.Value);
 
