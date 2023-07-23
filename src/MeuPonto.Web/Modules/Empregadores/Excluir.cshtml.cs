@@ -1,10 +1,11 @@
 ﻿using MeuPonto.Data;
+using MeuPonto.Modules.Empregadores;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
-namespace MeuPonto.Modules.Perfis.Empregadores;
+namespace MeuPonto.Modules.Empregadores;
 
 public class ExcluirModel : PageModel
 {

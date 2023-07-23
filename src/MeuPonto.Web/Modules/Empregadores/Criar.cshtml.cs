@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Claims;
 
-namespace MeuPonto.Modules.Perfis.Empregadores;
+namespace MeuPonto.Modules.Empregadores;
 
 public class CriarModel : PageModel
 {

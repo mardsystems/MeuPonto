@@ -1,8 +1,10 @@
-﻿namespace MeuPonto.Modules.Perfis;
+﻿using MeuPonto.Modules.Empregadores;
+
+namespace MeuPonto.Modules.Perfis;
 
 public static class PerfilFacade
 {
-    public static void VinculaEmpregador(this Perfil perfil, Empregadores.Empregador empregador)
+    public static void VinculaEmpregador(this Perfil perfil, Empregador empregador)
     {
         perfil.Empregador = new EmpregadorRef
         {

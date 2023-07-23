@@ -1,4 +1,4 @@
-﻿using MeuPonto.Modules.Perfis.Empregadores;
+﻿using MeuPonto.Modules.Empregadores;
 
 namespace MeuPonto.Modules.Perfis;
 

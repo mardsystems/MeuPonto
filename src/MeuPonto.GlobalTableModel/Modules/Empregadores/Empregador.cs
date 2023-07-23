@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 
-namespace MeuPonto.Modules.Perfis.Empregadores;
+namespace MeuPonto.Modules.Empregadores;
 
 public class Empregador : GlobalTableEntity, Concepts.Empregador
 {

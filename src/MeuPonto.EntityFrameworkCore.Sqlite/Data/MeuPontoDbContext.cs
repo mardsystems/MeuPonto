@@ -1,6 +1,6 @@
 ﻿using MeuPonto.Modules;
+using MeuPonto.Modules.Empregadores;
 using MeuPonto.Modules.Perfis;
-using MeuPonto.Modules.Perfis.Empregadores;
 using MeuPonto.Modules.Pontos;
 using MeuPonto.Modules.Pontos.Comprovantes;
 using MeuPonto.Modules.Pontos.Folhas;

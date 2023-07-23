@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MeuPonto.Modules.Empregadores;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace MeuPonto.Modules.Perfis.Empregadores;
+namespace MeuPonto.Modules.Empregadores;
 
 public class EditarModel : PageModel
 {

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using MeuPonto.Modules.Shared;
 
-namespace MeuPonto.Modules.Perfis.Empregadores;
+namespace MeuPonto.Modules.Empregadores;
 
 public class IndexModel : PageModel
 {

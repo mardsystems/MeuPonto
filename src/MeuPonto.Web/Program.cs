@@ -1,6 +1,6 @@
 using MeuPonto.Cache;
 using MeuPonto.Data;
-using MeuPonto.Modules.Perfis.Empregadores;
+using MeuPonto.Modules.Empregadores;
 using MeuPonto.Modules.Trabalhadores;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
