@@ -37,7 +37,7 @@ public class IndexModel : PageModel
             Trabalhadores = await _db.Trabalhadores
                 .Where(x => true
                     && (Id == null || x.Id == Id))
-                .OrderByDescending(x => x.Id)
+                .OrderByDescending(x => x.CreationDate)
                 .Skip((Pagination.PaginaAtual - 1) * Pagination.TamanhoPagina.Value)
                 .Take(Pagination.TamanhoPagina.Value)
                 .ToListAsync();
