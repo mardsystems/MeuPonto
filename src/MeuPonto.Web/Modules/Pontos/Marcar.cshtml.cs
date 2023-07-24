@@ -30,7 +30,7 @@ public class MarcarModel : PageModel
 
         Ponto.DataHora = _dateTimeSnapshot.GetDateTimeUntilMinutes();
 
-        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
+        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.Ativo && x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
 
         return Page();
     }
@@ -45,7 +45,7 @@ public class MarcarModel : PageModel
 
         if (!ModelState.IsValid)
         {
-            ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
+            ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.Ativo && x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
 
             return Page();
         }
