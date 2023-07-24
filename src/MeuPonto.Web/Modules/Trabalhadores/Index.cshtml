@@ -22,6 +22,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Trabalhadores[0].Id)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Trabalhadores[0].CreationDate)
+                </th>
             </tr>
             <tr>
                 <th>
@@ -39,6 +42,7 @@
                 <th>
                     <input asp-for="Id" class="form-control" />
                 </th>
+                <td class="table-secondary"></td>
             </tr>
         </thead>
         <tbody class="table-group-divider">
@@ -54,6 +58,9 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreationDate)
                     </td>
                 </tr>
             }
