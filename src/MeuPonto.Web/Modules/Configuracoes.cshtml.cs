@@ -3,6 +3,7 @@ using MeuPonto.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Caching.Memory;
+using System.Security.Claims;
 
 namespace MeuPonto.Modules;
 
@@ -25,7 +26,7 @@ public class ConfiguracoesModel : PageModel
     public bool AskResetConfirmation { get; set; }
 
     [BindProperty]
-    public ConfiguracaoPorUsuario Configuracoes { get; set; } = default!;
+    public Configuracoes Configuracoes { get; set; } = default!;
 
     public ConfiguracoesModel(
         MeuPontoDbContext db,
@@ -43,11 +44,15 @@ public class ConfiguracoesModel : PageModel
     {
         ResetSuccess = false;
 
-        Configuracoes = await _db.Configuracoes.FindAsync(User.Identity.Name);
+        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
+
+        var userId = Guid.Parse(nameIdentifier.Value);
+
+        Configuracoes = await _db.Configuracoes.FindAsync(userId);
 
         if (Configuracoes == null)
         {
-            Configuracoes = new ConfiguracaoPorUsuario();
+            Configuracoes = new Configuracoes();
         }
 
         return Page();
@@ -71,13 +76,17 @@ public class ConfiguracoesModel : PageModel
             ResetSuccess = true;
         }
 
-        var configuracoes = await _db.Configuracoes.FindAsync(User.Identity.Name);
+        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
+
+        var userId = Guid.Parse(nameIdentifier.Value);
+
+        var configuracoes = await _db.Configuracoes.FindAsync(userId);
 
         if (configuracoes == null)
         {
-            configuracoes = new ConfiguracaoPorUsuario
+            configuracoes = new Configuracoes
             {
-                UserName = User.Identity.Name,
+                UserId = userId,
                 JavascriptIsEnabled = JavascriptIsEnabled
             };
 

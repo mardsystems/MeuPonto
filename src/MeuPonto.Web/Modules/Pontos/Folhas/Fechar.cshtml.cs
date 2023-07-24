@@ -1,7 +1,9 @@
 ﻿using MeuPonto.Data;
+using MeuPonto.Modules.Trabalhadores;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace MeuPonto.Modules.Pontos.Folhas;
 
@@ -49,7 +51,7 @@ public class FecharFolhaModel : PageModel
 
         try
         {
-            var folha = await _db.Folhas.FindByIdAsync(id, User.Identity.Name);
+            var folha = await _db.Folhas.FirstOrDefaultAsync(m => m.Id == id);
 
             await Apurar(folha);
 
@@ -79,7 +81,9 @@ public class FecharFolhaModel : PageModel
         var competenciaFolhaPosterior = competenciaFolha.AddMonths(1);
 
         var pontos = await _db.Pontos
-            .Where(x => x.DataHora >= competenciaFolha && x.DataHora < competenciaFolhaPosterior)
+            .Where(x => true
+            && x.DataHora >= competenciaFolha && x.DataHora < competenciaFolhaPosterior
+            && x.TrabalhadorId == Trabalhador.Default.Id)
             .OrderByDescending(x => x.DataHora)
         .ToListAsync();
 

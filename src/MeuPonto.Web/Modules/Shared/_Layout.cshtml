@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@{
+    var random = new Random();
+
+    var anuncioId = random.Next(3) + 1;
+}
+
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="utf-8" />
@@ -11,22 +19,47 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark fixed-top border-bottom shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">Meu Ponto</a>
+                <a class="navbar-brand" asp-area="" asp-page="/Index">
+                    <img src="~/img/logo-32-32-dark.png" width="32" height="32" alt="Logo" />
+                    Meu Ponto
+                    @if ((await AuthorizationService.AuthorizeAsync(User, "Admin")).Succeeded)
+                    {
+                        <span class="badge text-bg-secondary rounded-pill">Admin</span>
+                    }
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link @Html.ActiveClass("/Pontos")" asp-page="/Pontos/Index">Pontos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link @Html.ActiveClass("/Perfis") Perfis" asp-area="" asp-page="/Perfis/Index">Perfis</a>
-                        </li>
-                    </ul>
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link @Html.ActiveClass("/Pontos")" asp-page="/Pontos/Index">Pontos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @Html.ActiveClass("/Perfis") Perfis" asp-area="" asp-page="/Perfis/Index">Perfis</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @Html.ActiveClass("/Empregadores")" asp-area="" asp-page="/Empregadores/Index">Empregadores</a>
+                            </li>
+                            @if ((await AuthorizationService.AuthorizeAsync(User, "Admin")).Succeeded)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link @Html.ActiveClass("/Trabalhadores")" asp-area="" asp-page="/Trabalhadores/Index">Trabalhadores</a>
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <span class="navbar-text flex-grow-1">
+                            Sistema de controle de ponto para trabalhadores
+                        </span>
+                    }
                     <partial name="_LoginPartial" />
                 </div>
             </div>
@@ -37,10 +70,97 @@
             @RenderBody()
         </main>
     </div>
-
+    @*
     <footer class="border-top footer text-muted pt-3">
-        <div class="container">
-            &copy; 2023 - Meu Ponto - <a asp-page="/Privacidade">Privacidade</a> - <a asp-area="" asp-page="/Sobre">Sobre</a>
+
+    </footer>*@
+
+    <footer class="py-3 my-4">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item"><a class="nav-link px-2 text-body-secondary" asp-area="" asp-page="/Index">Home</a></li>
+            <li class="nav-item"><a class="nav-link px-2 text-body-secondary" asp-area="" asp-page="/Termos">Termos</a></li>
+            <li class="nav-item"><a class="nav-link px-2 text-body-secondary" asp-area="" asp-page="/Privacidade">Privacidade</a></li>
+            <li class="nav-item"><a class="nav-link px-2 text-body-secondary" asp-area="" asp-page="/Sobre">Sobre</a></li>
+        </ul>
+        <p class="text-center text-body-secondary">&copy; 2023 - Meu Ponto</p>
+        <div class="navbar navbar-light bg-light fixed-bottom border-top">
+            @switch (anuncioId)
+            {
+                case 1:
+                    <div class="container justify-content-start">
+                        <span class="badge text-bg-secondary me-2">Anúncio</span>
+                        <span class="navbar-brand">
+                            <img class="img-thumbnail border border-secondary bg-light" src="~/img/shop-32x32.png" width="32" height="32" alt="Shop" />
+                            Anuncie aqui
+                        </span>
+                        <span class="navbar-text flex-grow-1">
+                            Seja visto pelos trabalhadores de todo o Brasil
+                        </span>
+                        <span>
+                            <a href="mailto:mardsystems@gmail.com?subject=Quero anunciar no Meu Ponto" target="_blank" class="btn btn-sm btn-outline-primary rounded-pill">
+                                <i class="bi bi-envelope"></i>
+                                Contactar
+                            </a>
+                        </span>
+                    </div>
+
+                    break;
+
+                case 2:
+                    <div class="container justify-content-start">
+                        <span class="badge text-bg-secondary me-2">Anúncio</span>
+                        <span class="navbar-brand">
+                            <img class="img-thumbnail border border-secondary bg-light" src="~/img/marcelo-32x32.png" width="32" height="32" alt="Foto" />
+                            Marcelo Dias
+                        </span>
+                        <span class="navbar-text flex-grow-1">
+                            Desenvolvedor .NET Sênior
+                        </span>
+                        <span>
+                            <a href="https://linkedin.com/in/mardsystems" target="_blank" class="btn btn-sm btn-outline-secondary rounded-circle">
+                                <i class="bi bi-linkedin"></i>
+                            </a>
+                            <a href="https://github.com/mardsystems" target="_blank" class="btn btn-sm btn-outline-secondary rounded-circle">
+                                <i class="bi bi-github"></i>
+                            </a>
+                            <a href="mailto:mardsystems@gmail.com" target="_blank" class="btn btn-sm btn-outline-primary rounded-pill">
+                                <i class="bi bi-envelope"></i>
+                                Contactar
+                            </a>
+                        </span>
+                    </div>
+
+                    break;
+
+                case 3:
+                    <div class="container justify-content-start">
+                        <span class="badge text-bg-secondary me-2">Anúncio</span>
+                        <span class="navbar-brand">
+                            <img class="img-thumbnail border border-secondary bg-light" src="~/img/ateliex-32x32.png" width="32" height="32" alt="Logo" />
+                            Ateliex
+                        </span>
+                        <span class="navbar-text flex-grow-1">
+                            Desenvolvimento de sistemas
+                        </span>
+                        <span>
+                            <a href="https://www.linkedin.com/company/ateliex" target="_blank" class="btn btn-sm btn-outline-secondary rounded-circle">
+                                <i class="bi bi-linkedin"></i>
+                            </a>
+                            <a href="https://github.com/ateliex" target="_blank" class="btn btn-sm btn-outline-secondary rounded-circle">
+                                <i class="bi bi-github"></i>
+                            </a>
+                            <a href="https://ateliex.com.br/" target="_blank" class="btn btn-sm btn-outline-primary rounded-pill">
+                                <i class="bi bi-globe2"></i>
+                                Conhecer
+                            </a>
+                        </span>
+                    </div>
+
+                    break;
+
+                default:
+                    break;
+            }
         </div>
     </footer>
 
@@ -49,7 +169,7 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
-    
+
     @if (ViewData.ShowModal())
     {
         <div class="modal-backdrop fade show"></div>

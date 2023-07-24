@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MeuPonto.Helpers;
 using MeuPonto.Modules.Shared;
+using MeuPonto.Modules.Trabalhadores;
 
 namespace MeuPonto.Modules.Pontos.Folhas;
 
@@ -40,9 +41,9 @@ public class FolhasModel : PageModel
 
     public async Task OnGetAsync()
     {
-        ViewData["PerfilId"] = new SelectList(_db.Perfis, "Id", "Nome").AddEmptyValue();
+        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome").AddEmptyValue();
 
-        var totalRegistros = await _db.Folhas.CountAsync();
+        var totalRegistros = await _db.Folhas.CountAsync(x => x.TrabalhadorId == Trabalhador.Default.Id);
 
         Pagination = new PaginationModel(totalRegistros, PaginaAtual ?? 1);
 
@@ -53,7 +54,8 @@ public class FolhasModel : PageModel
                     && (PerfilId == null || x.PerfilId == PerfilId)
                     && (Competencia == null || x.Competencia == Competencia)
                     && (Status == null || x.StatusId == Status)
-                    && (Observacao == null || x.Observacao.Contains(Observacao)))
+                    && (Observacao == null || x.Observacao.Contains(Observacao))
+                    && x.TrabalhadorId == Trabalhador.Default.Id)
                 .OrderByDescending(x => x.Competencia)
                 .Skip((Pagination.PaginaAtual - 1) * Pagination.TamanhoPagina.Value)
                 .Take(Pagination.TamanhoPagina.Value)

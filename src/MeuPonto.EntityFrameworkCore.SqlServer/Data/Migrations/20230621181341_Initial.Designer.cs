@@ -36,7 +36,7 @@ namespace MeuPonto.Data.Migrations
                     b.ToTable("Configuracoes", (string)null);
                 });
 
-            modelBuilder.Entity("MeuPonto.Modules.Perfis.Empregadores.Empregador", b =>
+            modelBuilder.Entity("MeuPonto.Modules.Empregadores.Empregador", b =>
                 {
                     b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd()
@@ -389,7 +389,7 @@ namespace MeuPonto.Data.Migrations
 
             modelBuilder.Entity("MeuPonto.Modules.Perfis.Perfil", b =>
                 {
-                    b.HasOne("MeuPonto.Modules.Perfis.Empregadores.Empregador", "Empregador")
+                    b.HasOne("MeuPonto.Modules.Empregadores.Empregador", "Empregador")
                         .WithMany()
                         .HasForeignKey("EmpregadorId");
 

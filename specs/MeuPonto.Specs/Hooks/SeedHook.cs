@@ -3,6 +3,7 @@ using MeuPonto.Modules.Perfis;
 using MeuPonto.Modules.Pontos;
 using MeuPonto.Modules.Pontos.Comprovantes;
 using MeuPonto.Modules.Pontos.Folhas;
+using MeuPonto.Modules.Trabalhadores;
 
 namespace MeuPonto.Hooks;
 
@@ -21,11 +22,19 @@ public class SeedHook
         BackupComprovantesContext backupComprovantes,
         GestaoFolhasContext gestaoFolhas)
     {
-        var transaction = new TransactionContext("Test user");
+        var userId = Guid.Parse("d2fc8313-9bdc-455c-bf29-ccf709a2a692");
 
-        var perfil = PerfilFactory.CriaPerfil(transaction);
+        var userName = "Test user";
 
-        perfil.Nome = "Test user";
+        var transaction = new TransactionContext(userId);
+
+        var trabalhador = TrabalhadorFactory.CriaTrabalhador(transaction);
+
+        Trabalhador.Default = trabalhador;
+
+        var perfil = trabalhador.CriaPerfil(transaction);
+
+        perfil.Nome = userName;
         perfil.JornadaTrabalhoSemanalPrevista = new JornadaTrabalhoSemanal
         {
             Semana = new List<JornadaTrabalhoDiaria>(new[]{
@@ -69,13 +78,13 @@ public class SeedHook
 
         cadastroPerfis.Inicia(perfil);
 
-        var ponto = PontoFactory.CriaPonto(transaction);
+        var ponto = trabalhador.CriaPonto(transaction);
 
         ponto.MomentoId = MomentoEnum.Entrada;
 
         registroPontos.Inicia(ponto);
 
-        var comprovante = ComprovanteFactory.CriaComprovante(transaction);
+        var comprovante = trabalhador.CriaComprovante(transaction);
 
         backupComprovantes.Inicia(comprovante);
 
@@ -85,7 +94,7 @@ public class SeedHook
 
         var competencia = new DateTime(hoje.Year, hoje.Month, 1);
 
-        var folha = FolhaFactory.CriaFolha(transaction);
+        var folha = trabalhador.CriaFolha(transaction);
 
         perfil.QualificaFolha(folha);
 

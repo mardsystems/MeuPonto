@@ -1,7 +1,9 @@
 ﻿using MeuPonto.Data;
+using MeuPonto.Modules.Trabalhadores;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Security.Claims;
 
 namespace MeuPonto.Modules.Pontos;
 
@@ -16,7 +18,7 @@ public class CriarModel : PageModel
 
     public IActionResult OnGet()
     {
-        ViewData["PerfilId"] = new SelectList(_db.Perfis, "Id", "Nome");
+        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
         return Page();
     }
 
@@ -26,16 +28,20 @@ public class CriarModel : PageModel
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync()
     {
-        var transaction = new TransactionContext(User.Identity.Name);
+        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
+
+        var userId = Guid.Parse(nameIdentifier.Value);
+
+        var transaction = new TransactionContext(userId);
 
         if (!ModelState.IsValid)
         {
             return Page();
         }
 
-        Ponto.RecontextualizaPonto(transaction);
+        Trabalhador.Default.RecontextualizaPonto(Ponto, transaction);
 
-        var perfil = await _db.Perfis.FindByIdAsync(Ponto.PerfilId, User.Identity.Name);
+        var perfil = await _db.Perfis.FindByIdAsync(Ponto.PerfilId, Trabalhador.Default);
 
         perfil.QualificaPonto(Ponto);
 

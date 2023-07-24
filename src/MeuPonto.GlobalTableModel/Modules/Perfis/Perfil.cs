@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
-using MeuPonto.Modules.Perfis.Empregadores;
+using MeuPonto.Modules.Empregadores;
 
 namespace MeuPonto.Modules.Perfis;
 

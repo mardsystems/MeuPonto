@@ -1,6 +1,9 @@
 ﻿using MeuPonto.Data;
+using MeuPonto.Modules.Trabalhadores;
+using Microsoft.Azure.Cosmos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
+using System.Security.Claims;
 
 namespace MeuPonto.Cache;
 
@@ -26,15 +29,26 @@ public class CacheMiddleware
     {
         var javascriptIsEnabled = await _cache.GetOrCreateAsync("JavascriptIsEnabled", async entry =>
         {
-            var configuracoes = await db.Configuracoes.FirstOrDefaultAsync(); //FindAsync(context.User.Identity.Name);
-
-            if (configuracoes == null)
+            if (context.User.Identity.IsAuthenticated)
             {
-                return true;
+                var nameIdentifier = context.User.FindFirst(ClaimTypes.NameIdentifier);
+
+                var userId = Guid.Parse(nameIdentifier.Value);
+
+                var configuracoes = await db.Configuracoes.FirstOrDefaultAsync(x => x.UserId == userId); //FindAsync(context.User.Identity.Name);
+
+                if (configuracoes == null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return configuracoes.JavascriptIsEnabled;
+                }
             }
             else
             {
-                return configuracoes.JavascriptIsEnabled;
+                return true;
             }
         });
 

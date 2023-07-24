@@ -1,8 +1,10 @@
 ﻿using MeuPonto.Data;
 using MeuPonto.Helpers;
+using MeuPonto.Modules.Trabalhadores;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Security.Claims;
 
 namespace MeuPonto.Modules.Perfis;
 
@@ -17,11 +19,15 @@ public class CriarModel : PageModel
 
     public IActionResult OnGet()
     {
-        var transaction = new TransactionContext(User.Identity.Name);
+        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
 
-        Perfil = PerfilFactory.CriaPerfil(transaction);
+        var userId = Guid.Parse(nameIdentifier.Value);
 
-        ViewData["EmpregadorId"] = new SelectList(_db.Empregadores, "Id", "Nome").AddEmptyValue();
+        var transaction = new TransactionContext(userId);
+
+        Perfil = Trabalhador.Default.CriaPerfil(transaction);
+
+        ViewData["EmpregadorId"] = new SelectList(_db.Empregadores.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome").AddEmptyValue();
 
         var daysOfWeek = Enum.GetValues<DayOfWeek>();
 
@@ -45,9 +51,13 @@ public class CriarModel : PageModel
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync()
     {
-        var transaction = new TransactionContext(User.Identity.Name);
+        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
 
-        Perfil.RecontextualizaPerfil(transaction);
+        var userId = Guid.Parse(nameIdentifier.Value);
+
+        var transaction = new TransactionContext(userId);
+
+        Trabalhador.Default.RecontextualizaPerfil(Perfil, transaction);
 
         if (!ModelState.IsValid)
         {
@@ -56,7 +66,7 @@ public class CriarModel : PageModel
 
         if (Perfil.EmpregadorId.HasValue)
         {
-            var empregador = await _db.Empregadores.FindByIdAsync(Perfil.EmpregadorId, User.Identity.Name);
+            var empregador = await _db.Empregadores.FindByIdAsync(Perfil.EmpregadorId, Trabalhador.Default);
 
             Perfil.VinculaEmpregador(empregador);
         }

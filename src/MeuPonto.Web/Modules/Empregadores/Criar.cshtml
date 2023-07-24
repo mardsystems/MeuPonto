@@ -1,0 +1,51 @@
+﻿@page
+@model MeuPonto.Modules.Empregadores.CriarModel
+
+@{
+    ViewData["Title"] = "Criar Empregador";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
+        <li class="breadcrumb-item"><a asp-page="./Index">Empregadores</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Criar</li>
+    </ol>
+</nav>
+
+<h1>@ViewData["Title"] <span class="badge bg-secondary">Nova</span></h1>
+
+<div class="card">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" asp-page="./Criar">
+                    <i class="bi bi-plus-circle"></i>
+                    Criar Novo
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row mb-3">
+                <label asp-for="Empregador.Nome" class="col-sm-3 col-form-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="Empregador.Nome" class="form-control" />
+                    <span asp-validation-for="Empregador.Nome" class="text-danger"></span>
+                </div>
+            </div>
+            <button type="submit" value="Salvar" class="btn btn-primary">
+                <i class="bi bi-save"></i>
+                Criar
+            </button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

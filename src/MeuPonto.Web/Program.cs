@@ -1,9 +1,14 @@
 using MeuPonto.Cache;
 using MeuPonto.Data;
+using MeuPonto.Modules.Empregadores;
+using MeuPonto.Modules.Trabalhadores;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
+using System.Security.Claims;
 
 namespace MeuPonto;
 
@@ -43,15 +48,87 @@ public class Program
         builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
             .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"));
 
+        builder.Services.Configure<OpenIdConnectOptions>(OpenIdConnectDefaults.AuthenticationScheme, options =>
+        {
+            var previousOptions = options.Events.OnRedirectToIdentityProvider;
+            options.Events.OnRedirectToIdentityProvider = async context =>
+            {
+                await previousOptions(context);
+
+                //https://github.com/Azure-Samples/active-directory-aspnetcore-webapp-openidconnect-v2/issues/399#issuecomment-681917473
+                context.ProtocolMessage.ResponseType = Microsoft.IdentityModel.Protocols.OpenIdConnect.OpenIdConnectResponseType.IdToken;
+            };
+
+            var onTicketReceived = options.Events.OnTicketReceived;
+
+            options.Events.OnTicketReceived = async context =>
+            {
+                onTicketReceived?.Invoke(context);
+
+                var db = context.HttpContext.RequestServices.GetService<MeuPontoDbContext>();
+
+                var nameIdentifier = context.Principal.FindFirst(ClaimTypes.NameIdentifier);
+
+                var userId = Guid.Parse(nameIdentifier.Value);
+
+                var trabalhadorExistente = await db.Trabalhadores.FirstOrDefaultAsync(m => m.Id == userId);
+
+                var userName = context.Principal.GetDisplayName();
+
+                Trabalhador trabalhador;
+
+                var transaction = new TransactionContext(userId);
+
+                if (trabalhadorExistente == default)
+                {
+                    trabalhador = TrabalhadorFactory.CriaTrabalhador(transaction);
+
+                    try
+                    {
+                        db.Trabalhadores.Add(trabalhador);
+                        await db.SaveChangesAsync();
+                    }
+                    catch (Exception _)
+                    {
+                        throw;
+                    }
+                }
+                else
+                {
+                    trabalhador = trabalhadorExistente;
+                }
+
+                Trabalhador.Default = trabalhador;
+            };
+
+            options.Events.OnRedirectToIdentityProviderForSignOut = async context =>
+            {
+                Trabalhador.Default = null;
+            };
+        });
+        
         builder.Services.AddAuthorization(options =>
         {
             // By default, all incoming requests will be authorized according to the default policy.
             options.FallbackPolicy = options.DefaultPolicy;
+
+            var rolesSection = builder.Configuration.GetSection("Roles");
+
+            var userAdmin = rolesSection.GetValue<string>("Admin");
+
+            options.AddPolicy("Admin", policy => policy.RequireClaim(ClaimTypes.NameIdentifier, userAdmin));
         });
         builder.Services
             .AddRazorPages(options =>
             {
                 options.RootDirectory = "/Modules";
+            })
+            .AddMvcOptions(options =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                              .RequireAuthenticatedUser()
+                              .Build();
+                options.Filters.Add(new AuthorizeFilter(policy));
             })
             .AddViewOptions(options =>
             {
@@ -102,7 +179,7 @@ public class Program
         //    var db = scope.ServiceProvider.GetService<MeuPontoDbContext>();
 
         //    db.Database.EnsureDeleted();
-        //    db.Database.Migrate();
+        //    db.Database.EnsureCreated();
         //}
 
         app.UseMiddleware<CacheMiddleware>();

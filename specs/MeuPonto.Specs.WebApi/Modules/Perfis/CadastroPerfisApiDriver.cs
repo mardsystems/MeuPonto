@@ -22,7 +22,7 @@ public class CadastroPerfisApiDriver : CadastroPerfisInterface
         CriaPerfil.Perform((Perfil)perfil);
     }
 
-    public Concepts.Perfil DetalharPerfil(Concepts.Perfil perfilCadastrado)
+    public Concepts.Perfil DetalharPerfil(string nomePerfil)
     {
         int perfilId = 0;
 
@@ -31,12 +31,12 @@ public class CadastroPerfisApiDriver : CadastroPerfisInterface
         return perfil;
     }
 
-    public void EditarPerfil(Concepts.Perfil perfilCadastrado)
+    public void EditarPerfil(string nomePerfil,Concepts.Perfil perfilCadastrado)
     {
         throw new NotImplementedException();
     }
 
-    public void ExcluirPerfil(Concepts.Perfil perfilCadastrado)
+    public void ExcluirPerfil(string nomePerfil)
     {
         throw new NotImplementedException();
     }

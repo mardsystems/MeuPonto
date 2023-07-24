@@ -1,8 +1,10 @@
 ﻿using MeuPonto.Modules;
-using MeuPonto.Modules.Perfis.Empregadores;
+using MeuPonto.Modules.Empregadores;
+using MeuPonto.Modules.Perfis;
 using MeuPonto.Modules.Pontos;
 using MeuPonto.Modules.Pontos.Comprovantes;
 using MeuPonto.Modules.Pontos.Folhas;
+using MeuPonto.Modules.Trabalhadores;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
@@ -34,7 +36,7 @@ public class MeuPontoDbContext : DbContext
         }
 
         var perfilsAlterados = ChangeTracker
-        .Entries<Modules.Perfis.Perfil>()
+        .Entries<Perfil>()
         .Where(x => x.State == EntityState.Modified)
         .Select(x => x.Entity);
 
@@ -56,7 +58,7 @@ public class MeuPontoDbContext : DbContext
         }
 
         var pontosAlterados = ChangeTracker
-            .Entries<Modules.Pontos.Ponto>()
+            .Entries<Ponto>()
             .Where(x => x.State == EntityState.Modified)
             .Select(x => x.Entity);
 
@@ -79,26 +81,52 @@ public class MeuPontoDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
+        modelBuilder.Entity<Configuracoes>()
+            .ToContainer("Configuracoes")
+            .HasNoDiscriminator()
+            .HasPartitionKey(x => x.UserId)
+            .HasKey(x => x.UserId);
+
+        modelBuilder.Entity<Trabalhador>()
+            .ToContainer("Trabalhadores")
+            .HasPartitionKey(x => x.PartitionKey);
+
+        modelBuilder.Entity<Trabalhador>().Property(x => x.Version).IsETagConcurrency();
+
         modelBuilder.Entity<Empregador>()
-            .ToContainer("Perfis")
+            .ToContainer("Empregadores")
             .HasPartitionKey(x => x.PartitionKey);
 
         modelBuilder.Entity<Empregador>().Property(x => x.Version).IsETagConcurrency();
 
-        modelBuilder.Entity<Modules.Perfis.Perfil>()
+        modelBuilder.Entity<Perfil>()
             .ToContainer("Perfis")
             .HasPartitionKey(x => x.PartitionKey);
         //.HasKey(x => new { x.Id, x.PartitionKey });
 
-        modelBuilder.Entity<Modules.Perfis.Perfil>().Property(x => x.Version).IsETagConcurrency();
+        modelBuilder.Entity<Perfil>().Property(x => x.Version).IsETagConcurrency();
 
-        modelBuilder.Entity<Modules.Perfis.Perfil>().OwnsOne(a => a.JornadaTrabalhoSemanalPrevista, x =>
+        modelBuilder.Entity<Perfil>().OwnsOne(a => a.JornadaTrabalhoSemanalPrevista, x =>
         {
             x.OwnsMany(b => b.Semana, y =>
             {
                 //y.HasKey(c => c.DiaSemana);
             });
         });
+
+        modelBuilder.Entity<Ponto>()
+            .ToContainer("Pontos")
+            .HasPartitionKey(x => x.PartitionKey);
+
+        modelBuilder.Entity<Ponto>().Property(x => x.PausaId).HasConversion(new EnumToStringConverter<PausaEnum>());
+
+        modelBuilder.Entity<Ponto>().Property(x => x.Version).IsETagConcurrency();
+
+        modelBuilder.Entity<Comprovante>()
+            .ToContainer("Pontos")
+            .HasPartitionKey(x => x.PartitionKey);
+
+        modelBuilder.Entity<Comprovante>().Property(x => x.Version).IsETagConcurrency();
 
         modelBuilder.Entity<Folha>()
             .ToContainer("Pontos")
@@ -114,37 +142,13 @@ public class MeuPontoDbContext : DbContext
 
             });
         });
-
-        modelBuilder.Entity<Modules.Pontos.Ponto>()
-            .ToContainer("Pontos")
-            .HasPartitionKey(x => x.PartitionKey);
-
-        modelBuilder.Entity<Modules.Pontos.Ponto>().Property(x => x.PausaId).HasConversion(new EnumToStringConverter<PausaEnum>());
-
-        modelBuilder.Entity<Modules.Pontos.Ponto>().Property(x => x.Version).IsETagConcurrency();
-
-        modelBuilder.Entity<Comprovante>()
-            .ToContainer("Pontos")
-            .HasPartitionKey(x => x.PartitionKey);
-
-        modelBuilder.Entity<Comprovante>().Property(x => x.Version).IsETagConcurrency();
-
-        modelBuilder.Entity<Trabalhador>()
-            .ToContainer("Trabalhadores")
-            .HasNoDiscriminator()
-            .HasKey(x => x.UserName);
-
-        modelBuilder.Entity<ConfiguracaoPorUsuario>()
-            .ToContainer("Configuracoes")
-            .HasNoDiscriminator()
-            .HasKey(x => x.UserName);
     }
 
-    public DbSet<Modules.Perfis.Perfil> Perfis { get; set; }
-    public DbSet<Empregador> Empregadores { get; set; }
-    public DbSet<Folha> Folhas { get; set; }
-    public DbSet<Modules.Pontos.Ponto> Pontos { get; set; }
-    public DbSet<Comprovante> Comprovantes { get; set; }
+    public DbSet<Configuracoes> Configuracoes { get; set; }
     public DbSet<Trabalhador> Trabalhadores { get; set; }
-    public DbSet<ConfiguracaoPorUsuario> Configuracoes { get; set; }
+    public DbSet<Empregador> Empregadores { get; set; }
+    public DbSet<Perfil> Perfis { get; set; }
+    public DbSet<Ponto> Pontos { get; set; }
+    public DbSet<Comprovante> Comprovantes { get; set; }
+    public DbSet<Folha> Folhas { get; set; }
 }

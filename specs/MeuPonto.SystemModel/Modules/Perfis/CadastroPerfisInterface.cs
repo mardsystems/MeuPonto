@@ -5,7 +5,7 @@ namespace MeuPonto.Modules.Perfis;
 public interface CadastroPerfisInterface
 {
     void CriarPerfil(Perfil perfil);
-    Perfil DetalharPerfil(Perfil perfilCadastrado);
-    void EditarPerfil(Perfil perfilCadastrado);
-    void ExcluirPerfil(Perfil perfilCadastrado);
+    Perfil DetalharPerfil(string nomePerfil);
+    void EditarPerfil(string nomePerfil, Perfil perfilCadastrado);
+    void ExcluirPerfil(string nomePerfil);
 }

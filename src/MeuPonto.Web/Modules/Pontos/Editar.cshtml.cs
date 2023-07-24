@@ -1,8 +1,10 @@
 ﻿using MeuPonto.Data;
+using MeuPonto.Modules.Trabalhadores;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace MeuPonto.Modules.Pontos;
 
@@ -32,7 +34,7 @@ public class EditarModel : PageModel
         }
         Ponto = ponto;
 
-        ViewData["PerfilId"] = new SelectList(_db.Perfis, "Id", "Nome");
+        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
         return Page();
     }
 
@@ -45,7 +47,7 @@ public class EditarModel : PageModel
             return Page();
         }
 
-        var perfil = await _db.Perfis.FindByIdAsync(Ponto.PerfilId, User.Identity.Name);
+        var perfil = await _db.Perfis.FindByIdAsync(Ponto.PerfilId, Trabalhador.Default);
 
         perfil.QualificaPonto(Ponto);
 

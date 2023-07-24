@@ -1,12 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace MeuPonto.Modules;
 
-public class PrivacyModel : PageModel
+[AllowAnonymous]
+public class PrivacidadeModel : PageModel
 {
-    private readonly ILogger<PrivacyModel> _logger;
+    private readonly ILogger<PrivacidadeModel> _logger;
 
-    public PrivacyModel(ILogger<PrivacyModel> logger)
+    public PrivacidadeModel(ILogger<PrivacidadeModel> logger)
     {
         _logger = logger;
     }

@@ -1,7 +1,10 @@
 ﻿using MeuPonto.Data;
+using MeuPonto.Modules.Trabalhadores;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
 
 namespace MeuPonto.Modules.Pontos.Comprovantes;
 
@@ -19,9 +22,13 @@ public class CriarComprovanteModel : PageModel
 
     public async Task<IActionResult> OnGet()
     {
-        var transaction = new TransactionContext(User.Identity.Name);
+        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
 
-        Comprovante = ComprovanteFactory.CriaComprovante(transaction);
+        var userId = Guid.Parse(nameIdentifier.Value);
+
+        var transaction = new TransactionContext(userId);
+
+        Comprovante = Trabalhador.Default.CriaComprovante(transaction);
 
         return Page();
     }
@@ -36,13 +43,17 @@ public class CriarComprovanteModel : PageModel
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync()
     {
-        var transaction = new TransactionContext(User.Identity.Name);
+        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
 
-        Comprovante.RecontextualizaComprovante(transaction);
+        var userId = Guid.Parse(nameIdentifier.Value);
+
+        var transaction = new TransactionContext(userId);
+
+        Trabalhador.Default.RecontextualizaComprovante(Comprovante, transaction);
 
         if (ModelState.ContainsKey($"{nameof(Comprovante)}.{nameof(Comprovante.Imagem)}")) ModelState.Remove($"{nameof(Comprovante)}.{nameof(Comprovante.Imagem)}");
 
-        var ponto = await _db.Pontos.FindByIdAsync(PontoId, User.Identity.Name);
+        var ponto = await _db.Pontos.FirstOrDefaultAsync(m => m.Id == PontoId);
 
         Comprovante.ComprovaPonto(ponto);
 

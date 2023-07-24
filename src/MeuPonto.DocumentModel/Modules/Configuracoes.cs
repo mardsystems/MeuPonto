@@ -1,8 +1,8 @@
 ﻿namespace MeuPonto.Modules;
 
-public class ConfiguracaoPorUsuario : Concepts.ConfiguracaoPorUsuario
+public class Configuracoes
 {
-    public string UserName { get; set; }
+    public Guid UserId { get; set; }
 
     public bool JavascriptIsEnabled { get; set; }
 }

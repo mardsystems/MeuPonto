@@ -1,7 +1,9 @@
 ﻿using MeuPonto.Data;
+using MeuPonto.Modules.Trabalhadores;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace MeuPonto.Modules.Perfis;
 
@@ -46,7 +48,7 @@ public class ExcluirModel : PageModel
 
         try
         {
-            var perfil = await _db.Perfis.FindByIdAsync(id, User.Identity.Name);
+            var perfil = await _db.Perfis.FindByIdAsync(id, Trabalhador.Default);
 
             if (perfil != null)
             {

@@ -15,10 +15,6 @@ public class Perfil : DocumentEntity, Concepts.Perfil, Concepts.Contrato
     [DisplayName("Ativo?")]
     public bool Ativo { get; set; }
 
-    [MaxLength(30)]
-    [DisplayName("Matrícula")]
-    public string? Matricula { get; set; }
-
     [DisplayName("Empregador")]
     public Guid? EmpregadorId { get; set; }
 
@@ -29,6 +25,8 @@ public class Perfil : DocumentEntity, Concepts.Perfil, Concepts.Contrato
     [DisplayName("Jornada Trabalho Semanal Prevista")]
     public virtual JornadaTrabalhoSemanal JornadaTrabalhoSemanalPrevista { get; set; } = default!;
     Concepts.JornadaTrabalhoSemanal Concepts.Contrato.Preve() => JornadaTrabalhoSemanalPrevista;
+
+    public Guid? TrabalhadorId { get; set; }
 
     Concepts.Contrato Concepts.Perfil.IdentificaVinculo() => this;
 

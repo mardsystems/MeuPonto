@@ -78,17 +78,6 @@ public class CadastroPerfisAppDriver : CadastroPerfisInterface
 
         z.SendKeys(perfil.Nome);
 
-        if (perfil.IdentificaVinculo().Matricula != null)
-        {
-            y[7].Click();
-
-            y[7].Click();
-
-            z = x[x.Count - 2].FindElementByClassName("TextBox");
-
-            z.SendKeys(perfil.IdentificaVinculo().Matricula);
-        }
-
         z.SendKeys(Keys.Enter);
 
         //y[2].Click();
@@ -157,17 +146,17 @@ public class CadastroPerfisAppDriver : CadastroPerfisInterface
         Thread.Sleep(500);
     }
 
-    public Concepts.Perfil DetalharPerfil(Concepts.Perfil perfilCadastrado)
+    public Concepts.Perfil DetalharPerfil(string nomePerfil)
     {
         throw new NotImplementedException();
     }
 
-    public void EditarPerfil(Concepts.Perfil perfilCadastrado)
+    public void EditarPerfil(string nomePerfil, Concepts.Perfil perfilCadastrado)
     {
         throw new NotImplementedException();
     }
 
-    public void ExcluirPerfil(Concepts.Perfil perfilCadastrado)
+    public void ExcluirPerfil(string nomePerfil)
     {
         throw new NotImplementedException();
     }

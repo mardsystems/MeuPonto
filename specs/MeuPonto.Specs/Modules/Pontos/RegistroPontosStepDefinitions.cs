@@ -1,4 +1,6 @@
 using MeuPonto.Data;
+using MeuPonto.Modules.Perfis;
+using MeuPonto.Modules.Trabalhadores;
 using System.ComponentModel;
 
 namespace MeuPonto.Modules.Pontos;
@@ -10,16 +12,26 @@ public class RegistroPontosStepDefinitions
 
     private readonly RegistroPontosContext _registroPontos;
 
+    private readonly RegistroPontosInterface _registroPontosInterface;
+
+    private readonly CadastroPerfisContext _cadastroPerfis;
+
     private readonly MeuPontoDbContext _db;
 
     public RegistroPontosStepDefinitions(
         ScenarioContext scenario,
         RegistroPontosContext registroPontos,
+        RegistroPontosInterface registroPontosInterface,
+        CadastroPerfisContext cadastroPerfis,
         MeuPontoDbContext db)
     {
         _scenario = scenario;
 
         _registroPontos = registroPontos;
+
+        _registroPontosInterface = registroPontosInterface;
+
+        _cadastroPerfis = cadastroPerfis;
 
         _db = db;
     }
@@ -50,6 +62,49 @@ public class RegistroPontosStepDefinitions
     public void GivenQueOTrabalhadorAnotaASeguinteObservacaoNoPonto(string observacao)
     {
         _registroPontos.Ponto.Observacao = observacao;
+    }
+
+    [Given(@"que a data/hora do relógio é '([^']*)'")]
+    public void GivenQueADataHoraDoRelogioE(DateTime dataHora)
+    {
+        _registroPontos.DataHora = dataHora;
+    }
+
+    [Given(@"que o trabalhador qualifica o ponto com o perfil '([^']*)'")]
+    public void GivenQueOTrabalhadorQualificaOPontoComOPerfil(string nome)
+    {
+        var perfil = _db.Perfis.FirstOrDefault(x => x.Nome == nome && x.TrabalhadorId == Trabalhador.Default.Id);
+
+        perfil.QualificaPonto(_registroPontos.Ponto);
+    }
+
+    [When(@"o trabalhador marcar o ponto")]
+    public void WhenOTrabalhadorMarcarOPonto()
+    {
+        if (_registroPontos.Ponto.EstaSemQualificacao())
+        {
+            var perfil = _db.Perfis.FirstOrDefault(x => x.TrabalhadorId == Trabalhador.Default.Id);
+
+            if (perfil == default)
+            {
+                perfil = _cadastroPerfis.Perfil;
+
+                _db.Perfis.Add(perfil);
+                _db.SaveChanges();
+            }
+
+            perfil.QualificaPonto(_registroPontos.Ponto);
+        }
+
+        var pontoMarcado = _registroPontosInterface.MarcarPonto(_registroPontos.Ponto);
+
+        _registroPontos.Define(pontoMarcado);
+    }
+
+    [Then(@"o ponto deverá ser marcado")]
+    public void ThenOPontoDeveraSerMarcado()
+    {
+        _registroPontos.PontoRegistrado.Should().NotBeNull();
     }
 
     [Then(@"o perfil do ponto deverá deverá ser '([^']*)'")]

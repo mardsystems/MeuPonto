@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using MeuPonto.Data;
+using System.Security.Claims;
+using MeuPonto.Modules.Trabalhadores;
 
 namespace MeuPonto.Modules.Pontos.Folhas;
 
@@ -18,11 +20,15 @@ public class CriarFolhaModel : PageModel
 
     public IActionResult OnGet()
     {
-        var transaction = new TransactionContext(User.Identity.Name);
+        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
 
-        ViewData["PerfilId"] = new SelectList(_db.Perfis, "Id", "Nome");
+        var userId = Guid.Parse(nameIdentifier.Value);
 
-        Folha = FolhaFactory.CriaFolha(transaction);
+        var transaction = new TransactionContext(userId);
+
+        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
+
+        Folha = Trabalhador.Default.CriaFolha(transaction);
 
         return Page();
     }
@@ -43,22 +49,26 @@ public class CriarFolhaModel : PageModel
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync(string? command)
     {
-        var transaction = new TransactionContext(User.Identity.Name);
+        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
 
-        Folha.RecontextualizaFolha(transaction);
+        var userId = Guid.Parse(nameIdentifier.Value);
+
+        var transaction = new TransactionContext(userId);
+
+        Trabalhador.Default.RecontextualizaFolha(Folha, transaction);
 
         if (ModelState.ContainsKey($"{nameof(Folha)}.{nameof(Folha.Competencia)}")) ModelState.Remove($"{nameof(Folha)}.{nameof(Folha.Competencia)}");
 
         if (!ModelState.IsValid)
         {
-            ViewData["PerfilId"] = new SelectList(_db.Perfis, "Id", "Nome");
+            ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
 
             return Page();
         }
 
         Folha.StatusId = StatusEnum.Aberta;
 
-        var perfil = await _db.Perfis.FindByIdAsync(Folha.PerfilId, User.Identity.Name);
+        var perfil = await _db.Perfis.FindByIdAsync(Folha.PerfilId, Trabalhador.Default);
 
         perfil.QualificaFolha(Folha);
 
@@ -71,56 +81,31 @@ public class CriarFolhaModel : PageModel
                 if (ModelState.ContainsKey(state.Key)) ModelState.Remove(state.Key);
             }
 
-            ConfirmarCompetencia(perfil);
+            Folha.ConfirmarCompetencia(perfil, CompetenciaAno.Value, CompetenciaMes.Value);
 
-            ViewData["PerfilId"] = new SelectList(_db.Perfis, "Id", "Nome");
+            ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
 
             return Page();
         }
         else
         {
-            ConfirmarCompetencia(perfil);
+            var competenciaAtual = new DateTime(CompetenciaAno.Value, CompetenciaMes.Value, 1);
 
-            _db.Folhas.Add(Folha);
-            await _db.SaveChangesAsync();
-
-            return RedirectToPage("./Detalhar", new { id = Folha.Id });
-        }
-    }
-
-    private void ConfirmarCompetencia(Perfis.Perfil? perfil)
-    {
-        Folha.ApuracaoMensal.Dias.Clear();
-
-        var competenciaAtual = new DateTime(CompetenciaAno.Value, CompetenciaMes.Value, 1);
-
-        Folha.Competencia = competenciaAtual;
-
-        var competenciaPosterior = competenciaAtual.AddMonths(1);
-
-        var dias = (competenciaPosterior - competenciaAtual).Days;
-
-        Folha.ApuracaoMensal.TempoTotalPrevisto = TimeSpan.Zero;
-
-        for (int dia = 1; dia <= dias; dia++)
-        {
-            var data = competenciaAtual.AddDays(dia - 1);
-
-            var apuracaoDiaria = new ApuracaoDiaria
+            if (Folha.Competencia == competenciaAtual)
             {
-                Dia = dia,
-                TempoPrevisto = perfil.JornadaTrabalhoSemanalPrevista.Semana.Single(x => x.DiaSemana == data.DayOfWeek).Tempo,
-                TempoApurado = null,
-                DiferencaTempo = null,
-                Feriado = false,
-                Falta = false
-            };
+                Folha.PartitionKey = $"{Folha.TrabalhadorId}|{Folha.Competencia:yyyy}";
 
-            Folha.ApuracaoMensal.Dias.Add(apuracaoDiaria);
+                _db.Folhas.Add(Folha);
+                await _db.SaveChangesAsync();
 
-            Folha.ApuracaoMensal.TempoTotalPrevisto += apuracaoDiaria.TempoPrevisto;
+                return RedirectToPage("./Detalhar", new { id = Folha.Id });
+            }
+            else
+            {
+                ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
+
+                return Page();
+            }
         }
-
-        Folha.ApuracaoMensal.TempoTotalPeriodoAnterior = TimeSpan.Zero;
     }
 }
