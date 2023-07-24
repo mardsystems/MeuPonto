@@ -1,5 +1,6 @@
 ﻿using MeuPonto.Data;
 using MeuPonto.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Caching.Memory;
@@ -12,6 +13,8 @@ public class ConfiguracoesModel : PageModel
     private readonly MeuPontoDbContext _db;
 
     private readonly IMemoryCache _cache;
+
+    private readonly IAuthorizationService _authorizationService;
 
     private readonly ILogger<ConfiguracoesModel> _logger;
 
@@ -31,34 +34,56 @@ public class ConfiguracoesModel : PageModel
     public ConfiguracoesModel(
         MeuPontoDbContext db,
         IMemoryCache cache,
+        IAuthorizationService authorizationService,
         ILogger<ConfiguracoesModel> logger)
     {
         _db = db;
 
         _cache = cache;
 
+        _authorizationService = authorizationService;
+
         _logger = logger;
     }
 
-    public async Task<IActionResult> OnGet()
+    public async Task<IActionResult> OnGet(Guid? id)
     {
         ResetSuccess = false;
 
-        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
+        Guid userId;
 
-        var userId = Guid.Parse(nameIdentifier.Value);
+        if (id.HasValue)
+        {
+            if ((await _authorizationService.AuthorizeAsync(User, "Admin")).Succeeded)
+            {
+                userId = id.Value;
+            }
+            else
+            {
+                return Forbid();
+            }
+        }
+        else
+        {
+            var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
+
+            userId = Guid.Parse(nameIdentifier.Value);
+        }
 
         Configuracoes = await _db.Configuracoes.FindAsync(userId);
 
         if (Configuracoes == null)
         {
-            Configuracoes = new Configuracoes();
+            Configuracoes = new Configuracoes
+            {
+                UserId = userId
+            };
         }
 
         return Page();
     }
 
-    public async Task<IActionResult> OnPostAsync(string command)
+    public async Task<IActionResult> OnPostAsync(Guid? id, string command)
     {
         if (AskConfirmation == "Reset 2")
         {
@@ -76,30 +101,46 @@ public class ConfiguracoesModel : PageModel
             ResetSuccess = true;
         }
 
-        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
+        Guid userId;
 
-        var userId = Guid.Parse(nameIdentifier.Value);
-
-        var configuracoes = await _db.Configuracoes.FindAsync(userId);
-
-        if (configuracoes == null)
+        if (id.HasValue)
         {
-            configuracoes = new Configuracoes
+            if ((await _authorizationService.AuthorizeAsync(User, "Admin")).Succeeded)
+            {
+                userId = id.Value;
+            }
+            else
+            {
+                return Forbid();
+            }
+        }
+        else
+        {
+            var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
+
+            userId = Guid.Parse(nameIdentifier.Value);
+        }
+
+        Configuracoes = await _db.Configuracoes.FindAsync(userId);
+
+        if (Configuracoes == null)
+        {
+            Configuracoes = new Configuracoes
             {
                 UserId = userId,
                 JavascriptIsEnabled = JavascriptIsEnabled
             };
 
-            _db.Configuracoes.Add(configuracoes);
+            _db.Configuracoes.Add(Configuracoes);
         }
 
         if (JavascriptIsEnabled)
         {
-            configuracoes.JavascriptIsEnabled = true;
+            Configuracoes.JavascriptIsEnabled = true;
         }
         else
         {
-            configuracoes.JavascriptIsEnabled = false;
+            Configuracoes.JavascriptIsEnabled = false;
         }
 
         try
