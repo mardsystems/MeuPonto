@@ -117,11 +117,11 @@
                         <div class="accordion mb-3" id="accordionApuracaoMensal">
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDias" aria-expanded="false" aria-controls="collapseDias">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDias" aria-expanded="true" aria-controls="collapseDias">
                                         @Html.DisplayNameFor(model => model.Folha.ApuracaoMensal.Dias)
                                     </button>
                                 </h2>
-                                <div id="collapseDias" class="accordion-collapse collapse" data-bs-parent="#accordionApuracaoMensal">
+                                <div id="collapseDias" class="accordion-collapse collapse show" data-bs-parent="#accordionApuracaoMensal">
                                     <div class="accordion-body">
                                         @for (int i = 0; i < Model.Folha.ApuracaoMensal.Dias.Count; i++)
                                         {
