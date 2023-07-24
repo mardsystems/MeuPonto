@@ -1,6 +1,5 @@
 using MeuPonto.Cache;
 using MeuPonto.Data;
-using MeuPonto.Modules.Empregadores;
 using MeuPonto.Modules.Trabalhadores;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
@@ -106,7 +105,7 @@ public class Program
                 Trabalhador.Default = null;
             };
         });
-        
+
         builder.Services.AddAuthorization(options =>
         {
             // By default, all incoming requests will be authorized according to the default policy.
@@ -140,6 +139,8 @@ public class Program
 
         var app = builder.Build();
 
+        app.UseMiddleware<CacheMiddleware>();
+
         var supportedCultures = new[] { "pt-BR", "en-US" };
         var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[0])
             .AddSupportedCultures(supportedCultures)
@@ -150,6 +151,8 @@ public class Program
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
+            app.UseDeveloperExceptionPage();
+
             app.UseWebAssemblyDebugging();
         }
         else
@@ -181,8 +184,6 @@ public class Program
         //    db.Database.EnsureDeleted();
         //    db.Database.EnsureCreated();
         //}
-
-        app.UseMiddleware<CacheMiddleware>();
 
         app.Run();
     }
