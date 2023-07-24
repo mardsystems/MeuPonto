@@ -60,6 +60,14 @@ public class GestaoFolhasPageDriver : GestaoFolhasInterface
         form.GetSelect("CompetenciaMes").Value = folha.Competencia.Value.Month.ToString();
         form.GetTextArea("Folha.Observacao").Value = folha.Observacao;
 
+        var confirmarCompetenciaButton = form.GetSubmitButton("button[value='ConfirmarCompetencia']");
+
+        var competenciaConfirmadaPage = _angleSharp.Send(form, confirmarCompetenciaButton);
+
+        Document = _angleSharp.GetDocument(competenciaConfirmadaPage);
+
+        form = Document.GetForm();
+
         var submitButton = form.GetSubmitButton("button.btn-primary");
 
         var resultPage = _angleSharp.Send(form, submitButton);
