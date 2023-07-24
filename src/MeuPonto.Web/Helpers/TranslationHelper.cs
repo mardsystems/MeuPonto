@@ -6,9 +6,9 @@ public static class TranslationHelper
     {
         { DayOfWeek.Sunday, "Domingo" },
         { DayOfWeek.Monday, "Segunda-feira" },
-        { DayOfWeek.Thursday, "Terça-feira" },
+        { DayOfWeek.Tuesday, "Terça-feira" },
         { DayOfWeek.Wednesday, "Quarta-feira" },
-        { DayOfWeek.Tuesday, "Quinta-feira" },
+        { DayOfWeek.Thursday, "Quinta-feira" },
         { DayOfWeek.Friday, "Sexta-feira" },
         { DayOfWeek.Saturday, "Sábado" }
     };
