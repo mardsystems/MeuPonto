@@ -3,6 +3,7 @@ using MeuPonto.Modules.Trabalhadores;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Azure.Cosmos;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 
@@ -124,9 +125,27 @@ public class GuardarComprovanteModel : PageModel
 
             //
 
-            await _db.SaveChangesAsync();
+            try
+            {
+                await _db.SaveChangesAsync();
 
-            return RedirectToPage("./Detalhar", new { id = Comprovante.Id });
+                return RedirectToPage("./Detalhar", new { id = Comprovante.Id });
+            }
+            catch (Exception _)
+            {
+                if (_.InnerException is CosmosException ex)
+                {
+                    if (ex.ResponseBody.Contains("Request size is too large"))
+                    {
+                        ModelState.AddModelError("Imagem", "Arquivo muito grande");
+
+                        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
+                        return Page();
+                    }
+                }
+
+                throw;
+            }
         }
     }
 }
