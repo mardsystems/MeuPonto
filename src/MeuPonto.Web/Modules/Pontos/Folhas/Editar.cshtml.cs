@@ -56,8 +56,12 @@ public class EditarFolhaModel : PageModel
 
     // To protect from overposting attacks, enable the specific properties you want to bind to.
     // For more details, see https://aka.ms/RazorPagesCRUD.
-    public async Task<IActionResult> OnPostAsync(string? command)
+    public async Task<IActionResult> OnPostAsync(Guid? id, string? command)
     {
+        var transaction = User.CreateTransaction();
+
+        Trabalhador.Default.RecontextualizaFolha(Folha, transaction, id);
+
         if (ModelState.ContainsKey($"{nameof(Folha)}.{nameof(Folha.Competencia)}")) ModelState.Remove($"{nameof(Folha)}.{nameof(Folha.Competencia)}");
 
         if (!ModelState.IsValid)
@@ -66,8 +70,6 @@ public class EditarFolhaModel : PageModel
 
             return Page();
         }
-
-        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
 
         var perfil = await _db.Perfis.FindByIdAsync(Folha.PerfilId, Trabalhador.Default);
 

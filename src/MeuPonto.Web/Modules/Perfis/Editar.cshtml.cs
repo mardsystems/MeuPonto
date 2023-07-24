@@ -42,15 +42,11 @@ public class EditarModel : PageModel
 
     // To protect from overposting attacks, enable the specific properties you want to bind to.
     // For more details, see https://aka.ms/RazorPagesCRUD.
-    public async Task<IActionResult> OnPostAsync()
+    public async Task<IActionResult> OnPostAsync(Guid? id)
     {
-        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
+        var transaction = User.CreateTransaction();
 
-        var userId = Guid.Parse(nameIdentifier.Value);
-
-        var transaction = new TransactionContext(userId);
-
-        Trabalhador.Default.RecontextualizaPerfil(Perfil, transaction);
+        Trabalhador.Default.RecontextualizaPerfil(Perfil, transaction, id);
 
         if (!ModelState.IsValid)
         {

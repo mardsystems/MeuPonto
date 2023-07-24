@@ -1,4 +1,5 @@
 ﻿using MeuPonto.Modules.Empregadores;
+using MeuPonto.Modules.Trabalhadores;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +25,7 @@ public class EditarModel : PageModel
             return NotFound();
         }
 
-        var empregador =  await _db.Empregadores.FirstOrDefaultAsync(m => m.Id == id);
+        var empregador = await _db.Empregadores.FirstOrDefaultAsync(m => m.Id == id);
         if (empregador == null)
         {
             return NotFound();
@@ -35,12 +36,16 @@ public class EditarModel : PageModel
 
     // To protect from overposting attacks, enable the specific properties you want to bind to.
     // For more details, see https://aka.ms/RazorPagesCRUD.
-    public async Task<IActionResult> OnPostAsync()
+    public async Task<IActionResult> OnPostAsync(Guid? id)
     {
+        var transaction = User.CreateTransaction();
+
         if (!ModelState.IsValid)
         {
             return Page();
         }
+
+        Trabalhador.Default.RecontextualizaEmpregador(Empregador, transaction, id);
 
         _db.Attach(Empregador).State = EntityState.Modified;
 
@@ -65,6 +70,6 @@ public class EditarModel : PageModel
 
     private bool EmpregadorExists(Guid? id)
     {
-      return _db.Perfis.Any(e => e.Id == id);
+        return _db.Perfis.Any(e => e.Id == id);
     }
 }

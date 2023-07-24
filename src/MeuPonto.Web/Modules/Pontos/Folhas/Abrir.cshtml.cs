@@ -20,11 +20,7 @@ public class AbrirFolhaModel : PageModel
 
     public IActionResult OnGet()
     {
-        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
-
-        var userId = Guid.Parse(nameIdentifier.Value);
-
-        var transaction = new TransactionContext(userId);
+        var transaction = User.CreateTransaction();
 
         ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
 
@@ -51,11 +47,7 @@ public class AbrirFolhaModel : PageModel
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync(string? command)
     {
-        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
-
-        var userId = Guid.Parse(nameIdentifier.Value);
-
-        var transaction = new TransactionContext(userId);
+        var transaction = User.CreateTransaction();
 
         Trabalhador.Default.RecontextualizaFolha(Folha, transaction);
 

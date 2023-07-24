@@ -7,7 +7,7 @@ public static class TrabalhadorFactory
         var trabalhador = new Trabalhador
         {
             Id = transaction.UserId,
-            PartitionKey = transaction.UserId.ToString(), 
+            PartitionKey = transaction.UserId.ToString(),
             CreationDate = transaction.DateTime
         };
 
@@ -16,8 +16,8 @@ public static class TrabalhadorFactory
 
     public static void RecontextualizaTrabalhador(this Trabalhador trabalhador, TransactionContext transaction)
     {
-        trabalhador.Id = transaction.UserId;
+        trabalhador.Id ??= transaction.UserId;
         trabalhador.PartitionKey = transaction.UserId.ToString();
-        trabalhador.CreationDate = transaction.DateTime;
+        trabalhador.CreationDate ??= transaction.DateTime;
     }
 }

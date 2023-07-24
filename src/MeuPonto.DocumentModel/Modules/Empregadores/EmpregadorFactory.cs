@@ -19,9 +19,9 @@ public static class EmpregadorFactory
 
     public static void RecontextualizaEmpregador(this Trabalhador trabalhador, Empregador empregador, TransactionContext transaction, Guid? id = null)
     {
-        empregador.Id = empregador.Id ?? id ?? Guid.NewGuid();
+        empregador.Id ??= id ?? Guid.NewGuid();
         empregador.TrabalhadorId = trabalhador.Id;
         empregador.PartitionKey = trabalhador.Id.ToString();
-        empregador.CreationDate = transaction.DateTime;
+        empregador.CreationDate ??= transaction.DateTime;
     }
 }

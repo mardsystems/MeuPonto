@@ -19,9 +19,9 @@ public static class ComprovanteFactory
 
     public static void RecontextualizaComprovante(this Trabalhador trabalhador, Comprovante comprovante, TransactionContext transaction, Guid? id = null)
     {
-        comprovante.Id = comprovante.Id ?? id ?? Guid.NewGuid();
+        comprovante.Id ??= id ?? Guid.NewGuid();
         comprovante.TrabalhadorId = trabalhador.Id;
         //comprovante.PartitionKey = $"{trabalhador.Id}|{comprovante.Ponto.DataHora:yyyy}";
-        comprovante.CreationDate = transaction.DateTime;
+        comprovante.CreationDate ??= transaction.DateTime;
     }
 }

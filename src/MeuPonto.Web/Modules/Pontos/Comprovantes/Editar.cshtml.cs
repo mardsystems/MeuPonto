@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MeuPonto.Modules.Trabalhadores;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
@@ -38,8 +39,12 @@ public class EditarComprovanteModel : PageModel
 
     // To protect from overposting attacks, enable the specific properties you want to bind to.
     // For more details, see https://aka.ms/RazorPagesCRUD.
-    public async Task<IActionResult> OnPostAsync()
+    public async Task<IActionResult> OnPostAsync(Guid? id)
     {
+        var transaction = User.CreateTransaction();
+
+        Trabalhador.Default.RecontextualizaComprovante(Comprovante, transaction, id);
+
         if (ModelState.ContainsKey($"{nameof(Comprovante)}.{nameof(Comprovante.Imagem)}")) ModelState.Remove($"{nameof(Comprovante)}.{nameof(Comprovante.Imagem)}");
 
         var comprovante = await _db.Comprovantes.FirstOrDefaultAsync(m => m.Id == Comprovante.Id);

@@ -24,11 +24,7 @@ public class MarcarModel : PageModel
 
     public IActionResult OnGet()
     {
-        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
-
-        var userId = Guid.Parse(nameIdentifier.Value);
-
-        var transaction = new TransactionContext(userId);
+        var transaction = User.CreateTransaction();
 
         Ponto = Trabalhador.Default.CriaPonto(transaction);
 
@@ -45,11 +41,7 @@ public class MarcarModel : PageModel
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync()
     {
-        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
-
-        var userId = Guid.Parse(nameIdentifier.Value);
-
-        var transaction = new TransactionContext(userId);
+        var transaction = User.CreateTransaction();
 
         if (!ModelState.IsValid)
         {

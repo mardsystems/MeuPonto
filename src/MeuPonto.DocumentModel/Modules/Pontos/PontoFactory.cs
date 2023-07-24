@@ -19,9 +19,9 @@ public static class PontoFactory
 
     public static void RecontextualizaPonto(this Trabalhador trabalhador, Ponto ponto, TransactionContext transaction, Guid? id = null)
     {
-        ponto.Id = ponto.Id ?? id ?? Guid.NewGuid();
+        ponto.Id ??= id ?? Guid.NewGuid();
         ponto.TrabalhadorId = trabalhador.Id;
         ponto.PartitionKey = $"{trabalhador.Id}|{ponto.DataHora:yyyy}";
-        ponto.CreationDate = transaction.DateTime;
+        ponto.CreationDate ??= transaction.DateTime;
     }
 }

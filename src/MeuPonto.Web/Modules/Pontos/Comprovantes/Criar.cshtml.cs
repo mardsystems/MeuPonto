@@ -22,11 +22,7 @@ public class CriarComprovanteModel : PageModel
 
     public async Task<IActionResult> OnGet()
     {
-        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
-
-        var userId = Guid.Parse(nameIdentifier.Value);
-
-        var transaction = new TransactionContext(userId);
+        var transaction = User.CreateTransaction();
 
         Comprovante = Trabalhador.Default.CriaComprovante(transaction);
 
@@ -43,11 +39,7 @@ public class CriarComprovanteModel : PageModel
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync()
     {
-        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
-
-        var userId = Guid.Parse(nameIdentifier.Value);
-
-        var transaction = new TransactionContext(userId);
+        var transaction = User.CreateTransaction();
 
         Trabalhador.Default.RecontextualizaComprovante(Comprovante, transaction);
 

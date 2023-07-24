@@ -40,8 +40,10 @@ public class EditarModel : PageModel
 
     // To protect from overposting attacks, enable the specific properties you want to bind to.
     // For more details, see https://aka.ms/RazorPagesCRUD.
-    public async Task<IActionResult> OnPostAsync()
+    public async Task<IActionResult> OnPostAsync(Guid? id)
     {
+        var transaction = User.CreateTransaction();
+
         if (!ModelState.IsValid)
         {
             return Page();
@@ -50,6 +52,8 @@ public class EditarModel : PageModel
         var perfil = await _db.Perfis.FindByIdAsync(Ponto.PerfilId, Trabalhador.Default);
 
         perfil.QualificaPonto(Ponto);
+
+        Trabalhador.Default.RecontextualizaPonto(Ponto, transaction, id);
 
         _db.Attach(Ponto).State = EntityState.Modified;
 

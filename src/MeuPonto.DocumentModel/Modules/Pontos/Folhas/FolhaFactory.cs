@@ -19,9 +19,9 @@ public static class FolhaFactory
 
     public static void RecontextualizaFolha(this Trabalhador trabalhador, Folha folha, TransactionContext transaction, Guid? id = null)
     {
-        folha.Id = folha.Id ?? id ?? Guid.NewGuid();
+        folha.Id ??= id ?? Guid.NewGuid();
         folha.TrabalhadorId = trabalhador.Id;
         //folha.PartitionKey = $"{trabalhador.Id}|{folha.Competencia:yyyy}";
-        folha.CreationDate = transaction.DateTime;
+        folha.CreationDate ??= transaction.DateTime;
     }
 }
