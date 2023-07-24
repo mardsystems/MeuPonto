@@ -89,12 +89,23 @@ public class CriarFolhaModel : PageModel
         }
         else
         {
-            Folha.ConfirmarCompetencia(perfil, CompetenciaAno.Value, CompetenciaMes.Value);
+            var competenciaAtual = new DateTime(CompetenciaAno.Value, CompetenciaMes.Value, 1);
 
-            _db.Folhas.Add(Folha);
-            await _db.SaveChangesAsync();
+            if (Folha.Competencia == competenciaAtual)
+            {
+                Folha.PartitionKey = $"{Folha.TrabalhadorId}|{Folha.Competencia:yyyy}";
 
-            return RedirectToPage("./Detalhar", new { id = Folha.Id });
+                _db.Folhas.Add(Folha);
+                await _db.SaveChangesAsync();
+
+                return RedirectToPage("./Detalhar", new { id = Folha.Id });
+            }
+            else
+            {
+                ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
+
+                return Page();
+            }
         }
     }
 }
