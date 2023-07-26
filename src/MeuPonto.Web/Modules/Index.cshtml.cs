@@ -51,7 +51,7 @@ public class IndexModel : PageModel
 
         if (Trabalhador.Default == null)
         {
-            return Forbid();
+            return RedirectToAction("SignOut", "Account", new { area = "MicrosoftIdentity" });
         }
 
         var perfisSelectList = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
