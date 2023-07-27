@@ -197,25 +197,25 @@
                                 @Html.DisplayNameFor(model => model.Folha.ApuracaoMensal.TempoTotalPrevisto)
                             </dt>
                             <dd class="col-sm-4 col-lg-7 TempoTotalPrevisto">
-                                @Html.DisplayFor(model => model.Folha.ApuracaoMensal.TempoTotalPrevisto)
+                                @String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", Model.Folha.ApuracaoMensal.TempoTotalPrevisto)
                             </dd>
                             <dt class="col-sm-8 col-lg-5 TempoTotalApurado">
                                 @Html.DisplayNameFor(model => model.Folha.ApuracaoMensal.TempoTotalApurado)
                             </dt>
                             <dd class="col-sm-4 col-lg-7 TempoTotalApurado">
-                                @Html.DisplayFor(model => model.Folha.ApuracaoMensal.TempoTotalApurado)
+                                @String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", Model.Folha.ApuracaoMensal.TempoTotalApurado)
                             </dd>
                             <dt class="col-sm-8 col-lg-5 DiferencaTempoTotal">
                                 @Html.DisplayNameFor(model => model.Folha.ApuracaoMensal.DiferencaTempoTotal)
                             </dt>
                             <dd class="col-sm-4 col-lg-7 DiferencaTempoTotal">
-                                @Html.DisplayFor(model => model.Folha.ApuracaoMensal.DiferencaTempoTotal)
+                                @String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", Model.Folha.ApuracaoMensal.DiferencaTempoTotal)
                             </dd>
                             <dt class="col-sm-8 col-lg-5 TempoTotalPeriodoAnterior">
                                 @Html.DisplayNameFor(model => model.Folha.ApuracaoMensal.TempoTotalPeriodoAnterior)
                             </dt>
                             <dd class="col-sm-4 col-lg-7 TempoTotalPeriodoAnterior">
-                                @Html.DisplayFor(model => model.Folha.ApuracaoMensal.TempoTotalPeriodoAnterior)
+                                @String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", Model.Folha.ApuracaoMensal.TempoTotalPeriodoAnterior)
                             </dd>
                         </dl>
                     </div>

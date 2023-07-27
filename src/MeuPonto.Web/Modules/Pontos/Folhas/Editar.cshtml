@@ -223,25 +223,25 @@
                         <div class="row mb-3">
                             <label asp-for="Folha.ApuracaoMensal.TempoTotalPrevisto" class="col-sm-8 col-lg-5 col-form-label"></label>
                             <div class="col-sm-4 col-lg-7">
-                                <input asp-for="Folha.ApuracaoMensal.TempoTotalPrevisto" class="form-control" disabled />
+                                <input value="@String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", Model.Folha.ApuracaoMensal.TempoTotalPrevisto)" class="form-control" disabled />
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label asp-for="Folha.ApuracaoMensal.TempoTotalApurado" class="col-sm-8 col-lg-5 col-form-label"></label>
                             <div class="col-sm-4 col-lg-7">
-                                <input asp-for="Folha.ApuracaoMensal.TempoTotalApurado" class="form-control" disabled />
+                                <input value="@String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", Model.Folha.ApuracaoMensal.TempoTotalApurado)" class="form-control" disabled />
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label asp-for="Folha.ApuracaoMensal.DiferencaTempoTotal" class="col-sm-8 col-lg-5 col-form-label"></label>
                             <div class="col-sm-4 col-lg-7">
-                                <input asp-for="Folha.ApuracaoMensal.DiferencaTempoTotal" class="form-control" disabled />
+                                <input value="@String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", Model.Folha.ApuracaoMensal.DiferencaTempoTotal)" class="form-control" disabled />
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label asp-for="Folha.ApuracaoMensal.TempoTotalPeriodoAnterior" class="col-sm-8 col-lg-5 col-form-label"></label>
                             <div class="col-sm-4 col-lg-7">
-                                <input asp-for="Folha.ApuracaoMensal.TempoTotalPeriodoAnterior" class="form-control" disabled />
+                                <input value="@String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", Model.Folha.ApuracaoMensal.TempoTotalPeriodoAnterior)" class="form-control" disabled />
                             </div>
                         </div>
                     </div>

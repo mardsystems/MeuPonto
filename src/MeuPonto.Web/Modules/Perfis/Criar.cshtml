@@ -99,8 +99,8 @@
                             <div class="row">
                                 <label asp-for="Perfil.JornadaTrabalhoSemanalPrevista.TempoTotal" class="col-sm-3 col-form-label"></label>
                                 <div class="col-sm-9">
-                                    <div class="input-group">
-                                        <input asp-for="Perfil.JornadaTrabalhoSemanalPrevista.TempoTotal" class="form-control" disabled />
+                                    <div class="input-group">                                        
+                                        <input value="@String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", Model.Perfil.JornadaTrabalhoSemanalPrevista.TempoTotal)" class="form-control" disabled />
                                         <button class="btn btn-outline-secondary" name="command" value="RecalcularTempoTotal">Recalcular</button>
                                     </div>
                                 </div>

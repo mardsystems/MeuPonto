@@ -203,16 +203,16 @@
                         @Html.DisplayFor(modelItem => item.ApuracaoMensal.TotalDias)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.ApuracaoMensal.TempoTotalPrevisto)
+                        @String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", item.ApuracaoMensal.TempoTotalPrevisto)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.ApuracaoMensal.TempoTotalApurado)
+                        @String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", item.ApuracaoMensal.TempoTotalApurado)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.ApuracaoMensal.DiferencaTempoTotal)
+                        @String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", item.ApuracaoMensal.DiferencaTempoTotal)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.ApuracaoMensal.TempoTotalPeriodoAnterior)
+                        @String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", item.ApuracaoMensal.TempoTotalPeriodoAnterior)
                     </td>
                 </tr>
             }

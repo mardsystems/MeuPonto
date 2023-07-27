@@ -107,7 +107,7 @@
                                     </div>
                                 </div>
                                 <span class="badge text-bg-secondary rounded-pill">
-                                    @Html.DisplayFor(model => model.ApuracaoMensal.TempoTotalPrevisto)
+                                    @String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", Model.ApuracaoMensal.TempoTotalPrevisto)
                                 </span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-start">
@@ -117,7 +117,7 @@
                                     </div>
                                 </div>
                                 <span class="badge rounded-pill bg-primary tempoTotalApurado">
-                                    @Html.DisplayFor(model => model.ApuracaoMensal.TempoTotalApurado)
+                                    @String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", Model.ApuracaoMensal.TempoTotalApurado)
                                 </span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-start">
@@ -127,7 +127,7 @@
                                     </div>
                                 </div>
                                 <span class="badge rounded-pill @(Model.ApuracaoMensal.DiferencaTempoTotal >= TimeSpan.Zero ? "bg-success": "bg-danger")">
-                                    @Html.DisplayFor(model => model.ApuracaoMensal.DiferencaTempoTotal)
+                                    @String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", Model.ApuracaoMensal.DiferencaTempoTotal)
                                 </span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-start">
@@ -174,7 +174,7 @@
                                     </div>
                                 </div>
                                 <span class="badge rounded-pill bg-primary">
-                                    @Html.DisplayFor(model => model.Folha.ApuracaoMensal.TempoTotalApurado)
+                                    @String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", Model.Folha.ApuracaoMensal.TempoTotalApurado)
                                 </span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-start">
@@ -184,7 +184,7 @@
                                     </div>
                                 </div>
                                 <span class="badge rounded-pill text-bg-light">
-                                    @Html.DisplayFor(model => model.Folha.ApuracaoMensal.TempoTotalPeriodoAnterior)
+                                    @String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", Model.Folha.ApuracaoMensal.TempoTotalPeriodoAnterior)
                                 </span>
                             </li>
                         </ul>
@@ -212,13 +212,13 @@
                                     @if (apuracaoSemanal.TempoPeriodo.Futuro)
                                     {
                                         <span class="badge rounded-pill text-bg-secondary">
-                                            @Html.DisplayFor(model => apuracaoSemanal.TempoTotalApurado)
+                                            @String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", apuracaoSemanal.TempoTotalApurado)
                                         </span>
                                     }
                                     else
                                     {
                                         <span class="badge rounded-pill text-bg-primary">
-                                            @Html.DisplayFor(model => apuracaoSemanal.TempoTotalApurado)
+                                            @String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", apuracaoSemanal.TempoTotalApurado)
                                         </span>
                                     }
                                 </li>
@@ -231,13 +231,13 @@
                                     @if (apuracaoSemanal.TempoPeriodo.Futuro)
                                     {
                                         <span class="badge rounded-pill text-bg-secondary">
-                                            @Html.DisplayFor(model => apuracaoSemanal.DiferencaTempoTotal)
+                                            @String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", apuracaoSemanal.DiferencaTempoTotal)
                                         </span>
                                     }
                                     else
                                     {
                                         <span class="badge rounded-pill @(apuracaoSemanal.DiferencaTempoTotal >= TimeSpan.Zero ? "text-bg-success" : "text-bg-danger")">
-                                            @Html.DisplayFor(model => apuracaoSemanal.DiferencaTempoTotal)
+                                            @String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", apuracaoSemanal.DiferencaTempoTotal)
                                         </span>
                                     }
                                 </li>

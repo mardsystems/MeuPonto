@@ -114,7 +114,7 @@
                                 @Html.DisplayNameFor(model => model.Perfil.JornadaTrabalhoSemanalPrevista.TempoTotal)
                             </dt>
                             <dd class="col-sm-9">
-                                @Html.DisplayFor(model => model.Perfil.JornadaTrabalhoSemanalPrevista.TempoTotal)
+                                @String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", Model.Perfil.JornadaTrabalhoSemanalPrevista.TempoTotal)
                             </dd>
                         </dl>
                     </div>
