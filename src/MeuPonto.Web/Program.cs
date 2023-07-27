@@ -116,6 +116,15 @@ public class Program
             var userAdmin = rolesSection.GetValue<string>("Admin");
 
             options.AddPolicy("Admin", policy => policy.RequireClaim(ClaimTypes.NameIdentifier, userAdmin));
+
+            options.AddPolicy("NoAds", policy =>
+            {
+                policy.RequireAuthenticatedUser();
+
+                policy.RequireAssertion(handler =>
+                    Trabalhador.Default?.CustomerSubscription?.SubscriptionPlanId == Billing.SubscriptionPlanEnum.Silver ||
+                    Trabalhador.Default?.CustomerSubscription?.SubscriptionPlanId == Billing.SubscriptionPlanEnum.Gold);
+            });
         });
         builder.Services
             .AddRazorPages(options =>

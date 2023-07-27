@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using MeuPonto.Modules.Shared;
 using Microsoft.AspNetCore.Authorization;
+using MeuPonto.Billing;
 
 namespace MeuPonto.Modules.Trabalhadores;
 
@@ -19,6 +20,9 @@ public class IndexModel : PageModel
     [BindProperty(SupportsGet = true)]
     public Guid? Id { get; set; }
 
+    [BindProperty(SupportsGet = true)]
+    public FiltroCustomerSubscription? CustomerSubscription { get; set; }
+
     public IList<Trabalhador> Trabalhadores { get; set; } = default!;
 
     [BindProperty(SupportsGet = true)]
@@ -26,8 +30,15 @@ public class IndexModel : PageModel
 
     public PaginationModel Pagination { get; set; }
 
+    public bool AskSubscriptionConfirmation { get; set; }
+
     public async Task OnGetAsync()
     {
+        if (CustomerSubscription == null)
+        {
+            CustomerSubscription = new FiltroCustomerSubscription();
+        }
+
         var totalRegistros = await _db.Trabalhadores.CountAsync();
 
         Pagination = new PaginationModel(totalRegistros, PaginaAtual ?? 1);
@@ -36,11 +47,17 @@ public class IndexModel : PageModel
         {
             Trabalhadores = await _db.Trabalhadores
                 .Where(x => true
-                    && (Id == null || x.Id == Id))
+                    && (Id == null || x.Id == Id)
+                    && (CustomerSubscription.SubscriptionPlanId == null || x.CustomerSubscription.SubscriptionPlanId == CustomerSubscription.SubscriptionPlanId))
                 .OrderByDescending(x => x.CreationDate)
                 .Skip((Pagination.PaginaAtual - 1) * Pagination.TamanhoPagina.Value)
                 .Take(Pagination.TamanhoPagina.Value)
                 .ToListAsync();
         }
     }
+}
+
+public class FiltroCustomerSubscription
+{
+    public SubscriptionPlanEnum? SubscriptionPlanId { get; set; }
 }

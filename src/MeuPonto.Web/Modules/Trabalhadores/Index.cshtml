@@ -1,4 +1,6 @@
 ﻿@page
+@using System.ComponentModel;
+@using MeuPonto.Billing;
 @model MeuPonto.Modules.Trabalhadores.IndexModel
 
 @{
@@ -18,13 +20,21 @@
     <table class="table table-striped align-middle mb-3 Trabalhadores">
         <thead class="table-light">
             <tr>
-                <th>Ações</th>
-                <th>
+                <th rowspan="2">Ações</th>
+                <th rowspan="2">
                     @Html.DisplayNameFor(model => model.Trabalhadores[0].Id)
                 </th>
-                <th>
+                <th rowspan="2">
                     @Html.DisplayNameFor(model => model.Trabalhadores[0].CreationDate)
                     <i class="bi bi-sort-down"></i>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Trabalhadores[0].CustomerSubscription)
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Trabalhadores[0].CustomerSubscription.SubscriptionPlanId)
                 </th>
             </tr>
             <tr>
@@ -44,6 +54,9 @@
                     <input asp-for="Id" class="form-control" />
                 </th>
                 <td class="table-secondary"></td>
+                <th>
+                    <select asp-for="CustomerSubscription.SubscriptionPlanId" class="form-select" asp-items="Html.GetEnumSelectListWithEmptyValue<SubscriptionPlanEnum>()"></select>
+                </th>
             </tr>
         </thead>
         <tbody class="table-group-divider">
@@ -51,9 +64,15 @@
             {
                 <tr data-id="@item.Id" data-name="@item.Id">
                     <td class="p-1" scope="row">
-                        <div class="btn-group" role="group">
-                            <a class="btn btn-link rounded-0" asp-page="/Configuracoes" asp-route-id="@item.Id">
+                        <div class="btn-group me-2" role="group">
+                            <a class="btn btn-link rounded-0" asp-page="/Configuracoes" asp-route-id="@item.Id" title="Configurar">
                                 <i class="bi bi-gear"></i>
+                            </a>
+                            <a class="btn btn-link Detalhe" asp-page="./Detalhar" asp-route-id="@item.Id" title="Detalhar">
+                                <i class="bi bi-card-text"></i>
+                            </a>
+                            <a class="btn btn-link Edicao" asp-page="./Editar" asp-route-id="@item.Id" title="Editar">
+                                <i class="bi bi-pencil"></i>
                             </a>
                         </div>
                     </td>
@@ -62,6 +81,9 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.CreationDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CustomerSubscription.SubscriptionPlanId)
                     </td>
                 </tr>
             }

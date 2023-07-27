@@ -1,0 +1,96 @@
+﻿@page
+@model MeuPonto.Modules.Trabalhadores.DetalharModel
+
+@{
+    ViewData["Title"] = "Detalhar Trabalhador";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
+        <li class="breadcrumb-item"><a asp-page="./Index">Trabalhadores</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Detalhar</li>
+    </ol>
+</nav>
+
+<h1>@ViewData["Title"] <span class="badge bg-secondary">@Html.DisplayFor(model => model.Trabalhador.Id)</span></h1>
+
+<div class="card">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="me-1">
+                <a class="btn btn-primary" asp-page="/Configuracoes" asp-route-id="@Model.Trabalhador?.Id">
+                    <i class="bi bi-gear"></i>
+                    Configurar
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page">
+                    <i class="bi bi-card-text"></i>
+                    Detalhar
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-page="./Editar" asp-route-id="@Model.Trabalhador?.Id">
+                    <i class="bi bi-pencil"></i>
+                    <span class="d-none d-sm-inline">Editar</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <dl class="row g-3 Trabalhador">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Trabalhador.Id)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Trabalhador.Id)
+            </dd>
+            @*                            <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Trabalhador.PartitionKey)
+            </dt>
+            <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Trabalhador.PartitionKey)
+            </dd>
+            *@
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Trabalhador.CreationDate)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Trabalhador.CreationDate)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Trabalhador.Version)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Trabalhador.Version)
+            </dd>
+        </dl>
+        <div class="card">
+            <div class="card-header">
+                @Html.DisplayNameFor(model => model.Trabalhador.CustomerSubscription)
+            </div>
+            <div class="row g-0">
+                <div class="col-sm-3">
+                    @*<svg class="bd-placeholder-img img-fluid rounded-start" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <title>Placeholder</title>
+                    <rect width="100%" height="100%" fill="#868e96"></rect>
+                    <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Apuração Mensal</text>
+                    </svg>*@
+                </div>
+                <div class="col-sm-9">
+                    <div class="card-body">
+                        <dl class="row g-3 CustomerSubscription">
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.Trabalhador.CustomerSubscription.SubscriptionPlanId)
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Html.DisplayFor(model => model.Trabalhador.CustomerSubscription.SubscriptionPlanId)
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
