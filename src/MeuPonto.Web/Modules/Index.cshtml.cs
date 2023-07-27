@@ -103,13 +103,27 @@ public class IndexModel : PageModel
 
                 int totalSemanas;
 
-                if (restoDiasSemana == 0)
+                if (ApuracaoMensal.PrimeiroDiaSemanaMes == DayOfWeek.Sunday)
                 {
-                    totalSemanas = totalInteiroSemanas;
+                    if (restoDiasSemana == 0)
+                    {
+                        totalSemanas = totalInteiroSemanas;
+                    }
+                    else
+                    {
+                        totalSemanas = totalInteiroSemanas + 1;
+                    }
                 }
                 else
                 {
-                    totalSemanas = totalInteiroSemanas + 1;
+                    if (restoDiasSemana == 0)
+                    {
+                        totalSemanas = totalInteiroSemanas + 1;
+                    }
+                    else
+                    {
+                        totalSemanas = totalInteiroSemanas + 2;
+                    }
                 }
 
                 ApuracaoMensal.TempoTotalPrevisto = TimeSpan.Zero;
@@ -136,6 +150,8 @@ public class IndexModel : PageModel
                     ApuracaoMensal.TempoPeriodo.Passado = false;
                     ApuracaoMensal.TempoPeriodo.Futuro = true;
                 }
+
+                int diaIndex = -1;
 
                 for (int semanaIndex = 0; semanaIndex < totalSemanas; semanaIndex++)
                 {
@@ -183,9 +199,20 @@ public class IndexModel : PageModel
                         apuracaoSemanalModel.TempoPeriodo.Futuro = true;
                     }
 
-                    for (int diaSemanaIndex = 0; diaSemanaIndex < 7; diaSemanaIndex++)
+                    int ultimoDiaSemanaIndex;
+
+                    if (semanaIndex == 0)
                     {
-                        var diaIndex = (semanaIndex * 7) + diaSemanaIndex;
+                        ultimoDiaSemanaIndex = 7 - (int)ApuracaoMensal.PrimeiroDiaSemanaMes;
+                    }
+                    else
+                    {
+                        ultimoDiaSemanaIndex = 7;
+                    }
+
+                    for (int diaSemanaIndex = 0; diaSemanaIndex < ultimoDiaSemanaIndex; diaSemanaIndex++)
+                    {
+                        diaIndex++;
 
                         if (diaIndex >= Folha.ApuracaoMensal.TotalDias)
                         {
