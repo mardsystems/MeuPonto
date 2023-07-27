@@ -14,8 +14,6 @@ public static class FolhaFacade
 
         var dias = (competenciaPosterior - competenciaAtual).Days;
 
-        folha.ApuracaoMensal.TempoTotalPrevisto = TimeSpan.Zero;
-
         for (int dia = 1; dia <= dias; dia++)
         {
             var data = competenciaAtual.AddDays(dia - 1);
@@ -31,8 +29,6 @@ public static class FolhaFacade
             };
 
             folha.ApuracaoMensal.Dias.Add(apuracaoDiaria);
-
-            folha.ApuracaoMensal.TempoTotalPrevisto += apuracaoDiaria.TempoPrevisto;
         }
 
         folha.ApuracaoMensal.TempoTotalPeriodoAnterior = TimeSpan.Zero;

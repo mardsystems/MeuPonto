@@ -108,9 +108,9 @@ public class GestaoFolhasPageDriver : GestaoFolhasInterface
 
         var dl = Document.GetDefinitionList("Folha");
 
-        var dlApuracaoMensal = Document.GetDefinitionList("ApuracaoMensal");
+        var dlApuracaoDiariaCollection = Document.GetDefinitionListCollection("ApuracaoDiaria");
 
-        var tempoTotalApurado = dlApuracaoMensal.GetDataListItem("TempoTotalApurado").TextContent.Trim();
+        //var tempoTotalApurado = dlApuracaoMensal.GetDataListItem("TempoTotalApurado").TextContent.Trim();
 
         var folhaAberta = new Folha
         {
@@ -123,14 +123,26 @@ public class GestaoFolhasPageDriver : GestaoFolhasInterface
             Observacao = dl.GetDataListItem("Observacao").GetString(),
             ApuracaoMensal = new ApuracaoMensal
             {
-                Dias = new[] {
-                    new ApuracaoDiaria {
-                        Dia = 1,
-                        TempoPrevisto = new TimeSpan()
-                    }
-                },
-                TempoTotalApurado = string.IsNullOrEmpty(tempoTotalApurado) ? null : TimeSpan.Parse(tempoTotalApurado)
-            }
+                Dias = dlApuracaoDiariaCollection.Select(element =>
+                {
+                    var dlApuracaoDiaria = (IHtmlElement)element;
+
+                    var dia = int.Parse(dlApuracaoDiaria.GetAttribute("data-dia"));
+
+                    var tempoPrevisto = dlApuracaoDiaria.GetDataListItem("TempoPrevisto").TextContent.Trim();
+
+                    var tempoApurado = dlApuracaoDiaria.GetDataListItem("TempoApurado").TextContent.Trim();
+
+                    var apuracaoDiaria = new ApuracaoDiaria
+                    {
+                        Dia = dia,
+                        TempoPrevisto = string.IsNullOrEmpty(tempoPrevisto) ? null : TimeSpan.Parse(tempoPrevisto),
+                        TempoApurado = string.IsNullOrEmpty(tempoApurado) ? null : TimeSpan.Parse(tempoApurado),
+                    };
+
+                    return apuracaoDiaria;
+                }).ToArray()
+            },
         };
 
         return folhaAberta;

@@ -15,15 +15,63 @@ public class ApuracaoMensal : Concepts.ApuracaoMensal
 
     [DisplayName("Tempo Total Previsto")]
     //[DisplayFormat(DataFormatString = "{0:d\\d\\ hh\\:mm}")]
-    public TimeSpan? TempoTotalPrevisto { get; set; }
+    public TimeSpan? TempoTotalPrevisto
+    {
+        get
+        {
+            TimeSpan? total = null;
+
+            foreach (var apuracaoDiaria in Dias)
+            {
+                if (apuracaoDiaria.TempoPrevisto.HasValue)
+                {
+                    total = (total ?? TimeSpan.Zero) + apuracaoDiaria.TempoPrevisto;
+                }
+            }
+
+            return total;
+        }
+    }
 
     [DisplayName("Tempo Total Apurado")]
     //[DisplayFormat(DataFormatString = "{0:d\\d\\ hh\\:mm}")]
-    public TimeSpan? TempoTotalApurado { get; set; }
+    public TimeSpan? TempoTotalApurado
+    {
+        get
+        {
+            TimeSpan? total = null;
+
+            foreach (var apuracaoDiaria in Dias)
+            {
+                if (apuracaoDiaria.TempoApurado.HasValue)
+                {
+                    total = (total ?? TimeSpan.Zero) + apuracaoDiaria.TempoApurado + (apuracaoDiaria.TempoAbonado ?? TimeSpan.Zero);
+                }
+            }
+
+            return total;
+        }
+    }
 
     [DisplayName("Diferença Tempo Total")]
     //[DisplayFormat(DataFormatString = "{0:d\\d\\ hh\\:mm}")]
-    public TimeSpan? DiferencaTempoTotal { get; set; }
+    public TimeSpan? DiferencaTempoTotal
+    {
+        get
+        {
+            TimeSpan? total = null;
+
+            foreach (var apuracaoDiaria in Dias)
+            {
+                if (apuracaoDiaria.DiferencaTempo.HasValue)
+                {
+                    total = (total ?? TimeSpan.Zero) + apuracaoDiaria.DiferencaTempo;
+                }
+            }
+
+            return total;
+        }
+    }
 
     [DisplayName("Tempo Total Período Anterior")]
     //[DisplayFormat(DataFormatString = "{0:d\\d\\ hh\\:mm}")]

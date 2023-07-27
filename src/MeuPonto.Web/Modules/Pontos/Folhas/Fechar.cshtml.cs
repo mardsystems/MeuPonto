@@ -87,8 +87,6 @@ public class FecharFolhaModel : PageModel
             .OrderByDescending(x => x.DataHora)
         .ToListAsync();
 
-        folha.ApuracaoMensal.TempoTotalApurado = TimeSpan.Zero;
-
         for (int diaIndex = 0; diaIndex < folha.ApuracaoMensal.Dias.Count; diaIndex++)
         {
             var apuracaoDiaria = folha.ApuracaoMensal.Dias[diaIndex];
@@ -142,9 +140,9 @@ public class FecharFolhaModel : PageModel
                         break;
                     }
                 }
-            }
 
-            folha.ApuracaoMensal.TempoTotalApurado += tempoApurado + (apuracaoDiaria.TempoAbonado ?? TimeSpan.Zero);
+                apuracaoDiaria.TempoApurado = tempoApurado;
+            }
         }
     }
 

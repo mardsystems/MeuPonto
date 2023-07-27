@@ -1,5 +1,6 @@
 ﻿using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
+using System.Xml.Linq;
 
 namespace MeuPonto.Helpers;
 
@@ -120,6 +121,13 @@ public static class AngleSharpExtensions
         var definitionList = (IHtmlElement)document.QuerySelector($"dl.{@class}");
 
         return definitionList;
+    }
+
+    public static IHtmlCollection<IElement> GetDefinitionListCollection(this IHtmlDocument document, string @class)
+    {
+        var elements = document.QuerySelectorAll($"dl.{@class}");
+
+        return elements;
     }
 
     public static IHtmlElement GetTermListItem(this IHtmlElement element, string @class)

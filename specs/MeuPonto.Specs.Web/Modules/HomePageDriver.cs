@@ -2,6 +2,7 @@
 using MeuPonto.Helpers;
 using MeuPonto.Modules.Pontos.Folhas;
 using MeuPonto.Support;
+using System.Security.Claims;
 
 namespace MeuPonto.Modules;
 
@@ -78,6 +79,8 @@ public class HomePageDriver : HomeInterface
 
         var tempoTotalApuradoElement = (IHtmlElement)Document.QuerySelector(".tempoTotalApurado");
 
+        var elements = Document.QuerySelectorAll($".apuracaoDiaria");
+
         var folhaApurada = new Folha
         {
             //Perfil = new PontoPerfilRef
@@ -89,14 +92,34 @@ public class HomePageDriver : HomeInterface
             //Observacao = folhaElement.QuerySelector("dd.observacao").TextContent,
             ApuracaoMensal = new ApuracaoMensal
             {
-                TempoTotalApurado = tempoTotalApuradoElement == null ? null : TimeSpan.Parse(tempoTotalApuradoElement.TextContent.Trim()),
-            }
-            //Dias = new[] {
-            //    new PontoFolhaDia{
-            //        Data = folhaAberta.Competencia,
-            //        TempoTotalPrevisto = new TimeSpan()
-            //    }
-            //}
+                Dias = elements.Select(element =>
+                {
+                    var apuracaoDiariaElement = (IHtmlElement)element;
+
+                    var dia = int.Parse(apuracaoDiariaElement.GetAttribute("data-dia"));
+
+                    var tempoApuradoElement = apuracaoDiariaElement.QuerySelector($".TempoApurado");
+
+                    string tempoApurado;
+
+                    if (tempoApuradoElement == null)
+                    {
+                        tempoApurado = null;
+                    }
+                    else
+                    {
+                        tempoApurado = apuracaoDiariaElement.QuerySelector($".TempoApurado").TextContent.Trim();
+                    }
+
+                    var apuracaoDiaria = new ApuracaoDiaria
+                    {
+                        Dia = dia,
+                        TempoApurado = string.IsNullOrEmpty(tempoApurado) ? null : TimeSpan.Parse(tempoApurado),
+                    };
+
+                    return apuracaoDiaria;
+                }).ToArray()
+            },
         };
 
         return folhaApurada;

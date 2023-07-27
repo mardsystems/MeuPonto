@@ -84,7 +84,7 @@ public class EditarFolhaModel : PageModel
                 if (ModelState.ContainsKey(state.Key)) ModelState.Remove(state.Key);
             }
 
-            ConfirmarCompetencia(perfil);
+            Folha.ConfirmarCompetencia(perfil, CompetenciaAno.Value, CompetenciaMes.Value);
 
             ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
 
@@ -118,42 +118,6 @@ public class EditarFolhaModel : PageModel
 
             return RedirectToPage("./Detalhar", new { id = Folha.Id });
         }
-    }
-
-    private void ConfirmarCompetencia(Perfis.Perfil? perfil)
-    {
-        Folha.ApuracaoMensal.Dias.Clear();
-
-        var competenciaAtual = new DateTime(CompetenciaAno.Value, CompetenciaMes.Value, 1);
-
-        Folha.Competencia = competenciaAtual;
-
-        var competenciaPosterior = competenciaAtual.AddMonths(1);
-
-        var dias = (competenciaPosterior - competenciaAtual).Days;
-
-        Folha.ApuracaoMensal.TempoTotalPrevisto = TimeSpan.Zero;
-
-        for (int dia = 1; dia <= dias; dia++)
-        {
-            var data = competenciaAtual.AddDays(dia - 1);
-
-            var apuracaoDiaria = new ApuracaoDiaria
-            {
-                Dia = dia,
-                TempoPrevisto = perfil.JornadaTrabalhoSemanalPrevista.Semana.Single(x => x.DiaSemana == data.DayOfWeek).Tempo,
-                TempoApurado = null,
-                DiferencaTempo = null,
-                Feriado = false,
-                Falta = false
-            };
-
-            Folha.ApuracaoMensal.Dias.Add(apuracaoDiaria);
-
-            Folha.ApuracaoMensal.TempoTotalPrevisto += apuracaoDiaria.TempoPrevisto;
-        }
-
-        Folha.ApuracaoMensal.TempoTotalPeriodoAnterior = TimeSpan.Zero;
     }
 
     private bool PontoFolhaExists(Guid? id)

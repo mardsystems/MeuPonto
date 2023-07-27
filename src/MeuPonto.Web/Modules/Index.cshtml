@@ -259,7 +259,7 @@
                             var apuracaoDiaria = Model.ApuracaoMensal.Dias[diaIndex - (int)Model.ApuracaoMensal.PrimeiroDiaSemanaMes];
 
                             <div class="col">
-                                <div class="card apuracaoDiaria @(apuracaoDiaria.TempoPeriodo.Atual ? "border border-primary border-2" : "") @(apuracaoDiaria.TempoPrevisto == TimeSpan.Zero ? "text-bg-secondary" : "")">
+                                <div class="card apuracaoDiaria @(apuracaoDiaria.TempoPeriodo.Atual ? "border border-primary border-2" : "") @(apuracaoDiaria.TempoPrevisto == TimeSpan.Zero ? "text-bg-secondary" : "")" data-dia="@apuracaoDiaria.Dia">
                                     <div class="card-header">
                                         @apuracaoDiaria.DescricaoDia
                                     </div>
@@ -285,19 +285,19 @@
                                                 </div>
                                                 @if (apuracaoDiaria.TempoPeriodo.Futuro)
                                                 {
-                                                    <span class="badge text-bg-secondary rounded-pill">
+                                                    <span class="badge text-bg-secondary rounded-pill TempoApurado">
                                                         @apuracaoDiaria.TempoApurado.ToString("hh\\:mm")
                                                     </span>
                                                 }
                                                 else if (apuracaoDiaria.TempoApuradoIdeterminado)
                                                 {
-                                                    <span class="badge text-bg-warning rounded-pill">
+                                                    <span class="badge text-bg-warning rounded-pill TempoApurado">
                                                         @apuracaoDiaria.TempoApurado.ToString("hh\\:mm")
                                                     </span>
                                                 }
                                                 else
                                                 {
-                                                    <span class="badge rounded-pill bg-primary">
+                                                    <span class="badge rounded-pill bg-primary TempoApurado">
                                                         @apuracaoDiaria.TempoApurado.ToString("hh\\:mm")
                                                     </span>
                                                 }
