@@ -92,21 +92,23 @@ public class EditarFolhaModel : PageModel
         }
         else
         {
-            _db.Attach(Folha).State = EntityState.Modified;
-
             //ConfirmarCompetencia(perfil);
 
             var competenciaAtual = new DateTime(CompetenciaAno.Value, CompetenciaMes.Value, 1);
 
             Folha.Competencia = competenciaAtual;
 
+            Folha.PartitionKey = $"{Trabalhador.Default.Id}|{Folha.Competencia:yyyy}";
+
             try
             {
+                _db.Attach(Folha).State = EntityState.Modified;
+
                 await _db.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PontoFolhaExists(Folha.Id))
+                if (!FolhaExists(Folha.Id))
                 {
                     return NotFound();
                 }
@@ -120,7 +122,7 @@ public class EditarFolhaModel : PageModel
         }
     }
 
-    private bool PontoFolhaExists(Guid? id)
+    private bool FolhaExists(Guid? id)
     {
       return _db.Folhas.Any(e => e.Id == id);
     }
