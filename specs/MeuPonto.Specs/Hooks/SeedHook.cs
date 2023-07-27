@@ -35,6 +35,7 @@ public class SeedHook
         var perfil = trabalhador.CriaPerfil(transaction);
 
         perfil.Nome = userName;
+        perfil.Ativo = true;
         perfil.JornadaTrabalhoSemanalPrevista = new JornadaTrabalhoSemanal
         {
             Semana = new List<JornadaTrabalhoDiaria>(new[]{
