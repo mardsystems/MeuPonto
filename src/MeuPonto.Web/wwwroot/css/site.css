@@ -12,7 +12,7 @@ span.field-validation-error {
     display: block;
 }
 
-.oneline-comment {
+.oneline-text {
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
@@ -22,9 +22,12 @@ span.field-validation-error {
 
 
 
-
-
 @media (min-width: 992px) {
+    .row-cols-lg-8 > * {
+        flex: 0 0 auto;
+        width: 12.5%;
+    }
+
     .rounded-lg-3 {
         border-radius: .3rem;
     }

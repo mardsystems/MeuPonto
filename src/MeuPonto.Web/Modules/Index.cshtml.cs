@@ -1,4 +1,5 @@
-﻿using MeuPonto.Modules.Pontos;
+﻿using MeuPonto.Helpers;
+using MeuPonto.Modules.Pontos;
 using MeuPonto.Modules.Pontos.Folhas;
 using MeuPonto.Modules.Shared;
 using MeuPonto.Modules.Trabalhadores;
@@ -282,7 +283,7 @@ public class IndexModel : PageModel
                         {
                             Dia = apuracaoDiaria.Dia.Value,
                             DiaSemana = data.DayOfWeek,
-                            DescricaoDia = data.ToString("dddd"),
+                            DescricaoDia = data.DayOfWeek.Translate(),
                             TempoPrevisto = apuracaoDiaria.TempoPrevisto ?? TimeSpan.Zero,
                             TempoApurado = tempoApurado ?? TimeSpan.Zero,
                             TempoApuradoIdeterminado = tempoApuradoIndeterminado ?? false,

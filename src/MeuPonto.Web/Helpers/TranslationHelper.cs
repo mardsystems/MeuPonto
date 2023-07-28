@@ -5,11 +5,11 @@ public static class TranslationHelper
     private static readonly Dictionary<DayOfWeek, string> _map = new()
     {
         { DayOfWeek.Sunday, "Domingo" },
-        { DayOfWeek.Monday, "Segunda-feira" },
-        { DayOfWeek.Tuesday, "Terça-feira" },
-        { DayOfWeek.Wednesday, "Quarta-feira" },
-        { DayOfWeek.Thursday, "Quinta-feira" },
-        { DayOfWeek.Friday, "Sexta-feira" },
+        { DayOfWeek.Monday, "Segunda" },
+        { DayOfWeek.Tuesday, "Terça" },
+        { DayOfWeek.Wednesday, "Quarta" },
+        { DayOfWeek.Thursday, "Quinta" },
+        { DayOfWeek.Friday, "Sexta" },
         { DayOfWeek.Saturday, "Sábado" }
     };
 
