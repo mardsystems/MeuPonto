@@ -279,6 +279,10 @@
                                             @apuracaoDiaria.Dia
                                         </h1>
                                         <div class="card-text d-flex justify-content-center">
+                                            @if (apuracaoDiaria.Hoje)
+                                            {
+                                                <span class="badge text-bg-primary">Hoje</span>
+                                            }
                                             @if (apuracaoDiaria.Feriado)
                                             {
                                                 <span class="badge text-bg-info">Feriado</span>

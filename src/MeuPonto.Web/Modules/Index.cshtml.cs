@@ -289,6 +289,7 @@ public class IndexModel : PageModel
                             TempoApuradoIdeterminado = tempoApuradoIndeterminado ?? false,
                             DiferencaTempo = diferencaTempo ?? TimeSpan.Zero,
                             TempoAbonado = apuracaoDiaria.TempoAbonado ?? TimeSpan.Zero,
+                            Hoje = data == hoje,
                             Feriado = apuracaoDiaria.Feriado,
                             Falta = apuracaoDiaria.Falta,
                             Pontos = pontosDoDia.ToArray()
@@ -420,6 +421,8 @@ public class ApuracaoDiariaViewModel
     public TimeSpan DiferencaTempo { get; set; }
 
     public TimeSpan TempoAbonado { get; set; }
+
+    public bool Hoje { get; set; }
 
     public bool Feriado { get; set; }
 
