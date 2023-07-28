@@ -36,6 +36,12 @@ span.field-validation-error {
 
 
 
+.pricing-header {
+    max-width: 700px;
+}
+
+
+
 
 .feature-icon {
     width: 4rem;
