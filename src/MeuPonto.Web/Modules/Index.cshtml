@@ -210,7 +210,7 @@
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item d-flex justify-content-between align-items-start @(apuracaoSemanal.TempoPeriodo.Atual ? "text-bg-dark" : "text-bg-secondary")">
                                     <div class="ms-2 me-auto">
-                                        <div class="fw-bold d-none d-lg-inline">
+                                        <div class="fw-bold d-none d-lg-inline" title="Apuração">
                                             Ap.
                                         </div>
                                         <div class="fw-bold d-inline d-lg-none">
@@ -232,7 +232,7 @@
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-start @(apuracaoSemanal.TempoPeriodo.Atual ? "text-bg-dark" : "text-bg-secondary")">
                                     <div class="ms-2 me-auto">
-                                        <div class="fw-bold d-none d-lg-inline">
+                                        <div class="fw-bold d-none d-lg-inline" title="Diferença">
                                             Dif.
                                         </div>
                                         <div class="fw-bold d-inline d-lg-none">
@@ -290,7 +290,7 @@
                                         <ol class="list-group list-group-flush">
                                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                                 <div class="ms-2 me-auto">
-                                                    <div class="fw-bold d-none d-lg-inline">
+                                                    <div class="fw-bold d-none d-lg-inline" title="Apuração">
                                                         Ap.
                                                     </div>
                                                     <div class="fw-bold d-inline d-lg-none">
@@ -318,7 +318,7 @@
                                             </li>
                                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                                 <div class="ms-2 me-auto">
-                                                    <div class="fw-bold d-none d-lg-inline">
+                                                    <div class="fw-bold d-none d-lg-inline" title="Diferença">
                                                         Dif.
                                                     </div>
                                                     <div class="fw-bold d-inline d-lg-none">
@@ -351,8 +351,11 @@
                                             {
                                                 <li class="list-group-item d-flex justify-content-between align-items-start">
                                                     <div class="ms-2 me-auto">
-                                                        <div class="fw-bold">
+                                                        <div class="fw-bold d-none d-lg-inline" title="Abonado">
                                                             Ab.
+                                                        </div>
+                                                        <div class="fw-bold d-inline d-lg-none">
+                                                            Abonado
                                                         </div>
                                                     </div>
                                                     @if (apuracaoDiaria.TempoPeriodo.Futuro)
