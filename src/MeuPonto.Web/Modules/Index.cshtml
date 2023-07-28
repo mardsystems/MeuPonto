@@ -16,7 +16,7 @@
 {
     if (ViewBag.HasPerfil)
     {
-        <div class="d-grid gap-2 col-sm-10 col-md-8 col-lg-6 mx-auto mb-3">
+        <div class="d-grid col-sm-10 col-md-8 col-lg-6 mx-auto gap-2 mb-3">
             <a class="btn btn-primary btn-lg Marcacao Ponto" asp-page="./Pontos/Marcar">
                 <i class="bi bi-check2-circle"></i>
                 Marcar Ponto
@@ -27,45 +27,43 @@
             </a>
         </div>
 
-        <div class="mb-3">
-            <form class="row row-cols-md-auto g-2 justify-content-md-center" method="get">
-                <div class="col-12">
-                    <div class="input-group">
-                        <label asp-for="PerfilId" class="input-group-text"></label>
-                        <select asp-for="PerfilId" class="form-select" asp-items="ViewBag.PerfilId"></select>
-                    </div>
+        <form class="row row-cols-md-auto justify-content-md-center g-2 mb-3" method="get">
+            <div class="col-12">
+                <div class="input-group">
+                    <label asp-for="PerfilId" class="input-group-text"></label>
+                    <select asp-for="PerfilId" class="form-select" asp-items="ViewBag.PerfilId"></select>
                 </div>
-                <div action="col-12">
-                    <div class="input-group">
-                        <label class="input-group-text">Competência</label>
-                        <label asp-for="CompetenciaAno" class="visually-hidden"></label>
-                        <input asp-for="CompetenciaAno" class="form-control" placeholder="Ano" />
-                        <label asp-for="CompetenciaMes" class="visually-hidden"></label>
-                        <select asp-for="CompetenciaMes" class="form-select">
-                            <option value="" disabled selected>Mês</option>
-                            <option value="1">01 (janeiro)</option>
-                            <option value="2">02 (fevereiro)</option>
-                            <option value="3">03 (março)</option>
-                            <option value="4">04 (abril)</option>
-                            <option value="5">05 (maio)</option>
-                            <option value="6">06 (junho)</option>
-                            <option value="7">07 (julho)</option>
-                            <option value="8">08 (agosto)</option>
-                            <option value="9">09 (setembro)</option>
-                            <option value="10">10 (outubro)</option>
-                            <option value="11">11 (novembro)</option>
-                            <option value="12">12 (dezembro)</option>
-                        </select>
-                    </div>
+            </div>
+            <div action="col-12">
+                <div class="input-group">
+                    <label class="input-group-text">Competência</label>
+                    <label asp-for="CompetenciaAno" class="visually-hidden"></label>
+                    <input asp-for="CompetenciaAno" class="form-control" placeholder="Ano" />
+                    <label asp-for="CompetenciaMes" class="visually-hidden"></label>
+                    <select asp-for="CompetenciaMes" class="form-select">
+                        <option value="" disabled selected>Mês</option>
+                        <option value="1">01 (janeiro)</option>
+                        <option value="2">02 (fevereiro)</option>
+                        <option value="3">03 (março)</option>
+                        <option value="4">04 (abril)</option>
+                        <option value="5">05 (maio)</option>
+                        <option value="6">06 (junho)</option>
+                        <option value="7">07 (julho)</option>
+                        <option value="8">08 (agosto)</option>
+                        <option value="9">09 (setembro)</option>
+                        <option value="10">10 (outubro)</option>
+                        <option value="11">11 (novembro)</option>
+                        <option value="12">12 (dezembro)</option>
+                    </select>
                 </div>
-                <div class="col-12">
-                    <button type="submit" class="btn btn-primary">
-                        <i class="bi bi-search"></i>
-                        Buscar
-                    </button>
-                </div>
-            </form>
-        </div>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-search"></i>
+                    Buscar
+                </button>
+            </div>
+        </form>
         @if (Model.Folha == null)
         {
             <div class="alert alert-info" role="alert">
@@ -75,8 +73,8 @@
         }
         else
         {
-            <div class="row justify-content-md-center mb-4">
-                <div class="col col-md-6">
+            <div class="row row-cols-1 row-cols-md-2 g-4 mb-4">
+                <div class="col">
                     <div class="card folha2">
                         <div class="card-header">
                             Folha de Ponto
