@@ -6,7 +6,7 @@ public static class DateTimeExtensions
     {
         var firstYearDayDateTime = new DateTime(dateTime.Year, 1, 1);
 
-        var totalDays = (dateTime - firstYearDayDateTime).TotalDays;
+        var totalDays = (dateTime - firstYearDayDateTime).TotalDays + 1;
 
         int integerWeekNumber = ((int)totalDays - (int)firstYearDayDateTime.DayOfWeek) / 7;
 
