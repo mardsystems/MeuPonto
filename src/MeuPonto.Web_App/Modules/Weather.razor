@@ -1,4 +1,5 @@
-﻿@page "/app/fetchdata"
+﻿@page "/app/weather"
+@using MeuPonto.Models;
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @attribute [Authorize]
@@ -44,8 +45,6 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        //forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("app/sample-data/weather.json");
-
         try
         {
             forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
@@ -54,16 +53,5 @@ else
         {
             exception.Redirect();
         }
-    }
-
-    public class WeatherForecast
-    {
-        public DateTime Date { get; set; }
-
-        public int TemperatureC { get; set; }
-
-        public string? Summary { get; set; }
-
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
     }
 }

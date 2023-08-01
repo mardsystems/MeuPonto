@@ -21,6 +21,8 @@ internal class Program
         builder.Services.AddMsalAuthentication(options =>
         {
             builder.Configuration.Bind("AzureAd", options.ProviderOptions.Authentication);
+            builder.Configuration.Bind("AuthenticationPaths", options.AuthenticationPaths);
+            
             options.ProviderOptions.DefaultAccessTokenScopes.Add(builder.Configuration.GetSection("ServerApi")["Scopes"]);
         });
 
