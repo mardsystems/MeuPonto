@@ -8,19 +8,19 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 
-namespace MeuPonto.Modules.Perfis;
+namespace MeuPonto.Modules.Trabalhadores;
 
-public partial class CadastroPerfisWindow : Window
+public partial class CadastroTrabalhadoresWindow : Window
 {
     private readonly IServiceScope _scope;
 
     private readonly Data.MeuPontoDbContext _db;
 
-    private CollectionViewSource _perfisViewSource;
+    private CollectionViewSource _trabalhadoresViewSource;
 
-    private ObservableCollection<Perfil> _perfis;
+    private ObservableCollection<Trabalhador> _trabalhadores;
 
-    public CadastroPerfisWindow(IServiceProvider serviceProvider)
+    public CadastroTrabalhadoresWindow(IServiceProvider serviceProvider)
     {
         InitializeComponent();
 
@@ -33,38 +33,25 @@ public partial class CadastroPerfisWindow : Window
     {
         Cursor = Cursors.Wait;
 
-        _perfisViewSource = ((CollectionViewSource)(this.FindResource("perfisViewSource")));
+        _trabalhadoresViewSource = ((CollectionViewSource)(this.FindResource("trabalhadoresViewSource")));
 
-        await _db.Perfis
+        await _db.Trabalhadores
             .LoadAsync();
 
-        _perfis = _db.Perfis.Local.ToObservableCollection();
+        _trabalhadores = _db.Trabalhadores.Local.ToObservableCollection();
 
-        _perfis.CollectionChanged += Perfis_CollectionChanged;
+        _trabalhadores.CollectionChanged += Trabalhadores_CollectionChanged;
 
-        _perfisViewSource.Source = _perfis;
+        _trabalhadoresViewSource.Source = _trabalhadores;
 
         Cursor = null;
     }
 
-    private void Perfis_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    private void Trabalhadores_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
     {
         if (e.Action == NotifyCollectionChangedAction.Add)
         {
-            var perfil = e.NewItems[0] as Perfil;
-
-            var daysOfWeek = Enum.GetValues<DayOfWeek>();
-
-            foreach (var dayOfWeek in daysOfWeek)
-            {
-                var jornadaTrabalhoDiaria = new JornadaTrabalhoDiaria
-                {
-                    DiaSemana = dayOfWeek,
-                    Tempo = new TimeSpan(8, 0, 0)
-                };
-
-                perfil.JornadaTrabalhoSemanalPrevista.Semana.Add(jornadaTrabalhoDiaria);
-            }
+            var trabalhador = e.NewItems[0] as Trabalhador;
         }
     }
 
@@ -77,17 +64,17 @@ public partial class CadastroPerfisWindow : Window
 
     private async void SaveButton_Click(object sender, RoutedEventArgs e)
     {
-        //CollectionViewSource perfisViewSource = ((CollectionViewSource)(this.FindResource("perfisViewSource")));
+        //CollectionViewSource trabalhadoresViewSource = ((CollectionViewSource)(this.FindResource("trabalhadoresViewSource")));
 
-        //var observableCollection = (PerfisCollection)perfisViewSource.Source;
+        //var observableCollection = (TrabalhadoresCollection)trabalhadoresViewSource.Source;
 
-        perfilViewModelDataGrid.CommitEdit();
+        trabalhadorViewModelDataGrid.CommitEdit();
 
         try
         {
             await _db.SaveChangesAsync();
 
-            SetStatusBar("Perfis salvos com sucesso.");
+            SetStatusBar("Trabalhadores salvos com sucesso.");
         }
         catch (Exception ex)
         {
@@ -95,9 +82,9 @@ public partial class CadastroPerfisWindow : Window
         }
     }
 
-    private void novoPerfilButton_Click(object sender, RoutedEventArgs e)
+    private void novoTrabalhadorButton_Click(object sender, RoutedEventArgs e)
     {
-        var perfil = new Perfil
+        var trabalhador = new Trabalhador
         {
             CreationDate = DateTime.Now,
         };
@@ -112,10 +99,10 @@ public partial class CadastroPerfisWindow : Window
         //        Tempo = new TimeSpan(8, 0, 0)
         //    };
 
-        //    perfil.JornadaTrabalhoSemanalPrevista.Semana.Add(jornadaTrabalhoDiaria);
+        //    trabalhador.JornadaTrabalhoSemanalPrevista.Semana.Add(jornadaTrabalhoDiaria);
         //}
 
-        _perfis.Add(perfil);
+        _trabalhadores.Add(trabalhador);
     }
 
     private void Window_Unloaded(object sender, RoutedEventArgs e)

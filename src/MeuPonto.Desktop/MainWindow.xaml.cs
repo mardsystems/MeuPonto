@@ -1,10 +1,13 @@
-﻿using MeuPonto.Modules.Perfis;
+﻿using MeuPonto.Modules.Empregadores;
+using MeuPonto.Modules.Perfis;
 using MeuPonto.Modules.Pontos;
 using MeuPonto.Modules.Pontos.Comprovantes;
 using MeuPonto.Modules.Pontos.Folhas;
+using MeuPonto.Modules.Trabalhadores;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Windows;
+using System.Windows.Input;
 
 namespace MeuPonto;
 
@@ -17,6 +20,20 @@ public partial class MainWindow : Window
         InitializeComponent();
 
         ServiceProvider = serviceProvider;
+    }
+
+    private void CadastroTrabalhadoresMenuItem_Click(object sender, RoutedEventArgs e)
+    {
+        var cadastroTrabalhadoresWindow = ServiceProvider.GetRequiredService<CadastroTrabalhadoresWindow>();
+
+        cadastroTrabalhadoresWindow.Show();
+    }
+
+    private void CadastroEmpregadoresMenuItem_Click(object sender, RoutedEventArgs e)
+    {
+        var cadastroEmpregadoresWindow = ServiceProvider.GetRequiredService<CadastroEmpregadoresWindow>();
+
+        cadastroEmpregadoresWindow.Show();
     }
 
     private void CadastroPerfisMenuItem_Click(object sender, RoutedEventArgs e)

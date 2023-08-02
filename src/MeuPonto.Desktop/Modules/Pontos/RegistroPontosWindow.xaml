@@ -5,13 +5,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:MeuPonto.Modules.Pontos"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:perfis="clr-namespace:MeuPonto.Modules.Perfis;assembly=MeuPonto.EntityFrameworkCore.Sqlite"
-    xmlns:pontos="clr-namespace:MeuPonto.Modules.Pontos;assembly=MeuPonto.EntityFrameworkCore.Sqlite"
+    xmlns:perfis="clr-namespace:MeuPonto.Modules.Perfis;assembly=MeuPonto.DocumentModel"
+    xmlns:pontos="clr-namespace:MeuPonto.Modules.Pontos;assembly=MeuPonto.DocumentModel"
     xmlns:system="clr-namespace:System;assembly=System.Xaml.Extensions"
     Title="Registro de Pontos"
-    Width="800"
-    Height="450"
+    Width="1200"
+    Height="600"
     Loaded="Window_Loaded"
+    Unloaded="Window_Unloaded"
     mc:Ignorable="d">
     <Window.Resources>
         <ResourceDictionary>
@@ -19,6 +20,7 @@
             <CollectionViewSource x:Key="comprovantesViewSource" Source="{Binding Comprovantes, Source={StaticResource pontosViewSource}}" />
             <CollectionViewSource x:Key="perfisViewSource" d:DesignSource="{d:DesignInstance {x:Type perfis:Perfil}, CreateList=False}" />
             <Image x:Key="Save" Source="/Resources/saveHS.png" />
+            <Image x:Key="Refresh" Source="/Resources/refresh_16xLG.png" />
             <Image x:Key="SaveAll" Source="/Resources/saveAllHS.png" />
         </ResourceDictionary>
     </Window.Resources>
@@ -32,7 +34,10 @@
             <MenuItem Header="Registro">
                 <MenuItem Header="Novo Ponto ..." />
                 <Separator />
-                <MenuItem Click="SaveButton_Click" Header="Salvar" InputGestureText="Ctrl+S" />
+                <MenuItem
+                    Click="SaveButton_Click"
+                    Header="Salvar"
+                    InputGestureText="Ctrl+S" />
                 <Separator />
                 <MenuItem Header="Fechar" />
             </MenuItem>
@@ -43,9 +48,9 @@
             Margin="0"
             DataContext="{StaticResource pontosViewSource}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="5" />
-                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="250" />
             </Grid.ColumnDefinitions>
             <Grid>
                 <Grid.RowDefinitions>
@@ -62,8 +67,15 @@
                     <Button
                         x:Name="saveButton"
                         Height="24"
+                        Click="SaveButton_Click"
                         Content="{StaticResource Save}"
                         ToolTip="Salvar" />
+                    <Button
+                        x:Name="refreshButton"
+                        Height="24"
+                        Click="refreshButton_Click"
+                        Content="{StaticResource Refresh}"
+                        ToolTip="Atualizar" />
                 </ToolBar>
                 <DataGrid
                     x:Name="pontoViewModelDataGrid"
@@ -81,19 +93,20 @@
                             SelectedValueBinding="{Binding PerfilId}"
                             SelectedValuePath="Id" />
                         <DataGridTextColumn
-                            Width="150"
-                            Binding="{Binding DataHora}"
-                            Header="Data/Hora" />
+                            Width="120"
+                            Binding="{Binding DataHora, StringFormat={}{0:dd/MM/yyyy HH:mm}}"
+                            Header="Data/Hora"
+                            HeaderStringFormat="dd/MM/yyyy HH:mm" />
                         <DataGridComboBoxColumn
                             Width="72"
                             Header="Momento"
-                            ItemsSource="{Binding Source={system:EnumBindingSourceExtension {x:Type pontos:Momento}}, Mode=OneWay}"
-                            SelectedValueBinding="{Binding Momento}" />
+                            ItemsSource="{Binding Source={system:EnumBindingSourceExtension {x:Type pontos:MomentoEnum}}, Mode=OneWay}"
+                            SelectedValueBinding="{Binding MomentoId}" />
                         <DataGridComboBoxColumn
                             Width="72"
                             Header="Pausa"
-                            ItemsSource="{Binding Source={system:EnumBindingSourceExtension {x:Type pontos:Pausa}}, Mode=OneWay}"
-                            SelectedValueBinding="{Binding Pausa}" />
+                            ItemsSource="{Binding Source={system:EnumBindingSourceExtension {x:Type pontos:PausaEnum}}, Mode=OneWay}"
+                            SelectedValueBinding="{Binding PausaId}" />
                         <DataGridCheckBoxColumn
                             Width="100"
                             Binding="{Binding Estimado}"
@@ -102,6 +115,18 @@
                             Width="150"
                             Binding="{Binding Observacao}"
                             Header="Observação" />
+                        <DataGridTextColumn
+                            Width="100"
+                            Binding="{Binding TrabalhadorId}"
+                            Header="Trabalhador Id" />
+                        <DataGridTextColumn
+                            Width="120"
+                            Binding="{Binding CreationDate, StringFormat={}{0:dd/MM/yyyy HH:mm}}"
+                            Header="Creation Date" />
+                        <DataGridTextColumn
+                            Width="250"
+                            Binding="{Binding Id}"
+                            Header="Id" />
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

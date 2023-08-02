@@ -10,12 +10,12 @@ public static class DbModule
 {
     internal static IServiceCollection AddDbServices(this IServiceCollection services)
     {
-        var basePath = Directory.GetCurrentDirectory();
+        //var basePath = Directory.GetCurrentDirectory();
 
-        var dataSource = Path.Combine(basePath, "MeuPonto.db");
+        //var dataSource = Path.Combine(basePath, "MeuPonto.db");
 
-        services.AddDbContext<MeuPontoDbContext>(options =>
-            options.UseSqlite($"Data Source={dataSource}", b => b.MigrationsAssembly("MeuPonto.EntityFrameworkCore.Sqlite")));
+        //services.AddDbContext<MeuPontoDbContext>(options =>
+        //    options.UseSqlite($"Data Source={dataSource}", b => b.MigrationsAssembly("MeuPonto.EntityFrameworkCore.Sqlite")));
 
         //
 
@@ -56,7 +56,7 @@ public static class DbModule
 
             //await db.Database.EnsureCreatedAsync();
 
-            await db.Database.MigrateAsync();
+            //await db.Database.MigrateAsync();
         }
     }
 }

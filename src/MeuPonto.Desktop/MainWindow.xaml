@@ -11,7 +11,9 @@
     Height="450"
     mc:Ignorable="d">
     <Window.Resources>
-        <converters:VisualToImageSourceConverter x:Key="Converter" />
+        <ResourceDictionary>
+            <converters:VisualToImageSourceConverter x:Key="Converter" />
+        </ResourceDictionary>
     </Window.Resources>
     <!--<Button Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                     Margin="4" HorizontalAlignment="Center"
@@ -126,6 +128,26 @@
                     AutomationProperties.AutomationId="cadastroPerfisMenuItem"
                     Click="CadastroPerfisMenuItem_Click"
                     Header="Cadastro de Perfis" />
+            </MenuItem>
+            <MenuItem
+                x:Name="empregadoresMenuItem"
+                AutomationProperties.AutomationId="empregadoresMenuItem"
+                Header="Empregadores">
+                <MenuItem
+                    x:Name="cadastroEmpregadoresMenuItem"
+                    AutomationProperties.AutomationId="cadastroEmpregadoresMenuItem"
+                    Click="CadastroEmpregadoresMenuItem_Click"
+                    Header="Cadastro de Empregadores" />
+            </MenuItem>
+            <MenuItem
+                x:Name="trabalhadoresMenuItem"
+                AutomationProperties.AutomationId="trabalhadoresMenuItem"
+                Header="Trabalhadores">
+                <MenuItem
+                    x:Name="cadastroTrabalhadoresMenuItem"
+                    AutomationProperties.AutomationId="cadastroTrabalhadoresMenuItem"
+                    Click="CadastroTrabalhadoresMenuItem_Click"
+                    Header="Cadastro de Trabalhadores" />
             </MenuItem>
         </Menu>
         <TextBlock
