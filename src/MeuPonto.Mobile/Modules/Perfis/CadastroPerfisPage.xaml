@@ -6,61 +6,6 @@
     xmlns:local="clr-namespace:MeuPonto.Modules.Perfis"
     Title="Cadastro de Perfis"
     Loaded="ContentPage_Loaded">
-    <ContentPage.Resources>
-        <Style x:Key="AdaptiveTriggerPageStyle" TargetType="StackLayout">
-            <Setter Property="VisualStateManager.VisualStateGroups">
-                <VisualStateGroupList>
-                    <VisualStateGroup>
-                        <VisualState x:Name="Vertical">
-                            <VisualState.StateTriggers>
-                                <AdaptiveTrigger MinWindowWidth="0" />
-                            </VisualState.StateTriggers>
-                            <VisualState.Setters>
-                                <Setter Property="Orientation" Value="Vertical" />
-                            </VisualState.Setters>
-                        </VisualState>
-                        <VisualState x:Name="Horizontal">
-                            <VisualState.StateTriggers>
-                                <AdaptiveTrigger MinWindowWidth="800" />
-                            </VisualState.StateTriggers>
-                            <VisualState.Setters>
-                                <Setter Property="Orientation" Value="Horizontal" />
-                            </VisualState.Setters>
-                        </VisualState>
-                    </VisualStateGroup>
-                </VisualStateGroupList>
-            </Setter>
-        </Style>
-        <Style x:Key="DeviceStateTriggerPageStyle" TargetType="ContentPage">
-            <Setter Property="VisualStateManager.VisualStateGroups">
-                <VisualStateGroupList>
-                    <VisualStateGroup>
-                        <VisualState x:Name="Windows">
-                            <VisualState.StateTriggers>
-                                <DeviceStateTrigger Device="Windows" />
-                            </VisualState.StateTriggers>
-                            <VisualState.Setters>
-                                <Setter Property="BackgroundColor" Value="Silver" />
-                            </VisualState.Setters>
-                        </VisualState>
-                        <VisualState x:Name="Android">
-                            <VisualState.StateTriggers>
-                                <DeviceStateTrigger Device="Android" />
-                            </VisualState.StateTriggers>
-                            <VisualState.Setters>
-                                <Setter Property="BackgroundColor" Value="#2196F3" />
-                            </VisualState.Setters>
-                        </VisualState>
-                    </VisualStateGroup>
-                </VisualStateGroupList>
-            </Setter>
-        </Style>
-    </ContentPage.Resources>
-    <!--<ContentPage.MenuBarItems>
-        <MenuBarItem Text="File">
-            <MenuFlyoutItem Text="Exit" />
-        </MenuBarItem>
-    </ContentPage.MenuBarItems>-->
     <ContentPage.ToolbarItems>
         <ToolbarItem
             Command="{Binding CriarNovoCommand}"
@@ -79,7 +24,7 @@
             ShowsResults="True" />
     </Shell.SearchHandler>
     <StackLayout Margin="10">
-        <ListView ItemsSource="{Binding Perfis}" VerticalOptions="FillAndExpand">
+        <ListView ItemSelected="ListView_ItemSelected" ItemsSource="{Binding Perfis}" VerticalOptions="FillAndExpand">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

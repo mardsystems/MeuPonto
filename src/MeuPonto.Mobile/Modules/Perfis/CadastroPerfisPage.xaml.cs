@@ -50,4 +50,13 @@ public partial class CadastroPerfisPage : ContentPage
 
         await DisplayAlert("Pronto", $"Carregado {total} registro(s)!", "OK");
     }
+
+    private async void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    {
+        var id = (e.SelectedItem as Perfil).Id;
+
+        var perfil = await _db.Perfis.FirstOrDefaultAsync(x => x.Id == id);
+
+        await Shell.Current.GoToAsync("Perfil", new Dictionary<string, object> { { "Perfil", perfil } });
+    }
 }

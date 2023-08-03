@@ -15,4 +15,9 @@ public partial class AppShell : Shell
         Routing.RegisterRoute("Empregadores/Empregador", typeof(EmpregadorPage));
         Routing.RegisterRoute("Perfis/Perfil", typeof(PerfilPage));
     }
+
+    protected override void OnNavigating(ShellNavigatingEventArgs args)
+    {
+        base.OnNavigating(args);
+    }
 }

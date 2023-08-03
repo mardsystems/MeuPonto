@@ -2,18 +2,27 @@ using MeuPonto.Data;
 using MeuPonto.Helpers;
 using MeuPonto.Modules.Empregadores;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace MeuPonto.Modules.Perfis;
 
+[QueryProperty(nameof(Perfil), "Perfil")]
 public partial class PerfilPage : ContentPage
 {
     private readonly MeuPontoDbContext _db;
 
-    public Perfil Perfil { get; set; }
+    private Perfil _perfil;
+    public Perfil Perfil
+    {
+        get => _perfil;
+        set
+        {
+            _perfil = value;
+            OnPropertyChanged();
+        }
+    }
 
-    public ObservableCollection<Empregador> Empregadores { get; set; }
+    public IEnumerable<Empregador> Empregadores { get; set; }
 
     public ICommand SalvarCommand { get; set; }
 
@@ -42,12 +51,13 @@ public partial class PerfilPage : ContentPage
             Perfil.JornadaTrabalhoSemanalPrevista.Semana.Add(jornadaTrabalhoDiaria);
         }
 
-        sundayLabel.Text = Perfil.JornadaTrabalhoSemanalPrevista.Semana[0].DiaSemana.Translate();
-        mondayLabel.Text = Perfil.JornadaTrabalhoSemanalPrevista.Semana[1].DiaSemana.Translate();
-
-        Empregadores = _db.Empregadores.Local.ToObservableCollection();
-
-        Empregadores.Insert(0, new Empregador { Nome = "" });
+        sundayLabel.Text = Perfil.JornadaTrabalhoSemanalPrevista.Semana[(int)DayOfWeek.Sunday].DiaSemana.Translate();
+        mondayLabel.Text = Perfil.JornadaTrabalhoSemanalPrevista.Semana[(int)DayOfWeek.Monday].DiaSemana.Translate();
+        tuesdayLabel.Text = Perfil.JornadaTrabalhoSemanalPrevista.Semana[(int)DayOfWeek.Tuesday].DiaSemana.Translate();
+        wednesdayLabel.Text = Perfil.JornadaTrabalhoSemanalPrevista.Semana[(int)DayOfWeek.Wednesday].DiaSemana.Translate();
+        thursdayLabel.Text = Perfil.JornadaTrabalhoSemanalPrevista.Semana[(int)DayOfWeek.Thursday].DiaSemana.Translate();
+        fridayLabel.Text = Perfil.JornadaTrabalhoSemanalPrevista.Semana[(int)DayOfWeek.Friday].DiaSemana.Translate();
+        saturdayLabel.Text = Perfil.JornadaTrabalhoSemanalPrevista.Semana[(int)DayOfWeek.Saturday].DiaSemana.Translate();
 
         SalvarCommand = new Command(Salvar);
 
@@ -56,10 +66,11 @@ public partial class PerfilPage : ContentPage
 
     private async void ContentPage_Loaded(object sender, EventArgs e)
     {
-        await _db.Empregadores
-            .LoadAsync();
+        var empregadores = await _db.Empregadores.ToListAsync();
 
-        //Perfis = _db.Perfis.Local.ToObservableCollection();
+        empregadores.Insert(0, new Empregador { Nome = "" });
+
+        Empregadores = empregadores;
     }
 
     private async void Salvar()
