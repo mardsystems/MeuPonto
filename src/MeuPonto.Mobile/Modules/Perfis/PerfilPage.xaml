@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MeuPonto.Modules.Perfis.PerfilPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Perfil"
+    Loaded="ContentPage_Loaded">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Command="{Binding SalvarCommand}"
+            IconImageSource="save.png"
+            Order="Primary"
+            Priority="0"
+            Text="Salvar" />
+    </ContentPage.ToolbarItems>
+    <StackLayout Margin="10" Spacing="10">
+        <Label Text="Nome" />
+        <Entry Placeholder="Nome" Text="{Binding Perfil.Nome}" />
+        <Label Text="Ativo" />
+        <CheckBox HorizontalOptions="Start" IsChecked="{Binding Perfil.Ativo}" />
+        <Label Text="Empregador" />
+        <Picker
+            x:Name="empregadoresPicker"
+            Title="Empregador"
+            ItemDisplayBinding="{Binding Nome}"
+            ItemsSource="{Binding Empregadores}"
+            SelectedItem="{Binding Perfil.Empregador}" />
+        <Frame
+            Padding="8"
+            BorderColor="Gray"
+            CornerRadius="5">
+            <StackLayout>
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    Text="Jornada Trabalho Semanal Prevista" />
+                <BoxView
+                    HeightRequest="1"
+                    HorizontalOptions="Fill"
+                    Color="Gray" />
+                <Frame
+                    Margin="10"
+                    Padding="10"
+                    BorderColor="Gray"
+                    CornerRadius="5">
+                    <StackLayout>
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            Text="Semana" />
+                        <BoxView
+                            HeightRequest="1"
+                            HorizontalOptions="Fill"
+                            Color="Gray" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="100" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label x:Name="sundayLabel" />
+                            <Entry Grid.Column="1" Text="{Binding Perfil.JornadaTrabalhoSemanalPrevista.Semana[0].Tempo}" />
+                            <Label x:Name="mondayLabel" Grid.Row="1" />
+                            <Entry
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Text="{Binding Perfil.JornadaTrabalhoSemanalPrevista.Semana[1].Tempo}" />
+                        </Grid>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+</ContentPage>

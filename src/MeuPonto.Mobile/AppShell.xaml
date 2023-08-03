@@ -3,15 +3,49 @@
     x:Class="MeuPonto.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:empregadores="clr-namespace:MeuPonto.Modules.Empregadores"
     xmlns:local="clr-namespace:MeuPonto"
-    xmlns:perfis="clr-namespace:MeuPonto.Modules.Perfis">
+    xmlns:modules="clr-namespace:MeuPonto.Modules"
+    xmlns:perfis="clr-namespace:MeuPonto.Modules.Perfis"
+    xmlns:pontos="clr-namespace:MeuPonto.Modules.Pontos">
 
-    <FlyoutItem Title="Home" Icon="house.png">
-        <ShellContent ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent
+            Title="Home"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Icon="home.png"
+            Route="MainPage" />
+
+        <ShellContent
+            Title="Pontos"
+            ContentTemplate="{DataTemplate pontos:RegistroPontosPage}"
+            Icon="timer.png"
+            Route="Pontos" />
+
+        <ShellContent
+            Title="Perfis"
+            ContentTemplate="{DataTemplate perfis:CadastroPerfisPage}"
+            Icon="group.png"
+            Route="Perfis" />
+
+        <ShellContent
+            Title="Empregadores"
+            ContentTemplate="{DataTemplate empregadores:CadastroEmpregadoresPage}"
+            Icon="apartment.png"
+            Route="Empregadores" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Perfis">
-        <ShellContent ContentTemplate="{DataTemplate perfis:CadastroPerfisPage}" Route="Perfis" />
-    </FlyoutItem>
+    <MenuItem
+        Command="{Binding HelpCommand}"
+        CommandParameter="https://learn.microsoft.com/dotnet/maui/fundamentals/shell"
+        IconImageSource="account_circle.png"
+        Text="Usuário" />
 
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent
+            Title="Configurações"
+            ContentTemplate="{DataTemplate modules:ConfiguracoesPage}"
+            Icon="settings.png"
+            Route="Configuracoes" />
+    </FlyoutItem>
 </Shell>

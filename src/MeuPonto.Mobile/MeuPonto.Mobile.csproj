@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net6.0-android;net6.0-ios;net6.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks>net6.0-ios;net6.0-maccatalyst;net6.0-android31.0</TargetFrameworks>
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net6.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net6.0-tizen</TargetFrameworks> -->
@@ -12,7 +12,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<!-- Display name -->
-		<ApplicationTitle>MeuPonto</ApplicationTitle>
+		<ApplicationTitle>Meu Ponto</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.meuponto.mobile</ApplicationId>
@@ -28,6 +28,7 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+		<EnforceCodeStyleInBuild>False</EnforceCodeStyleInBuild>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -49,18 +50,83 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\AppIcon\account_circle.svg" />
+	  <None Remove="Resources\AppIcon\add_circle.svg" />
+	  <None Remove="Resources\AppIcon\apartment.svg" />
+	  <None Remove="Resources\AppIcon\building.svg" />
+	  <None Remove="Resources\AppIcon\close.svg" />
+	  <None Remove="Resources\AppIcon\fingerprint.svg" />
+	  <None Remove="Resources\AppIcon\gear.svg" />
+	  <None Remove="Resources\AppIcon\group.svg" />
+	  <None Remove="Resources\AppIcon\home.svg" />
+	  <None Remove="Resources\AppIcon\people.svg" />
+	  <None Remove="Resources\AppIcon\person_circle.svg" />
+	  <None Remove="Resources\AppIcon\plus_circle.svg" />
+	  <None Remove="Resources\AppIcon\save.svg" />
+	  <None Remove="Resources\AppIcon\search.svg" />
+	  <None Remove="Resources\AppIcon\settings.svg" />
+	  <None Remove="Resources\AppIcon\stopwatch.svg" />
+	  <None Remove="Resources\AppIcon\timer.svg" />
 	  <None Remove="Resources\Images\house.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiImage Include="Resources\AppIcon\account_circle.svg" />
+	  <MauiImage Include="Resources\AppIcon\add_circle.svg" />
+	  <MauiImage Include="Resources\AppIcon\apartment.svg" />
+	  <MauiImage Include="Resources\AppIcon\building.svg" />
+	  <MauiImage Include="Resources\AppIcon\close.svg" />
+	  <MauiImage Include="Resources\AppIcon\fingerprint.svg" />
+	  <MauiImage Include="Resources\AppIcon\gear.svg" />
+	  <MauiImage Include="Resources\AppIcon\group.svg" />
+	  <MauiImage Include="Resources\AppIcon\home.svg" />
 	  <MauiImage Include="Resources\AppIcon\house.svg">
 	  </MauiImage>
+	  <MauiImage Include="Resources\AppIcon\people.svg" />
+	  <MauiImage Include="Resources\AppIcon\person_circle.svg" />
+	  <MauiImage Include="Resources\AppIcon\plus_circle.svg" />
+	  <MauiImage Include="Resources\AppIcon\save.svg" />
+	  <MauiImage Include="Resources\AppIcon\search.svg" />
+	  <MauiImage Include="Resources\AppIcon\settings.svg" />
+	  <MauiImage Include="Resources\AppIcon\stopwatch.svg" />
+	  <MauiImage Include="Resources\AppIcon\timer.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\MeuPonto.EntityFrameworkCore.Sqlite\MeuPonto.EntityFrameworkCore.Sqlite.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Modules\ConfiguracoesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Modules\Empregadores\CadastroEmpregadoresPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Modules\Empregadores\EmpregadorPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Modules\Perfis\CadastroPerfisPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Modules\Perfis\PerfilPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Modules\Pontos\RegistroPontosPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Modules\Empregadores\CadastroEmpregadoresPage.xaml.cs">
+	    <DependentUpon>CadastroEmpregadoresPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Modules\Empregadores\EmpregadorPage.xaml.cs">
+	    <DependentUpon>EmpregadorPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Modules\Pontos\RegistroPontosPage.xaml.cs">
+	    <DependentUpon>RegistroPontosPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 </Project>

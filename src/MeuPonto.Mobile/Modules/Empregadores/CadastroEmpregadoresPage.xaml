@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="MeuPonto.Modules.Perfis.CadastroPerfisPage"
+    x:Class="MeuPonto.Modules.Empregadores.CadastroEmpregadoresPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:MeuPonto.Modules.Perfis"
-    Title="Cadastro de Perfis"
+    xmlns:local="clr-namespace:MeuPonto.Modules.Empregadores"
+    Title="Cadastro de Empregadores"
     Loaded="ContentPage_Loaded">
     <ContentPage.Resources>
         <Style x:Key="AdaptiveTriggerPageStyle" TargetType="StackLayout">
@@ -70,8 +70,8 @@
             Text="Criar Novo" />
     </ContentPage.ToolbarItems>
     <Shell.SearchHandler>
-        <local:PerfisSearchHandler
-            x:Name="perfisSearchHandler"
+        <local:EmpregadoresSearchHandler
+            x:Name="empregadoresSearchHandler"
             ClearIcon="close.png"
             DisplayMemberName="Nome"
             Placeholder="Digite o nome"
@@ -79,7 +79,7 @@
             ShowsResults="True" />
     </Shell.SearchHandler>
     <StackLayout Margin="10">
-        <ListView ItemsSource="{Binding Perfis}" VerticalOptions="FillAndExpand">
+        <ListView ItemsSource="{Binding Empregadores}" VerticalOptions="FillAndExpand">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

@@ -3,25 +3,25 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace MeuPonto.Modules.Perfis;
+namespace MeuPonto.Modules.Empregadores;
 
-public partial class CadastroPerfisPage : ContentPage
+public partial class CadastroEmpregadoresPage : ContentPage
 {
     private readonly MeuPontoDbContext _db;
 
     public ICommand CriarNovoCommand { get; set; }
 
-    public ObservableCollection<Perfil> Perfis { get; set; }
+    public ObservableCollection<Empregador> Empregadores { get; set; }
 
-    public CadastroPerfisPage(MeuPontoDbContext db)
+    public CadastroEmpregadoresPage(MeuPontoDbContext db)
     {
         InitializeComponent();
 
         _db = db;
 
-        Perfis = _db.Perfis.Local.ToObservableCollection();
+        Empregadores = _db.Empregadores.Local.ToObservableCollection();
 
-        perfisSearchHandler.Perfis = Perfis;
+        empregadoresSearchHandler.Empregadores = Empregadores;
 
         CriarNovoCommand = new Command(CriarNovo);
 
@@ -30,23 +30,23 @@ public partial class CadastroPerfisPage : ContentPage
 
     private async void ContentPage_Loaded(object sender, EventArgs e)
     {
-        await _db.Perfis
+        await _db.Empregadores
             .LoadAsync();
 
-        //Perfis = _db.Perfis.Local.ToObservableCollection();
+        //Empregadores = _db.Empregadores.Local.ToObservableCollection();
     }
 
     private async void CriarNovo()
     {
-        await Shell.Current.GoToAsync($"Perfil");
+        await Shell.Current.GoToAsync($"Empregador");
     }
 
     private async void Button_Clicked(object sender, EventArgs e)
     {
-        await _db.Perfis
+        await _db.Empregadores
             .LoadAsync();
 
-        var total = Perfis.Count;
+        var total = Empregadores.Count;
 
         await DisplayAlert("Pronto", $"Carregado {total} registro(s)!", "OK");
     }

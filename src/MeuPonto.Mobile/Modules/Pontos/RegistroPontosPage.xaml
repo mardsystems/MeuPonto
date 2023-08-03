@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="MeuPonto.Modules.Perfis.CadastroPerfisPage"
+    x:Class="MeuPonto.Modules.Pontos.RegistroPontosPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:MeuPonto.Modules.Perfis"
-    Title="Cadastro de Perfis"
+    Title="Registro de Pontos"
     Loaded="ContentPage_Loaded">
     <ContentPage.Resources>
         <Style x:Key="AdaptiveTriggerPageStyle" TargetType="StackLayout">
@@ -56,30 +55,28 @@
             </Setter>
         </Style>
     </ContentPage.Resources>
-    <!--<ContentPage.MenuBarItems>
-        <MenuBarItem Text="File">
-            <MenuFlyoutItem Text="Exit" />
-        </MenuBarItem>
-    </ContentPage.MenuBarItems>-->
     <ContentPage.ToolbarItems>
         <ToolbarItem
-            Command="{Binding CriarNovoCommand}"
             IconImageSource="add_circle.png"
             Order="Primary"
             Priority="0"
             Text="Criar Novo" />
+        <ToolbarItem
+            IconImageSource="fingerprint.png"
+            Order="Secondary"
+            Priority="1"
+            Text="Marcar Ponto" />
+        <ToolbarItem
+            Order="Secondary"
+            Priority="2"
+            Text="Folhas" />
+        <ToolbarItem
+            Order="Secondary"
+            Priority="3"
+            Text="Comprovantes" />
     </ContentPage.ToolbarItems>
-    <Shell.SearchHandler>
-        <local:PerfisSearchHandler
-            x:Name="perfisSearchHandler"
-            ClearIcon="close.png"
-            DisplayMemberName="Nome"
-            Placeholder="Digite o nome"
-            QueryIcon="search.png"
-            ShowsResults="True" />
-    </Shell.SearchHandler>
     <StackLayout Margin="10">
-        <ListView ItemsSource="{Binding Perfis}" VerticalOptions="FillAndExpand">
+        <ListView ItemsSource="{Binding Pontos}" VerticalOptions="FillAndExpand">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
