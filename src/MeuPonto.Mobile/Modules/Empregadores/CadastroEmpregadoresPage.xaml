@@ -6,15 +6,10 @@
     xmlns:local="clr-namespace:MeuPonto.Modules.Empregadores"
     Title="Cadastro de Empregadores"
     Loaded="ContentPage_Loaded">
-    <!--<ContentPage.MenuBarItems>
-        <MenuBarItem Text="File">
-            <MenuFlyoutItem Text="Exit" />
-        </MenuBarItem>
-    </ContentPage.MenuBarItems>-->
     <ContentPage.ToolbarItems>
         <ToolbarItem
             Command="{Binding CriarNovoCommand}"
-            IconImageSource="add_circle.png"
+            IconImageSource="criar_novo.png"
             Order="Primary"
             Priority="0"
             Text="Criar Novo" />
@@ -29,7 +24,10 @@
             ShowsResults="True" />
     </Shell.SearchHandler>
     <StackLayout Margin="10">
-        <ListView ItemsSource="{Binding Empregadores}" VerticalOptions="FillAndExpand">
+        <ListView
+            ItemSelected="ListView_ItemSelected"
+            ItemsSource="{Binding Empregadores}"
+            VerticalOptions="FillAndExpand">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

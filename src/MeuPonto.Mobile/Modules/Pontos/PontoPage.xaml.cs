@@ -1,29 +1,37 @@
 using MeuPonto.Data;
+using MeuPonto.Modules.Perfis;
+using Microsoft.EntityFrameworkCore;
 using System.Windows.Input;
 
-namespace MeuPonto.Modules.Empregadores;
+namespace MeuPonto.Modules.Pontos;
 
-[QueryProperty(nameof(Empregador), "Empregador")]
-public partial class EmpregadorPage : ContentPage
+[QueryProperty(nameof(Ponto), "Ponto")]
+public partial class PontoPage : ContentPage
 {
     private readonly MeuPontoDbContext _db;
 
     public ICommand ExcluirCommand { get; set; }
 
-    private Empregador _empregador;
-    public Empregador Empregador
+    private Ponto _ponto;
+    public Ponto Ponto
     {
-        get => _empregador;
+        get => _ponto;
         set
         {
-            _empregador = value;
+            _ponto = value;
             OnPropertyChanged();
         }
     }
 
+    public DateTime? Data { get; set; }
+
+    public TimeSpan? Hora { get; set; }
+
+    public IEnumerable<Perfil> Perfis { get; set; }
+
     public ICommand SalvarCommand { get; set; }
 
-    public EmpregadorPage(MeuPontoDbContext db)
+    public PontoPage(MeuPontoDbContext db)
     {
         InitializeComponent();
 
@@ -31,26 +39,34 @@ public partial class EmpregadorPage : ContentPage
 
         ExcluirCommand = new Command(Excluir);
 
-        Empregador = new Empregador
+        Ponto = new Ponto
         {
             Id = Guid.NewGuid()
         };
+
+        var agora = DateTime.Now;
+
+        Data = agora.Date;
+
+        Hora = agora.TimeOfDay;
 
         SalvarCommand = new Command(Salvar);
 
         BindingContext = this;
     }
 
-    private void ContentPage_Loaded(object sender, EventArgs e)
+    private async void ContentPage_Loaded(object sender, EventArgs e)
     {
+        var perfis = await _db.Perfis.ToListAsync();
 
+        Perfis = perfis;
     }
 
     private async void Salvar()
     {
         try
         {
-            _db.Empregadores.Add(Empregador);
+            _db.Pontos.Add(Ponto);
             await _db.SaveChangesAsync();
 
             await Shell.Current.GoToAsync("..");
@@ -63,17 +79,17 @@ public partial class EmpregadorPage : ContentPage
 
     private async void Excluir()
     {
-        var yes = await DisplayAlert("Excluir Empregador", "Tem certeza que deseja excluir isso?", "Sim", "Não");
+        var yes = await DisplayAlert("Excluir Ponto", "Tem certeza que deseja excluir isso?", "Sim", "Não");
 
         if (yes)
         {
             try
             {
-                var empregador = await _db.Empregadores.FindAsync(Empregador.Id);
+                var ponto = await _db.Pontos.FindAsync(Ponto.Id);
 
-                if (empregador != null)
+                if (ponto != null)
                 {
-                    _db.Empregadores.Remove(empregador);
+                    _db.Pontos.Remove(ponto);
                     await _db.SaveChangesAsync();
                 }
 

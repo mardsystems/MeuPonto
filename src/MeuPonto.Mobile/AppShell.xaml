@@ -7,45 +7,61 @@
     xmlns:local="clr-namespace:MeuPonto"
     xmlns:modules="clr-namespace:MeuPonto.Modules"
     xmlns:perfis="clr-namespace:MeuPonto.Modules.Perfis"
-    xmlns:pontos="clr-namespace:MeuPonto.Modules.Pontos">
-
+    xmlns:pontos="clr-namespace:MeuPonto.Modules.Pontos"
+    Title="Meu Ponto">
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <Grid BackgroundColor="Black" HeightRequest="200">
+                <Image
+                    Aspect="AspectFill"
+                    Opacity="0.6"
+                    Source="flyout_header.png" />
+                <Label
+                    FontAttributes="Bold"
+                    HorizontalTextAlignment="Center"
+                    Text="Meu Ponto"
+                    TextColor="White"
+                    VerticalTextAlignment="Center" />
+            </Grid>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
             Title="Home"
             ContentTemplate="{DataTemplate local:MainPage}"
-            Icon="home.png"
+            Icon="flyout_home.png"
             Route="MainPage" />
 
         <ShellContent
             Title="Pontos"
             ContentTemplate="{DataTemplate pontos:RegistroPontosPage}"
-            Icon="timer.png"
+            Icon="flyout_pontos.png"
             Route="Pontos" />
 
         <ShellContent
             Title="Perfis"
             ContentTemplate="{DataTemplate perfis:CadastroPerfisPage}"
-            Icon="group.png"
+            Icon="flyout_perfis.png"
             Route="Perfis" />
 
         <ShellContent
             Title="Empregadores"
             ContentTemplate="{DataTemplate empregadores:CadastroEmpregadoresPage}"
-            Icon="apartment.png"
+            Icon="flyout_empregadores.png"
             Route="Empregadores" />
     </FlyoutItem>
 
     <MenuItem
         Command="{Binding HelpCommand}"
         CommandParameter="https://learn.microsoft.com/dotnet/maui/fundamentals/shell"
-        IconImageSource="account_circle.png"
+        IconImageSource="flyout_usuario.png"
         Text="Usuário" />
 
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
             Title="Configurações"
             ContentTemplate="{DataTemplate modules:ConfiguracoesPage}"
-            Icon="settings.png"
+            Icon="flyout_configuracoes.png"
             Route="Configuracoes" />
     </FlyoutItem>
 </Shell>

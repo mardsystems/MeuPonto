@@ -1,12 +1,15 @@
 using MeuPonto.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace MeuPonto.Modules.Pontos;
 
 public partial class RegistroPontosPage : ContentPage
 {
     private readonly MeuPontoDbContext _db;
+
+    public ICommand CriarNovoCommand { get; set; }
 
     public ObservableCollection<Ponto> Pontos { get; set; }
 
@@ -18,6 +21,8 @@ public partial class RegistroPontosPage : ContentPage
 
         Pontos = _db.Pontos.Local.ToObservableCollection();
 
+        CriarNovoCommand = new Command(CriarNovo);
+
         BindingContext = this;
     }
 
@@ -27,6 +32,11 @@ public partial class RegistroPontosPage : ContentPage
             .LoadAsync();
 
         //Pontos = _db.Pontos.Local.ToObservableCollection();
+    }
+
+    private async void CriarNovo()
+    {
+        await Shell.Current.GoToAsync($"Ponto");
     }
 
     private async void Button_Clicked(object sender, EventArgs e)

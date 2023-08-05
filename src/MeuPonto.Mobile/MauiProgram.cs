@@ -1,6 +1,6 @@
-﻿using MeuPonto.Data;
+﻿using CommunityToolkit.Maui;
+using MeuPonto.Data;
 using MeuPonto.Infrastructure;
-using Microsoft.EntityFrameworkCore;
 
 namespace MeuPonto;
 
@@ -12,6 +12,7 @@ public static class MauiProgram
 
         builder
             .UseMauiApp<App>()
+            .UseMauiCommunityToolkit()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

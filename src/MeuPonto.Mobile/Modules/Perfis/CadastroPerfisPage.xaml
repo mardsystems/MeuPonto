@@ -9,7 +9,7 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem
             Command="{Binding CriarNovoCommand}"
-            IconImageSource="add_circle.png"
+            IconImageSource="criar_novo.png"
             Order="Primary"
             Priority="0"
             Text="Criar Novo" />
@@ -24,7 +24,10 @@
             ShowsResults="True" />
     </Shell.SearchHandler>
     <StackLayout Margin="10">
-        <ListView ItemSelected="ListView_ItemSelected" ItemsSource="{Binding Perfis}" VerticalOptions="FillAndExpand">
+        <ListView
+            ItemSelected="ListView_ItemSelected"
+            ItemsSource="{Binding Perfis}"
+            VerticalOptions="FillAndExpand">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

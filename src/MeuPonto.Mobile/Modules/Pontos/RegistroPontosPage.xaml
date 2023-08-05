@@ -7,12 +7,13 @@
     Loaded="ContentPage_Loaded">
     <ContentPage.ToolbarItems>
         <ToolbarItem
-            IconImageSource="add_circle.png"
+            Command="{Binding CriarNovoCommand}"
+            IconImageSource="criar_novo.png"
             Order="Primary"
             Priority="0"
             Text="Criar Novo" />
         <ToolbarItem
-            IconImageSource="fingerprint.png"
+            IconImageSource="marcar_ponto.png"
             Order="Secondary"
             Priority="1"
             Text="Marcar Ponto" />

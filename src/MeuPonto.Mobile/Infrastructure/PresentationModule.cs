@@ -19,6 +19,7 @@ public static class PresentationModule
         services.AddTransient(typeof(PerfilPage));
 
         services.AddTransient(typeof(RegistroPontosPage));
+        services.AddTransient(typeof(PontoPage));
 
         //services.AddTransient(typeof(BackupComprovantesWindow));
 

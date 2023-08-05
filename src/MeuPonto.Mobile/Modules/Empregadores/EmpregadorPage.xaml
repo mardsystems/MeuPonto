@@ -3,17 +3,20 @@
     x:Class="MeuPonto.Modules.Empregadores.EmpregadorPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="Empregador">
+    Title="Empregador"
+    Loaded="ContentPage_Loaded">
     <ContentPage.ToolbarItems>
         <ToolbarItem
-            Command="{Binding SalvarCommand}"
-            IconImageSource="save.png"
-            Order="Primary"
+            Command="{Binding ExcluirCommand}"
+            Order="Secondary"
             Priority="0"
-            Text="Salvar" />
+            Text="Excluir" />
     </ContentPage.ToolbarItems>
-    <StackLayout>
-        <Label Text="Nome" />
-        <Entry Placeholder="Enter text" Text="{Binding Empregador.Nome}" />
-    </StackLayout>
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="10">
+            <Label Text="Nome" />
+            <Entry Text="{Binding Empregador.Nome}" />
+            <Button Command="{Binding SalvarCommand}" Text="Salvar" />
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

@@ -11,6 +11,8 @@ public partial class PerfilPage : ContentPage
 {
     private readonly MeuPontoDbContext _db;
 
+    public ICommand ExcluirCommand { get; set; }
+
     private Perfil _perfil;
     public Perfil Perfil
     {
@@ -31,6 +33,8 @@ public partial class PerfilPage : ContentPage
         InitializeComponent();
 
         _db = db;
+
+        ExcluirCommand = new Command(Excluir);
 
         Perfil = new Perfil
         {
@@ -85,6 +89,33 @@ public partial class PerfilPage : ContentPage
         catch (Exception _)
         {
             throw;
+        }
+    }
+
+    private async void Excluir()
+    {
+        var yes = await DisplayAlert("Excluir Perfil", "Tem certeza que deseja excluir isso?", "Sim", "Não");
+
+        if (yes)
+        {
+            try
+            {
+                var perfil = await _db.Perfis.FindAsync(Perfil.Id);
+
+                if (perfil != null)
+                {
+                    _db.Perfis.Remove(perfil);
+                    await _db.SaveChangesAsync();
+                }
+
+                await Shell.Current.GoToAsync("..");
+            }
+            catch (Exception _)
+            {
+                throw;
+            }
+
+            await Shell.Current.GoToAsync("..");
         }
     }
 }

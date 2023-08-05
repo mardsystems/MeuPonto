@@ -33,10 +33,10 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#0D6EFD" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#0D6EFD" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -50,46 +50,57 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Resources\AppIcon\account_circle.svg" />
-	  <None Remove="Resources\AppIcon\add_circle.svg" />
-	  <None Remove="Resources\AppIcon\apartment.svg" />
-	  <None Remove="Resources\AppIcon\building.svg" />
-	  <None Remove="Resources\AppIcon\close.svg" />
+	  <None Remove="Resources\WinIcon\flyout_home.svg" />
+	  <None Remove="Resources\AppIcon\flyout_home.svg" />
+	  <None Remove="Resources\WinIcon\flyout_pontos.svg" />
+	  <None Remove="Resources\AppIcon\flyout_pontos.svg" />
+	  <None Remove="Resources\WinIcon\flyout_perfis.svg" />
+	  <None Remove="Resources\AppIcon\flyout_perfis.svg" />
+	  <None Remove="Resources\WinIcon\flyout_empregadores.svg" />
+	  <None Remove="Resources\AppIcon\flyout_empregadores.svg" />
+	  <None Remove="Resources\WinIcon\flyout_usuario.svg" />
+	  <None Remove="Resources\AppIcon\flyout_usuario.svg" />
+	  <None Remove="Resources\WinIcon\flyout_configuracoes.svg" />
+	  <None Remove="Resources\AppIcon\flyout_configuracoes.svg" />
+	  <None Remove="Resources\WinIcon\criar_novo.svg" />
+	  <None Remove="Resources\AppIcon\criar_novo.svg" />
+	  <None Remove="Resources\WinIcon\fingerprint.svg" />
 	  <None Remove="Resources\AppIcon\fingerprint.svg" />
-	  <None Remove="Resources\AppIcon\gear.svg" />
-	  <None Remove="Resources\AppIcon\group.svg" />
-	  <None Remove="Resources\AppIcon\home.svg" />
-	  <None Remove="Resources\AppIcon\people.svg" />
-	  <None Remove="Resources\AppIcon\person_circle.svg" />
-	  <None Remove="Resources\AppIcon\plus_circle.svg" />
-	  <None Remove="Resources\AppIcon\save.svg" />
+	  <None Remove="Resources\WinIcon\qr_code.svg" />
+	  <None Remove="Resources\AppIcon\qr_code.svg" />
+	  <None Remove="Resources\WinIcon\close.svg" />
+	  <None Remove="Resources\AppIcon\close.svg" />
+	  <None Remove="Resources\WinIcon\search.svg" />
 	  <None Remove="Resources\AppIcon\search.svg" />
-	  <None Remove="Resources\AppIcon\settings.svg" />
-	  <None Remove="Resources\AppIcon\stopwatch.svg" />
-	  <None Remove="Resources\AppIcon\timer.svg" />
-	  <None Remove="Resources\Images\house.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiImage Include="Resources\AppIcon\account_circle.svg" />
-	  <MauiImage Include="Resources\AppIcon\add_circle.svg" />
-	  <MauiImage Include="Resources\AppIcon\apartment.svg" />
-	  <MauiImage Include="Resources\AppIcon\building.svg" />
-	  <MauiImage Include="Resources\AppIcon\close.svg" />
-	  <MauiImage Include="Resources\AppIcon\fingerprint.svg" />
-	  <MauiImage Include="Resources\AppIcon\gear.svg" />
-	  <MauiImage Include="Resources\AppIcon\group.svg" />
-	  <MauiImage Include="Resources\AppIcon\home.svg" />
-	  <MauiImage Include="Resources\AppIcon\house.svg">
-	  </MauiImage>
-	  <MauiImage Include="Resources\AppIcon\people.svg" />
-	  <MauiImage Include="Resources\AppIcon\person_circle.svg" />
-	  <MauiImage Include="Resources\AppIcon\plus_circle.svg" />
-	  <MauiImage Include="Resources\AppIcon\save.svg" />
-	  <MauiImage Include="Resources\AppIcon\search.svg" />
-	  <MauiImage Include="Resources\AppIcon\settings.svg" />
-	  <MauiImage Include="Resources\AppIcon\stopwatch.svg" />
-	  <MauiImage Include="Resources\AppIcon\timer.svg" />
+	  <MauiImage Include="Resources\WinIcon\flyout_home.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
+	  <MauiImage Include="Resources\AppIcon\flyout_home.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
+	  <MauiImage Include="Resources\WinIcon\flyout_pontos.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
+	  <MauiImage Include="Resources\AppIcon\flyout_pontos.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
+	  <MauiImage Include="Resources\WinIcon\flyout_perfis.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
+	  <MauiImage Include="Resources\AppIcon\flyout_perfis.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
+	  <MauiImage Include="Resources\WinIcon\flyout_empregadores.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
+	  <MauiImage Include="Resources\AppIcon\flyout_empregadores.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
+	  <MauiImage Include="Resources\WinIcon\flyout_usuario.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
+	  <MauiImage Include="Resources\AppIcon\flyout_usuario.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
+	  <MauiImage Include="Resources\WinIcon\flyout_configuracoes.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
+	  <MauiImage Include="Resources\AppIcon\flyout_configuracoes.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
+	  <MauiImage Include="Resources\WinIcon\criar_novo.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
+	  <MauiImage Include="Resources\AppIcon\criar_novo.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
+	  <MauiImage Include="Resources\WinIcon\fingerprint.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
+	  <MauiImage Include="Resources\AppIcon\fingerprint.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
+	  <MauiImage Include="Resources\WinIcon\qr_code.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
+	  <MauiImage Include="Resources\AppIcon\qr_code.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
+	  <MauiImage Include="Resources\WinIcon\close.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
+	  <MauiImage Include="Resources\AppIcon\close.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
+	  <MauiImage Include="Resources\WinIcon\search.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
+	  <MauiImage Include="Resources\AppIcon\search.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="CommunityToolkit.Maui" Version="2.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -110,6 +121,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Modules\Perfis\PerfilPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Modules\Pontos\PontoPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Modules\Pontos\RegistroPontosPage.xaml">

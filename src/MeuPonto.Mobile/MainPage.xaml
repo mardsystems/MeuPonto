@@ -10,6 +10,18 @@
             Spacing="25"
             VerticalOptions="Center">
 
+            <Button
+                ContentLayout="Left"
+                HorizontalOptions="Center"
+                ImageSource="fingerprint.png"
+                Text="Marcar Ponto" />
+
+            <Button
+                ContentLayout="Left"
+                HorizontalOptions="Center"
+                ImageSource="qr_code.png"
+                Text="Guardar Comprovante" />
+
             <Image
                 HeightRequest="200"
                 HorizontalOptions="Center"

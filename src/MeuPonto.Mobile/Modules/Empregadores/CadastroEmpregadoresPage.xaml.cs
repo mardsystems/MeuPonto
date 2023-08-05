@@ -50,4 +50,13 @@ public partial class CadastroEmpregadoresPage : ContentPage
 
         await DisplayAlert("Pronto", $"Carregado {total} registro(s)!", "OK");
     }
+
+    private async void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    {
+        var id = (e.SelectedItem as Empregador).Id;
+
+        var empregador = await _db.Empregadores.FirstOrDefaultAsync(x => x.Id == id);
+
+        await Shell.Current.GoToAsync("Empregador", new Dictionary<string, object> { { "Empregador", empregador } });
+    }
 }
