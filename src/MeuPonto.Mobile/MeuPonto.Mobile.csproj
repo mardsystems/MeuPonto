@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net6.0-ios;net6.0-maccatalyst;net6.0-android31.0</TargetFrameworks>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net6.0-windows10.0.19041.0</TargetFrameworks>
+		<TargetFrameworks>net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
-		<!-- <TargetFrameworks>$(TargetFrameworks);net6.0-tizen</TargetFrameworks> -->
+		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
 		<OutputType>Exe</OutputType>
 		<RootNamespace>MeuPonto</RootNamespace>
 		<UseMaui>true</UseMaui>
@@ -16,19 +16,18 @@
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.meuponto.mobile</ApplicationId>
-		<ApplicationIdGuid>49983f9e-a7ef-40ed-a4db-f1979d40b53a</ApplicationIdGuid>
+		<ApplicationIdGuid>2a4a9e5e-2dac-494d-bfe6-4899e07d823d</ApplicationIdGuid>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
 
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.1</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
-		<EnforceCodeStyleInBuild>False</EnforceCodeStyleInBuild>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -50,97 +49,62 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Resources\WinIcon\flyout_home.svg" />
-	  <None Remove="Resources\AppIcon\flyout_home.svg" />
-	  <None Remove="Resources\WinIcon\flyout_pontos.svg" />
-	  <None Remove="Resources\AppIcon\flyout_pontos.svg" />
-	  <None Remove="Resources\WinIcon\flyout_perfis.svg" />
-	  <None Remove="Resources\AppIcon\flyout_perfis.svg" />
-	  <None Remove="Resources\WinIcon\flyout_empregadores.svg" />
-	  <None Remove="Resources\AppIcon\flyout_empregadores.svg" />
-	  <None Remove="Resources\WinIcon\flyout_usuario.svg" />
-	  <None Remove="Resources\AppIcon\flyout_usuario.svg" />
-	  <None Remove="Resources\WinIcon\flyout_configuracoes.svg" />
-	  <None Remove="Resources\AppIcon\flyout_configuracoes.svg" />
-	  <None Remove="Resources\WinIcon\criar_novo.svg" />
-	  <None Remove="Resources\AppIcon\criar_novo.svg" />
-	  <None Remove="Resources\WinIcon\fingerprint.svg" />
-	  <None Remove="Resources\AppIcon\fingerprint.svg" />
-	  <None Remove="Resources\WinIcon\qr_code.svg" />
-	  <None Remove="Resources\AppIcon\qr_code.svg" />
-	  <None Remove="Resources\WinIcon\close.svg" />
-	  <None Remove="Resources\AppIcon\close.svg" />
-	  <None Remove="Resources\WinIcon\search.svg" />
-	  <None Remove="Resources\AppIcon\search.svg" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="5.2.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiImage Include="Resources\WinIcon\flyout_home.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
-	  <MauiImage Include="Resources\AppIcon\flyout_home.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
-	  <MauiImage Include="Resources\WinIcon\flyout_pontos.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
-	  <MauiImage Include="Resources\AppIcon\flyout_pontos.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
-	  <MauiImage Include="Resources\WinIcon\flyout_perfis.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
-	  <MauiImage Include="Resources\AppIcon\flyout_perfis.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
-	  <MauiImage Include="Resources\WinIcon\flyout_empregadores.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
-	  <MauiImage Include="Resources\AppIcon\flyout_empregadores.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
-	  <MauiImage Include="Resources\WinIcon\flyout_usuario.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
-	  <MauiImage Include="Resources\AppIcon\flyout_usuario.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
-	  <MauiImage Include="Resources\WinIcon\flyout_configuracoes.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
-	  <MauiImage Include="Resources\AppIcon\flyout_configuracoes.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
-	  <MauiImage Include="Resources\WinIcon\criar_novo.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
-	  <MauiImage Include="Resources\AppIcon\criar_novo.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
-	  <MauiImage Include="Resources\WinIcon\fingerprint.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
-	  <MauiImage Include="Resources\AppIcon\fingerprint.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
-	  <MauiImage Include="Resources\WinIcon\qr_code.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
-	  <MauiImage Include="Resources\AppIcon\qr_code.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
-	  <MauiImage Include="Resources\WinIcon\close.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
-	  <MauiImage Include="Resources\AppIcon\close.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
-	  <MauiImage Include="Resources\WinIcon\search.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
-	  <MauiImage Include="Resources\AppIcon\search.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
+		<None Remove="Resources\WinIcon\flyout_home.svg" />
+		<None Remove="Resources\AppIcon\flyout_home.svg" />
+		<None Remove="Resources\WinIcon\flyout_pontos.svg" />
+		<None Remove="Resources\AppIcon\flyout_pontos.svg" />
+		<None Remove="Resources\WinIcon\flyout_perfis.svg" />
+		<None Remove="Resources\AppIcon\flyout_perfis.svg" />
+		<None Remove="Resources\WinIcon\flyout_empregadores.svg" />
+		<None Remove="Resources\AppIcon\flyout_empregadores.svg" />
+		<None Remove="Resources\WinIcon\flyout_usuario.svg" />
+		<None Remove="Resources\AppIcon\flyout_usuario.svg" />
+		<None Remove="Resources\WinIcon\flyout_configuracoes.svg" />
+		<None Remove="Resources\AppIcon\flyout_configuracoes.svg" />
+		<None Remove="Resources\WinIcon\criar_novo.svg" />
+		<None Remove="Resources\AppIcon\criar_novo.svg" />
+		<None Remove="Resources\WinIcon\fingerprint.svg" />
+		<None Remove="Resources\AppIcon\fingerprint.svg" />
+		<None Remove="Resources\WinIcon\qr_code.svg" />
+		<None Remove="Resources\AppIcon\qr_code.svg" />
+		<None Remove="Resources\WinIcon\close.svg" />
+		<None Remove="Resources\AppIcon\close.svg" />
+		<None Remove="Resources\WinIcon\search.svg" />
+		<None Remove="Resources\AppIcon\search.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="CommunityToolkit.Maui" Version="2.0.0" />
+		<MauiImage Include="Resources\WinIcon\flyout_home.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
+		<MauiImage Include="Resources\AppIcon\flyout_home.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
+		<MauiImage Include="Resources\WinIcon\flyout_pontos.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
+		<MauiImage Include="Resources\AppIcon\flyout_pontos.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
+		<MauiImage Include="Resources\WinIcon\flyout_perfis.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
+		<MauiImage Include="Resources\AppIcon\flyout_perfis.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
+		<MauiImage Include="Resources\WinIcon\flyout_empregadores.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
+		<MauiImage Include="Resources\AppIcon\flyout_empregadores.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
+		<MauiImage Include="Resources\WinIcon\flyout_usuario.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
+		<MauiImage Include="Resources\AppIcon\flyout_usuario.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
+		<MauiImage Include="Resources\WinIcon\flyout_configuracoes.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
+		<MauiImage Include="Resources\AppIcon\flyout_configuracoes.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
+		<MauiImage Include="Resources\WinIcon\criar_novo.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
+		<MauiImage Include="Resources\AppIcon\criar_novo.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
+		<MauiImage Include="Resources\WinIcon\fingerprint.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
+		<MauiImage Include="Resources\AppIcon\fingerprint.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
+		<MauiImage Include="Resources\WinIcon\qr_code.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
+		<MauiImage Include="Resources\AppIcon\qr_code.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
+		<MauiImage Include="Resources\WinIcon\close.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
+		<MauiImage Include="Resources\AppIcon\close.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
+		<MauiImage Include="Resources\WinIcon\search.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
+		<MauiImage Include="Resources\AppIcon\search.svg" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\MeuPonto.EntityFrameworkCore.Sqlite\MeuPonto.EntityFrameworkCore.Sqlite.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiXaml Update="Modules\ConfiguracoesPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Modules\Empregadores\CadastroEmpregadoresPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Modules\Empregadores\EmpregadorPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Modules\Perfis\CadastroPerfisPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Modules\Perfis\PerfilPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Modules\Pontos\PontoPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Modules\Pontos\RegistroPontosPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Compile Update="Modules\Empregadores\CadastroEmpregadoresPage.xaml.cs">
-	    <DependentUpon>CadastroEmpregadoresPage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Modules\Empregadores\EmpregadorPage.xaml.cs">
-	    <DependentUpon>EmpregadorPage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Modules\Pontos\RegistroPontosPage.xaml.cs">
-	    <DependentUpon>RegistroPontosPage.xaml</DependentUpon>
-	  </Compile>
 	</ItemGroup>
 
 </Project>

@@ -1,20 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RootNamespace>MeuPonto</RootNamespace>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Remove="Support\**" />
     <EmbeddedResource Remove="Support\**" />
     <None Remove="Support\**" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\MeuPonto.ConceptualModel\MeuPonto.ConceptualModel.csproj" />
   </ItemGroup>
-
 </Project>
