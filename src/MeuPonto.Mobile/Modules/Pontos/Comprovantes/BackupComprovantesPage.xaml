@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="MeuPonto.Modules.Pontos.RegistroPontosPage"
+    x:Class="MeuPonto.Modules.Pontos.Comprovantes.BackupComprovantesPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="Registro de Pontos"
+    Title="Backup de Comprovantes"
     Loaded="ContentPage_Loaded">
     <ContentPage.ToolbarItems>
         <ToolbarItem
@@ -13,21 +13,12 @@
             Priority="0"
             Text="Criar Novo" />
         <ToolbarItem
+            x:Name="guardarComprovanteToolbarItem"
+            Clicked="guardarComprovanteToolbarItem_Clicked"
+            IconImageSource="qr_code.png"
             Order="Secondary"
             Priority="1"
-            Text="Marcar Ponto" />
-        <ToolbarItem
-            x:Name="folhasToolbarItem"
-            Clicked="folhasToolbarItem_Clicked"
-            Order="Secondary"
-            Priority="2"
-            Text="Folhas" />
-        <ToolbarItem
-            x:Name="comprovantesToolbarItem"
-            Clicked="comprovantesToolbarItem_Clicked"
-            Order="Secondary"
-            Priority="3"
-            Text="Comprovantes" />
+            Text="Guardar Comprovante" />
     </ContentPage.ToolbarItems>
     <StackLayout Margin="10">
         <ListView ItemsSource="{Binding Pontos}" VerticalOptions="FillAndExpand">

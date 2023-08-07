@@ -1,6 +1,7 @@
 ﻿using MeuPonto.Modules.Empregadores;
 using MeuPonto.Modules.Perfis;
 using MeuPonto.Modules.Pontos;
+using MeuPonto.Modules.Pontos.Comprovantes;
 
 namespace MeuPonto.Infrastructure;
 
@@ -21,7 +22,8 @@ public static class PresentationModule
         services.AddTransient(typeof(RegistroPontosPage));
         services.AddTransient(typeof(PontoPage));
 
-        //services.AddTransient(typeof(BackupComprovantesWindow));
+        services.AddTransient(typeof(BackupComprovantesPage));
+        services.AddTransient(typeof(GuardarComprovantePage));
 
         //services.AddTransient(typeof(GestaoFolhasWindow));
 

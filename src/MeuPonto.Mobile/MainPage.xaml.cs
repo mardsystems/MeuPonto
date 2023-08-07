@@ -20,5 +20,10 @@ public partial class MainPage : ContentPage
 
         SemanticScreenReader.Announce(CounterBtn.Text);
     }
+
+    private async void guardarComprovanteButton_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("//Pontos/Comprovantes/GuardarComprovante");
+    }
 }
 
