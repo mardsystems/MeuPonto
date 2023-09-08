@@ -7,7 +7,6 @@ using MeuPonto.Modules.Trabalhadores;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Windows;
-using System.Windows.Input;
 
 namespace MeuPonto;
 

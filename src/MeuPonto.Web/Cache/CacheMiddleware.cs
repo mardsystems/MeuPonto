@@ -1,6 +1,4 @@
 ﻿using MeuPonto.Data;
-using MeuPonto.Modules.Trabalhadores;
-using Microsoft.Azure.Cosmos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using System.Security.Claims;

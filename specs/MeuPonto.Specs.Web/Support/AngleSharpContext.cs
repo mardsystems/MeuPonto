@@ -3,7 +3,6 @@ using AngleSharp.Html.Dom;
 using AngleSharp.Io;
 using AngleSharp;
 using System.Net.Http.Headers;
-using Azure;
 
 namespace MeuPonto.Support;
 

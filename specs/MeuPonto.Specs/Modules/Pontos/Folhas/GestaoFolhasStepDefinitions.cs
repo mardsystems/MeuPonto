@@ -1,4 +1,5 @@
 using MeuPonto.Data;
+using MeuPonto.Helpers;
 using MeuPonto.Modules.Perfis;
 using MeuPonto.Modules.Trabalhadores;
 using System.ComponentModel;
@@ -49,7 +50,7 @@ public class GestaoFolhasStepDefinitions
     [Given(@"que o trabalhador qualifica a folha com o perfil '([^']*)'")]
     public void GivenQueOTrabalhadorQualificaAFolhaComOPerfil(string nome)
     {
-        var perfil = _db.Perfis.FirstOrDefault(x => x.Nome == nome && x.TrabalhadorId == Trabalhador.Default.Id);
+        var perfil = _db.Perfis.FirstOrDefault(x => x.Nome == nome && x.TrabalhadorId == _scenario.GetUserId());
 
         perfil.QualificaFolha(_gestaoFolhas.Folha);
     }
@@ -73,9 +74,9 @@ public class GestaoFolhasStepDefinitions
 
         var transaction = new TransactionContext(userId);
 
-        var perfil = _db.Perfis.FirstOrDefault(x => x.TrabalhadorId == Trabalhador.Default.Id);
+        var perfil = _db.Perfis.FirstOrDefault(x => x.TrabalhadorId == _scenario.GetUserId());
 
-        var pontoEntrada = Trabalhador.Default.CriaPonto(transaction);
+        var pontoEntrada = PontoFactory.CriaPonto(transaction);
 
         perfil.QualificaPonto(pontoEntrada);
 
@@ -93,9 +94,9 @@ public class GestaoFolhasStepDefinitions
 
         var transaction = new TransactionContext(userId);
 
-        var perfil = _db.Perfis.FirstOrDefault(x => x.TrabalhadorId == Trabalhador.Default.Id);
+        var perfil = _db.Perfis.FirstOrDefault(x => x.TrabalhadorId == _scenario.GetUserId());
 
-        var pontoSaida = Trabalhador.Default.CriaPonto(transaction);
+        var pontoSaida = PontoFactory.CriaPonto(transaction);
 
         perfil.QualificaPonto(pontoSaida);
 
@@ -149,7 +150,7 @@ public class GestaoFolhasStepDefinitions
 
             var momento = (MomentoEnum)Enum.Parse(typeof(MomentoEnum), row["momento"]);
 
-            var ponto = Trabalhador.Default.CriaPonto(transaction);
+            var ponto = PontoFactory.CriaPonto(transaction);
 
             _cadastroPerfis.Perfil.QualificaPonto(ponto);
 
@@ -170,7 +171,7 @@ public class GestaoFolhasStepDefinitions
     {
         if (_gestaoFolhas.Folha.Perfil == null)
         {
-            var perfil = _db.Perfis.FirstOrDefault(x => x.TrabalhadorId == Trabalhador.Default.Id);
+            var perfil = _db.Perfis.FirstOrDefault(x => x.TrabalhadorId == _scenario.GetUserId());
 
             if (perfil == default)
             {

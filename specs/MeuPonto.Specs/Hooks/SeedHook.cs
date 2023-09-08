@@ -17,6 +17,7 @@ public class SeedHook
 
     [BeforeScenario]
     public void SetupTestUsers(
+        ScenarioContext scenario,
         CadastroPerfisContext cadastroPerfis,
         RegistroPontosContext registroPontos,
         BackupComprovantesContext backupComprovantes,
@@ -26,13 +27,13 @@ public class SeedHook
 
         var userName = "Test user";
 
+        scenario.Set(userId, "UserId");
+
         var transaction = new TransactionContext(userId);
 
         var trabalhador = TrabalhadorFactory.CriaTrabalhador(transaction);
 
-        Trabalhador.Default = trabalhador;
-
-        var perfil = trabalhador.CriaPerfil(transaction);
+        var perfil = PerfilFactory.CriaPerfil(transaction);
 
         perfil.Nome = userName;
         perfil.Ativo = true;
@@ -79,13 +80,13 @@ public class SeedHook
 
         cadastroPerfis.Inicia(perfil);
 
-        var ponto = trabalhador.CriaPonto(transaction);
+        var ponto = PontoFactory.CriaPonto(transaction);
 
         ponto.MomentoId = MomentoEnum.Entrada;
 
         registroPontos.Inicia(ponto);
 
-        var comprovante = trabalhador.CriaComprovante(transaction);
+        var comprovante = ComprovanteFactory.CriaComprovante(transaction);
 
         backupComprovantes.Inicia(comprovante);
 
@@ -95,7 +96,7 @@ public class SeedHook
 
         var competencia = new DateTime(hoje.Year, hoje.Month, 1);
 
-        var folha = trabalhador.CriaFolha(transaction);
+        var folha = FolhaFactory.CriaFolha(transaction);
 
         perfil.QualificaFolha(folha);
 

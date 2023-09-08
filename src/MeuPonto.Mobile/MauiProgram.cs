@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Maui;
-using MeuPonto.Data;
 using MeuPonto.Infrastructure;
 using Microsoft.Extensions.Logging;
 

@@ -1,7 +1,5 @@
-﻿using MeuPonto.Modules.Trabalhadores;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Security.Claims;
 
 namespace MeuPonto.Modules.Empregadores;
 
@@ -27,7 +25,7 @@ public class CriarModel : PageModel
     {
         var transaction = User.CreateTransaction();
 
-        Trabalhador.Default.RecontextualizaEmpregador(Empregador, transaction);
+        Empregador.RecontextualizaEmpregador(transaction);
 
         if (!ModelState.IsValid)
         {

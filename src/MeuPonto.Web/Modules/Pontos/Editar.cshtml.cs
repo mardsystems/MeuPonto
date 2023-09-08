@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 
 namespace MeuPonto.Modules.Pontos;
 
@@ -34,7 +33,7 @@ public class EditarModel : PageModel
         }
         Ponto = ponto;
 
-        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
+        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
         return Page();
     }
 
@@ -49,11 +48,11 @@ public class EditarModel : PageModel
             return Page();
         }
 
-        var perfil = await _db.Perfis.FindByIdAsync(Ponto.PerfilId, Trabalhador.Default);
+        var perfil = await _db.Perfis.FindByIdAsync(Ponto.PerfilId, User.GetUserId());
 
         perfil.QualificaPonto(Ponto);
 
-        Trabalhador.Default.RecontextualizaPonto(Ponto, transaction, id);
+        Ponto.RecontextualizaPonto(transaction, id);
 
         _db.Attach(Ponto).State = EntityState.Modified;
 

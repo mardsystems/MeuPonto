@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Azure.Cosmos;
 using System.ComponentModel.DataAnnotations;
-using System.Security.Claims;
 
 namespace MeuPonto.Modules.Pontos.Comprovantes;
 
@@ -22,11 +21,11 @@ public class GuardarComprovanteModel : PageModel
     {
         var transaction = User.CreateTransaction();
 
-        Comprovante = Trabalhador.Default.CriaComprovante(transaction);
+        Comprovante = ComprovanteFactory.CriaComprovante(transaction);
 
         Comprovante.TipoImagemId = TipoImagemEnum.Original;
 
-        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
+        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
         return Page();
     }
 
@@ -45,7 +44,7 @@ public class GuardarComprovanteModel : PageModel
     {
         var transaction = User.CreateTransaction();
 
-        Trabalhador.Default.RecontextualizaComprovante(Comprovante, transaction);
+        Comprovante.RecontextualizaComprovante(transaction);
 
         if (ModelState.ContainsKey($"{nameof(Comprovante)}.{nameof(Comprovante.PontoId)}")) ModelState.Remove($"{nameof(Comprovante)}.{nameof(Comprovante.PontoId)}");
 
@@ -53,13 +52,13 @@ public class GuardarComprovanteModel : PageModel
 
         if (!ModelState.IsValid)
         {
-            ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
+            ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
             return Page();
         }
 
         if (command == "Escanear")
         {
-            ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
+            ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
 
             ModelState.Remove($"{nameof(Ponto)}.{nameof(Ponto.DataHora)}");
 
@@ -73,9 +72,9 @@ public class GuardarComprovanteModel : PageModel
         }
         else
         {
-            Trabalhador.Default.RecontextualizaPonto(Ponto, transaction);
+            Ponto.RecontextualizaPonto(transaction);
 
-            var perfil = await _db.Perfis.FindByIdAsync(Ponto.PerfilId, Trabalhador.Default);
+            var perfil = await _db.Perfis.FindByIdAsync(Ponto.PerfilId, User.GetUserId());
 
             perfil.QualificaPonto(Ponto);
 
@@ -131,7 +130,7 @@ public class GuardarComprovanteModel : PageModel
                     {
                         ModelState.AddModelError("Imagem", "Arquivo muito grande");
 
-                        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
+                        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
                         return Page();
                     }
                 }

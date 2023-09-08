@@ -2,7 +2,6 @@
 using MeuPonto.Helpers;
 using MeuPonto.Modules.Pontos.Folhas;
 using MeuPonto.Support;
-using System.Security.Claims;
 
 namespace MeuPonto.Modules;
 

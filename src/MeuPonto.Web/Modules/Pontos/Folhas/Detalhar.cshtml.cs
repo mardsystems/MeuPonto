@@ -1,5 +1,4 @@
-﻿using MeuPonto.Modules.Trabalhadores;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
@@ -46,7 +45,7 @@ public class DetalharFolhaModel : PageModel
             var pontos = await _db.Pontos
                 .Where(x => true
                     && x.DataHora >= competenciaAtual && x.DataHora < competenciaPosterior
-                    && x.TrabalhadorId == Trabalhador.Default.Id)
+                    && x.TrabalhadorId == User.GetUserId())
                 .ToListAsync();
 
             foreach (var apuracaoDiaria in Folha.ApuracaoMensal.Dias)

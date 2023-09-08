@@ -33,13 +33,13 @@ public class BasicIntegrationTests
     [InlineData("/Pontos/Comprovantes/Guardar")]
     public async Task Get_EndpointsReturnSuccessAndCorrectContentType(string url)
     {
-        var userId = Guid.Parse("d2fc8313-9bdc-455c-bf29-ccf709a2a692");
+        //var userId = Guid.Parse("d2fc8313-9bdc-455c-bf29-ccf709a2a692");
 
-        var transaction = new TransactionContext(userId);
+        //var transaction = new TransactionContext(userId);
 
-        var trabalhador = TrabalhadorFactory.CriaTrabalhador(transaction);
+        //var trabalhador = TrabalhadorFactory.CriaTrabalhador(transaction);
 
-        Trabalhador.Default = trabalhador;
+        //Trabalhador.Default = trabalhador;
 
         // Arrange
         var client = _factory.CreateClient();

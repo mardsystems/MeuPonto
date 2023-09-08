@@ -25,7 +25,7 @@
                     }
                     else if (User.Identity?.IsAuthenticated == true)
                     {
-                        switch (Trabalhadores.Trabalhador.Default.CustomerSubscription?.SubscriptionPlanId)
+                        switch (User.GetSubscriptionPlanId())
                         {
                             case Billing.SubscriptionPlanEnum.Bronze:
                                 <span class="badge rounded-pill" style="color: #cd7f32;">

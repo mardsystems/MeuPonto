@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using MeuPonto.Modules.Pontos.Comprovantes;
-using MeuPonto.Modules.Trabalhadores;
 
 namespace MeuPonto.Modules.Pontos;
 
@@ -45,7 +44,7 @@ public class DetalharModel : PageModel
                 .Include(x => x.Ponto)
                 .Where(x => true
                     && x.PontoId == id
-                    && x.TrabalhadorId == Trabalhador.Default.Id)
+                    && x.TrabalhadorId == User.GetUserId())
                 .ToListAsync();
         }
 
