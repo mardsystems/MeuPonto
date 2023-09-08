@@ -107,4 +107,22 @@
 	  <ProjectReference Include="..\MeuPonto.EntityFrameworkCore.Sqlite\MeuPonto.EntityFrameworkCore.Sqlite.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Compile Update="Modules\Pontos\Comprovantes\GuardarComprovantePage.xaml.cs">
+	    <DependentUpon>GuardarComprovantePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Modules\Pontos\Comprovantes\BackupComprovantesPage.xaml.cs">
+	    <DependentUpon>BackupComprovantesPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Modules\Pontos\Comprovantes\GuardarComprovantePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Modules\Pontos\Comprovantes\BackupComprovantesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>

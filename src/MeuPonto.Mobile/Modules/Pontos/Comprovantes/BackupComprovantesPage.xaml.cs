@@ -3,23 +3,23 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace MeuPonto.Modules.Pontos;
+namespace MeuPonto.Modules.Pontos.Comprovantes;
 
-public partial class RegistroPontosPage : ContentPage
+public partial class BackupComprovantesPage : ContentPage
 {
     private readonly MeuPontoDbContext _db;
 
     public ICommand CriarNovoCommand { get; set; }
 
-    public ObservableCollection<Ponto> Pontos { get; set; }
+    public ObservableCollection<Comprovante> Comprovantes { get; set; }
 
-    public RegistroPontosPage(MeuPontoDbContext db)
+    public BackupComprovantesPage(MeuPontoDbContext db)
     {
         InitializeComponent();
 
         _db = db;
 
-        Pontos = _db.Pontos.Local.ToObservableCollection();
+        Comprovantes = _db.Comprovantes.Local.ToObservableCollection();
 
         CriarNovoCommand = new Command(CriarNovo);
 
@@ -28,34 +28,29 @@ public partial class RegistroPontosPage : ContentPage
 
     private async void ContentPage_Loaded(object sender, EventArgs e)
     {
-        await _db.Pontos
+        await _db.Comprovantes
             .LoadAsync();
 
-        //Pontos = _db.Pontos.Local.ToObservableCollection();
+        //Comprovantes = _db.Comprovantes.Local.ToObservableCollection();
     }
 
     private async void CriarNovo()
     {
-        await Shell.Current.GoToAsync($"Ponto");
+        await Shell.Current.GoToAsync($"Comprovante");
     }
 
     private async void Button_Clicked(object sender, EventArgs e)
     {
-        await _db.Pontos
+        await _db.Comprovantes
             .LoadAsync();
 
-        var total = Pontos.Count;
+        var total = Comprovantes.Count;
 
         await DisplayAlert("Pronto", $"Carregado {total} registro(s)!", "OK");
     }
 
-    private async void folhasToolbarItem_Clicked(object sender, EventArgs e)
+    private async void guardarComprovanteToolbarItem_Clicked(object sender, EventArgs e)
     {
-        
-    }
-
-    private async void comprovantesToolbarItem_Clicked(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("Comprovantes");
+        await Shell.Current.GoToAsync("GuardarComprovante");
     }
 }
