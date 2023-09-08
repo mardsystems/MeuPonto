@@ -145,6 +145,8 @@ public class Program
 
         builder.Services.AddTransient(p => new DateTimeSnapshot(DateTime.Now));
 
+        builder.Services.AddTransient<IClaimsTransformation, MyClaimsTransformation>();
+
         var app = builder.Build();
 
         app.UseMiddleware<CacheMiddleware>();
