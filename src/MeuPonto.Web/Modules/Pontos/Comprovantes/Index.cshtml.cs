@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using MeuPonto.Modules.Shared;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MeuPonto.Helpers;
-using MeuPonto.Modules.Trabalhadores;
 
 namespace MeuPonto.Modules.Pontos.Comprovantes;
 
@@ -43,9 +42,9 @@ public class ComprovantesModel : PageModel
             Ponto = new FiltroPontoRef();
         }
 
-        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome").AddEmptyValue();
+        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome").AddEmptyValue();
 
-        var totalRegistros = await _db.Comprovantes.CountAsync(x => x.TrabalhadorId == Trabalhador.Default.Id);
+        var totalRegistros = await _db.Comprovantes.CountAsync(x => x.TrabalhadorId == User.GetUserId());
 
         Pagination = new PaginationModel(totalRegistros, PaginaAtual ?? 1);
 
@@ -59,7 +58,7 @@ public class ComprovantesModel : PageModel
                     && (Ponto.Pausa == null || x.Ponto.PausaId == Ponto.Pausa)
                     && (TipoImagem == null || x.TipoImagemId == TipoImagem)
                     && (Numero == null || x.Numero == Numero)
-                    && x.TrabalhadorId == Trabalhador.Default.Id)
+                    && x.TrabalhadorId == User.GetUserId())
                 .OrderByDescending(x => x.Ponto.DataHora)
                 .Skip((Pagination.PaginaAtual - 1) * Pagination.TamanhoPagina.Value)
                 .Take(Pagination.TamanhoPagina.Value)

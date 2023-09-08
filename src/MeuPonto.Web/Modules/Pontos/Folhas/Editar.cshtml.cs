@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using MeuPonto.Data;
-using System.Security.Claims;
 using MeuPonto.Modules.Trabalhadores;
 
 namespace MeuPonto.Modules.Pontos.Folhas;
@@ -50,7 +49,7 @@ public class EditarFolhaModel : PageModel
         
         CompetenciaMes = folha.Competencia.Value.Month;
 
-        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
+        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
         return Page();
     }
 
@@ -60,18 +59,18 @@ public class EditarFolhaModel : PageModel
     {
         var transaction = User.CreateTransaction();
 
-        Trabalhador.Default.RecontextualizaFolha(Folha, transaction, id);
+        Folha.RecontextualizaFolha(transaction, id);
 
         if (ModelState.ContainsKey($"{nameof(Folha)}.{nameof(Folha.Competencia)}")) ModelState.Remove($"{nameof(Folha)}.{nameof(Folha.Competencia)}");
 
         if (!ModelState.IsValid)
         {
-            ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
+            ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
 
             return Page();
         }
 
-        var perfil = await _db.Perfis.FindByIdAsync(Folha.PerfilId, Trabalhador.Default);
+        var perfil = await _db.Perfis.FindByIdAsync(Folha.PerfilId, User.GetUserId());
 
         perfil.QualificaFolha(Folha);
 
@@ -86,7 +85,7 @@ public class EditarFolhaModel : PageModel
 
             Folha.ConfirmarCompetencia(perfil, CompetenciaAno.Value, CompetenciaMes.Value);
 
-            ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
+            ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
 
             return Page();
         }
@@ -98,7 +97,7 @@ public class EditarFolhaModel : PageModel
 
             Folha.Competencia = competenciaAtual;
 
-            Folha.PartitionKey = $"{Trabalhador.Default.Id}|{Folha.Competencia:yyyy}";
+            Folha.PartitionKey = $"{User.GetUserId()}|{Folha.Competencia:yyyy}";
 
             try
             {

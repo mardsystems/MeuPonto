@@ -2,7 +2,6 @@
 using MeuPonto.Modules.Pontos;
 using MeuPonto.Modules.Pontos.Folhas;
 using MeuPonto.Modules.Shared;
-using MeuPonto.Modules.Trabalhadores;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -50,12 +49,7 @@ public class IndexModel : PageModel
             return Page();
         }
 
-        if (Trabalhador.Default == null)
-        {
-            return RedirectToAction("SignOut", "Account", new { area = "MicrosoftIdentity" });
-        }
-
-        var perfisSelectList = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
+        var perfisSelectList = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
 
         ViewData["PerfilId"] = perfisSelectList;
 
@@ -78,7 +72,7 @@ public class IndexModel : PageModel
             Folha = await _db.Folhas.FirstOrDefaultAsync(x => true
                 && x.PerfilId == PerfilId
                 && x.Competencia == competencia
-                && x.TrabalhadorId == Trabalhador.Default.Id);
+                && x.TrabalhadorId == User.GetUserId());
 
             if (Folha != null)
             {
@@ -92,7 +86,7 @@ public class IndexModel : PageModel
                     .Where(x => true
                         && x.DataHora >= competenciaFolha
                         && x.DataHora < competenciaFolhaPosterior
-                        && x.TrabalhadorId == Trabalhador.Default.Id)
+                        && x.TrabalhadorId == User.GetUserId())
                     .OrderByDescending(x => x.DataHora)
                     .ToListAsync();
 

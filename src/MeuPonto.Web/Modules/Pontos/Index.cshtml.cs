@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MeuPonto.Helpers;
 using MeuPonto.Modules.Shared;
-using MeuPonto.Modules.Trabalhadores;
 
 namespace MeuPonto.Modules.Pontos;
 
@@ -47,9 +46,9 @@ public class IndexModel : PageModel
 
     public async Task OnGetAsync()
     {
-        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome").AddEmptyValue();
+        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome").AddEmptyValue();
 
-        var totalRegistros = await _db.Pontos.CountAsync(x => x.TrabalhadorId == Trabalhador.Default.Id);
+        var totalRegistros = await _db.Pontos.CountAsync(x => x.TrabalhadorId == User.GetUserId());
 
         Pagination = new PaginationModel(totalRegistros, PaginaAtual ?? 1);
 
@@ -63,7 +62,7 @@ public class IndexModel : PageModel
                     && (Pausa == null || x.PausaId == Pausa)
                     && (Estimado == null || x.Estimado == Estimado)
                     && (Observacao == null || x.Observacao.Contains(Observacao))
-                    && x.TrabalhadorId == Trabalhador.Default.Id)
+                    && x.TrabalhadorId == User.GetUserId())
                 .OrderByDescending(x => x.DataHora)
                 .Skip((Pagination.PaginaAtual - 1) * Pagination.TamanhoPagina.Value)
                 .Take(Pagination.TamanhoPagina.Value)

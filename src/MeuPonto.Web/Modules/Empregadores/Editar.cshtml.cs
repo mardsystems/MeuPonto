@@ -1,6 +1,4 @@
-﻿using MeuPonto.Modules.Empregadores;
-using MeuPonto.Modules.Trabalhadores;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
@@ -45,7 +43,7 @@ public class EditarModel : PageModel
             return Page();
         }
 
-        Trabalhador.Default.RecontextualizaEmpregador(Empregador, transaction, id);
+        Empregador.RecontextualizaEmpregador(transaction, id);
 
         _db.Attach(Empregador).State = EntityState.Modified;
 

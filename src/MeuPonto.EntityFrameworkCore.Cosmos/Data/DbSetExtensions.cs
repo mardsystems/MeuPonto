@@ -1,7 +1,6 @@
 ﻿using MeuPonto.Modules.Empregadores;
 using MeuPonto.Modules.Perfis;
 using MeuPonto.Modules.Pontos;
-using MeuPonto.Modules.Trabalhadores;
 using Microsoft.EntityFrameworkCore;
 
 namespace MeuPonto.Data;
@@ -13,23 +12,23 @@ public static class DbSetExtensions
         return dbSet.FindAsync(id, partitionKey);
     }
 
-    public static ValueTask<Empregador> FindByIdAsync(this DbSet<Empregador> dbSet, Guid? id, Trabalhador trabalhador)
+    public static ValueTask<Empregador> FindByIdAsync(this DbSet<Empregador> dbSet, Guid? id, Guid userId)
     {
-        var partitionKey = $"{trabalhador.Id}";
+        var partitionKey = $"{userId}";
 
         return dbSet.FindAsync(id, partitionKey);
     }
 
-    public static ValueTask<Perfil> FindByIdAsync(this DbSet<Perfil> dbSet, Guid? id, Trabalhador trabalhador)
+    public static ValueTask<Perfil> FindByIdAsync(this DbSet<Perfil> dbSet, Guid? id, Guid userId)
     {
-        var partitionKey = $"{trabalhador.Id}";
+        var partitionKey = $"{userId}";
 
         return dbSet.FindAsync(id, partitionKey);
     }
 
-    public static ValueTask<Ponto> FindByIdAsync(this DbSet<Ponto> dbSet, Guid? id, Trabalhador trabalhador, int ano)
+    public static ValueTask<Ponto> FindByIdAsync(this DbSet<Ponto> dbSet, Guid? id, Guid userId, int ano)
     {
-        var partitionKey = $"{trabalhador.Id}|{ano}";
+        var partitionKey = $"{userId}|{ano}";
 
         return dbSet.FindAsync(id, partitionKey);
     }

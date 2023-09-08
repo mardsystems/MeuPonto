@@ -1,5 +1,4 @@
-﻿using MeuPonto.Modules.Trabalhadores;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
@@ -43,7 +42,7 @@ public class EditarComprovanteModel : PageModel
     {
         var transaction = User.CreateTransaction();
 
-        Trabalhador.Default.RecontextualizaComprovante(Comprovante, transaction, id);
+        Comprovante.RecontextualizaComprovante(transaction, id);
 
         if (ModelState.ContainsKey($"{nameof(Comprovante)}.{nameof(Comprovante.Imagem)}")) ModelState.Remove($"{nameof(Comprovante)}.{nameof(Comprovante.Imagem)}");
 

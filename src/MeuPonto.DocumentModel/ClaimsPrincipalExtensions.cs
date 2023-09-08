@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using MeuPonto.Billing;
+using System.Security.Claims;
 
 namespace MeuPonto;
 
@@ -20,5 +21,21 @@ public static class ClaimsPrincipalExtensions
         var userId = Guid.Parse(nameIdentifier.Value);
 
         return userId;
+    }
+
+    public static SubscriptionPlanEnum GetSubscriptionPlanId(this ClaimsPrincipal user)
+    {
+        var subscriptionPlanClaim = user.FindFirst("SubscriptionPlanId");
+
+        if (subscriptionPlanClaim == null)
+        {
+            return SubscriptionPlanEnum.Bronze;
+        }
+        else
+        {
+            var subscriptionPlanId = (SubscriptionPlanEnum)Enum.Parse(typeof(SubscriptionPlanEnum), subscriptionPlanClaim.Value);
+
+            return subscriptionPlanId;
+        }
     }
 }

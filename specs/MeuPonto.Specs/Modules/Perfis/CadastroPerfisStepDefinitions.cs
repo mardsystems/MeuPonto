@@ -1,5 +1,5 @@
 using MeuPonto.Data;
-using MeuPonto.Modules.Trabalhadores;
+using MeuPonto.Helpers;
 using TechTalk.SpecFlow.Assist;
 
 namespace MeuPonto.Modules.Perfis;
@@ -33,7 +33,7 @@ public class CadastroPerfisStepDefinitions
     [Given(@"que o trabalhador não tem nenhum perfil cadastrado")]
     public void GivenQueOTrabalhadorNaoTemNenhumPerfilCadastrado()
     {
-        _db.Perfis.Count(x => x.TrabalhadorId == Trabalhador.Default.Id).Should().Be(0);
+        _db.Perfis.Count(x => x.TrabalhadorId == _scenario.GetUserId()).Should().Be(0);
 
         //_home.CriacaoPerfilAnchor.Should().NotBeNull("quando não existe nenhum perfil cadastrado a tela inicial deve ter um link de criação de perfil");
     }
@@ -178,7 +178,7 @@ public class CadastroPerfisStepDefinitions
 
         _cadastroPerfisInterface.CriarPerfil(_cadastroPerfis.Perfil);
 
-        var perfilCadastrado = _db.Perfis.FirstOrDefault(x => x.Nome == _cadastroPerfis.Perfil.Nome && x.TrabalhadorId == Trabalhador.Default.Id);
+        var perfilCadastrado = _db.Perfis.FirstOrDefault(x => x.Nome == _cadastroPerfis.Perfil.Nome && x.TrabalhadorId == _scenario.GetUserId());
 
         _cadastroPerfis.Define(perfilCadastrado);
     }
@@ -216,7 +216,7 @@ public class CadastroPerfisStepDefinitions
     {
         _cadastroPerfisInterface.EditarPerfil(_cadastroPerfis.NomePerfil, _cadastroPerfis.Perfil);
 
-        var perfilEdidado = _db.Perfis.FirstOrDefault(x => x.Nome == _cadastroPerfis.Perfil.Nome && x.TrabalhadorId == Trabalhador.Default.Id);
+        var perfilEdidado = _db.Perfis.FirstOrDefault(x => x.Nome == _cadastroPerfis.Perfil.Nome && x.TrabalhadorId == _scenario.GetUserId());
 
         _cadastroPerfis.Define(perfilEdidado);
     }
@@ -240,7 +240,7 @@ public class CadastroPerfisStepDefinitions
     [Then(@"o perfil deverá ser excluído")]
     public void ThenOPerfilDeveraSerExcluido()
     {
-        var perfil = _db.Perfis.FirstOrDefault(x => x.Nome == _cadastroPerfis.Perfil.Nome && x.TrabalhadorId == Trabalhador.Default.Id);
+        var perfil = _db.Perfis.FirstOrDefault(x => x.Nome == _cadastroPerfis.Perfil.Nome && x.TrabalhadorId == _scenario.GetUserId());
 
         perfil.Should().BeNull();
     }

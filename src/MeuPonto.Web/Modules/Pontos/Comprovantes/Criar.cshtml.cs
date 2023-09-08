@@ -1,10 +1,8 @@
 ﻿using MeuPonto.Data;
-using MeuPonto.Modules.Trabalhadores;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
-using System.Security.Claims;
 
 namespace MeuPonto.Modules.Pontos.Comprovantes;
 
@@ -24,7 +22,7 @@ public class CriarComprovanteModel : PageModel
     {
         var transaction = User.CreateTransaction();
 
-        Comprovante = Trabalhador.Default.CriaComprovante(transaction);
+        Comprovante = ComprovanteFactory.CriaComprovante(transaction);
 
         return Page();
     }
@@ -41,7 +39,7 @@ public class CriarComprovanteModel : PageModel
     {
         var transaction = User.CreateTransaction();
 
-        Trabalhador.Default.RecontextualizaComprovante(Comprovante, transaction);
+        Comprovante.RecontextualizaComprovante(transaction);
 
         if (ModelState.ContainsKey($"{nameof(Comprovante)}.{nameof(Comprovante.Imagem)}")) ModelState.Remove($"{nameof(Comprovante)}.{nameof(Comprovante.Imagem)}");
 

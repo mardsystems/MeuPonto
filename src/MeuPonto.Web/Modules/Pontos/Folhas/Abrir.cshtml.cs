@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Security.Claims;
 
 namespace MeuPonto.Modules.Pontos.Folhas;
 
@@ -22,9 +21,9 @@ public class AbrirFolhaModel : PageModel
     {
         var transaction = User.CreateTransaction();
 
-        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
+        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
 
-        Folha = Trabalhador.Default.CriaFolha(transaction);
+        Folha = FolhaFactory.CriaFolha(transaction);
 
         Folha.StatusId = StatusEnum.Aberta;
 
@@ -49,7 +48,7 @@ public class AbrirFolhaModel : PageModel
     {
         var transaction = User.CreateTransaction();
 
-        Trabalhador.Default.RecontextualizaFolha(Folha, transaction);
+        Folha.RecontextualizaFolha(transaction);
 
         if (ModelState.ContainsKey($"{nameof(Folha)}.{nameof(Folha.Competencia)}")) ModelState.Remove($"{nameof(Folha)}.{nameof(Folha.Competencia)}");
 
@@ -58,11 +57,11 @@ public class AbrirFolhaModel : PageModel
             return Page();
         }
 
-        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
+        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
 
         Folha.StatusId = StatusEnum.Aberta;
 
-        var perfil = await _db.Perfis.FindByIdAsync(Folha.PerfilId, Trabalhador.Default);
+        var perfil = await _db.Perfis.FindByIdAsync(Folha.PerfilId, User.GetUserId());
 
         perfil.QualificaFolha(Folha);
 
@@ -77,7 +76,7 @@ public class AbrirFolhaModel : PageModel
 
             Folha.ConfirmarCompetencia(perfil, CompetenciaAno.Value, CompetenciaMes.Value);
 
-            ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
+            ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
 
             return Page();
         }
@@ -96,7 +95,7 @@ public class AbrirFolhaModel : PageModel
             }
             else
             {
-                ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome");
+                ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
 
                 return Page();
             }

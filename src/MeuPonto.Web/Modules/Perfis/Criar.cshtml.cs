@@ -1,10 +1,8 @@
 ﻿using MeuPonto.Data;
 using MeuPonto.Helpers;
-using MeuPonto.Modules.Trabalhadores;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Security.Claims;
 
 namespace MeuPonto.Modules.Perfis;
 
@@ -21,9 +19,9 @@ public class CriarModel : PageModel
     {
         var transaction = User.CreateTransaction();
 
-        Perfil = Trabalhador.Default.CriaPerfil(transaction);
+        Perfil = PerfilFactory.CriaPerfil(transaction);
 
-        ViewData["EmpregadorId"] = new SelectList(_db.Empregadores.Where(x => x.TrabalhadorId == Trabalhador.Default.Id), "Id", "Nome").AddEmptyValue();
+        ViewData["EmpregadorId"] = new SelectList(_db.Empregadores.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome").AddEmptyValue();
 
         var daysOfWeek = Enum.GetValues<DayOfWeek>();
 
@@ -49,7 +47,7 @@ public class CriarModel : PageModel
     {
         var transaction = User.CreateTransaction();
 
-        Trabalhador.Default.RecontextualizaPerfil(Perfil, transaction);
+        Perfil.RecontextualizaPerfil(transaction);
 
         if (!ModelState.IsValid)
         {
@@ -58,7 +56,7 @@ public class CriarModel : PageModel
 
         if (Perfil.EmpregadorId.HasValue)
         {
-            var empregador = await _db.Empregadores.FindByIdAsync(Perfil.EmpregadorId, Trabalhador.Default);
+            var empregador = await _db.Empregadores.FindByIdAsync(Perfil.EmpregadorId, User.GetUserId());
 
             Perfil.VinculaEmpregador(empregador);
         }

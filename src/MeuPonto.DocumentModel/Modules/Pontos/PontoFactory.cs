@@ -1,27 +1,25 @@
-﻿using MeuPonto.Modules.Trabalhadores;
-
-namespace MeuPonto.Modules.Pontos;
+﻿namespace MeuPonto.Modules.Pontos;
 
 public static class PontoFactory
 {
-    public static Ponto CriaPonto(this Trabalhador trabalhador, TransactionContext transaction, Guid? id = null)
+    public static Ponto CriaPonto(TransactionContext transaction, Guid? id = null)
     {
         var ponto = new Ponto
         {
             Id = id ?? Guid.NewGuid(),
-            TrabalhadorId = trabalhador.Id,
-            PartitionKey = $"{trabalhador.Id}",
+            TrabalhadorId = transaction.UserId,
+            PartitionKey = $"{transaction.UserId}",
             CreationDate = transaction.DateTime
         };
 
         return ponto;
     }
 
-    public static void RecontextualizaPonto(this Trabalhador trabalhador, Ponto ponto, TransactionContext transaction, Guid? id = null)
+    public static void RecontextualizaPonto(this Ponto ponto, TransactionContext transaction, Guid? id = null)
     {
         ponto.Id ??= id ?? Guid.NewGuid();
-        ponto.TrabalhadorId = trabalhador.Id;
-        ponto.PartitionKey = $"{trabalhador.Id}|{ponto.DataHora:yyyy}";
+        ponto.TrabalhadorId = transaction.UserId;
+        ponto.PartitionKey = $"{transaction.UserId}|{ponto.DataHora:yyyy}";
         ponto.CreationDate ??= transaction.DateTime;
     }
 }

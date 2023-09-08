@@ -1,6 +1,7 @@
 using MeuPonto.Cache;
 using MeuPonto.Data;
 using MeuPonto.Modules.Trabalhadores;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -97,12 +98,12 @@ public class Program
                     trabalhador = trabalhadorExistente;
                 }
 
-                Trabalhador.Default = trabalhador;
+                //Trabalhador.Default = trabalhador;
             };
 
             options.Events.OnRedirectToIdentityProviderForSignOut = async context =>
             {
-                Trabalhador.Default = null;
+                //Trabalhador.Default = null;
             };
         });
 
@@ -121,9 +122,7 @@ public class Program
             {
                 policy.RequireAuthenticatedUser();
 
-                policy.RequireAssertion(handler =>
-                    Trabalhador.Default?.CustomerSubscription?.SubscriptionPlanId == Billing.SubscriptionPlanEnum.Silver ||
-                    Trabalhador.Default?.CustomerSubscription?.SubscriptionPlanId == Billing.SubscriptionPlanEnum.Gold);
+                policy.RequireClaim("SubscriptionPlanId", Billing.SubscriptionPlanEnum.Silver.ToString(), Billing.SubscriptionPlanEnum.Gold.ToString());
             });
         });
         builder.Services

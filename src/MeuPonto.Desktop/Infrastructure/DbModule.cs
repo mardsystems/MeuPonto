@@ -1,7 +1,5 @@
 ﻿using MeuPonto.Data;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System.IO;
 using System.Threading.Tasks;
 
 namespace MeuPonto.Infrastructure;

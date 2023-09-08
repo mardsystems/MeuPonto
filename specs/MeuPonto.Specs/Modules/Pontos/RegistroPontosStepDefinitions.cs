@@ -1,6 +1,6 @@
 using MeuPonto.Data;
+using MeuPonto.Helpers;
 using MeuPonto.Modules.Perfis;
-using MeuPonto.Modules.Trabalhadores;
 using System.ComponentModel;
 
 namespace MeuPonto.Modules.Pontos;
@@ -73,7 +73,7 @@ public class RegistroPontosStepDefinitions
     [Given(@"que o trabalhador qualifica o ponto com o perfil '([^']*)'")]
     public void GivenQueOTrabalhadorQualificaOPontoComOPerfil(string nome)
     {
-        var perfil = _db.Perfis.FirstOrDefault(x => x.Nome == nome && x.TrabalhadorId == Trabalhador.Default.Id);
+        var perfil = _db.Perfis.FirstOrDefault(x => x.Nome == nome && x.TrabalhadorId == _scenario.GetUserId());
 
         perfil.QualificaPonto(_registroPontos.Ponto);
     }
@@ -83,7 +83,7 @@ public class RegistroPontosStepDefinitions
     {
         if (_registroPontos.Ponto.EstaSemQualificacao())
         {
-            var perfil = _db.Perfis.FirstOrDefault(x => x.TrabalhadorId == Trabalhador.Default.Id);
+            var perfil = _db.Perfis.FirstOrDefault(x => x.TrabalhadorId == _scenario.GetUserId());
 
             if (perfil == default)
             {

@@ -4,24 +4,24 @@ namespace MeuPonto.Modules.Pontos.Folhas;
 
 public static class FolhaFactory
 {
-    public static Folha CriaFolha(this Trabalhador trabalhador, TransactionContext transaction, Guid? id = null)
+    public static Folha CriaFolha(this TransactionContext transaction, Guid? id = null)
     {
         var folha = new Folha
         {
             Id = id ?? Guid.NewGuid(),
-            TrabalhadorId = trabalhador.Id,
-            PartitionKey = $"{trabalhador.Id}",
+            TrabalhadorId = transaction.UserId,
+            PartitionKey = $"{transaction.UserId}",
             CreationDate = transaction.DateTime
         };
 
         return folha;
     }
 
-    public static void RecontextualizaFolha(this Trabalhador trabalhador, Folha folha, TransactionContext transaction, Guid? id = null)
+    public static void RecontextualizaFolha(this Folha folha, TransactionContext transaction, Guid? id = null)
     {
         folha.Id ??= id ?? Guid.NewGuid();
-        folha.TrabalhadorId = trabalhador.Id;
-        //folha.PartitionKey = $"{trabalhador.Id}|{folha.Competencia:yyyy}";
+        folha.TrabalhadorId = transaction.UserId;
+        //folha.PartitionKey = $"{transaction.UserId}|{folha.Competencia:yyyy}";
         folha.CreationDate ??= transaction.DateTime;
     }
 }

@@ -1,6 +1,5 @@
 ﻿using AngleSharp.Html.Dom;
 using MeuPonto.Helpers;
-using MeuPonto.Modules.Perfis;
 using MeuPonto.Support;
 
 namespace MeuPonto.Modules.Pontos.Comprovantes;

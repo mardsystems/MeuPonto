@@ -6,8 +6,6 @@ namespace MeuPonto.Modules.Trabalhadores;
 
 public class Trabalhador : DocumentEntity, Concepts.Trabalhador
 {
-    public static Trabalhador Default { get; set; }
-
     [DisplayName("Assinatura do Cliente")]
     public CustomerSubscription? CustomerSubscription { get; set; }
 

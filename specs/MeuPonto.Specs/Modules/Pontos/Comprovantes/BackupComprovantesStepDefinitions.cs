@@ -62,14 +62,14 @@ public class BackupComprovantesStepDefinitions
 
         var transaction = new TransactionContext(userId);
 
-        var ponto = Trabalhador.Default.CriaPonto(transaction);
+        var ponto = PontoFactory.CriaPonto(transaction);
 
         _cadastroPerfis.Perfil.QualificaPonto(ponto);
         
         ponto.DataHora = data;
         ponto.MomentoId = MomentoEnum.Entrada;
 
-        var comprovante = Trabalhador.Default.CriaComprovante(transaction);
+        var comprovante = ComprovanteFactory.CriaComprovante(transaction);
 
         comprovante.ComprovaPonto(ponto);
 
