@@ -96,30 +96,7 @@ public class IndexModel : PageModel
 
                 var restoDiasSemana = (competenciaFolhaPosterior - competenciaFolha).TotalDays % 7;
 
-                int totalSemanas;
-
-                if (ApuracaoMensal.PrimeiroDiaSemanaMes == DayOfWeek.Sunday)
-                {
-                    if (restoDiasSemana == 0)
-                    {
-                        totalSemanas = totalInteiroSemanas;
-                    }
-                    else
-                    {
-                        totalSemanas = totalInteiroSemanas + 1;
-                    }
-                }
-                else
-                {
-                    if (restoDiasSemana == 0)
-                    {
-                        totalSemanas = totalInteiroSemanas + 1;
-                    }
-                    else
-                    {
-                        totalSemanas = totalInteiroSemanas + 2;
-                    }
-                }
+                int totalSemanas = totalInteiroSemanas + 2;
 
                 ApuracaoMensal.TempoTotalPrevisto = TimeSpan.Zero;
 
