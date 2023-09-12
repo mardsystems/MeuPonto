@@ -16,8 +16,8 @@
 {
     <h1>@ViewData["Title"]</h1>
 
-    <div class="btn-group me-2" role="group" aria-label="First group">
-        <a class="btn btn-primary Criacao Perfil" asp-page="./Criar">
+    <div class="btn-group mb-3" role="group" aria-label="First group">
+        <a class="btn btn-primary Criacao Perfil" asp-page="./Criar" target="_modal">
             <i class="bi bi-plus-circle"></i>
             Criar Novo
         </a>
@@ -113,10 +113,10 @@
                                 <a class="btn btn-link rounded-0 Detalhe" asp-page="./Detalhar" asp-route-id="@item.Id" title="Detalhar">
                                     <i class="bi bi-card-text"></i>
                                 </a>
-                                <a class="btn btn-link Edicao" asp-page="./Editar" asp-route-id="@item.Id" title="Editar">
+                                <a class="btn btn-link Edicao" asp-page="./Editar" asp-route-id="@item.Id" title="Editar" target="_modal">
                                     <i class="bi bi-pencil"></i>
                                 </a>
-                                <a class="btn btn-link text-danger rounded-0 Exclusao" asp-page="./Excluir" asp-route-id="@item.Id" title="Excluir">
+                                <a class="btn btn-link text-danger rounded-0 Exclusao" asp-page="./Excluir" asp-route-id="@item.Id" title="Excluir" target="_modal">
                                     <i class="bi bi-trash"></i>
                                 </a>
                             </div>

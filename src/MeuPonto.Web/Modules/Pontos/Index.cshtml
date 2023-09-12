@@ -18,7 +18,7 @@
 
     <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
         <div class="btn-group me-2" role="group" aria-label="First group">
-            <a class="btn btn-primary" asp-page="./Criar">
+            <a class="btn btn-primary" asp-page="./Criar" target="_modal">
                 <i class="bi bi-plus-circle"></i>
                 Criar Novo
             </a>
@@ -27,7 +27,7 @@
             </button>
             <ul class="dropdown-menu">
                 <li>
-                    <a class="dropdown-item Marcacao Ponto" asp-page="./Marcar">
+                    <a class="dropdown-item Marcacao Ponto" asp-page="./Marcar" target="_modal">
                         <i class="bi bi-check2-circle"></i>
                         Marcar Ponto
                     </a>
@@ -110,16 +110,16 @@
                                 <a class="btn btn-link rounded-0" asp-page="./Detalhar" asp-route-id="@item.Id" title="Detalhar">
                                     <i class="bi bi-card-text"></i>
                                 </a>
-                                <a class="btn btn-link Edicao" asp-page="./Editar" asp-route-id="@item.Id" title="Editar">
+                                <a class="btn btn-link Edicao" asp-page="./Editar" asp-route-id="@item.Id" title="Editar" target="_modal">
                                     <i class="bi bi-pencil"></i>
                                 </a>
-                                <a class="btn btn-link text-danger rounded-0 Exclusao" asp-page="./Excluir" asp-route-id="@item.Id" title="Excluir">
+                                <a class="btn btn-link text-danger rounded-0 Exclusao" asp-page="./Excluir" asp-route-id="@item.Id" title="Excluir" target="_modal">
                                     <i class="bi bi-trash"></i>
                                 </a>
                             </div>
                         </td>
                         <td>
-                            <a class="text-decoration-none" asp-page="/Perfis/Detalhar" asp-route-id="@item.PerfilId" title="Detalhar Perfil" target="_blank">
+                            <a class="text-decoration-none" asp-page="/Perfis/Detalhar" asp-route-id="@item.PerfilId" title="Detalhar" target="_blank">
                                 @Html.DisplayFor(modelItem => item.Perfil.Nome)
                                 <i class="bi bi-link-45deg"></i>
                             </a>

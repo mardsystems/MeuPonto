@@ -1,0 +1,24 @@
+﻿@{
+    IgnoreSection("Breadcrumb");
+
+    IgnoreSection("CardHeader");
+}
+
+<form method="post" enctype="@ViewData["Enctype"]">
+    <input type="hidden" name="display" value="modal" />
+    <div class="modal-header">
+        <h5 class="modal-title">
+            @await RenderSectionAsync("Title")
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        @RenderBody()
+    </div>
+    <div class="modal-footer">
+        @await RenderSectionAsync("FormActions", required: false)
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+    </div>
+</form>
+
+@await RenderSectionAsync("Scripts", required: false)

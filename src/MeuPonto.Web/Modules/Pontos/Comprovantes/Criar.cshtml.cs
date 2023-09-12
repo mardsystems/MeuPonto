@@ -24,6 +24,13 @@ public class CriarComprovanteModel : PageModel
 
         Comprovante = ComprovanteFactory.CriaComprovante(transaction);
 
+        var ponto = await _db.Pontos.FirstOrDefaultAsync(m => m.Id == PontoId);
+
+        if (ponto != default)
+        {
+            Comprovante.ComprovaPonto(ponto);
+        }
+
         return Page();
     }
 

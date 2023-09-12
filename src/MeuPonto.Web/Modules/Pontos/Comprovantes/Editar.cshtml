@@ -3,190 +3,146 @@
 
 @{
     ViewData["Title"] = "Editar Comprovante de Ponto";
+
+    ViewData["Enctype"] = "multipart/form-data";
 }
 
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
-        <li class="breadcrumb-item"><a asp-page="/Pontos/Index">Pontos</a></li>
-        <li class="breadcrumb-item"><a asp-page="./Index">Comprovantes</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Editar</li>
-    </ol>
-</nav>
+@section Breadcrumb {
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
+            <li class="breadcrumb-item"><a asp-page="/Pontos/Index">Pontos</a></li>
+            <li class="breadcrumb-item"><a asp-page="./Index">Comprovantes</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Editar</li>
+        </ol>
+    </nav>
+}
 
-<h1>@ViewData["Title"] <span class="badge bg-secondary">@Html.DisplayFor(model => model.Comprovante.TipoImagemId)</span></h1>
+@section Title {
+    @ViewData["Title"] <span class="badge bg-secondary">@Html.DisplayFor(model => model.Comprovante.TipoImagemId)</span>
+}
 
-<div class="card">
+@section CardHeader {
+    <ul class="nav nav-tabs card-header-tabs">
+        <li class="me-1">
+            <div class="btn-group">
+                <a class="btn btn-primary" asp-page="./Criar" target="_modal">
+                    <i class="bi bi-plus-circle"></i>
+                    Criar Novo
+                </a>
+                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent">
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="dropdown-item" asp-page="./Guardar" target="_modal">
+                            <i class="bi bi-qr-code"></i>
+                            Guardar Comprovante
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-page="./Detalhar" asp-route-id="@Model.Comprovante?.Id">
+                <i class="bi bi-card-text"></i>
+                <span class="d-none d-sm-inline">Detalhar</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page">
+                <i class="bi bi-pencil"></i>
+                Editar
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-danger" asp-page="./Excluir" asp-route-id="@Model.Comprovante?.Id" target="_modal">
+                <i class="bi bi-trash"></i>
+                <span class="d-none d-sm-inline">Excluir</span>
+            </a>
+        </li>
+    </ul>
+}
+
+@* <form method="post" enctype=""> *@
+<div asp-validation-summary="All" class="text-danger"></div>
+<div class="card mb-3">
     <div class="card-header">
-        <ul class="nav nav-tabs card-header-tabs">
-            <li class="me-1">
-                <div class="btn-group">
-                    <a class="btn btn-primary" asp-page="./Criar">
-                        <i class="bi bi-plus-circle"></i>
-                        Criar Novo
-                    </a>
-                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent">
-                        <span class="visually-hidden">Toggle Dropdown</span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a class="dropdown-item" asp-page="./Guardar">
-                                <i class="bi bi-qr-code"></i>
-                                Guardar Comprovante
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" asp-page="./Detalhar" asp-route-id="@Model.Comprovante?.Id">
-                    <i class="bi bi-card-text"></i>
-                    <span class="d-none d-sm-inline">Detalhar</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page">
-                    <i class="bi bi-pencil"></i>
-                    Editar
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-danger" asp-page="./Excluir" asp-route-id="@Model.Comprovante?.Id">
-                    <i class="bi bi-trash"></i>
-                    <span class="d-none d-sm-inline">Excluir</span>
-                </a>
-            </li>
-        </ul>
+        @Html.DisplayNameFor(model => model.Comprovante.Ponto)
     </div>
     <div class="card-body">
-        <form method="post" enctype="multipart/form-data">
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="card mb-3">
-                <div class="card-header">
-                    Ponto
-                </div>
-                <div class="row g-0">
-                    <div class="col-sm-3">
-                        @*<svg class="bd-placeholder-img img-fluid rounded-start" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <title>PlacehSolder</title>
-                        <rect width="100%" height="100%" fill="#868e96"></rect>
-                        <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Apuração Mensal</text>
-                        </svg>*@
-                    </div>
-                    <div class="col-sm-9">
-                        <div class="card-body">
-                            <input asp-for="Comprovante.PontoId" type="hidden" />
-                            <input asp-for="Comprovante.Ponto.PerfilId" type="hidden" />
-                            <input asp-for="Comprovante.Ponto.MomentoId" type="hidden" />
-                            <input asp-for="Comprovante.Ponto.PausaId" type="hidden" />
-                            <div class="row mb-3">
-                                <label asp-for="Comprovante.Ponto.Perfil" class="col-sm-3 col-form-label"></label>
-                                <div class="col-sm-9">
-                                    <input asp-for="Comprovante.Ponto.Perfil.Nome" class="form-control" disabled />
-                                    <input asp-for="Comprovante.Ponto.Perfil.Nome" type="hidden" />
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label asp-for="Comprovante.Ponto.DataHora" class="col-sm-3 col-form-label"></label>
-                                <div class="col-sm-9">
-                                    <input asp-for="Comprovante.Ponto.DataHora" class="form-control" disabled />
-                                    <input asp-for="Comprovante.Ponto.DataHora" type="hidden" />
-                                </div>
-                            </div>
-                            <fieldset class="row mb-3" disabled>
-                                <legend class="col-form-label col-sm-3 pt-0">Momento</legend>
-                                <div class="col-sm-9">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="Ponto.Momento" id="Ponto_Momento_Entrada" value="1" @(Model.Comprovante.Ponto.MomentoId == Pontos.MomentoEnum.Entrada ? "checked" : "")>
-                                        <label class="form-check-label" for="Ponto_Momento_Entrada">
-                                            Entrada
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="Ponto.Momento" id="Ponto_Momento_Saida" value="2" @(Model.Comprovante.Ponto.MomentoId == Pontos.MomentoEnum.Saida ? "checked" : "")>
-                                        <label class="form-check-label" for="Ponto_Momento_Saida">
-                                            Saída
-                                        </label>
-                                    </div>
-                                    <div class="form-check disabled">
-                                        <input class="form-check-input" type="radio" name="Ponto.Momento" id="Ponto_Momento_Errado" value="3" @(Model.Comprovante.Ponto.MomentoId == Pontos.MomentoEnum.Errado ? "checked" : "")>
-                                        <label class="form-check-label" for="Ponto_Momento_Errado">
-                                            Errado
-                                        </label>
-                                    </div>
-                                </div>
-                            </fieldset>
-                            <fieldset class="row mb-3" disabled>
-                                <legend class="col-form-label col-sm-3 pt-0">Pausa</legend>
-                                <div class="col-sm-9">
-                                    <div class="btn-group" role="group" aria-label="Pausa">
-                                        <input type="radio" class="btn-check" name="Ponto.Pausa" id="Ponto_Pausa_Almoco" value="1" autocomplete="off" @(Model.Comprovante.Ponto.PausaId == Pontos.PausaEnum.Almoco ? "checked" : "")>
-                                        <label class="btn btn-outline-primary" for="Ponto_Pausa_Almoco">
-                                            <i class="bi bi-egg-fried"></i>
-                                        </label>
-                                        <input type="radio" class="btn-check" name="Ponto.Pausa" id="Ponto_Pausa_CafeLanche" value="2" autocomplete="off" @(Model.Comprovante.Ponto.PausaId == Pontos.PausaEnum.CafeLanche ? "checked" : "")>
-                                        <label class="btn btn-outline-primary" for="Ponto_Pausa_CafeLanche">
-                                            <i class="bi bi-cup-hot"></i>
-                                        </label>
-                                        <input type="radio" class="btn-check" name="Ponto.Pausa" id="Ponto_Pausa_Banheiro" value="3" autocomplete="off" @(Model.Comprovante.Ponto.PausaId == Pontos.PausaEnum.Banheiro ? "checked" : "")>
-                                        <label class="btn btn-outline-primary" for="Ponto_Pausa_Banheiro">
-                                            <i class="bi bi-badge-wc"></i>
-                                        </label>
-                                        <input type="radio" class="btn-check" name="Ponto.Pausa" id="Ponto_Pausa_ConversaReuniao" value="4" autocomplete="off" @(Model.Comprovante.Ponto.PausaId == Pontos.PausaEnum.ConversaReuniao ? "checked" : "")>
-                                        <label class="btn btn-outline-primary" for="Ponto_Pausa_ConversaReuniao">
-                                            <i class="bi bi-chat"></i>
-                                        </label>
-                                        <input type="radio" class="btn-check" name="Ponto.Pausa" id="Ponto_Pausa_Telefonema" value="5" autocomplete="off" @(Model.Comprovante.Ponto.PausaId == Pontos.PausaEnum.Telefonema ? "checked" : "")>
-                                        <label class="btn btn-outline-primary" for="Ponto_Pausa_Telefonema">
-                                            <i class="bi bi-telephone"></i>
-                                        </label>
-                                        <input type="radio" class="btn-check" name="Ponto.Pausa" id="Ponto_Pausa_Generica" value="6" autocomplete="off" @(Model.Comprovante.Ponto.PausaId == Pontos.PausaEnum.Generica ? "checked" : "")>
-                                        <label class="btn btn-outline-primary" for="Ponto_Pausa_Generica">
-                                            <i class="bi bi-pause-fill"></i>
-                                        </label>
-                                    </div>
-                                </div>
-                            </fieldset>
-                            <button type="submit" value="Procurar" class="btn btn-primary">
-                                <i class="bi bi-binoculars"></i>
-                                Procurar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label asp-for="Imagem" class="col-sm-3 col-form-label"></label>
-                <div class="col-sm-9">
-                    <img class="mb-3" src="data:image/png;base64,@Convert.ToBase64String(Model.Comprovante.Imagem)" width="100%" />
-                    <input asp-for="Imagem" class="form-control" />
-                    <span asp-validation-for="Imagem" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label asp-for="Comprovante.TipoImagemId" class="col-sm-3 col-form-label"></label>
-                <div class="col-sm-9">
-                    <select asp-for="Comprovante.TipoImagemId" class="form-select" asp-items="Html.GetEnumSelectList<TipoImagemEnum>()"></select>
-                    <span asp-validation-for="Comprovante.TipoImagemId" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label asp-for="Comprovante.Numero" class="col-sm-3 col-form-label"></label>
-                <div class="col-sm-9">
-                    <input asp-for="Comprovante.Numero" class="form-control" />
-                    <span asp-validation-for="Comprovante.Numero" class="text-danger"></span>
-                </div>
-            </div>
-            <input type="hidden" asp-for="Comprovante.Version" />
-            <button type="submit" value="Salvar" class="btn btn-primary">
-                <i class="bi bi-save"></i>
-                Salvar
-            </button>
-        </form>
+        <dl class="row g-3 Ponto">
+            <dt class="col-sm-3 Perfil">
+                @Html.DisplayNameFor(model => model.Comprovante.Ponto.Perfil)
+            </dt>
+            <dd class="col-sm-9 Perfil">
+                <a class="text-decoration-none" asp-page="/Perfis/Detalhar" asp-route-id="@Model.Comprovante.Ponto.PerfilId" title="Detalhar Perfil" target="_blank">
+                    @Html.DisplayFor(model => model.Comprovante.Ponto.Perfil.Nome)
+                    <i class="bi bi-link-45deg"></i>
+                </a>
+            </dd>
+            <dt class="col-sm-3 DataHora">
+                @Html.DisplayNameFor(model => model.Comprovante.Ponto.DataHora)
+            </dt>
+            <dd class="col-sm-9 DataHora">
+                <a class="text-decoration-none" asp-page="/Pontos/Detalhar" asp-route-id="@Model.Comprovante.PontoId" title="Detalhar Ponto" target="_blank">
+                    @Html.DisplayFor(model => model.Comprovante.Ponto.DataHora)
+                    <i class="bi bi-link-45deg"></i>
+                </a>
+            </dd>
+            <dt class="col-sm-3 Momento">
+                @Html.DisplayNameFor(model => model.Comprovante.Ponto.MomentoId)
+            </dt>
+            <dd class="col-sm-9 Momento">
+                @Html.DisplayFor(model => model.Comprovante.Ponto.MomentoId)
+                <input asp-for="Comprovante.Ponto.MomentoId" type="hidden" />
+            </dd>
+            <dt class="col-sm-3 Pausa">
+                @Html.DisplayNameFor(model => model.Comprovante.Ponto.PausaId)
+            </dt>
+            <dd class="col-sm-9 Pausa">
+                @Html.DisplayFor(model => model.Comprovante.Ponto.PausaId)
+                <input asp-for="Comprovante.Ponto.PausaId" type="hidden" />
+            </dd>
+        </dl>
+        <button type="submit" value="Procurar" class="btn btn-secondary">
+            <i class="bi bi-binoculars"></i>
+            Procurar
+        </button>
     </div>
+</div>
+<div class="row mb-3">
+    <label asp-for="Imagem" class="col-sm-3 col-form-label"></label>
+    <div class="col-sm-9">
+        <img class="mb-3" src="data:image/png;base64,@Convert.ToBase64String(Model.Comprovante.Imagem)" width="100%" />
+        <input asp-for="Imagem" class="form-control" />
+        <span asp-validation-for="Imagem" class="text-danger"></span>
+    </div>
+</div>
+<div class="row mb-3">
+    <label asp-for="Comprovante.TipoImagemId" class="col-sm-3 col-form-label"></label>
+    <div class="col-sm-9">
+        <select asp-for="Comprovante.TipoImagemId" class="form-select" asp-items="Html.GetEnumSelectList<TipoImagemEnum>()"></select>
+        <span asp-validation-for="Comprovante.TipoImagemId" class="text-danger"></span>
+    </div>
+</div>
+<div class="row mb-3">
+    <label asp-for="Comprovante.Numero" class="col-sm-3 col-form-label"></label>
+    <div class="col-sm-9">
+        <input asp-for="Comprovante.Numero" class="form-control" />
+        <span asp-validation-for="Comprovante.Numero" class="text-danger"></span>
+    </div>
+</div>
+<input type="hidden" asp-for="Comprovante.Version" />
 
-    @section Scripts {
-        @{
-            await Html.RenderPartialAsync("_ValidationScriptsPartial");
-        }
+@section FormActions {
+    <button type="submit" value="Salvar" class="btn btn-primary">
+        Salvar
+    </button>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+}

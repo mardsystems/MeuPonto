@@ -1,5 +1,4 @@
 ﻿using MeuPonto.Data;
-using MeuPonto.Modules.Trabalhadores;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -39,7 +38,7 @@ public class EditarModel : PageModel
 
     // To protect from overposting attacks, enable the specific properties you want to bind to.
     // For more details, see https://aka.ms/RazorPagesCRUD.
-    public async Task<IActionResult> OnPostAsync(Guid? id)
+    public async Task<IActionResult> OnPostAsync(Guid? id, string layout)
     {
         var transaction = User.CreateTransaction();
 
@@ -72,7 +71,7 @@ public class EditarModel : PageModel
             }
         }
 
-        return RedirectToPage("./Detalhar", new { id = Ponto.Id });
+        return RedirectToPage("./Detalhar", new { id = Ponto.Id, layout });
     }
 
     private bool PontoExists(Guid? id)

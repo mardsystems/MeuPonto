@@ -33,4 +33,10 @@
       </Aliases>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Update="Modules\Shared\_FormModalLayout.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
 </Project>
