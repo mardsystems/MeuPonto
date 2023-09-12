@@ -1,3 +1,32 @@
 ﻿@{
-    Layout = "_Layout";
+    string displayQueryValue;
+
+    if (ViewContext.HttpContext.Request.Query.ContainsKey("display"))
+    {
+        displayQueryValue = ViewContext.HttpContext.Request.Query["display"].ToString();
+    }
+    else
+    {
+        displayQueryValue = null;
+    }
+
+    string displayFormValue;
+
+    if (ViewContext.HttpContext.Request.HasFormContentType)
+    {
+        displayFormValue = ViewContext.HttpContext.Request.Form["display"].ToString();
+    }
+    else
+    {
+        displayFormValue = null;
+    }
+
+    if ((displayQueryValue == "modal") || (displayFormValue == "modal"))
+    {
+        Layout = "_FormModalLayout";
+    }
+    else
+    {
+        Layout = "_Layout";
+    }
 }

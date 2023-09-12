@@ -19,7 +19,7 @@
 
     <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
         <div class="btn-group" role="group" aria-label="First group">
-            <a class="btn btn-primary" asp-page="./Criar">
+            <a class="btn btn-primary" asp-page="./Criar" target="_modal">
                 <i class="bi bi-plus-circle"></i>
                 Criar Novo
             </a>
@@ -28,7 +28,7 @@
             </button>
             <ul class="dropdown-menu">
                 <li>
-                    <a class="dropdown-item Guardar Comprovante" asp-page="./Guardar">
+                    <a class="dropdown-item Guardar Comprovante" asp-page="./Guardar" target="_modal">
                         <i class="bi bi-qr-code"></i>
                         Guardar Comprovante
                     </a>
@@ -114,10 +114,10 @@
                                 <a class="btn btn-link rounded-0" asp-page="./Detalhar" asp-route-id="@item.Id" title="Detalhar">
                                     <i class="bi bi-card-text"></i>
                                 </a>
-                                <a class="btn btn-link edicao" asp-page="./Editar" asp-route-id="@item.Id" title="Editar">
+                                <a class="btn btn-link edicao Modal" asp-page="./Editar" asp-route-id="@item.Id" title="Editar" target="_modal">
                                     <i class="bi bi-pencil"></i>
                                 </a>
-                                <a class="btn btn-link text-danger exclusao rounded-0" asp-page="./Excluir" asp-route-id="@item.Id" title="Excluir">
+                                <a class="btn btn-link text-danger exclusao rounded-0" asp-page="./Excluir" asp-route-id="@item.Id" title="Excluir" target="_modal">
                                     <i class="bi bi-trash"></i>
                                 </a>
                             </div>
