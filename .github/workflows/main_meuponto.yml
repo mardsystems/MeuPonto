@@ -29,7 +29,7 @@ jobs:
         run: dotnet build src/MeuPonto.Web/MeuPonto.Web.csproj --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test --no-restore --verbosity normal
+        run: dotnet test specs/MeuPonto.Specs/MeuPonto.Specs.csproj --no-restore --verbosity normal
 
       - name: dotnet publish
         run: dotnet publish src/MeuPonto.Web/MeuPonto.Web.csproj -c Release -o ${{env.DOTNET_ROOT}}/myapp
