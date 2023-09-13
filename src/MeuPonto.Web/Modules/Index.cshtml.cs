@@ -31,12 +31,8 @@ public class IndexModel : PageModel
     public Guid? PerfilId { get; set; }
 
     [BindProperty(SupportsGet = true)]
-    [DisplayName("Ano")]
-    public int? CompetenciaAno { get; set; }
-
-    [BindProperty(SupportsGet = true)]
-    [DisplayName("Mês")]
-    public int? CompetenciaMes { get; set; }
+    [DisplayName("Competência")]
+    public DateTime? Competencia { get; set; }
 
     public Folha Folha { get; set; }
 
@@ -59,15 +55,13 @@ public class IndexModel : PageModel
 
         var hoje = DateTime.Today;
 
-        if (CompetenciaAno == null || CompetenciaMes == null)
+        if (Competencia == null)
         {
-            CompetenciaAno = hoje.Year;
-
-            CompetenciaMes = hoje.Month;
+            Competencia = hoje;
         }
         else
         {
-            var competencia = new DateTime(CompetenciaAno.Value, CompetenciaMes.Value, 1);
+            var competencia = Competencia;
 
             Folha = await _db.Folhas.FirstOrDefaultAsync(x => true
                 && x.PerfilId == PerfilId

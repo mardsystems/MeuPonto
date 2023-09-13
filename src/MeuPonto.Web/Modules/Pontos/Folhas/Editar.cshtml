@@ -77,31 +77,13 @@
     </div>
 </div>
 <div class="row mb-3">
-    <span class="col-sm-3 col-form-label">Competência</span>
+    <label asp-for="Folha.Competencia" class="col-sm-3 col-form-label"></label>
     <div class="col-sm-9">
         <div class="input-group">
-            <label asp-for="CompetenciaAno" class="input-group-text"></label>
-            <input asp-for="CompetenciaAno" class="form-control" placeholder="Ano" />
-            <label asp-for="CompetenciaMes" class="input-group-text"></label>
-            <select asp-for="CompetenciaMes" class="form-select">
-                <option value="" disabled selected>Mês</option>
-                <option value="1">01 (janeiro)</option>
-                <option value="2">02 (fevereiro)</option>
-                <option value="3">03 (março)</option>
-                <option value="4">04 (abril)</option>
-                <option value="5">05 (maio)</option>
-                <option value="6">06 (junho)</option>
-                <option value="7">07 (julho)</option>
-                <option value="8">08 (agosto)</option>
-                <option value="9">09 (setembro)</option>
-                <option value="10">10 (outubro)</option>
-                <option value="11">11 (novembro)</option>
-                <option value="12">12 (dezembro)</option>
-            </select>
+            <input asp-for="Folha.Competencia" class="form-control" type="month" />
             <button class="btn btn-outline-secondary" name="command" value="ConfirmarCompetencia">Confirmar</button>
         </div>
-        <span asp-validation-for="CompetenciaAno" class="text-danger"></span>
-        <span asp-validation-for="CompetenciaMes" class="text-danger"></span>
+        <span asp-validation-for="Folha.Competencia" class="text-danger"></span>
     </div>
 </div>
 <div class="row mb-3">

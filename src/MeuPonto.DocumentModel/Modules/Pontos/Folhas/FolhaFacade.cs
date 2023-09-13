@@ -2,13 +2,9 @@
 
 public static class FolhaFacade
 {
-    public static void ConfirmarCompetencia(this Folha folha, Perfis.Perfil? perfil, int ano, int mes)
+    public static void ConfirmarCompetencia(this Folha folha, Perfis.Perfil? perfil)
     {
-        folha.ApuracaoMensal.Dias.Clear();
-
-        var competenciaAtual = new DateTime(ano, mes, 1);
-
-        folha.Competencia = competenciaAtual;
+        var competenciaAtual = folha.Competencia.Value;
 
         var competenciaPosterior = competenciaAtual.AddMonths(1);
 

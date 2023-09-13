@@ -104,7 +104,7 @@
 
             @if (IsSectionDefined("FormActions"))
             {
-                <form method="post">
+                <form method="post" enctype="@ViewData["Enctype"]">
                     @if (IsSectionDefined("CardHeader"))
                     {
                         <div class="card">

@@ -21,16 +21,6 @@ public class EditarFolhaModel : PageModel
     [BindProperty]
     public Folha Folha { get; set; } = default!;
 
-    [BindProperty]
-    [Required]
-    [DisplayName("Ano")]
-    public int? CompetenciaAno { get; set; }
-
-    [BindProperty]
-    [Required]
-    [DisplayName("Mês")]
-    public int? CompetenciaMes { get; set; }
-
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {
         if (id == null || _db.Folhas == null)
@@ -43,11 +33,8 @@ public class EditarFolhaModel : PageModel
         {
             return NotFound();
         }
-        Folha = folha;
 
-        CompetenciaAno = folha.Competencia.Value.Year;
-        
-        CompetenciaMes = folha.Competencia.Value.Month;
+        Folha = folha;
 
         ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
         return Page();
@@ -60,8 +47,6 @@ public class EditarFolhaModel : PageModel
         var transaction = User.CreateTransaction();
 
         Folha.RecontextualizaFolha(transaction, id);
-
-        if (ModelState.ContainsKey($"{nameof(Folha)}.{nameof(Folha.Competencia)}")) ModelState.Remove($"{nameof(Folha)}.{nameof(Folha.Competencia)}");
 
         if (!ModelState.IsValid)
         {
@@ -83,7 +68,9 @@ public class EditarFolhaModel : PageModel
                 if (ModelState.ContainsKey(state.Key)) ModelState.Remove(state.Key);
             }
 
-            Folha.ConfirmarCompetencia(perfil, CompetenciaAno.Value, CompetenciaMes.Value);
+            Folha.ApuracaoMensal.Dias.Clear();
+
+            Folha.ConfirmarCompetencia(perfil);
 
             ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
 
@@ -93,9 +80,12 @@ public class EditarFolhaModel : PageModel
         {
             //ConfirmarCompetencia(perfil);
 
-            var competenciaAtual = new DateTime(CompetenciaAno.Value, CompetenciaMes.Value, 1);
+            if (Folha.ApuracaoMensal.Dias.Count == 0)
+            {
+                Folha.ConfirmarCompetencia(perfil);
+            }
 
-            Folha.Competencia = competenciaAtual;
+            var competenciaAtual = Folha.Competencia.Value;
 
             Folha.PartitionKey = $"{User.GetUserId()}|{Folha.Competencia:yyyy}";
 

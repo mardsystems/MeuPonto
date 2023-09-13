@@ -1,5 +1,4 @@
 ﻿using MeuPonto.Data;
-using MeuPonto.Modules.Trabalhadores;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;

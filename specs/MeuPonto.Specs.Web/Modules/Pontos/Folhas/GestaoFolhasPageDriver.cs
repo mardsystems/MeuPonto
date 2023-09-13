@@ -55,8 +55,7 @@ public class GestaoFolhasPageDriver : GestaoFolhasInterface
         //var competencia = folha.Competencia.Value.ToString("yyyy-MM-dd\\THH:mm:ss");
 
         form.GetSelect("Folha.PerfilId").GetOption(perfil.Nome).IsSelected = true;
-        form.GetInput("CompetenciaAno").Value = folha.Competencia.Value.Year.ToString();
-        form.GetSelect("CompetenciaMes").Value = folha.Competencia.Value.Month.ToString();
+        form.GetInput("Folha.Competencia").ValueAsDate = folha.Competencia;
         form.GetTextArea("Folha.Observacao").Value = folha.Observacao;
 
         var confirmarCompetenciaButton = form.GetSubmitButton("button[value='ConfirmarCompetencia']");
@@ -117,7 +116,7 @@ public class GestaoFolhasPageDriver : GestaoFolhasInterface
             {
                 Nome = dl.GetDataListItem("Perfil").GetString(),
             },
-            Competencia = DateTime.ParseExact(dl.GetDataListItem("Competencia").GetString().Substring(0, 7), "yyyy/MM", CultureInfo.InvariantCulture),
+            Competencia = DateTime.ParseExact(dl.GetDataListItem("Competencia").GetString(), "y", CultureInfo.CurrentCulture),
             StatusId = (StatusEnum)Enum.Parse(typeof(StatusEnum), dl.GetDataListItem("Status").GetString()),
             Observacao = dl.GetDataListItem("Observacao").GetString(),
             ApuracaoMensal = new ApuracaoMensal
