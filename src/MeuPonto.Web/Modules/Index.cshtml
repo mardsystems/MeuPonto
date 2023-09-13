@@ -36,25 +36,8 @@
             </div>
             <div action="col-12">
                 <div class="input-group">
-                    <label class="input-group-text">Competência</label>
-                    <label asp-for="CompetenciaAno" class="visually-hidden"></label>
-                    <input asp-for="CompetenciaAno" class="form-control" placeholder="Ano" />
-                    <label asp-for="CompetenciaMes" class="visually-hidden"></label>
-                    <select asp-for="CompetenciaMes" class="form-select">
-                        <option value="" disabled selected>Mês</option>
-                        <option value="1">01 (janeiro)</option>
-                        <option value="2">02 (fevereiro)</option>
-                        <option value="3">03 (março)</option>
-                        <option value="4">04 (abril)</option>
-                        <option value="5">05 (maio)</option>
-                        <option value="6">06 (junho)</option>
-                        <option value="7">07 (julho)</option>
-                        <option value="8">08 (agosto)</option>
-                        <option value="9">09 (setembro)</option>
-                        <option value="10">10 (outubro)</option>
-                        <option value="11">11 (novembro)</option>
-                        <option value="12">12 (dezembro)</option>
-                    </select>
+                    <label asp-for="Competencia" class="input-group-text"></label>
+                    <input asp-for="Competencia" class="form-control" type="month" />
                 </div>
             </div>
             <div class="col-12">

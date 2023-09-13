@@ -69,7 +69,7 @@ public class FecharFolhaModel : PageModel
             }
         }
 
-        return RedirectToPage("./Detalhar", new { id = Folha.Id });
+        return RedirectToPage("./Detalhar", new { id });
     }
 
     private async Task Apurar(Folha folha)

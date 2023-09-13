@@ -1,6 +1,5 @@
 using MeuPonto.Data;
 using MeuPonto.Modules.Perfis;
-using MeuPonto.Modules.Trabalhadores;
 
 namespace MeuPonto.Modules.Pontos.Comprovantes;
 

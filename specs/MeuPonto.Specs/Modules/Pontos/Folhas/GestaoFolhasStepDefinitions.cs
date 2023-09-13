@@ -1,7 +1,6 @@
 using MeuPonto.Data;
 using MeuPonto.Helpers;
 using MeuPonto.Modules.Perfis;
-using MeuPonto.Modules.Trabalhadores;
 using System.ComponentModel;
 
 namespace MeuPonto.Modules.Pontos.Folhas;

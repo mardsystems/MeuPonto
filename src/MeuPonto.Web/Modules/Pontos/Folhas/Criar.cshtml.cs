@@ -1,10 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MeuPonto.Data;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel;
-using MeuPonto.Data;
-using MeuPonto.Modules.Trabalhadores;
 
 namespace MeuPonto.Modules.Pontos.Folhas;
 
@@ -31,24 +28,12 @@ public class CriarFolhaModel : PageModel
     [BindProperty]
     public Folha Folha { get; set; }
 
-    [BindProperty]
-    [Required]
-    [DisplayName("Ano")]
-    public int? CompetenciaAno { get; set; }
-
-    [BindProperty]
-    [Required]
-    [DisplayName("Mês")]
-    public int? CompetenciaMes { get; set; }
-
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync(string? command)
     {
         var transaction = User.CreateTransaction();
 
         Folha.RecontextualizaFolha(transaction);
-
-        if (ModelState.ContainsKey($"{nameof(Folha)}.{nameof(Folha.Competencia)}")) ModelState.Remove($"{nameof(Folha)}.{nameof(Folha.Competencia)}");
 
         if (!ModelState.IsValid)
         {
@@ -72,7 +57,9 @@ public class CriarFolhaModel : PageModel
                 if (ModelState.ContainsKey(state.Key)) ModelState.Remove(state.Key);
             }
 
-            Folha.ConfirmarCompetencia(perfil, CompetenciaAno.Value, CompetenciaMes.Value);
+            Folha.ApuracaoMensal.Dias.Clear();
+
+            Folha.ConfirmarCompetencia(perfil);
 
             ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
 
@@ -80,23 +67,19 @@ public class CriarFolhaModel : PageModel
         }
         else
         {
-            var competenciaAtual = new DateTime(CompetenciaAno.Value, CompetenciaMes.Value, 1);
-
-            if (Folha.Competencia == competenciaAtual)
+            if (Folha.ApuracaoMensal.Dias.Count == 0)
             {
-                Folha.PartitionKey = $"{Folha.TrabalhadorId}|{Folha.Competencia:yyyy}";
-
-                _db.Folhas.Add(Folha);
-                await _db.SaveChangesAsync();
-
-                return RedirectToPage("./Detalhar", new { id = Folha.Id });
+                Folha.ConfirmarCompetencia(perfil);
             }
-            else
-            {
-                ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
 
-                return Page();
-            }
+            var competenciaAtual = Folha.Competencia.Value;
+
+            Folha.PartitionKey = $"{Folha.TrabalhadorId}|{Folha.Competencia:yyyy}";
+
+            _db.Folhas.Add(Folha);
+            await _db.SaveChangesAsync();
+
+            return RedirectToPage("./Detalhar", new { id = Folha.Id });
         }
     }
 }

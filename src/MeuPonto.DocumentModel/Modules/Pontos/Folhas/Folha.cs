@@ -15,7 +15,7 @@ public class Folha : DocumentEntity, Concepts.Folha
 
     [Required]
     [DisplayName("Competência")]
-    [DisplayFormat(DataFormatString = "{0:yyyy/MM (MMMM)}")]
+    [DisplayFormat(DataFormatString = "{0:y}")]
     public DateTime? Competencia { get; set; }
 
     [Required]
