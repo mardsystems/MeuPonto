@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: MeuPonto.Web - Build and deploy ASP.Net Core app to Azure Web App
+name: MeuPonto.Web
 
 on:
   pull_request:
@@ -11,8 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted
-
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
 
@@ -32,7 +31,7 @@ jobs:
         run: dotnet test specs/MeuPonto.Specs/MeuPonto.Specs.csproj --configuration Release --no-restore --verbosity normal
 
       - name: dotnet publish
-        run: dotnet publish src/MeuPonto.Web/MeuPonto.Web.csproj -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish src/MeuPonto.Web/MeuPonto.Web.csproj -c Release --no-restore -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
