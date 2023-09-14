@@ -1,4 +1,4 @@
-using MeuPonto.Modules.Trabalhadores;
+using System.Net;
 
 namespace MeuPonto;
 
@@ -48,8 +48,17 @@ public class BasicIntegrationTests
         var response = await client.GetAsync(url);
 
         // Assert
-        response.EnsureSuccessStatusCode(); // Status Code 200-299
-        Assert.Equal("text/html; charset=utf-8",
-            response.Content.Headers.ContentType.ToString());
+        try
+        {
+            response.EnsureSuccessStatusCode(); // Status Code 200-299
+
+            Assert.Equal("text/html; charset=utf-8", response.Content.Headers.ContentType.ToString());
+        }
+        catch (Exception ex)
+        {
+            var message = await response.Content.ReadAsStringAsync();
+
+            throw new Exception(message, ex);
+        }
     }
 }

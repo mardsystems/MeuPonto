@@ -85,9 +85,7 @@ public class EditarFolhaModel : PageModel
                 Folha.ConfirmarCompetencia(perfil);
             }
 
-            var competenciaAtual = Folha.Competencia.Value;
-
-            Folha.PartitionKey = $"{User.GetUserId()}|{Folha.Competencia:yyyy}";
+            Folha.RecontextualizaFolha(transaction);
 
             try
             {

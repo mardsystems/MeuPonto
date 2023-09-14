@@ -7,9 +7,6 @@
     <RootNamespace>MeuPonto</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MeuPonto.DocumentModel\MeuPonto.DocumentModel.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <ServiceWorker Include="wwwroot\app\service-worker.js" PublishedContent="wwwroot\app\service-worker.published.js" />
   </ItemGroup>
   <ItemGroup>
@@ -20,5 +17,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.9" />
     <PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" Version="7.0.9" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MeuPonto.DocumentModel\MeuPonto.DocumentModel.csproj" />
   </ItemGroup>
 </Project>

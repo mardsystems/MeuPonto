@@ -23,16 +23,10 @@ public class Ponto : GlobalTableEntity, Concepts.Ponto
     [Required]
     [DisplayName("Momento")]
     public MomentoEnum? MomentoId { get; set; }
-
-    [DisplayName("Momento")]
-    public Momento? Momento { get; set; }
     string? Concepts.Ponto.Momento => MomentoId?.GetDisplayName();
 
     [DisplayName("Pausa")]
     public PausaEnum? PausaId { get; set; }
-
-    [DisplayName("Pausa")]
-    public Pausa? Pausa { get; set; }
     string? Concepts.Ponto.Pausa => PausaId?.GetDisplayName();
 
     [Required]
@@ -43,6 +37,8 @@ public class Ponto : GlobalTableEntity, Concepts.Ponto
     [MaxLength(255)]
     [DisplayName("Observação")]
     public string? Observacao { get; set; }
+
+    public Guid? TrabalhadorId { get; set; }
 
     [DisplayName("Comprovantes")]
     public virtual IList<Comprovante> Comprovantes { get; set; } = default!;

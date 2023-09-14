@@ -77,9 +77,7 @@ public class AbrirFolhaModel : PageModel
                 Folha.ConfirmarCompetencia(perfil);
             }
 
-            var competenciaAtual = Folha.Competencia.Value;
-
-            Folha.PartitionKey = $"{Folha.TrabalhadorId}|{Folha.Competencia:yyyy}";
+            Folha.RecontextualizaFolha(transaction);
 
             _db.Folhas.Add(Folha);
             await _db.SaveChangesAsync();

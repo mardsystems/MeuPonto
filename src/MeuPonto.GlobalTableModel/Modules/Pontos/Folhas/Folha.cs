@@ -22,9 +22,6 @@ public class Folha : GlobalTableEntity, Concepts.Folha
     [Required]
     [DisplayName("Status")]
     public StatusEnum? StatusId { get; set; }
-    
-    [DisplayName("Status")]
-    public Status? Status { get; set; }
     string? Concepts.Folha.Status => StatusId?.GetDisplayName();
 
     [MinLength(3)]
@@ -37,6 +34,8 @@ public class Folha : GlobalTableEntity, Concepts.Folha
     Concepts.ApuracaoMensal Concepts.Folha.ApuracaoMensal => ApuracaoMensal;
 
     Concepts.Ponto[] Concepts.Folha.Apura() => throw new NotImplementedException();
+
+    public Guid? TrabalhadorId { get; set; }
 
     public Folha()
     {

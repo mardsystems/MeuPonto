@@ -15,15 +15,14 @@ namespace MeuPonto.Data.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "6.0.13");
+            modelBuilder.HasAnnotation("ProductVersion", "7.0.9");
 
-            modelBuilder.Entity("MeuPonto.Modules.ConfiguracaoPorUsuario", b =>
+            modelBuilder.Entity("MeuPonto.Modules.Configuracoes", b =>
                 {
                     b.Property<bool>("JavascriptIsEnabled")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("UserName")
-                        .IsRequired()
+                    b.Property<Guid>("UserId")
                         .HasColumnType("TEXT");
 
                     b.ToTable("Configuracoes", (string)null);
@@ -35,28 +34,15 @@ namespace MeuPonto.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Cnpj")
-                        .HasMaxLength(14)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Cpf")
-                        .HasMaxLength(11)
-                        .HasColumnType("TEXT");
-
                     b.Property<DateTime?>("CreationDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Endereco")
-                        .HasMaxLength(36)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("InscricaoEstadual")
-                        .HasMaxLength(12)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(36)
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("TrabalhadorId")
                         .HasColumnType("TEXT");
 
                     b.Property<byte[]>("Version")
@@ -84,13 +70,12 @@ namespace MeuPonto.Data.Migrations
                     b.Property<Guid?>("EmpregadorId")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Matricula")
-                        .HasMaxLength(30)
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(36)
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("TrabalhadorId")
                         .HasColumnType("TEXT");
 
                     b.Property<byte[]>("Version")
@@ -129,6 +114,9 @@ namespace MeuPonto.Data.Migrations
                     b.Property<int>("TipoImagemId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<Guid?>("TrabalhadorId")
+                        .HasColumnType("TEXT");
+
                     b.Property<byte[]>("Version")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate()
@@ -137,8 +125,6 @@ namespace MeuPonto.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("PontoId");
-
-                    b.HasIndex("TipoImagemId");
 
                     b.ToTable("Comprovantes", (string)null);
                 });
@@ -193,6 +179,9 @@ namespace MeuPonto.Data.Migrations
                     b.Property<int>("StatusId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<Guid?>("TrabalhadorId")
+                        .HasColumnType("TEXT");
+
                     b.Property<byte[]>("Version")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate()
@@ -201,8 +190,6 @@ namespace MeuPonto.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("PerfilId");
-
-                    b.HasIndex("StatusId");
 
                     b.ToTable("Folhas", (string)null);
                 });
@@ -340,6 +327,9 @@ namespace MeuPonto.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid?>("TrabalhadorId")
+                        .HasColumnType("TEXT");
+
                     b.Property<byte[]>("Version")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate()
@@ -347,29 +337,26 @@ namespace MeuPonto.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MomentoId");
-
-                    b.HasIndex("PausaId");
-
                     b.HasIndex("PerfilId");
 
                     b.ToTable("Pontos", (string)null);
                 });
 
-            modelBuilder.Entity("MeuPonto.Modules.Trabalhador", b =>
+            modelBuilder.Entity("MeuPonto.Modules.Trabalhadores.Trabalhador", b =>
                 {
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(36)
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Pis")
-                        .HasMaxLength(12)
+                    b.Property<DateTime?>("CreationDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<byte[]>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("BLOB");
+
+                    b.HasKey("Id");
 
                     b.ToTable("Trabalhadores", (string)null);
                 });
@@ -429,15 +416,7 @@ namespace MeuPonto.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MeuPonto.Modules.Pontos.Comprovantes.TipoImagem", "TipoImagem")
-                        .WithMany()
-                        .HasForeignKey("TipoImagemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Ponto");
-
-                    b.Navigation("TipoImagem");
                 });
 
             modelBuilder.Entity("MeuPonto.Modules.Pontos.Folhas.Folha", b =>
@@ -445,12 +424,6 @@ namespace MeuPonto.Data.Migrations
                     b.HasOne("MeuPonto.Modules.Perfis.Perfil", "Perfil")
                         .WithMany()
                         .HasForeignKey("PerfilId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MeuPonto.Modules.Pontos.Folhas.Status", "Status")
-                        .WithMany()
-                        .HasForeignKey("StatusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -521,33 +494,38 @@ namespace MeuPonto.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Perfil");
-
-                    b.Navigation("Status");
                 });
 
             modelBuilder.Entity("MeuPonto.Modules.Pontos.Ponto", b =>
                 {
-                    b.HasOne("MeuPonto.Modules.Pontos.Momento", "Momento")
-                        .WithMany()
-                        .HasForeignKey("MomentoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MeuPonto.Modules.Pontos.Pausa", "Pausa")
-                        .WithMany()
-                        .HasForeignKey("PausaId");
-
                     b.HasOne("MeuPonto.Modules.Perfis.Perfil", "Perfil")
                         .WithMany()
                         .HasForeignKey("PerfilId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Momento");
-
-                    b.Navigation("Pausa");
-
                     b.Navigation("Perfil");
+                });
+
+            modelBuilder.Entity("MeuPonto.Modules.Trabalhadores.Trabalhador", b =>
+                {
+                    b.OwnsOne("MeuPonto.Billing.CustomerSubscription", "CustomerSubscription", b1 =>
+                        {
+                            b1.Property<Guid>("TrabalhadorId")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<int>("SubscriptionPlanId")
+                                .HasColumnType("INTEGER");
+
+                            b1.HasKey("TrabalhadorId");
+
+                            b1.ToTable("Trabalhadores");
+
+                            b1.WithOwner()
+                                .HasForeignKey("TrabalhadorId");
+                        });
+
+                    b.Navigation("CustomerSubscription");
                 });
 
             modelBuilder.Entity("MeuPonto.Modules.Pontos.Ponto", b =>
