@@ -69,11 +69,6 @@ public class MeuPontoDbContext : DbContext
         modelBuilder.Entity<Trabalhador>()
             .ToTable("Trabalhadores");
 
-        //modelBuilder.Entity<Trabalhador>().OwnsOne(a => a.CustomerSubscription, x =>
-        //{
-
-        //});
-
         modelBuilder.Entity<Configuracoes>()
             .ToTable("Configuracoes")
             .HasNoKey();

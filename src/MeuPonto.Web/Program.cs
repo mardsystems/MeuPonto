@@ -21,19 +21,19 @@ public class Program
         // Add services to the container.
 
         {
-            var endpointUri = builder.Configuration.GetConnectionString("EndpointUri") ?? throw new InvalidOperationException("EndpointUri not found.");
-            var primaryKey = builder.Configuration.GetConnectionString("PrimaryKey") ?? throw new InvalidOperationException("PrimaryKey not found.");
+            //var endpointUri = builder.Configuration.GetConnectionString("EndpointUri") ?? throw new InvalidOperationException("EndpointUri not found.");
+            //var primaryKey = builder.Configuration.GetConnectionString("PrimaryKey") ?? throw new InvalidOperationException("PrimaryKey not found.");
 
-            builder.Services.AddDbContext<MeuPontoDbContext>(options =>
-                options.UseCosmos(endpointUri, primaryKey, databaseName: "MeuPonto"));
+            //builder.Services.AddDbContext<MeuPontoDbContext>(options =>
+            //    options.UseCosmos(endpointUri, primaryKey, databaseName: "MeuPonto"));
         }
 
         {
             var basePath = Directory.GetCurrentDirectory();
             var dataSource = Path.Combine(basePath, "MeuPonto.db");
 
-            //builder.Services.AddDbContext<MeuPontoDbContext>(options =>
-            //    options.UseSqlite($"Data Source={dataSource}", b => b.MigrationsAssembly("MeuPonto.EntityFrameworkCore.Sqlite")));
+            builder.Services.AddDbContext<MeuPontoDbContext>(options =>
+                options.UseSqlite($"Data Source={dataSource}", b => b.MigrationsAssembly("MeuPonto.EntityFrameworkCore.Sqlite")));
         }
 
         {
@@ -186,6 +186,32 @@ public class Program
         app.MapRazorPages();
         app.MapControllers();
         app.MapFallbackToFile("app/index.html");
+
+        using (var scope = app.Services.CreateScope())
+        {
+            var scopedServices = scope.ServiceProvider;
+            var db = scopedServices.GetRequiredService<MeuPontoDbContext>();
+            var logger = scopedServices
+                .GetRequiredService<ILogger<MeuPontoDbContext>>();
+
+            //logger.LogDebug("EnsureDeleted");
+
+            //db.Database.EnsureDeleted();
+
+            logger.LogDebug("Migrate");
+
+            db.Database.MigrateAsync();
+
+            try
+            {
+                //Utilities.InitializeDbForTests(db);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "An error occurred seeding the " +
+                    "database with test messages. Error: {Message}", ex.Message);
+            }
+        }
 
         //using (var scope = app.Services.CreateScope())
         //{

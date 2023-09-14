@@ -27,7 +27,7 @@
     <EditorConfigFiles Remove="C:\github\MeuPonto\.net\src\MeuPonto.Web\.editorconfig" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MeuPonto.EntityFrameworkCore.Cosmos\MeuPonto.EntityFrameworkCore.Cosmos.csproj" />
+    <ProjectReference Include="..\MeuPonto.EntityFrameworkCore.Sqlite\MeuPonto.EntityFrameworkCore.Sqlite.csproj" />
     <ProjectReference Include="..\MeuPonto.Web_App\MeuPonto.Web_App.csproj">
       <Aliases>
       </Aliases>
