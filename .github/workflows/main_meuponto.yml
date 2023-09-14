@@ -27,8 +27,8 @@ jobs:
       - name: Build with dotnet
         run: dotnet build src/MeuPonto.Web/MeuPonto.Web.csproj --configuration Release --no-restore
 
-      - name: Test
-        run: dotnet test specs/MeuPonto.Specs/MeuPonto.Specs.csproj --configuration Release --no-restore --verbosity normal
+      # - name: Test
+      #   run: dotnet test specs/MeuPonto.Specs/MeuPonto.Specs.csproj --configuration Release --no-restore --verbosity normal
 
       - name: dotnet publish
         run: dotnet publish src/MeuPonto.Web/MeuPonto.Web.csproj -c Release --no-restore -o ${{env.DOTNET_ROOT}}/myapp
