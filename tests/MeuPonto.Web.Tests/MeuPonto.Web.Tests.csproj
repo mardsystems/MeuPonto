@@ -4,24 +4,24 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <IsPackable>false</IsPackable>
     <RootNamespace>MeuPonto</RootNamespace>
-    <Configurations>Debug;Release;Debug (Web+Cosmos);Release (Web+Cosmos);Debug (Web+Sqlite);Release (Web+Sqlite)</Configurations>
+    <Configurations>Debug;Release;Debug_Web_Cosmos;Release_Web_Cosmos;Debug_Web_Sqlite;Release_Web_Sqlite</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>$(DefineConstants);INFRA_SQLITE</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug (Web+Sqlite)|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Web_Sqlite|AnyCPU'">
     <DefineConstants>$(DefineConstants);INFRA_SQLITE</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug (Web+Cosmos)|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Web_Cosmos|AnyCPU'">
     <DefineConstants>$(DefineConstants);INFRA_COSMOS</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DefineConstants>$(DefineConstants);INFRA_SQLITE</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release (Web+Sqlite)|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Web_Sqlite|AnyCPU'">
     <DefineConstants>$(DefineConstants);INFRA_SQLITE</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release (Web+Cosmos)|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Web_Cosmos|AnyCPU'">
     <DefineConstants>$(DefineConstants);INFRA_COSMOS</DefineConstants>
   </PropertyGroup>
   <ItemGroup>

@@ -25,16 +25,16 @@ jobs:
         run: dotnet restore
 
       - name: Build with dotnet
-        run: dotnet build src/MeuPonto.Web/MeuPonto.Web.csproj --configuration Release --no-restore
+        run: dotnet build src/MeuPonto.Web/MeuPonto.Web.csproj --configuration Release_Web_Cosmos --no-restore
 
       - name: Specs
-        run: dotnet test specs/MeuPonto.Specs/MeuPonto.Specs.csproj --configuration "Release (Web+Sqlite)" --verbosity normal
+        run: dotnet test specs/MeuPonto.Specs/MeuPonto.Specs.csproj --configuration Release --verbosity normal
 
       - name: Web tests
-        run: dotnet test tests/MeuPonto.Web.Tests/MeuPonto.Web.Tests.csproj --configuration "Release (Web+Sqlite)" --verbosity normal
+        run: dotnet test tests/MeuPonto.Web.Tests/MeuPonto.Web.Tests.csproj --configuration Release --verbosity normal
 
       - name: dotnet publish
-        run: dotnet publish src/MeuPonto.Web/MeuPonto.Web.csproj -c Release -o ${{env.DOTNET_ROOT}}/myapp --no-restore
+        run: dotnet publish src/MeuPonto.Web/MeuPonto.Web.csproj -c Release_Web_Cosmos -o ${{env.DOTNET_ROOT}}/myapp --no-restore
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
