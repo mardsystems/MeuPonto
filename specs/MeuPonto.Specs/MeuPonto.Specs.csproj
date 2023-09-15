@@ -4,6 +4,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>MeuPonto</RootNamespace>
+    <Configurations>Debug;Release;Debug (Web+Cosmos);Release (Web+Cosmos);Debug (Web+Sqlite);Release (Web+Sqlite)</Configurations>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="specflow.json" />

@@ -5,12 +5,25 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
     <RootNamespace>MeuPonto</RootNamespace>
+    <Configurations>Debug;Release;Debug (Web+Cosmos);Release (Web+Cosmos);Debug (Web+Sqlite);Release (Web+Sqlite)</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>$(DefineConstants);GLOBAL_TABLE_DRIVEN</DefineConstants>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug (Web+Sqlite)|AnyCPU'">
+    <DefineConstants>$(DefineConstants);GLOBAL_TABLE_DRIVEN</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug (Web+Cosmos)|AnyCPU'">
+    <DefineConstants>$(DefineConstants);DOCUMENT_DRIVEN</DefineConstants>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DefineConstants>$(DefineConstants);GLOBAL_TABLE_DRIVEN</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release (Web+Sqlite)|AnyCPU'">
+    <DefineConstants>$(DefineConstants);GLOBAL_TABLE_DRIVEN</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release (Web+Cosmos)|AnyCPU'">
+    <DefineConstants>$(DefineConstants);DOCUMENT_DRIVEN</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <ServiceWorker Include="wwwroot\app\service-worker.js" PublishedContent="wwwroot\app\service-worker.published.js" />
@@ -26,6 +39,10 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MeuPonto.GlobalTableModel\MeuPonto.GlobalTableModel.csproj" Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" />
+    <ProjectReference Include="..\MeuPonto.GlobalTableModel\MeuPonto.GlobalTableModel.csproj" Condition="'$(Configuration)|$(Platform)'=='Debug (Web+Sqlite)|AnyCPU'" />
+    <ProjectReference Include="..\MeuPonto.DocumentModel\MeuPonto.DocumentModel.csproj" Condition="'$(Configuration)|$(Platform)'=='Debug (Web+Cosmos)|AnyCPU'" />
     <ProjectReference Include="..\MeuPonto.GlobalTableModel\MeuPonto.GlobalTableModel.csproj" Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'" />
+    <ProjectReference Include="..\MeuPonto.GlobalTableModel\MeuPonto.GlobalTableModel.csproj" Condition="'$(Configuration)|$(Platform)'=='Release (Web+Sqlite)|AnyCPU'" />
+    <ProjectReference Include="..\MeuPonto.DocumentModel\MeuPonto.DocumentModel.csproj" Condition="'$(Configuration)|$(Platform)'=='Release (Web+Cosmos)|AnyCPU'" />
   </ItemGroup>
 </Project>

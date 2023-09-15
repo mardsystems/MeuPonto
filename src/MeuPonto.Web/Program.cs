@@ -22,11 +22,11 @@ public class Program
 
 #if DOCUMENT_DRIVEN
         {
-            //var endpointUri = builder.Configuration.GetConnectionString("EndpointUri") ?? throw new InvalidOperationException("EndpointUri not found.");
-            //var primaryKey = builder.Configuration.GetConnectionString("PrimaryKey") ?? throw new InvalidOperationException("PrimaryKey not found.");
+            var endpointUri = builder.Configuration.GetConnectionString("EndpointUri") ?? throw new InvalidOperationException("EndpointUri not found.");
+            var primaryKey = builder.Configuration.GetConnectionString("PrimaryKey") ?? throw new InvalidOperationException("PrimaryKey not found.");
 
-            //builder.Services.AddDbContext<MeuPontoDbContext>(options =>
-            //    options.UseCosmos(endpointUri, primaryKey, databaseName: "MeuPonto"));
+            builder.Services.AddDbContext<MeuPontoDbContext>(options =>
+                options.UseCosmos(endpointUri, primaryKey, databaseName: "MeuPonto"));
         }
 #endif
 

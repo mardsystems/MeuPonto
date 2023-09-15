@@ -4,5 +4,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RootNamespace>MeuPonto</RootNamespace>
+    <Configurations>Debug;Release;Debug (Web+Cosmos);Release (Web+Cosmos);Debug (Web+Sqlite);Release (Web+Sqlite)</Configurations>
   </PropertyGroup>
 </Project>
