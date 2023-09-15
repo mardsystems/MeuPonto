@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>MeuPonto</RootNamespace>
     <Configurations>Debug;Release;Debug_Web_Cosmos;Release_Web_Cosmos;Debug_Web_Sqlite;Release_Web_Sqlite</Configurations>
