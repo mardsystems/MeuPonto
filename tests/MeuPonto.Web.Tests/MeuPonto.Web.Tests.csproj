@@ -2,7 +2,6 @@
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
     <RootNamespace>MeuPonto</RootNamespace>
     <Configurations>Debug;Release;Debug (Web+Cosmos);Release (Web+Cosmos);Debug (Web+Sqlite);Release (Web+Sqlite)</Configurations>

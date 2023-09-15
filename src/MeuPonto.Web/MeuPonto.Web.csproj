@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-MeuPonto-a092c9dd-ee53-439b-a59c-b03af725fbcc</UserSecretsId>
     <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
