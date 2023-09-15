@@ -4,6 +4,7 @@ using MeuPonto.Modules.Perfis;
 using MeuPonto.Modules.Pontos;
 using MeuPonto.Modules.Pontos.Comprovantes;
 using MeuPonto.Modules.Pontos.Folhas;
+using MeuPonto.Modules.Trabalhadores;
 using Microsoft.EntityFrameworkCore;
 
 namespace MeuPonto.Data;
@@ -66,8 +67,7 @@ public class MeuPontoDbContext : DbContext
             .ToTable("Comprovantes");
 
         modelBuilder.Entity<Trabalhador>()
-            .ToTable("Trabalhadores")
-            .HasNoKey();
+            .ToTable("Trabalhadores");
 
         modelBuilder.Entity<Configuracoes>()
             .ToTable("Configuracoes")
@@ -108,7 +108,7 @@ public class MeuPontoDbContext : DbContext
         );
 
         //
-        
+
         //modelBuilder.Entity<Ponto>().Property(x => x.PausaId).HasConversion(new EnumToStringConverter<PausaEnum>());
     }
 

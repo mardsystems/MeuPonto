@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MeuPonto.Billing;
 
+[Owned]
 public class CustomerSubscription
 {
     [Required]

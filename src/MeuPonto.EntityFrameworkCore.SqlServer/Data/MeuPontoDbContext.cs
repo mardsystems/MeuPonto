@@ -4,6 +4,7 @@ using MeuPonto.Modules.Perfis;
 using MeuPonto.Modules.Pontos;
 using MeuPonto.Modules.Pontos.Comprovantes;
 using MeuPonto.Modules.Pontos.Folhas;
+using MeuPonto.Modules.Trabalhadores;
 using Microsoft.EntityFrameworkCore;
 
 namespace MeuPonto.Data;

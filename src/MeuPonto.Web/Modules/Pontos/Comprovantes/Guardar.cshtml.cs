@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Azure.Cosmos;
 using System.ComponentModel.DataAnnotations;
 
 namespace MeuPonto.Modules.Pontos.Comprovantes;
@@ -121,17 +120,16 @@ public class GuardarComprovanteModel : PageModel
 
                 return RedirectToPage("./Detalhar", new { id = Comprovante.Id });
             }
-            catch (Exception _)
+            catch (Exception ex)
             {
-                if (_.InnerException is CosmosException ex)
-                {
-                    if (ex.ResponseBody.Contains("Request size is too large"))
-                    {
-                        ModelState.AddModelError("Imagem", "Arquivo muito grande");
+                var message = ex.HandleException();
 
-                        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
-                        return Page();
-                    }
+                if (message == "Request size is too large")
+                {
+                    ModelState.AddModelError("Imagem", "Arquivo muito grande");
+
+                    ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
+                    return Page();
                 }
 
                 throw;

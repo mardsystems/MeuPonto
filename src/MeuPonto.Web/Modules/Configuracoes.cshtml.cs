@@ -3,6 +3,7 @@ using MeuPonto.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using System.Security.Claims;
 
@@ -70,7 +71,7 @@ public class ConfiguracoesModel : PageModel
             userId = Guid.Parse(nameIdentifier.Value);
         }
 
-        Configuracoes = await _db.Configuracoes.FindAsync(userId);
+        Configuracoes = await _db.Configuracoes.FirstOrDefaultAsync(x => x.UserId == id);
 
         if (Configuracoes == null)
         {

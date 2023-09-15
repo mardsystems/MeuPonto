@@ -1,6 +1,7 @@
 ﻿using MeuPonto.Modules.Empregadores;
 using MeuPonto.Modules.Perfis;
 using MeuPonto.Modules.Pontos;
+using Microsoft.Azure.Cosmos;
 using Microsoft.EntityFrameworkCore;
 
 namespace MeuPonto.Data;
@@ -31,5 +32,20 @@ public static class DbSetExtensions
         var partitionKey = $"{userId}|{ano}";
 
         return dbSet.FindAsync(id, partitionKey);
+    }
+
+    public static string HandleException(this Exception ex)
+    {
+        if (ex.InnerException is CosmosException cosmosException)
+        {
+            if (cosmosException.ResponseBody.Contains("Request size is too large"))
+            {
+                return "Request size is too large";
+            }
+
+            return cosmosException.Message;
+        }
+
+        return ex.Message;
     }
 }

@@ -1,18 +1,23 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace MeuPonto.Data.Migrations
 {
+    /// <inheritdoc />
     public partial class Initial : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
                 name: "Configuracoes",
                 columns: table => new
                 {
-                    UserName = table.Column<string>(type: "TEXT", nullable: false),
+                    UserId = table.Column<Guid>(type: "TEXT", nullable: false),
                     JavascriptIsEnabled = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -25,10 +30,7 @@ namespace MeuPonto.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Nome = table.Column<string>(type: "TEXT", maxLength: 36, nullable: false),
-                    Cnpj = table.Column<string>(type: "TEXT", maxLength: 14, nullable: true),
-                    Cpf = table.Column<string>(type: "TEXT", maxLength: 11, nullable: true),
-                    InscricaoEstadual = table.Column<string>(type: "TEXT", maxLength: 12, nullable: true),
-                    Endereco = table.Column<string>(type: "TEXT", maxLength: 36, nullable: true),
+                    TrabalhadorId = table.Column<Guid>(type: "TEXT", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
                     Version = table.Column<byte[]>(type: "BLOB", rowVersion: true, nullable: true)
                 },
@@ -89,12 +91,14 @@ namespace MeuPonto.Data.Migrations
                 name: "Trabalhadores",
                 columns: table => new
                 {
-                    UserName = table.Column<string>(type: "TEXT", nullable: false),
-                    Nome = table.Column<string>(type: "TEXT", maxLength: 36, nullable: false),
-                    Pis = table.Column<string>(type: "TEXT", maxLength: 12, nullable: true)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    CustomerSubscription_SubscriptionPlanId = table.Column<int>(type: "INTEGER", nullable: true),
+                    CreationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    Version = table.Column<byte[]>(type: "BLOB", rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
+                    table.PrimaryKey("PK_Trabalhadores", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -104,8 +108,8 @@ namespace MeuPonto.Data.Migrations
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Nome = table.Column<string>(type: "TEXT", maxLength: 36, nullable: false),
                     Ativo = table.Column<bool>(type: "INTEGER", nullable: false),
-                    Matricula = table.Column<string>(type: "TEXT", maxLength: 30, nullable: true),
                     EmpregadorId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    TrabalhadorId = table.Column<Guid>(type: "TEXT", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
                     Version = table.Column<byte[]>(type: "BLOB", rowVersion: true, nullable: true)
                 },
@@ -132,6 +136,7 @@ namespace MeuPonto.Data.Migrations
                     ApuracaoMensal_TempoTotalApurado = table.Column<TimeSpan>(type: "TEXT", nullable: true),
                     ApuracaoMensal_DiferencaTempoTotal = table.Column<TimeSpan>(type: "TEXT", nullable: true),
                     ApuracaoMensal_TempoTotalPeriodoAnterior = table.Column<TimeSpan>(type: "TEXT", nullable: true),
+                    TrabalhadorId = table.Column<Guid>(type: "TEXT", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
                     Version = table.Column<byte[]>(type: "BLOB", rowVersion: true, nullable: true)
                 },
@@ -142,12 +147,6 @@ namespace MeuPonto.Data.Migrations
                         name: "FK_Folhas_Perfis_PerfilId",
                         column: x => x.PerfilId,
                         principalTable: "Perfis",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Folhas_Status_StatusId",
-                        column: x => x.StatusId,
-                        principalTable: "Status",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -182,23 +181,13 @@ namespace MeuPonto.Data.Migrations
                     PausaId = table.Column<int>(type: "INTEGER", nullable: true),
                     Estimado = table.Column<bool>(type: "INTEGER", nullable: false),
                     Observacao = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
+                    TrabalhadorId = table.Column<Guid>(type: "TEXT", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
                     Version = table.Column<byte[]>(type: "BLOB", rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Pontos", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Pontos_Momento_MomentoId",
-                        column: x => x.MomentoId,
-                        principalTable: "Momento",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Pontos_Pausa_PausaId",
-                        column: x => x.PausaId,
-                        principalTable: "Pausa",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Pontos_Perfis_PerfilId",
                         column: x => x.PerfilId,
@@ -240,6 +229,7 @@ namespace MeuPonto.Data.Migrations
                     Numero = table.Column<string>(type: "TEXT", maxLength: 16, nullable: true),
                     Imagem = table.Column<byte[]>(type: "BLOB", nullable: false),
                     TipoImagemId = table.Column<int>(type: "INTEGER", nullable: false),
+                    TrabalhadorId = table.Column<Guid>(type: "TEXT", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
                     Version = table.Column<byte[]>(type: "BLOB", rowVersion: true, nullable: true)
                 },
@@ -252,78 +242,48 @@ namespace MeuPonto.Data.Migrations
                         principalTable: "Pontos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Comprovantes_TipoImagem_TipoImagemId",
-                        column: x => x.TipoImagemId,
-                        principalTable: "TipoImagem",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
                 table: "Momento",
                 columns: new[] { "Id", "Nome" },
-                values: new object[] { 1, "Entrada" });
-
-            migrationBuilder.InsertData(
-                table: "Momento",
-                columns: new[] { "Id", "Nome" },
-                values: new object[] { 2, "Saída" });
-
-            migrationBuilder.InsertData(
-                table: "Momento",
-                columns: new[] { "Id", "Nome" },
-                values: new object[] { 3, "Errado" });
+                values: new object[,]
+                {
+                    { 1, "Entrada" },
+                    { 2, "Saída" },
+                    { 3, "Errado" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Pausa",
                 columns: new[] { "Id", "Nome" },
-                values: new object[] { 1, "Almoço" });
-
-            migrationBuilder.InsertData(
-                table: "Pausa",
-                columns: new[] { "Id", "Nome" },
-                values: new object[] { 2, "Café/Lanche" });
-
-            migrationBuilder.InsertData(
-                table: "Pausa",
-                columns: new[] { "Id", "Nome" },
-                values: new object[] { 3, "Banheiro" });
-
-            migrationBuilder.InsertData(
-                table: "Pausa",
-                columns: new[] { "Id", "Nome" },
-                values: new object[] { 4, "Conversa/Reunião" });
-
-            migrationBuilder.InsertData(
-                table: "Pausa",
-                columns: new[] { "Id", "Nome" },
-                values: new object[] { 5, "Telefonema" });
-
-            migrationBuilder.InsertData(
-                table: "Pausa",
-                columns: new[] { "Id", "Nome" },
-                values: new object[] { 6, "Genérica" });
+                values: new object[,]
+                {
+                    { 1, "Almoço" },
+                    { 2, "Café/Lanche" },
+                    { 3, "Banheiro" },
+                    { 4, "Conversa/Reunião" },
+                    { 5, "Telefonema" },
+                    { 6, "Genérica" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Status",
                 columns: new[] { "Id", "Nome" },
-                values: new object[] { 0, "Aberta" });
-
-            migrationBuilder.InsertData(
-                table: "Status",
-                columns: new[] { "Id", "Nome" },
-                values: new object[] { 1, "Fechada" });
-
-            migrationBuilder.InsertData(
-                table: "TipoImagem",
-                columns: new[] { "Id", "Nome" },
-                values: new object[] { 1, "Original" });
+                values: new object[,]
+                {
+                    { 0, "Aberta" },
+                    { 1, "Fechada" }
+                });
 
             migrationBuilder.InsertData(
                 table: "TipoImagem",
                 columns: new[] { "Id", "Nome" },
-                values: new object[] { 2, "Tratada" });
+                values: new object[,]
+                {
+                    { 1, "Original" },
+                    { 2, "Tratada" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comprovantes_PontoId",
@@ -331,19 +291,9 @@ namespace MeuPonto.Data.Migrations
                 column: "PontoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comprovantes_TipoImagemId",
-                table: "Comprovantes",
-                column: "TipoImagemId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Folhas_PerfilId",
                 table: "Folhas",
                 column: "PerfilId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Folhas_StatusId",
-                table: "Folhas",
-                column: "StatusId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Perfis_EmpregadorId",
@@ -351,21 +301,12 @@ namespace MeuPonto.Data.Migrations
                 column: "EmpregadorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pontos_MomentoId",
-                table: "Pontos",
-                column: "MomentoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Pontos_PausaId",
-                table: "Pontos",
-                column: "PausaId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Pontos_PerfilId",
                 table: "Pontos",
                 column: "PerfilId");
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
@@ -381,6 +322,18 @@ namespace MeuPonto.Data.Migrations
                 name: "JornadaTrabalhoDiaria");
 
             migrationBuilder.DropTable(
+                name: "Momento");
+
+            migrationBuilder.DropTable(
+                name: "Pausa");
+
+            migrationBuilder.DropTable(
+                name: "Status");
+
+            migrationBuilder.DropTable(
+                name: "TipoImagem");
+
+            migrationBuilder.DropTable(
                 name: "Trabalhadores");
 
             migrationBuilder.DropTable(
@@ -388,18 +341,6 @@ namespace MeuPonto.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Pontos");
-
-            migrationBuilder.DropTable(
-                name: "TipoImagem");
-
-            migrationBuilder.DropTable(
-                name: "Status");
-
-            migrationBuilder.DropTable(
-                name: "Momento");
-
-            migrationBuilder.DropTable(
-                name: "Pausa");
 
             migrationBuilder.DropTable(
                 name: "Perfis");

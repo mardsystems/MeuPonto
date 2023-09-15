@@ -1,6 +1,4 @@
-﻿using MeuPonto.Modules.Trabalhadores;
-
-namespace MeuPonto.Modules.Pontos.Folhas;
+﻿namespace MeuPonto.Modules.Pontos.Folhas;
 
 public static class FolhaFactory
 {
@@ -21,7 +19,7 @@ public static class FolhaFactory
     {
         folha.Id ??= id ?? Guid.NewGuid();
         folha.TrabalhadorId = transaction.UserId;
-        //folha.PartitionKey = $"{transaction.UserId}|{folha.Competencia:yyyy}";
+        folha.PartitionKey = $"{folha.TrabalhadorId}|{folha.Competencia:yyyy}";
         folha.CreationDate ??= transaction.DateTime;
     }
 }

@@ -3,6 +3,7 @@
     <TargetFramework>net7.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <RootNamespace>System</RootNamespace>
+    <Configurations>Debug;Release;Debug_Web_Cosmos;Release_Web_Cosmos;Debug_Web_Sqlite;Release_Web_Sqlite</Configurations>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\System.Extensions\System.Extensions.csproj" />

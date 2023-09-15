@@ -20,6 +20,7 @@ public class Program
 
         // Add services to the container.
 
+#if INFRA_COSMOS
         {
             var endpointUri = builder.Configuration.GetConnectionString("EndpointUri") ?? throw new InvalidOperationException("EndpointUri not found.");
             var primaryKey = builder.Configuration.GetConnectionString("PrimaryKey") ?? throw new InvalidOperationException("PrimaryKey not found.");
@@ -27,21 +28,27 @@ public class Program
             builder.Services.AddDbContext<MeuPontoDbContext>(options =>
                 options.UseCosmos(endpointUri, primaryKey, databaseName: "MeuPonto"));
         }
+#endif
 
+#if INFRA_SQLITE
         {
-            var basePath = Directory.GetCurrentDirectory();
+            var basePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+
             var dataSource = Path.Combine(basePath, "MeuPonto.db");
 
-            //builder.Services.AddDbContext<MeuPontoDbContext>(options =>
-            //    options.UseSqlite($"Data Source={dataSource}", b => b.MigrationsAssembly("MeuPonto.EntityFrameworkCore.Sqlite")));
+            builder.Services.AddDbContext<MeuPontoDbContext>(options =>
+                options.UseSqlite($"Data Source={dataSource}", b => b.MigrationsAssembly("MeuPonto.EntityFrameworkCore.Sqlite")));
         }
+#endif
 
+#if INFRA_SQLSERVER
         {
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
-            //builder.Services.AddDbContext<MeuPontoDbContext>(options =>
-            //    options.UseSqlServer(connectionString, b => b.MigrationsAssembly("MeuPonto.EntityFrameworkCore.SqlServer")));
+            builder.Services.AddDbContext<MeuPontoDbContext>(options =>
+                options.UseSqlServer(connectionString, b => b.MigrationsAssembly("MeuPonto.EntityFrameworkCore.SqlServer")));
         }
+#endif
 
         builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -187,13 +194,31 @@ public class Program
         app.MapControllers();
         app.MapFallbackToFile("app/index.html");
 
-        //using (var scope = app.Services.CreateScope())
-        //{
-        //    var db = scope.ServiceProvider.GetService<MeuPontoDbContext>();
+#if INFRA_SQLITE || INFRA_SQLSERVER
+        using (var scope = app.Services.CreateScope())
+        {
+            var scopedServices = scope.ServiceProvider;
+            var db = scopedServices.GetRequiredService<MeuPontoDbContext>();
+            var logger = scopedServices
+                .GetRequiredService<ILogger<MeuPontoDbContext>>();
 
-        //    db.Database.EnsureDeleted();
-        //    db.Database.EnsureCreated();
-        //}
+            logger.LogDebug("Starting database migration");
+
+            db.Database.MigrateAsync();
+
+            logger.LogDebug("Database migration finished");
+
+            try
+            {
+                //Utilities.InitializeDbForTests(db);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "An error occurred seeding the " +
+                    "database with test messages. Error: {Message}", ex.Message);
+            }
+        }
+#endif
 
         app.Run();
     }

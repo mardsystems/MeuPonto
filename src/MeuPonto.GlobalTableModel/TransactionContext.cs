@@ -2,13 +2,13 @@
 
 public class TransactionContext
 {
-    public string UserName { get; }
+    public Guid UserId { get; }
 
     public DateTime DateTime { get; }
 
-    public TransactionContext(string userName)
+    public TransactionContext(Guid userId)
     {
-        UserName = userName;
+        UserId = userId;
 
         DateTime = DateTime.Now;
     }
