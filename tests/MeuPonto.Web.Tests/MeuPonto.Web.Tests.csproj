@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -8,22 +8,22 @@
     <Configurations>Debug;Release;Debug (Web+Cosmos);Release (Web+Cosmos);Debug (Web+Sqlite);Release (Web+Sqlite)</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DefineConstants>$(DefineConstants);GLOBAL_TABLE_DRIVEN</DefineConstants>
+    <DefineConstants>$(DefineConstants);INFRA_SQLITE</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug (Web+Sqlite)|AnyCPU'">
-    <DefineConstants>$(DefineConstants);GLOBAL_TABLE_DRIVEN</DefineConstants>
+    <DefineConstants>$(DefineConstants);INFRA_SQLITE</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug (Web+Cosmos)|AnyCPU'">
-    <DefineConstants>$(DefineConstants);DOCUMENT_DRIVEN</DefineConstants>
+    <DefineConstants>$(DefineConstants);INFRA_COSMOS</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DefineConstants>$(DefineConstants);GLOBAL_TABLE_DRIVEN</DefineConstants>
+    <DefineConstants>$(DefineConstants);INFRA_SQLITE</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release (Web+Sqlite)|AnyCPU'">
-    <DefineConstants>$(DefineConstants);GLOBAL_TABLE_DRIVEN</DefineConstants>
+    <DefineConstants>$(DefineConstants);INFRA_SQLITE</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release (Web+Cosmos)|AnyCPU'">
-    <DefineConstants>$(DefineConstants);DOCUMENT_DRIVEN</DefineConstants>
+    <DefineConstants>$(DefineConstants);INFRA_COSMOS</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.0" />

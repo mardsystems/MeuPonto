@@ -20,7 +20,7 @@ public class Program
 
         // Add services to the container.
 
-#if DOCUMENT_DRIVEN
+#if INFRA_COSMOS
         {
             var endpointUri = builder.Configuration.GetConnectionString("EndpointUri") ?? throw new InvalidOperationException("EndpointUri not found.");
             var primaryKey = builder.Configuration.GetConnectionString("PrimaryKey") ?? throw new InvalidOperationException("PrimaryKey not found.");
@@ -30,9 +30,10 @@ public class Program
         }
 #endif
 
-#if GLOBAL_TABLE_DRIVEN
+#if INFRA_SQLITE
         {
-            var basePath = Directory.GetCurrentDirectory();
+            var basePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+
             var dataSource = Path.Combine(basePath, "MeuPonto.db");
 
             builder.Services.AddDbContext<MeuPontoDbContext>(options =>
@@ -40,12 +41,12 @@ public class Program
         }
 #endif
 
-#if LOCAL_TABLE_DRIVEN
+#if INFRA_SQLSERVER
         {
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
-            //builder.Services.AddDbContext<MeuPontoDbContext>(options =>
-            //    options.UseSqlServer(connectionString, b => b.MigrationsAssembly("MeuPonto.EntityFrameworkCore.SqlServer")));
+            builder.Services.AddDbContext<MeuPontoDbContext>(options =>
+                options.UseSqlServer(connectionString, b => b.MigrationsAssembly("MeuPonto.EntityFrameworkCore.SqlServer")));
         }
 #endif
 
@@ -193,6 +194,7 @@ public class Program
         app.MapControllers();
         app.MapFallbackToFile("app/index.html");
 
+#if INFRA_SQLITE || INFRA_SQLSERVER
         using (var scope = app.Services.CreateScope())
         {
             var scopedServices = scope.ServiceProvider;
@@ -200,13 +202,11 @@ public class Program
             var logger = scopedServices
                 .GetRequiredService<ILogger<MeuPontoDbContext>>();
 
-            //logger.LogDebug("EnsureDeleted");
-
-            //db.Database.EnsureDeleted();
-
-            logger.LogDebug("Migrate");
+            logger.LogDebug("Starting database migration");
 
             db.Database.MigrateAsync();
+
+            logger.LogDebug("Database migration finished");
 
             try
             {
@@ -218,14 +218,7 @@ public class Program
                     "database with test messages. Error: {Message}", ex.Message);
             }
         }
-
-        //using (var scope = app.Services.CreateScope())
-        //{
-        //    var db = scope.ServiceProvider.GetService<MeuPontoDbContext>();
-
-        //    db.Database.EnsureDeleted();
-        //    db.Database.EnsureCreated();
-        //}
+#endif
 
         app.Run();
     }

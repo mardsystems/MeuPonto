@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
-#if GLOBAL_TABLE_DRIVEN
+#if INFRA_SQLITE
 using MeuPonto.Data;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
@@ -20,7 +20,7 @@ public class MeuPontoWebFactory<TProgram> : WebApplicationFactory<TProgram> wher
                 .AddScheme<AuthenticationSchemeOptions, TestAuthHandler>(
                     "TestScheme", options => { });
 
-#if GLOBAL_TABLE_DRIVEN
+#if INFRA_SQLITE
             var dbContextDescriptor = services.SingleOrDefault(d =>
                 d.ServiceType == typeof(DbContextOptions<MeuPontoDbContext>));
 
@@ -48,34 +48,6 @@ public class MeuPontoWebFactory<TProgram> : WebApplicationFactory<TProgram> wher
                 //options.UseInMemoryDatabase("InMemoryDbForTesting");
             });
 #endif
-
-            //var sp = services.BuildServiceProvider();
-
-            //using (var scope = sp.CreateScope())
-            //{
-            //    var scopedServices = scope.ServiceProvider;
-            //    var db = scopedServices.GetRequiredService<MeuPontoDbContext>();
-            //    var logger = scopedServices
-            //        .GetRequiredService<ILogger<MeuPontoDbContext>>();
-
-            //    logger.LogDebug("EnsureDeleted");
-
-            //    db.Database.EnsureDeleted();
-
-            //    logger.LogDebug("EnsureCreated");
-
-            //    db.Database.EnsureCreated();
-
-            //    try
-            //    {
-            //        //Utilities.InitializeDbForTests(db);
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        logger.LogError(ex, "An error occurred seeding the " +
-            //            "database with test messages. Error: {Message}", ex.Message);
-            //    }
-            //}
         });
 
         builder.UseEnvironment("Development");

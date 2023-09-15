@@ -3,7 +3,7 @@ using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Options;
-#if GLOBAL_TABLE_DRIVEN
+#if INFRA_SQLITE
 using System.Data.Common;
 using MeuPonto.Data;
 using Microsoft.Data.Sqlite;
@@ -22,7 +22,7 @@ public class MeuPontoWebFactory<TProgram> : WebApplicationFactory<TProgram> wher
                 .AddScheme<AuthenticationSchemeOptions, TestAuthHandler>(
                     "TestScheme", options => { });
 
-#if GLOBAL_TABLE_DRIVEN
+#if INFRA_SQLITE
             var dbContextDescriptor = services.SingleOrDefault(
                 d => d.ServiceType ==
                     typeof(DbContextOptions<MeuPontoDbContext>));
