@@ -96,7 +96,21 @@ public class BackupComprovantesStepDefinitions
         _db.Perfis.Add(_cadastroPerfis.Perfil);
         await _db.SaveChangesAsync();
 
-        var file = new FileStream("C:\\temp\\20230222_104351.jpg", FileMode.Open);
+        var basePath = Directory.GetCurrentDirectory();
+
+        var path = Directory.GetParent(
+            Directory.GetParent(
+                Directory.GetParent(
+                    Directory.GetParent(
+                        Directory.GetParent(basePath).FullName
+                    ).FullName
+                ).FullName
+            ).FullName
+        ).FullName;
+
+        var filePath = Path.Combine(basePath, path, "img", "20230222_104351.jpg");
+
+        var file = new FileStream(filePath, FileMode.Open);
 
         _backupComprovantes.Define(file);
 
