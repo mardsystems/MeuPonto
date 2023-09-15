@@ -21,17 +21,17 @@ jobs:
           dotnet-version: '7.0.x'
           include-prerelease: false
 
-      - name: Specs
+      - name: Test specs (web)
         run: dotnet test specs/MeuPonto.Specs/MeuPonto.Specs.csproj --configuration Release --verbosity normal
 
-      - name: Web tests
+      - name: Test web
         run: dotnet test tests/MeuPonto.Web.Tests/MeuPonto.Web.Tests.csproj --configuration Release --verbosity normal
 
-      - name: Build with dotnet
+      - name: Build web
         run: dotnet build src/MeuPonto.Web/MeuPonto.Web.csproj --configuration Release_Web_Cosmos
 
-      - name: dotnet publish
-        run: dotnet publish src/MeuPonto.Web/MeuPonto.Web.csproj -c Release_Web_Cosmos -o ${{env.DOTNET_ROOT}}/myapp
+      - name: Publish web
+        run: dotnet publish src/MeuPonto.Web/MeuPonto.Web.csproj --configuration Release_Web_Cosmos -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
