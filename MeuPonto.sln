@@ -82,7 +82,7 @@ Global
 		Debug_Web_Cosmos|Any CPU = Debug_Web_Cosmos|Any CPU
 		Debug_Web_Sqlite|Any CPU = Debug_Web_Sqlite|Any CPU
 		Debug|Any CPU = Debug|Any CPU
-		Release_Web_Cosmos)|Any CPU = Release_Web_Cosmos)|Any CPU
+		Release_Web_Cosmos|Any CPU = Release_Web_Cosmos|Any CPU
 		Release_Web_Sqlite|Any CPU = Release_Web_Sqlite|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
@@ -93,8 +93,8 @@ Global
 		{D7547D16-4A37-4105-8117-DD5B1BFE5290}.Debug_Web_Sqlite|Any CPU.Build.0 = Debug_Web_Sqlite|Any CPU
 		{D7547D16-4A37-4105-8117-DD5B1BFE5290}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D7547D16-4A37-4105-8117-DD5B1BFE5290}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D7547D16-4A37-4105-8117-DD5B1BFE5290}.Release_Web_Cosmos)|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
-		{D7547D16-4A37-4105-8117-DD5B1BFE5290}.Release_Web_Cosmos)|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
+		{D7547D16-4A37-4105-8117-DD5B1BFE5290}.Release_Web_Cosmos|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
+		{D7547D16-4A37-4105-8117-DD5B1BFE5290}.Release_Web_Cosmos|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
 		{D7547D16-4A37-4105-8117-DD5B1BFE5290}.Release_Web_Sqlite|Any CPU.ActiveCfg = Release_Web_Sqlite|Any CPU
 		{D7547D16-4A37-4105-8117-DD5B1BFE5290}.Release_Web_Sqlite|Any CPU.Build.0 = Release_Web_Sqlite|Any CPU
 		{D7547D16-4A37-4105-8117-DD5B1BFE5290}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -105,8 +105,8 @@ Global
 		{1F0DF724-F874-47C5-AF5D-008B06355C96}.Debug_Web_Sqlite|Any CPU.Build.0 = Debug_Web_Sqlite|Any CPU
 		{1F0DF724-F874-47C5-AF5D-008B06355C96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1F0DF724-F874-47C5-AF5D-008B06355C96}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1F0DF724-F874-47C5-AF5D-008B06355C96}.Release_Web_Cosmos)|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
-		{1F0DF724-F874-47C5-AF5D-008B06355C96}.Release_Web_Cosmos)|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
+		{1F0DF724-F874-47C5-AF5D-008B06355C96}.Release_Web_Cosmos|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
+		{1F0DF724-F874-47C5-AF5D-008B06355C96}.Release_Web_Cosmos|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
 		{1F0DF724-F874-47C5-AF5D-008B06355C96}.Release_Web_Sqlite|Any CPU.ActiveCfg = Release_Web_Sqlite|Any CPU
 		{1F0DF724-F874-47C5-AF5D-008B06355C96}.Release_Web_Sqlite|Any CPU.Build.0 = Release_Web_Sqlite|Any CPU
 		{1F0DF724-F874-47C5-AF5D-008B06355C96}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -117,8 +117,8 @@ Global
 		{8D1EC29B-1AD9-4EC5-8EAD-76121F74B4B0}.Debug_Web_Sqlite|Any CPU.Build.0 = Debug_Web_Sqlite|Any CPU
 		{8D1EC29B-1AD9-4EC5-8EAD-76121F74B4B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8D1EC29B-1AD9-4EC5-8EAD-76121F74B4B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8D1EC29B-1AD9-4EC5-8EAD-76121F74B4B0}.Release_Web_Cosmos)|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
-		{8D1EC29B-1AD9-4EC5-8EAD-76121F74B4B0}.Release_Web_Cosmos)|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
+		{8D1EC29B-1AD9-4EC5-8EAD-76121F74B4B0}.Release_Web_Cosmos|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
+		{8D1EC29B-1AD9-4EC5-8EAD-76121F74B4B0}.Release_Web_Cosmos|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
 		{8D1EC29B-1AD9-4EC5-8EAD-76121F74B4B0}.Release_Web_Sqlite|Any CPU.ActiveCfg = Release_Web_Sqlite|Any CPU
 		{8D1EC29B-1AD9-4EC5-8EAD-76121F74B4B0}.Release_Web_Sqlite|Any CPU.Build.0 = Release_Web_Sqlite|Any CPU
 		{8D1EC29B-1AD9-4EC5-8EAD-76121F74B4B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -129,8 +129,8 @@ Global
 		{869E2EBA-74BF-429A-B79C-6338D1510A9B}.Debug_Web_Sqlite|Any CPU.Build.0 = Debug_Web_Sqlite|Any CPU
 		{869E2EBA-74BF-429A-B79C-6338D1510A9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{869E2EBA-74BF-429A-B79C-6338D1510A9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{869E2EBA-74BF-429A-B79C-6338D1510A9B}.Release_Web_Cosmos)|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
-		{869E2EBA-74BF-429A-B79C-6338D1510A9B}.Release_Web_Cosmos)|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
+		{869E2EBA-74BF-429A-B79C-6338D1510A9B}.Release_Web_Cosmos|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
+		{869E2EBA-74BF-429A-B79C-6338D1510A9B}.Release_Web_Cosmos|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
 		{869E2EBA-74BF-429A-B79C-6338D1510A9B}.Release_Web_Sqlite|Any CPU.ActiveCfg = Release_Web_Sqlite|Any CPU
 		{869E2EBA-74BF-429A-B79C-6338D1510A9B}.Release_Web_Sqlite|Any CPU.Build.0 = Release_Web_Sqlite|Any CPU
 		{869E2EBA-74BF-429A-B79C-6338D1510A9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -141,8 +141,8 @@ Global
 		{0949F008-34E0-48AE-84FB-738069731F0E}.Debug_Web_Sqlite|Any CPU.Build.0 = Debug_Web_Sqlite|Any CPU
 		{0949F008-34E0-48AE-84FB-738069731F0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0949F008-34E0-48AE-84FB-738069731F0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0949F008-34E0-48AE-84FB-738069731F0E}.Release_Web_Cosmos)|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
-		{0949F008-34E0-48AE-84FB-738069731F0E}.Release_Web_Cosmos)|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
+		{0949F008-34E0-48AE-84FB-738069731F0E}.Release_Web_Cosmos|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
+		{0949F008-34E0-48AE-84FB-738069731F0E}.Release_Web_Cosmos|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
 		{0949F008-34E0-48AE-84FB-738069731F0E}.Release_Web_Sqlite|Any CPU.ActiveCfg = Release_Web_Sqlite|Any CPU
 		{0949F008-34E0-48AE-84FB-738069731F0E}.Release_Web_Sqlite|Any CPU.Build.0 = Release_Web_Sqlite|Any CPU
 		{0949F008-34E0-48AE-84FB-738069731F0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -153,8 +153,8 @@ Global
 		{76329E4D-7AE1-46C7-9D8C-432E541AA4E5}.Debug_Web_Sqlite|Any CPU.Build.0 = Debug_Web_Sqlite|Any CPU
 		{76329E4D-7AE1-46C7-9D8C-432E541AA4E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{76329E4D-7AE1-46C7-9D8C-432E541AA4E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{76329E4D-7AE1-46C7-9D8C-432E541AA4E5}.Release_Web_Cosmos)|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
-		{76329E4D-7AE1-46C7-9D8C-432E541AA4E5}.Release_Web_Cosmos)|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
+		{76329E4D-7AE1-46C7-9D8C-432E541AA4E5}.Release_Web_Cosmos|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
+		{76329E4D-7AE1-46C7-9D8C-432E541AA4E5}.Release_Web_Cosmos|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
 		{76329E4D-7AE1-46C7-9D8C-432E541AA4E5}.Release_Web_Sqlite|Any CPU.ActiveCfg = Release_Web_Sqlite|Any CPU
 		{76329E4D-7AE1-46C7-9D8C-432E541AA4E5}.Release_Web_Sqlite|Any CPU.Build.0 = Release_Web_Sqlite|Any CPU
 		{76329E4D-7AE1-46C7-9D8C-432E541AA4E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -165,8 +165,8 @@ Global
 		{E3DC65FC-BF57-46FE-9C06-600A2E71D90F}.Debug_Web_Sqlite|Any CPU.Build.0 = Debug_Web_Sqlite|Any CPU
 		{E3DC65FC-BF57-46FE-9C06-600A2E71D90F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E3DC65FC-BF57-46FE-9C06-600A2E71D90F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E3DC65FC-BF57-46FE-9C06-600A2E71D90F}.Release_Web_Cosmos)|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
-		{E3DC65FC-BF57-46FE-9C06-600A2E71D90F}.Release_Web_Cosmos)|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
+		{E3DC65FC-BF57-46FE-9C06-600A2E71D90F}.Release_Web_Cosmos|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
+		{E3DC65FC-BF57-46FE-9C06-600A2E71D90F}.Release_Web_Cosmos|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
 		{E3DC65FC-BF57-46FE-9C06-600A2E71D90F}.Release_Web_Sqlite|Any CPU.ActiveCfg = Release_Web_Sqlite|Any CPU
 		{E3DC65FC-BF57-46FE-9C06-600A2E71D90F}.Release_Web_Sqlite|Any CPU.Build.0 = Release_Web_Sqlite|Any CPU
 		{E3DC65FC-BF57-46FE-9C06-600A2E71D90F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -177,8 +177,8 @@ Global
 		{6EBCC26B-41AD-4C64-B87B-52AF1475515B}.Debug_Web_Sqlite|Any CPU.Build.0 = Debug_Web_Sqlite|Any CPU
 		{6EBCC26B-41AD-4C64-B87B-52AF1475515B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6EBCC26B-41AD-4C64-B87B-52AF1475515B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6EBCC26B-41AD-4C64-B87B-52AF1475515B}.Release_Web_Cosmos)|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
-		{6EBCC26B-41AD-4C64-B87B-52AF1475515B}.Release_Web_Cosmos)|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
+		{6EBCC26B-41AD-4C64-B87B-52AF1475515B}.Release_Web_Cosmos|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
+		{6EBCC26B-41AD-4C64-B87B-52AF1475515B}.Release_Web_Cosmos|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
 		{6EBCC26B-41AD-4C64-B87B-52AF1475515B}.Release_Web_Sqlite|Any CPU.ActiveCfg = Release_Web_Sqlite|Any CPU
 		{6EBCC26B-41AD-4C64-B87B-52AF1475515B}.Release_Web_Sqlite|Any CPU.Build.0 = Release_Web_Sqlite|Any CPU
 		{6EBCC26B-41AD-4C64-B87B-52AF1475515B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -189,8 +189,8 @@ Global
 		{8A01260C-C083-4296-B6F5-01E1FCEA3CA5}.Debug_Web_Sqlite|Any CPU.Build.0 = Debug_Web_Sqlite|Any CPU
 		{8A01260C-C083-4296-B6F5-01E1FCEA3CA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8A01260C-C083-4296-B6F5-01E1FCEA3CA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8A01260C-C083-4296-B6F5-01E1FCEA3CA5}.Release_Web_Cosmos)|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
-		{8A01260C-C083-4296-B6F5-01E1FCEA3CA5}.Release_Web_Cosmos)|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
+		{8A01260C-C083-4296-B6F5-01E1FCEA3CA5}.Release_Web_Cosmos|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
+		{8A01260C-C083-4296-B6F5-01E1FCEA3CA5}.Release_Web_Cosmos|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
 		{8A01260C-C083-4296-B6F5-01E1FCEA3CA5}.Release_Web_Sqlite|Any CPU.ActiveCfg = Release_Web_Sqlite|Any CPU
 		{8A01260C-C083-4296-B6F5-01E1FCEA3CA5}.Release_Web_Sqlite|Any CPU.Build.0 = Release_Web_Sqlite|Any CPU
 		{8A01260C-C083-4296-B6F5-01E1FCEA3CA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -201,8 +201,8 @@ Global
 		{B40192ED-5654-4615-8EA9-57C34E082615}.Debug_Web_Sqlite|Any CPU.Build.0 = Debug_Web_Sqlite|Any CPU
 		{B40192ED-5654-4615-8EA9-57C34E082615}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B40192ED-5654-4615-8EA9-57C34E082615}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B40192ED-5654-4615-8EA9-57C34E082615}.Release_Web_Cosmos)|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
-		{B40192ED-5654-4615-8EA9-57C34E082615}.Release_Web_Cosmos)|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
+		{B40192ED-5654-4615-8EA9-57C34E082615}.Release_Web_Cosmos|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
+		{B40192ED-5654-4615-8EA9-57C34E082615}.Release_Web_Cosmos|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
 		{B40192ED-5654-4615-8EA9-57C34E082615}.Release_Web_Sqlite|Any CPU.ActiveCfg = Release_Web_Sqlite|Any CPU
 		{B40192ED-5654-4615-8EA9-57C34E082615}.Release_Web_Sqlite|Any CPU.Build.0 = Release_Web_Sqlite|Any CPU
 		{B40192ED-5654-4615-8EA9-57C34E082615}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -213,8 +213,8 @@ Global
 		{EE2128E2-AF82-4C33-9026-1B19964C0B31}.Debug_Web_Sqlite|Any CPU.Build.0 = Debug_Web_Sqlite|Any CPU
 		{EE2128E2-AF82-4C33-9026-1B19964C0B31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EE2128E2-AF82-4C33-9026-1B19964C0B31}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EE2128E2-AF82-4C33-9026-1B19964C0B31}.Release_Web_Cosmos)|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
-		{EE2128E2-AF82-4C33-9026-1B19964C0B31}.Release_Web_Cosmos)|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
+		{EE2128E2-AF82-4C33-9026-1B19964C0B31}.Release_Web_Cosmos|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
+		{EE2128E2-AF82-4C33-9026-1B19964C0B31}.Release_Web_Cosmos|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
 		{EE2128E2-AF82-4C33-9026-1B19964C0B31}.Release_Web_Sqlite|Any CPU.ActiveCfg = Release_Web_Sqlite|Any CPU
 		{EE2128E2-AF82-4C33-9026-1B19964C0B31}.Release_Web_Sqlite|Any CPU.Build.0 = Release_Web_Sqlite|Any CPU
 		{EE2128E2-AF82-4C33-9026-1B19964C0B31}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -225,8 +225,8 @@ Global
 		{A2C1BB9E-F2A6-4FBA-AC5F-5102D29E9720}.Debug_Web_Sqlite|Any CPU.Build.0 = Debug_Web_Sqlite|Any CPU
 		{A2C1BB9E-F2A6-4FBA-AC5F-5102D29E9720}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A2C1BB9E-F2A6-4FBA-AC5F-5102D29E9720}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A2C1BB9E-F2A6-4FBA-AC5F-5102D29E9720}.Release_Web_Cosmos)|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
-		{A2C1BB9E-F2A6-4FBA-AC5F-5102D29E9720}.Release_Web_Cosmos)|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
+		{A2C1BB9E-F2A6-4FBA-AC5F-5102D29E9720}.Release_Web_Cosmos|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
+		{A2C1BB9E-F2A6-4FBA-AC5F-5102D29E9720}.Release_Web_Cosmos|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
 		{A2C1BB9E-F2A6-4FBA-AC5F-5102D29E9720}.Release_Web_Sqlite|Any CPU.ActiveCfg = Release_Web_Sqlite|Any CPU
 		{A2C1BB9E-F2A6-4FBA-AC5F-5102D29E9720}.Release_Web_Sqlite|Any CPU.Build.0 = Release_Web_Sqlite|Any CPU
 		{A2C1BB9E-F2A6-4FBA-AC5F-5102D29E9720}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -237,8 +237,8 @@ Global
 		{DBF65EEF-8E80-4EA8-BDC2-2C43B8AA2666}.Debug_Web_Sqlite|Any CPU.Build.0 = Debug_Web_Sqlite|Any CPU
 		{DBF65EEF-8E80-4EA8-BDC2-2C43B8AA2666}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DBF65EEF-8E80-4EA8-BDC2-2C43B8AA2666}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DBF65EEF-8E80-4EA8-BDC2-2C43B8AA2666}.Release_Web_Cosmos)|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
-		{DBF65EEF-8E80-4EA8-BDC2-2C43B8AA2666}.Release_Web_Cosmos)|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
+		{DBF65EEF-8E80-4EA8-BDC2-2C43B8AA2666}.Release_Web_Cosmos|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
+		{DBF65EEF-8E80-4EA8-BDC2-2C43B8AA2666}.Release_Web_Cosmos|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
 		{DBF65EEF-8E80-4EA8-BDC2-2C43B8AA2666}.Release_Web_Sqlite|Any CPU.ActiveCfg = Release_Web_Sqlite|Any CPU
 		{DBF65EEF-8E80-4EA8-BDC2-2C43B8AA2666}.Release_Web_Sqlite|Any CPU.Build.0 = Release_Web_Sqlite|Any CPU
 		{DBF65EEF-8E80-4EA8-BDC2-2C43B8AA2666}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -249,8 +249,8 @@ Global
 		{80CD0071-E920-40E1-A3E7-B19BD54054A8}.Debug_Web_Sqlite|Any CPU.Build.0 = Debug_Web_Sqlite|Any CPU
 		{80CD0071-E920-40E1-A3E7-B19BD54054A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{80CD0071-E920-40E1-A3E7-B19BD54054A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{80CD0071-E920-40E1-A3E7-B19BD54054A8}.Release_Web_Cosmos)|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
-		{80CD0071-E920-40E1-A3E7-B19BD54054A8}.Release_Web_Cosmos)|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
+		{80CD0071-E920-40E1-A3E7-B19BD54054A8}.Release_Web_Cosmos|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
+		{80CD0071-E920-40E1-A3E7-B19BD54054A8}.Release_Web_Cosmos|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
 		{80CD0071-E920-40E1-A3E7-B19BD54054A8}.Release_Web_Sqlite|Any CPU.ActiveCfg = Release_Web_Sqlite|Any CPU
 		{80CD0071-E920-40E1-A3E7-B19BD54054A8}.Release_Web_Sqlite|Any CPU.Build.0 = Release_Web_Sqlite|Any CPU
 		{80CD0071-E920-40E1-A3E7-B19BD54054A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -261,8 +261,8 @@ Global
 		{6A898C52-A010-479F-8443-5A3D0AC54786}.Debug_Web_Sqlite|Any CPU.Build.0 = Debug_Web_Sqlite|Any CPU
 		{6A898C52-A010-479F-8443-5A3D0AC54786}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6A898C52-A010-479F-8443-5A3D0AC54786}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6A898C52-A010-479F-8443-5A3D0AC54786}.Release_Web_Cosmos)|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
-		{6A898C52-A010-479F-8443-5A3D0AC54786}.Release_Web_Cosmos)|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
+		{6A898C52-A010-479F-8443-5A3D0AC54786}.Release_Web_Cosmos|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
+		{6A898C52-A010-479F-8443-5A3D0AC54786}.Release_Web_Cosmos|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
 		{6A898C52-A010-479F-8443-5A3D0AC54786}.Release_Web_Sqlite|Any CPU.ActiveCfg = Release_Web_Sqlite|Any CPU
 		{6A898C52-A010-479F-8443-5A3D0AC54786}.Release_Web_Sqlite|Any CPU.Build.0 = Release_Web_Sqlite|Any CPU
 		{6A898C52-A010-479F-8443-5A3D0AC54786}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -273,8 +273,8 @@ Global
 		{38EF1922-BA5D-40B2-821D-D8FDA417DAD6}.Debug_Web_Sqlite|Any CPU.Build.0 = Debug_Web_Sqlite|Any CPU
 		{38EF1922-BA5D-40B2-821D-D8FDA417DAD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{38EF1922-BA5D-40B2-821D-D8FDA417DAD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{38EF1922-BA5D-40B2-821D-D8FDA417DAD6}.Release_Web_Cosmos)|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
-		{38EF1922-BA5D-40B2-821D-D8FDA417DAD6}.Release_Web_Cosmos)|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
+		{38EF1922-BA5D-40B2-821D-D8FDA417DAD6}.Release_Web_Cosmos|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
+		{38EF1922-BA5D-40B2-821D-D8FDA417DAD6}.Release_Web_Cosmos|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
 		{38EF1922-BA5D-40B2-821D-D8FDA417DAD6}.Release_Web_Sqlite|Any CPU.ActiveCfg = Release_Web_Sqlite|Any CPU
 		{38EF1922-BA5D-40B2-821D-D8FDA417DAD6}.Release_Web_Sqlite|Any CPU.Build.0 = Release_Web_Sqlite|Any CPU
 		{38EF1922-BA5D-40B2-821D-D8FDA417DAD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -285,8 +285,8 @@ Global
 		{92123B87-4D25-41D7-A6F6-2B30165962D3}.Debug_Web_Sqlite|Any CPU.Build.0 = Debug_Web_Sqlite|Any CPU
 		{92123B87-4D25-41D7-A6F6-2B30165962D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{92123B87-4D25-41D7-A6F6-2B30165962D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{92123B87-4D25-41D7-A6F6-2B30165962D3}.Release_Web_Cosmos)|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
-		{92123B87-4D25-41D7-A6F6-2B30165962D3}.Release_Web_Cosmos)|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
+		{92123B87-4D25-41D7-A6F6-2B30165962D3}.Release_Web_Cosmos|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
+		{92123B87-4D25-41D7-A6F6-2B30165962D3}.Release_Web_Cosmos|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
 		{92123B87-4D25-41D7-A6F6-2B30165962D3}.Release_Web_Sqlite|Any CPU.ActiveCfg = Release_Web_Sqlite|Any CPU
 		{92123B87-4D25-41D7-A6F6-2B30165962D3}.Release_Web_Sqlite|Any CPU.Build.0 = Release_Web_Sqlite|Any CPU
 		{92123B87-4D25-41D7-A6F6-2B30165962D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -297,8 +297,8 @@ Global
 		{A57CAE0B-EE9A-444F-A8D6-9DAC9EEB4D7A}.Debug_Web_Sqlite|Any CPU.Build.0 = Debug_Web_Sqlite|Any CPU
 		{A57CAE0B-EE9A-444F-A8D6-9DAC9EEB4D7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A57CAE0B-EE9A-444F-A8D6-9DAC9EEB4D7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A57CAE0B-EE9A-444F-A8D6-9DAC9EEB4D7A}.Release_Web_Cosmos)|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
-		{A57CAE0B-EE9A-444F-A8D6-9DAC9EEB4D7A}.Release_Web_Cosmos)|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
+		{A57CAE0B-EE9A-444F-A8D6-9DAC9EEB4D7A}.Release_Web_Cosmos|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
+		{A57CAE0B-EE9A-444F-A8D6-9DAC9EEB4D7A}.Release_Web_Cosmos|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
 		{A57CAE0B-EE9A-444F-A8D6-9DAC9EEB4D7A}.Release_Web_Sqlite|Any CPU.ActiveCfg = Release_Web_Sqlite|Any CPU
 		{A57CAE0B-EE9A-444F-A8D6-9DAC9EEB4D7A}.Release_Web_Sqlite|Any CPU.Build.0 = Release_Web_Sqlite|Any CPU
 		{A57CAE0B-EE9A-444F-A8D6-9DAC9EEB4D7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -309,8 +309,8 @@ Global
 		{3968994B-2704-4C62-AADF-FA867A05C60C}.Debug_Web_Sqlite|Any CPU.Build.0 = Debug_Web_Sqlite|Any CPU
 		{3968994B-2704-4C62-AADF-FA867A05C60C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3968994B-2704-4C62-AADF-FA867A05C60C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3968994B-2704-4C62-AADF-FA867A05C60C}.Release_Web_Cosmos)|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
-		{3968994B-2704-4C62-AADF-FA867A05C60C}.Release_Web_Cosmos)|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
+		{3968994B-2704-4C62-AADF-FA867A05C60C}.Release_Web_Cosmos|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
+		{3968994B-2704-4C62-AADF-FA867A05C60C}.Release_Web_Cosmos|Any CPU.Build.0 = Release_Web_Cosmos|Any CPU
 		{3968994B-2704-4C62-AADF-FA867A05C60C}.Release_Web_Sqlite|Any CPU.ActiveCfg = Release_Web_Sqlite|Any CPU
 		{3968994B-2704-4C62-AADF-FA867A05C60C}.Release_Web_Sqlite|Any CPU.Build.0 = Release_Web_Sqlite|Any CPU
 		{3968994B-2704-4C62-AADF-FA867A05C60C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -324,7 +324,7 @@ Global
 		{A675CCD6-F2F1-4BC9-93B8-70493F29995C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A675CCD6-F2F1-4BC9-93B8-70493F29995C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A675CCD6-F2F1-4BC9-93B8-70493F29995C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{A675CCD6-F2F1-4BC9-93B8-70493F29995C}.Release_Web_Cosmos)|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
+		{A675CCD6-F2F1-4BC9-93B8-70493F29995C}.Release_Web_Cosmos|Any CPU.ActiveCfg = Release_Web_Cosmos|Any CPU
 		{A675CCD6-F2F1-4BC9-93B8-70493F29995C}.Release_Web_Sqlite|Any CPU.ActiveCfg = Release_Web_Sqlite|Any CPU
 		{A675CCD6-F2F1-4BC9-93B8-70493F29995C}.Release_Web_Sqlite|Any CPU.Build.0 = Release_Web_Sqlite|Any CPU
 		{A675CCD6-F2F1-4BC9-93B8-70493F29995C}.Release_Web_Sqlite|Any CPU.Deploy.0 = Release_Web_Sqlite|Any CPU
