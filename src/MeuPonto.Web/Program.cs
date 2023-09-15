@@ -20,6 +20,7 @@ public class Program
 
         // Add services to the container.
 
+#if DOCUMENT_DRIVEN
         {
             //var endpointUri = builder.Configuration.GetConnectionString("EndpointUri") ?? throw new InvalidOperationException("EndpointUri not found.");
             //var primaryKey = builder.Configuration.GetConnectionString("PrimaryKey") ?? throw new InvalidOperationException("PrimaryKey not found.");
@@ -27,7 +28,9 @@ public class Program
             //builder.Services.AddDbContext<MeuPontoDbContext>(options =>
             //    options.UseCosmos(endpointUri, primaryKey, databaseName: "MeuPonto"));
         }
+#endif
 
+#if GLOBAL_TABLE_DRIVEN
         {
             var basePath = Directory.GetCurrentDirectory();
             var dataSource = Path.Combine(basePath, "MeuPonto.db");
@@ -35,13 +38,16 @@ public class Program
             builder.Services.AddDbContext<MeuPontoDbContext>(options =>
                 options.UseSqlite($"Data Source={dataSource}", b => b.MigrationsAssembly("MeuPonto.EntityFrameworkCore.Sqlite")));
         }
+#endif
 
+#if LOCAL_TABLE_DRIVEN
         {
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
             //builder.Services.AddDbContext<MeuPontoDbContext>(options =>
             //    options.UseSqlServer(connectionString, b => b.MigrationsAssembly("MeuPonto.EntityFrameworkCore.SqlServer")));
         }
+#endif
 
         builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 

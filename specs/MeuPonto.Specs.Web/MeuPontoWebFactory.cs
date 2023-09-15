@@ -1,10 +1,12 @@
-﻿using MeuPonto.Data;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
+#if GLOBAL_TABLE_DRIVEN
+using MeuPonto.Data;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using System.Data.Common;
+#endif
 
 namespace MeuPonto;
 
@@ -14,6 +16,11 @@ public class MeuPontoWebFactory<TProgram> : WebApplicationFactory<TProgram> wher
     {
         builder.ConfigureTestServices(services =>
         {
+            services.AddAuthentication(defaultScheme: "TestScheme")
+                .AddScheme<AuthenticationSchemeOptions, TestAuthHandler>(
+                    "TestScheme", options => { });
+
+#if GLOBAL_TABLE_DRIVEN
             var dbContextDescriptor = services.SingleOrDefault(d =>
                 d.ServiceType == typeof(DbContextOptions<MeuPontoDbContext>));
 
@@ -40,10 +47,7 @@ public class MeuPontoWebFactory<TProgram> : WebApplicationFactory<TProgram> wher
 
                 //options.UseInMemoryDatabase("InMemoryDbForTesting");
             });
-
-            services.AddAuthentication(defaultScheme: "TestScheme")
-                .AddScheme<AuthenticationSchemeOptions, TestAuthHandler>(
-                    "TestScheme", options => { });
+#endif
 
             //var sp = services.BuildServiceProvider();
 

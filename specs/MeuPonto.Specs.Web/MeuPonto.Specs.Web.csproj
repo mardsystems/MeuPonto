@@ -5,6 +5,12 @@
     <Nullable>enable</Nullable>
     <RootNamespace>MeuPonto</RootNamespace>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>$(DefineConstants);GLOBAL_TABLE_DRIVEN</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>$(DefineConstants);GLOBAL_TABLE_DRIVEN</DefineConstants>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="AngleSharp" Version="1.0.4" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.0" />

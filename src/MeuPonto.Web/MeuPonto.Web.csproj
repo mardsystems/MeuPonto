@@ -8,6 +8,12 @@
     <RootNamespace>MeuPonto</RootNamespace>
     <WebProject_DirectoryAccessLevelKey>0</WebProject_DirectoryAccessLevelKey>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>$(DefineConstants);GLOBAL_TABLE_DRIVEN</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>$(DefineConstants);GLOBAL_TABLE_DRIVEN</DefineConstants>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.9" NoWarn="NU1605" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="7.0.9" NoWarn="NU1605" />
@@ -27,7 +33,8 @@
     <EditorConfigFiles Remove="C:\github\MeuPonto\.net\src\MeuPonto.Web\.editorconfig" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MeuPonto.EntityFrameworkCore.Sqlite\MeuPonto.EntityFrameworkCore.Sqlite.csproj" />
+    <ProjectReference Include="..\MeuPonto.EntityFrameworkCore.Sqlite\MeuPonto.EntityFrameworkCore.Sqlite.csproj" Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" />
+    <ProjectReference Include="..\MeuPonto.EntityFrameworkCore.Sqlite\MeuPonto.EntityFrameworkCore.Sqlite.csproj" Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'" />
     <ProjectReference Include="..\MeuPonto.Web_App\MeuPonto.Web_App.csproj">
       <Aliases>
       </Aliases>
