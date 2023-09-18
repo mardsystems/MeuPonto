@@ -1,22 +1,28 @@
 ﻿using MeuPonto.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 namespace MeuPonto.Modules.Pontos.Comprovantes;
 
-public class CriarComprovanteModel : PageModel
+public class CriarModel : FormPageModel
 {
     private readonly MeuPontoDbContext _db;
 
-    public CriarComprovanteModel(MeuPontoDbContext db)
+    [BindProperty(SupportsGet = true)]
+    public Guid? PontoId { get; set; }
+
+    [BindProperty]
+    public Comprovante Comprovante { get; set; }
+
+    [BindProperty]
+    [Required]
+    public IFormFile? Imagem { get; set; }
+
+    public CriarModel(MeuPontoDbContext db)
     {
         _db = db;
     }
-
-    [BindProperty(SupportsGet = true)]
-    public Guid? PontoId { get; set; }
 
     public async Task<IActionResult> OnGet()
     {
@@ -31,15 +37,10 @@ public class CriarComprovanteModel : PageModel
             Comprovante.ComprovaPonto(ponto);
         }
 
+        HoldRefererUrl();
+
         return Page();
     }
-
-    [BindProperty]
-    public Comprovante Comprovante { get; set; }
-
-    [BindProperty]
-    [Required]
-    public IFormFile? Imagem { get; set; }
 
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync()
@@ -84,8 +85,20 @@ public class CriarComprovanteModel : PageModel
         //};
 
         _db.Comprovantes.Add(Comprovante);
+
         await _db.SaveChangesAsync();
 
-        return RedirectToPage("./Index");
+        var detalharPage = Url.Page("Detalhar", new { id = Comprovante.Id });
+
+        AddTempSuccessMessageWithDetailLink("Comprovante criado com sucesso", detalharPage);
+
+        if (ShouldRedirectToRefererPage())
+        {
+            return RedirectToRefererPage();
+        }
+        else
+        {
+            return Redirect(detalharPage);
+        }
     }
 }

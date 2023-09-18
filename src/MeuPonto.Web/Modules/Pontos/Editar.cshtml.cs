@@ -1,22 +1,21 @@
 ﻿using MeuPonto.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace MeuPonto.Modules.Pontos;
 
-public class EditarModel : PageModel
+public class EditarModel : FormPageModel
 {
     private readonly MeuPontoDbContext _db;
+
+    [BindProperty]
+    public Ponto Ponto { get; set; } = default!;
 
     public EditarModel(MeuPontoDbContext db)
     {
         _db = db;
     }
-
-    [BindProperty]
-    public Ponto Ponto { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {
@@ -26,19 +25,24 @@ public class EditarModel : PageModel
         }
 
         var ponto = await _db.Pontos.FirstOrDefaultAsync(m => m.Id == id);
+
         if (ponto == null)
         {
             return NotFound();
         }
+        
         Ponto = ponto;
 
         ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
+
+        HoldRefererUrl();
+
         return Page();
     }
 
     // To protect from overposting attacks, enable the specific properties you want to bind to.
     // For more details, see https://aka.ms/RazorPagesCRUD.
-    public async Task<IActionResult> OnPostAsync(Guid? id, string layout)
+    public async Task<IActionResult> OnPostAsync(Guid? id)
     {
         var transaction = User.CreateTransaction();
 
@@ -71,7 +75,18 @@ public class EditarModel : PageModel
             }
         }
 
-        return RedirectToPage("./Detalhar", new { id = Ponto.Id, layout });
+        var detalharPage = Url.Page("Detalhar", new { id = Ponto.Id });
+
+        AddTempSuccessMessage("Ponto editado com sucesso");
+
+        if (ShouldRedirectToRefererPage())
+        {
+            return RedirectToRefererPage();
+        }
+        else
+        {
+            return Redirect(detalharPage);
+        }
     }
 
     private bool PontoExists(Guid? id)

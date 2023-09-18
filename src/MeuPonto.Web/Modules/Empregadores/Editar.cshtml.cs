@@ -1,20 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace MeuPonto.Modules.Empregadores;
 
-public class EditarModel : PageModel
+public class EditarModel : FormPageModel
 {
     private readonly Data.MeuPontoDbContext _db;
+
+    [BindProperty]
+    public Empregador Empregador { get; set; } = default!;
 
     public EditarModel(Data.MeuPontoDbContext db)
     {
         _db = db;
     }
-
-    [BindProperty]
-    public Empregador Empregador { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {
@@ -24,11 +23,16 @@ public class EditarModel : PageModel
         }
 
         var empregador = await _db.Empregadores.FirstOrDefaultAsync(m => m.Id == id);
+        
         if (empregador == null)
         {
             return NotFound();
         }
+
         Empregador = empregador;
+
+        HoldRefererUrl();
+
         return Page();
     }
 
@@ -63,7 +67,18 @@ public class EditarModel : PageModel
             }
         }
 
-        return RedirectToPage("./Detalhar", new { id = Empregador.Id });
+        var detalharPage = Url.Page("Detalhar", new { id = Empregador.Id });
+
+        AddTempSuccessMessage("Empregador editado com sucesso");
+
+        if (ShouldRedirectToRefererPage())
+        {
+            return RedirectToRefererPage();
+        }
+        else
+        {
+            return Redirect(detalharPage);
+        }
     }
 
     private bool EmpregadorExists(Guid? id)

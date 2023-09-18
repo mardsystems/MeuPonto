@@ -7,14 +7,9 @@ using MeuPonto.Helpers;
 
 namespace MeuPonto.Modules.Pontos.Comprovantes;
 
-public class ComprovantesModel : PageModel
+public class IndexModel : PageModel
 {
     private readonly Data.MeuPontoDbContext _db;
-
-    public ComprovantesModel(Data.MeuPontoDbContext db)
-    {
-        _db = db;
-    }
 
     [BindProperty(SupportsGet = true)]
     public Guid? PontoId { get; set; }
@@ -34,6 +29,11 @@ public class ComprovantesModel : PageModel
     public int? PaginaAtual { get; set; }
 
     public PaginationModel Pagination { get; set; }
+
+    public IndexModel(Data.MeuPontoDbContext db)
+    {
+        _db = db;
+    }
 
     public async Task OnGetAsync()
     {

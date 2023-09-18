@@ -4,18 +4,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MeuPonto.Modules.Pontos.Folhas;
 
-public class DetalharFolhaModel : PageModel
+public class DetalharModel : PageModel
 {
     private readonly Data.MeuPontoDbContext _db;
-
-    public DetalharFolhaModel(Data.MeuPontoDbContext db)
-    {
-        _db = db;
-    }
 
     public Folha Folha { get; set; }
 
     public IList<DetalharFolhaDiaModel> Dias { get; set; } = default!;
+
+    public DetalharModel(Data.MeuPontoDbContext db)
+    {
+        _db = db;
+    }
 
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {

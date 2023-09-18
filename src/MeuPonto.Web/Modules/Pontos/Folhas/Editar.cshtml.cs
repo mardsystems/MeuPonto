@@ -1,25 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel;
 using MeuPonto.Data;
-using MeuPonto.Modules.Trabalhadores;
 
 namespace MeuPonto.Modules.Pontos.Folhas;
 
-public class EditarFolhaModel : PageModel
+public class EditarModel : FormPageModel
 {
     private readonly MeuPontoDbContext _db;
 
-    public EditarFolhaModel(MeuPontoDbContext db)
+    [BindProperty]
+    public Folha Folha { get; set; } = default!;
+
+    public EditarModel(MeuPontoDbContext db)
     {
         _db = db;
     }
-
-    [BindProperty]
-    public Folha Folha { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {
@@ -28,7 +24,8 @@ public class EditarFolhaModel : PageModel
             return NotFound();
         }
 
-        var folha =  await _db.Folhas.FirstOrDefaultAsync(m => m.Id == id);
+        var folha = await _db.Folhas.FirstOrDefaultAsync(m => m.Id == id);
+
         if (folha == null)
         {
             return NotFound();
@@ -37,6 +34,9 @@ public class EditarFolhaModel : PageModel
         Folha = folha;
 
         ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
+
+        HoldRefererUrl();
+
         return Page();
     }
 
@@ -76,41 +76,48 @@ public class EditarFolhaModel : PageModel
 
             return Page();
         }
+
+        if (Folha.ApuracaoMensal.Dias.Count == 0)
+        {
+            Folha.ConfirmarCompetencia(perfil);
+        }
+
+        Folha.RecontextualizaFolha(transaction);
+
+        try
+        {
+            _db.Attach(Folha).State = EntityState.Modified;
+
+            await _db.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!FolhaExists(Folha.Id))
+            {
+                return NotFound();
+            }
+            else
+            {
+                throw;
+            }
+        }
+
+        var detalharPage = Url.Page("Detalhar", new { id = Folha.Id });
+
+        AddTempSuccessMessage("Folha editada com sucesso");
+
+        if (ShouldRedirectToRefererPage())
+        {
+            return RedirectToRefererPage();
+        }
         else
         {
-            //ConfirmarCompetencia(perfil);
-
-            if (Folha.ApuracaoMensal.Dias.Count == 0)
-            {
-                Folha.ConfirmarCompetencia(perfil);
-            }
-
-            Folha.RecontextualizaFolha(transaction);
-
-            try
-            {
-                _db.Attach(Folha).State = EntityState.Modified;
-
-                await _db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!FolhaExists(Folha.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return RedirectToPage("./Detalhar", new { id = Folha.Id });
+            return Redirect(detalharPage);
         }
     }
 
     private bool FolhaExists(Guid? id)
     {
-      return _db.Folhas.Any(e => e.Id == id);
+        return _db.Folhas.Any(e => e.Id == id);
     }
 }

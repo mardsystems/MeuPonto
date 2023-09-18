@@ -1,5 +1,5 @@
 ﻿@page
-@model MeuPonto.Modules.Pontos.Comprovantes.CriarComprovanteModel
+@model MeuPonto.Modules.Pontos.Comprovantes.CriarModel
 
 @{
     ViewData["Title"] = "Criar Comprovante de Ponto";
@@ -103,6 +103,7 @@
 </form>
 
 @section FormActions {
+    <input type="hidden" asp-for="RefererUrl" />
     <button type="submit" value="Salvar" class="btn btn-primary">
         Salvar
     </button>

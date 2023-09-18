@@ -148,9 +148,10 @@
         <span asp-validation-for="Ponto.Observacao" class="text-danger"></span>
     </div>
 </div>
-<input type="hidden" asp-for="Ponto.Version" />
 
 @section FormActions {
+    <input type="hidden" asp-for="Ponto.Version" />
+    <input type="hidden" asp-for="RefererUrl" />
     <button type="submit" value="Salvar" class="btn btn-primary">
         Salvar
     </button>

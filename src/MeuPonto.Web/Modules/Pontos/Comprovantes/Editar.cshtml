@@ -1,5 +1,5 @@
 ﻿@page
-@model MeuPonto.Modules.Pontos.Comprovantes.EditarComprovanteModel
+@model MeuPonto.Modules.Pontos.Comprovantes.EditarModel
 
 @{
     ViewData["Title"] = "Editar Comprovante de Ponto";
@@ -64,7 +64,6 @@
     </ul>
 }
 
-@* <form method="post" enctype=""> *@
 <div asp-validation-summary="All" class="text-danger"></div>
 <div class="card mb-3">
     <div class="card-header">
@@ -133,9 +132,10 @@
         <span asp-validation-for="Comprovante.Numero" class="text-danger"></span>
     </div>
 </div>
-<input type="hidden" asp-for="Comprovante.Version" />
 
 @section FormActions {
+    <input type="hidden" asp-for="Comprovante.Version" />
+    <input type="hidden" asp-for="RefererUrl" />
     <button type="submit" value="Salvar" class="btn btn-primary">
         Salvar
     </button>

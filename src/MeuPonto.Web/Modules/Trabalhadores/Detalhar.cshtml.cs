@@ -8,12 +8,12 @@ public class DetalharModel : PageModel
 {
     private readonly Data.MeuPontoDbContext _db;
 
+    public Trabalhador Trabalhador { get; set; }
+
     public DetalharModel(Data.MeuPontoDbContext db)
     {
         _db = db;
     }
-
-  public Trabalhador Trabalhador { get; set; }
 
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {
@@ -27,7 +27,7 @@ public class DetalharModel : PageModel
         {
             return NotFound();
         }
-        else 
+        else
         {
             Trabalhador = trabalhador;
         }

@@ -4,16 +4,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MeuPonto.Modules.Pontos.Comprovantes;
 
-public class DetalharComprovanteModel : PageModel
+public class DetalharModel : PageModel
 {
     private readonly Data.MeuPontoDbContext _db;
 
-    public DetalharComprovanteModel(Data.MeuPontoDbContext db)
+    public Comprovante Comprovante { get; set; }
+
+    public DetalharModel(Data.MeuPontoDbContext db)
     {
         _db = db;
     }
-
-    public Comprovante Comprovante { get; set; }
 
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {
@@ -34,6 +34,7 @@ public class DetalharComprovanteModel : PageModel
         {
             Comprovante = comprovante;
         }
+
         return Page();
     }
 }

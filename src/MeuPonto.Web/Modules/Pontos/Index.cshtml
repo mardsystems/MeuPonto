@@ -5,17 +5,21 @@
     ViewData["Title"] = "Registro de Pontos";
 }
 
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
-        <li class="breadcrumb-item active" aria-current="page">Pontos</li>
-    </ol>
-</nav>
+@section Breadcrumb {
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
+            <li class="breadcrumb-item active" aria-current="page">Pontos</li>
+        </ol>
+    </nav>
+}
+
+@section Title {
+    @ViewData["Title"]
+}
 
 @if (User.Identity?.IsAuthenticated == true)
 {
-    <h1>@ViewData["Title"]</h1>
-
     <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
         <div class="btn-group me-2" role="group" aria-label="First group">
             <a class="btn btn-primary" asp-page="./Criar" target="_modal">

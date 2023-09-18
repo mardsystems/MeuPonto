@@ -1,16 +1,25 @@
 ﻿using MeuPonto.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
 namespace MeuPonto.Modules.Pontos.Comprovantes;
 
-public class GuardarComprovanteModel : PageModel
+public class GuardarModel : FormPageModel
 {
     private readonly MeuPontoDbContext _db;
 
-    public GuardarComprovanteModel(MeuPontoDbContext db)
+    [BindProperty]
+    public Comprovante Comprovante { get; set; }
+
+    [BindProperty]
+    [Required]
+    public IFormFile? Imagem { get; set; }
+
+    [BindProperty]
+    public Ponto Ponto { get; set; }
+
+    public GuardarModel(MeuPontoDbContext db)
     {
         _db = db;
     }
@@ -24,18 +33,11 @@ public class GuardarComprovanteModel : PageModel
         Comprovante.TipoImagemId = TipoImagemEnum.Original;
 
         ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
+
+        HoldRefererUrl();
+
         return Page();
     }
-
-    [BindProperty]
-    public Comprovante Comprovante { get; set; }
-
-    [BindProperty]
-    [Required]
-    public IFormFile? Imagem { get; set; }
-
-    [BindProperty]
-    public Ponto Ponto { get; set; }
 
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync(string? command)
@@ -68,72 +70,82 @@ public class GuardarComprovanteModel : PageModel
 
             return Page();
         }
-        else
+
+        Ponto.RecontextualizaPonto(transaction);
+
+        var perfil = await _db.Perfis.FindByIdAsync(Ponto.PerfilId, User.GetUserId());
+
+        perfil.QualificaPonto(Ponto);
+
+        _db.Pontos.Add(Ponto);
+
+        await _db.SaveChangesAsync();
+
+        //
+
+        Comprovante.ComprovaPonto(Ponto);
+
+        byte[] imagem;
+
+        using (var memoryStream = new MemoryStream())
         {
-            Ponto.RecontextualizaPonto(transaction);
+            await Imagem.CopyToAsync(memoryStream);
 
-            var perfil = await _db.Perfis.FindByIdAsync(Ponto.PerfilId, User.GetUserId());
+            imagem = memoryStream.ToArray();
+        }
 
-            perfil.QualificaPonto(Ponto);
+        Comprovante.Imagem = imagem;
 
-            _db.Pontos.Add(Ponto);
+        Comprovante.TipoImagemId = TipoImagemEnum.Original;
 
+        //var comprovante = new Comprovante()
+        //{
+        //    Id = Comprovante.Id,
+        //    PartitionKey = Comprovante.PartitionKey,
+        //    CreationDate = Comprovante.CreationDate,
+        //    PontoId = Comprovante.PontoId,
+        //    Ponto = Comprovante.Ponto,
+        //    Numero = Comprovante.Numero,
+        //    Imagem = imagem,
+        //    ImagemTipoId = Comprovante.ImagemTipoId,
+        //    ImagemTipo = Comprovante.ImagemTipo
+        //};
+
+        _db.Comprovantes.Add(Comprovante);
+
+        //
+
+        try
+        {
             await _db.SaveChangesAsync();
 
-            //
+            var detalharPage = Url.Page("Detalhar", new { id = Comprovante.Id });
 
-            Comprovante.ComprovaPonto(Ponto);
+            AddTempSuccessMessageWithDetailLink("Comprovante guardado com sucesso", detalharPage);
 
-            byte[] imagem;
-
-            using (var memoryStream = new MemoryStream())
+            if (ShouldRedirectToRefererPage())
             {
-                await Imagem.CopyToAsync(memoryStream);
+                return RedirectToRefererPage();
+            }
+            else
+            {
+                return Redirect(detalharPage);
+            }
+        }
+        catch (Exception ex)
+        {
+            var message = ex.HandleException();
 
-                imagem = memoryStream.ToArray();
+            if (message == "Request size is too large")
+            {
+                ModelState.AddModelError("Imagem", "Arquivo muito grande");
+
+                ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
+
+                return Page();
             }
 
-            Comprovante.Imagem = imagem;
-
-            Comprovante.TipoImagemId = TipoImagemEnum.Original;
-
-            //var comprovante = new Comprovante()
-            //{
-            //    Id = Comprovante.Id,
-            //    PartitionKey = Comprovante.PartitionKey,
-            //    CreationDate = Comprovante.CreationDate,
-            //    PontoId = Comprovante.PontoId,
-            //    Ponto = Comprovante.Ponto,
-            //    Numero = Comprovante.Numero,
-            //    Imagem = imagem,
-            //    ImagemTipoId = Comprovante.ImagemTipoId,
-            //    ImagemTipo = Comprovante.ImagemTipo
-            //};
-
-            _db.Comprovantes.Add(Comprovante);
-
-            //
-
-            try
-            {
-                await _db.SaveChangesAsync();
-
-                return RedirectToPage("./Detalhar", new { id = Comprovante.Id });
-            }
-            catch (Exception ex)
-            {
-                var message = ex.HandleException();
-
-                if (message == "Request size is too large")
-                {
-                    ModelState.AddModelError("Imagem", "Arquivo muito grande");
-
-                    ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
-                    return Page();
-                }
-
-                throw;
-            }
+            throw;
         }
     }
 }

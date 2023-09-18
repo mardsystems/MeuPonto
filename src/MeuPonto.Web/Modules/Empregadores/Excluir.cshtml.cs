@@ -1,21 +1,20 @@
 ﻿using MeuPonto.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace MeuPonto.Modules.Empregadores;
 
-public class ExcluirModel : PageModel
+public class ExcluirModel : FormPageModel
 {
     private readonly MeuPontoDbContext _db;
+
+    [BindProperty]
+    public Empregador Empregador { get; set; }
 
     public ExcluirModel(MeuPontoDbContext db)
     {
         _db = db;
     }
-
-    [BindProperty]
-    public Empregador Empregador { get; set; }
 
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {
@@ -34,6 +33,9 @@ public class ExcluirModel : PageModel
         {
             Empregador = empregador;
         }
+
+        HoldRefererUrl();
+
         return Page();
     }
 
@@ -44,22 +46,26 @@ public class ExcluirModel : PageModel
             return NotFound();
         }
 
-        try
+        var empregador = await _db.Empregadores.FindByIdAsync(id, User.GetUserId());
+
+        if (empregador != null)
         {
-            var empregador = await _db.Empregadores.FindByIdAsync(id, User.GetUserId());
+            Empregador = empregador;
 
-            if (empregador != null)
-            {
-                Empregador = empregador;
-                _db.Empregadores.Remove(Empregador);
-                await _db.SaveChangesAsync();
-            }
+            _db.Empregadores.Remove(Empregador);
 
-            return RedirectToPage("./Index");
+            await _db.SaveChangesAsync();
         }
-        catch (Exception _)
+
+        AddTempSuccessMessage("Empregador excluído com sucesso");
+
+        if (ShouldRedirectToRefererPage())
         {
-            throw;
+            return RedirectToRefererPage();
+        }
+        else
+        {
+            return RedirectToPage("./Index");
         }
     }
 }

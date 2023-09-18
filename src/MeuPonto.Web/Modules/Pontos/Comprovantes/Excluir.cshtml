@@ -1,5 +1,5 @@
 ﻿@page
-@model MeuPonto.Modules.Pontos.Comprovantes.ExcluirComprovanteModel
+@model MeuPonto.Modules.Pontos.Comprovantes.ExcluirModel
 
 @{
     ViewData["Title"] = "Excluir Comprovante de Ponto";
@@ -167,6 +167,7 @@
 
 @section FormActions {
     <input type="hidden" asp-for="Comprovante.Id" />
+    <input type="hidden" asp-for="RefererUrl" />
     <button type="submit" value="Excluir" class="btn btn-danger">
         Excluir
     </button>

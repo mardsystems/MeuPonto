@@ -12,11 +12,6 @@ public class IndexModel : PageModel
 {
     private readonly Data.MeuPontoDbContext _db;
 
-    public IndexModel(Data.MeuPontoDbContext db)
-    {
-        _db = db;
-    }
-
     [BindProperty(SupportsGet = true)]
     public Guid? Id { get; set; }
 
@@ -31,6 +26,11 @@ public class IndexModel : PageModel
     public PaginationModel Pagination { get; set; }
 
     public bool AskSubscriptionConfirmation { get; set; }
+
+    public IndexModel(Data.MeuPontoDbContext db)
+    {
+        _db = db;
+    }
 
     public async Task OnGetAsync()
     {

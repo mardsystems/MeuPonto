@@ -1,5 +1,5 @@
 ﻿@page
-@model MeuPonto.Modules.Pontos.Comprovantes.GuardarComprovanteModel
+@model MeuPonto.Modules.Pontos.Comprovantes.GuardarModel
 
 @{
     ViewData["Title"] = "Guardar Comprovante de Ponto";
@@ -144,6 +144,7 @@
 </div>
 
 @section FormActions {
+    <input type="hidden" asp-for="RefererUrl" />
     <button type="submit" value="Salvar" class="btn btn-primary">
         Salvar
     </button>

@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace MeuPonto.Modules.Empregadores;
 
-public class CriarModel : PageModel
+public class CriarModel : FormPageModel
 {
     private readonly Data.MeuPontoDbContext _db;
+
+    [BindProperty]
+    public Empregador Empregador { get; set; }
 
     public CriarModel(Data.MeuPontoDbContext db)
     {
@@ -14,11 +16,10 @@ public class CriarModel : PageModel
 
     public IActionResult OnGet()
     {
+        HoldRefererUrl();
+
         return Page();
     }
-
-    [BindProperty]
-    public Empregador Empregador { get; set; }
 
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync()
@@ -32,16 +33,21 @@ public class CriarModel : PageModel
             return Page();
         }
 
-        try
-        {
-            _db.Empregadores.Add(Empregador);
-            await _db.SaveChangesAsync();
-        }
-        catch (Exception _)
-        {
-            throw;
-        }
+        _db.Empregadores.Add(Empregador);
 
-        return RedirectToPage("./Detalhar", new { id = Empregador.Id });
+        await _db.SaveChangesAsync();
+
+        var detalharPage = Url.Page("Detalhar", new { id = Empregador.Id });
+
+        AddTempSuccessMessageWithDetailLink("Empregador criado com sucesso", detalharPage);
+
+        if (ShouldRedirectToRefererPage())
+        {
+            return RedirectToRefererPage();
+        }
+        else
+        {
+            return Redirect(detalharPage);
+        }
     }
 }

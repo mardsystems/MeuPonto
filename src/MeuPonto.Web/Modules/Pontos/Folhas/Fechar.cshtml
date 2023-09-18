@@ -1,5 +1,5 @@
 ﻿@page
-@model MeuPonto.Modules.Pontos.Folhas.FecharFolhaModel
+@model MeuPonto.Modules.Pontos.Folhas.FecharModel
 
 @{
     ViewData["Title"] = "Fechar Folha de Ponto";
@@ -245,6 +245,7 @@
 
 @section FormActions {
     <input type="hidden" asp-for="Folha.Version" />
+    <input type="hidden" asp-for="RefererUrl" />
     <button type="submit" value="Fechar" class="btn btn-primary">
         Fechar
     </button>

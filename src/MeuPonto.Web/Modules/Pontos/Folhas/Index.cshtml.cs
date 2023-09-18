@@ -8,14 +8,9 @@ using MeuPonto.Modules.Shared;
 
 namespace MeuPonto.Modules.Pontos.Folhas;
 
-public class FolhasModel : PageModel
+public class IndexModel : PageModel
 {
     private readonly Data.MeuPontoDbContext _db;
-
-    public FolhasModel(Data.MeuPontoDbContext db)
-    {
-        _db = db;
-    }
 
     [BindProperty(SupportsGet = true)]
     public Guid? PerfilId { get; set; }
@@ -37,6 +32,11 @@ public class FolhasModel : PageModel
     public int? PaginaAtual { get; set; }
 
     public PaginationModel Pagination { get; set; }
+
+    public IndexModel(Data.MeuPontoDbContext db)
+    {
+        _db = db;
+    }
 
     public async Task OnGetAsync()
     {

@@ -1,21 +1,20 @@
 ﻿using MeuPonto.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace MeuPonto.Modules.Pontos.Comprovantes;
 
-public class ExcluirComprovanteModel : PageModel
+public class ExcluirModel : FormPageModel
 {
     private readonly MeuPontoDbContext _db;
 
-    public ExcluirComprovanteModel(MeuPontoDbContext db)
+    [BindProperty]
+    public Comprovante Comprovante { get; set; }
+
+    public ExcluirModel(MeuPontoDbContext db)
     {
         _db = db;
     }
-
-    [BindProperty]
-    public Comprovante Comprovante { get; set; }
 
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {
@@ -24,7 +23,9 @@ public class ExcluirComprovanteModel : PageModel
             return NotFound();
         }
 
-        var comprovante = await _db.Comprovantes.FirstOrDefaultAsync(m => m.Id == id);
+        var comprovante = await _db.Comprovantes
+            .Include(x => x.Ponto)
+            .FirstOrDefaultAsync(m => m.Id == id);
 
         if (comprovante == null)
         {
@@ -34,6 +35,9 @@ public class ExcluirComprovanteModel : PageModel
         {
             Comprovante = comprovante;
         }
+
+        HoldRefererUrl();
+
         return Page();
     }
 
@@ -49,10 +53,21 @@ public class ExcluirComprovanteModel : PageModel
         if (comprovante != null)
         {
             Comprovante = comprovante;
+
             _db.Comprovantes.Remove(Comprovante);
+
             await _db.SaveChangesAsync();
         }
 
-        return RedirectToPage("./Index");
+        AddTempSuccessMessage("Comprovante excluído com sucesso");
+
+        if (ShouldRedirectToRefererPage())
+        {
+            return RedirectToRefererPage();
+        }
+        else
+        {
+            return RedirectToPage("./Index");
+        }
     }
 }

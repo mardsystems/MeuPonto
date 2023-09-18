@@ -1,21 +1,20 @@
 ﻿using MeuPonto.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace MeuPonto.Modules.Pontos.Folhas;
 
-public class FecharFolhaModel : PageModel
+public class FecharModel : FormPageModel
 {
     private readonly MeuPontoDbContext _db;
 
-    public FecharFolhaModel(MeuPontoDbContext db)
+    [BindProperty]
+    public Folha Folha { get; set; }
+
+    public FecharModel(MeuPontoDbContext db)
     {
         _db = db;
     }
-
-    [BindProperty]
-    public Folha Folha { get; set; }
 
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {
@@ -37,6 +36,8 @@ public class FecharFolhaModel : PageModel
             Folha = folha;
         }
 
+        HoldRefererUrl();
+
         return Page();
     }
 
@@ -51,9 +52,18 @@ public class FecharFolhaModel : PageModel
         {
             var folha = await _db.Folhas.FirstOrDefaultAsync(m => m.Id == id);
 
-            await Apurar(folha);
+            if (folha == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                await Apurar(folha);
 
-            folha.StatusId = StatusEnum.Fechada;
+                Folha = folha;
+            }
+
+            Folha.StatusId = StatusEnum.Fechada;
 
             await _db.SaveChangesAsync();
         }
@@ -69,7 +79,18 @@ public class FecharFolhaModel : PageModel
             }
         }
 
-        return RedirectToPage("./Detalhar", new { id });
+        var detalharPage = Url.Page("Detalhar", new { id = Folha.Id });
+
+        AddTempSuccessMessage("Folha fechada com sucesso");
+
+        if (ShouldRedirectToRefererPage())
+        {
+            return RedirectToRefererPage();
+        }
+        else
+        {
+            return Redirect(detalharPage);
+        }
     }
 
     private async Task Apurar(Folha folha)

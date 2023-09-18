@@ -1,5 +1,5 @@
 ﻿@page
-@model MeuPonto.Modules.Pontos.Folhas.EditarFolhaModel
+@model MeuPonto.Modules.Pontos.Folhas.EditarModel
 
 @{
     ViewData["Title"] = "Editar Folha de Ponto";
@@ -214,6 +214,7 @@
 
 @section FormActions {
     <input type="hidden" asp-for="Folha.Version" />
+    <input type="hidden" asp-for="RefererUrl" />
     <button type="submit" value="Salvar" class="btn btn-primary">
         Salvar
     </button>
