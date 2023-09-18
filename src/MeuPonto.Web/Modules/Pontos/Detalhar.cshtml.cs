@@ -9,14 +9,14 @@ public class DetalharModel : PageModel
 {
     private readonly Data.MeuPontoDbContext _db;
 
+    public Ponto Ponto { get; set; }
+
+    public IList<Comprovante> Comprovantes { get; set; } = default!;
+
     public DetalharModel(Data.MeuPontoDbContext db)
     {
         _db = db;
     }
-
-    public Ponto Ponto { get; set; }
-
-    public IList<Comprovante> Comprovantes { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {

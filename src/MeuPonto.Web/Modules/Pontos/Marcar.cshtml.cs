@@ -1,16 +1,17 @@
 ﻿using MeuPonto.Data;
-using MeuPonto.Modules.Trabalhadores;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MeuPonto.Modules.Pontos;
 
-public class MarcarModel : PageModel
+public class MarcarModel : FormPageModel
 {
     private readonly MeuPontoDbContext _db;
 
     private readonly DateTimeSnapshot _dateTimeSnapshot;
+
+    [BindProperty]
+    public Ponto Ponto { get; set; }
 
     public MarcarModel(
         MeuPontoDbContext db,
@@ -31,11 +32,10 @@ public class MarcarModel : PageModel
 
         ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.Ativo && x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
 
+        HoldRefererUrl();
+
         return Page();
     }
-
-    [BindProperty]
-    public Ponto Ponto { get; set; }
 
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync()
@@ -56,8 +56,20 @@ public class MarcarModel : PageModel
         perfil.QualificaPonto(Ponto);
 
         _db.Pontos.Add(Ponto);
+
         await _db.SaveChangesAsync();
 
-        return RedirectToPage("./Detalhar", new { id = Ponto.Id });
+        var detalharPage = Url.Page("Detalhar", new { id = Ponto.Id });
+
+        AddTempSuccessMessageWithDetailLink("Ponto marcado com sucesso", detalharPage);
+
+        if (ShouldRedirectToRefererPage())
+        {
+            return RedirectToRefererPage();
+        }
+        else
+        {
+            return Redirect(detalharPage);
+        }
     }
 }

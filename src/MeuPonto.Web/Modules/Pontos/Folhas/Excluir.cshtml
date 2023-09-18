@@ -1,5 +1,5 @@
 ﻿@page
-@model MeuPonto.Modules.Pontos.Folhas.ExcluirFolhaModel
+@model MeuPonto.Modules.Pontos.Folhas.ExcluirModel
 
 @{
     ViewData["Title"] = "Excluir Folha de Ponto";
@@ -145,6 +145,7 @@
 
 @section FormActions {
     <input type="hidden" asp-for="Folha.Id" />
+    <input type="hidden" asp-for="RefererUrl" />
     <button type="submit" value="Excluir" class="btn btn-danger">
         Excluir
     </button>

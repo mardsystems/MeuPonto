@@ -7,14 +7,18 @@
     ViewData["Title"] = "Cadastro de Trabalhadores";
 }
 
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
-        <li class="breadcrumb-item active" aria-current="page">Trabalhadores</li>
-    </ol>
-</nav>
+@section Breadcrumb {
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
+            <li class="breadcrumb-item active" aria-current="page">Trabalhadores</li>
+        </ol>
+    </nav>
+}
 
-<h1>@ViewData["Title"]</h1>
+@section Title {
+    @ViewData["Title"]
+}
 
 <form class="table-responsive text-nowrap" method="get">
     <table class="table table-striped align-middle mb-3 Trabalhadores">

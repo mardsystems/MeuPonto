@@ -1,22 +1,21 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace MeuPonto.Modules.Trabalhadores;
 
 [Authorize(Policy = "Admin")]
-public class EditarModel : PageModel
+public class EditarModel : FormPageModel
 {
     private readonly Data.MeuPontoDbContext _db;
+
+    [BindProperty]
+    public Trabalhador Trabalhador { get; set; } = default!;
 
     public EditarModel(Data.MeuPontoDbContext db)
     {
         _db = db;
     }
-
-    [BindProperty]
-    public Trabalhador Trabalhador { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync(Guid id)
     {
@@ -26,11 +25,16 @@ public class EditarModel : PageModel
         }
 
         var trabalhador = await _db.Trabalhadores.FirstOrDefaultAsync(m => m.Id == id);
+
         if (trabalhador == null)
         {
             return NotFound();
         }
+        
         Trabalhador = trabalhador;
+
+        HoldRefererUrl();
+
         return Page();
     }
 
@@ -67,7 +71,18 @@ public class EditarModel : PageModel
             }
         }
 
-        return RedirectToPage("./Detalhar", new { id });
+        var detalharPage = Url.Page("Detalhar", new { id = Trabalhador.Id });
+
+        AddTempSuccessMessage("Trabalhador editado com sucesso");
+
+        if (ShouldRedirectToRefererPage())
+        {
+            return RedirectToRefererPage();
+        }
+        else
+        {
+            return Redirect(detalharPage);
+        }
     }
 
     private bool TrabalhadorExists(Guid? id)

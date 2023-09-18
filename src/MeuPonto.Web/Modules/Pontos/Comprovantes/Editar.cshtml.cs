@@ -1,23 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace MeuPonto.Modules.Pontos.Comprovantes;
 
-public class EditarComprovanteModel : PageModel
+public class EditarModel : FormPageModel
 {
     private readonly Data.MeuPontoDbContext _db;
-
-    public EditarComprovanteModel(Data.MeuPontoDbContext db)
-    {
-        _db = db;
-    }
 
     [BindProperty]
     public Comprovante Comprovante { get; set; } = default!;
 
     [BindProperty]
     public IFormFile? Imagem { get; set; }
+
+    public EditarModel(Data.MeuPontoDbContext db)
+    {
+        _db = db;
+    }
 
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {
@@ -27,11 +26,15 @@ public class EditarComprovanteModel : PageModel
         }
 
         var comprovante = await _db.Comprovantes.FirstOrDefaultAsync(m => m.Id == id);
+
         if (comprovante == null)
         {
             return NotFound();
         }
+
         Comprovante = comprovante;
+
+        HoldRefererUrl();
 
         return Page();
     }
@@ -93,7 +96,18 @@ public class EditarComprovanteModel : PageModel
             }
         }
 
-        return RedirectToPage("./Index");
+        var detalharPage = Url.Page("Detalhar", new { id = Comprovante.Id });
+
+        AddTempSuccessMessage("Comprovante editado com sucesso");
+
+        if (ShouldRedirectToRefererPage())
+        {
+            return RedirectToRefererPage();
+        }
+        else
+        {
+            return Redirect(detalharPage);
+        }
     }
 
     private bool PontoComprovanteExists(Guid? id)

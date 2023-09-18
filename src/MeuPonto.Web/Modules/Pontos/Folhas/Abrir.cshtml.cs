@@ -1,18 +1,17 @@
 ﻿using MeuPonto.Data;
-using MeuPonto.Modules.Trabalhadores;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 
 namespace MeuPonto.Modules.Pontos.Folhas;
 
-public class AbrirFolhaModel : PageModel
+public class AbrirModel : FormPageModel
 {
     private readonly MeuPontoDbContext _db;
 
-    public AbrirFolhaModel(MeuPontoDbContext db)
+    [BindProperty]
+    public Folha Folha { get; set; }
+
+    public AbrirModel(MeuPontoDbContext db)
     {
         _db = db;
     }
@@ -27,11 +26,10 @@ public class AbrirFolhaModel : PageModel
 
         Folha.StatusId = StatusEnum.Aberta;
 
+        HoldRefererUrl();
+
         return Page();
     }
-
-    [BindProperty]
-    public Folha Folha { get; set; }
 
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync(string? command)
@@ -70,19 +68,29 @@ public class AbrirFolhaModel : PageModel
 
             return Page();
         }
+
+        if (Folha.ApuracaoMensal.Dias.Count == 0)
+        {
+            Folha.ConfirmarCompetencia(perfil);
+        }
+
+        Folha.RecontextualizaFolha(transaction);
+
+        _db.Folhas.Add(Folha);
+
+        await _db.SaveChangesAsync();
+
+        var detalharPage = Url.Page("Detalhar", new { id = Folha.Id });
+
+        AddTempSuccessMessageWithDetailLink("Folha aberta com sucesso", detalharPage);
+
+        if (ShouldRedirectToRefererPage())
+        {
+            return RedirectToRefererPage();
+        }
         else
         {
-            if (Folha.ApuracaoMensal.Dias.Count == 0)
-            {
-                Folha.ConfirmarCompetencia(perfil);
-            }
-
-            Folha.RecontextualizaFolha(transaction);
-
-            _db.Folhas.Add(Folha);
-            await _db.SaveChangesAsync();
-
-            return RedirectToPage("./Detalhar", new { id = Folha.Id });
+            return Redirect(detalharPage);
         }
     }
 }

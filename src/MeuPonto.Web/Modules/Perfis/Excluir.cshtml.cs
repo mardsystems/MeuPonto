@@ -1,21 +1,20 @@
 ﻿using MeuPonto.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace MeuPonto.Modules.Perfis;
 
-public class ExcluirModel : PageModel
+public class ExcluirModel : FormPageModel
 {
     private readonly MeuPontoDbContext _db;
+
+    [BindProperty]
+    public Perfil Perfil { get; set; }
 
     public ExcluirModel(MeuPontoDbContext db)
     {
         _db = db;
     }
-
-    [BindProperty]
-    public Perfil Perfil { get; set; }
 
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {
@@ -34,6 +33,9 @@ public class ExcluirModel : PageModel
         {
             Perfil = perfil;
         }
+
+        HoldRefererUrl();
+
         return Page();
     }
 
@@ -44,22 +46,26 @@ public class ExcluirModel : PageModel
             return NotFound();
         }
 
-        try
+        var perfil = await _db.Perfis.FindByIdAsync(id, User.GetUserId());
+
+        if (perfil != null)
         {
-            var perfil = await _db.Perfis.FindByIdAsync(id, User.GetUserId());
+            Perfil = perfil;
 
-            if (perfil != null)
-            {
-                Perfil = perfil;
-                _db.Perfis.Remove(Perfil);
-                await _db.SaveChangesAsync();
-            }
-
-            return RedirectToPage("./Index");
+            _db.Perfis.Remove(Perfil);
+            
+            await _db.SaveChangesAsync();
         }
-        catch (Exception _)
+
+        AddTempSuccessMessage("Perfil excluído com sucesso");
+
+        if (ShouldRedirectToRefererPage())
         {
-            throw;
+            return RedirectToRefererPage();
+        }
+        else
+        {
+            return RedirectToPage("./Index");
         }
     }
 }

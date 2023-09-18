@@ -93,13 +93,34 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
-            @await RenderSectionAsync("Breadcrumb", required: false)
-
-            @if (IsSectionDefined("Title"))
+            @if (User.Identity?.IsAuthenticated == true)
             {
-                <h1>
-                    @await RenderSectionAsync("Title")
-                </h1>
+                @await RenderSectionAsync("Breadcrumb", required: false)
+
+                @if (IsSectionDefined("Title"))
+                {
+                    <h1>
+                        @await RenderSectionAsync("Title")
+                    </h1>
+                }
+            }
+
+            @if (TempData.ContainsKey("TextSuccessMessage"))
+            {
+                <div class="alert alert-success alert-dismissible fade show d-flex align-items-center mb-3" role="alert">
+                    <i class="bi bi-check-circle-fill flex-shrink-0 me-2"></i>
+                    <div>
+                        @(TempData["TextSuccessMessage"]).
+                        @if (TempData.ContainsKey("DetailLinkSuccessMessage"))
+                        {
+                            <a href="@TempData["DetailLinkSuccessMessage"]" target="_blank">
+                                Detalhar
+                                <i class="bi bi-link-45deg"></i>
+                            </a>
+                        }
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
             }
 
             @if (IsSectionDefined("FormActions"))

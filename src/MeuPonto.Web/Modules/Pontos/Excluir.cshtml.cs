@@ -1,22 +1,21 @@
 ﻿using MeuPonto.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace MeuPonto.Modules.Pontos;
 
-public class ExcluirModel : PageModel
+public class ExcluirModel : FormPageModel
 {
     private readonly MeuPontoDbContext _db;
+
+    [BindProperty]
+    public Ponto Ponto { get; set; }
 
     public ExcluirModel(MeuPontoDbContext db)
     {
         _db = db;
     }
-
-    [BindProperty]
-    public Ponto Ponto { get; set; }
 
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {
@@ -35,6 +34,9 @@ public class ExcluirModel : PageModel
         {
             Ponto = ponto;
         }
+
+        HoldRefererUrl();
+
         return Page();
     }
 
@@ -44,6 +46,7 @@ public class ExcluirModel : PageModel
         {
             return NotFound();
         }
+
         var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
 
         var ponto = await _db.Pontos.FirstOrDefaultAsync(m => m.Id == id);
@@ -51,10 +54,21 @@ public class ExcluirModel : PageModel
         if (ponto != null)
         {
             Ponto = ponto;
+
             _db.Pontos.Remove(Ponto);
+
             await _db.SaveChangesAsync();
         }
 
-        return RedirectToPage("./Index");
+        AddTempSuccessMessage("Ponto excluído com sucesso");
+
+        if (ShouldRedirectToRefererPage())
+        {
+            return RedirectToRefererPage();
+        }
+        else
+        {
+            return RedirectToPage("./Index");
+        }
     }
 }

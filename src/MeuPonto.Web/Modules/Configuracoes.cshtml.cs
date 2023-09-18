@@ -122,7 +122,7 @@ public class ConfiguracoesModel : PageModel
             userId = Guid.Parse(nameIdentifier.Value);
         }
 
-        Configuracoes = await _db.Configuracoes.FindAsync(userId);
+        Configuracoes = await _db.Configuracoes.FirstOrDefaultAsync(x => x.UserId == id);
 
         if (Configuracoes == null)
         {

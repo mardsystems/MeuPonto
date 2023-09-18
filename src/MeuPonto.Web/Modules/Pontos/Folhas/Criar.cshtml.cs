@@ -1,15 +1,17 @@
 ﻿using MeuPonto.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MeuPonto.Modules.Pontos.Folhas;
 
-public class CriarFolhaModel : PageModel
+public class CriarModel : FormPageModel
 {
     private readonly MeuPontoDbContext _db;
 
-    public CriarFolhaModel(MeuPontoDbContext db)
+    [BindProperty]
+    public Folha Folha { get; set; }
+
+    public CriarModel(MeuPontoDbContext db)
     {
         _db = db;
     }
@@ -22,11 +24,10 @@ public class CriarFolhaModel : PageModel
 
         Folha = FolhaFactory.CriaFolha(transaction);
 
+        HoldRefererUrl();
+
         return Page();
     }
-
-    [BindProperty]
-    public Folha Folha { get; set; }
 
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync(string? command)
@@ -65,19 +66,29 @@ public class CriarFolhaModel : PageModel
 
             return Page();
         }
+
+        if (Folha.ApuracaoMensal.Dias.Count == 0)
+        {
+            Folha.ConfirmarCompetencia(perfil);
+        }
+
+        Folha.RecontextualizaFolha(transaction);
+
+        _db.Folhas.Add(Folha);
+
+        await _db.SaveChangesAsync();
+
+        var detalharPage = Url.Page("Detalhar", new { id = Folha.Id });
+
+        AddTempSuccessMessageWithDetailLink("Folha criada com sucesso", detalharPage);
+
+        if (ShouldRedirectToRefererPage())
+        {
+            return RedirectToRefererPage();
+        }
         else
         {
-            if (Folha.ApuracaoMensal.Dias.Count == 0)
-            {
-                Folha.ConfirmarCompetencia(perfil);
-            }
-
-            Folha.RecontextualizaFolha(transaction);
-
-            _db.Folhas.Add(Folha);
-            await _db.SaveChangesAsync();
-
-            return RedirectToPage("./Detalhar", new { id = Folha.Id });
+            return Redirect(detalharPage);
         }
     }
 }

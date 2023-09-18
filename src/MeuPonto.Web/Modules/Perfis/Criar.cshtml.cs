@@ -1,14 +1,16 @@
 ﻿using MeuPonto.Data;
 using MeuPonto.Helpers;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MeuPonto.Modules.Perfis;
 
-public class CriarModel : PageModel
+public class CriarModel : FormPageModel
 {
     private readonly MeuPontoDbContext _db;
+
+    [BindProperty]
+    public Perfil Perfil { get; set; }
 
     public CriarModel(MeuPontoDbContext db)
     {
@@ -36,11 +38,10 @@ public class CriarModel : PageModel
             Perfil.JornadaTrabalhoSemanalPrevista.Semana.Add(jornadaTrabalhoDiaria);
         }
 
+        HoldRefererUrl();
+
         return Page();
     }
-
-    [BindProperty]
-    public Perfil Perfil { get; set; }
 
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync()
@@ -61,16 +62,21 @@ public class CriarModel : PageModel
             Perfil.VinculaEmpregador(empregador);
         }
 
-        try
-        {
-            _db.Perfis.Add(Perfil);
-            await _db.SaveChangesAsync();
-        }
-        catch (Exception _)
-        {
-            throw;
-        }
+        _db.Perfis.Add(Perfil);
 
-        return RedirectToPage("./Detalhar", new { id = Perfil.Id });
+        await _db.SaveChangesAsync();
+
+        var detalharPage = Url.Page("Detalhar", new { id = Perfil.Id });
+
+        AddTempSuccessMessageWithDetailLink("Perfil criado com sucesso", detalharPage);
+
+        if (ShouldRedirectToRefererPage())
+        {
+            return RedirectToRefererPage();
+        }
+        else
+        {
+            return Redirect(detalharPage);
+        }
     }
 }

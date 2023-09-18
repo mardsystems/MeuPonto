@@ -1,23 +1,22 @@
 ﻿using MeuPonto.Data;
 using MeuPonto.Helpers;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace MeuPonto.Modules.Perfis;
 
-public class EditarModel : PageModel
+public class EditarModel : FormPageModel
 {
     private readonly Data.MeuPontoDbContext _db;
+
+    [BindProperty]
+    public Perfil Perfil { get; set; } = default!;
 
     public EditarModel(Data.MeuPontoDbContext db)
     {
         _db = db;
     }
-
-    [BindProperty]
-    public Perfil Perfil { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {
@@ -27,13 +26,17 @@ public class EditarModel : PageModel
         }
 
         var perfil = await _db.Perfis.FirstOrDefaultAsync(m => m.Id == id);
+
         if (perfil == null)
         {
             return NotFound();
         }
+
         Perfil = perfil;
 
         ViewData["EmpregadorId"] = new SelectList(_db.Empregadores.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome").AddEmptyValue();
+
+        HoldRefererUrl();
 
         return Page();
     }
@@ -75,12 +78,19 @@ public class EditarModel : PageModel
                 throw;
             }
         }
-        catch (Exception _)
+
+        var detalharPage = Url.Page("Detalhar", new { id = Perfil.Id });
+
+        AddTempSuccessMessage("Perfil editado com sucesso");
+
+        if (ShouldRedirectToRefererPage())
         {
-
+            return RedirectToRefererPage();
         }
-
-        return RedirectToPage("./Detalhar", new { id = Perfil.Id });
+        else
+        {
+            return Redirect(detalharPage);
+        }
     }
 
     private bool PerfilExists(Guid? id)

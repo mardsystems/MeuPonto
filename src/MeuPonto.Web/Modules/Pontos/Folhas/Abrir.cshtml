@@ -1,5 +1,5 @@
 ﻿@page
-@model MeuPonto.Modules.Pontos.Folhas.AbrirFolhaModel
+@model MeuPonto.Modules.Pontos.Folhas.AbrirModel
 
 @{
     ViewData["Title"] = "Abrir Folha de Ponto";
@@ -186,6 +186,7 @@
 
 @section FormActions {
     <input type="hidden" asp-for="Folha.Competencia" />
+    <input type="hidden" asp-for="RefererUrl" />
     <button type="submit" value="Salvar" class="btn btn-primary">
         Salvar
     </button>

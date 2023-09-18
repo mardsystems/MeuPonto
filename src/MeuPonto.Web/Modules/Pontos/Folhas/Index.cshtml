@@ -1,19 +1,23 @@
 ﻿@page
-@model MeuPonto.Modules.Pontos.Folhas.FolhasModel
+@model MeuPonto.Modules.Pontos.Folhas.IndexModel
 
 @{
     ViewData["Title"] = "Folhas de Ponto";
 }
 
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
-        <li class="breadcrumb-item"><a asp-page="/Pontos/Index">Pontos</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Folhas</li>
-    </ol>
-</nav>
+@section Breadcrumb {
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
+            <li class="breadcrumb-item"><a asp-page="/Pontos/Index">Pontos</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Folhas</li>
+        </ol>
+    </nav>
+}
 
-<h1>@ViewData["Title"]</h1>
+@section Title {
+    @ViewData["Title"]
+}
 
 <div class="btn-group mb-3">
     <a class="btn btn-primary" asp-page="./Criar" target="_modal">

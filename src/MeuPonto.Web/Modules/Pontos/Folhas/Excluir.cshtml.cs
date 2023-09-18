@@ -1,21 +1,20 @@
 ﻿using MeuPonto.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace MeuPonto.Modules.Pontos.Folhas;
 
-public class ExcluirFolhaModel : PageModel
+public class ExcluirModel : FormPageModel
 {
     private readonly MeuPontoDbContext _db;
 
-    public ExcluirFolhaModel(MeuPontoDbContext db)
+    [BindProperty]
+    public Folha Folha { get; set; }
+
+    public ExcluirModel(MeuPontoDbContext db)
     {
         _db = db;
     }
-
-    [BindProperty]
-    public Folha Folha { get; set; }
 
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {
@@ -34,6 +33,9 @@ public class ExcluirFolhaModel : PageModel
         {
             Folha = folha;
         }
+
+        HoldRefererUrl();
+
         return Page();
     }
 
@@ -49,10 +51,21 @@ public class ExcluirFolhaModel : PageModel
         if (folha != null)
         {
             Folha = folha;
+
             _db.Folhas.Remove(Folha);
+
             await _db.SaveChangesAsync();
         }
 
-        return RedirectToPage("./Index");
+        AddTempSuccessMessage("Folha excluída com sucesso");
+
+        if (ShouldRedirectToRefererPage())
+        {
+            return RedirectToRefererPage();
+        }
+        else
+        {
+            return RedirectToPage("./Index");
+        }
     }
 }

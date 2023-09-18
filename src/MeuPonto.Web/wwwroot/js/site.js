@@ -86,7 +86,11 @@ var SITE = SITE || {};
                 const content = await response.text();
 
                 if (response.redirected) {
+                    global.document.open();
+
                     global.document.write(content);
+
+                    global.document.close();
                 }
                 else {
                     $formModalContent.html(content);
