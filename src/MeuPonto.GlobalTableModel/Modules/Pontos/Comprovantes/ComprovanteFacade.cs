@@ -4,14 +4,7 @@ public static class ComprovanteFacade
 {
     public static void ComprovaPonto(this Comprovante comprovante, Pontos.Ponto ponto)
     {
-        comprovante.Ponto = new Ponto
-        {
-            PerfilId = ponto?.PerfilId,
-            DataHora = ponto?.DataHora,
-            Perfil = ponto?.Perfil,
-            MomentoId = ponto?.MomentoId,
-            PausaId = ponto?.PausaId
-        };
+        comprovante.Ponto = ponto;
 
         comprovante.PontoId = ponto.Id;
     }

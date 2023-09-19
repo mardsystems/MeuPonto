@@ -51,6 +51,7 @@ public class IndexModel : PageModel
         if (_db.Comprovantes != null)
         {
             Comprovantes = await _db.Comprovantes
+                .Include(x => x.Ponto)
                 .Where(x => true
                     && (Ponto.PerfilId == null || x.Ponto.PerfilId == Ponto.PerfilId)
                     && (Ponto.DataHora == null || x.Ponto.DataHora == Ponto.DataHora)

@@ -1,5 +1,6 @@
 ﻿using MeuPonto.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
@@ -46,13 +47,13 @@ public class GuardarModel : FormPageModel
 
         Comprovante.RecontextualizaComprovante(transaction);
 
-        if (ModelState.ContainsKey($"{nameof(Comprovante)}.{nameof(Comprovante.PontoId)}")) ModelState.Remove($"{nameof(Comprovante)}.{nameof(Comprovante.PontoId)}");
-
-        if (ModelState.ContainsKey($"{nameof(Comprovante)}.{nameof(Comprovante.Imagem)}")) ModelState.Remove($"{nameof(Comprovante)}.{nameof(Comprovante.Imagem)}");
+        ModelState.Remove<EditarModel>(x => x.Comprovante.PontoId);
+        ModelState.Remove<EditarModel>(x => x.Comprovante.Imagem);
 
         if (!ModelState.IsValid)
         {
             ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
+
             return Page();
         }
 

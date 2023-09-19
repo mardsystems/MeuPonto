@@ -25,6 +25,7 @@ public class ExcluirModel : FormPageModel
 
         var comprovante = await _db.Comprovantes
             .Include(x => x.Ponto)
+                .ThenInclude(x => x.Perfil)
             .FirstOrDefaultAsync(m => m.Id == id);
 
         if (comprovante == null)

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 
 namespace MeuPonto.Modules.Pontos.Comprovantes;
@@ -25,7 +26,10 @@ public class EditarModel : FormPageModel
             return NotFound();
         }
 
-        var comprovante = await _db.Comprovantes.FirstOrDefaultAsync(m => m.Id == id);
+        var comprovante = await _db.Comprovantes
+            .Include(x => x.Ponto)
+                .ThenInclude(x => x.Perfil)
+            .FirstOrDefaultAsync(m => m.Id == id);
 
         if (comprovante == null)
         {
@@ -47,12 +51,18 @@ public class EditarModel : FormPageModel
 
         Comprovante.RecontextualizaComprovante(transaction, id);
 
-        if (ModelState.ContainsKey($"{nameof(Comprovante)}.{nameof(Comprovante.Imagem)}")) ModelState.Remove($"{nameof(Comprovante)}.{nameof(Comprovante.Imagem)}");
+        ModelState.Remove<EditarModel>(x => x.Comprovante.PontoId);
+        ModelState.Remove<EditarModel>(x => x.Comprovante.Imagem);
 
-        var comprovante = await _db.Comprovantes.FirstOrDefaultAsync(m => m.Id == Comprovante.Id);
+        var comprovante = await _db.Comprovantes
+            .Include(x => x.Ponto)
+                .ThenInclude(x => x.Perfil)
+            .FirstOrDefaultAsync(m => m.Id == Comprovante.Id);
 
         if (!ModelState.IsValid)
         {
+            Comprovante.Ponto = comprovante.Ponto;
+
             Comprovante.Imagem = comprovante.Imagem;
 
             return Page();
@@ -74,8 +84,6 @@ public class EditarModel : FormPageModel
             }
         }
 
-        comprovante.PontoId = Comprovante.PontoId;
-        comprovante.Ponto = Comprovante.Ponto;
         comprovante.Numero = Comprovante.Numero;
         comprovante.Imagem = imagem;
         comprovante.TipoImagemId = Comprovante.TipoImagemId;

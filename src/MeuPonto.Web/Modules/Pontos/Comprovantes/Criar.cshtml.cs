@@ -1,5 +1,6 @@
 ﻿using MeuPonto.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
@@ -30,7 +31,9 @@ public class CriarModel : FormPageModel
 
         Comprovante = ComprovanteFactory.CriaComprovante(transaction);
 
-        var ponto = await _db.Pontos.FirstOrDefaultAsync(m => m.Id == PontoId);
+        var ponto = await _db.Pontos
+            .Include(x => x.Perfil)
+            .FirstOrDefaultAsync(m => m.Id == PontoId);
 
         if (ponto != default)
         {
@@ -49,9 +52,12 @@ public class CriarModel : FormPageModel
 
         Comprovante.RecontextualizaComprovante(transaction);
 
-        if (ModelState.ContainsKey($"{nameof(Comprovante)}.{nameof(Comprovante.Imagem)}")) ModelState.Remove($"{nameof(Comprovante)}.{nameof(Comprovante.Imagem)}");
+        ModelState.Remove<CriarModel>(x => x.Comprovante.PontoId);
+        ModelState.Remove<CriarModel>(x => x.Comprovante.Imagem);
 
-        var ponto = await _db.Pontos.FirstOrDefaultAsync(m => m.Id == PontoId);
+        var ponto = await _db.Pontos
+            .Include(x => x.Perfil)
+            .FirstOrDefaultAsync(m => m.Id == PontoId);
 
         Comprovante.ComprovaPonto(ponto);
 
