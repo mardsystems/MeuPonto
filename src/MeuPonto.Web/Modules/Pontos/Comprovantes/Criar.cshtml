@@ -3,8 +3,9 @@
 
 @{
     ViewData["Title"] = "Criar Comprovante de Ponto";
-}
 
+    ViewData["Enctype"] = "multipart/form-data";
+}
 
 @section Breadcrumb {
     <nav aria-label="breadcrumb">
@@ -32,75 +33,71 @@
     </ul>
 }
 
-<form method="post" enctype="multipart/form-data">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="card mb-3">
-        <div class="card-header">
-            @Html.DisplayNameFor(model => model.Comprovante.Ponto)
-        </div>
-        <div class="card-body">
-            <dl class="row g-3 Ponto">
-                <dt class="col-sm-3 Perfil">
-                    @Html.DisplayNameFor(model => model.Comprovante.Ponto.Perfil)
-                </dt>
-                <dd class="col-sm-9 Perfil">
-                    <a class="text-decoration-none" asp-page="/Perfis/Detalhar" asp-route-id="@Model.Comprovante.Ponto?.PerfilId" title="Detalhar Perfil" target="_blank">
-                        @Html.DisplayFor(model => model.Comprovante.Ponto.Perfil.Nome)
-                        <i class="bi bi-link-45deg"></i>
-                    </a>
-                </dd>
-                <dt class="col-sm-3 DataHora">
-                    @Html.DisplayNameFor(model => model.Comprovante.Ponto.DataHora)
-                </dt>
-                <dd class="col-sm-9 DataHora">
-                    <a class="text-decoration-none" asp-page="/Pontos/Detalhar" asp-route-id="@Model.Comprovante.PontoId" title="Detalhar Ponto" target="_blank">
-                        @Html.DisplayFor(model => model.Comprovante.Ponto.DataHora)
-                        <i class="bi bi-link-45deg"></i>
-                    </a>
-                </dd>
-                <dt class="col-sm-3 Momento">
-                    @Html.DisplayNameFor(model => model.Comprovante.Ponto.MomentoId)
-                </dt>
-                <dd class="col-sm-9 Momento">
-                    @Html.DisplayFor(model => model.Comprovante.Ponto.MomentoId)
-                    <input asp-for="Comprovante.Ponto.MomentoId" type="hidden" />
-                </dd>
-                <dt class="col-sm-3 Pausa">
-                    @Html.DisplayNameFor(model => model.Comprovante.Ponto.PausaId)
-                </dt>
-                <dd class="col-sm-9 Pausa">
-                    @Html.DisplayFor(model => model.Comprovante.Ponto.PausaId)
-                    <input asp-for="Comprovante.Ponto.PausaId" type="hidden" />
-                </dd>
-            </dl>
-            <button type="submit" value="Procurar" class="btn btn-secondary">
-                <i class="bi bi-binoculars"></i>
-                Procurar
-            </button>
-        </div>
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="card mb-3">
+    <div class="card-header">
+        @Html.DisplayNameFor(model => model.Comprovante.Ponto)
     </div>
-    <div class="row mb-3">
-        <label asp-for="Imagem" class="col-sm-3 col-form-label"></label>
-        <div class="col-sm-9">
-            <input asp-for="Imagem" class="form-control" />
-            <span asp-validation-for="Imagem" class="text-danger"></span>
-        </div>
+    <div class="card-body">
+        <dl class="row g-3 Ponto">
+            <dt class="col-sm-3 Perfil">
+                @Html.DisplayNameFor(model => model.Comprovante.Ponto.Perfil)
+            </dt>
+            <dd class="col-sm-9 Perfil">
+                <a class="text-decoration-none" asp-page="/Perfis/Detalhar" asp-route-id="@Model.Comprovante.Ponto?.PerfilId" title="Detalhar Perfil" target="_blank">
+                    @Html.DisplayFor(model => model.Comprovante.Ponto.Perfil.Nome)
+                    <i class="bi bi-link-45deg"></i>
+                </a>
+            </dd>
+            <dt class="col-sm-3 DataHora">
+                @Html.DisplayNameFor(model => model.Comprovante.Ponto.DataHora)
+            </dt>
+            <dd class="col-sm-9 DataHora">
+                <a class="text-decoration-none" asp-page="/Pontos/Detalhar" asp-route-id="@Model.Comprovante.PontoId" title="Detalhar Ponto" target="_blank">
+                    @Html.DisplayFor(model => model.Comprovante.Ponto.DataHora)
+                    <i class="bi bi-link-45deg"></i>
+                </a>
+            </dd>
+            <dt class="col-sm-3 Momento">
+                @Html.DisplayNameFor(model => model.Comprovante.Ponto.MomentoId)
+            </dt>
+            <dd class="col-sm-9 Momento">
+                @Html.DisplayFor(model => model.Comprovante.Ponto.MomentoId)
+            </dd>
+            <dt class="col-sm-3 Pausa">
+                @Html.DisplayNameFor(model => model.Comprovante.Ponto.PausaId)
+            </dt>
+            <dd class="col-sm-9 Pausa">
+                @Html.DisplayFor(model => model.Comprovante.Ponto.PausaId)
+            </dd>
+        </dl>
+        <button type="submit" value="Procurar" class="btn btn-secondary">
+            <i class="bi bi-binoculars"></i>
+            Procurar
+        </button>
     </div>
-    <div class="row mb-3">
-        <label asp-for="Comprovante.TipoImagemId" class="col-sm-3 col-form-label"></label>
-        <div class="col-sm-9">
-            <select asp-for="Comprovante.TipoImagemId" class="form-select" asp-items="Html.GetEnumSelectList<TipoImagemEnum>()"></select>
-            <span asp-validation-for="Comprovante.TipoImagemId" class="text-danger"></span>
-        </div>
+</div>
+<div class="row mb-3">
+    <label asp-for="Imagem" class="col-sm-3 col-form-label"></label>
+    <div class="col-sm-9">
+        <input asp-for="Imagem" class="form-control" />
+        <span asp-validation-for="Imagem" class="text-danger"></span>
     </div>
-    <div class="row mb-3">
-        <label asp-for="Comprovante.Numero" class="col-sm-3 col-form-label"></label>
-        <div class="col-sm-9">
-            <input asp-for="Comprovante.Numero" class="form-control" />
-            <span asp-validation-for="Comprovante.Numero" class="text-danger"></span>
-        </div>
+</div>
+<div class="row mb-3">
+    <label asp-for="Comprovante.TipoImagemId" class="col-sm-3 col-form-label"></label>
+    <div class="col-sm-9">
+        <select asp-for="Comprovante.TipoImagemId" class="form-select" asp-items="Html.GetEnumSelectList<TipoImagemEnum>()"></select>
+        <span asp-validation-for="Comprovante.TipoImagemId" class="text-danger"></span>
     </div>
-</form>
+</div>
+<div class="row mb-3">
+    <label asp-for="Comprovante.Numero" class="col-sm-3 col-form-label"></label>
+    <div class="col-sm-9">
+        <input asp-for="Comprovante.Numero" class="form-control" />
+        <span asp-validation-for="Comprovante.Numero" class="text-danger"></span>
+    </div>
+</div>
 
 @section FormActions {
     <input type="hidden" asp-for="RefererUrl" />
