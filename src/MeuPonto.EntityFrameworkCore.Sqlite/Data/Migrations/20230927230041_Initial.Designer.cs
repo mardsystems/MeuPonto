@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MeuPonto.Data.Migrations
 {
     [DbContext(typeof(MeuPontoDbContext))]
-    [Migration("20230914213716_Initial")]
+    [Migration("20230927230041_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -435,16 +435,7 @@ namespace MeuPonto.Data.Migrations
                             b1.Property<Guid>("FolhaId")
                                 .HasColumnType("TEXT");
 
-                            b1.Property<TimeSpan?>("DiferencaTempoTotal")
-                                .HasColumnType("TEXT");
-
-                            b1.Property<TimeSpan?>("TempoTotalApurado")
-                                .HasColumnType("TEXT");
-
                             b1.Property<TimeSpan?>("TempoTotalPeriodoAnterior")
-                                .HasColumnType("TEXT");
-
-                            b1.Property<TimeSpan?>("TempoTotalPrevisto")
                                 .HasColumnType("TEXT");
 
                             b1.HasKey("FolhaId");

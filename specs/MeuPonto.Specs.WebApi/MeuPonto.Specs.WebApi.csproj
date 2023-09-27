@@ -4,7 +4,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RootNamespace>MeuPonto</RootNamespace>
-    <Configurations>Debug;Release;Debug_Web_Cosmos;Release_Web_Cosmos;Debug_Web_Sqlite;Release_Web_Sqlite</Configurations>
+    <Configurations>Debug;Release;Debug_Cosmos;Release_Cosmos;Debug_Sqlite;Release_Sqlite;Debug_SqlServer;Release_SqlServer</Configurations>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.0" />

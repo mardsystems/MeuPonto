@@ -54,9 +54,6 @@ public class MeuPontoDbContext : DbContext
                 y.Property(x => x.TempoAbonado).HasConversion<long>();
             });
 
-            x.Property(x => x.TempoTotalPrevisto).HasConversion<long>();
-            x.Property(x => x.TempoTotalApurado).HasConversion<long>();
-            x.Property(x => x.DiferencaTempoTotal).HasConversion<long>();
             x.Property(x => x.TempoTotalPeriodoAnterior).HasConversion<long>();
         });
 
@@ -67,8 +64,7 @@ public class MeuPontoDbContext : DbContext
             .ToTable("Comprovantes");
 
         modelBuilder.Entity<Trabalhador>()
-            .ToTable("Trabalhadores")
-            .HasNoKey();
+            .ToTable("Trabalhadores");
 
         modelBuilder.Entity<Configuracoes>()
             .ToTable("Configuracoes")
@@ -76,9 +72,12 @@ public class MeuPontoDbContext : DbContext
 
         //
 
+        modelBuilder.Entity<Trabalhador>().Property(b => b.CreationDate).HasDefaultValueSql("getdate()");
+        modelBuilder.Entity<Empregador>().Property(b => b.CreationDate).HasDefaultValueSql("getdate()");
         modelBuilder.Entity<Perfil>().Property(b => b.CreationDate).HasDefaultValueSql("getdate()");
         modelBuilder.Entity<Ponto>().Property(b => b.CreationDate).HasDefaultValueSql("getdate()");
         modelBuilder.Entity<Comprovante>().Property(b => b.CreationDate).HasDefaultValueSql("getdate()");
+        modelBuilder.Entity<Folha>().Property(b => b.CreationDate).HasDefaultValueSql("getdate()");
 
         //
 
