@@ -432,16 +432,7 @@ namespace MeuPonto.Data.Migrations
                             b1.Property<Guid>("FolhaId")
                                 .HasColumnType("TEXT");
 
-                            b1.Property<TimeSpan?>("DiferencaTempoTotal")
-                                .HasColumnType("TEXT");
-
-                            b1.Property<TimeSpan?>("TempoTotalApurado")
-                                .HasColumnType("TEXT");
-
                             b1.Property<TimeSpan?>("TempoTotalPeriodoAnterior")
-                                .HasColumnType("TEXT");
-
-                            b1.Property<TimeSpan?>("TempoTotalPrevisto")
                                 .HasColumnType("TEXT");
 
                             b1.HasKey("FolhaId");

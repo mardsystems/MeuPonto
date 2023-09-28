@@ -1,10 +1,12 @@
-﻿namespace MeuPonto.Infrastructure;
+﻿using Microsoft.Extensions.Configuration;
+
+namespace MeuPonto.Infrastructure;
 
 public static class InfrastructureModule
 {
-    public static IServiceCollection AddInfrastructure(this IServiceCollection services)
+    public static IServiceCollection AddInfrastructure(this IServiceCollection services,IConfiguration configuration)
     {
-        services.AddDbServices();
+        services.AddDbServices(configuration);
 
         //
 

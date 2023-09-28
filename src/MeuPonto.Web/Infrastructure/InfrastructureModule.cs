@@ -1,7 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-
-namespace MeuPonto.Infrastructure;
+﻿namespace MeuPonto.Infrastructure;
 
 public static class InfrastructureModule
 {

@@ -28,10 +28,10 @@ jobs:
         run: dotnet test tests/MeuPonto.Web.Tests/MeuPonto.Web.Tests.csproj --configuration Release --verbosity normal
 
       - name: Build Web
-        run: dotnet build src/MeuPonto.Web/MeuPonto.Web.csproj --configuration Release_Web_Cosmos
+        run: dotnet build src/MeuPonto.Web/MeuPonto.Web.csproj --configuration Release_Cosmos
 
       - name: Publish Web
-        run: dotnet publish src/MeuPonto.Web/MeuPonto.Web.csproj --configuration Release_Web_Cosmos -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish src/MeuPonto.Web/MeuPonto.Web.csproj --configuration Release_Cosmos -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -16,8 +17,8 @@ namespace MeuPonto.Data.Migrations
                 name: "Configuracoes",
                 columns: table => new
                 {
-                    UserId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    JavascriptIsEnabled = table.Column<bool>(type: "INTEGER", nullable: false)
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    JavascriptIsEnabled = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -27,11 +28,11 @@ namespace MeuPonto.Data.Migrations
                 name: "Empregadores",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Nome = table.Column<string>(type: "TEXT", maxLength: 36, nullable: false),
-                    TrabalhadorId = table.Column<Guid>(type: "TEXT", nullable: true),
-                    CreationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    Version = table.Column<byte[]>(type: "BLOB", rowVersion: true, nullable: true)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    TrabalhadorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "getdate()"),
+                    Version = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -42,8 +43,8 @@ namespace MeuPonto.Data.Migrations
                 name: "Momento",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false),
-                    Nome = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -54,8 +55,8 @@ namespace MeuPonto.Data.Migrations
                 name: "Pausa",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false),
-                    Nome = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -66,8 +67,8 @@ namespace MeuPonto.Data.Migrations
                 name: "Status",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false),
-                    Nome = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -78,8 +79,8 @@ namespace MeuPonto.Data.Migrations
                 name: "TipoImagem",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false),
-                    Nome = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -90,10 +91,10 @@ namespace MeuPonto.Data.Migrations
                 name: "Trabalhadores",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    CustomerSubscription_SubscriptionPlanId = table.Column<int>(type: "INTEGER", nullable: true),
-                    CreationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    Version = table.Column<byte[]>(type: "BLOB", rowVersion: true, nullable: true)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CustomerSubscription_SubscriptionPlanId = table.Column<int>(type: "int", nullable: true),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "getdate()"),
+                    Version = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -104,13 +105,13 @@ namespace MeuPonto.Data.Migrations
                 name: "Perfis",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Nome = table.Column<string>(type: "TEXT", maxLength: 36, nullable: false),
-                    Ativo = table.Column<bool>(type: "INTEGER", nullable: false),
-                    EmpregadorId = table.Column<Guid>(type: "TEXT", nullable: true),
-                    TrabalhadorId = table.Column<Guid>(type: "TEXT", nullable: true),
-                    CreationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    Version = table.Column<byte[]>(type: "BLOB", rowVersion: true, nullable: true)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    Ativo = table.Column<bool>(type: "bit", nullable: false),
+                    EmpregadorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    TrabalhadorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "getdate()"),
+                    Version = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -126,18 +127,15 @@ namespace MeuPonto.Data.Migrations
                 name: "Folhas",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    PerfilId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Competencia = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    StatusId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Observacao = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
-                    ApuracaoMensal_TempoTotalPrevisto = table.Column<TimeSpan>(type: "TEXT", nullable: true),
-                    ApuracaoMensal_TempoTotalApurado = table.Column<TimeSpan>(type: "TEXT", nullable: true),
-                    ApuracaoMensal_DiferencaTempoTotal = table.Column<TimeSpan>(type: "TEXT", nullable: true),
-                    ApuracaoMensal_TempoTotalPeriodoAnterior = table.Column<TimeSpan>(type: "TEXT", nullable: true),
-                    TrabalhadorId = table.Column<Guid>(type: "TEXT", nullable: true),
-                    CreationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    Version = table.Column<byte[]>(type: "BLOB", rowVersion: true, nullable: true)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PerfilId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Competencia = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StatusId = table.Column<int>(type: "int", nullable: false),
+                    Observacao = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    ApuracaoMensal_TempoTotalPeriodoAnterior = table.Column<long>(type: "bigint", nullable: true),
+                    TrabalhadorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "getdate()"),
+                    Version = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -154,9 +152,9 @@ namespace MeuPonto.Data.Migrations
                 name: "JornadaTrabalhoDiaria",
                 columns: table => new
                 {
-                    DiaSemana = table.Column<int>(type: "INTEGER", nullable: false),
-                    PerfilId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Tempo = table.Column<TimeSpan>(type: "TEXT", nullable: false)
+                    DiaSemana = table.Column<int>(type: "int", nullable: false),
+                    PerfilId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Tempo = table.Column<TimeSpan>(type: "time", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -173,16 +171,16 @@ namespace MeuPonto.Data.Migrations
                 name: "Pontos",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    PerfilId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    DataHora = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    MomentoId = table.Column<int>(type: "INTEGER", nullable: false),
-                    PausaId = table.Column<int>(type: "INTEGER", nullable: true),
-                    Estimado = table.Column<bool>(type: "INTEGER", nullable: false),
-                    Observacao = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
-                    TrabalhadorId = table.Column<Guid>(type: "TEXT", nullable: true),
-                    CreationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    Version = table.Column<byte[]>(type: "BLOB", rowVersion: true, nullable: true)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PerfilId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DataHora = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    MomentoId = table.Column<int>(type: "int", nullable: false),
+                    PausaId = table.Column<int>(type: "int", nullable: true),
+                    Estimado = table.Column<bool>(type: "bit", nullable: false),
+                    Observacao = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    TrabalhadorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "getdate()"),
+                    Version = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -199,14 +197,14 @@ namespace MeuPonto.Data.Migrations
                 name: "ApuracaoDiaria",
                 columns: table => new
                 {
-                    Dia = table.Column<int>(type: "INTEGER", nullable: false),
-                    FolhaId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    TempoPrevisto = table.Column<TimeSpan>(type: "TEXT", nullable: false),
-                    TempoApurado = table.Column<TimeSpan>(type: "TEXT", nullable: true),
-                    DiferencaTempo = table.Column<TimeSpan>(type: "TEXT", nullable: true),
-                    TempoAbonado = table.Column<TimeSpan>(type: "TEXT", nullable: true),
-                    Feriado = table.Column<bool>(type: "INTEGER", nullable: false),
-                    Falta = table.Column<bool>(type: "INTEGER", nullable: false)
+                    Dia = table.Column<int>(type: "int", nullable: false),
+                    FolhaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TempoPrevisto = table.Column<long>(type: "bigint", nullable: false),
+                    TempoApurado = table.Column<long>(type: "bigint", nullable: true),
+                    DiferencaTempo = table.Column<long>(type: "bigint", nullable: true),
+                    TempoAbonado = table.Column<long>(type: "bigint", nullable: true),
+                    Feriado = table.Column<bool>(type: "bit", nullable: false),
+                    Falta = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -223,14 +221,14 @@ namespace MeuPonto.Data.Migrations
                 name: "Comprovantes",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    PontoId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Numero = table.Column<string>(type: "TEXT", maxLength: 16, nullable: true),
-                    Imagem = table.Column<byte[]>(type: "BLOB", nullable: false),
-                    TipoImagemId = table.Column<int>(type: "INTEGER", nullable: false),
-                    TrabalhadorId = table.Column<Guid>(type: "TEXT", nullable: true),
-                    CreationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    Version = table.Column<byte[]>(type: "BLOB", rowVersion: true, nullable: true)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PontoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Numero = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: true),
+                    Imagem = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    TipoImagemId = table.Column<int>(type: "int", nullable: false),
+                    TrabalhadorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "getdate()"),
+                    Version = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {

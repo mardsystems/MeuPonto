@@ -17,19 +17,18 @@ namespace MeuPonto.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.14")
+                .HasAnnotation("ProductVersion", "7.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("MeuPonto.Modules.ConfiguracaoPorUsuario", b =>
+            modelBuilder.Entity("MeuPonto.Modules.Configuracoes", b =>
                 {
                     b.Property<bool>("JavascriptIsEnabled")
                         .HasColumnType("bit");
 
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.ToTable("Configuracoes", (string)null);
                 });
@@ -40,29 +39,18 @@ namespace MeuPonto.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Cnpj")
-                        .HasMaxLength(14)
-                        .HasColumnType("nvarchar(14)");
-
-                    b.Property<string>("Cpf")
-                        .HasMaxLength(11)
-                        .HasColumnType("nvarchar(11)");
-
                     b.Property<DateTime?>("CreationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Endereco")
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
-
-                    b.Property<string>("InscricaoEstadual")
-                        .HasMaxLength(12)
-                        .HasColumnType("nvarchar(12)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(36)
                         .HasColumnType("nvarchar(36)");
+
+                    b.Property<Guid?>("TrabalhadorId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<byte[]>("Version")
                         .IsConcurrencyToken()
@@ -91,14 +79,13 @@ namespace MeuPonto.Data.Migrations
                     b.Property<Guid?>("EmpregadorId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Matricula")
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(36)
                         .HasColumnType("nvarchar(36)");
+
+                    b.Property<Guid?>("TrabalhadorId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<byte[]>("Version")
                         .IsConcurrencyToken()
@@ -138,6 +125,9 @@ namespace MeuPonto.Data.Migrations
                     b.Property<int>("TipoImagemId")
                         .HasColumnType("int");
 
+                    b.Property<Guid?>("TrabalhadorId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<byte[]>("Version")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate()
@@ -146,8 +136,6 @@ namespace MeuPonto.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("PontoId");
-
-                    b.HasIndex("TipoImagemId");
 
                     b.ToTable("Comprovantes", (string)null);
                 });
@@ -189,7 +177,9 @@ namespace MeuPonto.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("CreationDate")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<string>("Observacao")
                         .HasMaxLength(255)
@@ -202,6 +192,9 @@ namespace MeuPonto.Data.Migrations
                     b.Property<int>("StatusId")
                         .HasColumnType("int");
 
+                    b.Property<Guid?>("TrabalhadorId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<byte[]>("Version")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate()
@@ -210,8 +203,6 @@ namespace MeuPonto.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("PerfilId");
-
-                    b.HasIndex("StatusId");
 
                     b.ToTable("Folhas", (string)null);
                 });
@@ -351,6 +342,9 @@ namespace MeuPonto.Data.Migrations
                         .IsRequired()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("TrabalhadorId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<byte[]>("Version")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate()
@@ -358,29 +352,28 @@ namespace MeuPonto.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MomentoId");
-
-                    b.HasIndex("PausaId");
-
                     b.HasIndex("PerfilId");
 
                     b.ToTable("Pontos", (string)null);
                 });
 
-            modelBuilder.Entity("MeuPonto.Modules.Trabalhador", b =>
+            modelBuilder.Entity("MeuPonto.Modules.Trabalhadores.Trabalhador", b =>
                 {
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Pis")
-                        .HasMaxLength(12)
-                        .HasColumnType("nvarchar(12)");
+                    b.Property<DateTime?>("CreationDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
 
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.HasKey("Id");
 
                     b.ToTable("Trabalhadores", (string)null);
                 });
@@ -440,15 +433,7 @@ namespace MeuPonto.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MeuPonto.Modules.Pontos.Comprovantes.TipoImagem", "TipoImagem")
-                        .WithMany()
-                        .HasForeignKey("TipoImagemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Ponto");
-
-                    b.Navigation("TipoImagem");
                 });
 
             modelBuilder.Entity("MeuPonto.Modules.Pontos.Folhas.Folha", b =>
@@ -459,27 +444,12 @@ namespace MeuPonto.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MeuPonto.Modules.Pontos.Folhas.Status", "Status")
-                        .WithMany()
-                        .HasForeignKey("StatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.OwnsOne("MeuPonto.Modules.Pontos.Folhas.ApuracaoMensal", "ApuracaoMensal", b1 =>
                         {
                             b1.Property<Guid>("FolhaId")
                                 .HasColumnType("uniqueidentifier");
 
-                            b1.Property<long?>("DiferencaTempoTotal")
-                                .HasColumnType("bigint");
-
-                            b1.Property<long?>("TempoTotalApurado")
-                                .HasColumnType("bigint");
-
                             b1.Property<long?>("TempoTotalPeriodoAnterior")
-                                .HasColumnType("bigint");
-
-                            b1.Property<long?>("TempoTotalPrevisto")
                                 .HasColumnType("bigint");
 
                             b1.HasKey("FolhaId");
@@ -530,33 +500,38 @@ namespace MeuPonto.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Perfil");
-
-                    b.Navigation("Status");
                 });
 
             modelBuilder.Entity("MeuPonto.Modules.Pontos.Ponto", b =>
                 {
-                    b.HasOne("MeuPonto.Modules.Pontos.Momento", "Momento")
-                        .WithMany()
-                        .HasForeignKey("MomentoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MeuPonto.Modules.Pontos.Pausa", "Pausa")
-                        .WithMany()
-                        .HasForeignKey("PausaId");
-
                     b.HasOne("MeuPonto.Modules.Perfis.Perfil", "Perfil")
                         .WithMany()
                         .HasForeignKey("PerfilId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Momento");
-
-                    b.Navigation("Pausa");
-
                     b.Navigation("Perfil");
+                });
+
+            modelBuilder.Entity("MeuPonto.Modules.Trabalhadores.Trabalhador", b =>
+                {
+                    b.OwnsOne("MeuPonto.Billing.CustomerSubscription", "CustomerSubscription", b1 =>
+                        {
+                            b1.Property<Guid>("TrabalhadorId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<int>("SubscriptionPlanId")
+                                .HasColumnType("int");
+
+                            b1.HasKey("TrabalhadorId");
+
+                            b1.ToTable("Trabalhadores");
+
+                            b1.WithOwner()
+                                .HasForeignKey("TrabalhadorId");
+                        });
+
+                    b.Navigation("CustomerSubscription");
                 });
 
             modelBuilder.Entity("MeuPonto.Modules.Pontos.Ponto", b =>

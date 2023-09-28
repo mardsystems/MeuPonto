@@ -1,5 +1,6 @@
 using MeuPonto.Cache;
 using MeuPonto.Data;
+using MeuPonto.Infrastructure;
 using MeuPonto.Modules.Trabalhadores;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -19,36 +20,6 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
-
-#if INFRA_COSMOS
-        {
-            var endpointUri = builder.Configuration.GetConnectionString("EndpointUri") ?? throw new InvalidOperationException("EndpointUri not found.");
-            var primaryKey = builder.Configuration.GetConnectionString("PrimaryKey") ?? throw new InvalidOperationException("PrimaryKey not found.");
-
-            builder.Services.AddDbContext<MeuPontoDbContext>(options =>
-                options.UseCosmos(endpointUri, primaryKey, databaseName: "MeuPonto"));
-        }
-#endif
-
-#if INFRA_SQLITE
-        {
-            var basePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-
-            var dataSource = Path.Combine(basePath, "MeuPonto.db");
-
-            builder.Services.AddDbContext<MeuPontoDbContext>(options =>
-                options.UseSqlite($"Data Source={dataSource}", b => b.MigrationsAssembly("MeuPonto.EntityFrameworkCore.Sqlite")));
-        }
-#endif
-
-#if INFRA_SQLSERVER
-        {
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-
-            builder.Services.AddDbContext<MeuPontoDbContext>(options =>
-                options.UseSqlServer(connectionString, b => b.MigrationsAssembly("MeuPonto.EntityFrameworkCore.SqlServer")));
-        }
-#endif
 
         builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -132,6 +103,7 @@ public class Program
                 policy.RequireClaim("SubscriptionPlanId", Billing.SubscriptionPlanEnum.Silver.ToString(), Billing.SubscriptionPlanEnum.Gold.ToString());
             });
         });
+
         builder.Services
             .AddRazorPages(options =>
             {
@@ -153,6 +125,8 @@ public class Program
         builder.Services.AddTransient(p => new DateTimeSnapshot(DateTime.Now));
 
         builder.Services.AddTransient<IClaimsTransformation, MyClaimsTransformation>();
+
+        builder.Services.AddInfrastructure(builder.Configuration);
 
         var app = builder.Build();
 
@@ -194,31 +168,7 @@ public class Program
         app.MapControllers();
         app.MapFallbackToFile("app/index.html");
 
-#if INFRA_SQLITE || INFRA_SQLSERVER
-        using (var scope = app.Services.CreateScope())
-        {
-            var scopedServices = scope.ServiceProvider;
-            var db = scopedServices.GetRequiredService<MeuPontoDbContext>();
-            var logger = scopedServices
-                .GetRequiredService<ILogger<MeuPontoDbContext>>();
-
-            logger.LogDebug("Starting database migration");
-
-            db.Database.MigrateAsync();
-
-            logger.LogDebug("Database migration finished");
-
-            try
-            {
-                //Utilities.InitializeDbForTests(db);
-            }
-            catch (Exception ex)
-            {
-                logger.LogError(ex, "An error occurred seeding the " +
-                    "database with test messages. Error: {Message}", ex.Message);
-            }
-        }
-#endif
+        DbModule.EnsureDatabaseExists(app.Services);
 
         app.Run();
     }

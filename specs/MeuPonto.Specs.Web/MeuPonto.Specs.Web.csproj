@@ -4,24 +4,30 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RootNamespace>MeuPonto</RootNamespace>
-    <Configurations>Debug;Release;Debug_Web_Cosmos;Release_Web_Cosmos;Debug_Web_Sqlite;Release_Web_Sqlite</Configurations>
+    <Configurations>Debug;Release;Debug_Cosmos;Release_Cosmos;Debug_Sqlite;Release_Sqlite;Debug_SqlServer;Release_SqlServer</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>$(DefineConstants);INFRA_SQLITE</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Web_Sqlite|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Sqlite|AnyCPU'">
     <DefineConstants>$(DefineConstants);INFRA_SQLITE</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Web_Cosmos|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_SqlServer|AnyCPU'">
+    <DefineConstants>$(DefineConstants);INFRA_SQLSERVER</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Cosmos|AnyCPU'">
     <DefineConstants>$(DefineConstants);INFRA_COSMOS</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DefineConstants>$(DefineConstants);INFRA_SQLITE</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Web_Sqlite|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Sqlite|AnyCPU'">
     <DefineConstants>$(DefineConstants);INFRA_SQLITE</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Web_Cosmos|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_SqlServer|AnyCPU'">
+    <DefineConstants>$(DefineConstants);INFRA_SQLSERVER</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Cosmos|AnyCPU'">
     <DefineConstants>$(DefineConstants);INFRA_COSMOS</DefineConstants>
   </PropertyGroup>
   <ItemGroup>

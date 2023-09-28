@@ -1,8 +1,11 @@
 ﻿using CommunityToolkit.Maui;
 using MeuPonto.Infrastructure;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using System.Reflection;
 
 namespace MeuPonto;
+
 public static class MauiProgram
 {
     public static MauiApp CreateMauiApp()
@@ -17,23 +20,20 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
 
+        builder.Configuration
+            .AddUserSecrets(Assembly.GetExecutingAssembly());
+
 #if DEBUG
-		builder.Logging.AddDebug();
+        builder.Logging.AddDebug();
 #endif
 
         builder.Services.AddWindows();
 
-        builder.Services.AddInfrastructure();
+        builder.Services.AddInfrastructure(builder.Configuration);
 
         var app = builder.Build();
 
-        //using (var scope = app.Services.CreateScope())
-        //{
-        //    var db = scope.ServiceProvider.GetService<MeuPontoDbContext>();
-
-        //    db.Database.EnsureDeleted();
-        //    db.Database.Migrate();
-        //}
+        DbModule.EnsureDatabaseExists(app.Services);
 
         return app;
     }

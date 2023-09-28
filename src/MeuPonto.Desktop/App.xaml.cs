@@ -3,6 +3,7 @@ using MeuPonto.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Globalization;
 using System.IO;
@@ -42,21 +43,13 @@ public partial class App : Application
 
         var serviceCollection = new ServiceCollection();
 
-        {
-            var endpointUri = Configuration.GetConnectionString("EndpointUri") ?? throw new InvalidOperationException("EndpointUri not found.");
-            var primaryKey = Configuration.GetConnectionString("PrimaryKey") ?? throw new InvalidOperationException("PrimaryKey not found.");
-
-            serviceCollection.AddDbContext<MeuPontoDbContext>(options =>
-                options.UseCosmos(endpointUri, primaryKey, databaseName: "MeuPonto"));
-        }
+        serviceCollection.AddLogging();
 
         ConfigureServices(serviceCollection);
 
         ServiceProvider = serviceCollection.BuildServiceProvider(validateScopes: true);
 
-        var serviceScopeFactory = ServiceProvider.GetRequiredService<IServiceScopeFactory>();
-
-        //await DbModule.EnsureDatabaseCreatedAsync(serviceScopeFactory);
+        await DbModule.EnsureDatabaseExistsAsync(ServiceProvider);
 
         var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
 
@@ -67,6 +60,6 @@ public partial class App : Application
     {
         services.AddWindows();
 
-        services.AddInfrastructure();
+        services.AddInfrastructure(Configuration);
     }
 }
