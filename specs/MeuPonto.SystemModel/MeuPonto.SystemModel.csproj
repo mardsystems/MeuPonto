@@ -11,7 +11,4 @@
     <EmbeddedResource Remove="Support\**" />
     <None Remove="Support\**" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MeuPonto.ConceptualModel\MeuPonto.ConceptualModel.csproj" />
-  </ItemGroup>
 </Project>

@@ -37,12 +37,12 @@ public class CadastroPerfisContext
 
     public string NomePerfil { get; private set; }
 
-    public void Define(Concepts.Perfil perfilCadastrado)
+    public void Define(Perfil perfilCadastrado)
     {
         PerfilCadastrado = perfilCadastrado;
 
         NomePerfil = perfilCadastrado.Nome;
     }
 
-    public Concepts.Perfil PerfilCadastrado { get; private set; }
+    public Perfil PerfilCadastrado { get; private set; }
 }

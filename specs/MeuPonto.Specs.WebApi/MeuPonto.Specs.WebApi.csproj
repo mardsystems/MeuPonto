@@ -15,7 +15,5 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\MeuPonto.WebApi\MeuPonto.WebApi.csproj" />
-    <ProjectReference Include="..\MeuPonto.ConceptualModel\MeuPonto.ConceptualModel.csproj" />
-    <ProjectReference Include="..\MeuPonto.SystemModel\MeuPonto.SystemModel.csproj" />
   </ItemGroup>
 </Project>

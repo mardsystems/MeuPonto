@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MeuPonto.Modules.Pontos.Comprovantes;
 
-public class Comprovante : GlobalTableEntity, Concepts.Comprovante
+public class Comprovante : GlobalTableEntity
 {
     [Required]
     [DisplayName("Ponto")]
@@ -11,7 +11,6 @@ public class Comprovante : GlobalTableEntity, Concepts.Comprovante
 
     [DisplayName("Ponto")]
     public Ponto? Ponto { get; set; }
-    Concepts.Ponto? Concepts.Comprovante.Ponto => Ponto;
 
     [MaxLength(16)]
     [DisplayName("Número")]
@@ -24,7 +23,6 @@ public class Comprovante : GlobalTableEntity, Concepts.Comprovante
     [Required]
     [DisplayName("Tipo Imagem")]
     public TipoImagemEnum? TipoImagemId { get; set; }
-    string? Concepts.Comprovante.TipoImagem => TipoImagemId?.GetDisplayName();
 
     public string? UserId { get; set; }
 }

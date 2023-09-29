@@ -12,8 +12,6 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.9" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\specs\MeuPonto.ConceptualModel\MeuPonto.ConceptualModel.csproj" />
-    <ProjectReference Include="..\..\specs\MeuPonto.SystemModel\MeuPonto.SystemModel.csproj" />
     <ProjectReference Include="..\System.Extensions\System.Extensions.csproj" />
   </ItemGroup>
 </Project>

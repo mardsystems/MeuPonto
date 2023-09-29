@@ -40,6 +40,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\MeuPonto.Web\MeuPonto.Web.csproj" />
-    <ProjectReference Include="..\MeuPonto.SystemModel\MeuPonto.SystemModel.csproj" />
+    <ProjectReference Include="..\..\src\System.Extensions\System.Extensions.csproj" />
   </ItemGroup>
 </Project>

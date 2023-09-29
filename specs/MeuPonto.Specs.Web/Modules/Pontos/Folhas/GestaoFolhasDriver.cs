@@ -5,7 +5,7 @@ using System.Globalization;
 
 namespace MeuPonto.Modules.Pontos.Folhas;
 
-public class GestaoFolhasPageDriver : GestaoFolhasInterface
+public class GestaoFolhasDriver
 {
     private readonly AngleSharpContext _angleSharp;
 
@@ -15,7 +15,7 @@ public class GestaoFolhasPageDriver : GestaoFolhasInterface
 
     public IHtmlAnchorElement FechamentoFolhaAnchor { get; private set; }
 
-    public GestaoFolhasPageDriver(AngleSharpContext angleSharp)
+    public GestaoFolhasDriver(AngleSharpContext angleSharp)
     {
         _angleSharp = angleSharp;
     }
@@ -29,7 +29,7 @@ public class GestaoFolhasPageDriver : GestaoFolhasInterface
         AberturaFolhaAnchor.Should().NotBeNull("'a gestão de folhas deve ter um link para a abertura de uma folha'");
     }
 
-    private void Identifica(Concepts.Folha folha)
+    private void Identifica(Folha folha)
     {
         var table = Document.GetTable("Folhas");
 
@@ -42,7 +42,7 @@ public class GestaoFolhasPageDriver : GestaoFolhasInterface
         FechamentoFolhaAnchor.Should().NotBeNull("a gestão de folhas deve ter um link para o fechamento da folha");
     }
 
-    public Concepts.Folha AbrirFolha(Concepts.Folha folha)
+    public Folha AbrirFolha(Folha folha)
     {
         GoTo();
 
@@ -50,7 +50,7 @@ public class GestaoFolhasPageDriver : GestaoFolhasInterface
 
         var form = Document.GetForm();
 
-        var perfil = folha.EQualificadaPelo();
+        var perfil = folha.Perfil;
 
         //var competencia = folha.Competencia.Value.ToString("yyyy-MM-dd\\THH:mm:ss");
 
@@ -77,7 +77,7 @@ public class GestaoFolhasPageDriver : GestaoFolhasInterface
         return folhaAberta;
     }
 
-    public Concepts.Folha FecharFolha(Concepts.Folha folhaAberta)
+    public Folha FecharFolha(Folha folhaAberta)
     {
         GoTo();
 

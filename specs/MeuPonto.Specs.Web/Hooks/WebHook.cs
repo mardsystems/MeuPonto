@@ -1,10 +1,5 @@
 ﻿using BoDi;
 using MeuPonto.Data;
-using MeuPonto.Modules;
-using MeuPonto.Modules.Perfis;
-using MeuPonto.Modules.Pontos;
-using MeuPonto.Modules.Pontos.Comprovantes;
-using MeuPonto.Modules.Pontos.Folhas;
 using Microsoft.AspNetCore.Mvc.Testing;
 using System.Net.Http.Headers;
 using TechTalk.SpecFlow.Infrastructure;
@@ -64,14 +59,6 @@ public class WebHook : IClassFixture<MeuPontoWebFactory<Program>>
         _db = scopedServices.GetRequiredService<MeuPontoDbContext>();
 
         objectContainer.RegisterInstanceAs(_db);
-
-        //
-
-        objectContainer.RegisterTypeAs<HomePageDriver, HomeInterface>();
-        objectContainer.RegisterTypeAs<CadastroPerfisPageDriver, CadastroPerfisInterface>();
-        objectContainer.RegisterTypeAs<RegistroPontosPageDriver, RegistroPontosInterface>();
-        objectContainer.RegisterTypeAs<GestaoFolhasPageDriver, GestaoFolhasInterface>();
-        objectContainer.RegisterTypeAs<BackupComprovantesPageDriver, BackupComprovantesInterface>();
     }
 
     [BeforeScenario]

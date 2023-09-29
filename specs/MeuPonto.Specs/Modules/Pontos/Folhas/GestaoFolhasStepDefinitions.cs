@@ -1,7 +1,5 @@
 using MeuPonto.Data;
-using MeuPonto.Helpers;
 using MeuPonto.Modules.Perfis;
-using System.ComponentModel;
 
 namespace MeuPonto.Modules.Pontos.Folhas;
 
@@ -12,36 +10,36 @@ public class GestaoFolhasStepDefinitions
 
     private readonly GestaoFolhasContext _gestaoFolhas;
 
-    private readonly GestaoFolhasInterface _gestaoFolhasInterface;
+    private readonly GestaoFolhasDriver _gestaoFolhasDriver;
 
     private readonly CadastroPerfisContext _cadastroPerfis;
 
     private readonly HomeContext _home;
 
-    private readonly HomeInterface _homeInterface;
+    private readonly HomeDriver _homeDriver;
 
     private readonly MeuPontoDbContext _db;
 
     public GestaoFolhasStepDefinitions(
         ScenarioContext scenario,
         GestaoFolhasContext gestaoFolhas,
-        GestaoFolhasInterface gestaoFolhasInterface,
+        GestaoFolhasDriver gestaoFolhasDriver,
         CadastroPerfisContext cadastroPerfis,
         HomeContext home,
-        HomeInterface homeInterface,
+        HomeDriver homeDriver,
         MeuPontoDbContext db)
     {
         _scenario = scenario;
 
         _gestaoFolhas = gestaoFolhas;
 
-        _gestaoFolhasInterface = gestaoFolhasInterface;
+        _gestaoFolhasDriver = gestaoFolhasDriver;
 
         _cadastroPerfis = cadastroPerfis;
 
         _home = home;
 
-        _homeInterface = homeInterface;
+        _homeDriver = homeDriver;
 
         _db = db;
     }
@@ -49,7 +47,7 @@ public class GestaoFolhasStepDefinitions
     [Given(@"que o trabalhador qualifica a folha com o perfil '([^']*)'")]
     public void GivenQueOTrabalhadorQualificaAFolhaComOPerfil(string nome)
     {
-        var perfil = _db.Perfis.FirstOrDefault(x => x.Nome == nome && x.UserId == _scenario.GetUserId());
+        var perfil = _db.Perfis.FirstOrDefault(x => x.Nome == nome);
 
         perfil.QualificaFolha(_gestaoFolhas.Folha);
     }
@@ -69,11 +67,11 @@ public class GestaoFolhasStepDefinitions
     [Given(@"que o trabalhador registrou a entrada no expediente às '([^']*)'")]
     public async Task GivenQueOTrabalhadorRegistrouAEntradaNoExpedienteAs(DateTime entrada)
     {
-        var userId = Guid.Parse("d2fc8313-9bdc-455c-bf29-ccf709a2a692");
+        var userId = Guid.Parse("d2fc8313-9bdc-455c-bf29-ccf709a2a692").ToString();
 
-        var transaction = new TransactionContext(userId.ToString());
+        var transaction = new TransactionContext(userId);
 
-        var perfil = _db.Perfis.FirstOrDefault(x => x.UserId == _scenario.GetUserId());
+        var perfil = _db.Perfis.FirstOrDefault();
 
         var pontoEntrada = PontoFactory.CriaPonto(transaction);
 
@@ -89,11 +87,11 @@ public class GestaoFolhasStepDefinitions
     [Given(@"que o trabalhador registrou a saída no expediente às '([^']*)'")]
     public async Task GivenQueOTrabalhadorRegistrouASaidaNoExpedienteAs(DateTime saida)
     {
-        var userId = Guid.Parse("d2fc8313-9bdc-455c-bf29-ccf709a2a692");
+        var userId = Guid.Parse("d2fc8313-9bdc-455c-bf29-ccf709a2a692").ToString();
 
-        var transaction = new TransactionContext(userId.ToString());
+        var transaction = new TransactionContext(userId);
 
-        var perfil = _db.Perfis.FirstOrDefault(x => x.UserId == _scenario.GetUserId());
+        var perfil = _db.Perfis.FirstOrDefault();
 
         var pontoSaida = PontoFactory.CriaPonto(transaction);
 
@@ -170,7 +168,7 @@ public class GestaoFolhasStepDefinitions
     {
         if (_gestaoFolhas.Folha.Perfil == null)
         {
-            var perfil = _db.Perfis.FirstOrDefault(x => x.UserId == _scenario.GetUserId());
+            var perfil = _db.Perfis.FirstOrDefault();
 
             if (perfil == default)
             {
@@ -184,7 +182,7 @@ public class GestaoFolhasStepDefinitions
         }
 
 
-        var folhaAberta = _gestaoFolhasInterface.AbrirFolha(_gestaoFolhas.Folha);
+        var folhaAberta = _gestaoFolhasDriver.AbrirFolha(_gestaoFolhas.Folha);
 
         _gestaoFolhas.Define(folhaAberta);
     }
@@ -202,7 +200,7 @@ public class GestaoFolhasStepDefinitions
     [When(@"o trabalhador apurar a folha de ponto")]
     public void WhenOTrabalhadorApurarAFolhaDePonto()
     {
-        var folhaApurada = _homeInterface.ApurarFolha(_gestaoFolhas.Folha);
+        var folhaApurada = _homeDriver.ApurarFolha(_gestaoFolhas.Folha);
 
         _gestaoFolhas.Define(folhaApurada);
     }
@@ -214,7 +212,7 @@ public class GestaoFolhasStepDefinitions
     [When(@"o trabalhador fechar a folha de ponto")]
     public void WhenOTrabalhadorFecharAFolhaDePonto()
     {
-        var folhaFechada = _gestaoFolhasInterface.FecharFolha(_gestaoFolhas.Folha);
+        var folhaFechada = _gestaoFolhasDriver.FecharFolha(_gestaoFolhas.Folha);
 
         _gestaoFolhas.Define(folhaFechada);
     }
@@ -222,7 +220,7 @@ public class GestaoFolhasStepDefinitions
     [Then(@"a folha de ponto deverá ser fechada")]
     public void ThenAFolhaDePontoDeveraSerFechada()
     {
-        _gestaoFolhas.FolhaAberta.Status.Should().Be(StatusEnum.Fechada.GetDisplayName());
+        _gestaoFolhas.FolhaAberta.StatusId.Should().Be(StatusEnum.Fechada);
     }
 
     #endregion
@@ -230,15 +228,15 @@ public class GestaoFolhasStepDefinitions
     [Then(@"o perfil da folha de ponto deverá deverá ser '([^']*)'")]
     public void ThenOPerfilDaFolhaDePontoDeveraDeveraSer(string nome)
     {
-        var perfil = _gestaoFolhas.FolhaAberta.EQualificadaPelo();
+        var perfil = _gestaoFolhas.FolhaAberta.Perfil;
 
         perfil.Nome.Should().Be(nome);
     }
 
     [Then(@"o status da folha de ponto deverá ser '([^']*)'")]
-    public void ThenOStatusDaFolhaDePontoDeveraSer(string status)
+    public void ThenOStatusDaFolhaDePontoDeveraSer(StatusEnum status)
     {
-        _gestaoFolhas.FolhaAberta.Status.Should().Be(status);
+        _gestaoFolhas.FolhaAberta.StatusId.Should().Be(status);
     }
 
     [Then(@"a folha de ponto deverá ter '([^']*)' dias")]

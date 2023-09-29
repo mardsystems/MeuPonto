@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace MeuPonto.Modules.Empregadores;
 
-public class Empregador : DocumentEntity, Concepts.Empregador
+public class Empregador : DocumentEntity
 {
     [Required]
     [MinLength(3)]

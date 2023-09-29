@@ -1,6 +1,5 @@
 ﻿using BoDi;
 using MeuPonto.Data;
-using MeuPonto.Modules.Perfis;
 using MeuPonto.Support;
 using Microsoft.EntityFrameworkCore;
 
@@ -39,12 +38,8 @@ public class WebApiHook
         _db = scopedServices.GetRequiredService<MeuPontoDbContext>();
 
         objectContainer.RegisterInstanceAs(_db);
-
-        //
-
-        objectContainer.RegisterTypeAs<CadastroPerfisApiDriver, CadastroPerfisInterface>();
     }
-    
+
     [BeforeScenario]
     public void InitializeWeb(FeatureContext feature, ScenarioContext scenario)
     {

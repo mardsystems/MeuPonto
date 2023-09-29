@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace MeuPonto.Modules.Pontos.Folhas;
 
 [Owned]
-public class ApuracaoDiaria : Concepts.ApuracaoDiaria
+public class ApuracaoDiaria
 {
     [Required]
     [DisplayName("Dia")]

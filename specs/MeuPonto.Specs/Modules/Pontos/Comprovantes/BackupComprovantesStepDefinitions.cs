@@ -10,7 +10,7 @@ public class BackupComprovantesStepDefinitions
 
     private readonly BackupComprovantesContext _backupComprovantes;
 
-    private readonly BackupComprovantesInterface _backupComprovantesInterface;
+    private readonly BackupComprovantesDriver _backupComprovantesDriver;
 
     private readonly CadastroPerfisContext _cadastroPerfis;
 
@@ -19,7 +19,7 @@ public class BackupComprovantesStepDefinitions
     public BackupComprovantesStepDefinitions(
         ScenarioContext scenario,
         BackupComprovantesContext backupComprovantes,
-        BackupComprovantesInterface backupComprovantesInterface,
+        BackupComprovantesDriver backupComprovantesDriver,
         CadastroPerfisContext cadastroPerfis,
         MeuPontoDbContext db)
     {
@@ -27,7 +27,7 @@ public class BackupComprovantesStepDefinitions
 
         _backupComprovantes = backupComprovantes;
 
-        _backupComprovantesInterface = backupComprovantesInterface;
+        _backupComprovantesDriver = backupComprovantesDriver;
 
         _cadastroPerfis = cadastroPerfis;
 
@@ -126,7 +126,7 @@ public class BackupComprovantesStepDefinitions
     [When(@"o trabalhador escanear o comprovante de ponto")]
     public void WhenOTrabalhadorEscanearOComprovanteDePonto()
     {
-        var comprovante = _backupComprovantesInterface.EscanearComprovante(
+        var comprovante = _backupComprovantesDriver.EscanearComprovante(
             _backupComprovantes.Imagem,
             _backupComprovantes.Comprovante,
             _backupComprovantes.Ponto);
@@ -137,7 +137,7 @@ public class BackupComprovantesStepDefinitions
     [When(@"o trabalhador guardar o comprovante de ponto")]
     public void WhenOTrabalhadorGuardarOComprovanteDePonto()
     {
-        var comprovanteGuardado = _backupComprovantesInterface.GuardarComprovante(
+        var comprovanteGuardado = _backupComprovantesDriver.GuardarComprovante(
             _backupComprovantes.Imagem,
             _backupComprovantes.Comprovante,
             _backupComprovantes.Ponto);

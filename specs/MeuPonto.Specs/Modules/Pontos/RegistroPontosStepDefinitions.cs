@@ -1,7 +1,5 @@
 using MeuPonto.Data;
-using MeuPonto.Helpers;
 using MeuPonto.Modules.Perfis;
-using System.ComponentModel;
 
 namespace MeuPonto.Modules.Pontos;
 
@@ -12,7 +10,7 @@ public class RegistroPontosStepDefinitions
 
     private readonly RegistroPontosContext _registroPontos;
 
-    private readonly RegistroPontosInterface _registroPontosInterface;
+    private readonly RegistroPontosDriver _registroPontosDriver;
 
     private readonly CadastroPerfisContext _cadastroPerfis;
 
@@ -21,7 +19,7 @@ public class RegistroPontosStepDefinitions
     public RegistroPontosStepDefinitions(
         ScenarioContext scenario,
         RegistroPontosContext registroPontos,
-        RegistroPontosInterface registroPontosInterface,
+        RegistroPontosDriver registroPontosDriver,
         CadastroPerfisContext cadastroPerfis,
         MeuPontoDbContext db)
     {
@@ -29,7 +27,7 @@ public class RegistroPontosStepDefinitions
 
         _registroPontos = registroPontos;
 
-        _registroPontosInterface = registroPontosInterface;
+        _registroPontosDriver = registroPontosDriver;
 
         _cadastroPerfis = cadastroPerfis;
 
@@ -73,7 +71,7 @@ public class RegistroPontosStepDefinitions
     [Given(@"que o trabalhador qualifica o ponto com o perfil '([^']*)'")]
     public void GivenQueOTrabalhadorQualificaOPontoComOPerfil(string nome)
     {
-        var perfil = _db.Perfis.FirstOrDefault(x => x.Nome == nome && x.UserId == _scenario.GetUserId());
+        var perfil = _db.Perfis.FirstOrDefault(x => x.Nome == nome);
 
         perfil.QualificaPonto(_registroPontos.Ponto);
     }
@@ -83,7 +81,7 @@ public class RegistroPontosStepDefinitions
     {
         if (_registroPontos.Ponto.EstaSemQualificacao())
         {
-            var perfil = _db.Perfis.FirstOrDefault(x => x.UserId == _scenario.GetUserId());
+            var perfil = _db.Perfis.FirstOrDefault();
 
             if (perfil == default)
             {
@@ -96,7 +94,7 @@ public class RegistroPontosStepDefinitions
             perfil.QualificaPonto(_registroPontos.Ponto);
         }
 
-        var pontoMarcado = _registroPontosInterface.MarcarPonto(_registroPontos.Ponto);
+        var pontoMarcado = _registroPontosDriver.MarcarPonto(_registroPontos.Ponto);
 
         _registroPontos.Define(pontoMarcado);
     }
@@ -120,21 +118,21 @@ public class RegistroPontosStepDefinitions
     }
 
     [Then(@"o momento do ponto deverá ser de '([^']*)'")]
-    public void ThenOMomentoDoPontoDeveraSerDe(string momento)
+    public void ThenOMomentoDoPontoDeveraSerDe(MomentoEnum momento)
     {
-        _registroPontos.PontoRegistrado.Momento.Should().Be(momento);
+        _registroPontos.PontoRegistrado.MomentoId.Should().Be(momento);
     }
 
     [Then(@"o ponto deverá indicar que é almoço")]
     public void ThenOPontoDeveraIndicarQueEAlmoco()
     {
-        _registroPontos.PontoRegistrado.Pausa.Should().Be(PausaEnum.Almoco.GetDisplayName());
+        _registroPontos.PontoRegistrado.PausaId.Should().Be(PausaEnum.Almoco);
     }
 
     [Then(@"o ponto deverá indicar que não é almoço")]
     public void ThenOPontoDeveraIndicarQueNaoEAlmoco()
     {
-        _registroPontos.PontoRegistrado.Pausa.Should().BeNull();
+        _registroPontos.PontoRegistrado.PausaId.Should().BeNull();
     }
 
     [Then(@"o ponto deverá indicar que não foi estimado")]

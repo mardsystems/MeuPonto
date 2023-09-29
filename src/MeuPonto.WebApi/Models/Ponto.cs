@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MeuPonto.Models;
 
-public class Ponto : LocalTableEntity, Concepts.Ponto
+public class Ponto : LocalTableEntity
 {
     [Required]
     [DisplayName("Perfil")]
@@ -12,7 +12,6 @@ public class Ponto : LocalTableEntity, Concepts.Ponto
 
     [DisplayName("Perfil")]
     public Perfil? Perfil { get; set; }
-    Concepts.Perfil? Concepts.Ponto.Perfil => Perfil;
 
     [Required]
     [DisplayName("Data/Hora")]
@@ -25,14 +24,12 @@ public class Ponto : LocalTableEntity, Concepts.Ponto
 
     [DisplayName("Momento")]
     public Momento? Momento { get; set; }
-    string? Concepts.Ponto.Momento => Momento?.Nome;
 
     [DisplayName("Pausa")]
     public PausaEnum? PausaId { get; set; }
     
     [DisplayName("Pausa")]
     public Pausa? Pausa { get; set; }
-    string? Concepts.Ponto.Pausa => Pausa?.Nome;
     
     [Required]
     [DisplayName("Estimado?")]

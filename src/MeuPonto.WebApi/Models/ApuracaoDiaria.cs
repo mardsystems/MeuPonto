@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace MeuPonto.Models;
 
 [Owned]
-public class ApuracaoDiaria : Concepts.ApuracaoDiaria
+public class ApuracaoDiaria
 {
     [Required]
     [DisplayName("Dia")]

@@ -4,11 +4,10 @@ using System.ComponentModel;
 namespace MeuPonto.Models;
 
 [Owned]
-public class ApuracaoMensal : Concepts.ApuracaoMensal
+public class ApuracaoMensal
 {
     [DisplayName("Dias")]
     public IList<ApuracaoDiaria> Dias { get; set; }
-    IList<Concepts.ApuracaoDiaria> Concepts.ApuracaoMensal.Dias => Dias.Cast<Concepts.ApuracaoDiaria>().ToList();
 
     [DisplayName("Total Dias")]
     public int TotalDias { get => Dias.Count; }

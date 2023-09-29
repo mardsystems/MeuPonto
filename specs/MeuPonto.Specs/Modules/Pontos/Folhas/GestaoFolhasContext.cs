@@ -26,10 +26,10 @@ public class GestaoFolhasContext
         Folha = folha;
     }
 
-    public void Define(Concepts.Folha folhaAberta)
+    public void Define(Folha folhaAberta)
     {
         FolhaAberta = folhaAberta;
     }
 
-    public Concepts.Folha FolhaAberta { get; private set; }
+    public Folha FolhaAberta { get; private set; }
 }
