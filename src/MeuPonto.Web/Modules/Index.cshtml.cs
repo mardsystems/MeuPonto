@@ -45,7 +45,7 @@ public class IndexModel : PageModel
             return Page();
         }
 
-        var perfisSelectList = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
+        var perfisSelectList = new SelectList(_db.Perfis.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
 
         ViewData["PerfilId"] = perfisSelectList;
 
@@ -66,7 +66,7 @@ public class IndexModel : PageModel
             Folha = await _db.Folhas.FirstOrDefaultAsync(x => true
                 && x.PerfilId == PerfilId
                 && x.Competencia == competencia
-                && x.TrabalhadorId == User.GetUserId());
+                && x.UserId == User.GetUserId());
 
             if (Folha != null)
             {
@@ -80,7 +80,7 @@ public class IndexModel : PageModel
                     .Where(x => true
                         && x.DataHora >= competenciaFolha
                         && x.DataHora < competenciaFolhaPosterior
-                        && x.TrabalhadorId == User.GetUserId())
+                        && x.UserId == User.GetUserId())
                     .OrderByDescending(x => x.DataHora)
                     .ToListAsync();
 

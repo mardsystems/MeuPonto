@@ -23,7 +23,7 @@ public class SeedHook
         BackupComprovantesContext backupComprovantes,
         GestaoFolhasContext gestaoFolhas)
     {
-        var userId = Guid.Parse("d2fc8313-9bdc-455c-bf29-ccf709a2a692");
+        var userId = Guid.Parse("d2fc8313-9bdc-455c-bf29-ccf709a2a692").ToString();
 
         var userName = "Test user";
 

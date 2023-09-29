@@ -30,7 +30,7 @@ namespace MeuPonto.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Nome = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
-                    TrabalhadorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "getdate()"),
                     Version = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
@@ -93,6 +93,7 @@ namespace MeuPonto.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CustomerSubscription_SubscriptionPlanId = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "getdate()"),
                     Version = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
@@ -109,7 +110,7 @@ namespace MeuPonto.Data.Migrations
                     Nome = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
                     Ativo = table.Column<bool>(type: "bit", nullable: false),
                     EmpregadorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    TrabalhadorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "getdate()"),
                     Version = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
@@ -133,7 +134,7 @@ namespace MeuPonto.Data.Migrations
                     StatusId = table.Column<int>(type: "int", nullable: false),
                     Observacao = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     ApuracaoMensal_TempoTotalPeriodoAnterior = table.Column<long>(type: "bigint", nullable: true),
-                    TrabalhadorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "getdate()"),
                     Version = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
@@ -178,7 +179,7 @@ namespace MeuPonto.Data.Migrations
                     PausaId = table.Column<int>(type: "int", nullable: true),
                     Estimado = table.Column<bool>(type: "bit", nullable: false),
                     Observacao = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    TrabalhadorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "getdate()"),
                     Version = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
@@ -226,7 +227,7 @@ namespace MeuPonto.Data.Migrations
                     Numero = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: true),
                     Imagem = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     TipoImagemId = table.Column<int>(type: "int", nullable: false),
-                    TrabalhadorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "getdate()"),
                     Version = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },

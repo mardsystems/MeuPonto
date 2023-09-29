@@ -26,5 +26,5 @@ public class Comprovante : GlobalTableEntity, Concepts.Comprovante
     public TipoImagemEnum? TipoImagemId { get; set; }
     string? Concepts.Comprovante.TipoImagem => TipoImagemId?.GetDisplayName();
 
-    public Guid? TrabalhadorId { get; set; }
+    public string? UserId { get; set; }
 }

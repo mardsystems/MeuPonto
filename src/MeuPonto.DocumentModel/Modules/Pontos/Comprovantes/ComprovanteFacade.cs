@@ -13,7 +13,7 @@ public static class ComprovanteFacade
             PausaId = ponto.PausaId
         };
         
-        comprovante.PartitionKey = $"{comprovante.TrabalhadorId}|{comprovante.Ponto.DataHora:yyyy}";
+        comprovante.PartitionKey = $"{comprovante.UserId}|{comprovante.Ponto.DataHora:yyyy}";
 
         comprovante.PontoId = ponto.Id;
     }

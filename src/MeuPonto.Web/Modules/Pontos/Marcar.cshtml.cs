@@ -30,7 +30,7 @@ public class MarcarModel : FormPageModel
 
         Ponto.DataHora = _dateTimeSnapshot.GetDateTimeUntilMinutes();
 
-        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.Ativo && x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
+        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.Ativo && x.UserId == User.GetUserId()), "Id", "Nome");
 
         HoldRefererUrl();
 
@@ -44,7 +44,7 @@ public class MarcarModel : FormPageModel
 
         if (!ModelState.IsValid)
         {
-            ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.Ativo && x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
+            ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.Ativo && x.UserId == User.GetUserId()), "Id", "Nome");
 
             return Page();
         }

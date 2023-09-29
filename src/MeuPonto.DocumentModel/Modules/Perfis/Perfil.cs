@@ -26,7 +26,7 @@ public class Perfil : DocumentEntity, Concepts.Perfil, Concepts.Contrato
     public virtual JornadaTrabalhoSemanal JornadaTrabalhoSemanalPrevista { get; set; } = default!;
     Concepts.JornadaTrabalhoSemanal Concepts.Contrato.Preve() => JornadaTrabalhoSemanalPrevista;
 
-    public Guid? TrabalhadorId { get; set; }
+    public string? UserId { get; set; }
 
     Concepts.Contrato Concepts.Perfil.IdentificaVinculo() => this;
 

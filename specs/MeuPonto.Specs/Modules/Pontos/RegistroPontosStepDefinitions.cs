@@ -73,7 +73,7 @@ public class RegistroPontosStepDefinitions
     [Given(@"que o trabalhador qualifica o ponto com o perfil '([^']*)'")]
     public void GivenQueOTrabalhadorQualificaOPontoComOPerfil(string nome)
     {
-        var perfil = _db.Perfis.FirstOrDefault(x => x.Nome == nome && x.TrabalhadorId == _scenario.GetUserId());
+        var perfil = _db.Perfis.FirstOrDefault(x => x.Nome == nome && x.UserId == _scenario.GetUserId());
 
         perfil.QualificaPonto(_registroPontos.Ponto);
     }
@@ -83,7 +83,7 @@ public class RegistroPontosStepDefinitions
     {
         if (_registroPontos.Ponto.EstaSemQualificacao())
         {
-            var perfil = _db.Perfis.FirstOrDefault(x => x.TrabalhadorId == _scenario.GetUserId());
+            var perfil = _db.Perfis.FirstOrDefault(x => x.UserId == _scenario.GetUserId());
 
             if (perfil == default)
             {

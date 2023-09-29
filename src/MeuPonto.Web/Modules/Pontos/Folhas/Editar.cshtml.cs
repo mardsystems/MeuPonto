@@ -33,7 +33,7 @@ public class EditarModel : FormPageModel
 
         Folha = folha;
 
-        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
+        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
 
         HoldRefererUrl();
 
@@ -50,7 +50,7 @@ public class EditarModel : FormPageModel
 
         if (!ModelState.IsValid)
         {
-            ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
+            ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
 
             return Page();
         }
@@ -72,7 +72,7 @@ public class EditarModel : FormPageModel
 
             Folha.ConfirmarCompetencia(perfil);
 
-            ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
+            ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
 
             return Page();
         }

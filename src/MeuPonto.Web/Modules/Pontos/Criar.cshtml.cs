@@ -18,7 +18,7 @@ public class CriarModel : FormPageModel
 
     public IActionResult OnGet()
     {
-        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
+        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
 
         HoldRefererUrl();
 

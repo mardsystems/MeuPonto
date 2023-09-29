@@ -47,15 +47,15 @@ public class Program
 
                 var nameIdentifier = context.Principal.FindFirst(ClaimTypes.NameIdentifier);
 
-                var userId = Guid.Parse(nameIdentifier.Value);
+                var userId = nameIdentifier.Value;
 
-                var trabalhadorExistente = await db.Trabalhadores.FirstOrDefaultAsync(m => m.Id == userId);
+                var trabalhadorExistente = await db.Trabalhadores.FirstOrDefaultAsync(m => m.UserId == userId);
 
                 var userName = context.Principal.GetDisplayName();
 
                 Trabalhador trabalhador;
 
-                var transaction = new TransactionContext(userId);
+                var transaction = new TransactionContext(userId.ToString());
 
                 if (trabalhadorExistente == default)
                 {

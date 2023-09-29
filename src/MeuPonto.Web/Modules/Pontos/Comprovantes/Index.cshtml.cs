@@ -42,9 +42,9 @@ public class IndexModel : PageModel
             Ponto = new FiltroPontoRef();
         }
 
-        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome").AddEmptyValue();
+        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.UserId == User.GetUserId()), "Id", "Nome").AddEmptyValue();
 
-        var totalRegistros = await _db.Comprovantes.CountAsync(x => x.TrabalhadorId == User.GetUserId());
+        var totalRegistros = await _db.Comprovantes.CountAsync(x => x.UserId == User.GetUserId());
 
         Pagination = new PaginationModel(totalRegistros, PaginaAtual ?? 1);
 
@@ -59,7 +59,7 @@ public class IndexModel : PageModel
                     && (Ponto.Pausa == null || x.Ponto.PausaId == Ponto.Pausa)
                     && (TipoImagem == null || x.TipoImagemId == TipoImagem)
                     && (Numero == null || x.Numero == Numero)
-                    && x.TrabalhadorId == User.GetUserId())
+                    && x.UserId == User.GetUserId())
                 .OrderByDescending(x => x.Ponto.DataHora)
                 .Skip((Pagination.PaginaAtual - 1) * Pagination.TamanhoPagina.Value)
                 .Take(Pagination.TamanhoPagina.Value)

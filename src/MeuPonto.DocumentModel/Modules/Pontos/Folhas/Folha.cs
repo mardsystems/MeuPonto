@@ -34,7 +34,7 @@ public class Folha : DocumentEntity, Concepts.Folha
 
     Concepts.Ponto[] Concepts.Folha.Apura() => throw new NotImplementedException();
 
-    public Guid? TrabalhadorId { get; set; }
+    public string? UserId { get; set; }
 
     public Folha()
     {

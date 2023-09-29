@@ -2,11 +2,11 @@
 
 public class TransactionContext
 {
-    public Guid UserId { get; }
+    public string UserId { get; }
 
     public DateTime DateTime { get; }
 
-    public TransactionContext(Guid userId)
+    public TransactionContext(string userId)
     {
         UserId = userId;
 

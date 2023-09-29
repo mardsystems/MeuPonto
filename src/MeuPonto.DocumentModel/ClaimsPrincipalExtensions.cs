@@ -14,11 +14,11 @@ public static class ClaimsPrincipalExtensions
         return transaction;
     }
 
-    public static Guid GetUserId(this ClaimsPrincipal user)
+    public static string GetUserId(this ClaimsPrincipal user)
     {
         var nameIdentifier = user.FindFirst(ClaimTypes.NameIdentifier);
 
-        var userId = Guid.Parse(nameIdentifier.Value);
+        var userId = nameIdentifier.Value;
 
         return userId;
     }

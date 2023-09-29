@@ -17,7 +17,7 @@ public class MyClaimsTransformation : IClaimsTransformation
 
     public async Task<ClaimsPrincipal> TransformAsync(ClaimsPrincipal principal)
     {
-        var trabalhador = await _db.Trabalhadores.FirstOrDefaultAsync(m => m.Id == principal.GetUserId());
+        var trabalhador = await _db.Trabalhadores.FirstOrDefaultAsync(m => m.UserId == principal.GetUserId());
 
         ClaimsIdentity claimsIdentity = new ClaimsIdentity();
 

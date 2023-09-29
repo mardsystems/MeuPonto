@@ -70,6 +70,7 @@
                 EnableRowVirtualization="False"
                 ItemsSource="{Binding}"
                 RowDetailsVisibilityMode="VisibleWhenSelected"
+                SelectionUnit="Cell"
                 VirtualizingPanel.IsVirtualizing="False">
                 <!--<DataGrid.RowValidationRules>
                     <local:PerfilValidationRule ValidationStep="UpdatedValue"/>
@@ -90,6 +91,10 @@
                         Width="100"
                         Binding="{Binding TrabalhadorId}"
                         Header="Trabalhador Id" />
+                    <DataGridTextColumn
+                        Width="100"
+                        Binding="{Binding UserId}"
+                        Header="User Id" />
                     <DataGridTextColumn
                         Width="120"
                         Binding="{Binding CreationDate, StringFormat={}{0:dd/MM/yyyy HH:mm}}"

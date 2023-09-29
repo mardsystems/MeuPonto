@@ -7,7 +7,7 @@ public static class EmpregadorFactory
         var empregador = new Empregador
         {
             Id = id ?? Guid.NewGuid(),
-            TrabalhadorId = transaction.UserId,
+            UserId = transaction.UserId,
             CreationDate = transaction.DateTime
         };
 
@@ -17,7 +17,7 @@ public static class EmpregadorFactory
     public static void RecontextualizaEmpregador(this Empregador empregador, TransactionContext transaction, Guid? id = null)
     {
         empregador.Id = empregador.Id ?? id ?? Guid.NewGuid();
-        empregador.TrabalhadorId = transaction.UserId;
+        empregador.UserId = transaction.UserId;
         empregador.CreationDate = transaction.DateTime;
     }
 }

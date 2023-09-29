@@ -34,7 +34,7 @@ public class EditarModel : FormPageModel
 
         Perfil = perfil;
 
-        ViewData["EmpregadorId"] = new SelectList(_db.Empregadores.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome").AddEmptyValue();
+        ViewData["EmpregadorId"] = new SelectList(_db.Empregadores.Where(x => x.UserId == User.GetUserId()), "Id", "Nome").AddEmptyValue();
 
         HoldRefererUrl();
 

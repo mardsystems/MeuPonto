@@ -49,7 +49,7 @@ public class GestaoFolhasStepDefinitions
     [Given(@"que o trabalhador qualifica a folha com o perfil '([^']*)'")]
     public void GivenQueOTrabalhadorQualificaAFolhaComOPerfil(string nome)
     {
-        var perfil = _db.Perfis.FirstOrDefault(x => x.Nome == nome && x.TrabalhadorId == _scenario.GetUserId());
+        var perfil = _db.Perfis.FirstOrDefault(x => x.Nome == nome && x.UserId == _scenario.GetUserId());
 
         perfil.QualificaFolha(_gestaoFolhas.Folha);
     }
@@ -71,9 +71,9 @@ public class GestaoFolhasStepDefinitions
     {
         var userId = Guid.Parse("d2fc8313-9bdc-455c-bf29-ccf709a2a692");
 
-        var transaction = new TransactionContext(userId);
+        var transaction = new TransactionContext(userId.ToString());
 
-        var perfil = _db.Perfis.FirstOrDefault(x => x.TrabalhadorId == _scenario.GetUserId());
+        var perfil = _db.Perfis.FirstOrDefault(x => x.UserId == _scenario.GetUserId());
 
         var pontoEntrada = PontoFactory.CriaPonto(transaction);
 
@@ -91,9 +91,9 @@ public class GestaoFolhasStepDefinitions
     {
         var userId = Guid.Parse("d2fc8313-9bdc-455c-bf29-ccf709a2a692");
 
-        var transaction = new TransactionContext(userId);
+        var transaction = new TransactionContext(userId.ToString());
 
-        var perfil = _db.Perfis.FirstOrDefault(x => x.TrabalhadorId == _scenario.GetUserId());
+        var perfil = _db.Perfis.FirstOrDefault(x => x.UserId == _scenario.GetUserId());
 
         var pontoSaida = PontoFactory.CriaPonto(transaction);
 
@@ -141,7 +141,7 @@ public class GestaoFolhasStepDefinitions
     {
         var userId = Guid.Parse("d2fc8313-9bdc-455c-bf29-ccf709a2a692");
 
-        var transaction = new TransactionContext(userId);
+        var transaction = new TransactionContext(userId.ToString());
 
         var pontos = table.Rows.Select(row =>
         {
@@ -170,7 +170,7 @@ public class GestaoFolhasStepDefinitions
     {
         if (_gestaoFolhas.Folha.Perfil == null)
         {
-            var perfil = _db.Perfis.FirstOrDefault(x => x.TrabalhadorId == _scenario.GetUserId());
+            var perfil = _db.Perfis.FirstOrDefault(x => x.UserId == _scenario.GetUserId());
 
             if (perfil == default)
             {

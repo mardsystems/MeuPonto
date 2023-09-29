@@ -45,7 +45,7 @@ public class DetalharModel : PageModel
             var pontos = await _db.Pontos
                 .Where(x => true
                     && x.DataHora >= competenciaAtual && x.DataHora < competenciaPosterior
-                    && x.TrabalhadorId == User.GetUserId())
+                    && x.UserId == User.GetUserId())
                 .ToListAsync();
 
             foreach (var apuracaoDiaria in Folha.ApuracaoMensal.Dias)

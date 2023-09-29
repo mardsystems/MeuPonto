@@ -33,7 +33,7 @@ public class EditarModel : FormPageModel
         
         Ponto = ponto;
 
-        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
+        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
 
         HoldRefererUrl();
 
