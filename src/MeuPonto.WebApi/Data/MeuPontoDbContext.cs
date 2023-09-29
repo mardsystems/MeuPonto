@@ -60,8 +60,7 @@ public class MeuPontoDbContext : DbContext
             .ToTable("Comprovantes");
 
         modelBuilder.Entity<Trabalhador>()
-            .ToTable("Trabalhadores")
-            .HasNoKey();
+            .ToTable("Trabalhadores");
 
         modelBuilder.Entity<Configuracoes>()
             .ToTable("Configuracoes")
@@ -69,9 +68,19 @@ public class MeuPontoDbContext : DbContext
 
         //
 
+        modelBuilder.Entity<Trabalhador>().Property(b => b.CreationDate).HasDefaultValueSql("getdate()");
+        modelBuilder.Entity<Empregador>().Property(b => b.CreationDate).HasDefaultValueSql("getdate()");
         modelBuilder.Entity<Perfil>().Property(b => b.CreationDate).HasDefaultValueSql("getdate()");
         modelBuilder.Entity<Ponto>().Property(b => b.CreationDate).HasDefaultValueSql("getdate()");
         modelBuilder.Entity<Comprovante>().Property(b => b.CreationDate).HasDefaultValueSql("getdate()");
+        modelBuilder.Entity<Folha>().Property(b => b.CreationDate).HasDefaultValueSql("getdate()");
+
+        //
+
+        modelBuilder.Entity<Status>().Property(x => x.Id).ValueGeneratedNever();
+        modelBuilder.Entity<Momento>().Property(x => x.Id).ValueGeneratedNever();
+        modelBuilder.Entity<Pausa>().Property(x => x.Id).ValueGeneratedNever();
+        modelBuilder.Entity<TipoImagem>().Property(x => x.Id).ValueGeneratedNever();
 
         //
 

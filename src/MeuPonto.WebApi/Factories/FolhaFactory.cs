@@ -8,6 +8,7 @@ public static class FolhaFactory
     {
         var folha = new Folha
         {
+            UserId = transaction.UserId,
             CreationDate = transaction.DateTime
         };
 
@@ -16,6 +17,7 @@ public static class FolhaFactory
 
     public static void RecontextualizaFolha(this Folha folha, TransactionContext transaction)
     {
+        folha.UserId = transaction.UserId;
         folha.CreationDate = transaction.DateTime;
     }
 }

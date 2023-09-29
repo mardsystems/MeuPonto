@@ -17,10 +17,10 @@ namespace MeuPonto.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.13")
+                .HasAnnotation("ProductVersion", "7.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("MeuPonto.Models.Comprovante", b =>
                 {
@@ -28,7 +28,7 @@ namespace MeuPonto.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
 
                     b.Property<DateTime?>("CreationDate")
                         .ValueGeneratedOnAdd()
@@ -50,6 +50,9 @@ namespace MeuPonto.Data.Migrations
                     b.Property<int>("TipoImagemId")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<byte[]>("Version")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate()
@@ -64,7 +67,7 @@ namespace MeuPonto.Data.Migrations
                     b.ToTable("Comprovantes", (string)null);
                 });
 
-            modelBuilder.Entity("MeuPonto.Models.ConfiguracaoPorUsuario", b =>
+            modelBuilder.Entity("MeuPonto.Models.Configuracoes", b =>
                 {
                     b.Property<bool>("JavascriptIsEnabled")
                         .HasColumnType("bit");
@@ -82,7 +85,7 @@ namespace MeuPonto.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
 
                     b.Property<string>("Cnpj")
                         .HasMaxLength(14)
@@ -93,7 +96,9 @@ namespace MeuPonto.Data.Migrations
                         .HasColumnType("nvarchar(11)");
 
                     b.Property<DateTime?>("CreationDate")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<string>("Endereco")
                         .HasMaxLength(36)
@@ -107,6 +112,9 @@ namespace MeuPonto.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(36)
                         .HasColumnType("nvarchar(36)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("Version")
                         .IsConcurrencyToken()
@@ -129,7 +137,9 @@ namespace MeuPonto.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("CreationDate")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<string>("Observacao")
                         .HasMaxLength(255)
@@ -141,6 +151,9 @@ namespace MeuPonto.Data.Migrations
 
                     b.Property<int>("StatusId")
                         .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("Version")
                         .IsConcurrencyToken()
@@ -239,7 +252,7 @@ namespace MeuPonto.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
 
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
@@ -261,6 +274,9 @@ namespace MeuPonto.Data.Migrations
                         .HasMaxLength(36)
                         .HasColumnType("nvarchar(36)");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<byte[]>("Version")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate()
@@ -279,7 +295,7 @@ namespace MeuPonto.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
 
                     b.Property<DateTime?>("CreationDate")
                         .ValueGeneratedOnAdd()
@@ -306,6 +322,9 @@ namespace MeuPonto.Data.Migrations
                     b.Property<int?>("PerfilId")
                         .IsRequired()
                         .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("Version")
                         .IsConcurrencyToken()
@@ -377,18 +396,26 @@ namespace MeuPonto.Data.Migrations
 
             modelBuilder.Entity("MeuPonto.Models.Trabalhador", b =>
                 {
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<string>("Pis")
-                        .HasMaxLength(12)
-                        .HasColumnType("nvarchar(12)");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
 
-                    b.Property<string>("UserName")
-                        .IsRequired()
+                    b.Property<DateTime?>("CreationDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
+
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.HasKey("Id");
 
                     b.ToTable("Trabalhadores", (string)null);
                 });
@@ -459,7 +486,7 @@ namespace MeuPonto.Data.Migrations
                                         .ValueGeneratedOnAdd()
                                         .HasColumnType("int");
 
-                                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b2.Property<int?>("Dia"), 1L, 1);
+                                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b2.Property<int?>("Dia"));
 
                                     b2.Property<long?>("DiferencaTempo")
                                         .HasColumnType("bigint");
@@ -568,6 +595,27 @@ namespace MeuPonto.Data.Migrations
                     b.Navigation("Pausa");
 
                     b.Navigation("Perfil");
+                });
+
+            modelBuilder.Entity("MeuPonto.Models.Trabalhador", b =>
+                {
+                    b.OwnsOne("MeuPonto.Models.CustomerSubscription", "CustomerSubscription", b1 =>
+                        {
+                            b1.Property<int>("TrabalhadorId")
+                                .HasColumnType("int");
+
+                            b1.Property<int>("SubscriptionPlanId")
+                                .HasColumnType("int");
+
+                            b1.HasKey("TrabalhadorId");
+
+                            b1.ToTable("Trabalhadores");
+
+                            b1.WithOwner()
+                                .HasForeignKey("TrabalhadorId");
+                        });
+
+                    b.Navigation("CustomerSubscription");
                 });
 
             modelBuilder.Entity("MeuPonto.Models.Ponto", b =>

@@ -46,6 +46,8 @@ public class Ponto : LocalTableEntity, Concepts.Ponto
     [DisplayName("Comprovantes")]
     public virtual IList<Comprovante> Comprovantes { get; set; } = default!;
 
+    public string? UserId { get; set; }
+
     public Ponto()
     {
         Comprovantes = new List<Comprovante>();

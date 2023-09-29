@@ -1,21 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace MeuPonto.Models;
 
 public class Trabalhador : LocalTableEntity, Concepts.Trabalhador
 {
-    public string UserName { get; set; }
+    [DisplayName("Assinatura do Cliente")]
+    public CustomerSubscription? CustomerSubscription { get; set; }
 
-    [Required]
-    [MinLength(3)]
-    [MaxLength(36)]
-    [DisplayName("Nome")]
-    public string? Nome { get; set; }
-
-    [StringLength(12)]
-    [DisplayName("PIS")]
-    public string? Pis { get; set; }
+    public string? UserId { get; set; }
 
     Concepts.Perfil[] Concepts.Trabalhador.Cadastra()
     {
