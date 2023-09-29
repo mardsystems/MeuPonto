@@ -8,6 +8,7 @@ public static class PontoFactory
     {
         var ponto = new Ponto
         {
+            UserId = transaction.UserId,
             CreationDate = transaction.DateTime
         };
 
@@ -16,6 +17,7 @@ public static class PontoFactory
 
     public static void RecontextualizaPonto(this Ponto ponto, TransactionContext transaction)
     {
+        ponto.UserId = transaction.UserId;
         ponto.CreationDate = transaction.DateTime;
     }
 }

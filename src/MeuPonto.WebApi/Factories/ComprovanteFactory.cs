@@ -8,6 +8,7 @@ public static class ComprovanteFactory
     {
         var comprovante = new Comprovante
         {
+            UserId = transaction.UserId,
             CreationDate = transaction.DateTime
         };
 
@@ -16,6 +17,7 @@ public static class ComprovanteFactory
 
     public static void RecontextualizaComprovante(this Comprovante comprovante, TransactionContext transaction)
     {
+        comprovante.UserId = transaction.UserId;
         comprovante.CreationDate = transaction.DateTime;
     }
 }

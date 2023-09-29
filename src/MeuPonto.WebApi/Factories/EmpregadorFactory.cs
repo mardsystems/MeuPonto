@@ -8,6 +8,7 @@ public static class EmpregadorFactory
     {
         var empregador = new Empregador
         {
+            UserId = transaction.UserId,
             CreationDate = transaction.DateTime
         };
 
@@ -16,6 +17,7 @@ public static class EmpregadorFactory
     
     public static void RecontextualizaEmpregador(this Empregador empregador, TransactionContext transaction)
     {
+        empregador.UserId = transaction.UserId;
         empregador.CreationDate = transaction.DateTime;
     }
 }

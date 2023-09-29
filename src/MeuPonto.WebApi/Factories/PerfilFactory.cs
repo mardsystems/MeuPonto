@@ -8,6 +8,7 @@ public static class PerfilFactory
     {
         var perfil = new Perfil
         {
+            UserId = transaction.UserId,
             CreationDate = transaction.DateTime
         };
 
@@ -16,6 +17,7 @@ public static class PerfilFactory
     
     public static void RecontextualizaPerfil(this Perfil perfil, TransactionContext transaction, Guid? id = null)
     {
+        perfil.UserId = transaction.UserId;
         perfil.CreationDate = transaction.DateTime;
     }
 }

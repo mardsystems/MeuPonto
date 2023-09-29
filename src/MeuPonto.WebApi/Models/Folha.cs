@@ -36,6 +36,8 @@ public class Folha : GlobalTableEntity, Concepts.Folha
     public ApuracaoMensal ApuracaoMensal { get; set; }
     Concepts.ApuracaoMensal Concepts.Folha.ApuracaoMensal => ApuracaoMensal;
 
+    public string? UserId { get; set; }
+
     Concepts.Ponto[] Concepts.Folha.Apura() => throw new NotImplementedException();
 
     public Folha()

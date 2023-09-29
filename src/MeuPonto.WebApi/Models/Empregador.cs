@@ -28,4 +28,6 @@ public class Empregador : LocalTableEntity, Concepts.Empregador
     [MaxLength(36)]
     [DisplayName("Endereço")]
     public string? Endereco { get; set; }
+
+    public string? UserId { get; set; }
 }

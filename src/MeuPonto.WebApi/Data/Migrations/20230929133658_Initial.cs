@@ -1,11 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace MeuPonto.Data.Migrations
 {
+    /// <inheritdoc />
     public partial class Initial : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -30,7 +35,8 @@ namespace MeuPonto.Data.Migrations
                     Cpf = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: true),
                     InscricaoEstadual = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: true),
                     Endereco = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
-                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "getdate()"),
                     Version = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
                 constraints: table =>
@@ -90,12 +96,16 @@ namespace MeuPonto.Data.Migrations
                 name: "Trabalhadores",
                 columns: table => new
                 {
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Nome = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
-                    Pis = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CustomerSubscription_SubscriptionPlanId = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "getdate()"),
+                    Version = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
+                    table.PrimaryKey("PK_Trabalhadores", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -108,6 +118,7 @@ namespace MeuPonto.Data.Migrations
                     Ativo = table.Column<bool>(type: "bit", nullable: false),
                     Matricula = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
                     EmpregadorId = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "getdate()"),
                     Version = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
@@ -134,7 +145,8 @@ namespace MeuPonto.Data.Migrations
                     ApuracaoMensal_TempoTotalApurado = table.Column<long>(type: "bigint", nullable: true),
                     ApuracaoMensal_DiferencaTempoTotal = table.Column<long>(type: "bigint", nullable: true),
                     ApuracaoMensal_TempoTotalPeriodoAnterior = table.Column<long>(type: "bigint", nullable: true),
-                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "getdate()"),
                     Version = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
                 constraints: table =>
@@ -185,6 +197,7 @@ namespace MeuPonto.Data.Migrations
                     PausaId = table.Column<int>(type: "int", nullable: true),
                     Estimado = table.Column<bool>(type: "bit", nullable: false),
                     Observacao = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "getdate()"),
                     Version = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
@@ -245,6 +258,7 @@ namespace MeuPonto.Data.Migrations
                     Numero = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: true),
                     Imagem = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     TipoImagemId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "getdate()"),
                     Version = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
@@ -347,6 +361,7 @@ namespace MeuPonto.Data.Migrations
                 column: "PerfilId");
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

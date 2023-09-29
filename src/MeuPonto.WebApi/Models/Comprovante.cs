@@ -30,6 +30,8 @@ public class Comprovante : LocalTableEntity, Concepts.Comprovante
     public TipoImagem? TipoImagem { get; set; }
     string? Concepts.Comprovante.TipoImagem => TipoImagem?.Nome;
 
+    public string? UserId { get; set; }
+
     public Comprovante()
     {
         Imagem = new byte[0];
