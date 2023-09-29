@@ -102,7 +102,7 @@ public class FecharModel : FormPageModel
         var pontos = await _db.Pontos
             .Where(x => true
             && x.DataHora >= competenciaFolha && x.DataHora < competenciaFolhaPosterior
-            && x.TrabalhadorId == User.GetUserId())
+            && x.UserId == User.GetUserId())
             .OrderByDescending(x => x.DataHora)
         .ToListAsync();
 

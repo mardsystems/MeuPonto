@@ -36,5 +36,5 @@ public class Ponto : DocumentEntity, Concepts.Ponto
     [DisplayName("Observação")]
     public string? Observacao { get; set; }
 
-    public Guid? TrabalhadorId { get; set; }
+    public string? UserId { get; set; }
 }

@@ -49,8 +49,8 @@ namespace MeuPonto.Data.Migrations
                         .HasMaxLength(36)
                         .HasColumnType("nvarchar(36)");
 
-                    b.Property<Guid?>("TrabalhadorId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("Version")
                         .IsConcurrencyToken()
@@ -84,8 +84,8 @@ namespace MeuPonto.Data.Migrations
                         .HasMaxLength(36)
                         .HasColumnType("nvarchar(36)");
 
-                    b.Property<Guid?>("TrabalhadorId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("Version")
                         .IsConcurrencyToken()
@@ -125,8 +125,8 @@ namespace MeuPonto.Data.Migrations
                     b.Property<int>("TipoImagemId")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("TrabalhadorId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("Version")
                         .IsConcurrencyToken()
@@ -192,8 +192,8 @@ namespace MeuPonto.Data.Migrations
                     b.Property<int>("StatusId")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("TrabalhadorId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("Version")
                         .IsConcurrencyToken()
@@ -342,8 +342,8 @@ namespace MeuPonto.Data.Migrations
                         .IsRequired()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("TrabalhadorId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("Version")
                         .IsConcurrencyToken()
@@ -367,6 +367,9 @@ namespace MeuPonto.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("getdate()");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("Version")
                         .IsConcurrencyToken()

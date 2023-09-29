@@ -29,6 +29,6 @@ public static class FolhaFacade
 
         folha.ApuracaoMensal.TempoTotalPeriodoAnterior = TimeSpan.Zero;
 
-        folha.PartitionKey = $"{folha.TrabalhadorId}|{folha.Competencia:yyyy}";
+        folha.PartitionKey = $"{folha.UserId}|{folha.Competencia:yyyy}";
     }
 }

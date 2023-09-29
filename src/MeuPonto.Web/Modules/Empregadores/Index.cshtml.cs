@@ -38,7 +38,7 @@ public class IndexModel : PageModel
             Empregadores = await _db.Empregadores
                 .Where(x => true
                     && (Nome == null || x.Nome == Nome)
-                    && x.TrabalhadorId == User.GetUserId())
+                    && x.UserId == User.GetUserId())
                 .OrderByDescending(x => x.Nome)
                 .Skip((Pagination.PaginaAtual - 1) * Pagination.TamanhoPagina.Value)
                 .Take(Pagination.TamanhoPagina.Value)

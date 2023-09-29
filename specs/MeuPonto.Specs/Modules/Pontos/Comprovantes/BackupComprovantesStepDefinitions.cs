@@ -73,7 +73,7 @@ public class BackupComprovantesStepDefinitions
 
         var userId = Guid.NewGuid();
 
-        var transaction = new TransactionContext(userId);
+        var transaction = new TransactionContext(userId.ToString());
 
         var ponto = PontoFactory.CriaPonto(transaction);
 

@@ -65,6 +65,53 @@ public partial class MainWindow : Window
 
     private void configuracoesMenuItem_Click(object sender, RoutedEventArgs e)
     {
+        //using (var scope = ServiceProvider.CreateScope())
+        //{
+        //    var db = scope.ServiceProvider.GetRequiredService<MeuPontoDbContext>();
+
+        //    foreach (var trabalhador in db.Trabalhadores)
+        //    {
+        //        trabalhador.UserId = trabalhador.Id.ToString();
+        //    }
+
+        //    db.SaveChanges();
+
+        //    foreach (var empregador in db.Empregadores)
+        //    {
+        //        empregador.UserId = empregador.TrabalhadorId.ToString();
+        //    }
+
+        //    db.SaveChanges();
+
+        //    foreach (var perfil in db.Perfis)
+        //    {
+        //        perfil.UserId = perfil.TrabalhadorId.ToString();
+        //    }
+
+        //    db.SaveChanges();
+
+        //    foreach (var ponto in db.Pontos)
+        //    {
+        //        ponto.UserId = ponto.TrabalhadorId.ToString();
+        //    }
+
+        //    db.SaveChanges();
+
+        //    foreach (var comprovante in db.Comprovantes)
+        //    {
+        //        comprovante.UserId = comprovante.TrabalhadorId.ToString();
+        //    }
+
+        //    db.SaveChanges();
+
+        //    foreach (var folha in db.Folhas)
+        //    {
+        //        folha.UserId = folha.TrabalhadorId.ToString();
+        //    }
+
+        //    db.SaveChanges();
+        //}
+
         //_db.Database.EnsureDeleted();
 
         //_db.Database.Migrate();

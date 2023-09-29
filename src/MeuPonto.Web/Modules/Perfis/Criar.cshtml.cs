@@ -23,7 +23,7 @@ public class CriarModel : FormPageModel
 
         Perfil = PerfilFactory.CriaPerfil(transaction);
 
-        ViewData["EmpregadorId"] = new SelectList(_db.Empregadores.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome").AddEmptyValue();
+        ViewData["EmpregadorId"] = new SelectList(_db.Empregadores.Where(x => x.UserId == User.GetUserId()), "Id", "Nome").AddEmptyValue();
 
         var daysOfWeek = Enum.GetValues<DayOfWeek>();
 

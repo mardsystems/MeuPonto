@@ -38,7 +38,7 @@ public class Ponto : GlobalTableEntity, Concepts.Ponto
     [DisplayName("Observação")]
     public string? Observacao { get; set; }
 
-    public Guid? TrabalhadorId { get; set; }
+    public string? UserId { get; set; }
 
     [DisplayName("Comprovantes")]
     public virtual IList<Comprovante> Comprovantes { get; set; } = default!;

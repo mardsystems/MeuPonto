@@ -42,7 +42,7 @@ namespace MeuPonto.Data.Migrations
                         .HasMaxLength(36)
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("TrabalhadorId")
+                    b.Property<string>("UserId")
                         .HasColumnType("TEXT");
 
                     b.Property<byte[]>("Version")
@@ -75,7 +75,7 @@ namespace MeuPonto.Data.Migrations
                         .HasMaxLength(36)
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("TrabalhadorId")
+                    b.Property<string>("UserId")
                         .HasColumnType("TEXT");
 
                     b.Property<byte[]>("Version")
@@ -114,7 +114,7 @@ namespace MeuPonto.Data.Migrations
                     b.Property<int>("TipoImagemId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid?>("TrabalhadorId")
+                    b.Property<string>("UserId")
                         .HasColumnType("TEXT");
 
                     b.Property<byte[]>("Version")
@@ -179,7 +179,7 @@ namespace MeuPonto.Data.Migrations
                     b.Property<int>("StatusId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid?>("TrabalhadorId")
+                    b.Property<string>("UserId")
                         .HasColumnType("TEXT");
 
                     b.Property<byte[]>("Version")
@@ -327,7 +327,7 @@ namespace MeuPonto.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("TrabalhadorId")
+                    b.Property<string>("UserId")
                         .HasColumnType("TEXT");
 
                     b.Property<byte[]>("Version")
@@ -349,6 +349,9 @@ namespace MeuPonto.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("CreationDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserId")
                         .HasColumnType("TEXT");
 
                     b.Property<byte[]>("Version")

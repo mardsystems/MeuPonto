@@ -20,7 +20,7 @@ public class AbrirModel : FormPageModel
     {
         var transaction = User.CreateTransaction();
 
-        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
+        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
 
         Folha = FolhaFactory.CriaFolha(transaction);
 
@@ -43,7 +43,7 @@ public class AbrirModel : FormPageModel
             return Page();
         }
 
-        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
+        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
 
         Folha.StatusId = StatusEnum.Aberta;
 
@@ -64,7 +64,7 @@ public class AbrirModel : FormPageModel
 
             Folha.ConfirmarCompetencia(perfil);
 
-            ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome");
+            ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
 
             return Page();
         }

@@ -44,7 +44,7 @@ public class DetalharModel : PageModel
                 .Include(x => x.Ponto)
                 .Where(x => true
                     && x.PontoId == id
-                    && x.TrabalhadorId == User.GetUserId())
+                    && x.UserId == User.GetUserId())
                 .ToListAsync();
         }
 

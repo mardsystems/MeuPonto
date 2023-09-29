@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MeuPonto.Data.Migrations
 {
     [DbContext(typeof(MeuPontoDbContext))]
-    [Migration("20230927230041_Initial")]
+    [Migration("20230929131244_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -45,7 +45,7 @@ namespace MeuPonto.Data.Migrations
                         .HasMaxLength(36)
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("TrabalhadorId")
+                    b.Property<string>("UserId")
                         .HasColumnType("TEXT");
 
                     b.Property<byte[]>("Version")
@@ -78,7 +78,7 @@ namespace MeuPonto.Data.Migrations
                         .HasMaxLength(36)
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("TrabalhadorId")
+                    b.Property<string>("UserId")
                         .HasColumnType("TEXT");
 
                     b.Property<byte[]>("Version")
@@ -117,7 +117,7 @@ namespace MeuPonto.Data.Migrations
                     b.Property<int>("TipoImagemId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid?>("TrabalhadorId")
+                    b.Property<string>("UserId")
                         .HasColumnType("TEXT");
 
                     b.Property<byte[]>("Version")
@@ -182,7 +182,7 @@ namespace MeuPonto.Data.Migrations
                     b.Property<int>("StatusId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid?>("TrabalhadorId")
+                    b.Property<string>("UserId")
                         .HasColumnType("TEXT");
 
                     b.Property<byte[]>("Version")
@@ -330,7 +330,7 @@ namespace MeuPonto.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("TrabalhadorId")
+                    b.Property<string>("UserId")
                         .HasColumnType("TEXT");
 
                     b.Property<byte[]>("Version")
@@ -352,6 +352,9 @@ namespace MeuPonto.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("CreationDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserId")
                         .HasColumnType("TEXT");
 
                     b.Property<byte[]>("Version")

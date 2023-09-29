@@ -2,11 +2,12 @@
 
 public static class TrabalhadorFactory
 {
-    public static Trabalhador CriaTrabalhador(TransactionContext transaction)
+    public static Trabalhador CriaTrabalhador(TransactionContext transaction, Guid? id = null)
     {
         var trabalhador = new Trabalhador
         {
-            Id = transaction.UserId,
+            Id = id ?? Guid.NewGuid(),
+            UserId = transaction.UserId,
             PartitionKey = transaction.UserId.ToString(),
             CreationDate = transaction.DateTime
         };
@@ -14,9 +15,10 @@ public static class TrabalhadorFactory
         return trabalhador;
     }
 
-    public static void RecontextualizaTrabalhador(this Trabalhador trabalhador, TransactionContext transaction)
+    public static void RecontextualizaTrabalhador(this Trabalhador trabalhador, TransactionContext transaction, Guid? id = null)
     {
-        trabalhador.Id ??= transaction.UserId;
+        trabalhador.Id = trabalhador.Id ?? id ?? Guid.NewGuid();
+        trabalhador.UserId = transaction.UserId;
         trabalhador.PartitionKey = transaction.UserId.ToString();
         trabalhador.CreationDate ??= transaction.DateTime;
     }

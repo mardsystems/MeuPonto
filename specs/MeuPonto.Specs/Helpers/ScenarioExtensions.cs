@@ -1,9 +1,10 @@
 ﻿namespace MeuPonto.Helpers;
+
 public static class ScenarioExtensions
 {
-    public static Guid GetUserId(this ScenarioContext scenario)
+    public static string GetUserId(this ScenarioContext scenario)
     {
-        var userId = scenario.Get<Guid>("UserId");
+        var userId = scenario.Get<string>("UserId");
 
         return userId;
     }

@@ -12,5 +12,5 @@ public class Empregador : DocumentEntity, Concepts.Empregador
     [DisplayName("Nome")]
     public string? Nome { get; set; }
 
-    public Guid? TrabalhadorId { get; set; }
+    public string? UserId { get; set; }
 }

@@ -37,9 +37,9 @@ public class IndexModel : PageModel
 
     public async Task OnGetAsync()
     {
-        ViewData["EmpregadorId"] = new SelectList(_db.Empregadores.Where(x => x.TrabalhadorId == User.GetUserId()), "Id", "Nome").AddEmptyValue();
+        ViewData["EmpregadorId"] = new SelectList(_db.Empregadores.Where(x => x.UserId == User.GetUserId()), "Id", "Nome").AddEmptyValue();
 
-        var totalRegistros = await _db.Perfis.CountAsync(x => x.TrabalhadorId == User.GetUserId());
+        var totalRegistros = await _db.Perfis.CountAsync(x => x.UserId == User.GetUserId());
 
         Pagination = new PaginationModel(totalRegistros, PaginaAtual ?? 1);
 
@@ -50,7 +50,7 @@ public class IndexModel : PageModel
                     && (Nome == null || x.Nome == Nome)
                     && (Ativo == null || x.Ativo == Ativo)
                     && (EmpregadorId == null || x.EmpregadorId == EmpregadorId)
-                    && x.TrabalhadorId == User.GetUserId())
+                    && x.UserId == User.GetUserId())
                 .OrderByDescending(x => x.Nome)
                 .Skip((Pagination.PaginaAtual - 1) * Pagination.TamanhoPagina.Value)
                 .Take(Pagination.TamanhoPagina.Value)

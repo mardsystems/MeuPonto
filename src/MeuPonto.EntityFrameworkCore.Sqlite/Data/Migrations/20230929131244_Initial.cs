@@ -30,7 +30,7 @@ namespace MeuPonto.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Nome = table.Column<string>(type: "TEXT", maxLength: 36, nullable: false),
-                    TrabalhadorId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    UserId = table.Column<string>(type: "TEXT", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
                     Version = table.Column<byte[]>(type: "BLOB", rowVersion: true, nullable: true)
                 },
@@ -93,6 +93,7 @@ namespace MeuPonto.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     CustomerSubscription_SubscriptionPlanId = table.Column<int>(type: "INTEGER", nullable: true),
+                    UserId = table.Column<string>(type: "TEXT", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
                     Version = table.Column<byte[]>(type: "BLOB", rowVersion: true, nullable: true)
                 },
@@ -109,7 +110,7 @@ namespace MeuPonto.Data.Migrations
                     Nome = table.Column<string>(type: "TEXT", maxLength: 36, nullable: false),
                     Ativo = table.Column<bool>(type: "INTEGER", nullable: false),
                     EmpregadorId = table.Column<Guid>(type: "TEXT", nullable: true),
-                    TrabalhadorId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    UserId = table.Column<string>(type: "TEXT", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
                     Version = table.Column<byte[]>(type: "BLOB", rowVersion: true, nullable: true)
                 },
@@ -133,7 +134,7 @@ namespace MeuPonto.Data.Migrations
                     StatusId = table.Column<int>(type: "INTEGER", nullable: false),
                     Observacao = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
                     ApuracaoMensal_TempoTotalPeriodoAnterior = table.Column<TimeSpan>(type: "TEXT", nullable: true),
-                    TrabalhadorId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    UserId = table.Column<string>(type: "TEXT", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
                     Version = table.Column<byte[]>(type: "BLOB", rowVersion: true, nullable: true)
                 },
@@ -178,7 +179,7 @@ namespace MeuPonto.Data.Migrations
                     PausaId = table.Column<int>(type: "INTEGER", nullable: true),
                     Estimado = table.Column<bool>(type: "INTEGER", nullable: false),
                     Observacao = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
-                    TrabalhadorId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    UserId = table.Column<string>(type: "TEXT", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
                     Version = table.Column<byte[]>(type: "BLOB", rowVersion: true, nullable: true)
                 },
@@ -226,7 +227,7 @@ namespace MeuPonto.Data.Migrations
                     Numero = table.Column<string>(type: "TEXT", maxLength: 16, nullable: true),
                     Imagem = table.Column<byte[]>(type: "BLOB", nullable: false),
                     TipoImagemId = table.Column<int>(type: "INTEGER", nullable: false),
-                    TrabalhadorId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    UserId = table.Column<string>(type: "TEXT", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
                     Version = table.Column<byte[]>(type: "BLOB", rowVersion: true, nullable: true)
                 },
