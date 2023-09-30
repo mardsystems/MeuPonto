@@ -63,7 +63,7 @@ public class FecharModel : FormPageModel
                 Folha = folha;
             }
 
-            Folha.StatusId = StatusEnum.Fechada;
+            Folha.StatusId = StatusFolhaEnum.Fechada;
 
             await _db.SaveChangesAsync();
         }

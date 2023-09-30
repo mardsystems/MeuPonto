@@ -28,17 +28,17 @@ public class WebHook : IClassFixture<MeuPontoWebFactory<Program>>
         ISpecFlowOutputHelper specFlowOutputHelper,
         MeuPontoWebFactory<Program> webFactory)
     {
-        this._objectContainer = objectContainer;
+        _objectContainer = objectContainer;
 
-        this._specFlowOutputHelper = specFlowOutputHelper;
+        _specFlowOutputHelper = specFlowOutputHelper;
 
         _counter++;
 
         specFlowOutputHelper.WriteLine($"WebHook --> {_counter}");
 
-        this._webFactory = webFactory;
+        _webFactory = webFactory;
 
-        _httpClient = this._webFactory.CreateClient(new WebApplicationFactoryClientOptions
+        _httpClient = _webFactory.CreateClient(new WebApplicationFactoryClientOptions
         {
             BaseAddress = new Uri("https://localhost")
         });

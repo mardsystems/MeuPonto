@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MeuPonto.Data.Migrations
 {
     [DbContext(typeof(MeuPontoDbContext))]
-    [Migration("20230929131244_Initial")]
+    [Migration("20230930134830_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -197,7 +197,7 @@ namespace MeuPonto.Data.Migrations
                     b.ToTable("Folhas", (string)null);
                 });
 
-            modelBuilder.Entity("MeuPonto.Modules.Pontos.Folhas.Status", b =>
+            modelBuilder.Entity("MeuPonto.Modules.Pontos.Folhas.StatusFolha", b =>
                 {
                     b.Property<int>("Id")
                         .HasColumnType("INTEGER");
@@ -208,7 +208,7 @@ namespace MeuPonto.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Status");
+                    b.ToTable("StatusFolha");
 
                     b.HasData(
                         new
@@ -399,7 +399,7 @@ namespace MeuPonto.Data.Migrations
 
                                     b2.HasKey("PerfilId", "DiaSemana");
 
-                                    b2.ToTable("JornadaTrabalhoDiaria");
+                                    b2.ToTable("Perfis_JornadaTrabalhoDiaria", (string)null);
 
                                     b2.WithOwner()
                                         .HasForeignKey("PerfilId");
@@ -478,7 +478,7 @@ namespace MeuPonto.Data.Migrations
 
                                     b2.HasKey("FolhaId", "Dia");
 
-                                    b2.ToTable("ApuracaoDiaria");
+                                    b2.ToTable("Folhas_ApuracaoDiaria", (string)null);
 
                                     b2.WithOwner()
                                         .HasForeignKey("FolhaId");

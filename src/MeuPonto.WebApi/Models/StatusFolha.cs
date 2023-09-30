@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MeuPonto.Models;
 
-public class Status
+public class StatusFolha
 {
-    public StatusEnum Id { get; set; }
+    public StatusFolhaEnum Id { get; set; }
 
     [MaxLength(255)]
     public string? Nome { get; set; }

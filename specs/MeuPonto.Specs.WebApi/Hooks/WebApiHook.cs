@@ -1,13 +1,17 @@
 ﻿using BoDi;
 using MeuPonto.Data;
 using MeuPonto.Support;
-using Microsoft.EntityFrameworkCore;
+using TechTalk.SpecFlow.Infrastructure;
 
 namespace MeuPonto.Hooks;
 
 [Binding]
 public class WebApiHook
 {
+    private readonly IObjectContainer _objectContainer;
+
+    private readonly ISpecFlowOutputHelper _specFlowOutputHelper;
+
     private readonly WebApiContext _webApiContext;
     private readonly TestFolders _testFolders;
     private readonly ScenarioContext _scenarioContext;
@@ -18,11 +22,16 @@ public class WebApiHook
 
     public WebApiHook(
         IObjectContainer objectContainer,
+        ISpecFlowOutputHelper specFlowOutputHelper,
         AppHostingContext _appHostingContext,
         WebApiContext webApiContext,
         TestFolders testFolders,
         ScenarioContext scenarioContext)
     {
+        _objectContainer = objectContainer;
+
+        _specFlowOutputHelper = specFlowOutputHelper;
+
         _webApiContext = webApiContext;
         _testFolders = testFolders;
         _scenarioContext = scenarioContext;
@@ -43,14 +52,41 @@ public class WebApiHook
     [BeforeScenario]
     public void InitializeWeb(FeatureContext feature, ScenarioContext scenario)
     {
+        _specFlowOutputHelper.WriteLine("EnsureDeleted");
+
         _db.Database.EnsureDeleted();
 
-        _db.Database.Migrate();
+        _specFlowOutputHelper.WriteLine("EnsureCreated");
+
+        _db.Database.EnsureCreated();
+
+        //_db.Database.Migrate();
+
+        //
+
+        //objectContainer.RegisterInstanceAs<CalculoDeTaxaDeMarcacao>(calculoDeTaxaDeMarcacaoWeb);
+
+        //if (feature.FeatureInfo.Title == "Cálculo (ou Calculadora) de Taxa de Marcação")
+        //{
+        //    var calculoDeTaxaDeMarcacaoWeb = new CalculoDeTaxaDeMarcacaoWeb(httpClient);
+
+        //    objectContainer.RegisterInstanceAs<CalculoDeTaxaDeMarcacao>(calculoDeTaxaDeMarcacaoWeb);
+        //}
+        //else if (feature.FeatureInfo.Title == "Cadastro de Modelos")
+        //{
+        //    var cadastroDeModelosWeb = new CadastroDeModelosWeb(httpClient);
+
+        //    objectContainer.RegisterInstanceAs<CadastroDeModelos>(cadastroDeModelosWeb);
+        //}
     }
 
     [AfterScenario]
     public void WriteLog()
     {
+        _serviceScope.Dispose();
+
+        _db.Dispose();
+
         if (_scenarioContext.TestError != null)
         {
             var fileName = _testFolders.GetScenarioSpecificFileName(".log");

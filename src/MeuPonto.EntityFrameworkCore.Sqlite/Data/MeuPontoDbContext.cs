@@ -43,6 +43,7 @@ public class MeuPontoDbContext : DbContext
         {
             x.OwnsMany(b => b.Semana, y =>
             {
+                y.ToTable("Perfis_JornadaTrabalhoDiaria");
                 y.WithOwner().HasForeignKey("PerfilId");
                 y.HasKey("PerfilId", "DiaSemana");
             });
@@ -55,6 +56,7 @@ public class MeuPontoDbContext : DbContext
         {
             x.OwnsMany(b => b.Dias, y =>
             {
+                y.ToTable("Folhas_ApuracaoDiaria");
                 y.WithOwner().HasForeignKey("FolhaId");
                 y.HasKey("FolhaId", "Dia");
             });
@@ -75,16 +77,16 @@ public class MeuPontoDbContext : DbContext
 
         //
 
-        modelBuilder.Entity<Status>().Property(x => x.Id).ValueGeneratedNever();
+        modelBuilder.Entity<StatusFolha>().Property(x => x.Id).ValueGeneratedNever();
         modelBuilder.Entity<Momento>().Property(x => x.Id).ValueGeneratedNever();
         modelBuilder.Entity<Pausa>().Property(x => x.Id).ValueGeneratedNever();
         modelBuilder.Entity<TipoImagem>().Property(x => x.Id).ValueGeneratedNever();
 
         //
 
-        modelBuilder.Entity<Status>().HasData(
-            new Status { Id = StatusEnum.Aberta, Nome = "Aberta" },
-            new Status { Id = StatusEnum.Fechada, Nome = "Fechada" }
+        modelBuilder.Entity<StatusFolha>().HasData(
+            new StatusFolha { Id = StatusFolhaEnum.Aberta, Nome = "Aberta" },
+            new StatusFolha { Id = StatusFolhaEnum.Fechada, Nome = "Fechada" }
         );
 
         modelBuilder.Entity<Momento>().HasData(

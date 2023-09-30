@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using Microsoft.EntityFrameworkCore;
 
 namespace MeuPonto.Modules.Perfis;
 
@@ -30,4 +31,46 @@ public class Perfil : DocumentEntity
     {
         JornadaTrabalhoSemanalPrevista = new JornadaTrabalhoSemanal();
     }
+}
+
+[Owned]
+public class JornadaTrabalhoSemanal
+{
+    [DisplayName("Semana")]
+    public virtual IList<JornadaTrabalhoDiaria> Semana { get; set; } = default!;
+
+    [DisplayName("Tempo Total")]
+    [DisplayFormat(DataFormatString = "{0:d\\d\\ hh\\:mm}")]
+    public TimeSpan TempoTotal
+    {
+        get
+        {
+            TimeSpan tempoTotal = TimeSpan.Zero;
+
+            foreach (var jornadaTrabalhoDiaria in Semana)
+            {
+                tempoTotal += jornadaTrabalhoDiaria.Tempo ?? TimeSpan.Zero;
+            }
+
+            return tempoTotal;
+        }
+    }
+
+    public JornadaTrabalhoSemanal()
+    {
+        Semana = new List<JornadaTrabalhoDiaria>();
+    }
+}
+
+[Owned]
+public class JornadaTrabalhoDiaria
+{
+    [Required]
+    [DisplayName("Dia Semana")]
+    public DayOfWeek? DiaSemana { get; set; }
+
+    [Required]
+    [DisplayName("Tempo")]
+    [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
+    public TimeSpan? Tempo { get; set; }
 }

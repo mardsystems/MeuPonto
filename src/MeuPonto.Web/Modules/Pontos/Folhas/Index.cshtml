@@ -129,7 +129,7 @@
                     <input asp-for="Competencia" class="form-control" />
                 </th>
                 <th>
-                    <select asp-for="Status" class="form-select" asp-items="Html.GetEnumSelectListWithEmptyValue<StatusEnum>()"></select>
+                    <select asp-for="Status" class="form-select" asp-items="Html.GetEnumSelectListWithEmptyValue<StatusFolhaEnum>()"></select>
                 </th>
                 <th>
                     <input asp-for="Observacao" class="form-control" />
@@ -169,9 +169,9 @@
                         @Html.DisplayFor(modelItem => item.Competencia)
                     </td>
                     <td>
-                        <span class="badge fs-6 @(item.StatusId == Pontos.Folhas.StatusEnum.Aberta ? "text-bg-warning" : "text-bg-success")">
+                        <span class="badge fs-6 @(item.StatusId == Pontos.Folhas.StatusFolhaEnum.Aberta ? "text-bg-warning" : "text-bg-success")">
                             @Html.DisplayFor(modelItem => item.StatusId)
-                            <i class="bi @(item.StatusId == Pontos.Folhas.StatusEnum.Aberta ? "bi-file-earmark-fill" : "bi-file-earmark-lock-fill")"></i>
+                            <i class="bi @(item.StatusId == Pontos.Folhas.StatusFolhaEnum.Aberta ? "bi-file-earmark-fill" : "bi-file-earmark-lock-fill")"></i>
                         </span>
                     </td>
                     <td>

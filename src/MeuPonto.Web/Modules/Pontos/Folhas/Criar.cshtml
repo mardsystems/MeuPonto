@@ -52,7 +52,7 @@
 <div class="row mb-3">
     <label asp-for="Folha.StatusId" class="col-sm-3 col-form-label"></label>
     <div class="col-sm-9">
-        <select asp-for="Folha.StatusId" class="form-select" asp-items="Html.GetEnumSelectList<StatusEnum>()"></select>
+        <select asp-for="Folha.StatusId" class="form-select" asp-items="Html.GetEnumSelectList<StatusFolhaEnum>()"></select>
         <input asp-for="Folha.StatusId" type="hidden" />
     </div>
 </div>
