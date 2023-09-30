@@ -7,6 +7,6 @@ Veja mais na [Wiki](https://github.com/mardsystems/MeuPonto/wiki).
 
 ![MeuPonto - Modelo Conceitual](img/Modelo_Conceitual.png)
 
-# Modelo Lógico
+# Modelo Lógico (Relacional)
 
 ![MeuPonto - Modelo Lógico (Relacional)](img/Modelo_Logico_Relacional.png)
