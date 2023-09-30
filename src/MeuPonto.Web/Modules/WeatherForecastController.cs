@@ -1,13 +1,12 @@
-using MeuPonto.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Web.Resource;
 
-namespace MeuPonto.Controllers;
+namespace MeuPonto.Modules;
 
 [Authorize]
 [ApiController]
-[Route("[controller]")]
+[Route("modules/[controller]")]
 [RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
 public class WeatherForecastController : ControllerBase
 {

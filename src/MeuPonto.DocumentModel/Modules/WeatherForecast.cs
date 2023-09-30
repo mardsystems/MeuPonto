@@ -1,4 +1,4 @@
-﻿namespace MeuPonto.Models;
+﻿namespace MeuPonto.Modules;
 
 public class WeatherForecast
 {

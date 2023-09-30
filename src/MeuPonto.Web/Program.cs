@@ -21,6 +21,8 @@ public class Program
 
         // Add services to the container.
 
+        builder.Services.AddInfrastructure(builder.Configuration);
+
         builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
         builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
@@ -125,8 +127,6 @@ public class Program
         builder.Services.AddTransient(p => new DateTimeSnapshot(DateTime.Now));
 
         builder.Services.AddTransient<IClaimsTransformation, MyClaimsTransformation>();
-
-        builder.Services.AddInfrastructure(builder.Configuration);
 
         var app = builder.Build();
 

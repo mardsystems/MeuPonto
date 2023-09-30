@@ -1,5 +1,4 @@
 ﻿@page "/app/weather"
-@using MeuPonto.Models;
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @attribute [Authorize]
@@ -47,7 +46,7 @@ else
     {
         try
         {
-            forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
+            forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("modules/WeatherForecast");
         }
         catch (AccessTokenNotAvailableException exception)
         {
