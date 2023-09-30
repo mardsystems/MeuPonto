@@ -103,29 +103,52 @@
                         @await RenderSectionAsync("Title")
                     </h1>
                 }
-            }
 
-            @if (TempData.ContainsKey("TextSuccessMessage"))
-            {
-                <div class="alert alert-success alert-dismissible fade show d-flex align-items-center mb-3" role="alert">
-                    <i class="bi bi-check-circle-fill flex-shrink-0 me-2"></i>
-                    <div>
-                        @(TempData["TextSuccessMessage"]).
-                        @if (TempData.ContainsKey("DetailLinkSuccessMessage"))
-                        {
-                            <a href="@TempData["DetailLinkSuccessMessage"]" target="_blank">
-                                Detalhar
-                                <i class="bi bi-link-45deg"></i>
-                            </a>
-                        }
+                @if (TempData.ContainsKey("TextSuccessMessage"))
+                {
+                    <div class="alert alert-success alert-dismissible fade show d-flex align-items-center mb-3" role="alert">
+                        <i class="bi bi-check-circle-fill flex-shrink-0 me-2"></i>
+                        <div>
+                            @(TempData["TextSuccessMessage"]).
+                            @if (TempData.ContainsKey("DetailLinkSuccessMessage"))
+                            {
+                                <a href="@TempData["DetailLinkSuccessMessage"]" target="_blank">
+                                    Detalhar
+                                    <i class="bi bi-link-45deg"></i>
+                                </a>
+                            }
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            }
+                }
 
-            @if (IsSectionDefined("FormActions"))
-            {
-                <form method="post" enctype="@ViewData["Enctype"]">
+                @if (IsSectionDefined("FormActions"))
+                {
+                    <form method="post" enctype="@ViewData["Enctype"]">
+                        @if (IsSectionDefined("CardHeader"))
+                        {
+                            <div class="card">
+                                <div class="card-header">
+                                    @await RenderSectionAsync("CardHeader")
+                                </div>
+                                <div class="card-body">
+                                    @RenderBody()
+                                </div>
+                                <div class="card-footer">
+                                    @await RenderSectionAsync("FormActions")
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            @RenderBody()
+
+                            @await RenderSectionAsync("FormActions")
+                        }
+                    </form>
+                }
+                else
+                {
                     @if (IsSectionDefined("CardHeader"))
                     {
                         <div class="card">
@@ -135,36 +158,26 @@
                             <div class="card-body">
                                 @RenderBody()
                             </div>
-                            <div class="card-footer">
-                                @await RenderSectionAsync("FormActions")
-                            </div>
                         </div>
                     }
                     else
                     {
                         @RenderBody()
-
-                        @await RenderSectionAsync("FormActions")
                     }
-                </form>
+                }
             }
             else
             {
-                @if (IsSectionDefined("CardHeader"))
+                @await RenderSectionAsync("Breadcrumb", required: false)
+
+                @if (IsSectionDefined("Title"))
                 {
-                    <div class="card">
-                        <div class="card-header">
-                            @await RenderSectionAsync("CardHeader")
-                        </div>
-                        <div class="card-body">
-                            @RenderBody()
-                        </div>
-                    </div>
+                    <h1>
+                        @await RenderSectionAsync("Title")
+                    </h1>
                 }
-                else
-                {
-                    @RenderBody()
-                }
+
+                @RenderBody()
             }
         </main>
     </div>
