@@ -24,7 +24,7 @@ public class AbrirModel : FormPageModel
 
         Folha = FolhaFactory.CriaFolha(transaction);
 
-        Folha.StatusId = StatusEnum.Aberta;
+        Folha.StatusId = StatusFolhaEnum.Aberta;
 
         HoldRefererUrl();
 
@@ -45,7 +45,7 @@ public class AbrirModel : FormPageModel
 
         ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
 
-        Folha.StatusId = StatusEnum.Aberta;
+        Folha.StatusId = StatusFolhaEnum.Aberta;
 
         var perfil = await _db.Perfis.FindByIdAsync(Folha.PerfilId, User.GetUserId());
 

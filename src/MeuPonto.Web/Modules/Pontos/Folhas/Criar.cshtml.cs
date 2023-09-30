@@ -43,7 +43,7 @@ public class CriarModel : FormPageModel
             return Page();
         }
 
-        Folha.StatusId = StatusEnum.Aberta;
+        Folha.StatusId = StatusFolhaEnum.Aberta;
 
         var perfil = await _db.Perfis.FindByIdAsync(Folha.PerfilId, User.GetUserId());
 

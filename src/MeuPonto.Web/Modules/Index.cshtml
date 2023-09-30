@@ -65,9 +65,9 @@
                         <div class="card-body">
                             <h5 class="card-title">
                                 @Html.DisplayFor(model => model.Folha.Competencia)
-                                <span class="badge @(Model.Folha.StatusId == Pontos.Folhas.StatusEnum.Aberta ? "text-bg-warning" : "text-bg-success")"><i class="bi @(Model.Folha.StatusId == Pontos.Folhas.StatusEnum.Aberta ? "bi-file-earmark-fill" : "bi-file-earmark-lock-fill")"></i></span>
+                                <span class="badge @(Model.Folha.StatusId == Pontos.Folhas.StatusFolhaEnum.Aberta ? "text-bg-warning" : "text-bg-success")"><i class="bi @(Model.Folha.StatusId == Pontos.Folhas.StatusFolhaEnum.Aberta ? "bi-file-earmark-fill" : "bi-file-earmark-lock-fill")"></i></span>
                             </h5>
-                            @if (Model.Folha.StatusId == Pontos.Folhas.StatusEnum.Aberta)
+                            @if (Model.Folha.StatusId == Pontos.Folhas.StatusFolhaEnum.Aberta)
                             {
                                 <p class="card-text">
                                     Esta folha de ponto está <b>aberta</b> e sendo apurada.
@@ -121,7 +121,7 @@
                             </li>
                         </ul>
                         <div class="card-body">
-                            @if (Model.Folha.StatusId == Pontos.Folhas.StatusEnum.Aberta)
+                            @if (Model.Folha.StatusId == Pontos.Folhas.StatusFolhaEnum.Aberta)
                             {
                                 <a class="card-link text-decoration-none" asp-page="/Pontos/Folhas/Fechar" asp-route-id="@Model.Folha.Id" target="_modal">
                                     Fechar

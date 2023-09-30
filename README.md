@@ -5,4 +5,8 @@ Veja mais na [Wiki](https://github.com/mardsystems/MeuPonto/wiki).
 
 # Modelo Conceitual
 
-![MeuPonto - Modelo Conceitual](img/Modelo-Conceitual.png)
+![MeuPonto - Modelo Conceitual](img/Modelo_Conceitual.png)
+
+# Modelo Lógico
+
+![MeuPonto - Modelo Lógico](img/Modelo_Logico.png)

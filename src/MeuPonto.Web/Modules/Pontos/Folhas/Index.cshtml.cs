@@ -19,7 +19,7 @@ public class IndexModel : PageModel
     public DateTime? Competencia { get; set; }
 
     [BindProperty(SupportsGet = true)]
-    public StatusEnum? Status { get; set; }
+    public StatusFolhaEnum? Status { get; set; }
 
     [MinLength(3)]
     [MaxLength(255)]

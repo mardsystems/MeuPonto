@@ -2,9 +2,9 @@
 
 namespace MeuPonto.Modules.Pontos.Folhas;
 
-public class Status
+public class StatusFolha
 {
-    public StatusEnum Id { get; set; }
+    public StatusFolhaEnum Id { get; set; }
 
     [MaxLength(255)]
     public string? Nome { get; set; }

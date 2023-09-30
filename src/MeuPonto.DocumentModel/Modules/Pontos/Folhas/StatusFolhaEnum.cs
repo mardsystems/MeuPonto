@@ -1,6 +1,6 @@
 ﻿namespace MeuPonto.Modules.Pontos.Folhas;
 
-public enum StatusEnum
+public enum StatusFolhaEnum
 {
     Aberta = 0,
 

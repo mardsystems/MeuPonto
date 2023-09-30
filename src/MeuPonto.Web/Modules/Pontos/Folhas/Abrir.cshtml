@@ -17,7 +17,7 @@
 }
 
 @section Title {
-    @ViewData["Title"] <span class="badge bg-secondary">Nova</span> <span class="badge @(Model.Folha.StatusId == Pontos.Folhas.StatusEnum.Aberta ? "text-bg-warning" : "text-bg-success")"><i class="bi @(Model.Folha.StatusId == Pontos.Folhas.StatusEnum.Aberta ? "bi-file-earmark-fill" : "bi-file-earmark-lock-fill")"></i></span>
+    @ViewData["Title"] <span class="badge bg-secondary">Nova</span> <span class="badge @(Model.Folha.StatusId == Pontos.Folhas.StatusFolhaEnum.Aberta ? "text-bg-warning" : "text-bg-success")"><i class="bi @(Model.Folha.StatusId == Pontos.Folhas.StatusFolhaEnum.Aberta ? "bi-file-earmark-fill" : "bi-file-earmark-lock-fill")"></i></span>
 }
 
 @section CardHeader {
@@ -52,7 +52,7 @@
 <div class="row mb-3">
     <label asp-for="Folha.StatusId" class="col-sm-3 col-form-label"></label>
     <div class="col-sm-9">
-        <select asp-for="Folha.StatusId" disabled class="form-select" asp-items="Html.GetEnumSelectList<StatusEnum>()"></select>
+        <select asp-for="Folha.StatusId" disabled class="form-select" asp-items="Html.GetEnumSelectList<StatusFolhaEnum>()"></select>
         <input asp-for="Folha.StatusId" type="hidden" />
     </div>
 </div>

@@ -1,6 +1,6 @@
 ﻿namespace MeuPonto.Enums;
 
-public enum StatusEnum
+public enum StatusFolhaEnum
 {
     Aberta = 0,
 

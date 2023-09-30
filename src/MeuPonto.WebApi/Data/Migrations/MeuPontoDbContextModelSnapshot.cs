@@ -342,7 +342,7 @@ namespace MeuPonto.Data.Migrations
                     b.ToTable("Pontos", (string)null);
                 });
 
-            modelBuilder.Entity("MeuPonto.Models.Status", b =>
+            modelBuilder.Entity("MeuPonto.Models.StatusFolha", b =>
                 {
                     b.Property<int>("Id")
                         .HasColumnType("int");
@@ -353,7 +353,7 @@ namespace MeuPonto.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Status");
+                    b.ToTable("StatusFolha");
 
                     b.HasData(
                         new
@@ -447,7 +447,7 @@ namespace MeuPonto.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MeuPonto.Models.Status", "Status")
+                    b.HasOne("MeuPonto.Models.StatusFolha", "Status")
                         .WithMany()
                         .HasForeignKey("StatusId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -508,7 +508,7 @@ namespace MeuPonto.Data.Migrations
 
                                     b2.HasKey("FolhaId", "Dia");
 
-                                    b2.ToTable("ApuracaoDiaria");
+                                    b2.ToTable("Folhas_ApuracaoDiaria", (string)null);
 
                                     b2.WithOwner()
                                         .HasForeignKey("FolhaId");
@@ -557,7 +557,7 @@ namespace MeuPonto.Data.Migrations
 
                                     b2.HasKey("PerfilId", "DiaSemana");
 
-                                    b2.ToTable("JornadaTrabalhoDiaria");
+                                    b2.ToTable("Perfis_JornadaTrabalhoDiaria", (string)null);
 
                                     b2.WithOwner()
                                         .HasForeignKey("PerfilId");

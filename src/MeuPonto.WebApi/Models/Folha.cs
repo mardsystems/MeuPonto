@@ -1,4 +1,5 @@
 ﻿using MeuPonto.Enums;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -20,10 +21,10 @@ public class Folha : GlobalTableEntity
 
     [Required]
     [DisplayName("Status")]
-    public StatusEnum? StatusId { get; set; }
+    public StatusFolhaEnum? StatusId { get; set; }
 
     [DisplayName("Status")]
-    public Status? Status { get; set; }
+    public StatusFolha? Status { get; set; }
 
     [MinLength(3)]
     [MaxLength(255)]
@@ -39,4 +40,68 @@ public class Folha : GlobalTableEntity
     {
         ApuracaoMensal = new ApuracaoMensal();
     }
+}
+
+[Owned]
+public class ApuracaoMensal
+{
+    [DisplayName("Dias")]
+    public IList<ApuracaoDiaria> Dias { get; set; }
+
+    [DisplayName("Total Dias")]
+    public int TotalDias { get => Dias.Count; }
+
+    [DisplayName("Tempo Total Previsto")]
+    //[DisplayFormat(DataFormatString = "{0:d\\d\\ hh\\:mm}")]
+    public TimeSpan? TempoTotalPrevisto { get; set; }
+
+    [DisplayName("Tempo Total Apurado")]
+    //[DisplayFormat(DataFormatString = "{0:d\\d\\ hh\\:mm}")]
+    public TimeSpan? TempoTotalApurado { get; set; }
+
+    [DisplayName("Diferença Tempo Total")]
+    //[DisplayFormat(DataFormatString = "{0:d\\d\\ hh\\:mm}")]
+    public TimeSpan? DiferencaTempoTotal { get; set; }
+
+    [DisplayName("Tempo Total Período Anterior")]
+    //[DisplayFormat(DataFormatString = "{0:d\\d\\ hh\\:mm}")]
+    public TimeSpan? TempoTotalPeriodoAnterior { get; set; }
+
+    public ApuracaoMensal()
+    {
+        Dias = new List<ApuracaoDiaria>();
+    }
+}
+
+[Owned]
+public class ApuracaoDiaria
+{
+    [Required]
+    [DisplayName("Dia")]
+    public int? Dia { get; set; }
+
+    [Required]
+    [DisplayName("Tempo Previsto")]
+    [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
+    public TimeSpan? TempoPrevisto { get; set; }
+
+    [DisplayName("Tempo Apurado")]
+    [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
+    public TimeSpan? TempoApurado { get; set; }
+
+    [DisplayName("Diferença Tempo")]
+    [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
+    public TimeSpan? DiferencaTempo { get; set; }
+
+    [DisplayName("Tempo Abonado")]
+    [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
+    public TimeSpan? TempoAbonado { get; set; }
+
+    [Required]
+    [DisplayName("Feriado?")]
+    public bool Feriado { get; set; }
+
+    [Required]
+    [DisplayName("Falta?")]
+    public bool Falta { get; set; }
 }

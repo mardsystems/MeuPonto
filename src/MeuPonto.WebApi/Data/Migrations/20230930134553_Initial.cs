@@ -69,7 +69,7 @@ namespace MeuPonto.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Status",
+                name: "StatusFolha",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false),
@@ -77,7 +77,7 @@ namespace MeuPonto.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Status", x => x.Id);
+                    table.PrimaryKey("PK_StatusFolha", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -159,15 +159,15 @@ namespace MeuPonto.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Folhas_Status_StatusId",
+                        name: "FK_Folhas_StatusFolha_StatusId",
                         column: x => x.StatusId,
-                        principalTable: "Status",
+                        principalTable: "StatusFolha",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "JornadaTrabalhoDiaria",
+                name: "Perfis_JornadaTrabalhoDiaria",
                 columns: table => new
                 {
                     DiaSemana = table.Column<int>(type: "int", nullable: false),
@@ -176,9 +176,9 @@ namespace MeuPonto.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_JornadaTrabalhoDiaria", x => new { x.PerfilId, x.DiaSemana });
+                    table.PrimaryKey("PK_Perfis_JornadaTrabalhoDiaria", x => new { x.PerfilId, x.DiaSemana });
                     table.ForeignKey(
-                        name: "FK_JornadaTrabalhoDiaria_Perfis_PerfilId",
+                        name: "FK_Perfis_JornadaTrabalhoDiaria_Perfis_PerfilId",
                         column: x => x.PerfilId,
                         principalTable: "Perfis",
                         principalColumn: "Id",
@@ -224,7 +224,7 @@ namespace MeuPonto.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ApuracaoDiaria",
+                name: "Folhas_ApuracaoDiaria",
                 columns: table => new
                 {
                     Dia = table.Column<int>(type: "int", nullable: false)
@@ -239,9 +239,9 @@ namespace MeuPonto.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ApuracaoDiaria", x => new { x.FolhaId, x.Dia });
+                    table.PrimaryKey("PK_Folhas_ApuracaoDiaria", x => new { x.FolhaId, x.Dia });
                     table.ForeignKey(
-                        name: "FK_ApuracaoDiaria_Folhas_FolhaId",
+                        name: "FK_Folhas_ApuracaoDiaria_Folhas_FolhaId",
                         column: x => x.FolhaId,
                         principalTable: "Folhas",
                         principalColumn: "Id",
@@ -303,7 +303,7 @@ namespace MeuPonto.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Status",
+                table: "StatusFolha",
                 columns: new[] { "Id", "Nome" },
                 values: new object[,]
                 {
@@ -365,22 +365,19 @@ namespace MeuPonto.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ApuracaoDiaria");
-
-            migrationBuilder.DropTable(
                 name: "Comprovantes");
 
             migrationBuilder.DropTable(
                 name: "Configuracoes");
 
             migrationBuilder.DropTable(
-                name: "JornadaTrabalhoDiaria");
+                name: "Folhas_ApuracaoDiaria");
+
+            migrationBuilder.DropTable(
+                name: "Perfis_JornadaTrabalhoDiaria");
 
             migrationBuilder.DropTable(
                 name: "Trabalhadores");
-
-            migrationBuilder.DropTable(
-                name: "Folhas");
 
             migrationBuilder.DropTable(
                 name: "Pontos");
@@ -389,7 +386,7 @@ namespace MeuPonto.Data.Migrations
                 name: "TipoImagem");
 
             migrationBuilder.DropTable(
-                name: "Status");
+                name: "Folhas");
 
             migrationBuilder.DropTable(
                 name: "Momento");
@@ -399,6 +396,9 @@ namespace MeuPonto.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Perfis");
+
+            migrationBuilder.DropTable(
+                name: "StatusFolha");
 
             migrationBuilder.DropTable(
                 name: "Empregadores");

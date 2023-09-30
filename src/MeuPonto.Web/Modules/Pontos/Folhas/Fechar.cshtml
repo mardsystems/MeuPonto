@@ -17,7 +17,7 @@
 }
 
 @section Title {
-    @ViewData["Title"] <span class="badge bg-secondary">@Html.DisplayFor(model => model.Folha.Competencia)</span> <span class="badge @(Model.Folha.StatusId == Pontos.Folhas.StatusEnum.Aberta ? "text-bg-warning" : "text-bg-success")"><i class="bi @(Model.Folha.StatusId == Pontos.Folhas.StatusEnum.Aberta ? "bi-file-earmark-fill" : "bi-file-earmark-lock-fill")"></i></span>
+    @ViewData["Title"] <span class="badge bg-secondary">@Html.DisplayFor(model => model.Folha.Competencia)</span> <span class="badge @(Model.Folha.StatusId == Pontos.Folhas.StatusFolhaEnum.Aberta ? "text-bg-warning" : "text-bg-success")"><i class="bi @(Model.Folha.StatusId == Pontos.Folhas.StatusFolhaEnum.Aberta ? "bi-file-earmark-fill" : "bi-file-earmark-lock-fill")"></i></span>
 }
 
 @section CardHeader {
@@ -91,9 +91,9 @@
         @Html.DisplayNameFor(model => model.Folha.StatusId)
     </dt>
     <dd class="col-sm-9 Status">
-        <span class="badge fs-6 @(Model.Folha.StatusId == Pontos.Folhas.StatusEnum.Aberta ? "text-bg-warning" : "text-bg-success")">
+        <span class="badge fs-6 @(Model.Folha.StatusId == Pontos.Folhas.StatusFolhaEnum.Aberta ? "text-bg-warning" : "text-bg-success")">
             @Html.DisplayFor(model => model.Folha.StatusId)
-            <i class="bi @(Model.Folha.StatusId == Pontos.Folhas.StatusEnum.Aberta ? "bi-file-earmark-fill" : "bi-file-earmark-lock-fill")"></i>
+            <i class="bi @(Model.Folha.StatusId == Pontos.Folhas.StatusFolhaEnum.Aberta ? "bi-file-earmark-fill" : "bi-file-earmark-lock-fill")"></i>
         </span>
     </dd>
     <dt class="col-sm-3 Observacao">

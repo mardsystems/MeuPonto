@@ -107,7 +107,7 @@ public class GestaoFolhasStepDefinitions
     [Given(@"que o trabalhador tem uma folha de ponto aberta na competência '([^']*)'")]
     public async Task GivenQueOTrabalhadorTemUmaFolhaDePontoAbertaNaCompetencia(DateTime competencia)
     {
-        _gestaoFolhas.Folha.StatusId = StatusEnum.Aberta;
+        _gestaoFolhas.Folha.StatusId = StatusFolhaEnum.Aberta;
         _gestaoFolhas.Folha.Competencia = competencia;
 
         _db.Folhas.Add(_gestaoFolhas.Folha);
@@ -220,7 +220,7 @@ public class GestaoFolhasStepDefinitions
     [Then(@"a folha de ponto deverá ser fechada")]
     public void ThenAFolhaDePontoDeveraSerFechada()
     {
-        _gestaoFolhas.FolhaAberta.StatusId.Should().Be(StatusEnum.Fechada);
+        _gestaoFolhas.FolhaAberta.StatusId.Should().Be(StatusFolhaEnum.Fechada);
     }
 
     #endregion
@@ -234,7 +234,7 @@ public class GestaoFolhasStepDefinitions
     }
 
     [Then(@"o status da folha de ponto deverá ser '([^']*)'")]
-    public void ThenOStatusDaFolhaDePontoDeveraSer(StatusEnum status)
+    public void ThenOStatusDaFolhaDePontoDeveraSer(StatusFolhaEnum status)
     {
         _gestaoFolhas.FolhaAberta.StatusId.Should().Be(status);
     }
