@@ -9,4 +9,4 @@ Veja mais na [Wiki](https://github.com/mardsystems/MeuPonto/wiki).
 
 # Modelo Lógico
 
-![MeuPonto - Modelo Lógico](img/Modelo_Logico.png)
+![MeuPonto - Modelo Lógico (Relacional)](img/Modelo_Logico_Relacional.png)
