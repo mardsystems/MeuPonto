@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MeuPonto.Models;
 
-public class Empregador : LocalTableEntity, Concepts.Empregador
+public class Empregador : LocalTableEntity
 {
     [Required]
     [MinLength(3)]

@@ -1,6 +1,5 @@
 ﻿using BoDi;
 using MeuPonto.Data;
-using MeuPonto.Modules.Perfis;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using SpecFlow.Actions.WindowsAppDriver;
@@ -36,8 +35,6 @@ public class DesktopHook
         _db = new MeuPontoDbContext();
 
         objectContainer.RegisterInstanceAs(_db);
-
-        objectContainer.RegisterTypeAs<CadastroPerfisAppDriver, CadastroPerfisInterface>();
     }
 
     [BeforeScenario]

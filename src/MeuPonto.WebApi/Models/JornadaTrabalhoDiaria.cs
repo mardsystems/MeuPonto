@@ -5,7 +5,7 @@ using System.ComponentModel;
 namespace MeuPonto.Models;
 
 [Owned]
-public class JornadaTrabalhoDiaria : Concepts.JornadaTrabalhoDiaria
+public class JornadaTrabalhoDiaria
 {
     [Required]
     [DisplayName("Dia Semana")]

@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace MeuPonto.Modules.Empregadores;
 
-public class Empregador : GlobalTableEntity, Concepts.Empregador
+public class Empregador : GlobalTableEntity
 {
     [Required]
     [MinLength(3)]

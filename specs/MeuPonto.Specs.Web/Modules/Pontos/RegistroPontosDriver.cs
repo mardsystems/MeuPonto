@@ -1,10 +1,11 @@
 ﻿using AngleSharp.Html.Dom;
 using MeuPonto.Helpers;
 using MeuPonto.Support;
+using System.ComponentModel;
 
 namespace MeuPonto.Modules.Pontos;
 
-public class RegistroPontosPageDriver : RegistroPontosInterface
+public class RegistroPontosDriver
 {
     private readonly AngleSharpContext _angleSharp;
 
@@ -12,7 +13,7 @@ public class RegistroPontosPageDriver : RegistroPontosInterface
 
     public IHtmlAnchorElement MarcacaoPontoAnchor { get; private set; }
 
-    public RegistroPontosPageDriver(AngleSharpContext angleSharp)
+    public RegistroPontosDriver(AngleSharpContext angleSharp)
     {
         _angleSharp = angleSharp;
     }
@@ -26,7 +27,7 @@ public class RegistroPontosPageDriver : RegistroPontosInterface
         MarcacaoPontoAnchor.Should().NotBeNull("o registro de pontos deve ter um link para a marcação de ponto");
     }
 
-    public Concepts.Ponto MarcarPonto(Concepts.Ponto ponto)
+    public Ponto MarcarPonto(Ponto ponto)
     {
         GoTo();
 
@@ -35,10 +36,10 @@ public class RegistroPontosPageDriver : RegistroPontosInterface
         var form = Document.GetForm();
 
         form.GetSelect("Ponto.PerfilId").GetOption(ponto.Perfil.Nome).IsSelected = true;
-        form.GetInput("Ponto.MomentoId", ponto.Momento).IsChecked = true;
-        if (ponto.Pausa != null)
+        form.GetInput("Ponto.MomentoId", ponto.MomentoId.GetDisplayName()).IsChecked = true;
+        if (ponto.PausaId != null)
         {
-            form.GetInput("Ponto.PausaId", ponto.Pausa).IsChecked = true;
+            form.GetInput("Ponto.PausaId", ponto.PausaId.GetDisplayName()).IsChecked = true;
         }
         form.GetTextArea("Ponto.Observacao").Value = ponto.Observacao;
 

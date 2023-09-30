@@ -31,7 +31,7 @@ Cenário: Trabalhador marca o ponto de saída do expediente
 	Quando o trabalhador marcar o ponto
 	Então o ponto deverá ser marcado
 	E a data do ponto deverá ser '27/11/2022 18:05'
-	E o momento do ponto deverá ser de 'Saída'
+	E o momento do ponto deverá ser de 'Saida'
 	#TODO: Verificar se o trecho abaixo deve ser verificado aqui ou não.
 	E o ponto deverá indicar que não é almoço
 	E o ponto deverá indicar que não foi estimado
@@ -43,7 +43,7 @@ Cenário: Trabalhador marca o ponto de saída do expediente para o almoço
 	Dado que é o momento de 'Saida' do expediente para o almoço
 	Quando o trabalhador marcar o ponto
 	Então o ponto deverá ser marcado
-	E o momento do ponto deverá ser de 'Saída'
+	E o momento do ponto deverá ser de 'Saida'
 	E o ponto deverá indicar que é almoço
 
 Cenário: Trabalhador marca o ponto de entrada do expediente da volta do almoço

@@ -5,7 +5,7 @@ using MeuPonto.Support;
 
 namespace MeuPonto.Modules;
 
-public class HomePageDriver : HomeInterface
+public class HomeDriver
 {
     private readonly AngleSharpContext _angleSharp;
 
@@ -19,7 +19,7 @@ public class HomePageDriver : HomeInterface
 
     public IHtmlAnchorElement CriacaoPerfilAnchor { get; private set; }
 
-    public HomePageDriver(AngleSharpContext angleSharp)
+    public HomeDriver(AngleSharpContext angleSharp)
     {
         _angleSharp = angleSharp;
     }
@@ -49,13 +49,13 @@ public class HomePageDriver : HomeInterface
         //CriacaoPerfilAnchor.Should().NotBeNull("'a tela inicial deve ter um link para a criação de perfil'");
     }
 
-    public Concepts.Folha ApurarFolha(Concepts.Folha folhaAberta)
+    public Folha ApurarFolha(Folha folhaAberta)
     {
         GoTo();
 
         var form = Document.GetForm();
 
-        var perfil = folhaAberta.EQualificadaPelo();
+        var perfil = folhaAberta.Perfil;
 
         form.GetSelect("PerfilId").GetOption(perfil.Nome).IsSelected = true;
         form.GetInput("Competencia").ValueAsDate = folhaAberta.Competencia;

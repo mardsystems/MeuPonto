@@ -2,7 +2,5 @@
 
 public interface Trabalhador
 {
-    Folha[] Gerencia();
-    Ponto[] Registra();
-    Perfil[] Cadastra();
+
 }

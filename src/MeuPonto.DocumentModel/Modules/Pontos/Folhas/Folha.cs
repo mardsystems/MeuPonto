@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MeuPonto.Modules.Pontos.Folhas;
 
-public class Folha : DocumentEntity, Concepts.Folha
+public class Folha : DocumentEntity
 {
     [Required]
     [DisplayName("Perfil")]
@@ -11,7 +11,6 @@ public class Folha : DocumentEntity, Concepts.Folha
 
     [DisplayName("Perfil")]
     public PerfilRef? Perfil { get; set; }
-    Concepts.Perfil? Concepts.Folha.EQualificadaPelo() => Perfil;
 
     [Required]
     [DisplayName("Competência")]
@@ -21,7 +20,6 @@ public class Folha : DocumentEntity, Concepts.Folha
     [Required]
     [DisplayName("Status")]
     public StatusEnum? StatusId { get; set; }
-    string? Concepts.Folha.Status => StatusId?.GetDisplayName();
 
     [MinLength(3)]
     [MaxLength(255)]
@@ -30,9 +28,6 @@ public class Folha : DocumentEntity, Concepts.Folha
 
     [DisplayName("Apuração Mensal")]
     public ApuracaoMensal ApuracaoMensal { get; set; }
-    Concepts.ApuracaoMensal Concepts.Folha.ApuracaoMensal => ApuracaoMensal;
-
-    Concepts.Ponto[] Concepts.Folha.Apura() => throw new NotImplementedException();
 
     public string? UserId { get; set; }
 

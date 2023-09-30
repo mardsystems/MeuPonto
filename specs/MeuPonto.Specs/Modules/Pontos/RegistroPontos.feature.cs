@@ -200,7 +200,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.And("a data do ponto deverá ser \'27/11/2022 18:05\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
 #line 34
- testRunner.And("o momento do ponto deverá ser de \'Saída\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+ testRunner.And("o momento do ponto deverá ser de \'Saida\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
 #line 36
  testRunner.And("o ponto deverá indicar que não é almoço", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
@@ -243,7 +243,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Then("o ponto deverá ser marcado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
 #line 46
- testRunner.And("o momento do ponto deverá ser de \'Saída\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+ testRunner.And("o momento do ponto deverá ser de \'Saida\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
 #line 47
  testRunner.And("o ponto deverá indicar que é almoço", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");

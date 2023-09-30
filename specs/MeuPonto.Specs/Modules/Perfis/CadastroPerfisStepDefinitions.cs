@@ -1,5 +1,4 @@
 using MeuPonto.Data;
-using MeuPonto.Helpers;
 using TechTalk.SpecFlow.Assist;
 
 namespace MeuPonto.Modules.Perfis;
@@ -11,14 +10,14 @@ public class CadastroPerfisStepDefinitions
 
     private readonly CadastroPerfisContext _cadastroPerfis;
 
-    private readonly CadastroPerfisInterface _cadastroPerfisInterface;
+    private readonly CadastroPerfisDriver _cadastroPerfisInterface;
 
     private readonly MeuPontoDbContext _db;
 
     public CadastroPerfisStepDefinitions(
         ScenarioContext scenario,
         CadastroPerfisContext cadastroPerfis,
-        CadastroPerfisInterface cadastroPerfisInterface,
+        CadastroPerfisDriver cadastroPerfisInterface,
         MeuPontoDbContext db)
     {
         this._scenario = scenario;
@@ -33,7 +32,7 @@ public class CadastroPerfisStepDefinitions
     [Given(@"que o trabalhador não tem nenhum perfil cadastrado")]
     public void GivenQueOTrabalhadorNaoTemNenhumPerfilCadastrado()
     {
-        _db.Perfis.Count(x => x.UserId == _scenario.GetUserId()).Should().Be(0);
+        _db.Perfis.Count().Should().Be(0);
 
         //_home.CriacaoPerfilAnchor.Should().NotBeNull("quando não existe nenhum perfil cadastrado a tela inicial deve ter um link de criação de perfil");
     }
@@ -178,7 +177,7 @@ public class CadastroPerfisStepDefinitions
 
         _cadastroPerfisInterface.CriarPerfil(_cadastroPerfis.Perfil);
 
-        var perfilCadastrado = _db.Perfis.FirstOrDefault(x => x.Nome == _cadastroPerfis.Perfil.Nome && x.UserId == _scenario.GetUserId());
+        var perfilCadastrado = _db.Perfis.FirstOrDefault(x => x.Nome == _cadastroPerfis.Perfil.Nome);
 
         _cadastroPerfis.Define(perfilCadastrado);
     }
@@ -216,7 +215,7 @@ public class CadastroPerfisStepDefinitions
     {
         _cadastroPerfisInterface.EditarPerfil(_cadastroPerfis.NomePerfil, _cadastroPerfis.Perfil);
 
-        var perfilEdidado = _db.Perfis.FirstOrDefault(x => x.Nome == _cadastroPerfis.Perfil.Nome && x.UserId == _scenario.GetUserId());
+        var perfilEdidado = _db.Perfis.FirstOrDefault(x => x.Nome == _cadastroPerfis.Perfil.Nome);
 
         _cadastroPerfis.Define(perfilEdidado);
     }
@@ -240,7 +239,7 @@ public class CadastroPerfisStepDefinitions
     [Then(@"o perfil deverá ser excluído")]
     public void ThenOPerfilDeveraSerExcluido()
     {
-        var perfil = _db.Perfis.FirstOrDefault(x => x.Nome == _cadastroPerfis.Perfil.Nome && x.UserId == _scenario.GetUserId());
+        var perfil = _db.Perfis.FirstOrDefault(x => x.Nome == _cadastroPerfis.Perfil.Nome);
 
         perfil.Should().BeNull();
     }
@@ -256,7 +255,7 @@ public class CadastroPerfisStepDefinitions
     [Then(@"a jornada de trabalho semanal prevista deverá ser:")]
     public void ThenAJornadaDeTrabalhoSemanalPrevistaDeveraSer(Table jornadaTrabalhoSemanal)
     {
-        var jornadaTrabalhoSemanalPrevista = _cadastroPerfis.PerfilCadastrado.IdentificaVinculo().Preve();
+        var jornadaTrabalhoSemanalPrevista = _cadastroPerfis.PerfilCadastrado.JornadaTrabalhoSemanalPrevista;
 
         jornadaTrabalhoSemanal.CompareToSet(jornadaTrabalhoSemanalPrevista.Semana);
     }
@@ -264,7 +263,7 @@ public class CadastroPerfisStepDefinitions
     [Then(@"o tempo total da jornada de trabalho semanal prevista deverá ser '([^']*)'")]
     public void ThenOTempoTotalDaJornadaDeTrabalhoSemanalPrevistaDeveraSer(TimeSpan tempoTotal)
     {
-        var jornadaTrabalhoSemanalPrevista = _cadastroPerfis.PerfilCadastrado.IdentificaVinculo().Preve();
+        var jornadaTrabalhoSemanalPrevista = _cadastroPerfis.PerfilCadastrado.JornadaTrabalhoSemanalPrevista;
 
         jornadaTrabalhoSemanalPrevista.TempoTotal.Should().Be(tempoTotal);
     }

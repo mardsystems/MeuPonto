@@ -3,11 +3,11 @@ using SpecFlow.Actions.WindowsAppDriver;
 
 namespace MeuPonto.Modules.Perfis;
 
-public class CadastroPerfisAppDriver : CadastroPerfisInterface
+public class CadastroPerfisDriver
 {
     private readonly AppDriver _driver;
 
-    public CadastroPerfisAppDriver(AppDriver driver)
+    public CadastroPerfisDriver(AppDriver driver)
     {
         _driver = driver;
     }
@@ -25,7 +25,7 @@ public class CadastroPerfisAppDriver : CadastroPerfisInterface
         cadastroPerfisMenuItem.Click();
     }
 
-    public void CriarPerfil(Concepts.Perfil perfil)
+    public void CriarPerfil(Perfil perfil)
     {
         GoTo();
 
@@ -117,7 +117,7 @@ public class CadastroPerfisAppDriver : CadastroPerfisInterface
 
         foreach (var dayOfWeek in daysOfWeek)
         {
-            var jornadaTrabalhoDiaria = perfil.IdentificaVinculo().Preve().Semana.SingleOrDefault(x => x.DiaSemana == dayOfWeek);
+            var jornadaTrabalhoDiaria = perfil.JornadaTrabalhoSemanalPrevista.Semana.SingleOrDefault(x => x.DiaSemana == dayOfWeek);
 
             var i = (int)dayOfWeek;
 
@@ -146,12 +146,12 @@ public class CadastroPerfisAppDriver : CadastroPerfisInterface
         Thread.Sleep(500);
     }
 
-    public Concepts.Perfil DetalharPerfil(string nomePerfil)
+    public Perfil DetalharPerfil(string nomePerfil)
     {
         throw new NotImplementedException();
     }
 
-    public void EditarPerfil(string nomePerfil, Concepts.Perfil perfilCadastrado)
+    public void EditarPerfil(string nomePerfil, Perfil perfilCadastrado)
     {
         throw new NotImplementedException();
     }

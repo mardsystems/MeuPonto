@@ -7,6 +7,6 @@ public interface Folha
     string? Status { get; }
     string? Observacao { get; }
 
-    Ponto[] Apura();
-    Perfil EQualificadaPelo();
+    Ponto[] Registra();
+    Contrato EReferenteAo();
 }

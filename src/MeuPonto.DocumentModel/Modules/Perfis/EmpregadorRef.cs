@@ -5,7 +5,7 @@ using System.ComponentModel;
 namespace MeuPonto.Modules.Perfis;
 
 [Owned]
-public class EmpregadorRef : Concepts.Empregador
+public class EmpregadorRef
 {
     [Required]
     [MinLength(3)]

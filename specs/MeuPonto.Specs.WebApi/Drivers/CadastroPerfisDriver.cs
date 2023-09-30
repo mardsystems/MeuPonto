@@ -1,13 +1,13 @@
 ﻿using MeuPonto.Support;
 
-namespace MeuPonto.Modules.Perfis;
+namespace MeuPonto.Drivers;
 
-public class CadastroPerfisApiDriver : CadastroPerfisInterface
+public class CadastroPerfisDriver
 {
     private readonly WebApiContext _webApiContext;
     public ActionAttempt<Perfil, Perfil> CriaPerfil { get; }
 
-    public CadastroPerfisApiDriver(WebApiContext webApiContext, ActionAttemptFactory actionAttemptFactory)
+    public CadastroPerfisDriver(WebApiContext webApiContext, ActionAttemptFactory actionAttemptFactory)
     {
         _webApiContext = webApiContext;
 
@@ -17,12 +17,12 @@ public class CadastroPerfisApiDriver : CadastroPerfisInterface
             System.Net.HttpStatusCode.Created);
     }
 
-    public void CriarPerfil(Concepts.Perfil perfil)
+    public void CriarPerfil(Perfil perfil)
     {
-        CriaPerfil.Perform((Perfil)perfil);
+        CriaPerfil.Perform(perfil);
     }
 
-    public Concepts.Perfil DetalharPerfil(string nomePerfil)
+    public Perfil DetalharPerfil(string nomePerfil)
     {
         int perfilId = 0;
 
@@ -31,7 +31,7 @@ public class CadastroPerfisApiDriver : CadastroPerfisInterface
         return perfil;
     }
 
-    public void EditarPerfil(string nomePerfil,Concepts.Perfil perfilCadastrado)
+    public void EditarPerfil(string nomePerfil, Perfil perfilCadastrado)
     {
         throw new NotImplementedException();
     }

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MeuPonto.Models;
 
-public class Perfil : LocalTableEntity, Concepts.Perfil, Concepts.Contrato
+public class Perfil : LocalTableEntity
 {
     [Required]
     [MinLength(3)]
@@ -24,15 +24,11 @@ public class Perfil : LocalTableEntity, Concepts.Perfil, Concepts.Contrato
 
     [DisplayName("Empregador")]
     public Empregador? Empregador { get; set; }
-    Concepts.Empregador? Concepts.Contrato.Vincula() => Empregador;
 
     [DisplayName("Jornada Trabalho Semanal Prevista")]
     public virtual JornadaTrabalhoSemanal JornadaTrabalhoSemanalPrevista { get; set; } = default!;
-    Concepts.JornadaTrabalhoSemanal Concepts.Contrato.Preve()=> JornadaTrabalhoSemanalPrevista;
 
     public string? UserId { get; set; }
-
-    Concepts.Contrato Concepts.Perfil.IdentificaVinculo() => this;
 
     public Perfil()
     {

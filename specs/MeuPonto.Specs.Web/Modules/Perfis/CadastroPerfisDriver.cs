@@ -4,7 +4,7 @@ using MeuPonto.Support;
 
 namespace MeuPonto.Modules.Perfis;
 
-public class CadastroPerfisPageDriver : CadastroPerfisInterface
+public class CadastroPerfisDriver
 {
     private readonly AngleSharpContext _angleSharp;
 
@@ -18,7 +18,7 @@ public class CadastroPerfisPageDriver : CadastroPerfisInterface
 
     public IHtmlAnchorElement ExclusaoPerfilAnchor { get; private set; }
 
-    public CadastroPerfisPageDriver(AngleSharpContext angleSharp)
+    public CadastroPerfisDriver(AngleSharpContext angleSharp)
     {
         _angleSharp = angleSharp;
     }
@@ -59,7 +59,7 @@ public class CadastroPerfisPageDriver : CadastroPerfisInterface
         ExclusaoPerfilAnchor.Should().NotBeNull("a lista de perfis deve ter um link de exclusão do perfil cadastrado");
     }
 
-    public void CriarPerfil(Concepts.Perfil perfil)
+    public void CriarPerfil(Perfil perfil)
     {
         GoTo();
 
@@ -73,7 +73,7 @@ public class CadastroPerfisPageDriver : CadastroPerfisInterface
 
         foreach (var dayOfWeek in daysOfWeek)
         {
-            var jornadaTrabalhoDiaria = perfil.IdentificaVinculo().Preve().Semana.SingleOrDefault(x => x.DiaSemana == dayOfWeek);
+            var jornadaTrabalhoDiaria = perfil.JornadaTrabalhoSemanalPrevista.Semana.SingleOrDefault(x => x.DiaSemana == dayOfWeek);
 
             var i = (int)dayOfWeek;
 
@@ -102,7 +102,7 @@ public class CadastroPerfisPageDriver : CadastroPerfisInterface
         //return perfilCadastrado;
     }
 
-    public Concepts.Perfil DetalharPerfil(string nomePerfil)
+    public Perfil DetalharPerfil(string nomePerfil)
     {
         GoTo();
 
@@ -115,7 +115,7 @@ public class CadastroPerfisPageDriver : CadastroPerfisInterface
         return perfilDetalhado;
     }
 
-    public void EditarPerfil(string nomePerfil, Concepts.Perfil perfilCadastrado)
+    public void EditarPerfil(string nomePerfil, Perfil perfilCadastrado)
     {
         GoTo();
 

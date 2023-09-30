@@ -1,10 +1,11 @@
 ﻿using AngleSharp.Html.Dom;
 using MeuPonto.Helpers;
 using MeuPonto.Support;
+using System.ComponentModel;
 
 namespace MeuPonto.Modules.Pontos.Comprovantes;
 
-public class BackupComprovantesPageDriver : BackupComprovantesInterface
+public class BackupComprovantesDriver
 {
     private readonly AngleSharpContext _angleSharp;
 
@@ -12,7 +13,7 @@ public class BackupComprovantesPageDriver : BackupComprovantesInterface
 
     public IHtmlAnchorElement GuardarComprovanteAnchor { get; private set; }
 
-    public BackupComprovantesPageDriver(AngleSharpContext angleSharp)
+    public BackupComprovantesDriver(AngleSharpContext angleSharp)
     {
         _angleSharp = angleSharp;
     }
@@ -26,7 +27,7 @@ public class BackupComprovantesPageDriver : BackupComprovantesInterface
         GuardarComprovanteAnchor.Should().NotBeNull("o backup de comprovantes deve ter um link para a guardar um comprovante");
     }
 
-    public Concepts.Comprovante EscanearComprovante(Stream imagem, Concepts.Comprovante comprovante, Concepts.Ponto ponto)
+    public Comprovante EscanearComprovante(Stream imagem, Comprovante comprovante, Ponto ponto)
     {
         GoTo();
 
@@ -37,15 +38,15 @@ public class BackupComprovantesPageDriver : BackupComprovantesInterface
         using (var fileEntry = new FileEntry("Arquivo", "jpg", imagem))
         {
             form.GetInput("Imagem").Files.Add(fileEntry);
-            form.GetSelect("Comprovante.TipoImagemId").GetOption(comprovante.TipoImagem).IsSelected = true;
+            form.GetSelect("Comprovante.TipoImagemId").GetOption(comprovante.TipoImagemId.GetDisplayName()).IsSelected = true;
             form.GetInput("Comprovante.Numero").Value = comprovante.Numero;
 
             form.GetSelect("Ponto.PerfilId").GetOption(ponto.Perfil.Nome).IsSelected = true;
             form.GetInput("Ponto.DataHora").Value = ponto.DataHora.Value.ToString("yyyy-MM-dd\\THH:mm:ss");
-            form.GetInput("Ponto.MomentoId", ponto.Momento).IsChecked = true;
-            if (ponto.Pausa != null)
+            form.GetInput("Ponto.MomentoId", ponto.MomentoId.GetDisplayName()).IsChecked = true;
+            if (ponto.PausaId != null)
             {
-                form.GetInput("Ponto.PausaId", ponto.Pausa).IsChecked = true;
+                form.GetInput("Ponto.PausaId", ponto.PausaId.GetDisplayName()).IsChecked = true;
             }
             form.GetTextArea("Ponto.Observacao").Value = ponto.Observacao;
 
@@ -91,7 +92,7 @@ public class BackupComprovantesPageDriver : BackupComprovantesInterface
         return comprovanteEscaneado;
     }
 
-    public Concepts.Comprovante GuardarComprovante(Stream imagem, Concepts.Comprovante comprovante, Concepts.Ponto ponto)
+    public Comprovante GuardarComprovante(Stream imagem, Comprovante comprovante, Ponto ponto)
     {
         GoTo();
 
@@ -102,15 +103,15 @@ public class BackupComprovantesPageDriver : BackupComprovantesInterface
         using (var fileEntry = new FileEntry("Arquivo", "jpg", imagem))
         {
             form.GetInput("Imagem").Files.Add(fileEntry);
-            form.GetSelect("Comprovante.TipoImagemId").GetOption(comprovante.TipoImagem).IsSelected = true;
+            form.GetSelect("Comprovante.TipoImagemId").GetOption(comprovante.TipoImagemId.GetDisplayName()).IsSelected = true;
             form.GetInput("Comprovante.Numero").Value = comprovante.Numero;
 
             form.GetSelect("Ponto.PerfilId").GetOption(ponto.Perfil.Nome).IsSelected = true;
             form.GetInput("Ponto.DataHora").Value = ponto.DataHora.Value.ToString("yyyy-MM-dd\\THH:mm:ss");
-            form.GetInput("Ponto.MomentoId", ponto.Momento).IsChecked = true;
-            if (ponto.Pausa != null)
+            form.GetInput("Ponto.MomentoId", ponto.MomentoId.GetDisplayName()).IsChecked = true;
+            if (ponto.PausaId != null)
             {
-                form.GetInput("Ponto.PausaId", ponto.Pausa).IsChecked = true;
+                form.GetInput("Ponto.PausaId", ponto.PausaId.GetDisplayName()).IsChecked = true;
             }
             form.GetTextArea("Ponto.Observacao").Value = ponto.Observacao;
 
