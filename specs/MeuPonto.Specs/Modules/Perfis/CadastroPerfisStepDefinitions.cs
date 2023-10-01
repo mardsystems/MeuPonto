@@ -267,4 +267,12 @@ public class CadastroPerfisStepDefinitions
 
         jornadaTrabalhoSemanalPrevista.TempoTotal.Should().Be(tempoTotal);
     }
+
+    [Then(@"o perfil não deverá ser excluído")]
+    public void ThenOPerfilNaoDeveraSerExcluido()
+    {
+        var perfil = _db.Perfis.FirstOrDefault(x => x.Nome == _cadastroPerfis.Perfil.Nome);
+
+        perfil.Should().NotBeNull();
+    }
 }

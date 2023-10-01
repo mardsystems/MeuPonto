@@ -22,7 +22,7 @@ jobs:
           include-prerelease: false
 
       - name: Test Specs (Web)
-        run: dotnet test specs/MeuPonto.Specs/MeuPonto.Specs.csproj --configuration Release --verbosity normal
+        run: dotnet test specs/MeuPonto.Specs/MeuPonto.Specs.csproj --configuration Release --verbosity normal --filter:"Category!=wip"
 
       - name: Test Web
         run: dotnet test tests/MeuPonto.Web.Tests/MeuPonto.Web.Tests.csproj --configuration Release --verbosity normal
