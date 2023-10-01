@@ -110,11 +110,15 @@ public class MeuPontoDbContext : DbContext
                 y.Property(x => x.TempoAbonado).HasConversion<long>();
             });
 
-            x.Property(x => x.TempoTotalPrevisto).HasConversion<long>();
-            x.Property(x => x.TempoTotalApurado).HasConversion<long>();
-            x.Property(x => x.DiferencaTempoTotal).HasConversion<long>();
             x.Property(x => x.TempoTotalPeriodoAnterior).HasConversion<long>();
         });
+
+        modelBuilder.Entity<StatusFolha>().Property(x => x.Id).ValueGeneratedNever();
+
+        modelBuilder.Entity<StatusFolha>().HasData(
+            new StatusFolha { Id = StatusFolhaEnum.Aberta, Nome = "Aberta" },
+            new StatusFolha { Id = StatusFolhaEnum.Fechada, Nome = "Fechada" }
+        );
     }
 
     public DbSet<Configuracoes> Configuracoes { get; set; }

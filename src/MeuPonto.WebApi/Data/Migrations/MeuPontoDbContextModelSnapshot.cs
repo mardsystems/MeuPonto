@@ -39,10 +39,6 @@ namespace MeuPonto.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("Numero")
-                        .HasMaxLength(16)
-                        .HasColumnType("nvarchar(16)");
-
                     b.Property<int?>("PontoId")
                         .IsRequired()
                         .HasColumnType("int");
@@ -87,31 +83,15 @@ namespace MeuPonto.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
 
-                    b.Property<string>("Cnpj")
-                        .HasMaxLength(14)
-                        .HasColumnType("nvarchar(14)");
-
-                    b.Property<string>("Cpf")
-                        .HasMaxLength(11)
-                        .HasColumnType("nvarchar(11)");
-
                     b.Property<DateTime?>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("getdate()");
 
-                    b.Property<string>("Endereco")
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
-
-                    b.Property<string>("InscricaoEstadual")
-                        .HasMaxLength(12)
-                        .HasColumnType("nvarchar(12)");
-
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
+                        .HasMaxLength(35)
+                        .HasColumnType("nvarchar(35)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
@@ -175,6 +155,7 @@ namespace MeuPonto.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -206,6 +187,7 @@ namespace MeuPonto.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -265,14 +247,10 @@ namespace MeuPonto.Data.Migrations
                     b.Property<int?>("EmpregadorId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Matricula")
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
+                        .HasMaxLength(35)
+                        .HasColumnType("nvarchar(35)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
@@ -348,12 +326,25 @@ namespace MeuPonto.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
 
                     b.ToTable("StatusFolha");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 0,
+                            Nome = "Aberta"
+                        },
+                        new
+                        {
+                            Id = 1,
+                            Nome = "Fechada"
+                        });
                 });
 
             modelBuilder.Entity("MeuPonto.Models.TipoImagem", b =>
@@ -362,6 +353,7 @@ namespace MeuPonto.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -446,16 +438,7 @@ namespace MeuPonto.Data.Migrations
                             b1.Property<Guid>("FolhaId")
                                 .HasColumnType("uniqueidentifier");
 
-                            b1.Property<long?>("DiferencaTempoTotal")
-                                .HasColumnType("bigint");
-
-                            b1.Property<long?>("TempoTotalApurado")
-                                .HasColumnType("bigint");
-
                             b1.Property<long?>("TempoTotalPeriodoAnterior")
-                                .HasColumnType("bigint");
-
-                            b1.Property<long?>("TempoTotalPrevisto")
                                 .HasColumnType("bigint");
 
                             b1.HasKey("FolhaId");
@@ -484,6 +467,10 @@ namespace MeuPonto.Data.Migrations
 
                                     b2.Property<bool>("Feriado")
                                         .HasColumnType("bit");
+
+                                    b2.Property<string>("Observacao")
+                                        .HasMaxLength(255)
+                                        .HasColumnType("nvarchar(255)");
 
                                     b2.Property<long?>("TempoAbonado")
                                         .HasColumnType("bigint");

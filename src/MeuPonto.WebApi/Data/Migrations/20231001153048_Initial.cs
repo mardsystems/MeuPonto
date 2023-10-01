@@ -30,11 +30,7 @@ namespace MeuPonto.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
-                    Cnpj = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: true),
-                    Cpf = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: true),
-                    InscricaoEstadual = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: true),
-                    Endereco = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
+                    Nome = table.Column<string>(type: "nvarchar(35)", maxLength: 35, nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "getdate()"),
                     Version = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
@@ -49,7 +45,7 @@ namespace MeuPonto.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false),
-                    Nome = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true)
+                    Nome = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -61,7 +57,7 @@ namespace MeuPonto.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false),
-                    Nome = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true)
+                    Nome = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -73,7 +69,7 @@ namespace MeuPonto.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false),
-                    Nome = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true)
+                    Nome = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -85,7 +81,7 @@ namespace MeuPonto.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false),
-                    Nome = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true)
+                    Nome = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -114,9 +110,8 @@ namespace MeuPonto.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(35)", maxLength: 35, nullable: false),
                     Ativo = table.Column<bool>(type: "bit", nullable: false),
-                    Matricula = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
                     EmpregadorId = table.Column<int>(type: "int", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "getdate()"),
@@ -142,9 +137,6 @@ namespace MeuPonto.Data.Migrations
                     Competencia = table.Column<DateTime>(type: "datetime2", nullable: false),
                     StatusId = table.Column<int>(type: "int", nullable: false),
                     Observacao = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    ApuracaoMensal_TempoTotalPrevisto = table.Column<long>(type: "bigint", nullable: true),
-                    ApuracaoMensal_TempoTotalApurado = table.Column<long>(type: "bigint", nullable: true),
-                    ApuracaoMensal_DiferencaTempoTotal = table.Column<long>(type: "bigint", nullable: true),
                     ApuracaoMensal_TempoTotalPeriodoAnterior = table.Column<long>(type: "bigint", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "getdate()"),
@@ -236,7 +228,8 @@ namespace MeuPonto.Data.Migrations
                     DiferencaTempo = table.Column<long>(type: "bigint", nullable: true),
                     TempoAbonado = table.Column<long>(type: "bigint", nullable: true),
                     Feriado = table.Column<bool>(type: "bit", nullable: false),
-                    Falta = table.Column<bool>(type: "bit", nullable: false)
+                    Falta = table.Column<bool>(type: "bit", nullable: false),
+                    Observacao = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -256,7 +249,6 @@ namespace MeuPonto.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PontoId = table.Column<int>(type: "int", nullable: false),
-                    Numero = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: true),
                     Imagem = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     TipoImagemId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -301,6 +293,15 @@ namespace MeuPonto.Data.Migrations
                     { 4, "Conversa/Reunião" },
                     { 5, "Telefonema" },
                     { 6, "Genérica" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "StatusFolha",
+                columns: new[] { "Id", "Nome" },
+                values: new object[,]
+                {
+                    { 0, "Aberta" },
+                    { 1, "Fechada" }
                 });
 
             migrationBuilder.InsertData(

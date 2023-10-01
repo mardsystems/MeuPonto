@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MeuPonto.Models;
 
@@ -53,14 +54,17 @@ public class ApuracaoMensal
 
     [DisplayName("Tempo Total Previsto")]
     //[DisplayFormat(DataFormatString = "{0:d\\d\\ hh\\:mm}")]
+    [NotMapped]
     public TimeSpan? TempoTotalPrevisto { get; set; }
 
     [DisplayName("Tempo Total Apurado")]
     //[DisplayFormat(DataFormatString = "{0:d\\d\\ hh\\:mm}")]
+    [NotMapped]
     public TimeSpan? TempoTotalApurado { get; set; }
 
     [DisplayName("Diferença Tempo Total")]
     //[DisplayFormat(DataFormatString = "{0:d\\d\\ hh\\:mm}")]
+    [NotMapped]
     public TimeSpan? DiferencaTempoTotal { get; set; }
 
     [DisplayName("Tempo Total Período Anterior")]
