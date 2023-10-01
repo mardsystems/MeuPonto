@@ -18,7 +18,6 @@ Cenário: Trabalhador cria um perfil para identificar seu novo vínculo com o em
 	Então um perfil deverá ser cadastrado
 	E o nome do perfil deverá ser 'Marcelo - Ateliex - Consultor'
 
-@wip
 Cenário: Trabalhador edita um perfil para corrigir um erro de digitação no nome
 	Dado que o trabalhador tem um perfil cadastrado com o nome 'Marcello'
 	E que o trabalhador identifica na lista o perfil cadastrado
@@ -29,7 +28,6 @@ Cenário: Trabalhador edita um perfil para corrigir um erro de digitação no no
 
 Regra: Tempo Total = Tempo Monday + Tempo Tuesday + Tempo Wednesday + Tempo Thursday + Tempo Friday + Tempo Saturday + Tempo Sunday
 
-@wip
 Cenário: Trabalhador cria um perfil com uma jornada de trabalho prevista de 40 horas semanais
 	Dado que o trabalhador não tem nenhum perfil cadastrado
 	E que o horário de trabalho é de 'Monday' a 'Friday' das '09:00' às '18:00' com '01:00' de almoço
@@ -45,7 +43,6 @@ Cenário: Trabalhador cria um perfil com uma jornada de trabalho prevista de 40 
 		| Saturday   | 00:00:00 |
 	E o tempo total da jornada de trabalho semanal prevista deverá ser '1.16:00'
 
-@wip
 Cenário: Trabalhador cria um perfil com uma jornada de trabalho prevista de 44 horas semanais (incluindo sábado)
 	Dado que o trabalhador não tem nenhum perfil cadastrado
 	E que o horário de trabalho é de 'Monday' a 'Friday' das '09:00' às '18:00' com '01:00' de almoço
@@ -62,11 +59,20 @@ Cenário: Trabalhador cria um perfil com uma jornada de trabalho prevista de 44 
 		| Saturday   | 04:00:00 |
 	E o tempo total da jornada de trabalho semanal prevista deverá ser '1.20:00'
 
-Regra: Remoção de perfil
+Regra: Deve ser possível excluir um perfil
 	
-@wip
-Cenário: Trabalhador identifica na lista de perfis um perfil que não era necessário
+Cenário: Sucesso ao remover um perfil que não era necessário
 	Dado que o trabalhador tem um perfil cadastrado com o nome 'Marcelo - Ateliex'
 	E que o trabalhador identifica na lista o perfil cadastrado
 	Quando o trabalhador excluir o perfil
 	Então o perfil deverá ser excluído
+
+Regra: Se existir dados relacionados a um perfil então ele não pode ser excluído
+
+@wip
+Cenário: Erro ao excluir um perfil com ponto(s) marcado(s)
+	Dado que o trabalhador tem um perfil cadastrado com o nome 'Marcelo - Ateliex'
+	E que o trabalhador qualifica o ponto com o perfil 'Marcelo - Ateliex'
+	E que o trabalhador identifica na lista o perfil cadastrado
+	Quando o trabalhador excluir o perfil
+	Então o perfil não deverá ser excluído

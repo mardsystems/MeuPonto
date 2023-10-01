@@ -74,6 +74,8 @@ public class RegistroPontosStepDefinitions
         var perfil = _db.Perfis.FirstOrDefault(x => x.Nome == nome);
 
         perfil.QualificaPonto(_registroPontos.Ponto);
+
+        _db.SaveChanges();
     }
 
     [When(@"o trabalhador marcar o ponto")]
