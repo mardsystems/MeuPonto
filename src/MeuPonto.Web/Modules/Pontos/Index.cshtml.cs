@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MeuPonto.Helpers;
 using MeuPonto.Modules.Shared;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MeuPonto.Modules.Pontos;
 

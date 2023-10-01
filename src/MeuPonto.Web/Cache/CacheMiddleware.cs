@@ -31,7 +31,7 @@ public class CacheMiddleware
             {
                 var nameIdentifier = context.User.FindFirst(ClaimTypes.NameIdentifier);
 
-                var userId = Guid.Parse(nameIdentifier.Value);
+                var userId = Guid.Parse(nameIdentifier.Value).ToString();
 
                 var configuracoes = await db.Configuracoes.FirstOrDefaultAsync(x => x.UserId == userId); //FindAsync(context.User.Identity.Name);
 

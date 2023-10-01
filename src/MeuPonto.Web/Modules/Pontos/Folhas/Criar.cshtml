@@ -124,13 +124,20 @@
                                                 <span asp-validation-for="Folha.ApuracaoMensal.Dias[i].Feriado" class="text-danger"></span>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row mb-3">
                                             <div class="col-sm-4 offset-sm-7 offset-lg-5">
                                                 <div class="form-check">
                                                     <input type="checkbox" asp-for="Folha.ApuracaoMensal.Dias[i].Falta" class="form-check-input" />
                                                     <label asp-for="Folha.ApuracaoMensal.Dias[i].Falta" class="form-check-label"></label>
                                                 </div>
                                                 <span asp-validation-for="Folha.ApuracaoMensal.Dias[i].Falta" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label asp-for="Folha.ApuracaoMensal.Dias[i].Observacao" class="col-sm-7 col-lg-5 col-form-label"></label>
+                                            <div class="col-sm-5 col-lg-7">
+                                                <textarea asp-for="Folha.ApuracaoMensal.Dias[i].Observacao" class="form-control"></textarea>
+                                                <span asp-validation-for="Folha.ApuracaoMensal.Dias[i].Observacao" class="text-danger"></span>
                                             </div>
                                         </div>
                                     </div>

@@ -1,6 +1,7 @@
 ﻿using BoDi;
 using MeuPonto.Data;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.EntityFrameworkCore;
 using System.Net.Http.Headers;
 using TechTalk.SpecFlow.Infrastructure;
 
@@ -68,11 +69,15 @@ public class WebHook : IClassFixture<MeuPontoWebFactory<Program>>
 
         _db.Database.EnsureDeleted();
 
+#if INFRA_COSMOS
         _specFlowOutputHelper.WriteLine("EnsureCreated");
 
         _db.Database.EnsureCreated();
+#else
+        _specFlowOutputHelper.WriteLine("Migrate");
 
-        //_db.Database.Migrate();
+        _db.Database.Migrate();
+#endif
 
         //
 

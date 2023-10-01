@@ -39,7 +39,6 @@ public class BackupComprovantesDriver
         {
             form.GetInput("Imagem").Files.Add(fileEntry);
             form.GetSelect("Comprovante.TipoImagemId").GetOption(comprovante.TipoImagemId.GetDisplayName()).IsSelected = true;
-            form.GetInput("Comprovante.Numero").Value = comprovante.Numero;
 
             form.GetSelect("Ponto.PerfilId").GetOption(ponto.Perfil.Nome).IsSelected = true;
             form.GetInput("Ponto.DataHora").Value = ponto.DataHora.Value.ToString("yyyy-MM-dd\\THH:mm:ss");
@@ -104,7 +103,6 @@ public class BackupComprovantesDriver
         {
             form.GetInput("Imagem").Files.Add(fileEntry);
             form.GetSelect("Comprovante.TipoImagemId").GetOption(comprovante.TipoImagemId.GetDisplayName()).IsSelected = true;
-            form.GetInput("Comprovante.Numero").Value = comprovante.Numero;
 
             form.GetSelect("Ponto.PerfilId").GetOption(ponto.Perfil.Nome).IsSelected = true;
             form.GetInput("Ponto.DataHora").Value = ponto.DataHora.Value.ToString("yyyy-MM-dd\\THH:mm:ss");

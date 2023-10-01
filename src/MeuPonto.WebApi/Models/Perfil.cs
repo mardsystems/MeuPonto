@@ -8,17 +8,13 @@ public class Perfil : LocalTableEntity
 {
     [Required]
     [MinLength(3)]
-    [MaxLength(36)]
+    [MaxLength(35)]
     [DisplayName("Nome")]
     public string? Nome { get; set; }
 
     [Required]
     [DisplayName("Ativo?")]
     public bool Ativo { get; set; }
-
-    [MaxLength(30)]
-    [DisplayName("Matrícula")]
-    public string? Matricula { get; set; }
 
     [DisplayName("Empregador")]
     public int? EmpregadorId { get; set; }

@@ -84,7 +84,6 @@ public class EditarModel : FormPageModel
             }
         }
 
-        comprovante.Numero = Comprovante.Numero;
         comprovante.Imagem = imagem;
         comprovante.TipoImagemId = Comprovante.TipoImagemId;
 

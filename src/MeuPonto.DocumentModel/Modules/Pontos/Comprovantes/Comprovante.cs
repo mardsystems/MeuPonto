@@ -12,10 +12,6 @@ public class Comprovante : DocumentEntity
     [DisplayName("Ponto")]
     public PontoRef? Ponto { get; set; }
 
-    [MaxLength(16)]
-    [DisplayName("Número")]
-    public string? Numero { get; set; }
-
     [Required]
     [DisplayName("Imagem")]
     public byte[]? Imagem { get; set; }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MeuPonto.Data.Migrations
 {
     [DbContext(typeof(MeuPontoDbContext))]
-    [Migration("20230930135008_Initial")]
+    [Migration("20231001142526_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -30,8 +30,9 @@ namespace MeuPonto.Data.Migrations
                     b.Property<bool>("JavascriptIsEnabled")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.ToTable("Configuracoes", (string)null);
                 });
@@ -49,8 +50,8 @@ namespace MeuPonto.Data.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
+                        .HasMaxLength(35)
+                        .HasColumnType("nvarchar(35)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
@@ -84,8 +85,8 @@ namespace MeuPonto.Data.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
+                        .HasMaxLength(35)
+                        .HasColumnType("nvarchar(35)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
@@ -117,10 +118,6 @@ namespace MeuPonto.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("Numero")
-                        .HasMaxLength(16)
-                        .HasColumnType("nvarchar(16)");
-
                     b.Property<Guid?>("PontoId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier");
@@ -149,6 +146,7 @@ namespace MeuPonto.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -216,6 +214,7 @@ namespace MeuPonto.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -242,6 +241,7 @@ namespace MeuPonto.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -273,6 +273,7 @@ namespace MeuPonto.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -388,7 +389,8 @@ namespace MeuPonto.Data.Migrations
                 {
                     b.HasOne("MeuPonto.Modules.Empregadores.Empregador", "Empregador")
                         .WithMany()
-                        .HasForeignKey("EmpregadorId");
+                        .HasForeignKey("EmpregadorId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.OwnsOne("MeuPonto.Modules.Perfis.JornadaTrabalhoSemanal", "JornadaTrabalhoSemanalPrevista", b1 =>
                         {
@@ -436,7 +438,7 @@ namespace MeuPonto.Data.Migrations
                     b.HasOne("MeuPonto.Modules.Pontos.Ponto", "Ponto")
                         .WithMany("Comprovantes")
                         .HasForeignKey("PontoId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Ponto");
@@ -447,7 +449,7 @@ namespace MeuPonto.Data.Migrations
                     b.HasOne("MeuPonto.Modules.Perfis.Perfil", "Perfil")
                         .WithMany()
                         .HasForeignKey("PerfilId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.OwnsOne("MeuPonto.Modules.Pontos.Folhas.ApuracaoMensal", "ApuracaoMensal", b1 =>
@@ -482,6 +484,10 @@ namespace MeuPonto.Data.Migrations
                                     b2.Property<bool>("Feriado")
                                         .HasColumnType("bit");
 
+                                    b2.Property<string>("Observacao")
+                                        .HasMaxLength(255)
+                                        .HasColumnType("nvarchar(255)");
+
                                     b2.Property<long?>("TempoAbonado")
                                         .HasColumnType("bigint");
 
@@ -513,7 +519,7 @@ namespace MeuPonto.Data.Migrations
                     b.HasOne("MeuPonto.Modules.Perfis.Perfil", "Perfil")
                         .WithMany()
                         .HasForeignKey("PerfilId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Perfil");

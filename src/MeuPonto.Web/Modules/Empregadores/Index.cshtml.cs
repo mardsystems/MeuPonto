@@ -16,7 +16,7 @@ public class IndexModel : PageModel
     }
 
     [MinLength(3)]
-    [MaxLength(36)]
+    [MaxLength(35)]
     [BindProperty(SupportsGet = true)]
     public string? Nome { get; set; }
 

@@ -17,7 +17,7 @@ namespace MeuPonto.Data.Migrations
                 name: "Configuracoes",
                 columns: table => new
                 {
-                    UserId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    UserId = table.Column<string>(type: "TEXT", nullable: false),
                     JavascriptIsEnabled = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -29,7 +29,7 @@ namespace MeuPonto.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Nome = table.Column<string>(type: "TEXT", maxLength: 36, nullable: false),
+                    Nome = table.Column<string>(type: "TEXT", maxLength: 35, nullable: false),
                     UserId = table.Column<string>(type: "TEXT", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
                     Version = table.Column<byte[]>(type: "BLOB", rowVersion: true, nullable: true)
@@ -44,7 +44,7 @@ namespace MeuPonto.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false),
-                    Nome = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true)
+                    Nome = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -56,7 +56,7 @@ namespace MeuPonto.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false),
-                    Nome = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true)
+                    Nome = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -68,7 +68,7 @@ namespace MeuPonto.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false),
-                    Nome = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true)
+                    Nome = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -80,7 +80,7 @@ namespace MeuPonto.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false),
-                    Nome = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true)
+                    Nome = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -107,7 +107,7 @@ namespace MeuPonto.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Nome = table.Column<string>(type: "TEXT", maxLength: 36, nullable: false),
+                    Nome = table.Column<string>(type: "TEXT", maxLength: 35, nullable: false),
                     Ativo = table.Column<bool>(type: "INTEGER", nullable: false),
                     EmpregadorId = table.Column<Guid>(type: "TEXT", nullable: true),
                     UserId = table.Column<string>(type: "TEXT", nullable: true),
@@ -121,7 +121,8 @@ namespace MeuPonto.Data.Migrations
                         name: "FK_Perfis_Empregadores_EmpregadorId",
                         column: x => x.EmpregadorId,
                         principalTable: "Empregadores",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -146,7 +147,7 @@ namespace MeuPonto.Data.Migrations
                         column: x => x.PerfilId,
                         principalTable: "Perfis",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -191,7 +192,7 @@ namespace MeuPonto.Data.Migrations
                         column: x => x.PerfilId,
                         principalTable: "Perfis",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -205,7 +206,8 @@ namespace MeuPonto.Data.Migrations
                     DiferencaTempo = table.Column<TimeSpan>(type: "TEXT", nullable: true),
                     TempoAbonado = table.Column<TimeSpan>(type: "TEXT", nullable: true),
                     Feriado = table.Column<bool>(type: "INTEGER", nullable: false),
-                    Falta = table.Column<bool>(type: "INTEGER", nullable: false)
+                    Falta = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Observacao = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -224,7 +226,6 @@ namespace MeuPonto.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     PontoId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Numero = table.Column<string>(type: "TEXT", maxLength: 16, nullable: true),
                     Imagem = table.Column<byte[]>(type: "BLOB", nullable: false),
                     TipoImagemId = table.Column<int>(type: "INTEGER", nullable: false),
                     UserId = table.Column<string>(type: "TEXT", nullable: true),
@@ -239,7 +240,7 @@ namespace MeuPonto.Data.Migrations
                         column: x => x.PontoId,
                         principalTable: "Pontos",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
