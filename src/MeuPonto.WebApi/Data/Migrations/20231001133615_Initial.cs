@@ -129,7 +129,8 @@ namespace MeuPonto.Data.Migrations
                         name: "FK_Perfis_Empregadores_EmpregadorId",
                         column: x => x.EmpregadorId,
                         principalTable: "Empregadores",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -157,7 +158,7 @@ namespace MeuPonto.Data.Migrations
                         column: x => x.PerfilId,
                         principalTable: "Perfis",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Folhas_StatusFolha_StatusId",
                         column: x => x.StatusId,
@@ -220,7 +221,7 @@ namespace MeuPonto.Data.Migrations
                         column: x => x.PerfilId,
                         principalTable: "Perfis",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -270,7 +271,7 @@ namespace MeuPonto.Data.Migrations
                         column: x => x.PontoId,
                         principalTable: "Pontos",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Comprovantes_TipoImagem_TipoImagemId",
                         column: x => x.TipoImagemId,
@@ -300,15 +301,6 @@ namespace MeuPonto.Data.Migrations
                     { 4, "Conversa/Reunião" },
                     { 5, "Telefonema" },
                     { 6, "Genérica" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "StatusFolha",
-                columns: new[] { "Id", "Nome" },
-                values: new object[,]
-                {
-                    { 0, "Aberta" },
-                    { 1, "Fechada" }
                 });
 
             migrationBuilder.InsertData(

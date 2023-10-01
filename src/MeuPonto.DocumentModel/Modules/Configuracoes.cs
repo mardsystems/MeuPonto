@@ -2,7 +2,7 @@
 
 public class Configuracoes
 {
-    public Guid UserId { get; set; }
+    public string UserId { get; set; }
 
     public bool JavascriptIsEnabled { get; set; }
 }

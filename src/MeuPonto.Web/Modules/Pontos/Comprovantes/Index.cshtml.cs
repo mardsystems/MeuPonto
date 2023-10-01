@@ -58,7 +58,6 @@ public class IndexModel : PageModel
                     && (Ponto.Momento == null || x.Ponto.MomentoId == Ponto.Momento)
                     && (Ponto.Pausa == null || x.Ponto.PausaId == Ponto.Pausa)
                     && (TipoImagem == null || x.TipoImagemId == TipoImagem)
-                    && (Numero == null || x.Numero == Numero)
                     && x.UserId == User.GetUserId())
                 .OrderByDescending(x => x.Ponto.DataHora)
                 .Skip((Pagination.PaginaAtual - 1) * Pagination.TamanhoPagina.Value)

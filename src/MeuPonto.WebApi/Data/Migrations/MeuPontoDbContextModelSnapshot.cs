@@ -354,18 +354,6 @@ namespace MeuPonto.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("StatusFolha");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 0,
-                            Nome = "Aberta"
-                        },
-                        new
-                        {
-                            Id = 1,
-                            Nome = "Fechada"
-                        });
                 });
 
             modelBuilder.Entity("MeuPonto.Models.TipoImagem", b =>
@@ -425,7 +413,7 @@ namespace MeuPonto.Data.Migrations
                     b.HasOne("MeuPonto.Models.Ponto", "Ponto")
                         .WithMany("Comprovantes")
                         .HasForeignKey("PontoId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("MeuPonto.Models.TipoImagem", "TipoImagem")
@@ -444,7 +432,7 @@ namespace MeuPonto.Data.Migrations
                     b.HasOne("MeuPonto.Models.Perfil", "Perfil")
                         .WithMany()
                         .HasForeignKey("PerfilId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("MeuPonto.Models.StatusFolha", "Status")
@@ -529,7 +517,8 @@ namespace MeuPonto.Data.Migrations
                 {
                     b.HasOne("MeuPonto.Models.Empregador", "Empregador")
                         .WithMany()
-                        .HasForeignKey("EmpregadorId");
+                        .HasForeignKey("EmpregadorId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.OwnsOne("MeuPonto.Models.JornadaTrabalhoSemanal", "JornadaTrabalhoSemanalPrevista", b1 =>
                         {
@@ -587,7 +576,7 @@ namespace MeuPonto.Data.Migrations
                     b.HasOne("MeuPonto.Models.Perfil", "Perfil")
                         .WithMany()
                         .HasForeignKey("PerfilId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Momento");

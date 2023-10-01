@@ -47,17 +47,17 @@ public class ConfiguracoesModel : PageModel
         _logger = logger;
     }
 
-    public async Task<IActionResult> OnGet(Guid? id)
+    public async Task<IActionResult> OnGet(string? id)
     {
         ResetSuccess = false;
 
-        Guid userId;
+        string userId;
 
-        if (id.HasValue)
+        if (id != null)
         {
             if ((await _authorizationService.AuthorizeAsync(User, "Admin")).Succeeded)
             {
-                userId = id.Value;
+                userId = id;
             }
             else
             {
@@ -68,7 +68,7 @@ public class ConfiguracoesModel : PageModel
         {
             var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
 
-            userId = Guid.Parse(nameIdentifier.Value);
+            userId = Guid.Parse(nameIdentifier.Value).ToString();
         }
 
         Configuracoes = await _db.Configuracoes.FirstOrDefaultAsync(x => x.UserId == id);
@@ -84,7 +84,7 @@ public class ConfiguracoesModel : PageModel
         return Page();
     }
 
-    public async Task<IActionResult> OnPostAsync(Guid? id, string command)
+    public async Task<IActionResult> OnPostAsync(string? id, string command)
     {
         if (AskConfirmation == "Reset 2")
         {
@@ -102,13 +102,13 @@ public class ConfiguracoesModel : PageModel
             ResetSuccess = true;
         }
 
-        Guid userId;
+        string userId;
 
-        if (id.HasValue)
+        if (id != null)
         {
             if ((await _authorizationService.AuthorizeAsync(User, "Admin")).Succeeded)
             {
-                userId = id.Value;
+                userId = id;
             }
             else
             {
@@ -119,7 +119,7 @@ public class ConfiguracoesModel : PageModel
         {
             var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier);
 
-            userId = Guid.Parse(nameIdentifier.Value);
+            userId = Guid.Parse(nameIdentifier.Value).ToString();
         }
 
         Configuracoes = await _db.Configuracoes.FirstOrDefaultAsync(x => x.UserId == id);

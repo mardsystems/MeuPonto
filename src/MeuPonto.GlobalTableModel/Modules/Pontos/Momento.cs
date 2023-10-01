@@ -7,5 +7,5 @@ public class Momento
     public MomentoEnum Id { get; set; }
 
     [MaxLength(255)]
-    public string? Nome { get; set; }
+    public string Nome { get; set; } = default!;
 }

@@ -148,4 +148,9 @@ public class ApuracaoDiaria
     [Required]
     [DisplayName("Falta?")]
     public bool Falta { get; set; }
+
+    [MinLength(3)]
+    [MaxLength(255)]
+    [DisplayName("Observação")]
+    public string? Observacao { get; set; }
 }

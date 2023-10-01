@@ -9,7 +9,7 @@ public class EmpregadorRef
 {
     [Required]
     [MinLength(3)]
-    [MaxLength(36)]
+    [MaxLength(35)]
     [DisplayName("Nome")]
     public string? Nome { get; set; }
 }

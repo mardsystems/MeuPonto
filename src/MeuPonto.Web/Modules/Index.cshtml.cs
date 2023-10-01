@@ -257,6 +257,7 @@ public class IndexModel : PageModel
                             Hoje = data == hoje,
                             Feriado = apuracaoDiaria.Feriado,
                             Falta = apuracaoDiaria.Falta,
+                            Observacao = apuracaoDiaria.Observacao,
                             Pontos = pontosDoDia.ToArray()
                         };
 
@@ -392,6 +393,8 @@ public class ApuracaoDiariaViewModel
     public bool Feriado { get; set; }
 
     public bool Falta { get; set; }
+
+    public string Observacao { get; set; }
 
     public TempoPeriodo TempoPeriodo { get; set; }
 

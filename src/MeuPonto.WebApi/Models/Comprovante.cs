@@ -13,10 +13,6 @@ public class Comprovante : LocalTableEntity
     [DisplayName("Ponto")]
     public Ponto? Ponto { get; set; }
 
-    [MaxLength(16)]
-    [DisplayName("Número")]
-    public string? Numero { get; set; }
-
     [Required]
     [DisplayName("Imagem")]
     public byte[]? Imagem { get; set; }
@@ -29,9 +25,4 @@ public class Comprovante : LocalTableEntity
     public TipoImagem? TipoImagem { get; set; }
 
     public string? UserId { get; set; }
-
-    public Comprovante()
-    {
-        Imagem = new byte[0];
-    }
 }
