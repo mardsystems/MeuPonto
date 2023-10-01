@@ -51,6 +51,8 @@ public class AbrirModel : FormPageModel
 
         perfil.QualificaFolha(Folha);
 
+        Folha.ConfirmarCompetencia(perfil);
+
         if (command == "ConfirmarCompetencia")
         {
             var states = ModelState.Where(state => state.Key.Contains($"{nameof(Folha.ApuracaoMensal)}"));
@@ -60,18 +62,9 @@ public class AbrirModel : FormPageModel
                 if (ModelState.ContainsKey(state.Key)) ModelState.Remove(state.Key);
             }
 
-            Folha.ApuracaoMensal.Dias.Clear();
-
-            Folha.ConfirmarCompetencia(perfil);
-
             ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
 
             return Page();
-        }
-
-        if (Folha.ApuracaoMensal.Dias.Count == 0)
-        {
-            Folha.ConfirmarCompetencia(perfil);
         }
 
         Folha.RecontextualizaFolha(transaction);

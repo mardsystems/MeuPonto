@@ -10,25 +10,61 @@ public static class FolhaFacade
 
         var dias = (competenciaPosterior - competenciaAtual).Days;
 
-        for (int dia = 1; dia <= dias; dia++)
+        if (folha.ApuracaoMensal.Dias.Count == 0)
         {
-            var data = competenciaAtual.AddDays(dia - 1);
-
-            var apuracaoDiaria = new ApuracaoDiaria
+            for (int dia = 1; dia <= dias; dia++)
             {
-                Dia = dia,
-                TempoPrevisto = perfil.JornadaTrabalhoSemanalPrevista.Semana.Single(x => x.DiaSemana == data.DayOfWeek).Tempo,
-                TempoApurado = null,
-                DiferencaTempo = null,
-                Feriado = false,
-                Falta = false
-            };
+                var data = competenciaAtual.AddDays(dia - 1);
 
-            folha.ApuracaoMensal.Dias.Add(apuracaoDiaria);
+                var apuracaoDiaria = new ApuracaoDiaria
+                {
+                    Dia = dia,
+                    TempoPrevisto = perfil.JornadaTrabalhoSemanalPrevista.Semana.Single(x => x.DiaSemana == data.DayOfWeek).Tempo,
+                    TempoApurado = null,
+                    DiferencaTempo = null,
+                    Feriado = false,
+                    Falta = false
+                };
+
+                folha.ApuracaoMensal.Dias.Add(apuracaoDiaria);
+            }
+
+            folha.ApuracaoMensal.TempoTotalPeriodoAnterior = TimeSpan.Zero;
         }
+        else
+        {
+            for (int dia = 1; dia <= dias; dia++)
+            {
+                var data = competenciaAtual.AddDays(dia - 1);
 
-        folha.ApuracaoMensal.TempoTotalPeriodoAnterior = TimeSpan.Zero;
+                if (folha.ApuracaoMensal.Dias.Any(x => x.Dia == dia))
+                {
+                    var apuracaoDiaria = folha.ApuracaoMensal.Dias.First(x => x.Dia == dia);
 
-        folha.PartitionKey = $"{folha.UserId}|{folha.Competencia:yyyy}";
+                    apuracaoDiaria.TempoPrevisto = perfil.JornadaTrabalhoSemanalPrevista.Semana.Single(x => x.DiaSemana == data.DayOfWeek).Tempo;
+                    apuracaoDiaria.TempoApurado = null;
+                    apuracaoDiaria.DiferencaTempo = null;
+                    apuracaoDiaria.DiferencaTempo = null;
+                    apuracaoDiaria.Feriado = false;
+                }
+                else
+                {
+                    var apuracaoDiaria = new ApuracaoDiaria
+                    {
+                        Dia = dia,
+                        TempoPrevisto = perfil.JornadaTrabalhoSemanalPrevista.Semana.Single(x => x.DiaSemana == data.DayOfWeek).Tempo,
+                        TempoApurado = null,
+                        DiferencaTempo = null,
+                        Feriado = false,
+                        Falta = false,
+                        Observacao = null
+                    };
+
+                    folha.ApuracaoMensal.Dias.Add(apuracaoDiaria);
+                }
+            }
+
+            folha.ApuracaoMensal.TempoTotalPeriodoAnterior = TimeSpan.Zero;
+        }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace MeuPonto.Modules.Trabalhadores;
+﻿using MeuPonto.Billing;
+
+namespace MeuPonto.Modules.Trabalhadores;
 
 public static class TrabalhadorFactory
 {
@@ -7,6 +9,10 @@ public static class TrabalhadorFactory
         var trabalhador = new Trabalhador
         {
             Id = id ?? Guid.NewGuid(),
+            CustomerSubscription = new CustomerSubscription
+            {
+                SubscriptionPlanId = SubscriptionPlanEnum.Bronze
+            },
             UserId = transaction.UserId,
             PartitionKey = transaction.UserId.ToString(),
             CreationDate = transaction.DateTime

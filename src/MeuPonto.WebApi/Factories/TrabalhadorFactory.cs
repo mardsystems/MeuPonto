@@ -1,4 +1,5 @@
-﻿using MeuPonto.Models;
+﻿using MeuPonto.Enums;
+using MeuPonto.Models;
 
 namespace MeuPonto.Factories;
 
@@ -8,6 +9,10 @@ public static class TrabalhadorFactory
     {
         var trabalhador = new Trabalhador
         {
+            CustomerSubscription = new CustomerSubscription
+            {
+                SubscriptionPlanId = SubscriptionPlanEnum.Bronze
+            },
             UserId = transaction.UserId,
             CreationDate = transaction.DateTime
         };
