@@ -10,9 +10,6 @@
     <None Remove="specflow.json" />
   </ItemGroup>
   <ItemGroup>
-    <SpecFlowObsoleteCodeBehindFiles Remove="Modules\Perfis\CriarPerfil - Copy.feature.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="specflow.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -32,23 +29,23 @@
     <ProjectReference Include="..\MeuPonto.Specs.Web\MeuPonto.Specs.Web.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Modules\Pontos\Comprovantes\BackupComprovantes.feature.cs">
+    <Compile Update="Features\BackupComprovantes.feature.cs">
       <DependentUpon>BackupComprovantes.feature</DependentUpon>
     </Compile>
-    <Compile Update="Modules\Pontos\RegistroPontos.feature.cs">
+    <Compile Update="Features\RegistroPontos.feature.cs">
       <DependentUpon>RegistroPontos.feature</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <SpecFlowFeatureFiles Update="Modules\Pontos\Folhas\GestaoFolhas.feature">
+    <SpecFlowFeatureFiles Update="Features\GestaoFolhas.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Modules\Pontos\Comprovantes\BackupComprovantes.feature">
+    <SpecFlowFeatureFiles Update="Features\BackupComprovantes.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Modules\Pontos\RegistroPontos.feature">
+    <SpecFlowFeatureFiles Update="Features\RegistroPontos.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>

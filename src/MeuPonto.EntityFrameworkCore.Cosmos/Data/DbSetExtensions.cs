@@ -1,6 +1,6 @@
-﻿using MeuPonto.Modules.Empregadores;
-using MeuPonto.Modules.Perfis;
-using MeuPonto.Modules.Pontos;
+﻿using MeuPonto.Models.Timesheet.Empregadores;
+using MeuPonto.Models.Timesheet.Perfis;
+using MeuPonto.Models.Timesheet.Pontos;
 using Microsoft.Azure.Cosmos;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,10 +1,10 @@
-﻿using MeuPonto.Modules;
-using MeuPonto.Modules.Empregadores;
-using MeuPonto.Modules.Perfis;
-using MeuPonto.Modules.Pontos;
-using MeuPonto.Modules.Pontos.Comprovantes;
-using MeuPonto.Modules.Pontos.Folhas;
-using MeuPonto.Modules.Trabalhadores;
+﻿using MeuPonto.Models;
+using MeuPonto.Models.Timesheet.Empregadores;
+using MeuPonto.Models.Timesheet.Perfis;
+using MeuPonto.Models.Timesheet.Pontos;
+using MeuPonto.Models.Timesheet.Pontos.Comprovantes;
+using MeuPonto.Models.Timesheet.Pontos.Folhas;
+using MeuPonto.Models.Timesheet.Trabalhadores;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 

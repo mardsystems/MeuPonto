@@ -1,0 +1,161 @@
+﻿<Window
+    x:Class="MeuPonto.Pages.Pontos.RegistroPontosWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MeuPonto.Pages.Pontos"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:perfis="clr-namespace:MeuPonto.Pages.Perfis;assembly=MeuPonto.DocumentModel"
+    xmlns:pontos="clr-namespace:MeuPonto.Pages.Pontos;assembly=MeuPonto.DocumentModel"
+    xmlns:system="clr-namespace:System;assembly=System.Xaml.Extensions"
+    Title="Registro de Pontos"
+    Width="1200"
+    Height="600"
+    Loaded="Window_Loaded"
+    Unloaded="Window_Unloaded"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <ResourceDictionary>
+            <CollectionViewSource x:Key="pontosViewSource" d:DesignSource="{d:DesignInstance {x:Type pontos:Ponto}, CreateList=True}" />
+            <CollectionViewSource x:Key="comprovantesViewSource" Source="{Binding Comprovantes, Source={StaticResource pontosViewSource}}" />
+            <CollectionViewSource x:Key="perfisViewSource" d:DesignSource="{d:DesignInstance {x:Type perfis:Perfil}, CreateList=False}" />
+            <Image x:Key="Save" Source="/Resources/saveHS.png" />
+            <Image x:Key="Refresh" Source="/Resources/refresh_16xLG.png" />
+            <Image x:Key="SaveAll" Source="/Resources/saveAllHS.png" />
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Menu Grid.ColumnSpan="2" VerticalAlignment="Top">
+            <MenuItem Header="Registro">
+                <MenuItem Header="Novo Ponto ..." />
+                <Separator />
+                <MenuItem
+                    Click="SaveButton_Click"
+                    Header="Salvar"
+                    InputGestureText="Ctrl+S" />
+                <Separator />
+                <MenuItem Header="Fechar" />
+            </MenuItem>
+        </Menu>
+        <Grid
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            Margin="0"
+            DataContext="{StaticResource pontosViewSource}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="250" />
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <ToolBar>
+                    <Button>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Novo Ponto ..." />
+                        </StackPanel>
+                    </Button>
+                    <Separator />
+                    <Button
+                        x:Name="saveButton"
+                        Height="24"
+                        Click="SaveButton_Click"
+                        Content="{StaticResource Save}"
+                        ToolTip="Salvar" />
+                    <Button
+                        x:Name="refreshButton"
+                        Height="24"
+                        Click="refreshButton_Click"
+                        Content="{StaticResource Refresh}"
+                        ToolTip="Atualizar" />
+                </ToolBar>
+                <DataGrid
+                    x:Name="pontoViewModelDataGrid"
+                    Grid.Row="2"
+                    AutoGenerateColumns="False"
+                    EnableRowVirtualization="True"
+                    ItemsSource="{Binding}"
+                    RowDetailsVisibilityMode="VisibleWhenSelected">
+                    <DataGrid.Columns>
+                        <DataGridComboBoxColumn
+                            Width="150"
+                            DisplayMemberPath="Nome"
+                            Header="Tipo"
+                            ItemsSource="{Binding Source={StaticResource perfisViewSource}, Mode=OneWay}"
+                            SelectedValueBinding="{Binding PerfilId}"
+                            SelectedValuePath="Id" />
+                        <DataGridTextColumn
+                            Width="120"
+                            Binding="{Binding DataHora, StringFormat={}{0:dd/MM/yyyy HH:mm}}"
+                            Header="Data/Hora"
+                            HeaderStringFormat="dd/MM/yyyy HH:mm" />
+                        <DataGridComboBoxColumn
+                            Width="72"
+                            Header="Momento"
+                            ItemsSource="{Binding Source={system:EnumBindingSourceExtension {x:Type pontos:MomentoEnum}}, Mode=OneWay}"
+                            SelectedValueBinding="{Binding MomentoId}" />
+                        <DataGridComboBoxColumn
+                            Width="72"
+                            Header="Pausa"
+                            ItemsSource="{Binding Source={system:EnumBindingSourceExtension {x:Type pontos:PausaEnum}}, Mode=OneWay}"
+                            SelectedValueBinding="{Binding PausaId}" />
+                        <DataGridCheckBoxColumn
+                            Width="100"
+                            Binding="{Binding Estimado}"
+                            Header="Estimado" />
+                        <DataGridTextColumn
+                            Width="150"
+                            Binding="{Binding Observacao}"
+                            Header="Observação" />
+                        <DataGridTextColumn
+                            Width="100"
+                            Binding="{Binding TrabalhadorId}"
+                            Header="Trabalhador Id" />
+                        <DataGridTextColumn
+                            Width="120"
+                            Binding="{Binding CreationDate, StringFormat={}{0:dd/MM/yyyy HH:mm}}"
+                            Header="Creation Date" />
+                        <DataGridTextColumn
+                            Width="250"
+                            Binding="{Binding Id}"
+                            Header="Id" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+            <GridSplitter
+                Grid.Column="1"
+                Width="5"
+                HorizontalAlignment="Stretch" />
+            <Grid
+                Grid.Column="2"
+                Grid.ColumnSpan="2"
+                Margin="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="135*" />
+                    <RowDefinition Height="50*" />
+                    <RowDefinition Height="199*" />
+                </Grid.RowDefinitions>
+
+                <GroupBox
+                    Grid.RowSpan="3"
+                    Margin="0,-2,0,0"
+                    DataContext="{StaticResource comprovantesViewSource}"
+                    Header="Comprovantes" />
+            </Grid>
+        </Grid>
+        <StatusBar
+            Grid.Row="3"
+            Grid.ColumnSpan="2"
+            VerticalAlignment="Bottom">
+            <Label x:Name="statusBarLabel" Content="Pronto." />
+        </StatusBar>
+    </Grid>
+</Window>

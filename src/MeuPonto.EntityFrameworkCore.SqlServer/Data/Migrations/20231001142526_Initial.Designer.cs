@@ -25,7 +25,7 @@ namespace MeuPonto.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("MeuPonto.Modules.Configuracoes", b =>
+            modelBuilder.Entity("MeuPonto.Pages.Configuracoes", b =>
                 {
                     b.Property<bool>("JavascriptIsEnabled")
                         .HasColumnType("bit");
@@ -37,7 +37,7 @@ namespace MeuPonto.Data.Migrations
                     b.ToTable("Configuracoes", (string)null);
                 });
 
-            modelBuilder.Entity("MeuPonto.Modules.Empregadores.Empregador", b =>
+            modelBuilder.Entity("MeuPonto.Pages.Empregadores.Empregador", b =>
                 {
                     b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd()
@@ -66,7 +66,7 @@ namespace MeuPonto.Data.Migrations
                     b.ToTable("Empregadores", (string)null);
                 });
 
-            modelBuilder.Entity("MeuPonto.Modules.Perfis.Perfil", b =>
+            modelBuilder.Entity("MeuPonto.Pages.Perfis.Perfil", b =>
                 {
                     b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd()
@@ -103,7 +103,7 @@ namespace MeuPonto.Data.Migrations
                     b.ToTable("Perfis", (string)null);
                 });
 
-            modelBuilder.Entity("MeuPonto.Modules.Pontos.Comprovantes.Comprovante", b =>
+            modelBuilder.Entity("MeuPonto.Pages.Pontos.Comprovantes.Comprovante", b =>
                 {
                     b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd()
@@ -140,7 +140,7 @@ namespace MeuPonto.Data.Migrations
                     b.ToTable("Comprovantes", (string)null);
                 });
 
-            modelBuilder.Entity("MeuPonto.Modules.Pontos.Comprovantes.TipoImagem", b =>
+            modelBuilder.Entity("MeuPonto.Pages.Pontos.Comprovantes.TipoImagem", b =>
                 {
                     b.Property<int>("Id")
                         .HasColumnType("int");
@@ -167,7 +167,7 @@ namespace MeuPonto.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("MeuPonto.Modules.Pontos.Folhas.Folha", b =>
+            modelBuilder.Entity("MeuPonto.Pages.Pontos.Folhas.Folha", b =>
                 {
                     b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd()
@@ -208,7 +208,7 @@ namespace MeuPonto.Data.Migrations
                     b.ToTable("Folhas", (string)null);
                 });
 
-            modelBuilder.Entity("MeuPonto.Modules.Pontos.Folhas.StatusFolha", b =>
+            modelBuilder.Entity("MeuPonto.Pages.Pontos.Folhas.StatusFolha", b =>
                 {
                     b.Property<int>("Id")
                         .HasColumnType("int");
@@ -235,7 +235,7 @@ namespace MeuPonto.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("MeuPonto.Modules.Pontos.Momento", b =>
+            modelBuilder.Entity("MeuPonto.Pages.Pontos.Momento", b =>
                 {
                     b.Property<int>("Id")
                         .HasColumnType("int");
@@ -267,7 +267,7 @@ namespace MeuPonto.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("MeuPonto.Modules.Pontos.Pausa", b =>
+            modelBuilder.Entity("MeuPonto.Pages.Pontos.Pausa", b =>
                 {
                     b.Property<int>("Id")
                         .HasColumnType("int");
@@ -314,7 +314,7 @@ namespace MeuPonto.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("MeuPonto.Modules.Pontos.Ponto", b =>
+            modelBuilder.Entity("MeuPonto.Pages.Pontos.Ponto", b =>
                 {
                     b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd()
@@ -361,7 +361,7 @@ namespace MeuPonto.Data.Migrations
                     b.ToTable("Pontos", (string)null);
                 });
 
-            modelBuilder.Entity("MeuPonto.Modules.Trabalhadores.Trabalhador", b =>
+            modelBuilder.Entity("MeuPonto.Pages.Trabalhadores.Trabalhador", b =>
                 {
                     b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd()
@@ -385,14 +385,14 @@ namespace MeuPonto.Data.Migrations
                     b.ToTable("Trabalhadores", (string)null);
                 });
 
-            modelBuilder.Entity("MeuPonto.Modules.Perfis.Perfil", b =>
+            modelBuilder.Entity("MeuPonto.Pages.Perfis.Perfil", b =>
                 {
-                    b.HasOne("MeuPonto.Modules.Empregadores.Empregador", "Empregador")
+                    b.HasOne("MeuPonto.Pages.Empregadores.Empregador", "Empregador")
                         .WithMany()
                         .HasForeignKey("EmpregadorId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.OwnsOne("MeuPonto.Modules.Perfis.JornadaTrabalhoSemanal", "JornadaTrabalhoSemanalPrevista", b1 =>
+                    b.OwnsOne("MeuPonto.Pages.Perfis.JornadaTrabalhoSemanal", "JornadaTrabalhoSemanalPrevista", b1 =>
                         {
                             b1.Property<Guid>("PerfilId")
                                 .HasColumnType("uniqueidentifier");
@@ -404,7 +404,7 @@ namespace MeuPonto.Data.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("PerfilId");
 
-                            b1.OwnsMany("MeuPonto.Modules.Perfis.JornadaTrabalhoDiaria", "Semana", b2 =>
+                            b1.OwnsMany("MeuPonto.Pages.Perfis.JornadaTrabalhoDiaria", "Semana", b2 =>
                                 {
                                     b2.Property<Guid>("PerfilId")
                                         .HasColumnType("uniqueidentifier");
@@ -433,9 +433,9 @@ namespace MeuPonto.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MeuPonto.Modules.Pontos.Comprovantes.Comprovante", b =>
+            modelBuilder.Entity("MeuPonto.Pages.Pontos.Comprovantes.Comprovante", b =>
                 {
-                    b.HasOne("MeuPonto.Modules.Pontos.Ponto", "Ponto")
+                    b.HasOne("MeuPonto.Pages.Pontos.Ponto", "Ponto")
                         .WithMany("Comprovantes")
                         .HasForeignKey("PontoId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -444,15 +444,15 @@ namespace MeuPonto.Data.Migrations
                     b.Navigation("Ponto");
                 });
 
-            modelBuilder.Entity("MeuPonto.Modules.Pontos.Folhas.Folha", b =>
+            modelBuilder.Entity("MeuPonto.Pages.Pontos.Folhas.Folha", b =>
                 {
-                    b.HasOne("MeuPonto.Modules.Perfis.Perfil", "Perfil")
+                    b.HasOne("MeuPonto.Pages.Perfis.Perfil", "Perfil")
                         .WithMany()
                         .HasForeignKey("PerfilId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.OwnsOne("MeuPonto.Modules.Pontos.Folhas.ApuracaoMensal", "ApuracaoMensal", b1 =>
+                    b.OwnsOne("MeuPonto.Pages.Pontos.Folhas.ApuracaoMensal", "ApuracaoMensal", b1 =>
                         {
                             b1.Property<Guid>("FolhaId")
                                 .HasColumnType("uniqueidentifier");
@@ -467,7 +467,7 @@ namespace MeuPonto.Data.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("FolhaId");
 
-                            b1.OwnsMany("MeuPonto.Modules.Pontos.Folhas.ApuracaoDiaria", "Dias", b2 =>
+                            b1.OwnsMany("MeuPonto.Pages.Pontos.Folhas.ApuracaoDiaria", "Dias", b2 =>
                                 {
                                     b2.Property<Guid>("FolhaId")
                                         .HasColumnType("uniqueidentifier");
@@ -514,9 +514,9 @@ namespace MeuPonto.Data.Migrations
                     b.Navigation("Perfil");
                 });
 
-            modelBuilder.Entity("MeuPonto.Modules.Pontos.Ponto", b =>
+            modelBuilder.Entity("MeuPonto.Pages.Pontos.Ponto", b =>
                 {
-                    b.HasOne("MeuPonto.Modules.Perfis.Perfil", "Perfil")
+                    b.HasOne("MeuPonto.Pages.Perfis.Perfil", "Perfil")
                         .WithMany()
                         .HasForeignKey("PerfilId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -525,7 +525,7 @@ namespace MeuPonto.Data.Migrations
                     b.Navigation("Perfil");
                 });
 
-            modelBuilder.Entity("MeuPonto.Modules.Trabalhadores.Trabalhador", b =>
+            modelBuilder.Entity("MeuPonto.Pages.Trabalhadores.Trabalhador", b =>
                 {
                     b.OwnsOne("MeuPonto.Billing.CustomerSubscription", "CustomerSubscription", b1 =>
                         {
@@ -546,7 +546,7 @@ namespace MeuPonto.Data.Migrations
                     b.Navigation("CustomerSubscription");
                 });
 
-            modelBuilder.Entity("MeuPonto.Modules.Pontos.Ponto", b =>
+            modelBuilder.Entity("MeuPonto.Pages.Pontos.Ponto", b =>
                 {
                     b.Navigation("Comprovantes");
                 });

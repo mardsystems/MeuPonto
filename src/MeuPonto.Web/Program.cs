@@ -1,7 +1,9 @@
+using MeuPonto.Authentication;
 using MeuPonto.Cache;
 using MeuPonto.Data;
 using MeuPonto.Infrastructure;
-using MeuPonto.Modules.Trabalhadores;
+using MeuPonto.Models.Billing;
+using MeuPonto.Models.Timesheet.Trabalhadores;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
@@ -102,14 +104,14 @@ public class Program
             {
                 policy.RequireAuthenticatedUser();
 
-                policy.RequireClaim("SubscriptionPlanId", Billing.SubscriptionPlanEnum.Silver.ToString(), Billing.SubscriptionPlanEnum.Gold.ToString());
+                policy.RequireClaim("SubscriptionPlanId", SubscriptionPlanEnum.Silver.ToString(), SubscriptionPlanEnum.Gold.ToString());
             });
         });
 
         builder.Services
             .AddRazorPages(options =>
             {
-                options.RootDirectory = "/Modules";
+                //options.RootDirectory = "/Modules";
             })
             .AddMvcOptions(options =>
             {
@@ -166,7 +168,7 @@ public class Program
 
         app.MapRazorPages();
         app.MapControllers();
-        app.MapFallbackToFile("app/index.html");
+        //app.MapFallbackToFile("app/index.html");
 
         DbModule.EnsureDatabaseExists(app.Services);
 
