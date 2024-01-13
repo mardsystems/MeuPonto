@@ -36,7 +36,7 @@ public class GuardarModel : FormPageModel
 
         Comprovante.TipoImagemId = TipoImagemEnum.Original;
 
-        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
+        ViewData["ContratoId"] = new SelectList(_db.Contratos.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
 
         HoldRefererUrl();
 
@@ -55,14 +55,14 @@ public class GuardarModel : FormPageModel
 
         if (!ModelState.IsValid)
         {
-            ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
+            ViewData["ContratoId"] = new SelectList(_db.Contratos.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
 
             return Page();
         }
 
         if (command == "Escanear")
         {
-            ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
+            ViewData["ContratoId"] = new SelectList(_db.Contratos.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
 
             ModelState.Remove($"{nameof(Ponto)}.{nameof(Ponto.DataHora)}");
 
@@ -77,9 +77,9 @@ public class GuardarModel : FormPageModel
 
         Ponto.RecontextualizaPonto(transaction);
 
-        var perfil = await _db.Perfis.FindByIdAsync(Ponto.PerfilId, User.GetUserId());
+        var contrato = await _db.Contratos.FindByIdAsync(Ponto.ContratoId, User.GetUserId());
 
-        perfil.QualificaPonto(Ponto);
+        contrato.QualificaPonto(Ponto);
 
         _db.Pontos.Add(Ponto);
 
@@ -144,7 +144,7 @@ public class GuardarModel : FormPageModel
             {
                 ModelState.AddModelError("Imagem", "Arquivo muito grande");
 
-                ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
+                ViewData["ContratoId"] = new SelectList(_db.Contratos.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
 
                 return Page();
             }

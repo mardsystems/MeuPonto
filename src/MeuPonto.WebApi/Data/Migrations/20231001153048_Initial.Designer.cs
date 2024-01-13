@@ -128,7 +128,7 @@ namespace MeuPonto.Data.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int?>("PerfilId")
+                    b.Property<int?>("ContratoId")
                         .IsRequired()
                         .HasColumnType("int");
 
@@ -145,7 +145,7 @@ namespace MeuPonto.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PerfilId");
+                    b.HasIndex("ContratoId");
 
                     b.HasIndex("StatusId");
 
@@ -231,7 +231,7 @@ namespace MeuPonto.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("MeuPonto.Models.Perfil", b =>
+            modelBuilder.Entity("MeuPonto.Models.Contrato", b =>
                 {
                     b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
@@ -267,7 +267,7 @@ namespace MeuPonto.Data.Migrations
 
                     b.HasIndex("EmpregadorId");
 
-                    b.ToTable("Perfis", (string)null);
+                    b.ToTable("Contratos", (string)null);
                 });
 
             modelBuilder.Entity("MeuPonto.Models.Ponto", b =>
@@ -300,7 +300,7 @@ namespace MeuPonto.Data.Migrations
                     b.Property<int?>("PausaId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PerfilId")
+                    b.Property<int?>("ContratoId")
                         .IsRequired()
                         .HasColumnType("int");
 
@@ -318,7 +318,7 @@ namespace MeuPonto.Data.Migrations
 
                     b.HasIndex("PausaId");
 
-                    b.HasIndex("PerfilId");
+                    b.HasIndex("ContratoId");
 
                     b.ToTable("Pontos", (string)null);
                 });
@@ -424,9 +424,9 @@ namespace MeuPonto.Data.Migrations
 
             modelBuilder.Entity("MeuPonto.Models.Folha", b =>
                 {
-                    b.HasOne("MeuPonto.Models.Perfil", "Perfil")
+                    b.HasOne("MeuPonto.Models.Contrato", "Contrato")
                         .WithMany()
-                        .HasForeignKey("PerfilId")
+                        .HasForeignKey("ContratoId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -498,12 +498,12 @@ namespace MeuPonto.Data.Migrations
                     b.Navigation("ApuracaoMensal")
                         .IsRequired();
 
-                    b.Navigation("Perfil");
+                    b.Navigation("Contrato");
 
                     b.Navigation("Status");
                 });
 
-            modelBuilder.Entity("MeuPonto.Models.Perfil", b =>
+            modelBuilder.Entity("MeuPonto.Models.Contrato", b =>
                 {
                     b.HasOne("MeuPonto.Models.Empregador", "Empregador")
                         .WithMany()
@@ -512,19 +512,19 @@ namespace MeuPonto.Data.Migrations
 
                     b.OwnsOne("MeuPonto.Models.JornadaTrabalhoSemanal", "JornadaTrabalhoSemanalPrevista", b1 =>
                         {
-                            b1.Property<int>("PerfilId")
+                            b1.Property<int>("ContratoId")
                                 .HasColumnType("int");
 
-                            b1.HasKey("PerfilId");
+                            b1.HasKey("ContratoId");
 
-                            b1.ToTable("Perfis");
+                            b1.ToTable("Contratos");
 
                             b1.WithOwner()
-                                .HasForeignKey("PerfilId");
+                                .HasForeignKey("ContratoId");
 
                             b1.OwnsMany("MeuPonto.Models.JornadaTrabalhoDiaria", "Semana", b2 =>
                                 {
-                                    b2.Property<int>("PerfilId")
+                                    b2.Property<int>("ContratoId")
                                         .HasColumnType("int");
 
                                     b2.Property<int>("DiaSemana")
@@ -534,12 +534,12 @@ namespace MeuPonto.Data.Migrations
                                         .IsRequired()
                                         .HasColumnType("time");
 
-                                    b2.HasKey("PerfilId", "DiaSemana");
+                                    b2.HasKey("ContratoId", "DiaSemana");
 
-                                    b2.ToTable("Perfis_JornadaTrabalhoDiaria", (string)null);
+                                    b2.ToTable("Contratos_JornadaTrabalhoDiaria", (string)null);
 
                                     b2.WithOwner()
-                                        .HasForeignKey("PerfilId");
+                                        .HasForeignKey("ContratoId");
                                 });
 
                             b1.Navigation("Semana");
@@ -563,9 +563,9 @@ namespace MeuPonto.Data.Migrations
                         .WithMany()
                         .HasForeignKey("PausaId");
 
-                    b.HasOne("MeuPonto.Models.Perfil", "Perfil")
+                    b.HasOne("MeuPonto.Models.Contrato", "Contrato")
                         .WithMany()
-                        .HasForeignKey("PerfilId")
+                        .HasForeignKey("ContratoId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -573,7 +573,7 @@ namespace MeuPonto.Data.Migrations
 
                     b.Navigation("Pausa");
 
-                    b.Navigation("Perfil");
+                    b.Navigation("Contrato");
                 });
 
             modelBuilder.Entity("MeuPonto.Models.Trabalhador", b =>

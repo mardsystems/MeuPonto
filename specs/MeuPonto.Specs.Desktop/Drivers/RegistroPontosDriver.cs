@@ -22,7 +22,7 @@ public class RegistroPontosDriver
     {
         var pontoRegistrado = new Ponto
         {
-            Perfil = new()
+            Contrato = new()
             {
 
             },

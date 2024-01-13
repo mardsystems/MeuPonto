@@ -35,7 +35,7 @@ public class EditarModel : FormPageModel
 
         Folha = folha;
 
-        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
+        ViewData["ContratoId"] = new SelectList(_db.Contratos.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
 
         HoldRefererUrl();
 
@@ -52,16 +52,16 @@ public class EditarModel : FormPageModel
 
         if (!ModelState.IsValid)
         {
-            ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
+            ViewData["ContratoId"] = new SelectList(_db.Contratos.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
 
             return Page();
         }
 
-        var perfil = await _db.Perfis.FindByIdAsync(Folha.PerfilId, User.GetUserId());
+        var contrato = await _db.Contratos.FindByIdAsync(Folha.ContratoId, User.GetUserId());
 
-        perfil.QualificaFolha(Folha);
+        contrato.QualificaFolha(Folha);
 
-        Folha.ConfirmarCompetencia(perfil);
+        Folha.ConfirmarCompetencia(contrato);
 
         if (command == "ConfirmarCompetencia")
         {
@@ -72,9 +72,9 @@ public class EditarModel : FormPageModel
                 if (ModelState.ContainsKey(state.Key)) ModelState.Remove(state.Key);
             }
 
-            //Folha.ConfirmarCompetencia(perfil);
+            //Folha.ConfirmarCompetencia(contrato);
 
-            ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
+            ViewData["ContratoId"] = new SelectList(_db.Contratos.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
 
             return Page();
         }

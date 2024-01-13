@@ -8,11 +8,11 @@ namespace MeuPonto.Models.Timesheet.Pontos.Comprovantes;
 public class PontoRef
 {
     [Required]
-    [DisplayName("Perfil")]
-    public Guid? PerfilId { get; set; }
+    [DisplayName("Contrato")]
+    public Guid? ContratoId { get; set; }
 
-    [DisplayName("Perfil")]
-    public PerfilRef? Perfil { get; set; }
+    [DisplayName("Contrato")]
+    public ContratoRef? Contrato { get; set; }
 
     [Required]
     [DisplayName("Data/Hora")]

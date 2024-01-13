@@ -15,7 +15,7 @@ public class IndexModel : PageModel
     private readonly Data.MeuPontoDbContext _db;
 
     [BindProperty(SupportsGet = true)]
-    public Guid? PerfilId { get; set; }
+    public Guid? ContratoId { get; set; }
 
     [BindProperty(SupportsGet = true)]
     public DateTime? DataHora { get; set; }
@@ -48,7 +48,7 @@ public class IndexModel : PageModel
 
     public async Task OnGetAsync()
     {
-        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.UserId == User.GetUserId()), "Id", "Nome").AddEmptyValue();
+        ViewData["ContratoId"] = new SelectList(_db.Contratos.Where(x => x.UserId == User.GetUserId()), "Id", "Nome").AddEmptyValue();
 
         var totalRegistros = await _db.Pontos.CountAsync(x => x.UserId == User.GetUserId());
 
@@ -58,7 +58,7 @@ public class IndexModel : PageModel
         {
             Pontos = await _db.Pontos
                 .Where(x => true
-                    && (PerfilId == null || x.PerfilId == PerfilId)
+                    && (ContratoId == null || x.ContratoId == ContratoId)
                     && (DataHora == null || x.DataHora == DataHora)
                     && (Momento == null || x.MomentoId == Momento)
                     && (Pausa == null || x.PausaId == Pausa)

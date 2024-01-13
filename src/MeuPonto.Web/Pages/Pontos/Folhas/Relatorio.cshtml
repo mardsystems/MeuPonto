@@ -35,20 +35,20 @@
 
 <div class="container">
     <dl class="row border-top border-2">
-        @if (!string.IsNullOrEmpty(Model.PerfilNome))
+        @if (!string.IsNullOrEmpty(Model.ContratoNome))
         {
             <dt class="col-sm-2 bg-light">
-                @Html.DisplayNameFor(model => model.PerfilNome)
+                @Html.DisplayNameFor(model => model.ContratoNome)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.PerfilNome)
+                @Html.DisplayFor(model => model.ContratoNome)
             </dd>
         }
         <dt class="col-sm-2 bg-light">
-            @Html.DisplayNameFor(model => model.PerfilAtivo)
+            @Html.DisplayNameFor(model => model.ContratoAtivo)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PerfilAtivo)
+            @Html.DisplayFor(model => model.ContratoAtivo)
         </dd>        
         @if (Model.Competencia != null)
         {
@@ -162,16 +162,16 @@
             <th scope="col">
                 #
             </th>
-            @* @if (!Model.PerfilGrupoId.HasValue)
+            @* @if (!Model.ContratoGrupoId.HasValue)
             {
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.Cobrancas[0].PerfilGrupo)
+                    @Html.DisplayNameFor(model => model.Cobrancas[0].ContratoGrupo)
                     <i class="bi bi-sort-alpha-down"></i>
                 </th>
             }
             <th scope="col">
-                @Html.DisplayNameFor(model => model.Cobrancas[0].PerfilNome)
-                @if (Model.PerfilGrupoId.HasValue)
+                @Html.DisplayNameFor(model => model.Cobrancas[0].ContratoNome)
+                @if (Model.ContratoGrupoId.HasValue)
                 {
                     <i class="bi bi-sort-alpha-down"></i>
                 }
@@ -208,14 +208,14 @@
                 <th scope="col">
                     @(i + 1)
                 </th>
-                @* @if (!Model.PerfilGrupoId.HasValue)
+                @* @if (!Model.ContratoGrupoId.HasValue)
                 {
                     <td>
-                        @Html.DisplayFor(modelItem => item.PerfilGrupo)
+                        @Html.DisplayFor(modelItem => item.ContratoGrupo)
                     </td>
                 }
                 <td>
-                    @if (item.PerfilInadimplente == true)
+                    @if (item.ContratoInadimplente == true)
                     {
                         <i class="bi bi-slash-square text-danger"></i>
                     }
@@ -223,7 +223,7 @@
                     {
                         <i class="bi bi-check-circle text-success"></i>
                     }
-                    @Html.DisplayFor(modelItem => item.PerfilNome)
+                    @Html.DisplayFor(modelItem => item.ContratoNome)
                 </td>
                 *@
                 @* @if (!Model.Competencia.HasValue)
@@ -395,24 +395,24 @@
         <form method="get">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="row mb-3">
-                <label asp-for="PerfilId" class="col-sm-4 col-form-label"></label>
+                <label asp-for="ContratoId" class="col-sm-4 col-form-label"></label>
                 <div class="col-sm-8">
-                    <select asp-for="PerfilId" class="form-select" asp-items="ViewBag.PerfilId"></select>
-                    <span asp-validation-for="PerfilId" class="text-danger"></span>
+                    <select asp-for="ContratoId" class="form-select" asp-items="ViewBag.ContratoId"></select>
+                    <span asp-validation-for="ContratoId" class="text-danger"></span>
                 </div>
             </div>
             <div class="row mb-3">
-                <label asp-for="PerfilNome" class="col-sm-4 col-form-label"></label>
+                <label asp-for="ContratoNome" class="col-sm-4 col-form-label"></label>
                 <div class="col-sm-8">
-                    <input asp-for="PerfilNome" class="form-control" />
-                    <span asp-validation-for="PerfilNome" class="text-danger"></span>
+                    <input asp-for="ContratoNome" class="form-control" />
+                    <span asp-validation-for="ContratoNome" class="text-danger"></span>
                 </div>
             </div>
             <div class="row mb-3">
-                <label asp-for="PerfilAtivo" class="col-sm-4 col-form-label"></label>
+                <label asp-for="ContratoAtivo" class="col-sm-4 col-form-label"></label>
                 <div class="col-sm-8">
-                    <input type="checkbox" asp-for="PerfilAtivo" class="form-check-input" />
-                    <span asp-validation-for="PerfilAtivo" class="text-danger"></span>
+                    <input type="checkbox" asp-for="ContratoAtivo" class="form-check-input" />
+                    <span asp-validation-for="ContratoAtivo" class="text-danger"></span>
                 </div>
             </div>
             <div class="row mb-3">

@@ -1,5 +1,5 @@
 ﻿using BoDi;
-using MeuPonto.Models.Timesheet.Perfis;
+using MeuPonto.Models.Timesheet.Contratos;
 using MeuPonto.Models.Timesheet.Pontos;
 using MeuPonto.Models.Timesheet.Pontos.Comprovantes;
 using MeuPonto.Models.Timesheet.Pontos.Folhas;
@@ -18,7 +18,7 @@ public class SeedHook
     [BeforeScenario]
     public void SetupTestUsers(
         ScenarioContext scenario,
-        CadastroPerfisContext cadastroPerfis,
+        GestaoContratosContext gestaoContratos,
         RegistroPontosContext registroPontos,
         BackupComprovantesContext backupComprovantes,
         GestaoFolhasContext gestaoFolhas)
@@ -33,11 +33,11 @@ public class SeedHook
 
         var trabalhador = TrabalhadorFactory.CriaTrabalhador(transaction);
 
-        var perfil = PerfilFactory.CriaPerfil(transaction);
+        var contrato = ContratoFactory.CriaContrato(transaction);
 
-        perfil.Nome = userName;
-        perfil.Ativo = true;
-        perfil.JornadaTrabalhoSemanalPrevista = new JornadaTrabalhoSemanal
+        contrato.Nome = userName;
+        contrato.Ativo = true;
+        contrato.JornadaTrabalhoSemanalPrevista = new JornadaTrabalhoSemanal
         {
             Semana = new List<JornadaTrabalhoDiaria>(new[]{
                     new JornadaTrabalhoDiaria
@@ -78,7 +78,7 @@ public class SeedHook
                 })
         };
 
-        cadastroPerfis.Inicia(perfil);
+        gestaoContratos.Inicia(contrato);
 
         var ponto = PontoFactory.CriaPonto(transaction);
 
@@ -98,7 +98,7 @@ public class SeedHook
 
         var folha = FolhaFactory.CriaFolha(transaction);
 
-        perfil.QualificaFolha(folha);
+        contrato.QualificaFolha(folha);
 
         folha.Competencia = competencia;
 
@@ -115,7 +115,7 @@ public class SeedHook
             var apuracaoDiaria = new ApuracaoDiaria
             {
                 Dia = dia,
-                TempoPrevisto = perfil.JornadaTrabalhoSemanalPrevista.Semana.Single(x => x.DiaSemana == data.DayOfWeek).Tempo,
+                TempoPrevisto = contrato.JornadaTrabalhoSemanalPrevista.Semana.Single(x => x.DiaSemana == data.DayOfWeek).Tempo,
                 TempoApurado = null,
                 DiferencaTempo = null,
                 Feriado = false,

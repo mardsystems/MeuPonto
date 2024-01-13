@@ -15,7 +15,7 @@ public class GestaoFolhasStepDefinitions
 
     private readonly GestaoFolhasDriver _gestaoFolhasDriver;
 
-    private readonly CadastroPerfisContext _cadastroPerfis;
+    private readonly GestaoContratosContext _gestaoContratos;
 
     private readonly HomeContext _home;
 
@@ -27,7 +27,7 @@ public class GestaoFolhasStepDefinitions
         ScenarioContext scenario,
         GestaoFolhasContext gestaoFolhas,
         GestaoFolhasDriver gestaoFolhasDriver,
-        CadastroPerfisContext cadastroPerfis,
+        GestaoContratosContext gestaoContratos,
         HomeContext home,
         HomeDriver homeDriver,
         MeuPontoDbContext db)
@@ -38,7 +38,7 @@ public class GestaoFolhasStepDefinitions
 
         _gestaoFolhasDriver = gestaoFolhasDriver;
 
-        _cadastroPerfis = cadastroPerfis;
+        _gestaoContratos = gestaoContratos;
 
         _home = home;
 
@@ -47,12 +47,12 @@ public class GestaoFolhasStepDefinitions
         _db = db;
     }
 
-    [Given(@"que o trabalhador qualifica a folha com o perfil '([^']*)'")]
-    public void GivenQueOTrabalhadorQualificaAFolhaComOPerfil(string nome)
+    [Given(@"que o trabalhador qualifica a folha com o contrato '([^']*)'")]
+    public void GivenQueOTrabalhadorQualificaAFolhaComOContrato(string nome)
     {
-        var perfil = _db.Perfis.FirstOrDefault(x => x.Nome == nome);
+        var contrato = _db.Contratos.FirstOrDefault(x => x.Nome == nome);
 
-        perfil.QualificaFolha(_gestaoFolhas.Folha);
+        contrato.QualificaFolha(_gestaoFolhas.Folha);
     }
 
     [Given(@"que o trabalhador deseja apurar a folha de ponto da competência '([^']*)'")]
@@ -74,11 +74,11 @@ public class GestaoFolhasStepDefinitions
 
         var transaction = new TransactionContext(userId);
 
-        var perfil = _db.Perfis.FirstOrDefault();
+        var contrato = _db.Contratos.FirstOrDefault();
 
         var pontoEntrada = PontoFactory.CriaPonto(transaction);
 
-        perfil.QualificaPonto(pontoEntrada);
+        contrato.QualificaPonto(pontoEntrada);
 
         pontoEntrada.DataHora = entrada;
         pontoEntrada.MomentoId = MomentoEnum.Entrada;
@@ -94,11 +94,11 @@ public class GestaoFolhasStepDefinitions
 
         var transaction = new TransactionContext(userId);
 
-        var perfil = _db.Perfis.FirstOrDefault();
+        var contrato = _db.Contratos.FirstOrDefault();
 
         var pontoSaida = PontoFactory.CriaPonto(transaction);
 
-        perfil.QualificaPonto(pontoSaida);
+        contrato.QualificaPonto(pontoSaida);
 
         pontoSaida.DataHora = saida;
         pontoSaida.MomentoId = MomentoEnum.Saida;
@@ -152,7 +152,7 @@ public class GestaoFolhasStepDefinitions
 
             var ponto = PontoFactory.CriaPonto(transaction);
 
-            _cadastroPerfis.Perfil.QualificaPonto(ponto);
+            _gestaoContratos.Contrato.QualificaPonto(ponto);
 
             ponto.DataHora = dataHora;
             ponto.MomentoId = momento;
@@ -169,19 +169,19 @@ public class GestaoFolhasStepDefinitions
     [When(@"o trabalhador abrir uma folha de ponto")]
     public void WhenOTrabalhadorAbrirUmaFolhaDePonto()
     {
-        if (_gestaoFolhas.Folha.Perfil == null)
+        if (_gestaoFolhas.Folha.Contrato == null)
         {
-            var perfil = _db.Perfis.FirstOrDefault();
+            var contrato = _db.Contratos.FirstOrDefault();
 
-            if (perfil == default)
+            if (contrato == default)
             {
-                perfil = _cadastroPerfis.Perfil;
+                contrato = _gestaoContratos.Contrato;
 
-                _db.Perfis.Add(perfil);
+                _db.Contratos.Add(contrato);
                 _db.SaveChanges();
             }
 
-            perfil.QualificaFolha(_gestaoFolhas.Folha);
+            contrato.QualificaFolha(_gestaoFolhas.Folha);
         }
 
 
@@ -228,12 +228,12 @@ public class GestaoFolhasStepDefinitions
 
     #endregion
 
-    [Then(@"o perfil da folha de ponto deverá deverá ser '([^']*)'")]
-    public void ThenOPerfilDaFolhaDePontoDeveraDeveraSer(string nome)
+    [Then(@"o contrato da folha de ponto deverá deverá ser '([^']*)'")]
+    public void ThenOContratoDaFolhaDePontoDeveraDeveraSer(string nome)
     {
-        var perfil = _gestaoFolhas.FolhaAberta.Perfil;
+        var contrato = _gestaoFolhas.FolhaAberta.Contrato;
 
-        perfil.Nome.Should().Be(nome);
+        contrato.Nome.Should().Be(nome);
     }
 
     [Then(@"o status da folha de ponto deverá ser '([^']*)'")]

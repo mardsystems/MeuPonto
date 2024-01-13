@@ -80,14 +80,14 @@ namespace MeuPonto.Features
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Trabalhador abre uma folha de ponto usando seu único perfil")]
+        [Xunit.SkippableFactAttribute(DisplayName="Trabalhador abre uma folha de ponto usando seu único contrato")]
         [Xunit.TraitAttribute("FeatureTitle", "Gestão Folhas")]
-        [Xunit.TraitAttribute("Description", "Trabalhador abre uma folha de ponto usando seu único perfil")]
-        public void TrabalhadorAbreUmaFolhaDePontoUsandoSeuUnicoPerfil()
+        [Xunit.TraitAttribute("Description", "Trabalhador abre uma folha de ponto usando seu único contrato")]
+        public void TrabalhadorAbreUmaFolhaDePontoUsandoSeuUnicoContrato()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador abre uma folha de ponto usando seu único perfil", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador abre uma folha de ponto usando seu único contrato", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 7
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -99,10 +99,10 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 8
- testRunner.Given("que o trabalhador tem um perfil cadastrado com o nome \'Marcelo - Ateliex\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+ testRunner.Given("que o trabalhador tem um contrato cadastrado com o nome \'Marcelo - Ateliex\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
 #line 9
- testRunner.Given("que o trabalhador qualifica a folha com o perfil \'Marcelo - Ateliex\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+ testRunner.Given("que o trabalhador qualifica a folha com o contrato \'Marcelo - Ateliex\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
 #line 10
  testRunner.When("o trabalhador abrir uma folha de ponto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
@@ -111,7 +111,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Then("uma folha de ponto deverá ser aberta", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
 #line 12
- testRunner.And("o perfil da folha de ponto deverá deverá ser \'Marcelo - Ateliex\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+ testRunner.And("o contrato da folha de ponto deverá deverá ser \'Marcelo - Ateliex\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -136,7 +136,7 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 17
- testRunner.Given("que o trabalhador tem um perfil cadastrado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+ testRunner.Given("que o trabalhador tem um contrato cadastrado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
 #line 18
  testRunner.And("que o trabalhador deseja apurar a folha de ponto da competência \'2022/11\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
@@ -188,7 +188,7 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 31
- testRunner.Given("que o trabalhador tem um perfil cadastrado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+ testRunner.Given("que o trabalhador tem um contrato cadastrado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
 #line 32
  testRunner.And("que o trabalhador anota a seguinte observação na folha de ponto:", "Verificar se a última sexta-feira do mês vai ser feriado.", ((TechTalk.SpecFlow.Table)(null)), "E ");
@@ -254,8 +254,8 @@ this.ScenarioInitialize(scenarioInfo);
                             "Saturday",
                             "00:00:00"});
 #line 43
- testRunner.Given("que o trabalhador tem um perfil cadastrado com a seguinte jornada de trabalho sem" +
-                        "anal prevista:", ((string)(null)), table3, "Dado ");
+ testRunner.Given("que o trabalhador tem um contrato cadastrado com a seguinte jornada de trabalho s" +
+                        "emanal prevista:", ((string)(null)), table3, "Dado ");
 #line hidden
 #line 52
  testRunner.And(string.Format("que o trabalhador registrou a entrada no expediente às \'{0}\'", entrada), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");

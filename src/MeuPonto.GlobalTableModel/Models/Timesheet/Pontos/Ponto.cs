@@ -1,4 +1,4 @@
-﻿using MeuPonto.Models.Timesheet.Perfis;
+﻿using MeuPonto.Models.Timesheet.Contratos;
 using MeuPonto.Models.Timesheet.Pontos.Comprovantes;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -8,11 +8,11 @@ namespace MeuPonto.Models.Timesheet.Pontos;
 public class Ponto : GlobalTableEntity
 {
     [Required]
-    [DisplayName("Perfil")]
-    public Guid? PerfilId { get; set; }
+    [DisplayName("Contrato")]
+    public Guid? ContratoId { get; set; }
 
-    [DisplayName("Perfil")]
-    public Perfil? Perfil { get; set; }
+    [DisplayName("Contrato")]
+    public Contrato? Contrato { get; set; }
 
     [Required]
     [DisplayName("Data/Hora")]

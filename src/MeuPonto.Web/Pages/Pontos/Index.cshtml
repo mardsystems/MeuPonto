@@ -50,7 +50,7 @@
                 <tr>
                     <th scope="col">Ações</th>
                     <th scope="col">
-                        @Html.DisplayNameFor(model => model.Pontos[0].Perfil)
+                        @Html.DisplayNameFor(model => model.Pontos[0].Contrato)
                     </th>
                     <th scope="col">
                         @Html.DisplayNameFor(model => model.Pontos[0].DataHora)
@@ -82,7 +82,7 @@
                         </div>
                     </th>
                     <th>
-                        <select asp-for="PerfilId" class="form-select" asp-items="ViewBag.PerfilId"></select>
+                        <select asp-for="ContratoId" class="form-select" asp-items="ViewBag.ContratoId"></select>
                     </th>
                     <th>
                         <input asp-for="DataHora" class="form-control" />
@@ -123,8 +123,8 @@
                             </div>
                         </td>
                         <td>
-                            <a class="text-decoration-none" asp-page="/Perfis/Detalhar" asp-route-id="@item.PerfilId" title="Detalhar" target="_blank">
-                                @Html.DisplayFor(modelItem => item.Perfil.Nome)
+                            <a class="text-decoration-none" asp-page="/Contratos/Detalhar" asp-route-id="@item.ContratoId" title="Detalhar" target="_blank">
+                                @Html.DisplayFor(modelItem => item.Contrato.Nome)
                                 <i class="bi bi-link-45deg"></i>
                             </a>
                         </td>

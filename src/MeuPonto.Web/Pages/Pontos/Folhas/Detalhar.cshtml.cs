@@ -27,7 +27,7 @@ public class DetalharModel : PageModel
         }
 
         var folha = await _db.Folhas
-            .Include(x => x.Perfil)
+            .Include(x => x.Contrato)
             .FirstOrDefaultAsync(x => x.Id == id);
 
         if (folha == null)

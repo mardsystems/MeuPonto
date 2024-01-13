@@ -117,11 +117,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MainDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="PerfisForm.cs">
+    <Compile Include="ContratosForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PerfisForm.Designer.cs">
-      <DependentUpon>PerfisForm.cs</DependentUpon>
+    <Compile Include="ContratosForm.Designer.cs">
+      <DependentUpon>ContratosForm.cs</DependentUpon>
     </Compile>
     <Compile Include="PontosForm.cs">
       <SubType>Form</SubType>
@@ -134,8 +134,8 @@
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PerfisForm.resx">
-      <DependentUpon>PerfisForm.cs</DependentUpon>
+    <EmbeddedResource Include="ContratosForm.resx">
+      <DependentUpon>ContratosForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PontosForm.resx">
       <DependentUpon>PontosForm.cs</DependentUpon>

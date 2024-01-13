@@ -21,11 +21,11 @@
                 <TimePicker Time="{Binding Hora}" />
             </StackLayout>
             <StackLayout>
-                <Label Text="Perfil" />
+                <Label Text="Contrato" />
                 <Picker
                     ItemDisplayBinding="{Binding Nome}"
-                    ItemsSource="{Binding Perfis}"
-                    SelectedItem="{Binding Ponto.Perfil}" />
+                    ItemsSource="{Binding Contratos}"
+                    SelectedItem="{Binding Ponto.Contrato}" />
             </StackLayout>
             <Button Command="{Binding SalvarCommand}" Text="Salvar" />
         </StackLayout>

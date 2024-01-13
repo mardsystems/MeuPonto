@@ -20,7 +20,7 @@ public class ExcluirModel : FormPageModel
 
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {
-        if (id == null || _db.Perfis == null)
+        if (id == null || _db.Contratos == null)
         {
             return NotFound();
         }
@@ -43,7 +43,7 @@ public class ExcluirModel : FormPageModel
 
     public async Task<IActionResult> OnPostAsync(Guid? id)
     {
-        if (id == null || _db.Perfis == null)
+        if (id == null || _db.Contratos == null)
         {
             return NotFound();
         }

@@ -117,12 +117,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Remove="Resources\AppIcon\flyout_perfis.svg" />
 		<None Remove="Resources\WinIcon\flyout_home.svg" />
 		<None Remove="Resources\AppIcon\flyout_home.svg" />
 		<None Remove="Resources\WinIcon\flyout_pontos.svg" />
 		<None Remove="Resources\AppIcon\flyout_pontos.svg" />
 		<None Remove="Resources\WinIcon\flyout_perfis.svg" />
-		<None Remove="Resources\AppIcon\flyout_perfis.svg" />
 		<None Remove="Resources\WinIcon\flyout_empregadores.svg" />
 		<None Remove="Resources\AppIcon\flyout_empregadores.svg" />
 		<None Remove="Resources\WinIcon\flyout_usuario.svg" />
@@ -178,6 +178,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Compile Update="Pages\Contratos\GestaoContratosPage.xaml.cs">
+		  <DependentUpon>GestaoContratosPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Pages\Contratos\ContratoPage.xaml.cs">
+		  <DependentUpon>ContratoPage.xaml</DependentUpon>
+		</Compile>
 		<Compile Update="Pages\Pontos\Comprovantes\GuardarComprovantePage.xaml.cs">
 			<DependentUpon>GuardarComprovantePage.xaml</DependentUpon>
 		</Compile>

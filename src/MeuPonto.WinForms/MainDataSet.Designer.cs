@@ -24,7 +24,7 @@ namespace MeuPonto {
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
     public partial class MainDataSet : global::System.Data.DataSet {
         
-        private PerfisDataTable tablePerfis;
+        private ContratosDataTable tableContratos;
         
         private PontosDataTable tablePontos;
         
@@ -32,7 +32,7 @@ namespace MeuPonto {
         
         private PontoComprovantesDataTable tablePontoComprovantes;
         
-        private global::System.Data.DataRelation relationFK_Pontos_Perfis_PerfilId;
+        private global::System.Data.DataRelation relationFK_Pontos_Contratos_ContratoId;
         
         private global::System.Data.DataRelation relationFK_PontoComprovantes_PontoComprovanteImagemTipos_ImagemTipoId;
         
@@ -66,8 +66,8 @@ namespace MeuPonto {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["Perfis"] != null)) {
-                    base.Tables.Add(new PerfisDataTable(ds.Tables["Perfis"]));
+                if ((ds.Tables["Contratos"] != null)) {
+                    base.Tables.Add(new ContratosDataTable(ds.Tables["Contratos"]));
                 }
                 if ((ds.Tables["Pontos"] != null)) {
                     base.Tables.Add(new PontosDataTable(ds.Tables["Pontos"]));
@@ -100,9 +100,9 @@ namespace MeuPonto {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public PerfisDataTable Perfis {
+        public ContratosDataTable Contratos {
             get {
-                return this.tablePerfis;
+                return this.tableContratos;
             }
         }
         
@@ -203,8 +203,8 @@ namespace MeuPonto {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["Perfis"] != null)) {
-                    base.Tables.Add(new PerfisDataTable(ds.Tables["Perfis"]));
+                if ((ds.Tables["Contratos"] != null)) {
+                    base.Tables.Add(new ContratosDataTable(ds.Tables["Contratos"]));
                 }
                 if ((ds.Tables["Pontos"] != null)) {
                     base.Tables.Add(new PontosDataTable(ds.Tables["Pontos"]));
@@ -248,10 +248,10 @@ namespace MeuPonto {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         internal void InitVars(bool initTable) {
-            this.tablePerfis = ((PerfisDataTable)(base.Tables["Perfis"]));
+            this.tableContratos = ((ContratosDataTable)(base.Tables["Contratos"]));
             if ((initTable == true)) {
-                if ((this.tablePerfis != null)) {
-                    this.tablePerfis.InitVars();
+                if ((this.tableContratos != null)) {
+                    this.tableContratos.InitVars();
                 }
             }
             this.tablePontos = ((PontosDataTable)(base.Tables["Pontos"]));
@@ -272,7 +272,7 @@ namespace MeuPonto {
                     this.tablePontoComprovantes.InitVars();
                 }
             }
-            this.relationFK_Pontos_Perfis_PerfilId = this.Relations["FK_Pontos_Perfis_PerfilId"];
+            this.relationFK_Pontos_Contratos_ContratoId = this.Relations["FK_Pontos_Contratos_ContratoId"];
             this.relationFK_PontoComprovantes_PontoComprovanteImagemTipos_ImagemTipoId = this.Relations["FK_PontoComprovantes_PontoComprovanteImagemTipos_ImagemTipoId"];
             this.relationFK_PontoComprovantes_Pontos_PontoId = this.Relations["FK_PontoComprovantes_Pontos_PontoId"];
         }
@@ -285,18 +285,18 @@ namespace MeuPonto {
             this.Namespace = "http://tempuri.org/MainDataSet.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-            this.tablePerfis = new PerfisDataTable();
-            base.Tables.Add(this.tablePerfis);
+            this.tableContratos = new ContratosDataTable();
+            base.Tables.Add(this.tableContratos);
             this.tablePontos = new PontosDataTable();
             base.Tables.Add(this.tablePontos);
             this.tablePontoComprovanteImagemTipos = new PontoComprovanteImagemTiposDataTable();
             base.Tables.Add(this.tablePontoComprovanteImagemTipos);
             this.tablePontoComprovantes = new PontoComprovantesDataTable();
             base.Tables.Add(this.tablePontoComprovantes);
-            this.relationFK_Pontos_Perfis_PerfilId = new global::System.Data.DataRelation("FK_Pontos_Perfis_PerfilId", new global::System.Data.DataColumn[] {
-                        this.tablePerfis.IdColumn}, new global::System.Data.DataColumn[] {
-                        this.tablePontos.PerfilIdColumn}, false);
-            this.Relations.Add(this.relationFK_Pontos_Perfis_PerfilId);
+            this.relationFK_Pontos_Contratos_ContratoId = new global::System.Data.DataRelation("FK_Pontos_Contratos_ContratoId", new global::System.Data.DataColumn[] {
+                        this.tableContratos.IdColumn}, new global::System.Data.DataColumn[] {
+                        this.tablePontos.ContratoIdColumn}, false);
+            this.Relations.Add(this.relationFK_Pontos_Contratos_ContratoId);
             this.relationFK_PontoComprovantes_PontoComprovanteImagemTipos_ImagemTipoId = new global::System.Data.DataRelation("FK_PontoComprovantes_PontoComprovanteImagemTipos_ImagemTipoId", new global::System.Data.DataColumn[] {
                         this.tablePontoComprovanteImagemTipos.IdColumn}, new global::System.Data.DataColumn[] {
                         this.tablePontoComprovantes.ImagemTipoIdColumn}, false);
@@ -309,7 +309,7 @@ namespace MeuPonto {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        private bool ShouldSerializePerfis() {
+        private bool ShouldSerializeContratos() {
             return false;
         }
         
@@ -387,7 +387,7 @@ namespace MeuPonto {
         }
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        public delegate void PerfisRowChangeEventHandler(object sender, PerfisRowChangeEvent e);
+        public delegate void ContratosRowChangeEventHandler(object sender, ContratosRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public delegate void PontosRowChangeEventHandler(object sender, PontosRowChangeEvent e);
@@ -403,7 +403,7 @@ namespace MeuPonto {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class PerfisDataTable : global::System.Data.TypedTableBase<PerfisRow> {
+        public partial class ContratosDataTable : global::System.Data.TypedTableBase<ContratosRow> {
             
             private global::System.Data.DataColumn columnId;
             
@@ -427,8 +427,8 @@ namespace MeuPonto {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public PerfisDataTable() {
-                this.TableName = "Perfis";
+            public ContratosDataTable() {
+                this.TableName = "Contratos";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -436,7 +436,7 @@ namespace MeuPonto {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            internal PerfisDataTable(global::System.Data.DataTable table) {
+            internal ContratosDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -453,7 +453,7 @@ namespace MeuPonto {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            protected PerfisDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected ContratosDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
@@ -549,34 +549,34 @@ namespace MeuPonto {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public PerfisRow this[int index] {
+            public ContratosRow this[int index] {
                 get {
-                    return ((PerfisRow)(this.Rows[index]));
+                    return ((ContratosRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event PerfisRowChangeEventHandler PerfisRowChanging;
+            public event ContratosRowChangeEventHandler ContratosRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event PerfisRowChangeEventHandler PerfisRowChanged;
+            public event ContratosRowChangeEventHandler ContratosRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event PerfisRowChangeEventHandler PerfisRowDeleting;
+            public event ContratosRowChangeEventHandler ContratosRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event PerfisRowChangeEventHandler PerfisRowDeleted;
+            public event ContratosRowChangeEventHandler ContratosRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void AddPerfisRow(PerfisRow row) {
+            public void AddContratosRow(ContratosRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public PerfisRow AddPerfisRow(string Matricula, string Nome, string Pis, string Empresa_Cnpj, string Empresa_Nome, string Empresa_InscricaoEstadual, string Empresa_Endereco, System.DateTime CreationDate, byte[] Version) {
-                PerfisRow rowPerfisRow = ((PerfisRow)(this.NewRow()));
+            public ContratosRow AddContratosRow(string Matricula, string Nome, string Pis, string Empresa_Cnpj, string Empresa_Nome, string Empresa_InscricaoEstadual, string Empresa_Endereco, System.DateTime CreationDate, byte[] Version) {
+                ContratosRow rowContratosRow = ((ContratosRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         Matricula,
@@ -588,22 +588,22 @@ namespace MeuPonto {
                         Empresa_Endereco,
                         CreationDate,
                         Version};
-                rowPerfisRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowPerfisRow);
-                return rowPerfisRow;
+                rowContratosRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowContratosRow);
+                return rowContratosRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public PerfisRow FindById(int Id) {
-                return ((PerfisRow)(this.Rows.Find(new object[] {
+            public ContratosRow FindById(int Id) {
+                return ((ContratosRow)(this.Rows.Find(new object[] {
                             Id})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                PerfisDataTable cln = ((PerfisDataTable)(base.Clone()));
+                ContratosDataTable cln = ((ContratosDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -611,7 +611,7 @@ namespace MeuPonto {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new PerfisDataTable();
+                return new ContratosDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -676,28 +676,28 @@ namespace MeuPonto {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public PerfisRow NewPerfisRow() {
-                return ((PerfisRow)(this.NewRow()));
+            public ContratosRow NewContratosRow() {
+                return ((ContratosRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new PerfisRow(builder);
+                return new ContratosRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(PerfisRow);
+                return typeof(ContratosRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.PerfisRowChanged != null)) {
-                    this.PerfisRowChanged(this, new PerfisRowChangeEvent(((PerfisRow)(e.Row)), e.Action));
+                if ((this.ContratosRowChanged != null)) {
+                    this.ContratosRowChanged(this, new ContratosRowChangeEvent(((ContratosRow)(e.Row)), e.Action));
                 }
             }
             
@@ -705,8 +705,8 @@ namespace MeuPonto {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.PerfisRowChanging != null)) {
-                    this.PerfisRowChanging(this, new PerfisRowChangeEvent(((PerfisRow)(e.Row)), e.Action));
+                if ((this.ContratosRowChanging != null)) {
+                    this.ContratosRowChanging(this, new ContratosRowChangeEvent(((ContratosRow)(e.Row)), e.Action));
                 }
             }
             
@@ -714,8 +714,8 @@ namespace MeuPonto {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.PerfisRowDeleted != null)) {
-                    this.PerfisRowDeleted(this, new PerfisRowChangeEvent(((PerfisRow)(e.Row)), e.Action));
+                if ((this.ContratosRowDeleted != null)) {
+                    this.ContratosRowDeleted(this, new ContratosRowChangeEvent(((ContratosRow)(e.Row)), e.Action));
                 }
             }
             
@@ -723,14 +723,14 @@ namespace MeuPonto {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.PerfisRowDeleting != null)) {
-                    this.PerfisRowDeleting(this, new PerfisRowChangeEvent(((PerfisRow)(e.Row)), e.Action));
+                if ((this.ContratosRowDeleting != null)) {
+                    this.ContratosRowDeleting(this, new ContratosRowChangeEvent(((ContratosRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void RemovePerfisRow(PerfisRow row) {
+            public void RemoveContratosRow(ContratosRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -757,7 +757,7 @@ namespace MeuPonto {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "PerfisDataTable";
+                attribute2.FixedValue = "ContratosDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -809,7 +809,7 @@ namespace MeuPonto {
             
             private global::System.Data.DataColumn columnData;
             
-            private global::System.Data.DataColumn columnPerfilId;
+            private global::System.Data.DataColumn columnContratoId;
             
             private global::System.Data.DataColumn columnObservacao;
             
@@ -868,9 +868,9 @@ namespace MeuPonto {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn PerfilIdColumn {
+            public global::System.Data.DataColumn ContratoIdColumn {
                 get {
-                    return this.columnPerfilId;
+                    return this.columnContratoId;
                 }
             }
             
@@ -935,7 +935,7 @@ namespace MeuPonto {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public PontosRow AddPontosRow(System.DateTime Data, PerfisRow parentPerfisRowByFK_Pontos_Perfis_PerfilId, string Observacao, System.DateTime CreationDate, byte[] Version) {
+            public PontosRow AddPontosRow(System.DateTime Data, ContratosRow parentContratosRowByFK_Pontos_Contratos_ContratoId, string Observacao, System.DateTime CreationDate, byte[] Version) {
                 PontosRow rowPontosRow = ((PontosRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -944,8 +944,8 @@ namespace MeuPonto {
                         Observacao,
                         CreationDate,
                         Version};
-                if ((parentPerfisRowByFK_Pontos_Perfis_PerfilId != null)) {
-                    columnValuesArray[2] = parentPerfisRowByFK_Pontos_Perfis_PerfilId[0];
+                if ((parentContratosRowByFK_Pontos_Contratos_ContratoId != null)) {
+                    columnValuesArray[2] = parentContratosRowByFK_Pontos_Contratos_ContratoId[0];
                 }
                 rowPontosRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowPontosRow);
@@ -978,7 +978,7 @@ namespace MeuPonto {
             internal void InitVars() {
                 this.columnId = base.Columns["Id"];
                 this.columnData = base.Columns["Data"];
-                this.columnPerfilId = base.Columns["PerfilId"];
+                this.columnContratoId = base.Columns["ContratoId"];
                 this.columnObservacao = base.Columns["Observacao"];
                 this.columnCreationDate = base.Columns["CreationDate"];
                 this.columnVersion = base.Columns["Version"];
@@ -991,8 +991,8 @@ namespace MeuPonto {
                 base.Columns.Add(this.columnId);
                 this.columnData = new global::System.Data.DataColumn("Data", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnData);
-                this.columnPerfilId = new global::System.Data.DataColumn("PerfilId", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPerfilId);
+                this.columnContratoId = new global::System.Data.DataColumn("ContratoId", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnContratoId);
                 this.columnObservacao = new global::System.Data.DataColumn("Observacao", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnObservacao);
                 this.columnCreationDate = new global::System.Data.DataColumn("CreationDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
@@ -1008,7 +1008,7 @@ namespace MeuPonto {
                 this.columnId.ReadOnly = true;
                 this.columnId.Unique = true;
                 this.columnData.AllowDBNull = false;
-                this.columnPerfilId.AllowDBNull = false;
+                this.columnContratoId.AllowDBNull = false;
                 this.columnObservacao.MaxLength = 255;
                 this.columnVersion.ReadOnly = true;
             }
@@ -1771,25 +1771,25 @@ namespace MeuPonto {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class PerfisRow : global::System.Data.DataRow {
+        public partial class ContratosRow : global::System.Data.DataRow {
             
-            private PerfisDataTable tablePerfis;
+            private ContratosDataTable tableContratos;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            internal PerfisRow(global::System.Data.DataRowBuilder rb) : 
+            internal ContratosRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tablePerfis = ((PerfisDataTable)(this.Table));
+                this.tableContratos = ((ContratosDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public int Id {
                 get {
-                    return ((int)(this[this.tablePerfis.IdColumn]));
+                    return ((int)(this[this.tableContratos.IdColumn]));
                 }
                 set {
-                    this[this.tablePerfis.IdColumn] = value;
+                    this[this.tableContratos.IdColumn] = value;
                 }
             }
             
@@ -1797,10 +1797,10 @@ namespace MeuPonto {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public string Matricula {
                 get {
-                    return ((string)(this[this.tablePerfis.MatriculaColumn]));
+                    return ((string)(this[this.tableContratos.MatriculaColumn]));
                 }
                 set {
-                    this[this.tablePerfis.MatriculaColumn] = value;
+                    this[this.tableContratos.MatriculaColumn] = value;
                 }
             }
             
@@ -1808,10 +1808,10 @@ namespace MeuPonto {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public string Nome {
                 get {
-                    return ((string)(this[this.tablePerfis.NomeColumn]));
+                    return ((string)(this[this.tableContratos.NomeColumn]));
                 }
                 set {
-                    this[this.tablePerfis.NomeColumn] = value;
+                    this[this.tableContratos.NomeColumn] = value;
                 }
             }
             
@@ -1820,14 +1820,14 @@ namespace MeuPonto {
             public string Pis {
                 get {
                     try {
-                        return ((string)(this[this.tablePerfis.PisColumn]));
+                        return ((string)(this[this.tableContratos.PisColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Pis\' in table \'Perfis\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Pis\' in table \'Contratos\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablePerfis.PisColumn] = value;
+                    this[this.tableContratos.PisColumn] = value;
                 }
             }
             
@@ -1835,10 +1835,10 @@ namespace MeuPonto {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public string Empresa_Cnpj {
                 get {
-                    return ((string)(this[this.tablePerfis.Empresa_CnpjColumn]));
+                    return ((string)(this[this.tableContratos.Empresa_CnpjColumn]));
                 }
                 set {
-                    this[this.tablePerfis.Empresa_CnpjColumn] = value;
+                    this[this.tableContratos.Empresa_CnpjColumn] = value;
                 }
             }
             
@@ -1846,10 +1846,10 @@ namespace MeuPonto {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public string Empresa_Nome {
                 get {
-                    return ((string)(this[this.tablePerfis.Empresa_NomeColumn]));
+                    return ((string)(this[this.tableContratos.Empresa_NomeColumn]));
                 }
                 set {
-                    this[this.tablePerfis.Empresa_NomeColumn] = value;
+                    this[this.tableContratos.Empresa_NomeColumn] = value;
                 }
             }
             
@@ -1858,14 +1858,14 @@ namespace MeuPonto {
             public string Empresa_InscricaoEstadual {
                 get {
                     try {
-                        return ((string)(this[this.tablePerfis.Empresa_InscricaoEstadualColumn]));
+                        return ((string)(this[this.tableContratos.Empresa_InscricaoEstadualColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Empresa_InscricaoEstadual\' in table \'Perfis\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Empresa_InscricaoEstadual\' in table \'Contratos\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablePerfis.Empresa_InscricaoEstadualColumn] = value;
+                    this[this.tableContratos.Empresa_InscricaoEstadualColumn] = value;
                 }
             }
             
@@ -1874,14 +1874,14 @@ namespace MeuPonto {
             public string Empresa_Endereco {
                 get {
                     try {
-                        return ((string)(this[this.tablePerfis.Empresa_EnderecoColumn]));
+                        return ((string)(this[this.tableContratos.Empresa_EnderecoColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Empresa_Endereco\' in table \'Perfis\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Empresa_Endereco\' in table \'Contratos\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablePerfis.Empresa_EnderecoColumn] = value;
+                    this[this.tableContratos.Empresa_EnderecoColumn] = value;
                 }
             }
             
@@ -1890,14 +1890,14 @@ namespace MeuPonto {
             public System.DateTime CreationDate {
                 get {
                     try {
-                        return ((global::System.DateTime)(this[this.tablePerfis.CreationDateColumn]));
+                        return ((global::System.DateTime)(this[this.tableContratos.CreationDateColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CreationDate\' in table \'Perfis\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'CreationDate\' in table \'Contratos\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablePerfis.CreationDateColumn] = value;
+                    this[this.tableContratos.CreationDateColumn] = value;
                 }
             }
             
@@ -1906,85 +1906,85 @@ namespace MeuPonto {
             public byte[] Version {
                 get {
                     try {
-                        return ((byte[])(this[this.tablePerfis.VersionColumn]));
+                        return ((byte[])(this[this.tableContratos.VersionColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Version\' in table \'Perfis\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Version\' in table \'Contratos\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablePerfis.VersionColumn] = value;
+                    this[this.tableContratos.VersionColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IsPisNull() {
-                return this.IsNull(this.tablePerfis.PisColumn);
+                return this.IsNull(this.tableContratos.PisColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetPisNull() {
-                this[this.tablePerfis.PisColumn] = global::System.Convert.DBNull;
+                this[this.tableContratos.PisColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IsEmpresa_InscricaoEstadualNull() {
-                return this.IsNull(this.tablePerfis.Empresa_InscricaoEstadualColumn);
+                return this.IsNull(this.tableContratos.Empresa_InscricaoEstadualColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetEmpresa_InscricaoEstadualNull() {
-                this[this.tablePerfis.Empresa_InscricaoEstadualColumn] = global::System.Convert.DBNull;
+                this[this.tableContratos.Empresa_InscricaoEstadualColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IsEmpresa_EnderecoNull() {
-                return this.IsNull(this.tablePerfis.Empresa_EnderecoColumn);
+                return this.IsNull(this.tableContratos.Empresa_EnderecoColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetEmpresa_EnderecoNull() {
-                this[this.tablePerfis.Empresa_EnderecoColumn] = global::System.Convert.DBNull;
+                this[this.tableContratos.Empresa_EnderecoColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IsCreationDateNull() {
-                return this.IsNull(this.tablePerfis.CreationDateColumn);
+                return this.IsNull(this.tableContratos.CreationDateColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetCreationDateNull() {
-                this[this.tablePerfis.CreationDateColumn] = global::System.Convert.DBNull;
+                this[this.tableContratos.CreationDateColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IsVersionNull() {
-                return this.IsNull(this.tablePerfis.VersionColumn);
+                return this.IsNull(this.tableContratos.VersionColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetVersionNull() {
-                this[this.tablePerfis.VersionColumn] = global::System.Convert.DBNull;
+                this[this.tableContratos.VersionColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public PontosRow[] GetPontosRows() {
-                if ((this.Table.ChildRelations["FK_Pontos_Perfis_PerfilId"] == null)) {
+                if ((this.Table.ChildRelations["FK_Pontos_Contratos_ContratoId"] == null)) {
                     return new PontosRow[0];
                 }
                 else {
-                    return ((PontosRow[])(base.GetChildRows(this.Table.ChildRelations["FK_Pontos_Perfis_PerfilId"])));
+                    return ((PontosRow[])(base.GetChildRows(this.Table.ChildRelations["FK_Pontos_Contratos_ContratoId"])));
                 }
             }
         }
@@ -2027,12 +2027,12 @@ namespace MeuPonto {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public int PerfilId {
+            public int ContratoId {
                 get {
-                    return ((int)(this[this.tablePontos.PerfilIdColumn]));
+                    return ((int)(this[this.tablePontos.ContratoIdColumn]));
                 }
                 set {
-                    this[this.tablePontos.PerfilIdColumn] = value;
+                    this[this.tablePontos.ContratoIdColumn] = value;
                 }
             }
             
@@ -2086,12 +2086,12 @@ namespace MeuPonto {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public PerfisRow PerfisRow {
+            public ContratosRow ContratosRow {
                 get {
-                    return ((PerfisRow)(this.GetParentRow(this.Table.ParentRelations["FK_Pontos_Perfis_PerfilId"])));
+                    return ((ContratosRow)(this.GetParentRow(this.Table.ParentRelations["FK_Pontos_Contratos_ContratoId"])));
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_Pontos_Perfis_PerfilId"]);
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_Pontos_Contratos_ContratoId"]);
                 }
             }
             
@@ -2360,22 +2360,22 @@ namespace MeuPonto {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        public class PerfisRowChangeEvent : global::System.EventArgs {
+        public class ContratosRowChangeEvent : global::System.EventArgs {
             
-            private PerfisRow eventRow;
+            private ContratosRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public PerfisRowChangeEvent(PerfisRow row, global::System.Data.DataRowAction action) {
+            public ContratosRowChangeEvent(ContratosRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public PerfisRow Row {
+            public ContratosRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -2505,7 +2505,7 @@ namespace MeuPonto.MainDataSetTableAdapters {
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class PerfisTableAdapter : global::System.ComponentModel.Component {
+    public partial class ContratosTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
         
@@ -2519,7 +2519,7 @@ namespace MeuPonto.MainDataSetTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        public PerfisTableAdapter() {
+        public ContratosTableAdapter() {
             this.ClearBeforeFill = true;
         }
         
@@ -2616,7 +2616,7 @@ namespace MeuPonto.MainDataSetTableAdapters {
             this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "Perfis";
+            tableMapping.DataSetTable = "Contratos";
             tableMapping.ColumnMappings.Add("Id", "Id");
             tableMapping.ColumnMappings.Add("Matricula", "Matricula");
             tableMapping.ColumnMappings.Add("Nome", "Nome");
@@ -2630,7 +2630,7 @@ namespace MeuPonto.MainDataSetTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[Perfis] WHERE (([Id] = @Original_Id) AND ((@IsNull_Version = 1" +
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[Contratos] WHERE (([Id] = @Original_Id) AND ((@IsNull_Version = 1" +
                 " AND [Version] IS NULL) OR ([Version] = @Original_Version)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -2638,8 +2638,8 @@ namespace MeuPonto.MainDataSetTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Version", global::System.Data.SqlDbType.Timestamp, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Version", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[Perfis] ([Matricula], [Nome], [Pis], [Empresa_Cnpj], [Empresa_Nome], [Empresa_InscricaoEstadual], [Empresa_Endereco], [CreationDate]) VALUES (@Matricula, @Nome, @Pis, @Empresa_Cnpj, @Empresa_Nome, @Empresa_InscricaoEstadual, @Empresa_Endereco, @CreationDate);
-SELECT Id, Matricula, Nome, Pis, Empresa_Cnpj, Empresa_Nome, Empresa_InscricaoEstadual, Empresa_Endereco, CreationDate, Version FROM Perfis WHERE (Id = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[Contratos] ([Matricula], [Nome], [Pis], [Empresa_Cnpj], [Empresa_Nome], [Empresa_InscricaoEstadual], [Empresa_Endereco], [CreationDate]) VALUES (@Matricula, @Nome, @Pis, @Empresa_Cnpj, @Empresa_Nome, @Empresa_InscricaoEstadual, @Empresa_Endereco, @CreationDate);
+SELECT Id, Matricula, Nome, Pis, Empresa_Cnpj, Empresa_Nome, Empresa_InscricaoEstadual, Empresa_Endereco, CreationDate, Version FROM Contratos WHERE (Id = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Matricula", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Matricula", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Nome", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Nome", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -2651,8 +2651,8 @@ SELECT Id, Matricula, Nome, Pis, Empresa_Cnpj, Empresa_Nome, Empresa_InscricaoEs
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CreationDate", global::System.Data.SqlDbType.DateTime2, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CreationDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Perfis] SET [Matricula] = @Matricula, [Nome] = @Nome, [Pis] = @Pis, [Empresa_Cnpj] = @Empresa_Cnpj, [Empresa_Nome] = @Empresa_Nome, [Empresa_InscricaoEstadual] = @Empresa_InscricaoEstadual, [Empresa_Endereco] = @Empresa_Endereco, [CreationDate] = @CreationDate WHERE (([Id] = @Original_Id) AND ((@IsNull_Version = 1 AND [Version] IS NULL) OR ([Version] = @Original_Version)));
-SELECT Id, Matricula, Nome, Pis, Empresa_Cnpj, Empresa_Nome, Empresa_InscricaoEstadual, Empresa_Endereco, CreationDate, Version FROM Perfis WHERE (Id = @Id)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Contratos] SET [Matricula] = @Matricula, [Nome] = @Nome, [Pis] = @Pis, [Empresa_Cnpj] = @Empresa_Cnpj, [Empresa_Nome] = @Empresa_Nome, [Empresa_InscricaoEstadual] = @Empresa_InscricaoEstadual, [Empresa_Endereco] = @Empresa_Endereco, [CreationDate] = @CreationDate WHERE (([Id] = @Original_Id) AND ((@IsNull_Version = 1 AND [Version] IS NULL) OR ([Version] = @Original_Version)));
+SELECT Id, Matricula, Nome, Pis, Empresa_Cnpj, Empresa_Nome, Empresa_InscricaoEstadual, Empresa_Endereco, CreationDate, Version FROM Contratos WHERE (Id = @Id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Matricula", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Matricula", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Nome", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Nome", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -2682,7 +2682,7 @@ SELECT Id, Matricula, Nome, Pis, Empresa_Cnpj, Empresa_Nome, Empresa_InscricaoEs
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT Id, Matricula, Nome, Pis, Empresa_Cnpj, Empresa_Nome, Empresa_InscricaoEst" +
-                "adual, Empresa_Endereco, CreationDate, Version FROM dbo.Perfis";
+                "adual, Empresa_Endereco, CreationDate, Version FROM dbo.Contratos";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -2690,7 +2690,7 @@ SELECT Id, Matricula, Nome, Pis, Empresa_Cnpj, Empresa_Nome, Empresa_InscricaoEs
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(MainDataSet.PerfisDataTable dataTable) {
+        public virtual int Fill(MainDataSet.ContratosDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -2703,9 +2703,9 @@ SELECT Id, Matricula, Nome, Pis, Empresa_Cnpj, Empresa_Nome, Empresa_InscricaoEs
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual MainDataSet.PerfisDataTable GetData() {
+        public virtual MainDataSet.ContratosDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            MainDataSet.PerfisDataTable dataTable = new MainDataSet.PerfisDataTable();
+            MainDataSet.ContratosDataTable dataTable = new MainDataSet.ContratosDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -2713,7 +2713,7 @@ SELECT Id, Matricula, Nome, Pis, Empresa_Cnpj, Empresa_Nome, Empresa_InscricaoEs
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(MainDataSet.PerfisDataTable dataTable) {
+        public virtual int Update(MainDataSet.ContratosDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
@@ -2721,7 +2721,7 @@ SELECT Id, Matricula, Nome, Pis, Empresa_Cnpj, Empresa_Nome, Empresa_InscricaoEs
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         public virtual int Update(MainDataSet dataSet) {
-            return this.Adapter.Update(dataSet, "Perfis");
+            return this.Adapter.Update(dataSet, "Contratos");
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3049,7 +3049,7 @@ SELECT Id, Matricula, Nome, Pis, Empresa_Cnpj, Empresa_Nome, Empresa_InscricaoEs
             tableMapping.DataSetTable = "Pontos";
             tableMapping.ColumnMappings.Add("Id", "Id");
             tableMapping.ColumnMappings.Add("Data", "Data");
-            tableMapping.ColumnMappings.Add("PerfilId", "PerfilId");
+            tableMapping.ColumnMappings.Add("ContratoId", "ContratoId");
             tableMapping.ColumnMappings.Add("Observacao", "Observacao");
             tableMapping.ColumnMappings.Add("CreationDate", "CreationDate");
             tableMapping.ColumnMappings.Add("Version", "Version");
@@ -3064,21 +3064,21 @@ SELECT Id, Matricula, Nome, Pis, Empresa_Cnpj, Empresa_Nome, Empresa_InscricaoEs
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Version", global::System.Data.SqlDbType.Timestamp, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Version", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Pontos] ([Data], [PerfilId], [Observacao], [CreationDate]) VAL" +
-                "UES (@Data, @PerfilId, @Observacao, @CreationDate);\r\nSELECT Id, Data, PerfilId, " +
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Pontos] ([Data], [ContratoId], [Observacao], [CreationDate]) VAL" +
+                "UES (@Data, @ContratoId, @Observacao, @CreationDate);\r\nSELECT Id, Data, ContratoId, " +
                 "Observacao, CreationDate, Version FROM Pontos WHERE (Id = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Data", global::System.Data.SqlDbType.DateTime2, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Data", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PerfilId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PerfilId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ContratoId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ContratoId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Observacao", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Observacao", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CreationDate", global::System.Data.SqlDbType.DateTime2, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CreationDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Pontos] SET [Data] = @Data, [PerfilId] = @PerfilId, [Observacao] = @Observacao, [CreationDate] = @CreationDate WHERE (([Id] = @Original_Id) AND ((@IsNull_Version = 1 AND [Version] IS NULL) OR ([Version] = @Original_Version)));
-SELECT Id, Data, PerfilId, Observacao, CreationDate, Version FROM Pontos WHERE (Id = @Id)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Pontos] SET [Data] = @Data, [ContratoId] = @ContratoId, [Observacao] = @Observacao, [CreationDate] = @CreationDate WHERE (([Id] = @Original_Id) AND ((@IsNull_Version = 1 AND [Version] IS NULL) OR ([Version] = @Original_Version)));
+SELECT Id, Data, ContratoId, Observacao, CreationDate, Version FROM Pontos WHERE (Id = @Id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Data", global::System.Data.SqlDbType.DateTime2, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Data", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PerfilId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PerfilId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ContratoId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ContratoId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Observacao", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Observacao", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CreationDate", global::System.Data.SqlDbType.DateTime2, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CreationDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -3100,7 +3100,7 @@ SELECT Id, Data, PerfilId, Observacao, CreationDate, Version FROM Pontos WHERE (
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT Id, Data, PerfilId, Observacao, CreationDate, Version FROM dbo.Pontos";
+            this._commandCollection[0].CommandText = "SELECT Id, Data, ContratoId, Observacao, CreationDate, Version FROM dbo.Pontos";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -3191,9 +3191,9 @@ SELECT Id, Data, PerfilId, Observacao, CreationDate, Version FROM Pontos WHERE (
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(System.DateTime Data, int PerfilId, string Observacao, global::System.Nullable<global::System.DateTime> CreationDate) {
+        public virtual int Insert(System.DateTime Data, int ContratoId, string Observacao, global::System.Nullable<global::System.DateTime> CreationDate) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((System.DateTime)(Data));
-            this.Adapter.InsertCommand.Parameters[1].Value = ((int)(PerfilId));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((int)(ContratoId));
             if ((Observacao == null)) {
                 this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
@@ -3226,9 +3226,9 @@ SELECT Id, Data, PerfilId, Observacao, CreationDate, Version FROM Pontos WHERE (
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(System.DateTime Data, int PerfilId, string Observacao, global::System.Nullable<global::System.DateTime> CreationDate, int Original_Id, byte[] Original_Version, int Id) {
+        public virtual int Update(System.DateTime Data, int ContratoId, string Observacao, global::System.Nullable<global::System.DateTime> CreationDate, int Original_Id, byte[] Original_Version, int Id) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((System.DateTime)(Data));
-            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(PerfilId));
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(ContratoId));
             if ((Observacao == null)) {
                 this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
@@ -3271,8 +3271,8 @@ SELECT Id, Data, PerfilId, Observacao, CreationDate, Version FROM Pontos WHERE (
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(System.DateTime Data, int PerfilId, string Observacao, global::System.Nullable<global::System.DateTime> CreationDate, int Original_Id, byte[] Original_Version) {
-            return this.Update(Data, PerfilId, Observacao, CreationDate, Original_Id, Original_Version, Original_Id);
+        public virtual int Update(System.DateTime Data, int ContratoId, string Observacao, global::System.Nullable<global::System.DateTime> CreationDate, int Original_Id, byte[] Original_Version) {
+            return this.Update(Data, ContratoId, Observacao, CreationDate, Original_Id, Original_Version, Original_Id);
         }
     }
     
@@ -3973,7 +3973,7 @@ SELECT Id, PontoId, Numero, Imagem, ImagemTipoId, CreationDate, Version FROM Com
         
         private UpdateOrderOption _updateOrder;
         
-        private PerfisTableAdapter _perfisTableAdapter;
+        private ContratosTableAdapter _contratosTableAdapter;
         
         private PontosTableAdapter _pontosTableAdapter;
         
@@ -4001,12 +4001,12 @@ SELECT Id, PontoId, Numero, Imagem, ImagemTipoId, CreationDate, Version FROM Com
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
             "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
             "a", "System.Drawing.Design.UITypeEditor")]
-        public PerfisTableAdapter PerfisTableAdapter {
+        public ContratosTableAdapter ContratosTableAdapter {
             get {
-                return this._perfisTableAdapter;
+                return this._contratosTableAdapter;
             }
             set {
-                this._perfisTableAdapter = value;
+                this._contratosTableAdapter = value;
             }
         }
         
@@ -4071,9 +4071,9 @@ SELECT Id, PontoId, Numero, Imagem, ImagemTipoId, CreationDate, Version FROM Com
                 if ((this._connection != null)) {
                     return this._connection;
                 }
-                if (((this._perfisTableAdapter != null) 
-                            && (this._perfisTableAdapter.Connection != null))) {
-                    return this._perfisTableAdapter.Connection;
+                if (((this._contratosTableAdapter != null) 
+                            && (this._contratosTableAdapter.Connection != null))) {
+                    return this._contratosTableAdapter.Connection;
                 }
                 if (((this._pontosTableAdapter != null) 
                             && (this._pontosTableAdapter.Connection != null))) {
@@ -4100,7 +4100,7 @@ SELECT Id, PontoId, Numero, Imagem, ImagemTipoId, CreationDate, Version FROM Com
         public int TableAdapterInstanceCount {
             get {
                 int count = 0;
-                if ((this._perfisTableAdapter != null)) {
+                if ((this._contratosTableAdapter != null)) {
                     count = (count + 1);
                 }
                 if ((this._pontosTableAdapter != null)) {
@@ -4123,12 +4123,12 @@ SELECT Id, PontoId, Numero, Imagem, ImagemTipoId, CreationDate, Version FROM Com
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private int UpdateUpdatedRows(MainDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._perfisTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Perfis.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._contratosTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Contratos.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._perfisTableAdapter.Update(updatedRows));
+                    result = (result + this._contratosTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -4169,11 +4169,11 @@ SELECT Id, PontoId, Numero, Imagem, ImagemTipoId, CreationDate, Version FROM Com
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private int UpdateInsertedRows(MainDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._perfisTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Perfis.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._contratosTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Contratos.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._perfisTableAdapter.Update(addedRows));
+                    result = (result + this._contratosTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -4235,11 +4235,11 @@ SELECT Id, PontoId, Numero, Imagem, ImagemTipoId, CreationDate, Version FROM Com
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._perfisTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Perfis.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._contratosTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Contratos.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._perfisTableAdapter.Update(deletedRows));
+                    result = (result + this._contratosTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -4282,8 +4282,8 @@ SELECT Id, PontoId, Numero, Imagem, ImagemTipoId, CreationDate, Version FROM Com
             if ((dataSet.HasChanges() == false)) {
                 return 0;
             }
-            if (((this._perfisTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._perfisTableAdapter.Connection) == false))) {
+            if (((this._contratosTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._contratosTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
@@ -4334,13 +4334,13 @@ SELECT Id, PontoId, Numero, Imagem, ImagemTipoId, CreationDate, Version FROM Com
             try {
                 // ---- Prepare for update -----------
                 //
-                if ((this._perfisTableAdapter != null)) {
-                    revertConnections.Add(this._perfisTableAdapter, this._perfisTableAdapter.Connection);
-                    this._perfisTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._perfisTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._perfisTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._perfisTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._perfisTableAdapter.Adapter);
+                if ((this._contratosTableAdapter != null)) {
+                    revertConnections.Add(this._contratosTableAdapter, this._contratosTableAdapter.Connection);
+                    this._contratosTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._contratosTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._contratosTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._contratosTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._contratosTableAdapter.Adapter);
                     }
                 }
                 if ((this._pontosTableAdapter != null)) {
@@ -4428,9 +4428,9 @@ SELECT Id, PontoId, Numero, Imagem, ImagemTipoId, CreationDate, Version FROM Com
                 if (workConnOpened) {
                     workConnection.Close();
                 }
-                if ((this._perfisTableAdapter != null)) {
-                    this._perfisTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._perfisTableAdapter]));
-                    this._perfisTableAdapter.Transaction = null;
+                if ((this._contratosTableAdapter != null)) {
+                    this._contratosTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._contratosTableAdapter]));
+                    this._contratosTableAdapter.Transaction = null;
                 }
                 if ((this._pontosTableAdapter != null)) {
                     this._pontosTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._pontosTableAdapter]));

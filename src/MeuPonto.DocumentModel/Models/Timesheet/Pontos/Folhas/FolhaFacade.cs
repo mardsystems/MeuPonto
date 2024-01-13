@@ -1,10 +1,10 @@
-﻿using MeuPonto.Models.Timesheet.Perfis;
+﻿using MeuPonto.Models.Timesheet.Contratos;
 
 namespace MeuPonto.Models.Timesheet.Pontos.Folhas;
 
 public static class FolhaFacade
 {
-    public static void ConfirmarCompetencia(this Folha folha, Perfil? perfil)
+    public static void ConfirmarCompetencia(this Folha folha, Contrato? contrato)
     {
         var competenciaAtual = folha.Competencia.Value;
 
@@ -21,7 +21,7 @@ public static class FolhaFacade
                 var apuracaoDiaria = new ApuracaoDiaria
                 {
                     Dia = dia,
-                    TempoPrevisto = perfil.JornadaTrabalhoSemanalPrevista.Semana.Single(x => x.DiaSemana == data.DayOfWeek).Tempo,
+                    TempoPrevisto = contrato.JornadaTrabalhoSemanalPrevista.Semana.Single(x => x.DiaSemana == data.DayOfWeek).Tempo,
                     TempoApurado = null,
                     DiferencaTempo = null,
                     Feriado = false,
@@ -43,7 +43,7 @@ public static class FolhaFacade
                 {
                     var apuracaoDiaria = folha.ApuracaoMensal.Dias.First(x => x.Dia == dia);
 
-                    apuracaoDiaria.TempoPrevisto = perfil.JornadaTrabalhoSemanalPrevista.Semana.Single(x => x.DiaSemana == data.DayOfWeek).Tempo;
+                    apuracaoDiaria.TempoPrevisto = contrato.JornadaTrabalhoSemanalPrevista.Semana.Single(x => x.DiaSemana == data.DayOfWeek).Tempo;
                     apuracaoDiaria.TempoApurado = null;
                     apuracaoDiaria.DiferencaTempo = null;
                     apuracaoDiaria.DiferencaTempo = null;
@@ -54,7 +54,7 @@ public static class FolhaFacade
                     var apuracaoDiaria = new ApuracaoDiaria
                     {
                         Dia = dia,
-                        TempoPrevisto = perfil.JornadaTrabalhoSemanalPrevista.Semana.Single(x => x.DiaSemana == data.DayOfWeek).Tempo,
+                        TempoPrevisto = contrato.JornadaTrabalhoSemanalPrevista.Semana.Single(x => x.DiaSemana == data.DayOfWeek).Tempo,
                         TempoApurado = null,
                         DiferencaTempo = null,
                         Feriado = false,

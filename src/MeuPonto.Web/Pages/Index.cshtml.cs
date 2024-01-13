@@ -25,8 +25,8 @@ public class IndexModel : PageModel
     }
 
     [BindProperty(SupportsGet = true)]
-    [DisplayName("Perfil")]
-    public Guid? PerfilId { get; set; }
+    [DisplayName("Contrato")]
+    public Guid? ContratoId { get; set; }
 
     [BindProperty(SupportsGet = true)]
     [DisplayName("Competência")]
@@ -43,11 +43,11 @@ public class IndexModel : PageModel
             return Page();
         }
 
-        var perfisSelectList = new SelectList(_db.Perfis.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
+        var contratosSelectList = new SelectList(_db.Contratos.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
 
-        ViewData["PerfilId"] = perfisSelectList;
+        ViewData["ContratoId"] = contratosSelectList;
 
-        ViewData["HasPerfil"] = perfisSelectList.Any();
+        ViewData["HasContrato"] = contratosSelectList.Any();
 
         ApuracaoMensal = new ApuracaoMensalViewModel();
 
@@ -62,7 +62,7 @@ public class IndexModel : PageModel
             var competencia = Competencia;
 
             Folha = await _db.Folhas.FirstOrDefaultAsync(x => true
-                && x.PerfilId == PerfilId
+                && x.ContratoId == ContratoId
                 && x.Competencia == competencia
                 && x.UserId == User.GetUserId());
 

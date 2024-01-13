@@ -25,7 +25,7 @@ public class DetalharModel : PageModel
 
         var comprovante = await _db.Comprovantes
             .Include(x => x.Ponto)
-                .ThenInclude(x => x.Perfil)
+                .ThenInclude(x => x.Contrato)
             .FirstOrDefaultAsync(x => x.Id == id);
 
         if (comprovante == null)

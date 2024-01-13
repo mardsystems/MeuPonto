@@ -72,11 +72,11 @@
     <div class="card-body">
         <dl class="row g-3 ponto">
             <dt class="col-sm-3">
-                @Html.DisplayNameFor(model => model.Comprovante.Ponto.Perfil)
+                @Html.DisplayNameFor(model => model.Comprovante.Ponto.Contrato)
             </dt>
             <dd class="col-sm-9">
-                <a class="text-decoration-none" asp-page="/Perfis/Detalhar" asp-route-id="@Model.Comprovante.Ponto.PerfilId" title="Detalhar Perfil" target="_blank">
-                    @Html.DisplayFor(model => model.Comprovante.Ponto.Perfil.Nome)
+                <a class="text-decoration-none" asp-page="/Contratos/Detalhar" asp-route-id="@Model.Comprovante.Ponto.ContratoId" title="Detalhar Contrato" target="_blank">
+                    @Html.DisplayFor(model => model.Comprovante.Ponto.Contrato.Nome)
                     <i class="bi bi-link-45deg"></i>
                 </a>
             </dd>

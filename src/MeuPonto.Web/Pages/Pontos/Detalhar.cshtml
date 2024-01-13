@@ -62,12 +62,12 @@
 }
 
 <dl class="row g-3 Ponto">
-    <dt class="col-sm-3 Perfil">
-        @Html.DisplayNameFor(model => model.Ponto.Perfil)
+    <dt class="col-sm-3 Contrato">
+        @Html.DisplayNameFor(model => model.Ponto.Contrato)
     </dt>
-    <dd class="col-sm-9 Perfil">
-        <a class="text-decoration-none" asp-page="/Perfis/Detalhar" asp-route-id="@Model.Ponto.PerfilId" title="Detalhar Perfil" target="_blank">
-            @Html.DisplayFor(model => model.Ponto.Perfil.Nome)
+    <dd class="col-sm-9 Contrato">
+        <a class="text-decoration-none" asp-page="/Contratos/Detalhar" asp-route-id="@Model.Ponto.ContratoId" title="Detalhar Contrato" target="_blank">
+            @Html.DisplayFor(model => model.Ponto.Contrato.Nome)
             <i class="bi bi-link-45deg"></i>
         </a>
     </dd>

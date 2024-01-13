@@ -7,11 +7,11 @@ namespace MeuPonto.Models.Timesheet.Pontos.Folhas;
 public class Folha : DocumentEntity
 {
     [Required]
-    [DisplayName("Perfil")]
-    public Guid? PerfilId { get; set; }
+    [DisplayName("Contrato")]
+    public Guid? ContratoId { get; set; }
 
-    [DisplayName("Perfil")]
-    public PerfilRef? Perfil { get; set; }
+    [DisplayName("Contrato")]
+    public ContratoRef? Contrato { get; set; }
 
     [Required]
     [DisplayName("Competência")]

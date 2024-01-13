@@ -120,14 +120,14 @@
                 </MenuItem>
             </MenuItem>
             <MenuItem
-                x:Name="perfisMenuItem"
-                AutomationProperties.AutomationId="perfisMenuItem"
-                Header="Perfis">
+                x:Name="contratosMenuItem"
+                AutomationProperties.AutomationId="contratosMenuItem"
+                Header="Contratos">
                 <MenuItem
-                    x:Name="cadastroPerfisMenuItem"
-                    AutomationProperties.AutomationId="cadastroPerfisMenuItem"
-                    Click="CadastroPerfisMenuItem_Click"
-                    Header="Cadastro de Perfis" />
+                    x:Name="gestaoContratosMenuItem"
+                    AutomationProperties.AutomationId="gestaoContratosMenuItem"
+                    Click="GestaoContratosMenuItem_Click"
+                    Header="Gestão de Contratos" />
             </MenuItem>
             <MenuItem
                 x:Name="empregadoresMenuItem"

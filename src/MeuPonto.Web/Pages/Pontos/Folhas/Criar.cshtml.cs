@@ -22,7 +22,7 @@ public class CriarModel : FormPageModel
     {
         var transaction = User.CreateTransaction();
 
-        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
+        ViewData["ContratoId"] = new SelectList(_db.Contratos.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
 
         Folha = FolhaFactory.CriaFolha(transaction);
 
@@ -40,18 +40,18 @@ public class CriarModel : FormPageModel
 
         if (!ModelState.IsValid)
         {
-            ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
+            ViewData["ContratoId"] = new SelectList(_db.Contratos.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
 
             return Page();
         }
 
         Folha.StatusId = StatusFolhaEnum.Aberta;
 
-        var perfil = await _db.Perfis.FindByIdAsync(Folha.PerfilId, User.GetUserId());
+        var contrato = await _db.Contratos.FindByIdAsync(Folha.ContratoId, User.GetUserId());
 
-        perfil.QualificaFolha(Folha);
+        contrato.QualificaFolha(Folha);
 
-        Folha.ConfirmarCompetencia(perfil);
+        Folha.ConfirmarCompetencia(contrato);
 
         if (command == "ConfirmarCompetencia")
         {
@@ -62,7 +62,7 @@ public class CriarModel : FormPageModel
                 if (ModelState.ContainsKey(state.Key)) ModelState.Remove(state.Key);
             }
 
-            ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
+            ViewData["ContratoId"] = new SelectList(_db.Contratos.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
 
             return Page();
         }

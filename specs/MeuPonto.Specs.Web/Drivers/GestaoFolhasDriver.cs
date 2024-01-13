@@ -51,11 +51,11 @@ public class GestaoFolhasDriver
 
         var form = Document.GetForm();
 
-        var perfil = folha.Perfil;
+        var contrato = folha.Contrato;
 
         //var competencia = folha.Competencia.Value.ToString("yyyy-MM-dd\\THH:mm:ss");
 
-        form.GetSelect("Folha.PerfilId").GetOption(perfil.Nome).IsSelected = true;
+        form.GetSelect("Folha.ContratoId").GetOption(contrato.Nome).IsSelected = true;
         form.GetInput("Folha.Competencia").ValueAsDate = folha.Competencia;
         form.GetTextArea("Folha.Observacao").Value = folha.Observacao;
 
@@ -113,9 +113,9 @@ public class GestaoFolhasDriver
 
         var folhaAberta = new Folha
         {
-            Perfil = new()
+            Contrato = new()
             {
-                Nome = dl.GetDataListItem("Perfil").GetString(),
+                Nome = dl.GetDataListItem("Contrato").GetString(),
             },
             Competencia = DateTime.ParseExact(dl.GetDataListItem("Competencia").GetString(), "y", CultureInfo.CurrentCulture),
             StatusId = (StatusFolhaEnum)Enum.Parse(typeof(StatusFolhaEnum), dl.GetDataListItem("Status").GetString()),

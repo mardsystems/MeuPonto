@@ -20,7 +20,7 @@ public class CriarModel : FormPageModel
 
     public IActionResult OnGet()
     {
-        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
+        ViewData["ContratoId"] = new SelectList(_db.Contratos.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
 
         HoldRefererUrl();
 
@@ -39,9 +39,9 @@ public class CriarModel : FormPageModel
 
         Ponto.RecontextualizaPonto(transaction);
 
-        var perfil = await _db.Perfis.FindByIdAsync(Ponto.PerfilId, User.GetUserId());
+        var contrato = await _db.Contratos.FindByIdAsync(Ponto.ContratoId, User.GetUserId());
 
-        perfil.QualificaPonto(Ponto);
+        contrato.QualificaPonto(Ponto);
 
         _db.Pontos.Add(Ponto);
 

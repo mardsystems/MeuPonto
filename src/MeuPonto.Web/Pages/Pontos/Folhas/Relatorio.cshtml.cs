@@ -17,31 +17,31 @@ public class RelatorioModel : PageModel
     }
 
     [BindProperty(SupportsGet = true)]
-    [DisplayName("Perfil")]
-    public Guid? PerfilId { get; set; }
+    [DisplayName("Contrato")]
+    public Guid? ContratoId { get; set; }
 
     [BindProperty(SupportsGet = true)]
-    [DisplayName("Grupo Perfil")]
-    public int? PerfilGrupoId { get; set; }
+    [DisplayName("Grupo Contrato")]
+    public int? ContratoGrupoId { get; set; }
 
-    [DisplayName("Grupo Perfil")]
-    public string? PerfilGrupo { get; set; }
-
-    [BindProperty(SupportsGet = true)]
-    [DisplayName("Código Perfil")]
-    public string? PerfilCodigo { get; set; }
+    [DisplayName("Grupo Contrato")]
+    public string? ContratoGrupo { get; set; }
 
     [BindProperty(SupportsGet = true)]
-    [DisplayName("CPF Perfil")]
-    public string? PerfilCpf { get; set; }
+    [DisplayName("Código Contrato")]
+    public string? ContratoCodigo { get; set; }
 
     [BindProperty(SupportsGet = true)]
-    [DisplayName("Nome Perfil")]
-    public string? PerfilNome { get; set; }
+    [DisplayName("CPF Contrato")]
+    public string? ContratoCpf { get; set; }
 
     [BindProperty(SupportsGet = true)]
-    [DisplayName("Perfil Ativo")]
-    public bool PerfilAtivo { get; set; } = true;
+    [DisplayName("Nome Contrato")]
+    public string? ContratoNome { get; set; }
+
+    [BindProperty(SupportsGet = true)]
+    [DisplayName("Contrato Ativo")]
+    public bool ContratoAtivo { get; set; } = true;
 
     [BindProperty(SupportsGet = true)]
     [DisplayName("Competência")]
@@ -51,11 +51,11 @@ public class RelatorioModel : PageModel
 
     public async Task<IActionResult> OnGet()
     {
-        var perfisSelectList = new SelectList(_db.Perfis.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
+        var contratosSelectList = new SelectList(_db.Contratos.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
 
-        ViewData["PerfilId"] = perfisSelectList;
+        ViewData["ContratoId"] = contratosSelectList;
 
-        ViewData["HasPerfil"] = perfisSelectList.Any();
+        ViewData["HasContrato"] = contratosSelectList.Any();
 
         if (!ModelState.IsValid)
         {
@@ -75,7 +75,7 @@ public class RelatorioModel : PageModel
             var competencia = Competencia;
 
             var folha = await _db.Folhas.FirstOrDefaultAsync(x => true
-                && x.PerfilId == PerfilId
+                && x.ContratoId == ContratoId
                 && x.Competencia == competencia
                 && x.UserId == User.GetUserId());
 

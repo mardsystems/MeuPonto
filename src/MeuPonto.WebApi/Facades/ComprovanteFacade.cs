@@ -8,9 +8,9 @@ public static class ComprovanteFacade
     {
         comprovante.Ponto = new Ponto
         {
-            PerfilId = ponto?.PerfilId,
+            ContratoId = ponto?.ContratoId,
             DataHora = ponto?.DataHora,
-            Perfil = ponto?.Perfil,
+            Contrato = ponto?.Contrato,
             MomentoId = ponto?.MomentoId,
             PausaId = ponto?.PausaId
         };

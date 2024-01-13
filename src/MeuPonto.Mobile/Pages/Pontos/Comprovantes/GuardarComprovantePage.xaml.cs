@@ -1,5 +1,5 @@
 using MeuPonto.Data;
-using MeuPonto.Models.Timesheet.Perfis;
+using MeuPonto.Models.Timesheet.Contratos;
 using MeuPonto.Models.Timesheet.Pontos.Comprovantes;
 using Microsoft.EntityFrameworkCore;
 using System.Windows.Input;
@@ -28,7 +28,7 @@ public partial class GuardarComprovantePage : ContentPage
 
     public TimeSpan? Hora { get; set; }
 
-    public IEnumerable<Perfil> Perfis { get; set; }
+    public IEnumerable<Contrato> Contratos { get; set; }
 
     public ICommand SalvarCommand { get; set; }
 
@@ -58,9 +58,9 @@ public partial class GuardarComprovantePage : ContentPage
 
     private async void ContentPage_Loaded(object sender, EventArgs e)
     {
-        var perfis = await _db.Perfis.ToListAsync();
+        var contratos = await _db.Contratos.ToListAsync();
 
-        Perfis = perfis;
+        Contratos = contratos;
     }
 
     private async void Salvar()

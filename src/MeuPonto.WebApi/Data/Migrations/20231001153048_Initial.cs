@@ -104,7 +104,7 @@ namespace MeuPonto.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Perfis",
+                name: "Contratos",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -118,9 +118,9 @@ namespace MeuPonto.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Perfis", x => x.Id);
+                    table.PrimaryKey("PK_Contratos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Perfis_Empregadores_EmpregadorId",
+                        name: "FK_Contratos_Empregadores_EmpregadorId",
                         column: x => x.EmpregadorId,
                         principalTable: "Empregadores",
                         principalColumn: "Id",
@@ -132,7 +132,7 @@ namespace MeuPonto.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PerfilId = table.Column<int>(type: "int", nullable: false),
+                    ContratoId = table.Column<int>(type: "int", nullable: false),
                     Competencia = table.Column<DateTime>(type: "datetime2", nullable: false),
                     StatusId = table.Column<int>(type: "int", nullable: false),
                     Observacao = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
@@ -145,9 +145,9 @@ namespace MeuPonto.Data.Migrations
                 {
                     table.PrimaryKey("PK_Folhas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Folhas_Perfis_PerfilId",
-                        column: x => x.PerfilId,
-                        principalTable: "Perfis",
+                        name: "FK_Folhas_Contratos_ContratoId",
+                        column: x => x.ContratoId,
+                        principalTable: "Contratos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -159,20 +159,20 @@ namespace MeuPonto.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Perfis_JornadaTrabalhoDiaria",
+                name: "Contratos_JornadaTrabalhoDiaria",
                 columns: table => new
                 {
                     DiaSemana = table.Column<int>(type: "int", nullable: false),
-                    PerfilId = table.Column<int>(type: "int", nullable: false),
+                    ContratoId = table.Column<int>(type: "int", nullable: false),
                     Tempo = table.Column<TimeSpan>(type: "time", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Perfis_JornadaTrabalhoDiaria", x => new { x.PerfilId, x.DiaSemana });
+                    table.PrimaryKey("PK_Contratos_JornadaTrabalhoDiaria", x => new { x.ContratoId, x.DiaSemana });
                     table.ForeignKey(
-                        name: "FK_Perfis_JornadaTrabalhoDiaria_Perfis_PerfilId",
-                        column: x => x.PerfilId,
-                        principalTable: "Perfis",
+                        name: "FK_Contratos_JornadaTrabalhoDiaria_Contratos_ContratoId",
+                        column: x => x.ContratoId,
+                        principalTable: "Contratos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -183,7 +183,7 @@ namespace MeuPonto.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PerfilId = table.Column<int>(type: "int", nullable: false),
+                    ContratoId = table.Column<int>(type: "int", nullable: false),
                     DataHora = table.Column<DateTime>(type: "datetime2", nullable: false),
                     MomentoId = table.Column<int>(type: "int", nullable: false),
                     PausaId = table.Column<int>(type: "int", nullable: true),
@@ -208,9 +208,9 @@ namespace MeuPonto.Data.Migrations
                         principalTable: "Pausa",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Pontos_Perfis_PerfilId",
-                        column: x => x.PerfilId,
-                        principalTable: "Perfis",
+                        name: "FK_Pontos_Contratos_ContratoId",
+                        column: x => x.ContratoId,
+                        principalTable: "Contratos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -323,9 +323,9 @@ namespace MeuPonto.Data.Migrations
                 column: "TipoImagemId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Folhas_PerfilId",
+                name: "IX_Folhas_ContratoId",
                 table: "Folhas",
-                column: "PerfilId");
+                column: "ContratoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Folhas_StatusId",
@@ -333,8 +333,8 @@ namespace MeuPonto.Data.Migrations
                 column: "StatusId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Perfis_EmpregadorId",
-                table: "Perfis",
+                name: "IX_Contratos_EmpregadorId",
+                table: "Contratos",
                 column: "EmpregadorId");
 
             migrationBuilder.CreateIndex(
@@ -348,9 +348,9 @@ namespace MeuPonto.Data.Migrations
                 column: "PausaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pontos_PerfilId",
+                name: "IX_Pontos_ContratoId",
                 table: "Pontos",
-                column: "PerfilId");
+                column: "ContratoId");
         }
 
         /// <inheritdoc />
@@ -366,7 +366,7 @@ namespace MeuPonto.Data.Migrations
                 name: "Folhas_ApuracaoDiaria");
 
             migrationBuilder.DropTable(
-                name: "Perfis_JornadaTrabalhoDiaria");
+                name: "Contratos_JornadaTrabalhoDiaria");
 
             migrationBuilder.DropTable(
                 name: "Trabalhadores");
@@ -387,7 +387,7 @@ namespace MeuPonto.Data.Migrations
                 name: "Pausa");
 
             migrationBuilder.DropTable(
-                name: "Perfis");
+                name: "Contratos");
 
             migrationBuilder.DropTable(
                 name: "StatusFolha");

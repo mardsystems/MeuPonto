@@ -22,7 +22,7 @@ public class BackupComprovantesDriver
         {
             Ponto = new()
             {
-                Perfil = new()
+                Contrato = new()
                 {
 
                 },
@@ -47,7 +47,7 @@ public class BackupComprovantesDriver
         {
             Ponto = new()
             {
-                Perfil = new()
+                Contrato = new()
                 {
 
                 },

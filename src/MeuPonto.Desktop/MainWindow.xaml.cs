@@ -1,5 +1,5 @@
 ﻿using MeuPonto.Pages.Empregadores;
-using MeuPonto.Pages.Perfis;
+using MeuPonto.Pages.Contratos;
 using MeuPonto.Pages.Pontos;
 using MeuPonto.Pages.Pontos.Comprovantes;
 using MeuPonto.Pages.Pontos.Folhas;
@@ -35,11 +35,11 @@ public partial class MainWindow : Window
         cadastroEmpregadoresWindow.Show();
     }
 
-    private void CadastroPerfisMenuItem_Click(object sender, RoutedEventArgs e)
+    private void GestaoContratosMenuItem_Click(object sender, RoutedEventArgs e)
     {
-        var cadastroPerfisWindow = ServiceProvider.GetRequiredService<CadastroPerfisWindow>();
+        var gestaoContratosWindow = ServiceProvider.GetRequiredService<GestaoContratosWindow>();
 
-        cadastroPerfisWindow.Show();
+        gestaoContratosWindow.Show();
     }
 
     private void RegistroPontosMenuItem_Click(object sender, RoutedEventArgs e)
@@ -83,9 +83,9 @@ public partial class MainWindow : Window
 
         //    db.SaveChanges();
 
-        //    foreach (var perfil in db.Perfis)
+        //    foreach (var contrato in db.Contratos)
         //    {
-        //        perfil.UserId = perfil.TrabalhadorId.ToString();
+        //        contrato.UserId = contrato.TrabalhadorId.ToString();
         //    }
 
         //    db.SaveChanges();

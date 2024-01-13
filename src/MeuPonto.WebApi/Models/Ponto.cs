@@ -7,11 +7,11 @@ namespace MeuPonto.Models;
 public class Ponto : LocalTableEntity
 {
     [Required]
-    [DisplayName("Perfil")]
-    public int? PerfilId { get; set; }
+    [DisplayName("Contrato")]
+    public int? ContratoId { get; set; }
 
-    [DisplayName("Perfil")]
-    public Perfil? Perfil { get; set; }
+    [DisplayName("Contrato")]
+    public Contrato? Contrato { get; set; }
 
     [Required]
     [DisplayName("Data/Hora")]

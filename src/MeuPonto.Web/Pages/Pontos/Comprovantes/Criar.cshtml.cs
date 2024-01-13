@@ -34,7 +34,7 @@ public class CriarModel : FormPageModel
         Comprovante = ComprovanteFactory.CriaComprovante(transaction);
 
         var ponto = await _db.Pontos
-            .Include(x => x.Perfil)
+            .Include(x => x.Contrato)
             .FirstOrDefaultAsync(m => m.Id == PontoId);
 
         if (ponto != default)
@@ -58,7 +58,7 @@ public class CriarModel : FormPageModel
         ModelState.Remove<CriarModel>(x => x.Comprovante.Imagem);
 
         var ponto = await _db.Pontos
-            .Include(x => x.Perfil)
+            .Include(x => x.Contrato)
             .FirstOrDefaultAsync(m => m.Id == PontoId);
 
         Comprovante.ComprovaPonto(ponto);

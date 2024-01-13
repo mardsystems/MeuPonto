@@ -28,7 +28,7 @@ public class DetalharModel : PageModel
         }
 
         var ponto = await _db.Pontos
-            .Include(x => x.Perfil)
+            .Include(x => x.Contrato)
             .FirstOrDefaultAsync(m => m.Id == id);
 
         if (ponto == null)

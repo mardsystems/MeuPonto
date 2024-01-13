@@ -15,7 +15,7 @@ public class BackupComprovantesStepDefinitions
 
     private readonly BackupComprovantesDriver _backupComprovantesDriver;
 
-    private readonly CadastroPerfisContext _cadastroPerfis;
+    private readonly GestaoContratosContext _gestaoContratos;
 
     private readonly MeuPontoDbContext _db;
 
@@ -23,7 +23,7 @@ public class BackupComprovantesStepDefinitions
         ScenarioContext scenario,
         BackupComprovantesContext backupComprovantes,
         BackupComprovantesDriver backupComprovantesDriver,
-        CadastroPerfisContext cadastroPerfis,
+        GestaoContratosContext gestaoContratos,
         MeuPontoDbContext db)
     {
         _scenario = scenario;
@@ -32,7 +32,7 @@ public class BackupComprovantesStepDefinitions
 
         _backupComprovantesDriver = backupComprovantesDriver;
 
-        _cadastroPerfis = cadastroPerfis;
+        _gestaoContratos = gestaoContratos;
 
         _db = db;
     }
@@ -40,7 +40,7 @@ public class BackupComprovantesStepDefinitions
     [Given(@"que o trabalhador tem um comprovante de ponto com a data '([^']*)'")]
     public async Task GivenQueOTrabalhadorTemUmComprovanteDePontoComAData(DateTime data)
     {
-        _db.Perfis.Add(_cadastroPerfis.Perfil);
+        _db.Contratos.Add(_gestaoContratos.Contrato);
         await _db.SaveChangesAsync();
 
         var basePath = Directory.GetCurrentDirectory();
@@ -63,7 +63,7 @@ public class BackupComprovantesStepDefinitions
 
         _backupComprovantes.Comprovante.TipoImagemId = TipoImagemEnum.Original;
 
-        _cadastroPerfis.Perfil.QualificaPonto(_backupComprovantes.Ponto);
+        _gestaoContratos.Contrato.QualificaPonto(_backupComprovantes.Ponto);
         _backupComprovantes.Ponto.DataHora = new DateTime(2023, 02, 17, 17, 07, 0);
         _backupComprovantes.Ponto.MomentoId = MomentoEnum.Saida;
     }
@@ -71,7 +71,7 @@ public class BackupComprovantesStepDefinitions
     [Given(@"que o trabalhador tem um comprovante de ponto guardado com a data '([^']*)'")]
     public async Task GivenQueOTrabalhadorTemUmComprovanteDePontoGuardadoComAData(DateTime data)
     {
-        _db.Perfis.Add(_cadastroPerfis.Perfil);
+        _db.Contratos.Add(_gestaoContratos.Contrato);
         await _db.SaveChangesAsync();
 
         var userId = Guid.NewGuid();
@@ -80,7 +80,7 @@ public class BackupComprovantesStepDefinitions
 
         var ponto = PontoFactory.CriaPonto(transaction);
 
-        _cadastroPerfis.Perfil.QualificaPonto(ponto);
+        _gestaoContratos.Contrato.QualificaPonto(ponto);
 
         ponto.DataHora = data;
         ponto.MomentoId = MomentoEnum.Entrada;
@@ -96,7 +96,7 @@ public class BackupComprovantesStepDefinitions
     [Given(@"que o trabalhador escaneou um comprovante de ponto com a data '([^']*)'")]
     public async Task GivenQueOTrabalhadorEscaneouUmComprovanteDePontoComAData(string p0)
     {
-        _db.Perfis.Add(_cadastroPerfis.Perfil);
+        _db.Contratos.Add(_gestaoContratos.Contrato);
         await _db.SaveChangesAsync();
 
         var basePath = Directory.GetCurrentDirectory();
@@ -119,7 +119,7 @@ public class BackupComprovantesStepDefinitions
 
         _backupComprovantes.Comprovante.TipoImagemId = TipoImagemEnum.Original;
 
-        _cadastroPerfis.Perfil.QualificaPonto(_backupComprovantes.Ponto);
+        _gestaoContratos.Contrato.QualificaPonto(_backupComprovantes.Ponto);
         _backupComprovantes.Ponto.DataHora = new DateTime(2023, 02, 17, 17, 07, 0);
         _backupComprovantes.Ponto.MomentoId = MomentoEnum.Saida;
     }

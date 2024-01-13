@@ -19,7 +19,7 @@ public class EditarModel : FormPageModel
 
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {
-        if (id == null || _db.Perfis == null)
+        if (id == null || _db.Contratos == null)
         {
             return NotFound();
         }
@@ -85,6 +85,6 @@ public class EditarModel : FormPageModel
 
     private bool EmpregadorExists(Guid? id)
     {
-        return _db.Perfis.Any(e => e.Id == id);
+        return _db.Contratos.Any(e => e.Id == id);
     }
 }

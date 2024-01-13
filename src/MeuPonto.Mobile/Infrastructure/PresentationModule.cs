@@ -1,5 +1,5 @@
 ﻿using MeuPonto.Pages.Empregadores;
-using MeuPonto.Pages.Perfis;
+using MeuPonto.Pages.Contratos;
 using MeuPonto.Pages.Pontos;
 using MeuPonto.Pages.Pontos.Comprovantes;
 
@@ -16,8 +16,8 @@ public static class PresentationModule
         services.AddTransient(typeof(CadastroEmpregadoresPage));
         services.AddTransient(typeof(EmpregadorPage));
 
-        services.AddTransient(typeof(CadastroPerfisPage));
-        services.AddTransient(typeof(PerfilPage));
+        services.AddTransient(typeof(GestaoContratosPage));
+        services.AddTransient(typeof(ContratoPage));
 
         services.AddTransient(typeof(RegistroPontosPage));
         services.AddTransient(typeof(PontoPage));

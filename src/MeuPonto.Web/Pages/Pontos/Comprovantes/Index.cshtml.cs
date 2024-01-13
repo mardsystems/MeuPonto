@@ -45,7 +45,7 @@ public class IndexModel : PageModel
             Ponto = new FiltroPontoRef();
         }
 
-        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.UserId == User.GetUserId()), "Id", "Nome").AddEmptyValue();
+        ViewData["ContratoId"] = new SelectList(_db.Contratos.Where(x => x.UserId == User.GetUserId()), "Id", "Nome").AddEmptyValue();
 
         var totalRegistros = await _db.Comprovantes.CountAsync(x => x.UserId == User.GetUserId());
 
@@ -56,7 +56,7 @@ public class IndexModel : PageModel
             Comprovantes = await _db.Comprovantes
                 .Include(x => x.Ponto)
                 .Where(x => true
-                    && (Ponto.PerfilId == null || x.Ponto.PerfilId == Ponto.PerfilId)
+                    && (Ponto.ContratoId == null || x.Ponto.ContratoId == Ponto.ContratoId)
                     && (Ponto.DataHora == null || x.Ponto.DataHora == Ponto.DataHora)
                     && (Ponto.Momento == null || x.Ponto.MomentoId == Ponto.Momento)
                     && (Ponto.Pausa == null || x.Ponto.PausaId == Ponto.Pausa)
@@ -73,7 +73,7 @@ public class IndexModel : PageModel
 public class FiltroPontoRef
 {
     [BindProperty(SupportsGet = true)]
-    public Guid? PerfilId { get; set; }
+    public Guid? ContratoId { get; set; }
 
     [BindProperty(SupportsGet = true)]
     public DateTime? DataHora { get; set; }

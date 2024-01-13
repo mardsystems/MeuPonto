@@ -18,7 +18,7 @@ public class DetalharModel : PageModel
 
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {
-        if (id == null || _db.Perfis == null)
+        if (id == null || _db.Contratos == null)
         {
             return NotFound();
         }

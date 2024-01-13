@@ -1,0 +1,153 @@
+﻿@page
+@model MeuPonto.Pages.Contratos.DetalharModel
+
+@{
+    ViewData["Title"] = "Detalhar Contrato";
+}
+
+@section Breadcrumb {
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
+            <li class="breadcrumb-item"><a asp-page="./Index">Contratos</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Detalhar</li>
+        </ol>
+    </nav>
+}
+
+@section Title {
+    @ViewData["Title"] <span class="badge bg-secondary">@Html.DisplayFor(model => model.Contrato.Nome)</span>
+}
+
+@section CardHeader {
+    <ul class="nav nav-tabs card-header-tabs">
+        <li class="me-1">
+            <a class="btn btn-primary" asp-page="./Criar" target="_modal">
+                <i class="bi bi-plus-circle"></i>
+                Criar Novo
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page">
+                <i class="bi bi-card-text"></i>
+                Detalhar
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-page="./Editar" asp-route-id="@Model.Contrato?.Id" target="_modal">
+                <i class="bi bi-pencil"></i>
+                <span class="d-none d-sm-inline">Editar</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-danger" asp-page="./Excluir" asp-route-id="@Model.Contrato?.Id" target="_modal">
+                <i class="bi bi-trash"></i>
+                <span class="d-none d-sm-inline">Excluir</span>
+            </a>
+        </li>
+    </ul>
+}
+<dl class="row g-3 Contrato">
+    <dt class="col-sm-3 Nome">
+        @Html.DisplayNameFor(model => model.Contrato.Nome)
+    </dt>
+    <dd class="col-sm-9 Nome">
+        @Html.DisplayFor(model => model.Contrato.Nome)
+    </dd>
+    <dt class="col-sm-3 Ativo">
+        @Html.DisplayNameFor(model => model.Contrato.Ativo)
+    </dt>
+    <dd class="col-sm-9 Ativo">
+        @Html.DisplayFor(model => model.Contrato.Ativo)
+    </dd>
+    <dt class="col-sm-3 Empregador">
+        @Html.DisplayNameFor(model => model.Contrato.Empregador)
+    </dt>
+    <dd class="col-sm-9 Empregador">
+        @if (Model.Contrato.Empregador != null)
+        {
+            <a class="text-decoration-none" asp-page="/Contratos/Empregadores/Detalhar" asp-route-id="@Model.Contrato.EmpregadorId" title="Detalhar Empregador" target="_blank">
+                @Html.DisplayFor(model => model.Contrato.Empregador.Nome)
+                <i class="bi bi-link-45deg"></i>
+            </a>
+        }
+    </dd>
+</dl>
+<div class="card mb-3">
+    <div class="card-header">
+        @Html.DisplayNameFor(model => model.Contrato.JornadaTrabalhoSemanalPrevista)
+    </div>
+    <div class="card-body">
+        <div class="accordion mb-3" id="accordionJornadaTrabalhoSemanalPrevista">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSemana" aria-expanded="true" aria-controls="collapseSemana">
+                        @Html.DisplayNameFor(model => model.Contrato.JornadaTrabalhoSemanalPrevista.Semana)
+                    </button>
+                </h2>
+                <div id="collapseSemana" class="accordion-collapse collapse show" data-bs-parent="#accordionJornadaTrabalhoSemanalPrevista">
+                    <div class="accordion-body">
+                        @for (int i = 0; i < Model.Contrato.JornadaTrabalhoSemanalPrevista.Semana.Count; i++)
+                        {
+                            <dl class="row g-3 JornadaTrabalhoDiaria @(Model.Contrato.JornadaTrabalhoSemanalPrevista.Semana[i].DiaSemana.ToString())">
+                                <dt class="col-sm-3 TempoDiaSemana">
+                                    @Model.Contrato.JornadaTrabalhoSemanalPrevista.Semana[i].DiaSemana.Translate()
+                                </dt>
+                                <dd class="col-sm-9 TempoDiaSemana">
+                                    @Html.DisplayFor(model => model.Contrato.JornadaTrabalhoSemanalPrevista.Semana[i].Tempo)
+                                </dd>
+                            </dl>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <dl class="row g-3 JornadaTrabalhoSemanal">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Contrato.JornadaTrabalhoSemanalPrevista.TempoTotal)
+            </dt>
+            <dd class="col-sm-9">
+                @String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", Model.Contrato.JornadaTrabalhoSemanalPrevista.TempoTotal)
+            </dd>
+        </dl>
+    </div>
+</div>
+<div class="accordion" id="accordionDetalhes">
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDetalhesTecnicos" aria-expanded="false" aria-controls="collapseDetalhesTecnicos">
+                Detalhes Técnicos
+            </button>
+        </h2>
+        <div id="collapseDetalhesTecnicos" class="accordion-collapse collapse" data-bs-parent="#accordionDetalhes">
+            <div class="accordion-body">
+                <dl class="row g-3">
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Contrato.Id)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.Contrato.Id)
+                    </dd>
+                    @*<dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Contrato.PartitionKey)
+                    </dt>
+                    <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Contrato.PartitionKey)
+                    </dd>*@
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Contrato.CreationDate)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.Contrato.CreationDate)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Contrato.Version)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.Contrato.Version)
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
