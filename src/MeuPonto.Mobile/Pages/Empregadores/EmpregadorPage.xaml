@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MeuPonto.Pages.Empregadores.EmpregadorPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Empregador"
+    Loaded="ContentPage_Loaded">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Command="{Binding ExcluirCommand}"
+            Order="Secondary"
+            Priority="0"
+            Text="Excluir" />
+    </ContentPage.ToolbarItems>
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="10">
+            <Label Text="Nome" />
+            <Entry Text="{Binding Empregador.Nome}" />
+            <Button Command="{Binding SalvarCommand}" Text="Salvar" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

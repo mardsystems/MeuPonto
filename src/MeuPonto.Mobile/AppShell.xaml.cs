@@ -1,7 +1,7 @@
-﻿using MeuPonto.Modules.Empregadores;
-using MeuPonto.Modules.Perfis;
-using MeuPonto.Modules.Pontos;
-using MeuPonto.Modules.Pontos.Comprovantes;
+﻿using MeuPonto.Pages.Empregadores;
+using MeuPonto.Pages.Perfis;
+using MeuPonto.Pages.Pontos;
+using MeuPonto.Pages.Pontos.Comprovantes;
 using System.Windows.Input;
 
 namespace MeuPonto;

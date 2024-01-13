@@ -1,9 +1,6 @@
-﻿using MeuPonto.Data;
-using MeuPonto.Infrastructure;
-using Microsoft.EntityFrameworkCore;
+﻿using MeuPonto.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Globalization;
 using System.IO;

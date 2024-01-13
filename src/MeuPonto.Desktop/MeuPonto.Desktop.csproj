@@ -75,10 +75,10 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Modules\Empregadores\CadastroEmpregadoresWindow.xaml.cs">
+    <Compile Update="Pages\Empregadores\CadastroEmpregadoresWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Modules\Trabalhadores\CadastroTrabalhadoresWindow.xaml.cs">
+    <Compile Update="Pages\Trabalhadores\CadastroTrabalhadoresWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

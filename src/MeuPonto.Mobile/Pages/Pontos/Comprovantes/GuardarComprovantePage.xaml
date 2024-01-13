@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MeuPonto.Pages.Pontos.Comprovantes.GuardarComprovantePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    Title="Guardar Comprovante"
+    Loaded="ContentPage_Loaded">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Command="{Binding ExcluirCommand}"
+            Order="Secondary"
+            Priority="0"
+            Text="Excluir" />
+    </ContentPage.ToolbarItems>
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="10">
+            <StackLayout>
+                <Label Text="Data/Hora" />
+                <DatePicker Date="{Binding Data}" />
+                <TimePicker Time="{Binding Hora}" />
+            </StackLayout>
+            <StackLayout>
+                <Label Text="Perfil" />
+                <Picker
+                    ItemDisplayBinding="{Binding Nome}"
+                    ItemsSource="{Binding Perfis}"
+                    SelectedItem="{Binding Comprovante.Ponto.Perfil}" />
+            </StackLayout>
+            <Button Command="{Binding SalvarCommand}" Text="Salvar" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,91 @@
+﻿using MeuPonto.Data;
+using MeuPonto.Extensions;
+using MeuPonto.Models.Timesheet.Pontos.Folhas;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+
+namespace MeuPonto.Pages.Pontos.Folhas;
+
+public class AbrirModel : FormPageModel
+{
+    private readonly MeuPontoDbContext _db;
+
+    [BindProperty]
+    public Folha Folha { get; set; }
+
+    public AbrirModel(MeuPontoDbContext db)
+    {
+        _db = db;
+    }
+
+    public IActionResult OnGet()
+    {
+        var transaction = User.CreateTransaction();
+
+        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
+
+        Folha = FolhaFactory.CriaFolha(transaction);
+
+        Folha.StatusId = StatusFolhaEnum.Aberta;
+
+        HoldRefererUrl();
+
+        return Page();
+    }
+
+    // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
+    public async Task<IActionResult> OnPostAsync(string? command)
+    {
+        var transaction = User.CreateTransaction();
+
+        Folha.RecontextualizaFolha(transaction);
+
+        if (!ModelState.IsValid)
+        {
+            return Page();
+        }
+
+        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
+
+        Folha.StatusId = StatusFolhaEnum.Aberta;
+
+        var perfil = await _db.Perfis.FindByIdAsync(Folha.PerfilId, User.GetUserId());
+
+        perfil.QualificaFolha(Folha);
+
+        Folha.ConfirmarCompetencia(perfil);
+
+        if (command == "ConfirmarCompetencia")
+        {
+            var states = ModelState.Where(state => state.Key.Contains($"{nameof(Folha.ApuracaoMensal)}"));
+
+            foreach (var state in states)
+            {
+                if (ModelState.ContainsKey(state.Key)) ModelState.Remove(state.Key);
+            }
+
+            ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
+
+            return Page();
+        }
+
+        Folha.RecontextualizaFolha(transaction);
+
+        _db.Folhas.Add(Folha);
+
+        await _db.SaveChangesAsync();
+
+        var detalharPage = Url.Page("Detalhar", new { id = Folha.Id });
+
+        AddTempSuccessMessageWithDetailLink("Folha aberta com sucesso", detalharPage);
+
+        if (ShouldRedirectToRefererPage())
+        {
+            return RedirectToRefererPage();
+        }
+        else
+        {
+            return Redirect(detalharPage);
+        }
+    }
+}

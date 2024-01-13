@@ -1,0 +1,48 @@
+﻿@model MeuPonto.Pages.Shared.PaginationModel
+
+<nav>
+    <ul class="pagination">
+        @if (Model.PrimeiroItemPagina)
+        {
+            <li class="page-item">
+                <button type="submit" class="page-link" name="PaginaAtual" value="1">Primeira</button>
+            </li>
+        }
+        @if (Model.ItemPaginaContinuacaoInicial)
+        {
+            <li class="page-item">
+                <a class="page-link disabled" href="#">...</a>
+            </li>
+        }
+        @if (Model.ItemPaginaInicial)
+        {
+            <li class="page-item @(Model.PaginaInicial == Model.PaginaAtual ? "active" : "")">
+                <input type="submit" class="page-link" name="PaginaAtual" value="@(Model.PaginaInicial)" />
+            </li>
+        }
+        @if (Model.ItemPaginaMedio)
+        {
+            <li class="page-item @(Model.PaginaMedia == Model.PaginaAtual ? "active" : "")">
+                <input type="submit" class="page-link" name="PaginaAtual" value="@(Model.PaginaMedia)" />
+            </li>
+        }
+        @if (Model.ItemPaginaFinal)
+        {
+            <li class="page-item @(Model.PaginaFinal == Model.PaginaAtual ? "active" : "")">
+                <input type="submit" class="page-link" name="PaginaAtual" value="@(Model.PaginaFinal)" />
+            </li>
+        }
+        @if (Model.ItemPaginaContinuacaoFinal)
+        {
+            <li class="page-item">
+                <a class="page-link disabled" href="#">...</a>
+            </li>
+        }
+        @if (Model.UltimoItemPagina)
+        {
+            <li class="page-item">
+                <button type="submit" class="page-link" name="PaginaAtual" value="@(Model.TotalPaginas)">Última</button>
+            </li>
+        }
+    </ul>
+</nav>

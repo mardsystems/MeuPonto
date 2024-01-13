@@ -1,0 +1,86 @@
+﻿@page
+@using MeuPonto.Models.Billing;
+
+@model MeuPonto.Pages.Trabalhadores.EditarModel
+
+@{
+    ViewData["Title"] = "Editar Trabalhador";
+}
+
+@section Breadcrumb {
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
+            <li class="breadcrumb-item"><a asp-page="./Index">Trabalhadores</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Editar</li>
+        </ol>
+    </nav>
+}
+
+@section Title {
+    @ViewData["Title"] <span class="badge bg-secondary">@Html.DisplayFor(model => model.Trabalhador.Id)</span>
+}
+
+@section CardHeader {
+    <ul class="nav nav-tabs card-header-tabs">
+        <li class="me-1">
+            <a class="btn btn-primary" asp-page="/Configuracoes" asp-route-id="@Model.Trabalhador?.Id">
+                <i class="bi bi-gear"></i>
+                Configurar
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-page="./Detalhar" asp-route-id="@Model.Trabalhador?.Id">
+                <i class="bi bi-card-text"></i>
+                <span class="d-none d-sm-inline">Detalhar</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page">
+                <i class="bi bi-pencil"></i>
+                Editar
+            </a>
+        </li>
+    </ul>
+}
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="card mb-3">
+    <div class="card-header">
+        Assinatura do Cliente
+    </div>
+    <div class="row g-0">
+        <div class="col-sm-3">
+            @*<svg class="bd-placeholder-img img-fluid rounded-start" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <title>PlacehSolder</title>
+            <rect width="100%" height="100%" fill="#868e96"></rect>
+            <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Apuração Mensal</text>
+            </svg>*@
+        </div>
+        <div class="col-sm-9">
+            <div class="card-body">
+                <div class="row">
+                    <label asp-for="Trabalhador.CustomerSubscription.SubscriptionPlanId" class="col-sm-3 col-form-label"></label>
+                    <div class="col-sm-9">
+                        <select asp-for="Trabalhador.CustomerSubscription.SubscriptionPlanId" class="form-select" asp-items="Html.GetEnumSelectList<SubscriptionPlanEnum>()"></select>
+                        <span asp-validation-for="Trabalhador.CustomerSubscription.SubscriptionPlanId" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section FormActions {
+    <input type="hidden" asp-for="Trabalhador.Version" />
+    <input type="hidden" asp-for="RefererUrl" />
+    <button type="submit" value="Salvar" class="btn btn-primary">
+        Salvar
+    </button>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

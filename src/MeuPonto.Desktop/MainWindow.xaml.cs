@@ -1,9 +1,9 @@
-﻿using MeuPonto.Modules.Empregadores;
-using MeuPonto.Modules.Perfis;
-using MeuPonto.Modules.Pontos;
-using MeuPonto.Modules.Pontos.Comprovantes;
-using MeuPonto.Modules.Pontos.Folhas;
-using MeuPonto.Modules.Trabalhadores;
+﻿using MeuPonto.Pages.Empregadores;
+using MeuPonto.Pages.Perfis;
+using MeuPonto.Pages.Pontos;
+using MeuPonto.Pages.Pontos.Comprovantes;
+using MeuPonto.Pages.Pontos.Folhas;
+using MeuPonto.Pages.Trabalhadores;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Windows;

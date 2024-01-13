@@ -1,0 +1,139 @@
+﻿@page
+@model MeuPonto.Pages.Pontos.Comprovantes.EditarModel
+
+@{
+    ViewData["Title"] = "Editar Comprovante de Ponto";
+
+    ViewData["Enctype"] = "multipart/form-data";
+}
+
+@section Breadcrumb {
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
+            <li class="breadcrumb-item"><a asp-page="/Pontos/Index">Pontos</a></li>
+            <li class="breadcrumb-item"><a asp-page="./Index">Comprovantes</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Editar</li>
+        </ol>
+    </nav>
+}
+
+@section Title {
+    @ViewData["Title"] <span class="badge bg-secondary">@Html.DisplayFor(model => model.Comprovante.TipoImagemId)</span>
+}
+
+@section CardHeader {
+    <ul class="nav nav-tabs card-header-tabs">
+        <li class="me-1">
+            <div class="btn-group">
+                <a class="btn btn-primary" asp-page="./Criar" target="_modal">
+                    <i class="bi bi-plus-circle"></i>
+                    Criar Novo
+                </a>
+                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent">
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="dropdown-item" asp-page="./Guardar" target="_modal">
+                            <i class="bi bi-qr-code"></i>
+                            Guardar Comprovante
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-page="./Detalhar" asp-route-id="@Model.Comprovante?.Id">
+                <i class="bi bi-card-text"></i>
+                <span class="d-none d-sm-inline">Detalhar</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page">
+                <i class="bi bi-pencil"></i>
+                Editar
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-danger" asp-page="./Excluir" asp-route-id="@Model.Comprovante?.Id" target="_modal">
+                <i class="bi bi-trash"></i>
+                <span class="d-none d-sm-inline">Excluir</span>
+            </a>
+        </li>
+    </ul>
+}
+
+<div asp-validation-summary="All" class="text-danger"></div>
+<div class="card mb-3">
+    <div class="card-header">
+        @Html.DisplayNameFor(model => model.Comprovante.Ponto)
+    </div>
+    <div class="card-body">
+        <dl class="row g-3 Ponto">
+            <dt class="col-sm-3 Perfil">
+                @Html.DisplayNameFor(model => model.Comprovante.Ponto.Perfil)
+            </dt>
+            <dd class="col-sm-9 Perfil">
+                <a class="text-decoration-none" asp-page="/Perfis/Detalhar" asp-route-id="@Model.Comprovante.Ponto.PerfilId" title="Detalhar Perfil" target="_blank">
+                    @Html.DisplayFor(model => model.Comprovante.Ponto.Perfil.Nome)
+                    <i class="bi bi-link-45deg"></i>
+                </a>
+            </dd>
+            <dt class="col-sm-3 DataHora">
+                @Html.DisplayNameFor(model => model.Comprovante.Ponto.DataHora)
+            </dt>
+            <dd class="col-sm-9 DataHora">
+                <a class="text-decoration-none" asp-page="/Pontos/Detalhar" asp-route-id="@Model.Comprovante.PontoId" title="Detalhar Ponto" target="_blank">
+                    @Html.DisplayFor(model => model.Comprovante.Ponto.DataHora)
+                    <i class="bi bi-link-45deg"></i>
+                </a>
+            </dd>
+            <dt class="col-sm-3 Momento">
+                @Html.DisplayNameFor(model => model.Comprovante.Ponto.MomentoId)
+            </dt>
+            <dd class="col-sm-9 Momento">
+                @Html.DisplayFor(model => model.Comprovante.Ponto.MomentoId)
+            </dd>
+            <dt class="col-sm-3 Pausa">
+                @Html.DisplayNameFor(model => model.Comprovante.Ponto.PausaId)
+            </dt>
+            <dd class="col-sm-9 Pausa">
+                @Html.DisplayFor(model => model.Comprovante.Ponto.PausaId)
+            </dd>
+        </dl>
+        <button type="submit" value="Procurar" class="btn btn-secondary">
+            <i class="bi bi-binoculars"></i>
+            Procurar
+        </button>
+    </div>
+</div>
+<div class="row mb-3">
+    <label asp-for="Imagem" class="col-sm-3 col-form-label"></label>
+    <div class="col-sm-9">
+        <img class="mb-3" src="data:image/png;base64,@Convert.ToBase64String(Model.Comprovante.Imagem)" width="100%" />
+        <input asp-for="Imagem" class="form-control" />
+        <span asp-validation-for="Imagem" class="text-danger"></span>
+    </div>
+</div>
+<div class="row mb-3">
+    <label asp-for="Comprovante.TipoImagemId" class="col-sm-3 col-form-label"></label>
+    <div class="col-sm-9">
+        <select asp-for="Comprovante.TipoImagemId" class="form-select" asp-items="Html.GetEnumSelectList<TipoImagemEnum>()"></select>
+        <span asp-validation-for="Comprovante.TipoImagemId" class="text-danger"></span>
+    </div>
+</div>
+
+@section FormActions {
+    <input type="hidden" asp-for="Comprovante.Version" />
+    <input type="hidden" asp-for="RefererUrl" />
+    <button type="submit" value="Salvar" class="btn btn-primary">
+        Salvar
+    </button>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
