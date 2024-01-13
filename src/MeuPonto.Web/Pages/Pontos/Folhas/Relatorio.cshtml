@@ -1,0 +1,494 @@
+﻿@page
+@model MeuPonto.Pages.Pontos.Folhas.RelatorioModel
+
+@{
+    ViewData["Title"] = "Relatório de Folha de Ponto";
+}
+
+@section Breadcrumb {
+    <nav aria-label="breadcrumb" class="d-print-none">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
+            <li class="breadcrumb-item"><a asp-page="/Pontos/Index">Pontos</a></li>
+            <li class="breadcrumb-item"><a asp-page="/Pontos/Folhas/Index">Folhas</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Relatório</li>
+        </ol>
+    </nav>
+}
+
+@section Title {
+    <h1>@ViewData["Title"]</h1>
+}
+
+<form method="post" class="btn-toolbar mb-3 d-print-none" role="toolbar" aria-label="Toolbar with button groups">
+    <div class="btn-group me-2" role="group" aria-label="First group">
+        <a class="btn btn-primary" onclick="window.print()">
+            <i class="bi bi-printer"></i>
+            Imprimir
+        </a>
+    </div>
+    <a class="btn btn-secondary" data-bs-toggle="offcanvas" data-bs-target="#filtroOffcanvas" aria-controls="filtroOffcanvas">
+        <i class="bi bi-funnel"></i>
+        Filtro
+    </a>
+</form>
+
+<div class="container">
+    <dl class="row border-top border-2">
+        @if (!string.IsNullOrEmpty(Model.PerfilNome))
+        {
+            <dt class="col-sm-2 bg-light">
+                @Html.DisplayNameFor(model => model.PerfilNome)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PerfilNome)
+            </dd>
+        }
+        <dt class="col-sm-2 bg-light">
+            @Html.DisplayNameFor(model => model.PerfilAtivo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PerfilAtivo)
+        </dd>        
+        @if (Model.Competencia != null)
+        {
+            <dt class="col-sm-2 bg-light">
+                @Html.DisplayNameFor(model => model.Competencia)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Competencia)
+            </dd>
+        }
+        @* @if (Model.SituacaoId != null)
+        {
+            <dt class="col-sm-2 bg-light">
+                @Html.DisplayNameFor(model => model.SituacaoId)
+            </dt>
+            <dd class="col-sm-10">
+                @if (Model.SituacaoId == CobrancaSituacaoEnum.AVencer)
+                {
+                    <i class="bi bi-exclamation-circle-fill text-primary"></i>
+                    <span>A vencer</span>
+                }
+                else if (Model.SituacaoId == CobrancaSituacaoEnum.Vencida)
+                {
+                    <i class="bi bi-exclamation-square-fill text-danger"></i>
+                    <span>Vencida</span>
+                }
+                else if (Model.SituacaoId == CobrancaSituacaoEnum.Recebida)
+                {
+                    <i class="bi bi-check-lg text-success"></i>
+                    <span>Recebida</span>
+                }
+                else if (Model.SituacaoId == CobrancaSituacaoEnum.RecebidaEmDia)
+                {
+                    <i class="bi bi-check-circle-fill text-success"></i>
+                    <span>Recebida em dia</span>
+                }
+                else if (Model.SituacaoId == CobrancaSituacaoEnum.RecebidaComAtraso)
+                {
+                    <i class="bi bi-check-square-fill text-warning"></i>
+                    <span>Recebida com atraso</span>
+                }
+            </dd>
+        }
+        <dt class="col-sm-2 bg-light">
+            @Html.DisplayNameFor(model => model.Arquivada)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Arquivada)
+        </dd>
+        @if (Model.ValorString != "* até *")
+        {
+            <dt class="col-sm-2 bg-light">
+                @Html.DisplayNameFor(model => model.ValorString)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ValorString)
+            </dd>
+        }
+        @if (Model.DataVencimentoString != "* até *")
+        {
+            <dt class="col-sm-2 bg-light">
+                @Html.DisplayNameFor(model => model.DataVencimentoString)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.DataVencimentoString)
+            </dd>
+        }
+        @if (Model.DataPagamentoString != "* até *")
+        {
+            <dt class="col-sm-2 bg-light">
+                @Html.DisplayNameFor(model => model.DataPagamentoString)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.DataPagamentoString)
+            </dd>
+        } *@
+    </dl>
+</div>
+@* 
+<div class="container">
+    <div class="alert alert-light alert-dismissible fade show" role="alert">
+        <div class="d-inline d-lg-flex d-print-flex justify-content-around">
+            <div>
+                <i class="bi bi-exclamation-circle-fill text-primary"></i>
+                A vencer
+            </div>
+            <div>
+                <i class="bi bi-exclamation-square-fill text-danger"></i>
+                Vencida
+            </div>
+            <div>
+                <i class="bi bi-check-lg text-success"></i>
+                Recebida
+            </div>
+            <div>
+                <i class="bi bi-check-circle-fill text-success"></i>
+                Recebida em dia
+            </div>
+            <div>
+                <i class="bi bi-check-square-fill text-warning"></i>
+                Recebida com atraso
+            </div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</div> *@
+
+<table class="table table-striped table-bordered table-sm align-middle ApuracaoMensal">
+    <thead class="table-light">
+        <tr>
+            <th scope="col">
+                #
+            </th>
+            @* @if (!Model.PerfilGrupoId.HasValue)
+            {
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Cobrancas[0].PerfilGrupo)
+                    <i class="bi bi-sort-alpha-down"></i>
+                </th>
+            }
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Cobrancas[0].PerfilNome)
+                @if (Model.PerfilGrupoId.HasValue)
+                {
+                    <i class="bi bi-sort-alpha-down"></i>
+                }
+            </th>
+            @if (!Model.Competencia.HasValue)
+            {
+                <th scope="col" class="text-end">
+                    @Html.DisplayNameFor(model => model.Cobrancas[0].Competencia)
+                </th>
+            } *@
+            <th scope="col" class="text-end">
+                Hora Início
+            </th>
+            <th scope="col" class="text-end">
+                Hora Fim
+            </th>
+            <th scope="col" class="text-end">
+                Tempo Previsto
+            </th>
+            <th scope="col" class="text-end">
+                Tempo Apurado
+            </th>
+            <th scope="col" class="text-end">
+                Diferença Tempo
+            </th>
+        </tr>
+    </thead>
+    <tbody class="table-group-divider">
+        @for (int i = 0; i < Model.ApuracaoMensal.Dias.Count; i++)
+        {
+            var item = Model.ApuracaoMensal.Dias[i];
+
+            <tr>
+                <th scope="col">
+                    @(i + 1)
+                </th>
+                @* @if (!Model.PerfilGrupoId.HasValue)
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PerfilGrupo)
+                    </td>
+                }
+                <td>
+                    @if (item.PerfilInadimplente == true)
+                    {
+                        <i class="bi bi-slash-square text-danger"></i>
+                    }
+                    else
+                    {
+                        <i class="bi bi-check-circle text-success"></i>
+                    }
+                    @Html.DisplayFor(modelItem => item.PerfilNome)
+                </td>
+                *@
+                @* @if (!Model.Competencia.HasValue)
+                {
+                    <td class="text-end">
+                        @Html.DisplayFor(modelItem => item.Competencia)
+                    </td>
+                } *@
+                @*
+                <td class="text-end">
+                    @if (item.PossuiObservacao)
+                    {
+                        <i class="bi bi-card-heading"></i>
+                    }
+                    @Html.DisplayFor(modelItem => item.Valor)
+                    @if (item.SituacaoId == CobrancaSituacaoEnum.AVencer)
+                    {
+                        <i class="bi bi-exclamation-circle-fill text-primary"></i>
+                    }
+                    else if (item.SituacaoId == CobrancaSituacaoEnum.Vencida)
+                    {
+                        <i class="bi bi-exclamation-square-fill text-danger"></i>
+                    }
+                    else if (item.SituacaoId == CobrancaSituacaoEnum.Recebida)
+                    {
+                        <i class="bi bi-check-lg text-success"></i>
+                    }
+                    else if (item.SituacaoId == CobrancaSituacaoEnum.RecebidaEmDia)
+                    {
+                        <i class="bi bi-check-circle-fill text-success"></i>
+                    }
+                    else if (item.SituacaoId == CobrancaSituacaoEnum.RecebidaComAtraso)
+                    {
+                        <i class="bi bi-check-square-fill text-warning"></i>
+                    }
+                </td>
+                *@
+                <td class="text-end">
+                    @string.Format("{0:HH\\:mm}", item.DataHoraInicio)
+                </td>
+                <td class="text-end">
+                    @string.Format("{0:HH\\:mm}", item.DataHoraFim)
+                </td>
+                <td class="text-end">
+                    @item.TempoPrevisto.ToString("hh\\:mm")
+                </td>
+                <td class="text-end">
+                    @item.TempoApurado.ToString("hh\\:mm")
+                </td>
+                <td class="text-end">
+                    @(item.DiferencaTempo < TimeSpan.Zero ? "-" : "")@item.DiferencaTempo.ToString("hh\\:mm")
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@* 
+<footer class="container">
+    <h4>Total Geral</h4>
+    <dl class="row border-top border-2">
+        <dt class="col-sm-4 bg-light">
+            @Html.DisplayNameFor(model => model.TotalRegistros)
+        </dt>
+        <dd class="col-sm-2 text-end">
+            @Html.DisplayFor(model => model.TotalRegistros)
+        </dd>
+        <dt class="col-sm-4 bg-light">
+            @Html.DisplayNameFor(model => model.SomaValores)
+        </dt>
+        <dd class="col-sm-2 text-end">
+            @Html.DisplayFor(model => model.SomaValores)
+        </dd>
+        <dt class="col-sm-4 bg-light">
+            @Html.DisplayNameFor(model => model.TotalCobrancasPagas)
+        </dt>
+        <dd class="col-sm-2 text-end">
+            @Html.DisplayFor(model => model.TotalCobrancasPagas)
+        </dd>
+        <dt class="col-sm-4 bg-light">
+            @Html.DisplayNameFor(model => model.SomaValoresPagos)
+        </dt>
+        <dd class="col-sm-2 text-end">
+            @Html.DisplayFor(model => model.SomaValoresPagos)
+        </dd>
+        <dt class="col-sm-4 bg-light">
+            @Html.DisplayNameFor(model => model.TotalCobrancasNaoPagas)
+        </dt>
+        <dd class="col-sm-2 text-end">
+            @Html.DisplayFor(model => model.TotalCobrancasNaoPagas)
+        </dd>
+        <dt class="col-sm-4 bg-light">
+            @Html.DisplayNameFor(model => model.SomaValoresNaoPagos)
+        </dt>
+        <dd class="col-sm-2 text-end">
+            @Html.DisplayFor(model => model.SomaValoresNaoPagos)
+        </dd>
+    </dl>
+    <h4>Total por Situação</h4>
+    <dl class="row border-top border-2">
+        <dt class="col-sm-4 bg-light">
+            @Html.DisplayNameFor(model => model.TotalCobrancasAVencer)
+        </dt>
+        <dd class="col-sm-2 text-end">
+            @Html.DisplayFor(model => model.TotalCobrancasAVencer)
+        </dd>
+        <dt class="col-sm-4 bg-light">
+            @Html.DisplayNameFor(model => model.SomaValoresAVencer)
+        </dt>
+        <dd class="col-sm-2 text-end">
+            @Html.DisplayFor(model => model.SomaValoresAVencer)
+        </dd>
+        <dt class="col-sm-4 bg-light">
+            @Html.DisplayNameFor(model => model.TotalCobrancasVencidas)
+        </dt>
+        <dd class="col-sm-2 text-end">
+            @Html.DisplayFor(model => model.TotalCobrancasVencidas)
+        </dd>
+        <dt class="col-sm-4 bg-light">
+            @Html.DisplayNameFor(model => model.SomaValoresVencidos)
+        </dt>
+        <dd class="col-sm-2 text-end">
+            @Html.DisplayFor(model => model.SomaValoresVencidos)
+        </dd>
+        <dt class="col-sm-4 bg-light">
+            @Html.DisplayNameFor(model => model.TotalCobrancasRecebidas)
+        </dt>
+        <dd class="col-sm-2 text-end">
+            @Html.DisplayFor(model => model.TotalCobrancasRecebidas)
+        </dd>
+        <dt class="col-sm-4 bg-light">
+            @Html.DisplayNameFor(model => model.SomaValoresRecebidos)
+        </dt>
+        <dd class="col-sm-2 text-end">
+            @Html.DisplayFor(model => model.SomaValoresRecebidos)
+        </dd>
+        <dt class="col-sm-4 bg-light">
+            @Html.DisplayNameFor(model => model.TotalCobrancasRecebidasEmDia)
+        </dt>
+        <dd class="col-sm-2 text-end">
+            @Html.DisplayFor(model => model.TotalCobrancasRecebidasEmDia)
+        </dd>
+        <dt class="col-sm-4 bg-light">
+            @Html.DisplayNameFor(model => model.SomaValoresRecebidosEmDia)
+        </dt>
+        <dd class="col-sm-2 text-end">
+            @Html.DisplayFor(model => model.SomaValoresRecebidosEmDia)
+        </dd>
+        <dt class="col-sm-4 bg-light">
+            @Html.DisplayNameFor(model => model.TotalCobrancasRecebidasComAtraso)
+        </dt>
+        <dd class="col-sm-2 text-end">
+            @Html.DisplayFor(model => model.TotalCobrancasRecebidasComAtraso)
+        </dd>
+        <dt class="col-sm-4 bg-light">
+            @Html.DisplayNameFor(model => model.SomaValoresRecebidosComAtraso)
+        </dt>
+        <dd class="col-sm-2 text-end">
+            @Html.DisplayFor(model => model.SomaValoresRecebidosComAtraso)
+        </dd>
+    </dl>
+</footer> *@
+
+<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="filtroOffcanvas" aria-labelledby="filtroOffcanvasLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="filtroOffcanvasLabel">Filtro</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <form method="get">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="row mb-3">
+                <label asp-for="PerfilId" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <select asp-for="PerfilId" class="form-select" asp-items="ViewBag.PerfilId"></select>
+                    <span asp-validation-for="PerfilId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="PerfilNome" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <input asp-for="PerfilNome" class="form-control" />
+                    <span asp-validation-for="PerfilNome" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="PerfilAtivo" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <input type="checkbox" asp-for="PerfilAtivo" class="form-check-input" />
+                    <span asp-validation-for="PerfilAtivo" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="Competencia" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <input asp-for="Competencia" class="form-control text-" type="month" />
+                    <span asp-validation-for="Competencia" class="text-danger"></span>
+                </div>
+            </div>
+            @* <div class="row mb-3">
+                <label asp-for="SituacaoId" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <select asp-for="SituacaoId" class="form-select" asp-items="ViewBag.SituacaoId"></select>
+                    <span asp-validation-for="SituacaoId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="Arquivada" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <input type="checkbox" asp-for="Arquivada" class="form-check-input" />
+                    <span asp-validation-for="Arquivada" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="ValorInicio" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <input asp-for="ValorInicio" class="form-control" />
+                    <span asp-validation-for="ValorInicio" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="ValorFim" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <input asp-for="ValorFim" class="form-control" />
+                    <span asp-validation-for="ValorFim" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="DataVencimentoInicio" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <input asp-for="DataVencimentoInicio" class="form-control" type="date" />
+                    <span asp-validation-for="DataVencimentoInicio" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="DataVencimentoFim" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <input asp-for="DataVencimentoFim" class="form-control" type="date" />
+                    <span asp-validation-for="DataVencimentoFim" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="DataPagamentoInicio" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <input asp-for="DataPagamentoInicio" class="form-control" type="date" />
+                    <span asp-validation-for="DataPagamentoInicio" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="DataPagamentoFim" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <input asp-for="DataPagamentoFim" class="form-control" type="date" />
+                    <span asp-validation-for="DataPagamentoFim" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="Observacao" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <textarea asp-for="Observacao" class="form-control"></textarea>
+                    <span asp-validation-for="Observacao" class="text-danger"></span>
+                </div>
+            </div> *@
+            <button type="submit" value="Filtrar" class="btn btn-primary">
+                <i class="bi bi-funnel"></i>
+                Filtrar
+            </button>
+        </form>
+    </div>
+</div>

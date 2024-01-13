@@ -1,27 +1,19 @@
-ï»¿using MeuPonto.Extensions;
-using MeuPonto.Models.Timesheet.Pontos.Folhas;
-using MeuPonto.Pages.Pontos.Folhas;
-using Microsoft.AspNetCore.Authorization;
+using MeuPonto.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 
-namespace MeuPonto.Pages;
+namespace MeuPonto.Pages.Pontos.Folhas;
 
-[AllowAnonymous]
-public class IndexModel : PageModel
+public class RelatorioModel : PageModel
 {
     private readonly Data.MeuPontoDbContext _db;
 
-    private readonly ILogger<IndexModel> _logger;
-
-    public IndexModel(Data.MeuPontoDbContext db, ILogger<IndexModel> logger)
+    public RelatorioModel(Data.MeuPontoDbContext db)
     {
         _db = db;
-
-        _logger = logger;
     }
 
     [BindProperty(SupportsGet = true)]
@@ -29,25 +21,46 @@ public class IndexModel : PageModel
     public Guid? PerfilId { get; set; }
 
     [BindProperty(SupportsGet = true)]
-    [DisplayName("CompetÃªncia")]
-    public DateTime? Competencia { get; set; }
+    [DisplayName("Grupo Perfil")]
+    public int? PerfilGrupoId { get; set; }
 
-    public Folha Folha { get; set; }
+    [DisplayName("Grupo Perfil")]
+    public string? PerfilGrupo { get; set; }
+
+    [BindProperty(SupportsGet = true)]
+    [DisplayName("Código Perfil")]
+    public string? PerfilCodigo { get; set; }
+
+    [BindProperty(SupportsGet = true)]
+    [DisplayName("CPF Perfil")]
+    public string? PerfilCpf { get; set; }
+
+    [BindProperty(SupportsGet = true)]
+    [DisplayName("Nome Perfil")]
+    public string? PerfilNome { get; set; }
+
+    [BindProperty(SupportsGet = true)]
+    [DisplayName("Perfil Ativo")]
+    public bool PerfilAtivo { get; set; } = true;
+
+    [BindProperty(SupportsGet = true)]
+    [DisplayName("Competência")]
+    public DateTime? Competencia { get; set; }
 
     public ApuracaoMensalViewModel ApuracaoMensal { get; set; }
 
     public async Task<IActionResult> OnGet()
     {
-        if (User.Identity.IsAuthenticated == false)
-        {
-            return Page();
-        }
-
         var perfisSelectList = new SelectList(_db.Perfis.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
 
         ViewData["PerfilId"] = perfisSelectList;
 
         ViewData["HasPerfil"] = perfisSelectList.Any();
+
+        if (!ModelState.IsValid)
+        {
+            return Page();
+        }
 
         ApuracaoMensal = new ApuracaoMensalViewModel();
 
@@ -61,20 +74,20 @@ public class IndexModel : PageModel
         {
             var competencia = Competencia;
 
-            Folha = await _db.Folhas.FirstOrDefaultAsync(x => true
+            var folha = await _db.Folhas.FirstOrDefaultAsync(x => true
                 && x.PerfilId == PerfilId
                 && x.Competencia == competencia
                 && x.UserId == User.GetUserId());
 
-            if (Folha != null)
+            if (folha != null)
             {
                 var competenciaAtual = new DateTime(hoje.Year, hoje.Month, 1);
 
-                var competenciaFolha = Folha.Competencia.Value;
+                var competenciaFolha = folha.Competencia.Value;
 
                 var competenciaFolhaPosterior = competenciaFolha.AddMonths(1);
 
-                ApuracaoMensal = await _db.ApurarFolha(Folha, User, hoje, competenciaAtual, competenciaFolha, competenciaFolhaPosterior);
+                ApuracaoMensal = await _db.ApurarFolha(folha, User, hoje, competenciaAtual, competenciaFolha, competenciaFolhaPosterior);
             }
         }
 

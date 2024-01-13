@@ -19,22 +19,28 @@
     @ViewData["Title"]
 }
 
-<div class="btn-group mb-3">
-    <a class="btn btn-primary" asp-page="./Criar" target="_modal">
-        <i class="bi bi-plus-circle"></i>
-        Criar Nova
+<div class="btn-toolbar mb-3 justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+    <div class="btn-group" role="group" aria-label="First group">
+        <a class="btn btn-primary" asp-page="./Criar" target="_modal">
+            <i class="bi bi-plus-circle"></i>
+            Criar Nova
+        </a>
+        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent">
+            <span class="visually-hidden">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu">
+            <li>
+                <a class="dropdown-item Abertura Folha" asp-page="./Abrir" target="_modal">
+                    <i class="bi bi-file-earmark-plus"></i>
+                    Abrir Folha
+                </a>
+            </li>
+        </ul>
+    </div>
+    <a class="btn btn-secondary" asp-page="./Relatorio">
+        <i class="bi bi-journal-richtext"></i>
+        Relatório
     </a>
-    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent">
-        <span class="visually-hidden">Toggle Dropdown</span>
-    </button>
-    <ul class="dropdown-menu">
-        <li>
-            <a class="dropdown-item Abertura Folha" asp-page="./Abrir" target="_modal">
-                <i class="bi bi-file-earmark-plus"></i>
-                Abrir Folha
-            </a>
-        </li>
-    </ul>
 </div>
 
 <form class="table-responsive text-nowrap" method="get">
