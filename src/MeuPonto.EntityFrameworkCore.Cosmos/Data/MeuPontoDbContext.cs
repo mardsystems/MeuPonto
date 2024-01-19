@@ -93,12 +93,6 @@ public class MeuPontoDbContext : DbContext
 
         modelBuilder.Entity<Trabalhador>().Property(x => x.Version).IsETagConcurrency();
 
-        modelBuilder.Entity<Empregador>()
-            .ToContainer("Empregadores")
-            .HasPartitionKey(x => x.PartitionKey);
-
-        modelBuilder.Entity<Empregador>().Property(x => x.Version).IsETagConcurrency();
-
         modelBuilder.Entity<Contrato>()
             .ToContainer("Contratos")
             .HasPartitionKey(x => x.PartitionKey);
@@ -113,6 +107,12 @@ public class MeuPontoDbContext : DbContext
                 //y.HasKey(c => c.DiaSemana);
             });
         });
+
+        modelBuilder.Entity<Empregador>()
+            .ToContainer("Contratos")
+            .HasPartitionKey(x => x.PartitionKey);
+
+        modelBuilder.Entity<Empregador>().Property(x => x.Version).IsETagConcurrency();
 
         modelBuilder.Entity<Ponto>()
             .ToContainer("Pontos")
