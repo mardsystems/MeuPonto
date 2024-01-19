@@ -1,9 +1,9 @@
 ﻿using MeuPonto.Data;
 using MeuPonto.Extensions;
 using MeuPonto.Helpers;
-using MeuPonto.Models.Timesheet.Contratos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Timesheet.Models.Contratos;
 
 namespace MeuPonto.Pages.Contratos;
 

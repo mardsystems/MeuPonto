@@ -1,5 +1,4 @@
 ﻿using MeuPonto.Data;
-using MeuPonto.Models.Timesheet.Trabalhadores;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -8,6 +7,7 @@ using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
+using Timesheet.Models.Trabalhadores;
 
 namespace MeuPonto.Pages.Trabalhadores;
 

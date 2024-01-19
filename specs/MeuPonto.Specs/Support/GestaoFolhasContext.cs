@@ -1,4 +1,4 @@
-﻿using MeuPonto.Models.Timesheet.Pontos.Folhas;
+﻿using Timesheet.Models.Pontos.Folhas;
 
 namespace MeuPonto.Support;
 

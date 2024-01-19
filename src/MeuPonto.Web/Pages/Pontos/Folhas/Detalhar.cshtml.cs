@@ -1,8 +1,8 @@
 ﻿using MeuPonto.Extensions;
-using MeuPonto.Models.Timesheet.Pontos.Folhas;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Timesheet.Models.Pontos.Folhas;
 
 namespace MeuPonto.Pages.Pontos.Folhas;
 

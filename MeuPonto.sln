@@ -73,6 +73,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeuPonto.Web_App", "src\Meu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeuPonto.Mobile", "src\MeuPonto.Mobile\MeuPonto.Mobile.csproj", "{A675CCD6-F2F1-4BC9-93B8-70493F29995C}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Timesheet.DocumentModel", "src\Timesheet.DocumentModel\Timesheet.DocumentModel.csproj", "{943970A3-2C95-4B43-B24D-E36BF3A82B63}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Billing.DocumentModel", "src\Billing.DocumentModel\Billing.DocumentModel.csproj", "{5D697FA2-3F7A-4722-BBAE-80D32166F3B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timesheet.GlobalTableModel", "src\Timesheet.GlobalTableModel\Timesheet.GlobalTableModel.csproj", "{A82ADCFF-BD80-4498-B2DF-73B2FFDF03CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Billing.GlobalTableModel", "src\Billing.GlobalTableModel\Billing.GlobalTableModel.csproj", "{06F58A0F-FB08-4F36-A532-BE210B1AC05D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug_Cosmos|Any CPU = Debug_Cosmos|Any CPU
@@ -381,6 +389,70 @@ Global
 		{A675CCD6-F2F1-4BC9-93B8-70493F29995C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A675CCD6-F2F1-4BC9-93B8-70493F29995C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A675CCD6-F2F1-4BC9-93B8-70493F29995C}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{943970A3-2C95-4B43-B24D-E36BF3A82B63}.Debug_Cosmos|Any CPU.ActiveCfg = Debug_Cosmos|Any CPU
+		{943970A3-2C95-4B43-B24D-E36BF3A82B63}.Debug_Cosmos|Any CPU.Build.0 = Debug_Cosmos|Any CPU
+		{943970A3-2C95-4B43-B24D-E36BF3A82B63}.Debug_Sqlite|Any CPU.ActiveCfg = Debug_Sqlite|Any CPU
+		{943970A3-2C95-4B43-B24D-E36BF3A82B63}.Debug_Sqlite|Any CPU.Build.0 = Debug_Sqlite|Any CPU
+		{943970A3-2C95-4B43-B24D-E36BF3A82B63}.Debug_SqlServer|Any CPU.ActiveCfg = Debug_SqlServer|Any CPU
+		{943970A3-2C95-4B43-B24D-E36BF3A82B63}.Debug_SqlServer|Any CPU.Build.0 = Debug_SqlServer|Any CPU
+		{943970A3-2C95-4B43-B24D-E36BF3A82B63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{943970A3-2C95-4B43-B24D-E36BF3A82B63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{943970A3-2C95-4B43-B24D-E36BF3A82B63}.Release_Cosmos|Any CPU.ActiveCfg = Release_Cosmos|Any CPU
+		{943970A3-2C95-4B43-B24D-E36BF3A82B63}.Release_Cosmos|Any CPU.Build.0 = Release_Cosmos|Any CPU
+		{943970A3-2C95-4B43-B24D-E36BF3A82B63}.Release_Sqlite|Any CPU.ActiveCfg = Release_Sqlite|Any CPU
+		{943970A3-2C95-4B43-B24D-E36BF3A82B63}.Release_Sqlite|Any CPU.Build.0 = Release_Sqlite|Any CPU
+		{943970A3-2C95-4B43-B24D-E36BF3A82B63}.Release_SqlServer|Any CPU.ActiveCfg = Release_SqlServer|Any CPU
+		{943970A3-2C95-4B43-B24D-E36BF3A82B63}.Release_SqlServer|Any CPU.Build.0 = Release_SqlServer|Any CPU
+		{943970A3-2C95-4B43-B24D-E36BF3A82B63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{943970A3-2C95-4B43-B24D-E36BF3A82B63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D697FA2-3F7A-4722-BBAE-80D32166F3B9}.Debug_Cosmos|Any CPU.ActiveCfg = Debug_Cosmos|Any CPU
+		{5D697FA2-3F7A-4722-BBAE-80D32166F3B9}.Debug_Cosmos|Any CPU.Build.0 = Debug_Cosmos|Any CPU
+		{5D697FA2-3F7A-4722-BBAE-80D32166F3B9}.Debug_Sqlite|Any CPU.ActiveCfg = Debug_Sqlite|Any CPU
+		{5D697FA2-3F7A-4722-BBAE-80D32166F3B9}.Debug_Sqlite|Any CPU.Build.0 = Debug_Sqlite|Any CPU
+		{5D697FA2-3F7A-4722-BBAE-80D32166F3B9}.Debug_SqlServer|Any CPU.ActiveCfg = Debug_SqlServer|Any CPU
+		{5D697FA2-3F7A-4722-BBAE-80D32166F3B9}.Debug_SqlServer|Any CPU.Build.0 = Debug_SqlServer|Any CPU
+		{5D697FA2-3F7A-4722-BBAE-80D32166F3B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D697FA2-3F7A-4722-BBAE-80D32166F3B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D697FA2-3F7A-4722-BBAE-80D32166F3B9}.Release_Cosmos|Any CPU.ActiveCfg = Release_Cosmos|Any CPU
+		{5D697FA2-3F7A-4722-BBAE-80D32166F3B9}.Release_Cosmos|Any CPU.Build.0 = Release_Cosmos|Any CPU
+		{5D697FA2-3F7A-4722-BBAE-80D32166F3B9}.Release_Sqlite|Any CPU.ActiveCfg = Release_Sqlite|Any CPU
+		{5D697FA2-3F7A-4722-BBAE-80D32166F3B9}.Release_Sqlite|Any CPU.Build.0 = Release_Sqlite|Any CPU
+		{5D697FA2-3F7A-4722-BBAE-80D32166F3B9}.Release_SqlServer|Any CPU.ActiveCfg = Release_SqlServer|Any CPU
+		{5D697FA2-3F7A-4722-BBAE-80D32166F3B9}.Release_SqlServer|Any CPU.Build.0 = Release_SqlServer|Any CPU
+		{5D697FA2-3F7A-4722-BBAE-80D32166F3B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D697FA2-3F7A-4722-BBAE-80D32166F3B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A82ADCFF-BD80-4498-B2DF-73B2FFDF03CC}.Debug_Cosmos|Any CPU.ActiveCfg = Debug_Cosmos|Any CPU
+		{A82ADCFF-BD80-4498-B2DF-73B2FFDF03CC}.Debug_Cosmos|Any CPU.Build.0 = Debug_Cosmos|Any CPU
+		{A82ADCFF-BD80-4498-B2DF-73B2FFDF03CC}.Debug_Sqlite|Any CPU.ActiveCfg = Debug_Sqlite|Any CPU
+		{A82ADCFF-BD80-4498-B2DF-73B2FFDF03CC}.Debug_Sqlite|Any CPU.Build.0 = Debug_Sqlite|Any CPU
+		{A82ADCFF-BD80-4498-B2DF-73B2FFDF03CC}.Debug_SqlServer|Any CPU.ActiveCfg = Debug_SqlServer|Any CPU
+		{A82ADCFF-BD80-4498-B2DF-73B2FFDF03CC}.Debug_SqlServer|Any CPU.Build.0 = Debug_SqlServer|Any CPU
+		{A82ADCFF-BD80-4498-B2DF-73B2FFDF03CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A82ADCFF-BD80-4498-B2DF-73B2FFDF03CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A82ADCFF-BD80-4498-B2DF-73B2FFDF03CC}.Release_Cosmos|Any CPU.ActiveCfg = Release_Cosmos|Any CPU
+		{A82ADCFF-BD80-4498-B2DF-73B2FFDF03CC}.Release_Cosmos|Any CPU.Build.0 = Release_Cosmos|Any CPU
+		{A82ADCFF-BD80-4498-B2DF-73B2FFDF03CC}.Release_Sqlite|Any CPU.ActiveCfg = Release_Sqlite|Any CPU
+		{A82ADCFF-BD80-4498-B2DF-73B2FFDF03CC}.Release_Sqlite|Any CPU.Build.0 = Release_Sqlite|Any CPU
+		{A82ADCFF-BD80-4498-B2DF-73B2FFDF03CC}.Release_SqlServer|Any CPU.ActiveCfg = Release_SqlServer|Any CPU
+		{A82ADCFF-BD80-4498-B2DF-73B2FFDF03CC}.Release_SqlServer|Any CPU.Build.0 = Release_SqlServer|Any CPU
+		{A82ADCFF-BD80-4498-B2DF-73B2FFDF03CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A82ADCFF-BD80-4498-B2DF-73B2FFDF03CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06F58A0F-FB08-4F36-A532-BE210B1AC05D}.Debug_Cosmos|Any CPU.ActiveCfg = Debug_Cosmos|Any CPU
+		{06F58A0F-FB08-4F36-A532-BE210B1AC05D}.Debug_Cosmos|Any CPU.Build.0 = Debug_Cosmos|Any CPU
+		{06F58A0F-FB08-4F36-A532-BE210B1AC05D}.Debug_Sqlite|Any CPU.ActiveCfg = Debug_Sqlite|Any CPU
+		{06F58A0F-FB08-4F36-A532-BE210B1AC05D}.Debug_Sqlite|Any CPU.Build.0 = Debug_Sqlite|Any CPU
+		{06F58A0F-FB08-4F36-A532-BE210B1AC05D}.Debug_SqlServer|Any CPU.ActiveCfg = Debug_SqlServer|Any CPU
+		{06F58A0F-FB08-4F36-A532-BE210B1AC05D}.Debug_SqlServer|Any CPU.Build.0 = Debug_SqlServer|Any CPU
+		{06F58A0F-FB08-4F36-A532-BE210B1AC05D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06F58A0F-FB08-4F36-A532-BE210B1AC05D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06F58A0F-FB08-4F36-A532-BE210B1AC05D}.Release_Cosmos|Any CPU.ActiveCfg = Release_Cosmos|Any CPU
+		{06F58A0F-FB08-4F36-A532-BE210B1AC05D}.Release_Cosmos|Any CPU.Build.0 = Release_Cosmos|Any CPU
+		{06F58A0F-FB08-4F36-A532-BE210B1AC05D}.Release_Sqlite|Any CPU.ActiveCfg = Release_Sqlite|Any CPU
+		{06F58A0F-FB08-4F36-A532-BE210B1AC05D}.Release_Sqlite|Any CPU.Build.0 = Release_Sqlite|Any CPU
+		{06F58A0F-FB08-4F36-A532-BE210B1AC05D}.Release_SqlServer|Any CPU.ActiveCfg = Release_SqlServer|Any CPU
+		{06F58A0F-FB08-4F36-A532-BE210B1AC05D}.Release_SqlServer|Any CPU.Build.0 = Release_SqlServer|Any CPU
+		{06F58A0F-FB08-4F36-A532-BE210B1AC05D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06F58A0F-FB08-4F36-A532-BE210B1AC05D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -412,6 +484,10 @@ Global
 		{6780E7FC-3DE6-48F2-8B39-74D2E786139D} = {CC538074-51DB-436A-9C1E-115C19D7AC69}
 		{3968994B-2704-4C62-AADF-FA867A05C60C} = {7AB03659-E09F-4B6A-848C-8276D9ED31DD}
 		{A675CCD6-F2F1-4BC9-93B8-70493F29995C} = {7AB03659-E09F-4B6A-848C-8276D9ED31DD}
+		{943970A3-2C95-4B43-B24D-E36BF3A82B63} = {FF754EF2-E8A3-4742-98BE-81E110031EC7}
+		{5D697FA2-3F7A-4722-BBAE-80D32166F3B9} = {FF754EF2-E8A3-4742-98BE-81E110031EC7}
+		{A82ADCFF-BD80-4498-B2DF-73B2FFDF03CC} = {E52949B0-FCF3-4B10-9088-06D56B1ABB24}
+		{06F58A0F-FB08-4F36-A532-BE210B1AC05D} = {E52949B0-FCF3-4B10-9088-06D56B1ABB24}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2C3B2B12-9834-4C19-8682-DC85A58E8812}

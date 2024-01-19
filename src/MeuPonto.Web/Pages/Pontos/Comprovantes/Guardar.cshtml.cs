@@ -1,11 +1,11 @@
 ﻿using MeuPonto.Data;
 using MeuPonto.Extensions;
-using MeuPonto.Models.Timesheet.Pontos;
-using MeuPonto.Models.Timesheet.Pontos.Comprovantes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
+using Timesheet.Models.Pontos;
+using Timesheet.Models.Pontos.Comprovantes;
 
 namespace MeuPonto.Pages.Pontos.Comprovantes;
 

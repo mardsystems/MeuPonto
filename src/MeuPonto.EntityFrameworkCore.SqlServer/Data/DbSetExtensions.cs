@@ -1,6 +1,6 @@
-﻿using MeuPonto.Models.Timesheet.Empregadores;
-using MeuPonto.Models.Timesheet.Contratos;
-using MeuPonto.Models.Timesheet.Pontos;
+﻿using Timesheet.Models.Empregadores;
+using Timesheet.Models.Contratos;
+using Timesheet.Models.Pontos;
 using Microsoft.EntityFrameworkCore;
 
 namespace MeuPonto.Data;

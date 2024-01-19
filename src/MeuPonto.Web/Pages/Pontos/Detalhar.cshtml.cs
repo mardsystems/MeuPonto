@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using MeuPonto.Models.Timesheet.Pontos;
-using MeuPonto.Models.Timesheet.Pontos.Comprovantes;
 using MeuPonto.Extensions;
+using Timesheet.Models.Pontos;
+using Timesheet.Models.Pontos.Comprovantes;
 
 namespace MeuPonto.Pages.Pontos;
 

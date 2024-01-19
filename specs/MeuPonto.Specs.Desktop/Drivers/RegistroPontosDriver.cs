@@ -1,4 +1,4 @@
-﻿using MeuPonto.Models.Timesheet.Pontos;
+﻿using Timesheet.Models.Pontos;
 
 namespace MeuPonto.Drivers;
 

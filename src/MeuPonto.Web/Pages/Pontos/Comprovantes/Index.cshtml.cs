@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using MeuPonto.Pages.Shared;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MeuPonto.Helpers;
-using MeuPonto.Models.Timesheet.Pontos;
-using MeuPonto.Models.Timesheet.Pontos.Comprovantes;
 using MeuPonto.Extensions;
+using Timesheet.Models.Pontos;
+using Timesheet.Models.Pontos.Comprovantes;
 
 namespace MeuPonto.Pages.Pontos.Comprovantes;
 

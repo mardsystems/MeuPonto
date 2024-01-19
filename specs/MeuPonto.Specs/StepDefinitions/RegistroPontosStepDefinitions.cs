@@ -1,7 +1,7 @@
 using MeuPonto.Data;
 using MeuPonto.Drivers;
-using MeuPonto.Models.Timesheet.Pontos;
 using MeuPonto.Support;
+using Timesheet.Models.Pontos;
 
 namespace MeuPonto.StepDefinitions;
 

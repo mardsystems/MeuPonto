@@ -3,8 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using MeuPonto.Pages.Shared;
-using MeuPonto.Models.Timesheet.Empregadores;
 using MeuPonto.Extensions;
+using Timesheet.Models.Empregadores;
 
 namespace MeuPonto.Pages.Empregadores;
 

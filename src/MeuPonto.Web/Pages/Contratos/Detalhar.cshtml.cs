@@ -1,7 +1,7 @@
-﻿using MeuPonto.Models.Timesheet.Contratos;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Timesheet.Models.Contratos;
 
 namespace MeuPonto.Pages.Contratos;
 

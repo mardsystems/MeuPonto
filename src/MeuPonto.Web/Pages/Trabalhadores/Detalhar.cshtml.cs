@@ -1,7 +1,7 @@
-﻿using MeuPonto.Models.Timesheet.Trabalhadores;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Timesheet.Models.Trabalhadores;
 
 namespace MeuPonto.Pages.Trabalhadores;
 

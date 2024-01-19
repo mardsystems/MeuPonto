@@ -1,5 +1,6 @@
 ﻿@page "/contratos/criar"
 @using Microsoft.EntityFrameworkCore;
+@using Timesheet.Models.Contratos;
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -112,7 +113,7 @@
     private bool? _ativo;
 
     private string? _matricula;
-  
+
     public Contrato _contrato { get; set; }
 
     private int? _paginaAtual;

@@ -1,6 +1,6 @@
-﻿using MeuPonto.Models.Timesheet.Pontos;
-using MeuPonto.Pages.Shared;
+﻿using MeuPonto.Pages.Shared;
 using System.ComponentModel.DataAnnotations;
+using Timesheet.Models.Pontos;
 
 namespace MeuPonto.Pages.Pontos.Folhas;
 

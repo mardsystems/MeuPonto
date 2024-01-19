@@ -5,8 +5,8 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MeuPonto.Helpers;
 using MeuPonto.Pages.Shared;
-using MeuPonto.Models.Timesheet.Pontos;
 using MeuPonto.Extensions;
+using Timesheet.Models.Pontos;
 
 namespace MeuPonto.Pages.Pontos;
 

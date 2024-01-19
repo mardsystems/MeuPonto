@@ -1,8 +1,8 @@
 ﻿using MeuPonto.Data;
 using MeuPonto.Extensions;
-using MeuPonto.Models.Timesheet.Pontos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Timesheet.Models.Pontos;
 
 namespace MeuPonto.Pages.Pontos;
 

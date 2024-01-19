@@ -1,11 +1,11 @@
-﻿using MeuPonto.Models.Timesheet.Pontos;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
+using Timesheet.Models.Pontos;
 
 namespace MeuPonto.Pages.Pontos;
 

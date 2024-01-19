@@ -1,12 +1,12 @@
 ﻿using MeuPonto.Models;
-using MeuPonto.Models.Timesheet.Empregadores;
-using MeuPonto.Models.Timesheet.Contratos;
-using MeuPonto.Models.Timesheet.Pontos;
-using MeuPonto.Models.Timesheet.Pontos.Comprovantes;
-using MeuPonto.Models.Timesheet.Pontos.Folhas;
-using MeuPonto.Models.Timesheet.Trabalhadores;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Timesheet.Models.Pontos;
+using Timesheet.Models.Contratos;
+using Timesheet.Models.Empregadores;
+using Timesheet.Models.Trabalhadores;
+using Timesheet.Models.Pontos.Comprovantes;
+using Timesheet.Models.Pontos.Folhas;
 
 namespace MeuPonto.Data;
 

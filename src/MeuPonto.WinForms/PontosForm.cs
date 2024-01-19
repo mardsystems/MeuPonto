@@ -47,7 +47,7 @@ namespace MeuPonto
             if (result == DialogResult.OK)
             {
                 byte[] imagem;
-                
+
                 using (var fileStream = new FileStream(imagemOpenFileDialog.FileName, FileMode.Open))
                 {
                     using (var memoryStream = new MemoryStream())

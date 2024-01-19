@@ -1,7 +1,7 @@
 ﻿using AngleSharp.Html.Dom;
 using MeuPonto.Helpers;
-using MeuPonto.Models.Timesheet.Contratos;
 using MeuPonto.Support;
+using Timesheet.Models.Contratos;
 
 namespace MeuPonto.Drivers;
 

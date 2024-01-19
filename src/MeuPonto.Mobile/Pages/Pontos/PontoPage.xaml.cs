@@ -1,8 +1,8 @@
 using MeuPonto.Data;
-using MeuPonto.Models.Timesheet.Contratos;
-using MeuPonto.Models.Timesheet.Pontos;
 using Microsoft.EntityFrameworkCore;
 using System.Windows.Input;
+using Timesheet.Models.Contratos;
+using Timesheet.Models.Pontos;
 
 namespace MeuPonto.Pages.Pontos;
 
