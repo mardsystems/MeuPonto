@@ -16,7 +16,7 @@
 }
 
 @section Title {
-    @ViewData["Title"] <span class="badge bg-secondary">@Html.DisplayFor(model => model.Contrato.Nome)</span>
+    @ViewData["Title"] <span class="badge bg-secondary">@Html.DisplayFor(model => model.EdicaoContrato.Nome)</span>
 }
 
 @section CardHeader {
@@ -28,7 +28,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" asp-page="./Detalhar" asp-route-id="@Model.Contrato?.Id">
+            <a class="nav-link" asp-page="./Detalhar" asp-route-id="@Model.EdicaoContrato?.Id">
                 <i class="bi bi-card-text"></i>
                 <span class="d-none d-sm-inline">Detalhar</span>
             </a>
@@ -40,7 +40,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-danger" asp-page="./Excluir" asp-route-id="@Model.Contrato?.Id" target="_modal">
+            <a class="nav-link text-danger" asp-page="./Excluir" asp-route-id="@Model.EdicaoContrato?.Id" target="_modal">
                 <i class="bi bi-trash"></i>
                 <span class="d-none d-sm-inline">Excluir</span>
             </a>
@@ -50,52 +50,52 @@
 
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 <div class="row mb-3">
-    <label asp-for="Contrato.Nome" class="col-sm-3 col-form-label"></label>
+    <label asp-for="EdicaoContrato.Nome" class="col-sm-3 col-form-label"></label>
     <div class="col-sm-9">
-        <input asp-for="Contrato.Nome" class="form-control" />
-        <span asp-validation-for="Contrato.Nome" class="text-danger"></span>
+        <input asp-for="EdicaoContrato.Nome" class="form-control" />
+        <span asp-validation-for="EdicaoContrato.Nome" class="text-danger"></span>
     </div>
 </div>
 <div class="row mb-3">
     <div class="col-sm-9 offset-sm-3">
         <div class="form-check">
-            <input type="checkbox" asp-for="Contrato.Ativo" class="form-check-input" />
-            <label asp-for="Contrato.Ativo" class="form-check-label"></label>
+            <input type="checkbox" asp-for="EdicaoContrato.Ativo" class="form-check-input" />
+            <label asp-for="EdicaoContrato.Ativo" class="form-check-label"></label>
         </div>
-        <span asp-validation-for="Contrato.Ativo" class="text-danger"></span>
+        <span asp-validation-for="EdicaoContrato.Ativo" class="text-danger"></span>
     </div>
 </div>
 <div class="row mb-3">
-    <label asp-for="Contrato.EmpregadorId" class="col-sm-3 col-form-label"></label>
+    <label asp-for="EdicaoContrato.EmpregadorId" class="col-sm-3 col-form-label"></label>
     <div class="col-sm-9">
-        <select asp-for="Contrato.EmpregadorId" class="form-select" asp-items="ViewBag.EmpregadorId"></select>
-        <span asp-validation-for="Contrato.EmpregadorId" class="text-danger"></span>
+        <select asp-for="EdicaoContrato.EmpregadorId" class="form-select" asp-items="ViewBag.EmpregadorId"></select>
+        <span asp-validation-for="EdicaoContrato.EmpregadorId" class="text-danger"></span>
     </div>
 </div>
 <div class="card mb-3">
     <div class="card-header">
-        @Html.DisplayNameFor(model => model.Contrato.JornadaTrabalhoSemanalPrevista)
+        @Html.DisplayNameFor(model => model.EdicaoContrato.JornadaTrabalhoSemanalPrevista)
     </div>
     <div class="card-body">
         <div class="accordion mb-3" id="accordionJornadaTrabalhoSemanalPrevista">
             <div class="accordion-item">
                 <h2 class="accordion-header">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSemana" aria-expanded="true" aria-controls="collapseSemana">
-                        @Html.DisplayNameFor(model => model.Contrato.JornadaTrabalhoSemanalPrevista.Semana)
+                        @Html.DisplayNameFor(model => model.EdicaoContrato.JornadaTrabalhoSemanalPrevista.Semana)
                     </button>
                 </h2>
                 <div id="collapseSemana" class="accordion-collapse collapse show" data-bs-parent="#accordionJornadaTrabalhoSemanalPrevista">
                     <div class="accordion-body">
-                        @for (int i = 0; i < Model.Contrato.JornadaTrabalhoSemanalPrevista.Semana.Count; i++)
+                        @for (int i = 0; i < Model.EdicaoContrato.JornadaTrabalhoSemanalPrevista.Semana.Count; i++)
                         {
-                            <input asp-for="Contrato.JornadaTrabalhoSemanalPrevista.Semana[i].DiaSemana" type="hidden" />
+                            <input asp-for="EdicaoContrato.JornadaTrabalhoSemanalPrevista.Semana[i].DiaSemana" type="hidden" />
                             <div class="row mb-3">
-                                <label asp-for="Contrato.JornadaTrabalhoSemanalPrevista.Semana[i].Tempo" class="col-sm-3 col-form-label">
-                                    @Model.Contrato.JornadaTrabalhoSemanalPrevista.Semana[i].DiaSemana.Translate()
+                                <label asp-for="EdicaoContrato.JornadaTrabalhoSemanalPrevista.Semana[i].Tempo" class="col-sm-3 col-form-label">
+                                    @Model.EdicaoContrato.JornadaTrabalhoSemanalPrevista.Semana[i].DiaSemana.Translate()
                                 </label>
                                 <div class="col-sm-9">
-                                    <input asp-for="Contrato.JornadaTrabalhoSemanalPrevista.Semana[i].Tempo" class="form-control" />
-                                    <span asp-validation-for="Contrato.JornadaTrabalhoSemanalPrevista.Semana[i].Tempo" class="text-danger"></span>
+                                    <input asp-for="EdicaoContrato.JornadaTrabalhoSemanalPrevista.Semana[i].Tempo" class="form-control" />
+                                    <span asp-validation-for="EdicaoContrato.JornadaTrabalhoSemanalPrevista.Semana[i].Tempo" class="text-danger"></span>
                                 </div>
                             </div>
                         }
@@ -108,10 +108,10 @@
             Totalizar
         </button>
         <div class="row">
-            <label asp-for="Contrato.JornadaTrabalhoSemanalPrevista.TempoTotal" class="col-sm-3 col-form-label"></label>
+            <label asp-for="EdicaoContrato.JornadaTrabalhoSemanalPrevista.TempoTotal" class="col-sm-3 col-form-label"></label>
             <div class="col-sm-9">
                 <div class="input-group">
-                    <input value="@String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", Model.Contrato.JornadaTrabalhoSemanalPrevista.TempoTotal)" class="form-control" disabled />
+                    <input value="@String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", Model.EdicaoContrato.JornadaTrabalhoSemanalPrevista.TempoTotal)" class="form-control" disabled />
                     <button class="btn btn-outline-secondary" name="command" value="RecalcularTempoTotal">Recalcular</button>
                 </div>
             </div>
@@ -120,7 +120,7 @@
 </div>
 
 @section FormActions {
-    <input type="hidden" asp-for="Contrato.Version" />
+    <input type="hidden" asp-for="EdicaoContrato.Version" />
     <input type="hidden" asp-for="RefererUrl" />
     <button type="submit" value="Salvar" class="btn btn-primary">
         Salvar

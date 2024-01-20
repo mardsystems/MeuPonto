@@ -14,7 +14,7 @@ public class EditarModel : FormPageModel
     private readonly Data.MeuPontoDbContext _db;
 
     [BindProperty]
-    public Contrato Contrato { get; set; } = default!;
+    public Contrato EdicaoContrato { get; set; } = default!;
 
     public EditarModel(Data.MeuPontoDbContext db)
     {
@@ -35,7 +35,7 @@ public class EditarModel : FormPageModel
             return NotFound();
         }
 
-        Contrato = contrato;
+        EdicaoContrato = contrato;
 
         ViewData["EmpregadorId"] = new SelectList(_db.Empregadores.Where(x => x.UserId == User.GetUserId()), "Id", "Nome").AddEmptyValue();
 
@@ -50,29 +50,35 @@ public class EditarModel : FormPageModel
     {
         var transaction = User.CreateTransaction();
 
-        Contrato.RecontextualizaContrato(transaction, id);
+        EdicaoContrato.RecontextualizaContrato(transaction, id);
 
         if (!ModelState.IsValid)
         {
             return Page();
         }
 
-        if (Contrato.EmpregadorId.HasValue)
-        {
-            var empregador = await _db.Empregadores.FindByIdAsync(Contrato.EmpregadorId, User.GetUserId());
+        Empregador empregador;
 
-            Contrato.VinculaEmpregador(empregador);
+        if (EdicaoContrato.EmpregadorId != null)
+        {
+            empregador = await _db.Empregadores.FindByIdAsync(EdicaoContrato.EmpregadorId, User.GetUserId());
         }
+        else
+        {
+            empregador = null;
+        }
+
+        var contrato = EdicaoContrato.AlterarContrato(empregador);
 
         try
         {
-            _db.Attach(Contrato).State = EntityState.Modified;
+            _db.Attach(contrato).State = EntityState.Modified;
 
             await _db.SaveChangesAsync();
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!ContratoExists(Contrato.Id))
+            if (!ContratoExists(contrato.Id))
             {
                 return NotFound();
             }
@@ -82,7 +88,7 @@ public class EditarModel : FormPageModel
             }
         }
 
-        var detalharPage = Url.Page("Detalhar", new { id = Contrato.Id });
+        var detalharPage = Url.Page("Detalhar", new { id = contrato.Id });
 
         AddTempSuccessMessage("Contrato editado com sucesso");
 

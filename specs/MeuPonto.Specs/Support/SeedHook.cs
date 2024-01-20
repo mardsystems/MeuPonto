@@ -37,7 +37,7 @@ public class SeedHook
 
         var trabalhador = TrabalhadorFactory.CriaTrabalhador(transaction);
 
-        var contrato = GestaoContratosService.CriaContrato(transaction);
+        var contrato = GestaoContratosService.InciarAberturaContrato(transaction);
 
         contrato.Nome = userName;
         contrato.Ativo = true;

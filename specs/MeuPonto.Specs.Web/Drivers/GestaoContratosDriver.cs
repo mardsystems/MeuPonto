@@ -68,7 +68,7 @@ public class GestaoContratosDriver
 
         var form = Document.GetForm();
 
-        form.GetInput("Contrato.Nome").Value = contrato.Nome;
+        form.GetInput("AberturaContrato.Nome").Value = contrato.Nome;
 
         var daysOfWeek = Enum.GetValues<DayOfWeek>();
 
@@ -80,11 +80,11 @@ public class GestaoContratosDriver
 
             if (jornadaTrabalhoDiaria == default)
             {
-                form.GetInput($"Contrato.JornadaTrabalhoSemanalPrevista.Semana[{i}].Tempo").Value = "00:00";
+                form.GetInput($"AberturaContrato.JornadaTrabalhoSemanalPrevista.Semana[{i}].Tempo").Value = "00:00";
             }
             else
             {
-                form.GetInput($"Contrato.JornadaTrabalhoSemanalPrevista.Semana[{i}].Tempo").Value = jornadaTrabalhoDiaria.Tempo.Value.ToString("hh\\:mm");
+                form.GetInput($"AberturaContrato.JornadaTrabalhoSemanalPrevista.Semana[{i}].Tempo").Value = jornadaTrabalhoDiaria.Tempo.Value.ToString("hh\\:mm");
             }
         }
 
@@ -126,7 +126,7 @@ public class GestaoContratosDriver
 
         var form = Document.GetForm();
 
-        form.GetInput("Contrato.Nome").Value = contratoCadastrado.Nome;
+        form.GetInput("EdicaoContrato.Nome").Value = contratoCadastrado.Nome;
 
         var submitButton = form.GetSubmitButton();
 

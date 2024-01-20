@@ -13,7 +13,7 @@ public class CriarModel : FormPageModel
     private readonly MeuPontoDbContext _db;
 
     [BindProperty]
-    public Contrato Contrato { get; set; }
+    public Contrato AberturaContrato { get; set; }
 
     public CriarModel(MeuPontoDbContext db)
     {
@@ -24,7 +24,7 @@ public class CriarModel : FormPageModel
     {
         var transaction = User.CreateTransaction();
 
-        Contrato = GestaoContratosService.CriaContrato(transaction);
+        AberturaContrato = GestaoContratosService.InciarAberturaContrato(transaction);
 
         ViewData["EmpregadorId"] = new SelectList(_db.Empregadores.Where(x => x.UserId == User.GetUserId()), "Id", "Nome").AddEmptyValue();
 
@@ -38,7 +38,7 @@ public class CriarModel : FormPageModel
                 Tempo = new TimeSpan(8, 0, 0)
             };
 
-            Contrato.JornadaTrabalhoSemanalPrevista.Semana.Add(jornadaTrabalhoDiaria);
+            AberturaContrato.JornadaTrabalhoSemanalPrevista.Semana.Add(jornadaTrabalhoDiaria);
         }
 
         HoldRefererUrl();
@@ -51,25 +51,31 @@ public class CriarModel : FormPageModel
     {
         var transaction = User.CreateTransaction();
 
-        Contrato.RecontextualizaContrato(transaction);
+        AberturaContrato.RecontextualizaContrato(transaction);
 
         if (!ModelState.IsValid)
         {
             return Page();
         }
 
-        if (Contrato.EmpregadorId.HasValue)
-        {
-            var empregador = await _db.Empregadores.FindByIdAsync(Contrato.EmpregadorId, User.GetUserId());
+        Empregador empregador;
 
-            Contrato.VinculaEmpregador(empregador);
+        if (AberturaContrato.EmpregadorId != null)
+        {
+            empregador = await _db.Empregadores.FindByIdAsync(AberturaContrato.EmpregadorId, User.GetUserId());
+        }
+        else
+        {
+            empregador = null;
         }
 
-        _db.Contratos.Add(Contrato);
+        var contrato = AberturaContrato.AbrirContrato(empregador);
+
+        _db.Contratos.Add(contrato);
 
         await _db.SaveChangesAsync();
 
-        var detalharPage = Url.Page("Detalhar", new { id = Contrato.Id });
+        var detalharPage = Url.Page("Detalhar", new { id = AberturaContrato.Id });
 
         AddTempSuccessMessageWithDetailLink("Contrato criado com sucesso", detalharPage);
 
