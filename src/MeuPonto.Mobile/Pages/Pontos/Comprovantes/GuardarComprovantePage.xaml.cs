@@ -2,7 +2,7 @@ using MeuPonto.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Windows.Input;
 using Timesheet.Models.Contratos;
-using Timesheet.Models.Pontos.Comprovantes;
+using Timesheet.Models.Pontos;
 
 namespace MeuPonto.Pages.Pontos.Comprovantes;
 

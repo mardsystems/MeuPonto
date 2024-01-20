@@ -7,7 +7,7 @@ using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
-using Timesheet.Models.Contratos.Empregadores;
+using Timesheet.Models.Contratos;
 
 namespace MeuPonto.Pages.Empregadores;
 

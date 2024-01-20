@@ -24,7 +24,7 @@ public class CriarModel : FormPageModel
 
         ViewData["ContratoId"] = new SelectList(_db.Contratos.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
 
-        Folha = FolhaFactory.CriaFolha(transaction);
+        Folha = GestaoFolha.CriaFolha(transaction);
 
         HoldRefererUrl();
 

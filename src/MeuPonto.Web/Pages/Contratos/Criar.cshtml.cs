@@ -23,7 +23,7 @@ public class CriarModel : FormPageModel
     {
         var transaction = User.CreateTransaction();
 
-        Contrato = ContratoFactory.CriaContrato(transaction);
+        Contrato = GestaoContratos.CriaContrato(transaction);
 
         ViewData["EmpregadorId"] = new SelectList(_db.Empregadores.Where(x => x.UserId == User.GetUserId()), "Id", "Nome").AddEmptyValue();
 

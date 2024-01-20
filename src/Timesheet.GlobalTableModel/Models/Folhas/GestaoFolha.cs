@@ -1,9 +1,36 @@
-﻿using Timesheet.Models.Contratos;
+﻿using System.Transactions;
+using Timesheet.Models.Contratos;
 
 namespace Timesheet.Models.Folhas;
 
-public static class FolhaFacade
+public static class GestaoFolha
 {
+    public static Folha CriaFolha(TransactionContext transaction, Guid? id = null)
+    {
+        var folha = new Folha
+        {
+            Id = id ?? Guid.NewGuid(),
+            UserId = transaction.UserId,
+            CreationDate = transaction.DateTime
+        };
+
+        return folha;
+    }
+
+    public static void RecontextualizaFolha(this Folha folha, TransactionContext transaction, Guid? id = null)
+    {
+        folha.Id = folha.Id ?? id ?? Guid.NewGuid();
+        folha.UserId = transaction.UserId;
+        folha.CreationDate = transaction.DateTime;
+    }
+
+    public static void QualificaFolha(this Contrato contrato, Folha folha)
+    {
+        folha.Contrato = contrato;
+
+        folha.ContratoId = contrato.Id;
+    }
+
     public static void ConfirmarCompetencia(this Folha folha, Contrato? contrato)
     {
         var competenciaAtual = folha.Competencia.Value;

@@ -1,8 +1,9 @@
 ﻿using System.Transactions;
+using Timesheet.Models.Contratos;
 
 namespace Timesheet.Models.Pontos;
 
-public static class PontoFactory
+public static class RegistroPontos
 {
     public static Ponto CriaPonto(TransactionContext transaction, Guid? id = null)
     {
@@ -23,5 +24,25 @@ public static class PontoFactory
         ponto.UserId = transaction.UserId;
         ponto.PartitionKey = $"{transaction.UserId}|{ponto.DataHora:yyyy}";
         ponto.CreationDate ??= transaction.DateTime;
+    }
+
+    public static void QualificaPonto(this Contrato contrato, Ponto ponto)
+    {
+        ponto.Contrato = new ContratoRef
+        {
+            Nome = contrato.Nome
+        };
+
+        ponto.ContratoId = contrato.Id;
+    }
+
+    public static bool EstaQualificado(this Ponto ponto)
+    {
+        return ponto.ContratoId.HasValue;
+    }
+
+    public static bool EstaSemQualificacao(this Ponto ponto)
+    {
+        return ponto.ContratoId == null;
     }
 }

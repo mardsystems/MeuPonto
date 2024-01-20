@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
-using Timesheet.Models.Pontos;
 
-namespace Timesheet.Models.Pontos.Comprovantes;
+namespace Timesheet.Models.Pontos;
 
 [Owned]
 public class PontoRef

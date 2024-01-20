@@ -1,4 +1,4 @@
-﻿namespace Timesheet.Models.Pontos.Comprovantes;
+﻿namespace Timesheet.Models.Pontos;
 
 public enum TipoImagemEnum
 {

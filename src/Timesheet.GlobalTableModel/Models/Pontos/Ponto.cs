@@ -1,5 +1,5 @@
 ﻿using Timesheet.Models.Contratos;
-using Timesheet.Models.Pontos.Comprovantes;
+using Timesheet.Models.Pontos;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 

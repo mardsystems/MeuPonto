@@ -3,7 +3,6 @@ using MeuPonto.Helpers;
 using MeuPonto.Support;
 using System.ComponentModel;
 using Timesheet.Models.Pontos;
-using Timesheet.Models.Pontos.Comprovantes;
 
 namespace MeuPonto.Drivers;
 

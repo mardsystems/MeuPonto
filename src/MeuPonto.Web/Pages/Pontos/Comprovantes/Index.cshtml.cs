@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using MeuPonto.Helpers;
 using MeuPonto.Extensions;
 using Timesheet.Models.Pontos;
-using Timesheet.Models.Pontos.Comprovantes;
 
 namespace MeuPonto.Pages.Pontos.Comprovantes;
 

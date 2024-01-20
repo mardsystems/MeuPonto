@@ -1,8 +1,8 @@
 ﻿using System.Transactions;
 
-namespace Timesheet.Models.Pontos.Comprovantes;
+namespace Timesheet.Models.Pontos;
 
-public static class ComprovanteFactory
+public static class BackupComprovantes
 {
     public static Comprovante CriaComprovante(TransactionContext transaction, Guid? id = null)
     {
@@ -21,5 +21,12 @@ public static class ComprovanteFactory
         comprovante.Id = comprovante.Id ?? id ?? Guid.NewGuid();
         comprovante.UserId = transaction.UserId;
         comprovante.CreationDate = transaction.DateTime;
+    }
+
+    public static void ComprovaPonto(this Comprovante comprovante, Ponto ponto)
+    {
+        comprovante.Ponto = ponto;
+
+        comprovante.PontoId = ponto.Id;
     }
 }

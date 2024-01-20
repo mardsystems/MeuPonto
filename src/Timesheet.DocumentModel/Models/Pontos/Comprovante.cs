@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace Timesheet.Models.Pontos.Comprovantes;
+namespace Timesheet.Models.Pontos;
 
 public class Comprovante : DocumentEntity
 {

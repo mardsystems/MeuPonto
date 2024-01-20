@@ -1,9 +1,8 @@
 ﻿using MeuPonto.Models;
 using Timesheet.Models.Contratos;
 using Timesheet.Models.Pontos;
-using Timesheet.Models.Pontos.Comprovantes;
+using Timesheet.Models.Pontos;
 using Microsoft.EntityFrameworkCore;
-using Timesheet.Models.Contratos.Empregadores;
 using Timesheet.Models.Folhas;
 using MeuPonto.Models.Trabalhadores;
 

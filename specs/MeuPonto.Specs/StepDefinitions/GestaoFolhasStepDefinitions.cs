@@ -77,7 +77,7 @@ public class GestaoFolhasStepDefinitions
 
         var contrato = _db.Contratos.FirstOrDefault();
 
-        var pontoEntrada = PontoFactory.CriaPonto(transaction);
+        var pontoEntrada = RegistroPontos.CriaPonto(transaction);
 
         contrato.QualificaPonto(pontoEntrada);
 
@@ -97,7 +97,7 @@ public class GestaoFolhasStepDefinitions
 
         var contrato = _db.Contratos.FirstOrDefault();
 
-        var pontoSaida = PontoFactory.CriaPonto(transaction);
+        var pontoSaida = RegistroPontos.CriaPonto(transaction);
 
         contrato.QualificaPonto(pontoSaida);
 
@@ -151,7 +151,7 @@ public class GestaoFolhasStepDefinitions
 
             var momento = (MomentoEnum)Enum.Parse(typeof(MomentoEnum), row["momento"]);
 
-            var ponto = PontoFactory.CriaPonto(transaction);
+            var ponto = RegistroPontos.CriaPonto(transaction);
 
             _gestaoContratos.Contrato.QualificaPonto(ponto);
 

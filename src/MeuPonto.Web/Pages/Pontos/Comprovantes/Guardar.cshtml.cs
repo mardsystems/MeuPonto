@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 using Timesheet.Models.Pontos;
-using Timesheet.Models.Pontos.Comprovantes;
 
 namespace MeuPonto.Pages.Pontos.Comprovantes;
 
@@ -32,7 +31,7 @@ public class GuardarModel : FormPageModel
     {
         var transaction = User.CreateTransaction();
 
-        Comprovante = ComprovanteFactory.CriaComprovante(transaction);
+        Comprovante = BackupComprovantes.CriaComprovante(transaction);
 
         Comprovante.TipoImagemId = TipoImagemEnum.Original;
 

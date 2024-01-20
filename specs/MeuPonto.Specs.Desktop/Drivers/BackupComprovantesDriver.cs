@@ -1,5 +1,5 @@
 ﻿using Timesheet.Models.Pontos;
-using Timesheet.Models.Pontos.Comprovantes;
+using Timesheet.Models.Pontos;
 
 namespace MeuPonto.Drivers;
 

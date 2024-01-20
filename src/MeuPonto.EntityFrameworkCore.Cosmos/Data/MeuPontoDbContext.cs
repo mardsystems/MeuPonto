@@ -3,8 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Timesheet.Models.Pontos;
 using Timesheet.Models.Contratos;
-using Timesheet.Models.Pontos.Comprovantes;
-using Timesheet.Models.Contratos.Empregadores;
 using Timesheet.Models.Folhas;
 using MeuPonto.Models.Trabalhadores;
 

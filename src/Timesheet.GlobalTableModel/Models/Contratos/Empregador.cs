@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 
-namespace Timesheet.Models.Contratos.Empregadores;
+namespace Timesheet.Models.Contratos;
 
 public class Empregador : GlobalTableEntity
 {
