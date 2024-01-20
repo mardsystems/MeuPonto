@@ -23,7 +23,7 @@ public class GestaoFolhasDriver
 
     public void GoTo()
     {
-        Document = _angleSharp.GetDocument("/Pontos/Folhas");
+        Document = _angleSharp.GetDocument("/Folhas");
 
         AberturaFolhaAnchor = Document.GetAnchor("Abertura.Folha");
 

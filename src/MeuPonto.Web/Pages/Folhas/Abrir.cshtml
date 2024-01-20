@@ -1,31 +1,30 @@
 ﻿@page
-@model MeuPonto.Pages.Pontos.Folhas.CriarModel
+@model MeuPonto.Pages.Pontos.Folhas.AbrirModel
 
 @{
-    ViewData["Title"] = "Criar Folha de Ponto";
+    ViewData["Title"] = "Abrir Folha de Ponto";
 }
 
 @section Breadcrumb {
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
-            <li class="breadcrumb-item"><a asp-page="/Pontos/Index">Pontos</a></li>
             <li class="breadcrumb-item"><a asp-page="./Index">Folhas</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Criar</li>
+            <li class="breadcrumb-item active" aria-current="page">Abrir</li>
         </ol>
     </nav>
 }
 
 @section Title {
-    @ViewData["Title"] <span class="badge bg-secondary">Nova</span>
+    @ViewData["Title"] <span class="badge bg-secondary">Nova</span> <span class="badge @(Model.Folha.StatusId == StatusFolhaEnum.Aberta ? "text-bg-warning" : "text-bg-success")"><i class="bi @(Model.Folha.StatusId == StatusFolhaEnum.Aberta ? "bi-file-earmark-fill" : "bi-file-earmark-lock-fill")"></i></span>
 }
 
 @section CardHeader {
     <ul class="nav nav-tabs card-header-tabs">
         <li class="nav-item">
             <a class="nav-link active" aria-current="page">
-                <i class="bi bi-plus-circle"></i>
-                Criar Nova
+                <i class="bi bi-file-earmark-plus"></i>
+                Abrir Folha
             </a>
         </li>
     </ul>
@@ -52,7 +51,7 @@
 <div class="row mb-3">
     <label asp-for="Folha.StatusId" class="col-sm-3 col-form-label"></label>
     <div class="col-sm-9">
-        <select asp-for="Folha.StatusId" class="form-select" asp-items="Html.GetEnumSelectList<StatusFolhaEnum>()"></select>
+        <select asp-for="Folha.StatusId" disabled class="form-select" asp-items="Html.GetEnumSelectList<StatusFolhaEnum>()"></select>
         <input asp-for="Folha.StatusId" type="hidden" />
     </div>
 </div>

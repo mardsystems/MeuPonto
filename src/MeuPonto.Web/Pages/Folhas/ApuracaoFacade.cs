@@ -5,7 +5,7 @@ using System.Security.Claims;
 using Timesheet.Models.Folhas;
 using Timesheet.Models.Pontos;
 
-namespace MeuPonto.Pages.Pontos.Folhas;
+namespace MeuPonto.Pages.Folhas;
 
 public static class ApuracaoFacade
 {

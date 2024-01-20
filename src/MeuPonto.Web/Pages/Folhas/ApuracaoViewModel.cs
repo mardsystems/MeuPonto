@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Timesheet.Models.Pontos;
 
-namespace MeuPonto.Pages.Pontos.Folhas;
+namespace MeuPonto.Pages.Folhas;
 
 public class ApuracaoMensalViewModel
 {
@@ -84,7 +84,7 @@ public class ApuracaoDiariaViewModel
     public TempoPeriodo TempoPeriodo { get; set; }
 
     public DateTime? DataHoraInicio { get; set; }
-    
+
     public DateTime? DataHoraFim { get; set; }
 
     public Ponto[] Pontos { get; set; }

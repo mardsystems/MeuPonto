@@ -1,5 +1,5 @@
 ﻿using MeuPonto.Extensions;
-using MeuPonto.Pages.Pontos.Folhas;
+using MeuPonto.Pages.Folhas;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
