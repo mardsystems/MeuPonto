@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using MeuPonto.Pages.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Billing.Models;
-using Timesheet.Models.Trabalhadores;
+using MeuPonto.Models.Trabalhadores;
 
 namespace MeuPonto.Pages.Trabalhadores;
 

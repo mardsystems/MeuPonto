@@ -3,6 +3,7 @@ using MeuPonto.Authentication;
 using MeuPonto.Cache;
 using MeuPonto.Data;
 using MeuPonto.Infrastructure;
+using MeuPonto.Models.Trabalhadores;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
@@ -12,7 +13,6 @@ using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
 using System.Security.Claims;
 using System.Transactions;
-using Timesheet.Models.Trabalhadores;
 
 namespace MeuPonto;
 

@@ -1,6 +1,6 @@
 ﻿using System.Transactions;
 
-namespace Timesheet.Models.Trabalhadores;
+namespace MeuPonto.Models.Trabalhadores;
 
 public static class TrabalhadorFactory
 {
@@ -10,6 +10,7 @@ public static class TrabalhadorFactory
         {
             Id = id ?? Guid.NewGuid(),
             UserId = transaction.UserId,
+            PartitionKey = transaction.UserId.ToString(),
             CreationDate = transaction.DateTime
         };
 
@@ -20,6 +21,7 @@ public static class TrabalhadorFactory
     {
         trabalhador.Id = trabalhador.Id ?? id ?? Guid.NewGuid();
         trabalhador.UserId = transaction.UserId;
+        trabalhador.PartitionKey = transaction.UserId.ToString();
         trabalhador.CreationDate ??= transaction.DateTime;
     }
 }

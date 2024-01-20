@@ -1,7 +1,7 @@
 ﻿using Billing.Models;
 using System.ComponentModel;
 
-namespace Timesheet.Models.Trabalhadores;
+namespace MeuPonto.Models.Trabalhadores;
 
 public class Trabalhador : GlobalTableEntity
 {

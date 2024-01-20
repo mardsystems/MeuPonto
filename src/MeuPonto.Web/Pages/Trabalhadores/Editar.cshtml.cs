@@ -1,8 +1,8 @@
 ﻿using MeuPonto.Extensions;
+using MeuPonto.Models.Trabalhadores;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Timesheet.Models.Trabalhadores;
 
 namespace MeuPonto.Pages.Trabalhadores;
 
