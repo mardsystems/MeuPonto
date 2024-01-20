@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using Timesheet.Models.Pontos;
+using Timesheet.Models.Pontos.BackupComprovantes;
 
 namespace MeuPonto.Pages.Pontos.Comprovantes;
 
@@ -31,7 +32,7 @@ public class CriarModel : FormPageModel
     {
         var transaction = User.CreateTransaction();
 
-        Comprovante = BackupComprovantes.CriaComprovante(transaction);
+        Comprovante = BackupComprovantesService.CriaComprovante(transaction);
 
         var ponto = await _db.Pontos
             .Include(x => x.Contrato)

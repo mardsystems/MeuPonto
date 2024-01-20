@@ -1,8 +1,8 @@
 ﻿using System.Transactions;
 
-namespace Timesheet.Models.Contratos;
+namespace Timesheet.Models.Contratos.GestaoContratos;
 
-public static class GestaoContratos
+public static class GestaoContratosService
 {
     public static Contrato CriaContrato(TransactionContext transaction, Guid? id = null)
     {
@@ -10,7 +10,6 @@ public static class GestaoContratos
         {
             Id = id ?? Guid.NewGuid(),
             UserId = transaction.UserId,
-            PartitionKey = transaction.UserId.ToString(),
             CreationDate = transaction.DateTime
         };
 
@@ -19,18 +18,14 @@ public static class GestaoContratos
 
     public static void RecontextualizaContrato(this Contrato contrato, TransactionContext transaction, Guid? id = null)
     {
-        contrato.Id ??= id ?? Guid.NewGuid();
+        contrato.Id = contrato.Id ?? id ?? Guid.NewGuid();
         contrato.UserId = transaction.UserId;
-        contrato.PartitionKey = transaction.UserId.ToString();
-        contrato.CreationDate ??= transaction.DateTime;
+        contrato.CreationDate = transaction.DateTime;
     }
 
     public static void VinculaEmpregador(this Contrato contrato, Empregador empregador)
     {
-        contrato.Empregador = new EmpregadorRef
-        {
-            Nome = empregador.Nome
-        };
+        contrato.Empregador = empregador;
 
         contrato.EmpregadorId = empregador.Id;
     }

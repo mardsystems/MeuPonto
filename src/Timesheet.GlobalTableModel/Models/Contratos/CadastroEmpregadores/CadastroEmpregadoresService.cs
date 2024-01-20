@@ -1,6 +1,6 @@
 ﻿using System.Transactions;
 
-namespace Timesheet.Models.Contratos;
+namespace Timesheet.Models.Contratos.CadastroEmpregadores;
 
 public static class CadastroEmpregadores
 {
@@ -10,7 +10,6 @@ public static class CadastroEmpregadores
         {
             Id = id ?? Guid.NewGuid(),
             UserId = transaction.UserId,
-            PartitionKey = transaction.UserId.ToString(),
             CreationDate = transaction.DateTime
         };
 
@@ -19,9 +18,8 @@ public static class CadastroEmpregadores
 
     public static void RecontextualizaEmpregador(this Empregador empregador, TransactionContext transaction, Guid? id = null)
     {
-        empregador.Id ??= id ?? Guid.NewGuid();
+        empregador.Id = empregador.Id ?? id ?? Guid.NewGuid();
         empregador.UserId = transaction.UserId;
-        empregador.PartitionKey = transaction.UserId.ToString();
-        empregador.CreationDate ??= transaction.DateTime;
+        empregador.CreationDate = transaction.DateTime;
     }
 }

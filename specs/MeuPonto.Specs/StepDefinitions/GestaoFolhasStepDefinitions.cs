@@ -3,7 +3,9 @@ using MeuPonto.Drivers;
 using MeuPonto.Support;
 using System.Transactions;
 using Timesheet.Models.Folhas;
+using Timesheet.Models.Folhas.GestaoFolha;
 using Timesheet.Models.Pontos;
+using Timesheet.Models.Pontos.RegistroPontos;
 
 namespace MeuPonto.StepDefinitions;
 
@@ -77,7 +79,7 @@ public class GestaoFolhasStepDefinitions
 
         var contrato = _db.Contratos.FirstOrDefault();
 
-        var pontoEntrada = RegistroPontos.CriaPonto(transaction);
+        var pontoEntrada = RegistroPontosService.CriaPonto(transaction);
 
         contrato.QualificaPonto(pontoEntrada);
 
@@ -97,7 +99,7 @@ public class GestaoFolhasStepDefinitions
 
         var contrato = _db.Contratos.FirstOrDefault();
 
-        var pontoSaida = RegistroPontos.CriaPonto(transaction);
+        var pontoSaida = RegistroPontosService.CriaPonto(transaction);
 
         contrato.QualificaPonto(pontoSaida);
 
@@ -151,7 +153,7 @@ public class GestaoFolhasStepDefinitions
 
             var momento = (MomentoEnum)Enum.Parse(typeof(MomentoEnum), row["momento"]);
 
-            var ponto = RegistroPontos.CriaPonto(transaction);
+            var ponto = RegistroPontosService.CriaPonto(transaction);
 
             _gestaoContratos.Contrato.QualificaPonto(ponto);
 

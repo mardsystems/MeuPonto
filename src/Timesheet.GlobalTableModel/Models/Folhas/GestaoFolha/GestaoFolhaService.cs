@@ -1,9 +1,9 @@
 ﻿using System.Transactions;
 using Timesheet.Models.Contratos;
 
-namespace Timesheet.Models.Folhas;
+namespace Timesheet.Models.Folhas.GestaoFolha;
 
-public static class GestaoFolha
+public static class GestaoFolhaService
 {
     public static Folha CriaFolha(TransactionContext transaction, Guid? id = null)
     {

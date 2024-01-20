@@ -4,6 +4,7 @@ using MeuPonto.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Timesheet.Models.Contratos;
+using Timesheet.Models.Contratos.GestaoContratos;
 
 namespace MeuPonto.Pages.Contratos;
 
@@ -23,7 +24,7 @@ public class CriarModel : FormPageModel
     {
         var transaction = User.CreateTransaction();
 
-        Contrato = GestaoContratos.CriaContrato(transaction);
+        Contrato = GestaoContratosService.CriaContrato(transaction);
 
         ViewData["EmpregadorId"] = new SelectList(_db.Empregadores.Where(x => x.UserId == User.GetUserId()), "Id", "Nome").AddEmptyValue();
 

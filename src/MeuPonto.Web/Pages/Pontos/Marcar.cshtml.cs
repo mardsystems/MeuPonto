@@ -3,6 +3,7 @@ using MeuPonto.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Timesheet.Models.Pontos;
+using Timesheet.Models.Pontos.RegistroPontos;
 
 namespace MeuPonto.Pages.Pontos;
 
@@ -28,7 +29,7 @@ public class MarcarModel : FormPageModel
     {
         var transaction = User.CreateTransaction();
 
-        Ponto = RegistroPontos.CriaPonto(transaction);
+        Ponto = RegistroPontosService.CriaPonto(transaction);
 
         Ponto.DataHora = _dateTimeSnapshot.GetDateTimeUntilMinutes();
 

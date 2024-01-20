@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Timesheet.Models.Contratos;
+using Timesheet.Models.Contratos.CadastroEmpregadores;
 
 namespace MeuPonto.Pages.Empregadores;
 

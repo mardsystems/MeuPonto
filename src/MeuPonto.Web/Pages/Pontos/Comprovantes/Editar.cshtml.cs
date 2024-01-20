@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using Timesheet.Models.Pontos;
+using Timesheet.Models.Pontos.BackupComprovantes;
 
 namespace MeuPonto.Pages.Pontos.Comprovantes;
 

@@ -3,6 +3,7 @@ using MeuPonto.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Timesheet.Models.Pontos;
+using Timesheet.Models.Pontos.RegistroPontos;
 
 namespace MeuPonto.Pages.Pontos;
 

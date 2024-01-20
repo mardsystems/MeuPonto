@@ -3,6 +3,8 @@ using MeuPonto.Drivers;
 using MeuPonto.Support;
 using System.Transactions;
 using Timesheet.Models.Pontos;
+using Timesheet.Models.Pontos.BackupComprovantes;
+using Timesheet.Models.Pontos.RegistroPontos;
 
 namespace MeuPonto.StepDefinitions;
 
@@ -78,14 +80,14 @@ public class BackupComprovantesStepDefinitions
 
         var transaction = new TransactionContext(userId.ToString());
 
-        var ponto = RegistroPontos.CriaPonto(transaction);
+        var ponto = RegistroPontosService.CriaPonto(transaction);
 
         _gestaoContratos.Contrato.QualificaPonto(ponto);
 
         ponto.DataHora = data;
         ponto.MomentoId = MomentoEnum.Entrada;
 
-        var comprovante = BackupComprovantes.CriaComprovante(transaction);
+        var comprovante = BackupComprovantesService.CriaComprovante(transaction);
 
         comprovante.ComprovaPonto(ponto);
 

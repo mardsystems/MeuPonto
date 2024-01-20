@@ -1,9 +1,9 @@
 ﻿using System.Transactions;
 using Timesheet.Models.Contratos;
 
-namespace Timesheet.Models.Pontos;
+namespace Timesheet.Models.Pontos.RegistroPontos;
 
-public static class RegistroPontos
+public static class RegistroPontosService
 {
     public static Ponto CriaPonto(TransactionContext transaction, Guid? id = null)
     {

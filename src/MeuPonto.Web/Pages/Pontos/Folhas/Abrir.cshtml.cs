@@ -3,6 +3,7 @@ using MeuPonto.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Timesheet.Models.Folhas;
+using Timesheet.Models.Folhas.GestaoFolha;
 
 namespace MeuPonto.Pages.Pontos.Folhas;
 
@@ -24,7 +25,7 @@ public class AbrirModel : FormPageModel
 
         ViewData["ContratoId"] = new SelectList(_db.Contratos.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
 
-        Folha = GestaoFolha.CriaFolha(transaction);
+        Folha = GestaoFolhaService.CriaFolha(transaction);
 
         Folha.StatusId = StatusFolhaEnum.Aberta;
 

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using MeuPonto.Data;
 using MeuPonto.Extensions;
 using Timesheet.Models.Folhas;
+using Timesheet.Models.Folhas.GestaoFolha;
 
 namespace MeuPonto.Pages.Pontos.Folhas;
 

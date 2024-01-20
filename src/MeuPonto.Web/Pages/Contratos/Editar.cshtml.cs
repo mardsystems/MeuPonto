@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Timesheet.Models.Contratos;
+using Timesheet.Models.Contratos.GestaoContratos;
 
 namespace MeuPonto.Pages.Contratos;
 

@@ -1,6 +1,7 @@
 ﻿using MeuPonto.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Timesheet.Models.Contratos;
+using Timesheet.Models.Contratos.CadastroEmpregadores;
 
 namespace MeuPonto.Pages.Empregadores;
 

@@ -2,9 +2,12 @@
 using MeuPonto.Models.Trabalhadores;
 using System.Transactions;
 using Timesheet.Models.Contratos;
+using Timesheet.Models.Contratos.GestaoContratos;
 using Timesheet.Models.Folhas;
+using Timesheet.Models.Folhas.GestaoFolha;
 using Timesheet.Models.Pontos;
-using Timesheet.Models.Pontos;
+using Timesheet.Models.Pontos.BackupComprovantes;
+using Timesheet.Models.Pontos.RegistroPontos;
 
 namespace MeuPonto.Support;
 
@@ -34,7 +37,7 @@ public class SeedHook
 
         var trabalhador = TrabalhadorFactory.CriaTrabalhador(transaction);
 
-        var contrato = GestaoContratos.CriaContrato(transaction);
+        var contrato = GestaoContratosService.CriaContrato(transaction);
 
         contrato.Nome = userName;
         contrato.Ativo = true;
@@ -81,13 +84,13 @@ public class SeedHook
 
         gestaoContratos.Inicia(contrato);
 
-        var ponto = RegistroPontos.CriaPonto(transaction);
+        var ponto = RegistroPontosService.CriaPonto(transaction);
 
         ponto.MomentoId = MomentoEnum.Entrada;
 
         registroPontos.Inicia(ponto);
 
-        var comprovante = BackupComprovantes.CriaComprovante(transaction);
+        var comprovante = BackupComprovantesService.CriaComprovante(transaction);
 
         backupComprovantes.Inicia(comprovante);
 
@@ -97,7 +100,7 @@ public class SeedHook
 
         var competencia = new DateTime(hoje.Year, hoje.Month, 1);
 
-        var folha = GestaoFolha.CriaFolha(transaction);
+        var folha = GestaoFolhaService.CriaFolha(transaction);
 
         contrato.QualificaFolha(folha);
 
