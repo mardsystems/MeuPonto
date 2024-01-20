@@ -1,6 +1,6 @@
 ﻿using Timesheet.Models.Contratos;
 
-namespace Timesheet.Models.Pontos.Folhas;
+namespace Timesheet.Models.Folhas;
 
 public static class FolhaFacade
 {

@@ -1,6 +1,6 @@
 ﻿using MeuPonto.Extensions;
 using Microsoft.AspNetCore.Mvc;
-using Timesheet.Models.Empregadores;
+using Timesheet.Models.Contratos.Empregadores;
 
 namespace MeuPonto.Pages.Empregadores;
 

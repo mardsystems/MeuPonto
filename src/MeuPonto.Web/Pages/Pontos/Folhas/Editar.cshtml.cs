@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MeuPonto.Data;
 using MeuPonto.Extensions;
-using Timesheet.Models.Pontos.Folhas;
+using Timesheet.Models.Folhas;
 
 namespace MeuPonto.Pages.Pontos.Folhas;
 

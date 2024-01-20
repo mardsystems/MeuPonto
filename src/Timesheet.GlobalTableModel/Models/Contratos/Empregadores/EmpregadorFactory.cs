@@ -1,6 +1,6 @@
 ﻿using System.Transactions;
 
-namespace Timesheet.Models.Empregadores;
+namespace Timesheet.Models.Contratos.Empregadores;
 
 public static class EmpregadorFactory
 {

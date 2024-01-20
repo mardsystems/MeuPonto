@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Timesheet.Models.Pontos.Folhas;
+namespace Timesheet.Models.Folhas;
 
 public class StatusFolha
 {

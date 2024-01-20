@@ -1,6 +1,6 @@
 using MeuPonto.Data;
 using System.Windows.Input;
-using Timesheet.Models.Empregadores;
+using Timesheet.Models.Contratos.Empregadores;
 
 namespace MeuPonto.Pages.Empregadores;
 

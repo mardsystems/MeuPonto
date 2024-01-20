@@ -1,12 +1,16 @@
 ﻿using Timesheet.Models.Contratos;
+using Timesheet.Models.Pontos;
 
-namespace Timesheet.Models.Pontos.Folhas;
+namespace Timesheet.Models.Folhas;
 
 public static class ContratoFacade
 {
     public static void QualificaFolha(this Contrato contrato, Folha folha)
     {
-        folha.Contrato = contrato;
+        folha.Contrato = new ContratoRef
+        {
+            Nome = contrato.Nome
+        };
 
         folha.ContratoId = contrato.Id;
     }

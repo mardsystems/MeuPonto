@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using Microsoft.EntityFrameworkCore;
-using Timesheet.Models.Empregadores;
+using Timesheet.Models.Contratos.Empregadores;
 
 namespace Timesheet.Models.Contratos;
 

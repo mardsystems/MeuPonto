@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 
-namespace Timesheet.Models.Empregadores;
+namespace Timesheet.Models.Contratos.Empregadores;
 
 public class Empregador : DocumentEntity
 {

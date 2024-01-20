@@ -1,7 +1,7 @@
 ﻿using AngleSharp.Html.Dom;
 using MeuPonto.Helpers;
 using MeuPonto.Support;
-using Timesheet.Models.Pontos.Folhas;
+using Timesheet.Models.Folhas;
 
 namespace MeuPonto.Drivers;
 

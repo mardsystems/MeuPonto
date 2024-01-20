@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Timesheet.Models.Empregadores;
+using Timesheet.Models.Contratos.Empregadores;
 
 namespace MeuPonto.Pages.Empregadores;
 

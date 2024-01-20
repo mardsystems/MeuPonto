@@ -1,18 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Timesheet.Models.Contratos;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using Timesheet.Models.Pontos;
 
-namespace Timesheet.Models.Pontos.Folhas;
+namespace Timesheet.Models.Folhas;
 
-public class Folha : DocumentEntity
+public class Folha : GlobalTableEntity
 {
     [Required]
     [DisplayName("Contrato")]
     public Guid? ContratoId { get; set; }
 
     [DisplayName("Contrato")]
-    public ContratoRef? Contrato { get; set; }
+    public Contrato? Contrato { get; set; }
 
     [Required]
     [DisplayName("Competência")]

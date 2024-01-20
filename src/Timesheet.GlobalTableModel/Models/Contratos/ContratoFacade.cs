@@ -1,4 +1,4 @@
-﻿using Timesheet.Models.Empregadores;
+﻿using Timesheet.Models.Contratos.Empregadores;
 
 namespace Timesheet.Models.Contratos;
 

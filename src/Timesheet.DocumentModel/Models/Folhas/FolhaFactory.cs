@@ -1,15 +1,16 @@
 ﻿using System.Transactions;
 
-namespace Timesheet.Models.Pontos.Folhas;
+namespace Timesheet.Models.Folhas;
 
 public static class FolhaFactory
 {
-    public static Folha CriaFolha(TransactionContext transaction, Guid? id = null)
+    public static Folha CriaFolha(this TransactionContext transaction, Guid? id = null)
     {
         var folha = new Folha
         {
             Id = id ?? Guid.NewGuid(),
             UserId = transaction.UserId,
+            PartitionKey = $"{transaction.UserId}",
             CreationDate = transaction.DateTime
         };
 
@@ -18,8 +19,9 @@ public static class FolhaFactory
 
     public static void RecontextualizaFolha(this Folha folha, TransactionContext transaction, Guid? id = null)
     {
-        folha.Id = folha.Id ?? id ?? Guid.NewGuid();
+        folha.Id ??= id ?? Guid.NewGuid();
         folha.UserId = transaction.UserId;
-        folha.CreationDate = transaction.DateTime;
+        folha.PartitionKey = $"{folha.UserId}|{folha.Competencia:yyyy}";
+        folha.CreationDate ??= transaction.DateTime;
     }
 }

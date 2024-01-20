@@ -3,7 +3,7 @@ using MeuPonto.Helpers;
 using Microsoft.EntityFrameworkCore;
 using System.Windows.Input;
 using Timesheet.Models.Contratos;
-using Timesheet.Models.Empregadores;
+using Timesheet.Models.Contratos.Empregadores;
 
 namespace MeuPonto.Pages.Contratos;
 

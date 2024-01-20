@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Timesheet.Models.Pontos.Folhas;
+using Timesheet.Models.Folhas;
 
 namespace MeuPonto.Pages.Pontos.Folhas;
 
