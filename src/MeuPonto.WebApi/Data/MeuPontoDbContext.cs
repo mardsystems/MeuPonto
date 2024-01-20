@@ -16,15 +16,6 @@ public class MeuPontoDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<Configuracoes>()
-            .ToTable("Configuracoes")
-            .HasNoKey();
-
-        modelBuilder.Entity<Trabalhador>()
-            .ToTable("Trabalhadores");
-        
-        modelBuilder.Entity<Trabalhador>().Property(b => b.CreationDate).HasDefaultValueSql("getdate()");
-
         modelBuilder.Entity<Empregador>()
             .ToTable("Empregadores");
 
@@ -121,8 +112,6 @@ public class MeuPontoDbContext : DbContext
         );
     }
 
-    public DbSet<Configuracoes> Configuracoes { get; set; }
-    public DbSet<Trabalhador> Trabalhadores { get; set; }
     public DbSet<Empregador> Empregadores { get; set; }
     public DbSet<Contrato> Contratos { get; set; }
     public DbSet<Ponto> Pontos { get; set; }

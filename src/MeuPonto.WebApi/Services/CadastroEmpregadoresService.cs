@@ -1,8 +1,9 @@
 ﻿using MeuPonto.Models;
+using System.Transactions;
 
-namespace MeuPonto.Factories;
+namespace MeuPonto.Services;
 
-public static class EmpregadorFactory
+public static class CadastroEmpregadoresService
 {
     public static Empregador CriaEmpregador(TransactionContext transaction)
     {
@@ -14,7 +15,7 @@ public static class EmpregadorFactory
 
         return empregador;
     }
-    
+
     public static void RecontextualizaEmpregador(this Empregador empregador, TransactionContext transaction)
     {
         empregador.UserId = transaction.UserId;

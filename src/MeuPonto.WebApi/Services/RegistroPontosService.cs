@@ -1,8 +1,9 @@
 ﻿using MeuPonto.Models;
+using System.Transactions;
 
-namespace MeuPonto.Factories;
+namespace MeuPonto.Services;
 
-public static class PontoFactory
+public static class RegistroPontosService
 {
     public static Ponto CriaPonto(TransactionContext transaction)
     {
@@ -19,5 +20,15 @@ public static class PontoFactory
     {
         ponto.UserId = transaction.UserId;
         ponto.CreationDate = transaction.DateTime;
+    }
+
+    public static bool EstaQualificado(this Ponto ponto)
+    {
+        return ponto.ContratoId.HasValue;
+    }
+
+    public static bool EstaSemQualificacao(this Ponto ponto)
+    {
+        return ponto.ContratoId == null;
     }
 }

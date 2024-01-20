@@ -1,8 +1,9 @@
 ﻿using MeuPonto.Models;
+using System.Transactions;
 
-namespace MeuPonto.Factories;
+namespace MeuPonto.Services;
 
-public static class FolhaFactory
+public static class GestaoFolhasService
 {
     public static Folha CriaFolha(TransactionContext transaction)
     {
