@@ -1,7 +1,6 @@
 ﻿using BoDi;
 using MeuPonto.Data;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.EntityFrameworkCore;
 using System.Net.Http.Headers;
 using TechTalk.SpecFlow.Infrastructure;
 
