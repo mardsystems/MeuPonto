@@ -52,7 +52,7 @@
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewComboBoxColumn1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.perfisBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.contratosBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.formulárioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -74,7 +74,7 @@
             this.bindingNavigatorMoveLastItem1 = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.carregarImagemToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.perfisTableAdapter = new MeuPonto.MainDataSetTableAdapters.PerfisTableAdapter();
+            this.contratosTableAdapter = new MeuPonto.MainDataSetTableAdapters.ContratosTableAdapter();
             this.imagemOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.pontoComprovanteImagemTiposBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.pontoComprovanteImagemTiposTableAdapter = new MeuPonto.MainDataSetTableAdapters.PontoComprovanteImagemTiposTableAdapter();
@@ -87,7 +87,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pontosBindingNavigator)).BeginInit();
             this.pontosBindingNavigator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pontosDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.perfisBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.contratosBindingSource)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -117,7 +117,7 @@
             // tableAdapterManager
             // 
             this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
-            this.tableAdapterManager.PerfisTableAdapter = null;
+            this.tableAdapterManager.ContratosTableAdapter = null;
             this.tableAdapterManager.PontoComprovanteImagemTiposTableAdapter = null;
             this.tableAdapterManager.PontoComprovantesTableAdapter = this.pontoComprovantesTableAdapter;
             this.tableAdapterManager.PontosTableAdapter = this.pontosTableAdapter;
@@ -282,19 +282,19 @@
             // 
             // dataGridViewComboBoxColumn1
             // 
-            this.dataGridViewComboBoxColumn1.DataPropertyName = "PerfilId";
-            this.dataGridViewComboBoxColumn1.DataSource = this.perfisBindingSource;
+            this.dataGridViewComboBoxColumn1.DataPropertyName = "ContratoId";
+            this.dataGridViewComboBoxColumn1.DataSource = this.contratosBindingSource;
             this.dataGridViewComboBoxColumn1.DisplayMember = "Nome";
-            this.dataGridViewComboBoxColumn1.HeaderText = "Perfil";
+            this.dataGridViewComboBoxColumn1.HeaderText = "Contrato";
             this.dataGridViewComboBoxColumn1.Name = "dataGridViewComboBoxColumn1";
             this.dataGridViewComboBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewComboBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.dataGridViewComboBoxColumn1.ValueMember = "Id";
             // 
-            // perfisBindingSource
+            // contratosBindingSource
             // 
-            this.perfisBindingSource.DataMember = "Perfis";
-            this.perfisBindingSource.DataSource = this.mainDataSet;
+            this.contratosBindingSource.DataMember = "Contratos";
+            this.contratosBindingSource.DataSource = this.mainDataSet;
             // 
             // dataGridViewTextBoxColumn4
             // 
@@ -501,9 +501,9 @@
             this.carregarImagemToolStripButton.Text = "toolStripButton1";
             this.carregarImagemToolStripButton.Click += new System.EventHandler(this.carregarImagemToolStripButton_Click);
             // 
-            // perfisTableAdapter
+            // contratosTableAdapter
             // 
-            this.perfisTableAdapter.ClearBeforeFill = true;
+            this.contratosTableAdapter.ClearBeforeFill = true;
             // 
             // pontoComprovanteImagemTiposBindingSource
             // 
@@ -562,7 +562,7 @@
             this.pontosBindingNavigator.ResumeLayout(false);
             this.pontosBindingNavigator.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pontosDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.perfisBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.contratosBindingSource)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -621,8 +621,8 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem1;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator5;
         private System.Windows.Forms.ToolStripMenuItem sairToolStripMenuItem;
-        private System.Windows.Forms.BindingSource perfisBindingSource;
-        private MainDataSetTableAdapters.PerfisTableAdapter perfisTableAdapter;
+        private System.Windows.Forms.BindingSource contratosBindingSource;
+        private MainDataSetTableAdapters.ContratosTableAdapter contratosTableAdapter;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewComboBoxColumn1;

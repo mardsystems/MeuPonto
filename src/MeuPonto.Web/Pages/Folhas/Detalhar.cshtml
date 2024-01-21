@@ -1,0 +1,244 @@
+﻿@page
+@model MeuPonto.Pages.Pontos.Folhas.DetalharModel
+
+@{
+    ViewData["Title"] = "Detalhar Folha de Ponto";
+}
+
+@section Breadcrumb {
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
+            <li class="breadcrumb-item"><a asp-page="./Index">Folhas</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Detalhar</li>
+        </ol>
+    </nav>
+}
+
+@section Title {
+    @ViewData["Title"] <span class="badge bg-secondary">@Html.DisplayFor(model => model.Folha.Competencia)</span> <span class="badge @(Model.Folha.StatusId == StatusFolhaEnum.Aberta ? "text-bg-warning" : "text-bg-success")"><i class="bi @(Model.Folha.StatusId == StatusFolhaEnum.Aberta ? "bi-file-earmark-fill" : "bi-file-earmark-lock-fill")"></i></span>
+}
+
+@section CardHeader {
+    <ul class="nav nav-tabs card-header-tabs">
+        <li class="me-1">
+            <div class="btn-group">
+                <a class="btn btn-primary" asp-page="./Criar" target="_modal">
+                    <i class="bi bi-plus-circle"></i>
+                    Criar Nova
+                </a>
+                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent">
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="dropdown-item Abertura Folha" asp-page="./Abrir" target="_modal">
+                            <i class="bi bi-file-earmark-plus"></i>
+                            Abrir Folha
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page">
+                <i class="bi bi-card-text"></i>
+                Detalhar
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-page="./Editar" asp-route-id="@Model.Folha?.Id" target="_modal">
+                <i class="bi bi-pencil"></i>
+                <span class="d-none d-sm-inline">Editar</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-danger" asp-page="./Excluir" asp-route-id="@Model.Folha?.Id" target="_modal">
+                <i class="bi bi-trash"></i>
+                <span class="d-none d-sm-inline">Excluir</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-page="./Fechar" asp-route-id="@Model.Folha?.Id" target="_modal">
+                <i class="bi bi-file-earmark-check"></i>
+                <span class="d-none d-sm-inline">Fechar</span>
+            </a>
+        </li>
+    </ul>
+}
+
+<dl class="row g-3 Folha">
+    <dt class="col-sm-3 Contrato">
+        @Html.DisplayNameFor(model => model.Folha.Contrato)
+    </dt>
+    <dd class="col-sm-9 Contrato">
+        <a class="text-decoration-none" asp-page="/Contratos/Detalhar" asp-route-id="@Model.Folha.ContratoId" title="Detalhar Contrato" target="_blank">
+            @Html.DisplayFor(model => model.Folha.Contrato.Nome)
+            <i class="bi bi-link-45deg"></i>
+        </a>
+    </dd>
+    <dt class="col-sm-3 Competencia">
+        @Html.DisplayNameFor(model => model.Folha.Competencia)
+    </dt>
+    <dd class="col-sm-9 Competencia">
+        @Html.DisplayFor(model => model.Folha.Competencia)
+    </dd>
+    <dt class="col-sm-3 Status">
+        @Html.DisplayNameFor(model => model.Folha.StatusId)
+    </dt>
+    <dd class="col-sm-9 Status">
+        <span class="badge fs-6 @(Model.Folha.StatusId == StatusFolhaEnum.Aberta ? "text-bg-warning" : "text-bg-success")">
+            @Html.DisplayFor(model => model.Folha.StatusId)
+            <i class="bi @(Model.Folha.StatusId == StatusFolhaEnum.Aberta ? "bi-file-earmark-fill" : "bi-file-earmark-lock-fill")"></i>
+        </span>
+    </dd>
+    <dt class="col-sm-3 Observacao">
+        @Html.DisplayNameFor(model => model.Folha.Observacao)
+    </dt>
+    <dd class="col-sm-9 Observacao">
+        @Html.DisplayFor(model => model.Folha.Observacao)
+    </dd>
+</dl>
+<div class="card mb-3">
+    <div class="card-header">
+        @Html.DisplayNameFor(model => model.Folha.ApuracaoMensal)
+    </div>
+    <div class="card-body">
+        <div class="accordion mb-3" id="accordionApuracaoMensal">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDias" aria-expanded="true" aria-controls="collapseDias">
+                        @Html.DisplayNameFor(model => model.Folha.ApuracaoMensal.Dias)
+                    </button>
+                </h2>
+                <div id="collapseDias" class="accordion-collapse collapse show" data-bs-parent="#accordionApuracaoMensal">
+                    <div class="accordion-body">
+                        @for (int i = 0; i < Model.Folha.ApuracaoMensal.Dias.Count; i++)
+                        {
+                            <div class="card mb-3 @(Model.Folha.ApuracaoMensal.Dias[i].Dia.ToString())">
+                                <div class="card-header">
+                                    Dia @Html.DisplayFor(model => model.Folha.ApuracaoMensal.Dias[i].Dia)
+                                </div>
+                                <div class="card-body">
+                                    <dl class="row g-3 ApuracaoDiaria" data-dia="@Model.Folha.ApuracaoMensal.Dias[i].Dia">
+                                        <dt class="col-sm-7 col-lg-5 TempoPrevisto">
+                                            @Html.DisplayNameFor(model => model.Folha.ApuracaoMensal.Dias[i].TempoPrevisto)
+                                        </dt>
+                                        <dd class="col-sm-4 TempoPrevisto">
+                                            @Html.DisplayFor(model => model.Folha.ApuracaoMensal.Dias[i].TempoPrevisto)
+                                        </dd>
+                                        <dt class="col-sm-7 col-lg-5 TempoApurado">
+                                            @Html.DisplayNameFor(model => model.Folha.ApuracaoMensal.Dias[i].TempoApurado)
+                                        </dt>
+                                        <dd class="col-sm-4 TempoApurado">
+                                            @Html.DisplayFor(model => model.Folha.ApuracaoMensal.Dias[i].TempoApurado)
+                                        </dd>
+                                        <dt class="col-sm-7 col-lg-5 DiferencaTempo">
+                                            @Html.DisplayNameFor(model => model.Folha.ApuracaoMensal.Dias[i].DiferencaTempo)
+                                        </dt>
+                                        <dd class="col-sm-4 DiferencaTempo">
+                                            @Html.DisplayFor(model => model.Folha.ApuracaoMensal.Dias[i].DiferencaTempo)
+                                        </dd>
+                                        <dt class="col-sm-7 col-lg-5 TempoAbonado">
+                                            @Html.DisplayNameFor(model => model.Folha.ApuracaoMensal.Dias[i].TempoAbonado)
+                                        </dt>
+                                        <dd class="col-sm-4 TempoAbonado">
+                                            @Html.DisplayFor(model => model.Folha.ApuracaoMensal.Dias[i].TempoAbonado)
+                                        </dd>
+                                        <dt class="col-sm-7 col-lg-5 Feriado">
+                                            @Html.DisplayNameFor(model => model.Folha.ApuracaoMensal.Dias[i].Feriado)
+                                        </dt>
+                                        <dd class="col-sm-4 Feriado">
+                                            @Html.DisplayFor(model => model.Folha.ApuracaoMensal.Dias[i].Feriado)
+                                        </dd>
+                                        <dt class="col-sm-7 col-lg-5 Falta">
+                                            @Html.DisplayNameFor(model => model.Folha.ApuracaoMensal.Dias[i].Falta)
+                                        </dt>
+                                        <dd class="col-sm-4 Falta">
+                                            @Html.DisplayFor(model => model.Folha.ApuracaoMensal.Dias[i].Falta)
+                                        </dd>
+                                        <dt class="col-sm-7 col-lg-5 Observacao">
+                                            @Html.DisplayNameFor(model => model.Folha.ApuracaoMensal.Dias[i].Observacao)
+                                        </dt>
+                                        <dd class="col-sm-5 col-lg-7 Observacao">@Html.DisplayFor(model => model.Folha.ApuracaoMensal.Dias[i].Observacao)</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <dl class="row g-3 ApuracaoMensal">
+            <dt class="col-sm-8 col-lg-5 TotalDias">
+                @Html.DisplayNameFor(model => model.Folha.ApuracaoMensal.TotalDias)
+            </dt>
+            <dd class="col-sm-4 col-lg-7 TotalDias">
+                @Html.DisplayFor(model => model.Folha.ApuracaoMensal.TotalDias)
+            </dd>
+            <dt class="col-sm-8 col-lg-5 TempoTotalPrevisto">
+                @Html.DisplayNameFor(model => model.Folha.ApuracaoMensal.TempoTotalPrevisto)
+            </dt>
+            <dd class="col-sm-4 col-lg-7 TempoTotalPrevisto">
+                @String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", Model.Folha.ApuracaoMensal.TempoTotalPrevisto)
+            </dd>
+            <dt class="col-sm-8 col-lg-5 TempoTotalApurado">
+                @Html.DisplayNameFor(model => model.Folha.ApuracaoMensal.TempoTotalApurado)
+            </dt>
+            <dd class="col-sm-4 col-lg-7 TempoTotalApurado">
+                @String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", Model.Folha.ApuracaoMensal.TempoTotalApurado)
+            </dd>
+            <dt class="col-sm-8 col-lg-5 DiferencaTempoTotal">
+                @Html.DisplayNameFor(model => model.Folha.ApuracaoMensal.DiferencaTempoTotal)
+            </dt>
+            <dd class="col-sm-4 col-lg-7 DiferencaTempoTotal">
+                @String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", Model.Folha.ApuracaoMensal.DiferencaTempoTotal)
+            </dd>
+            <dt class="col-sm-8 col-lg-5 TempoTotalPeriodoAnterior">
+                @Html.DisplayNameFor(model => model.Folha.ApuracaoMensal.TempoTotalPeriodoAnterior)
+            </dt>
+            <dd class="col-sm-4 col-lg-7 TempoTotalPeriodoAnterior">
+                @String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", Model.Folha.ApuracaoMensal.TempoTotalPeriodoAnterior)
+            </dd>
+        </dl>
+    </div>
+</div>
+<div class="accordion" id="accordionDetalhes">
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDetalhesTecnicos" aria-expanded="false" aria-controls="collapseDetalhesTecnicos">
+                Detalhes Técnicos
+            </button>
+        </h2>
+        <div id="collapseDetalhesTecnicos" class="accordion-collapse collapse" data-bs-parent="#accordionDetalhes">
+            <div class="accordion-body">
+                <dl class="row g-3">
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Folha.Id)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.Folha.Id)
+                    </dd>
+                    @*<dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Folha.PartitionKey)
+                    </dt>
+                    <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Folha.PartitionKey)
+                    </dd>*@
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Folha.CreationDate)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.Folha.CreationDate)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Folha.Version)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.Folha.Version)
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>

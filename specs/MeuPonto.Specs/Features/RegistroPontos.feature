@@ -2,14 +2,14 @@
 
 Funcionalidade: Registro Pontos
 
-Regra: Perfil qualifica o ponto
+Regra: Contrato qualifica o ponto
 
-Cenário: Trabalhador marca o ponto usando seu único perfil
-	Dado que o trabalhador tem um perfil cadastrado com o nome 'Marcelo - Ateliex'
-	Dado que o trabalhador qualifica o ponto com o perfil 'Marcelo - Ateliex'
+Cenário: Trabalhador marca o ponto usando seu único contrato
+	Dado que o trabalhador tem um contrato cadastrado com o nome 'Marcelo - Ateliex'
+	Dado que o trabalhador qualifica o ponto com o contrato 'Marcelo - Ateliex'
 	Quando o trabalhador marcar o ponto
 	Então o ponto deverá ser marcado
-	E o perfil do ponto deverá deverá ser 'Marcelo - Ateliex'
+	E o contrato do ponto deverá deverá ser 'Marcelo - Ateliex'
 	
 Regra: Registro do momento de entrada e saída do expediente
 

@@ -1,8 +1,9 @@
 ﻿using MeuPonto.Data;
 using MeuPonto.Extensions;
-using MeuPonto.Models.Timesheet.Pontos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Timesheet.Models.Pontos;
+using Timesheet.Models.Pontos.RegistroPontos;
 
 namespace MeuPonto.Pages.Pontos;
 
@@ -28,11 +29,11 @@ public class MarcarModel : FormPageModel
     {
         var transaction = User.CreateTransaction();
 
-        Ponto = PontoFactory.CriaPonto(transaction);
+        Ponto = RegistroPontosService.CriaPonto(transaction);
 
         Ponto.DataHora = _dateTimeSnapshot.GetDateTimeUntilMinutes();
 
-        ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.Ativo && x.UserId == User.GetUserId()), "Id", "Nome");
+        ViewData["ContratoId"] = new SelectList(_db.Contratos.Where(x => x.Ativo && x.UserId == User.GetUserId()), "Id", "Nome");
 
         HoldRefererUrl();
 
@@ -46,16 +47,16 @@ public class MarcarModel : FormPageModel
 
         if (!ModelState.IsValid)
         {
-            ViewData["PerfilId"] = new SelectList(_db.Perfis.Where(x => x.Ativo && x.UserId == User.GetUserId()), "Id", "Nome");
+            ViewData["ContratoId"] = new SelectList(_db.Contratos.Where(x => x.Ativo && x.UserId == User.GetUserId()), "Id", "Nome");
 
             return Page();
         }
 
         Ponto.RecontextualizaPonto(transaction);
 
-        var perfil = await _db.Perfis.FindByIdAsync(Ponto.PerfilId, User.GetUserId());
+        var contrato = await _db.Contratos.FindByIdAsync(Ponto.ContratoId, User.GetUserId());
 
-        perfil.QualificaPonto(Ponto);
+        contrato.QualificaPonto(Ponto);
 
         _db.Pontos.Add(Ponto);
 

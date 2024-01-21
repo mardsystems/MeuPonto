@@ -1,8 +1,10 @@
 using MeuPonto.Data;
 using MeuPonto.Drivers;
-using MeuPonto.Models.Timesheet.Pontos;
-using MeuPonto.Models.Timesheet.Pontos.Comprovantes;
 using MeuPonto.Support;
+using System.Transactions;
+using Timesheet.Models.Pontos;
+using Timesheet.Models.Pontos.BackupComprovantes;
+using Timesheet.Models.Pontos.RegistroPontos;
 
 namespace MeuPonto.StepDefinitions;
 
@@ -15,7 +17,7 @@ public class BackupComprovantesStepDefinitions
 
     private readonly BackupComprovantesDriver _backupComprovantesDriver;
 
-    private readonly CadastroPerfisContext _cadastroPerfis;
+    private readonly GestaoContratosContext _gestaoContratos;
 
     private readonly MeuPontoDbContext _db;
 
@@ -23,7 +25,7 @@ public class BackupComprovantesStepDefinitions
         ScenarioContext scenario,
         BackupComprovantesContext backupComprovantes,
         BackupComprovantesDriver backupComprovantesDriver,
-        CadastroPerfisContext cadastroPerfis,
+        GestaoContratosContext gestaoContratos,
         MeuPontoDbContext db)
     {
         _scenario = scenario;
@@ -32,7 +34,7 @@ public class BackupComprovantesStepDefinitions
 
         _backupComprovantesDriver = backupComprovantesDriver;
 
-        _cadastroPerfis = cadastroPerfis;
+        _gestaoContratos = gestaoContratos;
 
         _db = db;
     }
@@ -40,7 +42,7 @@ public class BackupComprovantesStepDefinitions
     [Given(@"que o trabalhador tem um comprovante de ponto com a data '([^']*)'")]
     public async Task GivenQueOTrabalhadorTemUmComprovanteDePontoComAData(DateTime data)
     {
-        _db.Perfis.Add(_cadastroPerfis.Perfil);
+        _db.Contratos.Add(_gestaoContratos.Contrato);
         await _db.SaveChangesAsync();
 
         var basePath = Directory.GetCurrentDirectory();
@@ -63,7 +65,7 @@ public class BackupComprovantesStepDefinitions
 
         _backupComprovantes.Comprovante.TipoImagemId = TipoImagemEnum.Original;
 
-        _cadastroPerfis.Perfil.QualificaPonto(_backupComprovantes.Ponto);
+        _gestaoContratos.Contrato.QualificaPonto(_backupComprovantes.Ponto);
         _backupComprovantes.Ponto.DataHora = new DateTime(2023, 02, 17, 17, 07, 0);
         _backupComprovantes.Ponto.MomentoId = MomentoEnum.Saida;
     }
@@ -71,21 +73,21 @@ public class BackupComprovantesStepDefinitions
     [Given(@"que o trabalhador tem um comprovante de ponto guardado com a data '([^']*)'")]
     public async Task GivenQueOTrabalhadorTemUmComprovanteDePontoGuardadoComAData(DateTime data)
     {
-        _db.Perfis.Add(_cadastroPerfis.Perfil);
+        _db.Contratos.Add(_gestaoContratos.Contrato);
         await _db.SaveChangesAsync();
 
         var userId = Guid.NewGuid();
 
         var transaction = new TransactionContext(userId.ToString());
 
-        var ponto = PontoFactory.CriaPonto(transaction);
+        var ponto = RegistroPontosService.CriaPonto(transaction);
 
-        _cadastroPerfis.Perfil.QualificaPonto(ponto);
+        _gestaoContratos.Contrato.QualificaPonto(ponto);
 
         ponto.DataHora = data;
         ponto.MomentoId = MomentoEnum.Entrada;
 
-        var comprovante = ComprovanteFactory.CriaComprovante(transaction);
+        var comprovante = BackupComprovantesService.CriaComprovante(transaction);
 
         comprovante.ComprovaPonto(ponto);
 
@@ -96,7 +98,7 @@ public class BackupComprovantesStepDefinitions
     [Given(@"que o trabalhador escaneou um comprovante de ponto com a data '([^']*)'")]
     public async Task GivenQueOTrabalhadorEscaneouUmComprovanteDePontoComAData(string p0)
     {
-        _db.Perfis.Add(_cadastroPerfis.Perfil);
+        _db.Contratos.Add(_gestaoContratos.Contrato);
         await _db.SaveChangesAsync();
 
         var basePath = Directory.GetCurrentDirectory();
@@ -119,7 +121,7 @@ public class BackupComprovantesStepDefinitions
 
         _backupComprovantes.Comprovante.TipoImagemId = TipoImagemEnum.Original;
 
-        _cadastroPerfis.Perfil.QualificaPonto(_backupComprovantes.Ponto);
+        _gestaoContratos.Contrato.QualificaPonto(_backupComprovantes.Ponto);
         _backupComprovantes.Ponto.DataHora = new DateTime(2023, 02, 17, 17, 07, 0);
         _backupComprovantes.Ponto.MomentoId = MomentoEnum.Saida;
     }

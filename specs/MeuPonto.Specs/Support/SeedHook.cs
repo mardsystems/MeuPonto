@@ -1,9 +1,13 @@
 ﻿using BoDi;
-using MeuPonto.Models.Timesheet.Perfis;
-using MeuPonto.Models.Timesheet.Pontos;
-using MeuPonto.Models.Timesheet.Pontos.Comprovantes;
-using MeuPonto.Models.Timesheet.Pontos.Folhas;
-using MeuPonto.Models.Timesheet.Trabalhadores;
+using MeuPonto.Models.Trabalhadores;
+using System.Transactions;
+using Timesheet.Models.Contratos;
+using Timesheet.Models.Contratos.GestaoContratos;
+using Timesheet.Models.Folhas;
+using Timesheet.Models.Folhas.GestaoFolha;
+using Timesheet.Models.Pontos;
+using Timesheet.Models.Pontos.BackupComprovantes;
+using Timesheet.Models.Pontos.RegistroPontos;
 
 namespace MeuPonto.Support;
 
@@ -18,7 +22,7 @@ public class SeedHook
     [BeforeScenario]
     public void SetupTestUsers(
         ScenarioContext scenario,
-        CadastroPerfisContext cadastroPerfis,
+        GestaoContratosContext gestaoContratos,
         RegistroPontosContext registroPontos,
         BackupComprovantesContext backupComprovantes,
         GestaoFolhasContext gestaoFolhas)
@@ -33,11 +37,11 @@ public class SeedHook
 
         var trabalhador = TrabalhadorFactory.CriaTrabalhador(transaction);
 
-        var perfil = PerfilFactory.CriaPerfil(transaction);
+        var contrato = GestaoContratosService.InciarAberturaContrato(transaction);
 
-        perfil.Nome = userName;
-        perfil.Ativo = true;
-        perfil.JornadaTrabalhoSemanalPrevista = new JornadaTrabalhoSemanal
+        contrato.Nome = userName;
+        contrato.Ativo = true;
+        contrato.JornadaTrabalhoSemanalPrevista = new JornadaTrabalhoSemanal
         {
             Semana = new List<JornadaTrabalhoDiaria>(new[]{
                     new JornadaTrabalhoDiaria
@@ -78,15 +82,15 @@ public class SeedHook
                 })
         };
 
-        cadastroPerfis.Inicia(perfil);
+        gestaoContratos.Inicia(contrato);
 
-        var ponto = PontoFactory.CriaPonto(transaction);
+        var ponto = RegistroPontosService.CriaPonto(transaction);
 
         ponto.MomentoId = MomentoEnum.Entrada;
 
         registroPontos.Inicia(ponto);
 
-        var comprovante = ComprovanteFactory.CriaComprovante(transaction);
+        var comprovante = BackupComprovantesService.CriaComprovante(transaction);
 
         backupComprovantes.Inicia(comprovante);
 
@@ -96,9 +100,9 @@ public class SeedHook
 
         var competencia = new DateTime(hoje.Year, hoje.Month, 1);
 
-        var folha = FolhaFactory.CriaFolha(transaction);
+        var folha = GestaoFolhaService.CriaFolha(transaction);
 
-        perfil.QualificaFolha(folha);
+        contrato.QualificaFolha(folha);
 
         folha.Competencia = competencia;
 
@@ -115,7 +119,7 @@ public class SeedHook
             var apuracaoDiaria = new ApuracaoDiaria
             {
                 Dia = dia,
-                TempoPrevisto = perfil.JornadaTrabalhoSemanalPrevista.Semana.Single(x => x.DiaSemana == data.DayOfWeek).Tempo,
+                TempoPrevisto = contrato.JornadaTrabalhoSemanalPrevista.Semana.Single(x => x.DiaSemana == data.DayOfWeek).Tempo,
                 TempoApurado = null,
                 DiferencaTempo = null,
                 Feriado = false,

@@ -1,5 +1,5 @@
-﻿using MeuPonto.Models.Timesheet.Pontos;
-using MeuPonto.Models.Timesheet.Pontos.Comprovantes;
+﻿using Timesheet.Models.Pontos;
+using Timesheet.Models.Pontos;
 
 namespace MeuPonto.Drivers;
 
@@ -25,7 +25,7 @@ public class BackupComprovantesDriver
         {
             Ponto = new()
             {
-                Perfil = new()
+                Contrato = new()
                 {
 
                 },
@@ -50,7 +50,7 @@ public class BackupComprovantesDriver
         {
             Ponto = new()
             {
-                Perfil = new()
+                Contrato = new()
                 {
 
                 },

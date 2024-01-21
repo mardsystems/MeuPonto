@@ -80,14 +80,14 @@ namespace MeuPonto.Features
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Trabalhador marca o ponto usando seu único perfil")]
+        [Xunit.SkippableFactAttribute(DisplayName="Trabalhador marca o ponto usando seu único contrato")]
         [Xunit.TraitAttribute("FeatureTitle", "Registro Pontos")]
-        [Xunit.TraitAttribute("Description", "Trabalhador marca o ponto usando seu único perfil")]
-        public void TrabalhadorMarcaOPontoUsandoSeuUnicoPerfil()
+        [Xunit.TraitAttribute("Description", "Trabalhador marca o ponto usando seu único contrato")]
+        public void TrabalhadorMarcaOPontoUsandoSeuUnicoContrato()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador marca o ponto usando seu único perfil", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador marca o ponto usando seu único contrato", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 7
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -99,10 +99,10 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 8
- testRunner.Given("que o trabalhador tem um perfil cadastrado com o nome \'Marcelo - Ateliex\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+ testRunner.Given("que o trabalhador tem um contrato cadastrado com o nome \'Marcelo - Ateliex\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
 #line 9
- testRunner.Given("que o trabalhador qualifica o ponto com o perfil \'Marcelo - Ateliex\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+ testRunner.Given("que o trabalhador qualifica o ponto com o contrato \'Marcelo - Ateliex\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
 #line 10
  testRunner.When("o trabalhador marcar o ponto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
@@ -111,7 +111,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Then("o ponto deverá ser marcado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
 #line 12
- testRunner.And("o perfil do ponto deverá deverá ser \'Marcelo - Ateliex\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+ testRunner.And("o contrato do ponto deverá deverá ser \'Marcelo - Ateliex\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
             }
             this.ScenarioCleanup();

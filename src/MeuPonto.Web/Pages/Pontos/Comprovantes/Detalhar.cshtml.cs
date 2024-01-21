@@ -1,7 +1,7 @@
-﻿using MeuPonto.Models.Timesheet.Pontos.Comprovantes;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Timesheet.Models.Pontos;
 
 namespace MeuPonto.Pages.Pontos.Comprovantes;
 
@@ -25,7 +25,7 @@ public class DetalharModel : PageModel
 
         var comprovante = await _db.Comprovantes
             .Include(x => x.Ponto)
-                .ThenInclude(x => x.Perfil)
+                .ThenInclude(x => x.Contrato)
             .FirstOrDefaultAsync(x => x.Id == id);
 
         if (comprovante == null)

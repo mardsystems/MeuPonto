@@ -1,0 +1,82 @@
+﻿@page
+@model MeuPonto.Pages.Contratos.Empregadores.IndexModel
+
+@{
+    ViewData["Title"] = "Cadastro de Empregadores";
+}
+
+@section Breadcrumb {
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
+            <li class="breadcrumb-item"><a asp-page="/Contratos/Index">Contratos</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Empregadores</li>
+        </ol>
+    </nav>
+}
+
+@section Title {
+    @ViewData["Title"]
+}
+
+<div class="btn-group mb-3">
+    <a class="btn btn-primary Criacao Empregador" asp-page="./Criar" target="_modal">
+        <i class="bi bi-plus-circle"></i>
+        Criar Novo
+    </a>
+</div>
+
+<form class="table-responsive text-nowrap" method="get">
+    <table class="table table-striped align-middle mb-3 Empregadores">
+        <thead>
+            <tr>
+                <th>Ações</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Empregadores[0].Nome)
+                    <i class="bi bi-sort-down"></i>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <div class="btn-group" role="group">
+                        <button type="submit" value="Filtrar" class="btn btn-secondary">
+                            <i class="bi bi-funnel"></i>
+                            Filtrar
+                        </button>
+                        <a class="btn btn-warning" asp-page="./Index">
+                            <i class="bi bi-x-circle"></i>
+                        </a>
+                    </div>
+
+                </th>
+                <th>
+                    <input asp-for="Nome" class="form-control" />
+                </th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            @foreach (var item in Model.Empregadores)
+            {
+                <tr data-id="@item.Id" data-name="@item.Nome">
+                    <td class="p-1" scope="row">
+                        <div class="btn-group" role="group">
+                            <a class="btn btn-link rounded-0 Detalhe" asp-page="./Detalhar" asp-route-id="@item.Id" title="Detalhar">
+                                <i class="bi bi-card-text"></i>
+                            </a>
+                            <a class="btn btn-link Edicao" asp-page="./Editar" asp-route-id="@item.Id" title="Editar" target="_modal">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <a class="btn btn-link text-danger rounded-0 Exclusao" asp-page="./Excluir" asp-route-id="@item.Id" title="Excluir" target="_modal">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <partial name="_Pagination" model="Model.Pagination" />
+</form>

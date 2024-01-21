@@ -1,4 +1,4 @@
-﻿using MeuPonto.Models.Timesheet.Empregadores;
+﻿using Timesheet.Models.Contratos;
 
 namespace MeuPonto.Pages.Empregadores;
 

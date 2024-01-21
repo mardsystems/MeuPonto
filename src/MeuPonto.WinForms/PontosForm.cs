@@ -26,8 +26,8 @@ namespace MeuPonto
         {
             // TODO: This line of code loads data into the 'mainDataSet.PontoComprovanteImagemTipos' table. You can move, or remove it, as needed.
             this.pontoComprovanteImagemTiposTableAdapter.Fill(this.mainDataSet.PontoComprovanteImagemTipos);
-            // TODO: This line of code loads data into the 'mainDataSet.Perfis' table. You can move, or remove it, as needed.
-            this.perfisTableAdapter.Fill(this.mainDataSet.Perfis);
+            // TODO: This line of code loads data into the 'mainDataSet.Contratos' table. You can move, or remove it, as needed.
+            this.contratosTableAdapter.Fill(this.mainDataSet.Contratos);
             // TODO: This line of code loads data into the 'mainDataSet.Comprovantes' table. You can move, or remove it, as needed.
             this.pontoComprovantesTableAdapter.Fill(this.mainDataSet.Comprovantes);
             // TODO: This line of code loads data into the 'mainDataSet.Pontos' table. You can move, or remove it, as needed.
@@ -47,7 +47,7 @@ namespace MeuPonto
             if (result == DialogResult.OK)
             {
                 byte[] imagem;
-                
+
                 using (var fileStream = new FileStream(imagemOpenFileDialog.FileName, FileMode.Open))
                 {
                     using (var memoryStream = new MemoryStream())

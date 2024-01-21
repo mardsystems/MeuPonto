@@ -1,11 +1,10 @@
 ﻿using MeuPonto.Models;
-using MeuPonto.Models.Timesheet.Empregadores;
-using MeuPonto.Models.Timesheet.Perfis;
-using MeuPonto.Models.Timesheet.Pontos;
-using MeuPonto.Models.Timesheet.Pontos.Comprovantes;
-using MeuPonto.Models.Timesheet.Pontos.Folhas;
-using MeuPonto.Models.Timesheet.Trabalhadores;
+using Timesheet.Models.Contratos;
+using Timesheet.Models.Pontos;
+using Timesheet.Models.Pontos;
 using Microsoft.EntityFrameworkCore;
+using Timesheet.Models.Folhas;
+using MeuPonto.Models.Trabalhadores;
 
 namespace MeuPonto.Data;
 
@@ -35,20 +34,20 @@ public class MeuPontoDbContext : DbContext
 
         modelBuilder.Entity<Empregador>().Property(b => b.CreationDate).HasDefaultValueSql("getdate()");
 
-        modelBuilder.Entity<Perfil>()
-            .ToTable("Perfis");
+        modelBuilder.Entity<Contrato>()
+            .ToTable("Contratos");
 
-        modelBuilder.Entity<Perfil>().Property(b => b.CreationDate).HasDefaultValueSql("getdate()");
+        modelBuilder.Entity<Contrato>().Property(b => b.CreationDate).HasDefaultValueSql("getdate()");
 
-        modelBuilder.Entity<Perfil>().HasOne(a => a.Empregador).WithMany().HasForeignKey(a => a.EmpregadorId).OnDelete(DeleteBehavior.Restrict);
+        modelBuilder.Entity<Contrato>().HasOne(a => a.Empregador).WithMany().HasForeignKey(a => a.EmpregadorId).OnDelete(DeleteBehavior.Restrict);
 
-        modelBuilder.Entity<Perfil>().OwnsOne(a => a.JornadaTrabalhoSemanalPrevista, x =>
+        modelBuilder.Entity<Contrato>().OwnsOne(a => a.JornadaTrabalhoSemanalPrevista, x =>
         {
             x.OwnsMany(b => b.Semana, y =>
             {
-                y.ToTable("Perfis_JornadaTrabalhoDiaria");
-                y.WithOwner().HasForeignKey("PerfilId");
-                y.HasKey("PerfilId", "DiaSemana");
+                y.ToTable("Contratos_JornadaTrabalhoDiaria");
+                y.WithOwner().HasForeignKey("ContratoId");
+                y.HasKey("ContratoId", "DiaSemana");
             });
         });
 
@@ -57,7 +56,7 @@ public class MeuPontoDbContext : DbContext
 
         modelBuilder.Entity<Ponto>().Property(b => b.CreationDate).HasDefaultValueSql("getdate()");
 
-        modelBuilder.Entity<Ponto>().HasOne(a => a.Perfil).WithMany().HasForeignKey(a => a.PerfilId).OnDelete(DeleteBehavior.Restrict);
+        modelBuilder.Entity<Ponto>().HasOne(a => a.Contrato).WithMany().HasForeignKey(a => a.ContratoId).OnDelete(DeleteBehavior.Restrict);
 
         //modelBuilder.Entity<Ponto>().Property(x => x.PausaId).HasConversion(new EnumToStringConverter<PausaEnum>());
 
@@ -99,7 +98,7 @@ public class MeuPontoDbContext : DbContext
 
         modelBuilder.Entity<Folha>().Property(b => b.CreationDate).HasDefaultValueSql("getdate()");
 
-        modelBuilder.Entity<Folha>().HasOne(a => a.Perfil).WithMany().HasForeignKey(a => a.PerfilId).OnDelete(DeleteBehavior.Restrict);
+        modelBuilder.Entity<Folha>().HasOne(a => a.Contrato).WithMany().HasForeignKey(a => a.ContratoId).OnDelete(DeleteBehavior.Restrict);
 
         modelBuilder.Entity<Folha>().OwnsOne(a => a.ApuracaoMensal, x =>
         {
@@ -131,7 +130,7 @@ public class MeuPontoDbContext : DbContext
     public DbSet<Configuracoes> Configuracoes { get; set; }
     public DbSet<Trabalhador> Trabalhadores { get; set; }
     public DbSet<Empregador> Empregadores { get; set; }
-    public DbSet<Perfil> Perfis { get; set; }
+    public DbSet<Contrato> Contratos { get; set; }
     public DbSet<Ponto> Pontos { get; set; }
     public DbSet<Comprovante> Comprovantes { get; set; }
     public DbSet<Folha> Folhas { get; set; }

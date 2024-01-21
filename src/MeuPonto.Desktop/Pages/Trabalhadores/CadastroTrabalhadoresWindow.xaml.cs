@@ -1,5 +1,5 @@
 ﻿using MeuPonto.Data;
-using MeuPonto.Models.Timesheet.Trabalhadores;
+using MeuPonto.Models.Trabalhadores;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;

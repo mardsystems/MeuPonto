@@ -1,0 +1,115 @@
+﻿@page
+@model MeuPonto.Pages.Contratos.CriarModel
+
+@{
+    ViewData["Title"] = "Criar Contrato";
+}
+
+@section Breadcrumb {
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
+            <li class="breadcrumb-item"><a asp-page="./Index">Contratos</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Criar</li>
+        </ol>
+    </nav>
+}
+
+@section Title {
+    @ViewData["Title"] <span class="badge bg-secondary">Novo</span>
+}
+
+@section CardHeader {
+    <ul class="nav nav-tabs card-header-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" asp-page="./Criar" target="_modal">
+                <i class="bi bi-plus-circle"></i>
+                Criar Novo
+            </a>
+        </li>
+    </ul>
+}
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="row mb-3">
+    <label asp-for="AberturaContrato.Nome" class="col-sm-3 col-form-label"></label>
+    <div class="col-sm-9">
+        <input asp-for="AberturaContrato.Nome" class="form-control" />
+        <span asp-validation-for="AberturaContrato.Nome" class="text-danger"></span>
+    </div>
+</div>
+<div class="row mb-3">
+    <div class="col-sm-9 offset-sm-3">
+        <div class="form-check">
+            <input type="checkbox" asp-for="AberturaContrato.Ativo" class="form-check-input" />
+            <label asp-for="AberturaContrato.Ativo" class="form-check-label"></label>
+        </div>
+        <span asp-validation-for="AberturaContrato.Ativo" class="text-danger"></span>
+    </div>
+</div>
+<div class="row mb-3">
+    <label asp-for="AberturaContrato.EmpregadorId" class="col-sm-3 col-form-label"></label>
+    <div class="col-sm-9">
+        <select asp-for="AberturaContrato.EmpregadorId" class="form-select" asp-items="ViewBag.EmpregadorId"></select>
+        <span asp-validation-for="AberturaContrato.EmpregadorId" class="text-danger"></span>
+    </div>
+</div>
+<div class="card mb-3">
+    <div class="card-header">
+        @Html.DisplayNameFor(model => model.AberturaContrato.JornadaTrabalhoSemanalPrevista)
+    </div>
+    <div class="card-body">
+        <div class="accordion mb-3" id="accordionJornadaTrabalhoSemanalPrevista">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSemana" aria-expanded="true" aria-controls="collapseSemana">
+                        @Html.DisplayNameFor(model => model.AberturaContrato.JornadaTrabalhoSemanalPrevista.Semana)
+                    </button>
+                </h2>
+                <div id="collapseSemana" class="accordion-collapse collapse show" data-bs-parent="#accordionJornadaTrabalhoSemanalPrevista">
+                    <div class="accordion-body">
+                        @for (int i = 0; i < Model.AberturaContrato.JornadaTrabalhoSemanalPrevista.Semana.Count; i++)
+                        {
+                            <input asp-for="AberturaContrato.JornadaTrabalhoSemanalPrevista.Semana[i].DiaSemana" type="hidden" />
+                            <div class="row mb-3">
+                                <label asp-for="AberturaContrato.JornadaTrabalhoSemanalPrevista.Semana[i].Tempo" class="col-sm-3 col-form-label">
+                                    @Model.AberturaContrato.JornadaTrabalhoSemanalPrevista.Semana[i].DiaSemana.Translate()
+                                </label>
+                                <div class="col-sm-9">
+                                    <input asp-for="AberturaContrato.JornadaTrabalhoSemanalPrevista.Semana[i].Tempo" class="form-control" />
+                                    <span asp-validation-for="AberturaContrato.JornadaTrabalhoSemanalPrevista.Semana[i].Tempo" class="text-danger"></span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button value="Totalizar" class="btn btn-secondary">
+            <i class="bi bi-save"></i>
+            Totalizar
+        </button>
+        <div class="row">
+            <label asp-for="AberturaContrato.JornadaTrabalhoSemanalPrevista.TempoTotal" class="col-sm-3 col-form-label"></label>
+            <div class="col-sm-9">
+                <div class="input-group">
+                    <input value="@String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", Model.AberturaContrato.JornadaTrabalhoSemanalPrevista.TempoTotal)" class="form-control" disabled />
+                    <button class="btn btn-outline-secondary" name="command" value="RecalcularTempoTotal">Recalcular</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section FormActions {
+    <input type="hidden" asp-for="RefererUrl" />
+    <button type="submit" value="Salvar" class="btn btn-primary">
+        Salvar
+    </button>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

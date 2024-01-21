@@ -1,0 +1,73 @@
+﻿@page
+@model MeuPonto.Pages.Contratos.Empregadores.EditarModel
+
+@{
+    ViewData["Title"] = "Editar Empregador";
+}
+
+@section Breadcrumb {
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
+            <li class="breadcrumb-item"><a asp-page="/Contratos/Index">Contratos</a></li>
+            <li class="breadcrumb-item"><a asp-page="./Index">Empregadores</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Editar</li>
+        </ol>
+    </nav>
+}
+
+@section Title {
+    @ViewData["Title"] <span class="badge bg-secondary">@Html.DisplayFor(model => model.Empregador.Nome)</span>
+}
+
+@section CardHeader {
+    <ul class="nav nav-tabs card-header-tabs">
+        <li class="me-1">
+            <a class="btn btn-primary" asp-page="./Criar" target="_modal">
+                <i class="bi bi-plus-circle"></i>
+                Criar Novo
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-page="./Detalhar" asp-route-id="@Model.Empregador?.Id">
+                <i class="bi bi-card-text"></i>
+                <span class="d-none d-sm-inline">Detalhar</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page">
+                <i class="bi bi-pencil"></i>
+                Editar
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-danger" asp-page="./Excluir" asp-route-id="@Model.Empregador?.Id" target="_modal">
+                <i class="bi bi-trash"></i>
+                <span class="d-none d-sm-inline">Excluir</span>
+            </a>
+        </li>
+    </ul>
+}
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="row mb-3">
+    <label asp-for="Empregador.Nome" class="col-sm-3 col-form-label"></label>
+    <div class="col-sm-9">
+        <input asp-for="Empregador.Nome" class="form-control" />
+        <span asp-validation-for="Empregador.Nome" class="text-danger"></span>
+    </div>
+</div>
+
+@section FormActions {
+    <input type="hidden" asp-for="Empregador.Version" />
+    <input type="hidden" asp-for="RefererUrl" />
+    <button type="submit" value="Salvar" class="btn btn-primary">
+        Salvar
+    </button>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

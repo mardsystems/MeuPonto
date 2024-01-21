@@ -1,4 +1,4 @@
-﻿using MeuPonto.Models.Timesheet.Pontos;
+﻿using Timesheet.Models.Pontos;
 
 namespace MeuPonto.Drivers;
 
@@ -22,7 +22,7 @@ public class RegistroPontosDriver
     {
         var pontoRegistrado = new Ponto
         {
-            Perfil = new()
+            Contrato = new()
             {
 
             },

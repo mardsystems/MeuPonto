@@ -1,6 +1,6 @@
 ﻿@page
-@using MeuPonto.Models.Timesheet.Pontos
-@using MeuPonto.Models.Timesheet.Pontos.Folhas
+@using Timesheet.Models.Pontos
+@using Timesheet.Models.Folhas
 @model IndexModel
 @{
     ViewData["Title"] = "Home";
@@ -16,7 +16,7 @@
 
 @if (User.Identity?.IsAuthenticated == true)
 {
-    if (ViewBag.HasPerfil)
+    if (ViewBag.HasContrato)
     {
         <div class="d-grid col-sm-10 col-md-8 col-lg-6 mx-auto gap-2 mb-3">
             <a class="btn btn-primary btn-lg Marcacao Ponto" asp-page="./Pontos/Marcar" target="_modal">
@@ -25,15 +25,15 @@
             </a>
             <a class="btn btn-primary btn-lg" asp-page="/Pontos/Comprovantes/Guardar" target="_modal">
                 <i class="bi bi-qr-code"></i>
-                Guardar Comprovante de Ponto
+                Guardar Comprovante
             </a>
         </div>
 
         <form class="row row-cols-md-auto justify-content-md-center g-2 mb-3" method="get">
             <div class="col-12">
                 <div class="input-group">
-                    <label asp-for="PerfilId" class="input-group-text"></label>
-                    <select asp-for="PerfilId" class="form-select" asp-items="ViewBag.PerfilId"></select>
+                    <label asp-for="ContratoId" class="input-group-text"></label>
+                    <select asp-for="ContratoId" class="form-select" asp-items="ViewBag.ContratoId"></select>
                 </div>
             </div>
             <div action="col-12">
@@ -53,7 +53,7 @@
         {
             <div class="alert alert-info" role="alert">
                 Use a busca acima para <b>apurar uma folha de ponto</b>.
-                Se preferir, você também pode <a class="Abertura Folha" asp-page="/Pontos/Folhas/Abrir" target="_modal">abrir uma folha nova</a>.
+                Se preferir, você também pode <a class="Abertura Folha" asp-page="/Folhas/Abrir" target="_modal">abrir uma folha nova</a>.
             </div>
         }
         else
@@ -125,19 +125,19 @@
                         <div class="card-body">
                             @if (Model.Folha.StatusId == StatusFolhaEnum.Aberta)
                             {
-                                <a class="card-link text-decoration-none" asp-page="/Pontos/Folhas/Fechar" asp-route-id="@Model.Folha.Id" target="_modal">
+                                <a class="card-link text-decoration-none" asp-page="/Folhas/Fechar" asp-route-id="@Model.Folha.Id" target="_modal">
                                     Fechar
                                     <i class="bi bi-lock"></i>
                                 </a>
                             }
                             else
                             {
-                                <a class="card-link text-decoration-none" asp-page="/Pontos/Folhas/Reabrir" asp-route-id="@Model.Folha.Id" target="_modal">
+                                <a class="card-link text-decoration-none" asp-page="/Folhas/Reabrir" asp-route-id="@Model.Folha.Id" target="_modal">
                                     Reabrir
                                     <i class="bi bi-unlock"></i>
                                 </a>
                             }
-                            <a class="card-link text-decoration-none edicao" asp-page="/Pontos/Folhas/Editar" asp-route-id="@Model.Folha.Id" target="_modal">
+                            <a class="card-link text-decoration-none edicao" asp-page="/Folhas/Editar" asp-route-id="@Model.Folha.Id" target="_modal">
                                 Editar
                                 <i class="bi bi-pencil"></i>
                             </a>
@@ -448,18 +448,18 @@
     else
     {
         <div class="d-grid gap-2 col-sm-10 col-md-8 col-lg-6 mx-auto mb-3">
-            <a class="btn btn-primary btn-lg criacao perfil" asp-page="/Perfis/Criar" target="_modal">
+            <a class="btn btn-primary btn-lg criacao contrato" asp-page="/Contratos/Criar" target="_modal">
                 <i class="bi bi-plus-circle"></i>
-                Criar Novo Perfil
+                Criar Novo Contrato
             </a>
         </div>
 
         <div class="alert alert-warning mb-3" role="alert">
-            Você não tem nenhum perfil cadastrado.
+            Você não tem nenhum contrato cadastrado.
         </div>
 
         <div class="alert alert-info" role="alert">
-            Crie um novo perfil para saber o tempo total previsto de trabalho na sua folha de ponto.
+            Crie um novo contrato para saber o tempo total previsto de trabalho na sua folha de ponto.
         </div>
     }
 }

@@ -36,7 +36,7 @@ public class GestaoFolhasDriver
     {
         var folhaAberta = new Folha
         {
-            Perfil = new()
+            Contrato = new()
             {
 
             },

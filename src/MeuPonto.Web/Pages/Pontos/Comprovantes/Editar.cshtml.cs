@@ -1,8 +1,9 @@
 ﻿using MeuPonto.Extensions;
-using MeuPonto.Models.Timesheet.Pontos.Comprovantes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
+using Timesheet.Models.Pontos;
+using Timesheet.Models.Pontos.BackupComprovantes;
 
 namespace MeuPonto.Pages.Pontos.Comprovantes;
 
@@ -30,7 +31,7 @@ public class EditarModel : FormPageModel
 
         var comprovante = await _db.Comprovantes
             .Include(x => x.Ponto)
-                .ThenInclude(x => x.Perfil)
+                .ThenInclude(x => x.Contrato)
             .FirstOrDefaultAsync(m => m.Id == id);
 
         if (comprovante == null)
@@ -58,7 +59,7 @@ public class EditarModel : FormPageModel
 
         var comprovante = await _db.Comprovantes
             .Include(x => x.Ponto)
-                .ThenInclude(x => x.Perfil)
+                .ThenInclude(x => x.Contrato)
             .FirstOrDefaultAsync(m => m.Id == Comprovante.Id);
 
         if (!ModelState.IsValid)

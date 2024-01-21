@@ -1,5 +1,4 @@
-﻿using MeuPonto.Models.Timesheet.Pontos;
-using MeuPonto.Models.Timesheet.Pontos.Comprovantes;
+﻿using Timesheet.Models.Pontos;
 
 namespace MeuPonto.Support;
 

@@ -1,0 +1,151 @@
+﻿@page
+@model MeuPonto.Pages.Pontos.Folhas.ExcluirModel
+
+@{
+    ViewData["Title"] = "Excluir Folha de Ponto";
+}
+
+@section Breadcrumb {
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
+            <li class="breadcrumb-item"><a asp-page="./Index">Folhas</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Excluir</li>
+        </ol>
+    </nav>
+}
+
+@section Title {
+    @ViewData["Title"] <span class="badge bg-secondary">@Html.DisplayFor(model => model.Folha.Competencia)</span> <span class="badge @(Model.Folha.StatusId == StatusFolhaEnum.Aberta ? "text-bg-warning" : "text-bg-success")"><i class="bi @(Model.Folha.StatusId == StatusFolhaEnum.Aberta ? "bi-file-earmark-fill" : "bi-file-earmark-lock-fill")"></i></span>
+}
+
+@section CardHeader {
+    <ul class="nav nav-tabs card-header-tabs">
+        <li class="me-1">
+            <div class="btn-group">
+                <a class="btn btn-primary" asp-page="./Criar" target="_modal">
+                    <i class="bi bi-plus-circle"></i>
+                    Criar Nova
+                </a>
+                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent">
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="dropdown-item Abertura Folha" asp-page="./Abrir" target="_modal">
+                            <i class="bi bi-file-earmark-plus"></i>
+                            Abrir Folha
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-page="./Detalhar" asp-route-id="@Model.Folha?.Id">
+                <i class="bi bi-card-text"></i>
+                <span class="d-none d-sm-inline">Detalhar</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-page="./Editar" asp-route-id="@Model.Folha?.Id" target="_modal">
+                <i class="bi bi-pencil"></i>
+                <span class="d-none d-sm-inline">Editar</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-danger active" aria-current="page">
+                <i class="bi bi-trash"></i>
+                Excluir
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-page="./Fechar" asp-route-id="@Model.Folha?.Id" target="_modal">
+                <i class="bi bi-file-earmark-check"></i>
+                <span class="d-none d-sm-inline">Fechar</span>
+            </a>
+        </li>
+    </ul>
+}
+
+<div class="alert alert-danger" role="alert">
+    Tem certeza que deseja excluir isso?
+</div>
+<dl class="row g-3 Folha">
+    <dt class="col-sm-3 Contrato">
+        @Html.DisplayNameFor(model => model.Folha.Contrato)
+    </dt>
+    <dd class="col-sm-9 Contrato">
+        <a class="text-decoration-none" asp-page="/Contratos/Detalhar" asp-route-id="@Model.Folha.ContratoId" title="Detalhar Contrato" target="_blank">
+            @Html.DisplayFor(model => model.Folha.Contrato.Nome)
+            <i class="bi bi-link-45deg"></i>
+        </a>
+    </dd>
+    <dt class="col-sm-3 Competencia">
+        @Html.DisplayNameFor(model => model.Folha.Competencia)
+    </dt>
+    <dd class="col-sm-9 Competencia">
+        @Html.DisplayFor(model => model.Folha.Competencia)
+    </dd>
+    <dt class="col-sm-3 Status">
+        @Html.DisplayNameFor(model => model.Folha.StatusId)
+    </dt>
+    <dd class="col-sm-9 Status">
+        <span class="badge fs-6 @(Model.Folha.StatusId == StatusFolhaEnum.Aberta ? "text-bg-warning" : "text-bg-success")">
+            @Html.DisplayFor(model => model.Folha.StatusId)
+            <i class="bi @(Model.Folha.StatusId == StatusFolhaEnum.Aberta ? "bi-file-earmark-fill" : "bi-file-earmark-lock-fill")"></i>
+        </span>
+    </dd>
+    <dt class="col-sm-3 Observacao">
+        @Html.DisplayNameFor(model => model.Folha.Observacao)
+    </dt>
+    <dd class="col-sm-9 Observacao">
+        @Html.DisplayFor(model => model.Folha.Observacao)
+    </dd>
+</dl>
+<div class="accordion mb-3" id="accordionDetalhes">
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDetalhesTecnicos" aria-expanded="false" aria-controls="collapseDetalhesTecnicos">
+                Detalhes Técnicos
+            </button>
+        </h2>
+        <div id="collapseDetalhesTecnicos" class="accordion-collapse collapse" data-bs-parent="#accordionDetalhes">
+            <div class="accordion-body">
+                <dl class="row g-3">
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Folha.Id)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.Folha.Id)
+                    </dd>
+                    @*<dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Folha.PartitionKey)
+                    </dt>
+                    <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Folha.PartitionKey)
+                    </dd>*@
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Folha.CreationDate)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.Folha.CreationDate)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Folha.Version)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.Folha.Version)
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section FormActions {
+    <input type="hidden" asp-for="Folha.Id" />
+    <input type="hidden" asp-for="RefererUrl" />
+    <button type="submit" value="Excluir" class="btn btn-danger">
+        Excluir
+    </button>
+}

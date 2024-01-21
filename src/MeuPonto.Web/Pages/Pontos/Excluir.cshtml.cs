@@ -1,8 +1,8 @@
 ﻿using MeuPonto.Data;
-using MeuPonto.Models.Timesheet.Pontos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using Timesheet.Models.Pontos;
 
 namespace MeuPonto.Pages.Pontos;
 

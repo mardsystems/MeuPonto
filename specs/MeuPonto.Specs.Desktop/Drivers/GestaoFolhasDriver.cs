@@ -1,4 +1,4 @@
-﻿using MeuPonto.Models.Timesheet.Pontos.Folhas;
+﻿using Timesheet.Models.Folhas;
 
 namespace MeuPonto.Drivers;
 
@@ -38,7 +38,7 @@ public class GestaoFolhasDriver
     {
         var folhaAberta = new Folha
         {
-            Perfil = new()
+            Contrato = new()
             {
 
             },

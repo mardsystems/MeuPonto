@@ -1,8 +1,8 @@
 ﻿using AngleSharp.Html.Dom;
 using MeuPonto.Helpers;
-using MeuPonto.Models.Timesheet.Pontos;
 using MeuPonto.Support;
 using System.ComponentModel;
+using Timesheet.Models.Pontos;
 
 namespace MeuPonto.Drivers;
 
@@ -36,7 +36,7 @@ public class RegistroPontosDriver
 
         var form = Document.GetForm();
 
-        form.GetSelect("Ponto.PerfilId").GetOption(ponto.Perfil.Nome).IsSelected = true;
+        form.GetSelect("Ponto.ContratoId").GetOption(ponto.Contrato.Nome).IsSelected = true;
         form.GetInput("Ponto.MomentoId", ponto.MomentoId.GetDisplayName()).IsChecked = true;
         if (ponto.PausaId != null)
         {
@@ -72,9 +72,9 @@ public class RegistroPontosDriver
 
         var pontoRegistrado = new Ponto
         {
-            Perfil = new()
+            Contrato = new()
             {
-                Nome = dl.GetDataListItem("Perfil").GetString()
+                Nome = dl.GetDataListItem("Contrato").GetString()
             },
             DataHora = DateTime.Parse(dl.GetDataListItem("DataHora").GetString()),
             MomentoId = (MomentoEnum)Enum.Parse(typeof(MomentoEnum), momentoValue),

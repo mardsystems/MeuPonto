@@ -1,7 +1,8 @@
 using MeuPonto.Data;
 using MeuPonto.Drivers;
-using MeuPonto.Models.Timesheet.Pontos;
 using MeuPonto.Support;
+using Timesheet.Models.Pontos;
+using Timesheet.Models.Pontos.RegistroPontos;
 
 namespace MeuPonto.StepDefinitions;
 
@@ -14,7 +15,7 @@ public class RegistroPontosStepDefinitions
 
     private readonly RegistroPontosDriver _registroPontosDriver;
 
-    private readonly CadastroPerfisContext _cadastroPerfis;
+    private readonly GestaoContratosContext _gestaoContratos;
 
     private readonly MeuPontoDbContext _db;
 
@@ -22,7 +23,7 @@ public class RegistroPontosStepDefinitions
         ScenarioContext scenario,
         RegistroPontosContext registroPontos,
         RegistroPontosDriver registroPontosDriver,
-        CadastroPerfisContext cadastroPerfis,
+        GestaoContratosContext gestaoContratos,
         MeuPontoDbContext db)
     {
         _scenario = scenario;
@@ -31,7 +32,7 @@ public class RegistroPontosStepDefinitions
 
         _registroPontosDriver = registroPontosDriver;
 
-        _cadastroPerfis = cadastroPerfis;
+        _gestaoContratos = gestaoContratos;
 
         _db = db;
     }
@@ -70,12 +71,12 @@ public class RegistroPontosStepDefinitions
         _registroPontos.DataHora = dataHora;
     }
 
-    [Given(@"que o trabalhador qualifica o ponto com o perfil '([^']*)'")]
-    public void GivenQueOTrabalhadorQualificaOPontoComOPerfil(string nome)
+    [Given(@"que o trabalhador qualifica o ponto com o contrato '([^']*)'")]
+    public void GivenQueOTrabalhadorQualificaOPontoComOContrato(string nome)
     {
-        var perfil = _db.Perfis.FirstOrDefault(x => x.Nome == nome);
+        var contrato = _db.Contratos.FirstOrDefault(x => x.Nome == nome);
 
-        perfil.QualificaPonto(_registroPontos.Ponto);
+        contrato.QualificaPonto(_registroPontos.Ponto);
 
         _db.SaveChanges();
     }
@@ -85,17 +86,17 @@ public class RegistroPontosStepDefinitions
     {
         if (_registroPontos.Ponto.EstaSemQualificacao())
         {
-            var perfil = _db.Perfis.FirstOrDefault();
+            var contrato = _db.Contratos.FirstOrDefault();
 
-            if (perfil == default)
+            if (contrato == default)
             {
-                perfil = _cadastroPerfis.Perfil;
+                contrato = _gestaoContratos.Contrato;
 
-                _db.Perfis.Add(perfil);
+                _db.Contratos.Add(contrato);
                 _db.SaveChanges();
             }
 
-            perfil.QualificaPonto(_registroPontos.Ponto);
+            contrato.QualificaPonto(_registroPontos.Ponto);
         }
 
         var pontoMarcado = _registroPontosDriver.MarcarPonto(_registroPontos.Ponto);
@@ -109,10 +110,10 @@ public class RegistroPontosStepDefinitions
         _registroPontos.PontoRegistrado.Should().NotBeNull();
     }
 
-    [Then(@"o perfil do ponto deverá deverá ser '([^']*)'")]
-    public void ThenOPerfilDoPontoDeveraDeveraSer(string nome)
+    [Then(@"o contrato do ponto deverá deverá ser '([^']*)'")]
+    public void ThenOContratoDoPontoDeveraDeveraSer(string nome)
     {
-        _registroPontos.PontoRegistrado.Perfil.Nome.Should().Be(nome);
+        _registroPontos.PontoRegistrado.Contrato.Nome.Should().Be(nome);
     }
 
     [Then(@"a data do ponto deverá ser '([^']*)'")]

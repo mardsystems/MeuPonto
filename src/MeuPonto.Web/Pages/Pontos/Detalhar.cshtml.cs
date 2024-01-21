@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using MeuPonto.Models.Timesheet.Pontos;
-using MeuPonto.Models.Timesheet.Pontos.Comprovantes;
 using MeuPonto.Extensions;
+using Timesheet.Models.Pontos;
 
 namespace MeuPonto.Pages.Pontos;
 
@@ -28,7 +27,7 @@ public class DetalharModel : PageModel
         }
 
         var ponto = await _db.Pontos
-            .Include(x => x.Perfil)
+            .Include(x => x.Contrato)
             .FirstOrDefaultAsync(m => m.Id == id);
 
         if (ponto == null)

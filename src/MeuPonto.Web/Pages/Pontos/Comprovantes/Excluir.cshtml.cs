@@ -1,7 +1,7 @@
 ﻿using MeuPonto.Data;
-using MeuPonto.Models.Timesheet.Pontos.Comprovantes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Timesheet.Models.Pontos;
 
 namespace MeuPonto.Pages.Pontos.Comprovantes;
 
@@ -26,7 +26,7 @@ public class ExcluirModel : FormPageModel
 
         var comprovante = await _db.Comprovantes
             .Include(x => x.Ponto)
-                .ThenInclude(x => x.Perfil)
+                .ThenInclude(x => x.Contrato)
             .FirstOrDefaultAsync(m => m.Id == id);
 
         if (comprovante == null)

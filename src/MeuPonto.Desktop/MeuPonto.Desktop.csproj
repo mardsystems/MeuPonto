@@ -62,6 +62,7 @@
     <ProjectReference Include="..\MeuPonto.EntityFrameworkCore.SqlServer\MeuPonto.EntityFrameworkCore.SqlServer.csproj" Condition="'$(Configuration)|$(Platform)'=='Release_SqlServer|AnyCPU'" />
     <ProjectReference Include="..\MeuPonto.EntityFrameworkCore.Cosmos\MeuPonto.EntityFrameworkCore.Cosmos.csproj" Condition="'$(Configuration)|$(Platform)'=='Release_Cosmos|AnyCPU'" />
     <ProjectReference Include="..\System.Xaml.Extensions\System.Xaml.Extensions.csproj" />
+    <ProjectReference Include="..\Timesheet.DocumentModel\Timesheet.DocumentModel.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\refresh_16xLG.png">

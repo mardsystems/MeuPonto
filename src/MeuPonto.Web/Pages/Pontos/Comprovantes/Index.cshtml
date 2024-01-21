@@ -58,7 +58,7 @@
                 </tr>
                 <tr>
                     <th scope="col">
-                        @Html.DisplayNameFor(model => model.Comprovantes[0].Ponto.Perfil)
+                        @Html.DisplayNameFor(model => model.Comprovantes[0].Ponto.Contrato)
                     </th>
                     <th scope="col">
                         @Html.DisplayNameFor(model => model.Comprovantes[0].Ponto.DataHora)
@@ -84,7 +84,7 @@
                         </div>
                     </th>
                     <th>
-                        <select asp-for="Ponto.PerfilId" class="form-select" asp-items="ViewBag.PerfilId"></select>
+                        <select asp-for="Ponto.ContratoId" class="form-select" asp-items="ViewBag.ContratoId"></select>
                     </th>
                     <th>
                         <input asp-for="Ponto.DataHora" class="form-control" />
@@ -124,8 +124,8 @@
                             </div>
                         </td>
                         <td>
-                            <a class="text-decoration-none" asp-page="/Perfis/Detalhar" asp-route-id="@item.Ponto.PerfilId" title="Detalhar Perfil" target="_blank">
-                                @Html.DisplayFor(modelItem => item.Ponto.Perfil.Nome)
+                            <a class="text-decoration-none" asp-page="/Contratos/Detalhar" asp-route-id="@item.Ponto.ContratoId" title="Detalhar Contrato" target="_blank">
+                                @Html.DisplayFor(modelItem => item.Ponto.Contrato.Nome)
                                 <i class="bi bi-link-45deg"></i>
                             </a>
                         </td>

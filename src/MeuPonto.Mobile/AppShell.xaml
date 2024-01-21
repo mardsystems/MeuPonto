@@ -3,10 +3,10 @@
     x:Class="MeuPonto.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:contratos="clr-namespace:MeuPonto.Pages.Contratos"
     xmlns:empregadores="clr-namespace:MeuPonto.Pages.Empregadores"
     xmlns:local="clr-namespace:MeuPonto"
     xmlns:pages="clr-namespace:MeuPonto.Pages"
-    xmlns:perfis="clr-namespace:MeuPonto.Pages.Perfis"
     xmlns:pontos="clr-namespace:MeuPonto.Pages.Pontos"
     Title="Meu Ponto">
     <Shell.FlyoutHeaderTemplate>
@@ -39,10 +39,10 @@
             Route="Pontos" />
 
         <ShellContent
-            Title="Perfis"
-            ContentTemplate="{DataTemplate perfis:CadastroPerfisPage}"
-            Icon="flyout_perfis.png"
-            Route="Perfis" />
+            Title="Contratos"
+            ContentTemplate="{DataTemplate contratos:GestaoContratosPage}"
+            Icon="flyout_contratos.png"
+            Route="Contratos" />
 
         <ShellContent
             Title="Empregadores"

@@ -1,0 +1,99 @@
+﻿@page
+@model MeuPonto.Pages.Contratos.Empregadores.DetalharModel
+
+@{
+    ViewData["Title"] = "Detalhar Empregador";
+}
+
+@section Breadcrumb {
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
+            <li class="breadcrumb-item"><a asp-page="/Contratos/Index">Contratos</a></li>
+            <li class="breadcrumb-item"><a asp-page="./Index">Empregadores</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Detalhar</li>
+        </ol>
+    </nav>
+}
+
+@section Title {
+    @ViewData["Title"] <span class="badge bg-secondary">@Html.DisplayFor(model => model.Empregador.Nome)</span>
+}
+
+@section CardHeader {
+    <ul class="nav nav-tabs card-header-tabs">
+        <li class="me-1">
+            <a class="btn btn-primary" asp-page="./Criar" target="_modal">
+                <i class="bi bi-plus-circle"></i>
+                Criar Novo
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page">
+                <i class="bi bi-card-text"></i>
+                Detalhar
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-page="./Editar" asp-route-id="@Model.Empregador?.Id" target="_modal">
+                <i class="bi bi-pencil"></i>
+                <span class="d-none d-sm-inline">Editar</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-danger" asp-page="./Excluir" asp-route-id="@Model.Empregador?.Id" target="_modal">
+                <i class="bi bi-trash"></i>
+                <span class="d-none d-sm-inline">Excluir</span>
+            </a>
+        </li>
+    </ul>
+}
+
+<dl class="row g-3 Empregador">
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.Empregador.Nome)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.Empregador.Nome)
+    </dd>
+</dl>
+<div class="accordion" id="accordionDetalhes">
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDetalhesTecnicos" aria-expanded="false" aria-controls="collapseDetalhesTecnicos">
+                Detalhes Técnicos
+            </button>
+        </h2>
+        <div id="collapseDetalhesTecnicos" class="accordion-collapse collapse" data-bs-parent="#accordionDetalhes">
+            <div class="accordion-body">
+                <dl class="row g-3">
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Empregador.Id)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.Empregador.Id)
+                    </dd>
+                    @*                            <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Empregador.PartitionKey)
+                    </dt>
+                    <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Empregador.PartitionKey)
+                    </dd>
+                    *@
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Empregador.CreationDate)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.Empregador.CreationDate)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Empregador.Version)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.Empregador.Version)
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>

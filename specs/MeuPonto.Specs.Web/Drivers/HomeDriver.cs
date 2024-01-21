@@ -1,7 +1,7 @@
 ﻿using AngleSharp.Html.Dom;
 using MeuPonto.Helpers;
-using MeuPonto.Models.Timesheet.Pontos.Folhas;
 using MeuPonto.Support;
+using Timesheet.Models.Folhas;
 
 namespace MeuPonto.Drivers;
 
@@ -11,13 +11,13 @@ public class HomeDriver
 
     public IHtmlDocument Document { get; private set; }
 
-    public IHtmlAnchorElement PerfisAnchor { get; private set; }
+    public IHtmlAnchorElement ContratosAnchor { get; private set; }
 
     public IHtmlAnchorElement MarcacaoPontoAnchor { get; private set; }
 
     public IHtmlAnchorElement AberturaFolhaPontoAnchor { get; private set; }
 
-    public IHtmlAnchorElement CriacaoPerfilAnchor { get; private set; }
+    public IHtmlAnchorElement CriacaoContratoAnchor { get; private set; }
 
     public HomeDriver(AngleSharpContext angleSharp)
     {
@@ -28,9 +28,9 @@ public class HomeDriver
     {
         Document = _angleSharp.GetDocument("/");
 
-        PerfisAnchor = Document.GetAnchor("Perfis");
+        ContratosAnchor = Document.GetAnchor("Contratos");
 
-        PerfisAnchor.Should().NotBeNull("'a tela inicial deve ter um link para o cadastro de perfis'");
+        ContratosAnchor.Should().NotBeNull("'a tela inicial deve ter um link para o cadastro de contratos'");
 
         //
 
@@ -44,9 +44,9 @@ public class HomeDriver
 
         //
 
-        CriacaoPerfilAnchor = Document.GetAnchor("Criacao.Perfil");
+        CriacaoContratoAnchor = Document.GetAnchor("Criacao.Contrato");
 
-        //CriacaoPerfilAnchor.Should().NotBeNull("'a tela inicial deve ter um link para a criação de perfil'");
+        //CriacaoContratoAnchor.Should().NotBeNull("'a tela inicial deve ter um link para a criação de contrato'");
     }
 
     public Folha ApurarFolha(Folha folhaAberta)
@@ -55,9 +55,9 @@ public class HomeDriver
 
         var form = Document.GetForm();
 
-        var perfil = folhaAberta.Perfil;
+        var contrato = folhaAberta.Contrato;
 
-        form.GetSelect("PerfilId").GetOption(perfil.Nome).IsSelected = true;
+        form.GetSelect("ContratoId").GetOption(contrato.Nome).IsSelected = true;
         form.GetInput("Competencia").ValueAsDate = folhaAberta.Competencia;
 
         var submitButton = form.GetSubmitButton();
@@ -81,9 +81,9 @@ public class HomeDriver
 
         var folhaApurada = new Folha
         {
-            //Perfil = new PontoPerfilRef
+            //Contrato = new PontoContratoRef
             //{
-            //    Matricula = folhaElement.QuerySelector("dd.perfil").TextContent
+            //    Matricula = folhaElement.QuerySelector("dd.contrato").TextContent
             //},
             //Competencia = DateTime.Parse(folhaElement.QuerySelector("dd.competencia").TextContent),
             //Status = (PontoFolhaStatusEnum)Enum.Parse(typeof(PontoFolhaStatusEnum), folhaElement.QuerySelector("dd.status").TextContent),

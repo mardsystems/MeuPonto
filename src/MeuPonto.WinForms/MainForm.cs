@@ -17,11 +17,11 @@ namespace MeuPonto
             pontosForm.Show();
         }
 
-        private void perfisToolStripMenuItem_Click(object sender, EventArgs e)
+        private void contratosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var perfisForm = new PerfisForm();
+            var contratosForm = new ContratosForm();
 
-            perfisForm.Show();
+            contratosForm.Show();
         }
 
         private void sairToolStripMenuItem_Click(object sender, EventArgs e)

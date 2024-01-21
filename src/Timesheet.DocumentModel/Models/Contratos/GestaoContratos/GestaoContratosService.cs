@@ -1,0 +1,57 @@
+﻿using System.Transactions;
+
+namespace Timesheet.Models.Contratos.GestaoContratos;
+
+public static class GestaoContratosService
+{
+    public static Contrato InciarAberturaContrato(TransactionContext transaction, Guid? id = null)
+    {
+        var contrato = new Contrato
+        {
+            Id = id ?? Guid.NewGuid(),
+            UserId = transaction.UserId,
+            PartitionKey = transaction.UserId.ToString(),
+            CreationDate = transaction.DateTime
+        };
+
+        return contrato;
+    }
+
+    public static void RecontextualizaContrato(this Contrato contrato, TransactionContext transaction, Guid? id = null)
+    {
+        contrato.Id ??= id ?? Guid.NewGuid();
+        contrato.UserId = transaction.UserId;
+        contrato.PartitionKey = transaction.UserId.ToString();
+        contrato.CreationDate ??= transaction.DateTime;
+    }
+
+    public static Contrato AbrirContrato(this Contrato contrato, Empregador empregador)
+    {
+        if (empregador != null)
+        {
+            contrato.Empregador = new EmpregadorRef
+            {
+                Nome = empregador.Nome
+            };
+
+            contrato.EmpregadorId = empregador.Id;
+        }
+
+        return contrato;
+    }
+
+    public static Contrato AlterarContrato(this Contrato contrato, Empregador empregador)
+    {
+        if (empregador != null)
+        {
+            contrato.Empregador = new EmpregadorRef
+            {
+                Nome = empregador.Nome
+            };
+
+            contrato.EmpregadorId = empregador.Id;
+        }
+
+        return contrato;
+    }
+}

@@ -1,9 +1,9 @@
+using Billing.Models;
 using MeuPonto.Authentication;
 using MeuPonto.Cache;
 using MeuPonto.Data;
 using MeuPonto.Infrastructure;
-using MeuPonto.Models.Billing;
-using MeuPonto.Models.Timesheet.Trabalhadores;
+using MeuPonto.Models.Trabalhadores;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
 using System.Security.Claims;
+using System.Transactions;
 
 namespace MeuPonto;
 

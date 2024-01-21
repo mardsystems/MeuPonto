@@ -1,9 +1,8 @@
 ﻿using AngleSharp.Html.Dom;
 using MeuPonto.Helpers;
-using MeuPonto.Models.Timesheet.Pontos;
-using MeuPonto.Models.Timesheet.Pontos.Comprovantes;
 using MeuPonto.Support;
 using System.ComponentModel;
+using Timesheet.Models.Pontos;
 
 namespace MeuPonto.Drivers;
 
@@ -42,7 +41,7 @@ public class BackupComprovantesDriver
             form.GetInput("Imagem").Files.Add(fileEntry);
             form.GetSelect("Comprovante.TipoImagemId").GetOption(comprovante.TipoImagemId.GetDisplayName()).IsSelected = true;
 
-            form.GetSelect("Ponto.PerfilId").GetOption(ponto.Perfil.Nome).IsSelected = true;
+            form.GetSelect("Ponto.ContratoId").GetOption(ponto.Contrato.Nome).IsSelected = true;
             form.GetInput("Ponto.DataHora").Value = ponto.DataHora.Value.ToString("yyyy-MM-dd\\THH:mm:ss");
             form.GetInput("Ponto.MomentoId", ponto.MomentoId.GetDisplayName()).IsChecked = true;
             if (ponto.PausaId != null)
@@ -78,9 +77,9 @@ public class BackupComprovantesDriver
         {
             Ponto = new()
             {
-                Perfil = new()
+                Contrato = new()
                 {
-                    Nome = form.GetSelect("Ponto.PerfilId").Value
+                    Nome = form.GetSelect("Ponto.ContratoId").Value
                 },
                 DataHora = DateTime.Parse(form.GetInput("Ponto.DataHora").Value),
                 MomentoId = (MomentoEnum)Enum.Parse(typeof(MomentoEnum), momentoValue),
@@ -106,7 +105,7 @@ public class BackupComprovantesDriver
             form.GetInput("Imagem").Files.Add(fileEntry);
             form.GetSelect("Comprovante.TipoImagemId").GetOption(comprovante.TipoImagemId.GetDisplayName()).IsSelected = true;
 
-            form.GetSelect("Ponto.PerfilId").GetOption(ponto.Perfil.Nome).IsSelected = true;
+            form.GetSelect("Ponto.ContratoId").GetOption(ponto.Contrato.Nome).IsSelected = true;
             form.GetInput("Ponto.DataHora").Value = ponto.DataHora.Value.ToString("yyyy-MM-dd\\THH:mm:ss");
             form.GetInput("Ponto.MomentoId", ponto.MomentoId.GetDisplayName()).IsChecked = true;
             if (ponto.PausaId != null)
@@ -142,9 +141,9 @@ public class BackupComprovantesDriver
         {
             Ponto = new()
             {
-                Perfil = new()
+                Contrato = new()
                 {
-                    Nome = dl.GetDataListItem("Perfil").GetString()
+                    Nome = dl.GetDataListItem("Contrato").GetString()
                 },
                 DataHora = DateTime.Parse(dl.GetDataListItem("DataHora").GetString()),
                 MomentoId = (MomentoEnum)Enum.Parse(typeof(MomentoEnum), momentoValue),

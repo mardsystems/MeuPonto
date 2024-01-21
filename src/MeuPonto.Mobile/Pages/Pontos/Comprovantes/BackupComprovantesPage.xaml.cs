@@ -1,8 +1,8 @@
 using MeuPonto.Data;
-using MeuPonto.Models.Timesheet.Pontos.Comprovantes;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Timesheet.Models.Pontos;
 
 namespace MeuPonto.Pages.Pontos.Comprovantes;
 

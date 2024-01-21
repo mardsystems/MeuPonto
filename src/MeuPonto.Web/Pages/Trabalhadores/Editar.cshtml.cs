@@ -1,5 +1,5 @@
 ﻿using MeuPonto.Extensions;
-using MeuPonto.Models.Timesheet.Trabalhadores;
+using MeuPonto.Models.Trabalhadores;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

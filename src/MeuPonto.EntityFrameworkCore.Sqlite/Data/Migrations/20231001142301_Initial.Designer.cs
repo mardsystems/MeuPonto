@@ -59,7 +59,7 @@ namespace MeuPonto.Data.Migrations
                     b.ToTable("Empregadores", (string)null);
                 });
 
-            modelBuilder.Entity("MeuPonto.Pages.Perfis.Perfil", b =>
+            modelBuilder.Entity("MeuPonto.Pages.Contratos.Contrato", b =>
                 {
                     b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd()
@@ -91,7 +91,7 @@ namespace MeuPonto.Data.Migrations
 
                     b.HasIndex("EmpregadorId");
 
-                    b.ToTable("Perfis", (string)null);
+                    b.ToTable("Contratos", (string)null);
                 });
 
             modelBuilder.Entity("MeuPonto.Pages.Pontos.Comprovantes.Comprovante", b =>
@@ -173,7 +173,7 @@ namespace MeuPonto.Data.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("PerfilId")
+                    b.Property<Guid?>("ContratoId")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -190,7 +190,7 @@ namespace MeuPonto.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PerfilId");
+                    b.HasIndex("ContratoId");
 
                     b.ToTable("Folhas", (string)null);
                 });
@@ -327,7 +327,7 @@ namespace MeuPonto.Data.Migrations
                     b.Property<int?>("PausaId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid?>("PerfilId")
+                    b.Property<Guid?>("ContratoId")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -341,7 +341,7 @@ namespace MeuPonto.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PerfilId");
+                    b.HasIndex("ContratoId");
 
                     b.ToTable("Pontos", (string)null);
                 });
@@ -368,28 +368,28 @@ namespace MeuPonto.Data.Migrations
                     b.ToTable("Trabalhadores", (string)null);
                 });
 
-            modelBuilder.Entity("MeuPonto.Pages.Perfis.Perfil", b =>
+            modelBuilder.Entity("MeuPonto.Pages.Contratos.Contrato", b =>
                 {
                     b.HasOne("MeuPonto.Pages.Empregadores.Empregador", "Empregador")
                         .WithMany()
                         .HasForeignKey("EmpregadorId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.OwnsOne("MeuPonto.Pages.Perfis.JornadaTrabalhoSemanal", "JornadaTrabalhoSemanalPrevista", b1 =>
+                    b.OwnsOne("MeuPonto.Pages.Contratos.JornadaTrabalhoSemanal", "JornadaTrabalhoSemanalPrevista", b1 =>
                         {
-                            b1.Property<Guid>("PerfilId")
+                            b1.Property<Guid>("ContratoId")
                                 .HasColumnType("TEXT");
 
-                            b1.HasKey("PerfilId");
+                            b1.HasKey("ContratoId");
 
-                            b1.ToTable("Perfis");
+                            b1.ToTable("Contratos");
 
                             b1.WithOwner()
-                                .HasForeignKey("PerfilId");
+                                .HasForeignKey("ContratoId");
 
-                            b1.OwnsMany("MeuPonto.Pages.Perfis.JornadaTrabalhoDiaria", "Semana", b2 =>
+                            b1.OwnsMany("MeuPonto.Pages.Contratos.JornadaTrabalhoDiaria", "Semana", b2 =>
                                 {
-                                    b2.Property<Guid>("PerfilId")
+                                    b2.Property<Guid>("ContratoId")
                                         .HasColumnType("TEXT");
 
                                     b2.Property<int>("DiaSemana")
@@ -399,12 +399,12 @@ namespace MeuPonto.Data.Migrations
                                         .IsRequired()
                                         .HasColumnType("TEXT");
 
-                                    b2.HasKey("PerfilId", "DiaSemana");
+                                    b2.HasKey("ContratoId", "DiaSemana");
 
-                                    b2.ToTable("Perfis_JornadaTrabalhoDiaria", (string)null);
+                                    b2.ToTable("Contratos_JornadaTrabalhoDiaria", (string)null);
 
                                     b2.WithOwner()
-                                        .HasForeignKey("PerfilId");
+                                        .HasForeignKey("ContratoId");
                                 });
 
                             b1.Navigation("Semana");
@@ -429,9 +429,9 @@ namespace MeuPonto.Data.Migrations
 
             modelBuilder.Entity("MeuPonto.Pages.Pontos.Folhas.Folha", b =>
                 {
-                    b.HasOne("MeuPonto.Pages.Perfis.Perfil", "Perfil")
+                    b.HasOne("MeuPonto.Pages.Contratos.Contrato", "Contrato")
                         .WithMany()
-                        .HasForeignKey("PerfilId")
+                        .HasForeignKey("ContratoId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -496,18 +496,18 @@ namespace MeuPonto.Data.Migrations
                     b.Navigation("ApuracaoMensal")
                         .IsRequired();
 
-                    b.Navigation("Perfil");
+                    b.Navigation("Contrato");
                 });
 
             modelBuilder.Entity("MeuPonto.Pages.Pontos.Ponto", b =>
                 {
-                    b.HasOne("MeuPonto.Pages.Perfis.Perfil", "Perfil")
+                    b.HasOne("MeuPonto.Pages.Contratos.Contrato", "Contrato")
                         .WithMany()
-                        .HasForeignKey("PerfilId")
+                        .HasForeignKey("ContratoId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Perfil");
+                    b.Navigation("Contrato");
                 });
 
             modelBuilder.Entity("MeuPonto.Pages.Trabalhadores.Trabalhador", b =>

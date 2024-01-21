@@ -2,19 +2,19 @@
 
 Funcionalidade: Gestão Folhas
 	
-Regra: Perfil qualifica a folha de ponto
+Regra: Contrato qualifica a folha de ponto
 
-Cenário: Trabalhador abre uma folha de ponto usando seu único perfil
-	Dado que o trabalhador tem um perfil cadastrado com o nome 'Marcelo - Ateliex'
-	Dado que o trabalhador qualifica a folha com o perfil 'Marcelo - Ateliex'
+Cenário: Trabalhador abre uma folha de ponto usando seu único contrato
+	Dado que o trabalhador tem um contrato cadastrado com o nome 'Marcelo - Ateliex'
+	Dado que o trabalhador qualifica a folha com o contrato 'Marcelo - Ateliex'
 	Quando o trabalhador abrir uma folha de ponto
 	Então uma folha de ponto deverá ser aberta
-	E o perfil da folha de ponto deverá deverá ser 'Marcelo - Ateliex'
+	E o contrato da folha de ponto deverá deverá ser 'Marcelo - Ateliex'
 
 Regra: Folha de ponto tem periodicidade mensal
 
 Cenário: Trabalhador abre uma folha ponto para o mês de novembro de 2022
-	Dado que o trabalhador tem um perfil cadastrado
+	Dado que o trabalhador tem um contrato cadastrado
 	E que o trabalhador deseja apurar a folha de ponto da competência '2022/11'
 	Quando o trabalhador abrir uma folha de ponto
 	Então uma folha de ponto deverá ser aberta
@@ -28,7 +28,7 @@ Cenário: Trabalhador abre uma folha ponto para o mês de novembro de 2022
 Regra: Folha de ponto com observação
 	
 Cenário: Trabalhador abre uma folha de ponto anotando que deve confirmar os feriados do mês
-	Dado que o trabalhador tem um perfil cadastrado
+	Dado que o trabalhador tem um contrato cadastrado
 	E que o trabalhador anota a seguinte observação na folha de ponto:
 		"""
 		Verificar se a última sexta-feira do mês vai ser feriado.
@@ -40,7 +40,7 @@ Cenário: Trabalhador abre uma folha de ponto anotando que deve confirmar os fer
 Regra: Para toda entrada deverá existir uma saída
 
 Esquema do Cenário: Trabalhador registra a entrada e a saída do expediente
-	Dado que o trabalhador tem um perfil cadastrado com a seguinte jornada de trabalho semanal prevista:
+	Dado que o trabalhador tem um contrato cadastrado com a seguinte jornada de trabalho semanal prevista:
 		| dia semana | tempo    |
 		| Sunday     | 00:00:00 |
 		| Monday     | 08:00:00 |

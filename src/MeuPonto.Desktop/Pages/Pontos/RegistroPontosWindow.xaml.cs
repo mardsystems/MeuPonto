@@ -1,11 +1,11 @@
-﻿using MeuPonto.Models.Timesheet.Pontos;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
+using Timesheet.Models.Pontos;
 
 namespace MeuPonto.Pages.Pontos;
 
@@ -17,7 +17,7 @@ public partial class RegistroPontosWindow : Window
 
     private CollectionViewSource _pontosViewSource;
 
-    private CollectionViewSource _perfisViewSource;
+    private CollectionViewSource _contratosViewSource;
 
     private ObservableCollection<Ponto> _pontos;
 
@@ -55,14 +55,14 @@ public partial class RegistroPontosWindow : Window
 
         //
 
-        SetStatusBar("Carregando perfis...");
+        SetStatusBar("Carregando contratos...");
 
-        _perfisViewSource = ((CollectionViewSource)(this.FindResource("perfisViewSource")));
+        _contratosViewSource = ((CollectionViewSource)(this.FindResource("contratosViewSource")));
 
-        var perfis = await _db.Perfis
+        var contratos = await _db.Contratos
             .ToListAsync();
 
-        _perfisViewSource.Source = perfis;
+        _contratosViewSource.Source = contratos;
 
         SetStatusBar("Pronto.");
     }

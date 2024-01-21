@@ -1,10 +1,11 @@
 ﻿using MeuPonto.Data;
 using MeuPonto.Extensions;
-using MeuPonto.Models.Timesheet.Pontos.Comprovantes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using Timesheet.Models.Pontos;
+using Timesheet.Models.Pontos.BackupComprovantes;
 
 namespace MeuPonto.Pages.Pontos.Comprovantes;
 
@@ -31,10 +32,10 @@ public class CriarModel : FormPageModel
     {
         var transaction = User.CreateTransaction();
 
-        Comprovante = ComprovanteFactory.CriaComprovante(transaction);
+        Comprovante = BackupComprovantesService.CriaComprovante(transaction);
 
         var ponto = await _db.Pontos
-            .Include(x => x.Perfil)
+            .Include(x => x.Contrato)
             .FirstOrDefaultAsync(m => m.Id == PontoId);
 
         if (ponto != default)
@@ -58,7 +59,7 @@ public class CriarModel : FormPageModel
         ModelState.Remove<CriarModel>(x => x.Comprovante.Imagem);
 
         var ponto = await _db.Pontos
-            .Include(x => x.Perfil)
+            .Include(x => x.Contrato)
             .FirstOrDefaultAsync(m => m.Id == PontoId);
 
         Comprovante.ComprovaPonto(ponto);

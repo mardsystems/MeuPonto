@@ -1,6 +1,5 @@
-﻿using MeuPonto.Models.Timesheet.Empregadores;
-using MeuPonto.Models.Timesheet.Perfis;
-using MeuPonto.Models.Timesheet.Pontos;
+﻿using Timesheet.Models.Contratos;
+using Timesheet.Models.Pontos;
 using Microsoft.EntityFrameworkCore;
 
 namespace MeuPonto.Data;
@@ -19,7 +18,7 @@ public static class DbSetExtensions
         return dbSet.FindAsync(id);
     }
 
-    public static ValueTask<Perfil> FindByIdAsync(this DbSet<Perfil> dbSet, Guid? id, Guid userId)
+    public static ValueTask<Contrato> FindByIdAsync(this DbSet<Contrato> dbSet, Guid? id, Guid userId)
     {
         var partitionKey = $"{userId}";
 

@@ -1,0 +1,162 @@
+﻿@page "/contratos/criar"
+@using Microsoft.EntityFrameworkCore;
+@using Timesheet.Models.Contratos;
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
+        <li class="breadcrumb-item"><a asp-page="./Index">Contratos</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Criar</li>
+    </ol>
+</nav>
+
+<h1>Criar Contrato <span class="badge bg-secondary">Novo</span></h1>
+
+<div class="card">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" asp-page="./Criar">
+                    <i class="bi bi-plus-circle"></i>
+                    Criar Novo
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Nome</label>
+                <div class="col-sm-9">
+                    <input @bind="_contrato.Nome" class="form-control" />
+                    @*<span asp-validation-for="_contrato.Nome" class="text-danger"></span>*@
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-9 offset-sm-3">
+                    <div class="form-check">
+                        <input type="checkbox" asp-for="_contrato.Ativo" class="form-check-input" />
+                        <label class="form-check-label">Ativo</label>
+                    </div>
+                    @*<span asp-validation-for="_contrato.Ativo" class="text-danger"></span>*@
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-header">
+                    Jornada Trabalho Semanal Prevista
+                </div>
+                <div class="row g-0">
+                    <div class="col-sm-3">
+                        @*<svg class="bd-placeholder-img img-fluid rounded-start" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title>PlacehSolder</title>
+                        <rect width="100%" height="100%" fill="#868e96"></rect>
+                        <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Apuração Mensal</text>
+                        </svg>*@
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="card-body">
+                            <div class="accordion mb-3" id="accordionJornadaTrabalhoSemanalPrevista">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSemana" aria-expanded="true" aria-controls="collapseSemana">
+                                            Semana
+                                        </button>
+                                    </h2>
+                                    <div id="collapseSemana" class="accordion-collapse collapse show" data-bs-parent="#accordionJornadaTrabalhoSemanalPrevista">
+                                        <div class="accordion-body">
+                                            @for (int i = 0; i < _contrato.JornadaTrabalhoSemanalPrevista.Semana.Count; i++)
+                                            {
+                                                <input @bind="_contrato.JornadaTrabalhoSemanalPrevista.Semana[i].DiaSemana" type="hidden" />
+                                                <div class="row mb-3">
+                                                    <label asp-for="_contrato.JornadaTrabalhoSemanalPrevista.Semana[i].Tempo" class="col-sm-3 col-form-label">
+                                                        @_contrato.JornadaTrabalhoSemanalPrevista.Semana[i].DiaSemana
+                                                    </label>
+                                                    <div class="col-sm-9">
+                                                        <input @bind="_contrato.JornadaTrabalhoSemanalPrevista.Semana[i].Tempo" class="form-control" />
+                                                        <span asp-validation-for="_contrato.JornadaTrabalhoSemanalPrevista.Semana[i].Tempo" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button value="Totalizar" class="btn btn-secondary">
+                                <i class="bi bi-save"></i>
+                                Totalizar
+                            </button>
+                            <div class="row">
+                                <label asp-for="_contrato.JornadaTrabalhoSemanalPrevista.TempoTotal" class="col-sm-3 col-form-label"></label>
+                                <div class="col-sm-9">
+                                    <div class="input-group">
+                                        <input value="@_contrato.JornadaTrabalhoSemanalPrevista.TempoTotal" class="form-control" disabled />
+                                        <button class="btn btn-outline-secondary" name="command" value="RecalcularTempoTotal">Recalcular</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary" @onclick="Salvar">
+                <i class="bi bi-save"></i>
+                Criar
+            </button>
+        </div>
+    </div>
+</div>
+
+@code {
+    private string? _nome;
+
+    private bool? _ativo;
+
+    private string? _matricula;
+
+    public Contrato _contrato { get; set; }
+
+    private int? _paginaAtual;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _contrato = new Contrato
+        {
+
+        };
+
+        var daysOfWeek = Enum.GetValues<DayOfWeek>();
+
+        foreach (var dayOfWeek in daysOfWeek)
+        {
+            var jornadaTrabalhoDiaria = new JornadaTrabalhoDiaria
+                {
+                    DiaSemana = dayOfWeek,
+                    Tempo = new TimeSpan(8, 0, 0)
+                };
+
+            _contrato.JornadaTrabalhoSemanalPrevista.Semana.Add(jornadaTrabalhoDiaria);
+        }
+    }
+
+    public async Task Salvar()
+    {
+        _contrato.Id = Guid.NewGuid();
+
+        //_contrato.PartitionKey = User.Identity.Name; //_contrato.Empresa.Cnpj;
+
+        _contrato.CreationDate = DateTime.Now;
+
+        //try
+        //{
+        //    _db.Contratos.Add(_contrato);
+        //    await _db.SaveChangesAsync();
+        //}
+        //catch (Exception _)
+        //{
+        //    throw;
+        //}
+
+        //return RedirectToPage("./Detalhar", new { id = _contrato.Id });
+    }
+}
