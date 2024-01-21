@@ -33,7 +33,7 @@ public class GuardarModel : FormPageModel
     {
         var transaction = User.CreateTransaction();
 
-        Comprovante = BackupComprovantesService.CriaComprovante(transaction);
+        Comprovante = BackupComprovantesFacade.CriaComprovante(transaction);
 
         Comprovante.TipoImagemId = TipoImagemEnum.Original;
 

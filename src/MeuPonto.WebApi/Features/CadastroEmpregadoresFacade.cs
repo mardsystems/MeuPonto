@@ -1,9 +1,9 @@
 ﻿using MeuPonto.Models;
 using System.Transactions;
 
-namespace MeuPonto.Services;
+namespace MeuPonto.Features;
 
-public static class CadastroEmpregadoresService
+public static class CadastroEmpregadoresFacade
 {
     public static Empregador CriaEmpregador(TransactionContext transaction)
     {

@@ -32,7 +32,7 @@ public class CriarModel : FormPageModel
     {
         var transaction = User.CreateTransaction();
 
-        Comprovante = BackupComprovantesService.CriaComprovante(transaction);
+        Comprovante = BackupComprovantesFacade.CriaComprovante(transaction);
 
         var ponto = await _db.Pontos
             .Include(x => x.Contrato)

@@ -1,9 +1,9 @@
 ﻿using MeuPonto.Models;
 using System.Transactions;
 
-namespace MeuPonto.Services;
+namespace MeuPonto.Features;
 
-public static class GestaoContratosService
+public static class GestaoContratosFacade
 {
     public static Contrato InciarAberturaContrato(TransactionContext transaction)
     {
