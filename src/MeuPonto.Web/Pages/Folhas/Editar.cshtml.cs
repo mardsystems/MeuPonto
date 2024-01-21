@@ -49,7 +49,7 @@ public class EditarModel : FormPageModel
     {
         var transaction = User.CreateTransaction();
 
-        Folha.RecontextualizaFolha(transaction, id);
+        transaction.RecontextualizaFolha(Folha, id);
 
         if (!ModelState.IsValid)
         {
@@ -60,12 +60,12 @@ public class EditarModel : FormPageModel
 
         var contrato = await _db.Contratos.FindByIdAsync(Folha.ContratoId, User.GetUserId());
 
-        contrato.QualificaFolha(Folha);
-
-        Folha.ConfirmarCompetencia(contrato);
+        Folha.AssociarAo(contrato);
 
         if (command == "ConfirmarCompetencia")
         {
+            Folha.ConfirmarCompetencia(contrato);
+
             var states = ModelState.Where(state => state.Key.Contains($"{nameof(Folha.ApuracaoMensal)}"));
 
             foreach (var state in states)
@@ -80,7 +80,7 @@ public class EditarModel : FormPageModel
             return Page();
         }
 
-        Folha.RecontextualizaFolha(transaction);
+        transaction.RecontextualizaFolha(Folha);
 
         try
         {

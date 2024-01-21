@@ -100,9 +100,9 @@ public class SeedHook
 
         var competencia = new DateTime(hoje.Year, hoje.Month, 1);
 
-        var folha = GestaoFolhaService.CriaFolha(transaction);
+        var folha = GestaoFolhaService.IniciarAberturaFolha(transaction);
 
-        contrato.QualificaFolha(folha);
+        folha.AssociarAo(contrato);
 
         folha.Competencia = competencia;
 

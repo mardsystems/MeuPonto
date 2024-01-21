@@ -55,7 +55,7 @@ public class GestaoFolhasStepDefinitions
     {
         var contrato = _db.Contratos.FirstOrDefault(x => x.Nome == nome);
 
-        contrato.QualificaFolha(_gestaoFolhas.Folha);
+        _gestaoFolhas.Folha.AssociarAo(contrato);
     }
 
     [Given(@"que o trabalhador deseja apurar a folha de ponto da competência '([^']*)'")]
@@ -184,7 +184,7 @@ public class GestaoFolhasStepDefinitions
                 _db.SaveChanges();
             }
 
-            contrato.QualificaFolha(_gestaoFolhas.Folha);
+            _gestaoFolhas.Folha.AssociarAo(contrato);
         }
 
 

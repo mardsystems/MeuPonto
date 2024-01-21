@@ -5,7 +5,7 @@ namespace Timesheet.Models.Folhas.GestaoFolha;
 
 public static class GestaoFolhaService
 {
-    public static Folha CriaFolha(TransactionContext transaction, Guid? id = null)
+    public static Folha IniciarAberturaFolha(this TransactionContext transaction, Guid? id = null)
     {
         var folha = new Folha
         {
@@ -17,14 +17,14 @@ public static class GestaoFolhaService
         return folha;
     }
 
-    public static void RecontextualizaFolha(this Folha folha, TransactionContext transaction, Guid? id = null)
+    public static void RecontextualizaFolha(this TransactionContext transaction, Folha folha, Guid? id = null)
     {
         folha.Id = folha.Id ?? id ?? Guid.NewGuid();
         folha.UserId = transaction.UserId;
         folha.CreationDate = transaction.DateTime;
     }
 
-    public static void QualificaFolha(this Contrato contrato, Folha folha)
+    public static void AssociarAo(this Folha folha, Contrato contrato)
     {
         folha.Contrato = contrato;
 
