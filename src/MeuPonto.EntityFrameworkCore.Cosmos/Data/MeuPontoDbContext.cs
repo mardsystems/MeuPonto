@@ -127,7 +127,7 @@ public class MeuPontoDbContext : DbContext
         modelBuilder.Entity<Comprovante>().Property(x => x.Version).IsETagConcurrency();
 
         modelBuilder.Entity<Folha>()
-            .ToContainer("Pontos")
+            .ToContainer("Folhas")
             .HasPartitionKey(x => x.PartitionKey);
 
         modelBuilder.Entity<Folha>().Property(x => x.Version).IsETagConcurrency();

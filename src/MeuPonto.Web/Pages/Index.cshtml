@@ -25,7 +25,7 @@
             </a>
             <a class="btn btn-primary btn-lg" asp-page="/Pontos/Comprovantes/Guardar" target="_modal">
                 <i class="bi bi-qr-code"></i>
-                Guardar Comprovante de Ponto
+                Guardar Comprovante
             </a>
         </div>
 
@@ -53,7 +53,7 @@
         {
             <div class="alert alert-info" role="alert">
                 Use a busca acima para <b>apurar uma folha de ponto</b>.
-                Se preferir, você também pode <a class="Abertura Folha" asp-page="/Pontos/Folhas/Abrir" target="_modal">abrir uma folha nova</a>.
+                Se preferir, você também pode <a class="Abertura Folha" asp-page="/Folhas/Abrir" target="_modal">abrir uma folha nova</a>.
             </div>
         }
         else
@@ -125,19 +125,19 @@
                         <div class="card-body">
                             @if (Model.Folha.StatusId == StatusFolhaEnum.Aberta)
                             {
-                                <a class="card-link text-decoration-none" asp-page="/Pontos/Folhas/Fechar" asp-route-id="@Model.Folha.Id" target="_modal">
+                                <a class="card-link text-decoration-none" asp-page="/Folhas/Fechar" asp-route-id="@Model.Folha.Id" target="_modal">
                                     Fechar
                                     <i class="bi bi-lock"></i>
                                 </a>
                             }
                             else
                             {
-                                <a class="card-link text-decoration-none" asp-page="/Pontos/Folhas/Reabrir" asp-route-id="@Model.Folha.Id" target="_modal">
+                                <a class="card-link text-decoration-none" asp-page="/Folhas/Reabrir" asp-route-id="@Model.Folha.Id" target="_modal">
                                     Reabrir
                                     <i class="bi bi-unlock"></i>
                                 </a>
                             }
-                            <a class="card-link text-decoration-none edicao" asp-page="/Pontos/Folhas/Editar" asp-route-id="@Model.Folha.Id" target="_modal">
+                            <a class="card-link text-decoration-none edicao" asp-page="/Folhas/Editar" asp-route-id="@Model.Folha.Id" target="_modal">
                                 Editar
                                 <i class="bi bi-pencil"></i>
                             </a>
