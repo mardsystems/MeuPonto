@@ -1,6 +1,9 @@
 ﻿using BoDi;
 using MeuPonto.Data;
 using Microsoft.AspNetCore.Mvc.Testing;
+#if !INFRA_COSMOS
+using Microsoft.EntityFrameworkCore;
+#endif
 using System.Net.Http.Headers;
 using TechTalk.SpecFlow.Infrastructure;
 

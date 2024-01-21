@@ -16,7 +16,7 @@
 }
 
 @section Title {
-    @ViewData["Title"] <span class="badge bg-secondary">Nova</span> <span class="badge @(Model.Folha.StatusId == StatusFolhaEnum.Aberta ? "text-bg-warning" : "text-bg-success")"><i class="bi @(Model.Folha.StatusId == StatusFolhaEnum.Aberta ? "bi-file-earmark-fill" : "bi-file-earmark-lock-fill")"></i></span>
+    @ViewData["Title"] <span class="badge bg-secondary">Nova</span> <span class="badge @(Model.AberturaFolha.StatusId == StatusFolhaEnum.Aberta ? "text-bg-warning" : "text-bg-success")"><i class="bi @(Model.AberturaFolha.StatusId == StatusFolhaEnum.Aberta ? "bi-file-earmark-fill" : "bi-file-earmark-lock-fill")"></i></span>
 }
 
 @section CardHeader {
@@ -32,111 +32,111 @@
 
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 <div class="row mb-3">
-    <label asp-for="Folha.ContratoId" class="col-sm-3 col-form-label"></label>
+    <label asp-for="AberturaFolha.ContratoId" class="col-sm-3 col-form-label"></label>
     <div class="col-sm-9">
-        <select asp-for="Folha.ContratoId" class="form-select" asp-items="ViewBag.ContratoId"></select>
-        <span asp-validation-for="Folha.ContratoId" class="text-danger"></span>
+        <select asp-for="AberturaFolha.ContratoId" class="form-select" asp-items="ViewBag.ContratoId"></select>
+        <span asp-validation-for="AberturaFolha.ContratoId" class="text-danger"></span>
     </div>
 </div>
 <div class="row mb-3">
-    <label asp-for="Folha.Competencia" class="col-sm-3 col-form-label"></label>
+    <label asp-for="AberturaFolha.Competencia" class="col-sm-3 col-form-label"></label>
     <div class="col-sm-9">
         <div class="input-group">
-            <input asp-for="Folha.Competencia" class="form-control" type="month" />
+            <input asp-for="AberturaFolha.Competencia" class="form-control" type="month" />
             <button class="btn btn-outline-secondary" name="command" value="ConfirmarCompetencia">Confirmar</button>
         </div>
-        <span asp-validation-for="Folha.Competencia" class="text-danger"></span>
+        <span asp-validation-for="AberturaFolha.Competencia" class="text-danger"></span>
     </div>
 </div>
 <div class="row mb-3">
-    <label asp-for="Folha.StatusId" class="col-sm-3 col-form-label"></label>
+    <label asp-for="AberturaFolha.StatusId" class="col-sm-3 col-form-label"></label>
     <div class="col-sm-9">
-        <select asp-for="Folha.StatusId" disabled class="form-select" asp-items="Html.GetEnumSelectList<StatusFolhaEnum>()"></select>
-        <input asp-for="Folha.StatusId" type="hidden" />
+        <select asp-for="AberturaFolha.StatusId" disabled class="form-select" asp-items="Html.GetEnumSelectList<StatusFolhaEnum>()"></select>
+        <input asp-for="AberturaFolha.StatusId" type="hidden" />
     </div>
 </div>
 <div class="row mb-3">
-    <label asp-for="Folha.Observacao" class="col-sm-3 col-form-label"></label>
+    <label asp-for="AberturaFolha.Observacao" class="col-sm-3 col-form-label"></label>
     <div class="col-sm-9">
-        <textarea asp-for="Folha.Observacao" class="form-control"></textarea>
-        <span asp-validation-for="Folha.Observacao" class="text-danger"></span>
+        <textarea asp-for="AberturaFolha.Observacao" class="form-control"></textarea>
+        <span asp-validation-for="AberturaFolha.Observacao" class="text-danger"></span>
     </div>
 </div>
 <div class="card mb-3">
     <div class="card-header">
-        @Html.DisplayNameFor(model => model.Folha.ApuracaoMensal)
+        @Html.DisplayNameFor(model => model.AberturaFolha.ApuracaoMensal)
     </div>
     <div class="card-body">
-        @if (Model.Folha.ApuracaoMensal.Dias.Count > 0)
+        @if (Model.AberturaFolha.ApuracaoMensal.Dias.Count > 0)
         {
             <div class="accordion mb-3" id="accordionApuracaoMensal">
                 <div class="accordion-item">
                     <h2 class="accordion-header">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDias" aria-expanded="true" aria-controls="collapseDias">
-                            @Html.DisplayNameFor(model => model.Folha.ApuracaoMensal.Dias)
+                            @Html.DisplayNameFor(model => model.AberturaFolha.ApuracaoMensal.Dias)
                         </button>
                     </h2>
                     <div id="collapseDias" class="accordion-collapse collapse show" data-bs-parent="#accordionApuracaoMensal">
                         <div class="accordion-body">
-                            @for (int i = 0; i < Model.Folha.ApuracaoMensal.Dias.Count; i++)
+                            @for (int i = 0; i < Model.AberturaFolha.ApuracaoMensal.Dias.Count; i++)
                             {
-                                <input asp-for="Folha.ApuracaoMensal.Dias[i].Dia" type="hidden" />
+                                <input asp-for="AberturaFolha.ApuracaoMensal.Dias[i].Dia" type="hidden" />
                                 <div class="card mb-3">
                                     <div class="card-header">
-                                        Dia @(Model.Folha.ApuracaoMensal.Dias[i].Dia)
+                                        Dia @(Model.AberturaFolha.ApuracaoMensal.Dias[i].Dia)
                                     </div>
                                     <div class="card-body">
                                         <div class="row mb-3">
-                                            <label asp-for="Folha.ApuracaoMensal.Dias[i].TempoPrevisto" class="col-sm-7 col-lg-5 col-form-label"></label>
+                                            <label asp-for="AberturaFolha.ApuracaoMensal.Dias[i].TempoPrevisto" class="col-sm-7 col-lg-5 col-form-label"></label>
                                             <div class="col-sm-4">
-                                                <input asp-for="Folha.ApuracaoMensal.Dias[i].TempoPrevisto" class="form-control" />
-                                                <span asp-validation-for="Folha.ApuracaoMensal.Dias[i].TempoPrevisto" class="text-danger"></span>
+                                                <input asp-for="AberturaFolha.ApuracaoMensal.Dias[i].TempoPrevisto" class="form-control" />
+                                                <span asp-validation-for="AberturaFolha.ApuracaoMensal.Dias[i].TempoPrevisto" class="text-danger"></span>
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <label asp-for="Folha.ApuracaoMensal.Dias[i].TempoApurado" class="col-sm-7 col-lg-5 col-form-label"></label>
+                                            <label asp-for="AberturaFolha.ApuracaoMensal.Dias[i].TempoApurado" class="col-sm-7 col-lg-5 col-form-label"></label>
                                             <div class="col-sm-4">
-                                                <input asp-for="Folha.ApuracaoMensal.Dias[i].TempoApurado" class="form-control" />
-                                                <span asp-validation-for="Folha.ApuracaoMensal.Dias[i].TempoApurado" class="text-danger"></span>
+                                                <input asp-for="AberturaFolha.ApuracaoMensal.Dias[i].TempoApurado" class="form-control" />
+                                                <span asp-validation-for="AberturaFolha.ApuracaoMensal.Dias[i].TempoApurado" class="text-danger"></span>
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <label asp-for="Folha.ApuracaoMensal.Dias[i].DiferencaTempo" class="col-sm-7 col-lg-5 col-form-label"></label>
+                                            <label asp-for="AberturaFolha.ApuracaoMensal.Dias[i].DiferencaTempo" class="col-sm-7 col-lg-5 col-form-label"></label>
                                             <div class="col-sm-4">
-                                                <input asp-for="Folha.ApuracaoMensal.Dias[i].DiferencaTempo" class="form-control" />
-                                                <span asp-validation-for="Folha.ApuracaoMensal.Dias[i].DiferencaTempo" class="text-danger"></span>
+                                                <input asp-for="AberturaFolha.ApuracaoMensal.Dias[i].DiferencaTempo" class="form-control" />
+                                                <span asp-validation-for="AberturaFolha.ApuracaoMensal.Dias[i].DiferencaTempo" class="text-danger"></span>
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <label asp-for="Folha.ApuracaoMensal.Dias[i].TempoAbonado" class="col-sm-7 col-lg-5 col-form-label"></label>
+                                            <label asp-for="AberturaFolha.ApuracaoMensal.Dias[i].TempoAbonado" class="col-sm-7 col-lg-5 col-form-label"></label>
                                             <div class="col-sm-4">
-                                                <input asp-for="Folha.ApuracaoMensal.Dias[i].TempoAbonado" class="form-control" />
-                                                <span asp-validation-for="Folha.ApuracaoMensal.Dias[i].TempoAbonado" class="text-danger"></span>
+                                                <input asp-for="AberturaFolha.ApuracaoMensal.Dias[i].TempoAbonado" class="form-control" />
+                                                <span asp-validation-for="AberturaFolha.ApuracaoMensal.Dias[i].TempoAbonado" class="text-danger"></span>
                                             </div>
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col-sm-4 offset-sm-7 offset-lg-5">
                                                 <div class="form-check">
-                                                    <input type="checkbox" asp-for="Folha.ApuracaoMensal.Dias[i].Feriado" class="form-check-input" />
-                                                    <label asp-for="Folha.ApuracaoMensal.Dias[i].Feriado" class="form-check-label"></label>
+                                                    <input type="checkbox" asp-for="AberturaFolha.ApuracaoMensal.Dias[i].Feriado" class="form-check-input" />
+                                                    <label asp-for="AberturaFolha.ApuracaoMensal.Dias[i].Feriado" class="form-check-label"></label>
                                                 </div>
-                                                <span asp-validation-for="Folha.ApuracaoMensal.Dias[i].Feriado" class="text-danger"></span>
+                                                <span asp-validation-for="AberturaFolha.ApuracaoMensal.Dias[i].Feriado" class="text-danger"></span>
                                             </div>
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col-sm-4 offset-sm-7 offset-lg-5">
                                                 <div class="form-check">
-                                                    <input type="checkbox" asp-for="Folha.ApuracaoMensal.Dias[i].Falta" class="form-check-input" />
-                                                    <label asp-for="Folha.ApuracaoMensal.Dias[i].Falta" class="form-check-label"></label>
+                                                    <input type="checkbox" asp-for="AberturaFolha.ApuracaoMensal.Dias[i].Falta" class="form-check-input" />
+                                                    <label asp-for="AberturaFolha.ApuracaoMensal.Dias[i].Falta" class="form-check-label"></label>
                                                 </div>
-                                                <span asp-validation-for="Folha.ApuracaoMensal.Dias[i].Falta" class="text-danger"></span>
+                                                <span asp-validation-for="AberturaFolha.ApuracaoMensal.Dias[i].Falta" class="text-danger"></span>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <label asp-for="Folha.ApuracaoMensal.Dias[i].Observacao" class="col-sm-7 col-lg-5 col-form-label"></label>
+                                            <label asp-for="AberturaFolha.ApuracaoMensal.Dias[i].Observacao" class="col-sm-7 col-lg-5 col-form-label"></label>
                                             <div class="col-sm-5 col-lg-7">
-                                                <textarea asp-for="Folha.ApuracaoMensal.Dias[i].Observacao" class="form-control"></textarea>
-                                                <span asp-validation-for="Folha.ApuracaoMensal.Dias[i].Observacao" class="text-danger"></span>
+                                                <textarea asp-for="AberturaFolha.ApuracaoMensal.Dias[i].Observacao" class="form-control"></textarea>
+                                                <span asp-validation-for="AberturaFolha.ApuracaoMensal.Dias[i].Observacao" class="text-danger"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -158,40 +158,40 @@
             Totalizar
         </button>
         <div class="row mb-3">
-            <label asp-for="Folha.ApuracaoMensal.TotalDias" class="col-sm-8 col-lg-5 col-form-label"></label>
+            <label asp-for="AberturaFolha.ApuracaoMensal.TotalDias" class="col-sm-8 col-lg-5 col-form-label"></label>
             <div class="col-sm-4 col-lg-7">
-                <input asp-for="Folha.ApuracaoMensal.TotalDias" class="form-control" disabled />
+                <input asp-for="AberturaFolha.ApuracaoMensal.TotalDias" class="form-control" disabled />
             </div>
         </div>
         <div class="row mb-3">
-            <label asp-for="Folha.ApuracaoMensal.TempoTotalPrevisto" class="col-sm-8 col-lg-5 col-form-label"></label>
+            <label asp-for="AberturaFolha.ApuracaoMensal.TempoTotalPrevisto" class="col-sm-8 col-lg-5 col-form-label"></label>
             <div class="col-sm-4 col-lg-7">
-                <input value="@String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", Model.Folha.ApuracaoMensal.TempoTotalPrevisto)" class="form-control" disabled />
+                <input value="@String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", Model.AberturaFolha.ApuracaoMensal.TempoTotalPrevisto)" class="form-control" disabled />
             </div>
         </div>
         <div class="row mb-3">
-            <label asp-for="Folha.ApuracaoMensal.TempoTotalApurado" class="col-sm-8 col-lg-5 col-form-label"></label>
+            <label asp-for="AberturaFolha.ApuracaoMensal.TempoTotalApurado" class="col-sm-8 col-lg-5 col-form-label"></label>
             <div class="col-sm-4 col-lg-7">
-                <input value="@String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", Model.Folha.ApuracaoMensal.TempoTotalApurado)" class="form-control" disabled />
+                <input value="@String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", Model.AberturaFolha.ApuracaoMensal.TempoTotalApurado)" class="form-control" disabled />
             </div>
         </div>
         <div class="row mb-3">
-            <label asp-for="Folha.ApuracaoMensal.DiferencaTempoTotal" class="col-sm-8 col-lg-5 col-form-label"></label>
+            <label asp-for="AberturaFolha.ApuracaoMensal.DiferencaTempoTotal" class="col-sm-8 col-lg-5 col-form-label"></label>
             <div class="col-sm-4 col-lg-7">
-                <input value="@String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", Model.Folha.ApuracaoMensal.DiferencaTempoTotal)" class="form-control" disabled />
+                <input value="@String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", Model.AberturaFolha.ApuracaoMensal.DiferencaTempoTotal)" class="form-control" disabled />
             </div>
         </div>
         <div class="row mb-3">
-            <label asp-for="Folha.ApuracaoMensal.TempoTotalPeriodoAnterior" class="col-sm-8 col-lg-5 col-form-label"></label>
+            <label asp-for="AberturaFolha.ApuracaoMensal.TempoTotalPeriodoAnterior" class="col-sm-8 col-lg-5 col-form-label"></label>
             <div class="col-sm-4 col-lg-7">
-                <input value="@String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", Model.Folha.ApuracaoMensal.TempoTotalPeriodoAnterior)" class="form-control" disabled />
+                <input value="@String.Format(new TimeSpanFormatter(), "{0:hhh\\:mm}", Model.AberturaFolha.ApuracaoMensal.TempoTotalPeriodoAnterior)" class="form-control" disabled />
             </div>
         </div>
     </div>
 </div>
 
 @section FormActions {
-    <input type="hidden" asp-for="Folha.Competencia" />
+    <input type="hidden" asp-for="AberturaFolha.Competencia" />
     <input type="hidden" asp-for="RefererUrl" />
     <button type="submit" value="Salvar" class="btn btn-primary">
         Salvar

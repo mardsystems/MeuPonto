@@ -55,9 +55,9 @@ public class GestaoFolhasDriver
 
         //var competencia = folha.Competencia.Value.ToString("yyyy-MM-dd\\THH:mm:ss");
 
-        form.GetSelect("Folha.ContratoId").GetOption(contrato.Nome).IsSelected = true;
-        form.GetInput("Folha.Competencia").ValueAsDate = folha.Competencia;
-        form.GetTextArea("Folha.Observacao").Value = folha.Observacao;
+        form.GetSelect("AberturaFolha.ContratoId").GetOption(contrato.Nome).IsSelected = true;
+        form.GetInput("AberturaFolha.Competencia").ValueAsDate = folha.Competencia;
+        form.GetTextArea("AberturaFolha.Observacao").Value = folha.Observacao;
 
         var confirmarCompetenciaButton = form.GetSubmitButton("button[value='ConfirmarCompetencia']");
 

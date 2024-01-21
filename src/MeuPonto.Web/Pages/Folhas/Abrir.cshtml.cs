@@ -12,7 +12,7 @@ public class AbrirModel : FormPageModel
     private readonly MeuPontoDbContext _db;
 
     [BindProperty]
-    public Folha Folha { get; set; }
+    public Folha AberturaFolha { get; set; }
 
     public AbrirModel(MeuPontoDbContext db)
     {
@@ -25,9 +25,9 @@ public class AbrirModel : FormPageModel
 
         ViewData["ContratoId"] = new SelectList(_db.Contratos.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
 
-        Folha = GestaoFolhaService.CriaFolha(transaction);
+        AberturaFolha = transaction.IniciarAberturaFolha();
 
-        Folha.StatusId = StatusFolhaEnum.Aberta;
+        AberturaFolha.StatusId = StatusFolhaEnum.Aberta;
 
         HoldRefererUrl();
 
@@ -39,26 +39,26 @@ public class AbrirModel : FormPageModel
     {
         var transaction = User.CreateTransaction();
 
-        Folha.RecontextualizaFolha(transaction);
+        transaction.RecontextualizaFolha(AberturaFolha);
+
+        AberturaFolha.StatusId = StatusFolhaEnum.Aberta;
 
         if (!ModelState.IsValid)
         {
+            ViewData["ContratoId"] = new SelectList(_db.Contratos.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
+
             return Page();
         }
 
-        ViewData["ContratoId"] = new SelectList(_db.Contratos.Where(x => x.UserId == User.GetUserId()), "Id", "Nome");
+        var contrato = await _db.Contratos.FindByIdAsync(AberturaFolha.ContratoId, User.GetUserId());
 
-        Folha.StatusId = StatusFolhaEnum.Aberta;
-
-        var contrato = await _db.Contratos.FindByIdAsync(Folha.ContratoId, User.GetUserId());
-
-        contrato.QualificaFolha(Folha);
-
-        Folha.ConfirmarCompetencia(contrato);
+        AberturaFolha.AssociarAo(contrato);
 
         if (command == "ConfirmarCompetencia")
         {
-            var states = ModelState.Where(state => state.Key.Contains($"{nameof(Folha.ApuracaoMensal)}"));
+            AberturaFolha.ConfirmarCompetencia(contrato);
+
+            var states = ModelState.Where(state => state.Key.Contains($"{nameof(AberturaFolha.ApuracaoMensal)}"));
 
             foreach (var state in states)
             {
@@ -70,13 +70,13 @@ public class AbrirModel : FormPageModel
             return Page();
         }
 
-        Folha.RecontextualizaFolha(transaction);
+        transaction.RecontextualizaFolha(AberturaFolha);
 
-        _db.Folhas.Add(Folha);
+        _db.Folhas.Add(AberturaFolha);
 
         await _db.SaveChangesAsync();
 
-        var detalharPage = Url.Page("Detalhar", new { id = Folha.Id });
+        var detalharPage = Url.Page("Detalhar", new { id = AberturaFolha.Id });
 
         AddTempSuccessMessageWithDetailLink("Folha aberta com sucesso", detalharPage);
 
