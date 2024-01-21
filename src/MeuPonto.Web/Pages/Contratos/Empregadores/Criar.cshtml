@@ -1,5 +1,5 @@
 ﻿@page
-@model MeuPonto.Pages.Empregadores.CriarModel
+@model MeuPonto.Pages.Contratos.Empregadores.CriarModel
 
 @{
     ViewData["Title"] = "Criar Empregador";
@@ -9,6 +9,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
+            <li class="breadcrumb-item"><a asp-page="/Contratos/Index">Contratos</a></li>
             <li class="breadcrumb-item"><a asp-page="./Index">Empregadores</a></li>
             <li class="breadcrumb-item active" aria-current="page">Criar</li>
         </ol>
@@ -16,7 +17,7 @@
 }
 
 @section Title {
-    @ViewData["Title"] <span class="badge bg-secondary">Nova</span>
+    @ViewData["Title"] <span class="badge bg-secondary">Novo</span>
 }
 
 @section CardHeader {

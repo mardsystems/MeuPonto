@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Timesheet.Models.Contratos;
 using Timesheet.Models.Contratos.CadastroEmpregadores;
 
-namespace MeuPonto.Pages.Empregadores;
+namespace MeuPonto.Pages.Contratos.Empregadores;
 
 public class EditarModel : FormPageModel
 {

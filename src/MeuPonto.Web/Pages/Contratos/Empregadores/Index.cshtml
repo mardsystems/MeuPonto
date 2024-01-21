@@ -1,18 +1,23 @@
 ﻿@page
-@model MeuPonto.Pages.Empregadores.IndexModel
+@model MeuPonto.Pages.Contratos.Empregadores.IndexModel
 
 @{
     ViewData["Title"] = "Cadastro de Empregadores";
 }
 
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
-        <li class="breadcrumb-item active" aria-current="page">Empregadores</li>
-    </ol>
-</nav>
+@section Breadcrumb {
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
+            <li class="breadcrumb-item"><a asp-page="/Contratos/Index">Contratos</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Empregadores</li>
+        </ol>
+    </nav>
+}
 
-<h1>@ViewData["Title"]</h1>
+@section Title {
+    @ViewData["Title"]
+}
 
 <div class="btn-group mb-3">
     <a class="btn btn-primary Criacao Empregador" asp-page="./Criar" target="_modal">

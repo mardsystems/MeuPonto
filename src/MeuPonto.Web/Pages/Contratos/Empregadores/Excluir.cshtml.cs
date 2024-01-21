@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Timesheet.Models.Contratos;
 
-namespace MeuPonto.Pages.Empregadores;
+namespace MeuPonto.Pages.Contratos.Empregadores;
 
 public class ExcluirModel : FormPageModel
 {

@@ -6,7 +6,7 @@ using MeuPonto.Pages.Shared;
 using MeuPonto.Extensions;
 using Timesheet.Models.Contratos;
 
-namespace MeuPonto.Pages.Empregadores;
+namespace MeuPonto.Pages.Contratos.Empregadores;
 
 public class IndexModel : PageModel
 {

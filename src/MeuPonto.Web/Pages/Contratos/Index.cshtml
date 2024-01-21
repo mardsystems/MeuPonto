@@ -2,25 +2,34 @@
 @model MeuPonto.Pages.Contratos.IndexModel
 
 @{
-    ViewData["Title"] = "Contratos de Trabalho";
+    ViewData["Title"] = "Gestão de Contratos";
 }
 
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
-        <li class="breadcrumb-item active" aria-current="page">Contratos</li>
-    </ol>
-</nav>
+@section Breadcrumb {
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-page="/Index"><i class="bi bi-house"></i></a></li>
+            <li class="breadcrumb-item active" aria-current="page">Contratos</li>
+        </ol>
+    </nav>
+}
+
+@section Title {
+    @ViewData["Title"]
+}
 
 @if (User.Identity?.IsAuthenticated == true)
 {
-    <h1>@ViewData["Title"]</h1>
-
-    <div class="btn-group mb-3" role="group" aria-label="First group">
-        <a class="btn btn-primary Criacao Contrato" asp-page="./Criar" target="_modal">
-            <i class="bi bi-plus-circle"></i>
-            Criar Novo
-        </a>
+    <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
+        <div class="btn-group me-2" role="group" aria-label="First group">
+            <a class="btn btn-primary Criacao Contrato" asp-page="./Criar" target="_modal">
+                <i class="bi bi-plus-circle"></i>
+                Criar Novo
+            </a>
+        </div>
+        <div class="btn-group" role="group" aria-label="Second group">
+            <a class="btn btn-outline-secondary" asp-page="./Empregadores/Index">Empregadores</a>
+        </div>
     </div>
 
     <form class="table-responsive text-nowrap" method="get">
