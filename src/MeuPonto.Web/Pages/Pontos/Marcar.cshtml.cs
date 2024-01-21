@@ -29,7 +29,7 @@ public class MarcarModel : FormPageModel
     {
         var transaction = User.CreateTransaction();
 
-        Ponto = RegistroPontosService.CriaPonto(transaction);
+        Ponto = RegistroPontosFacade.CriaPonto(transaction);
 
         Ponto.DataHora = _dateTimeSnapshot.GetDateTimeUntilMinutes();
 

@@ -1,9 +1,9 @@
 ﻿using MeuPonto.Models;
 using System.Transactions;
 
-namespace MeuPonto.Services;
+namespace MeuPonto.Features;
 
-public static class BackupComprovantesService
+public static class BackupComprovantesFacade
 {
     public static Comprovante CriaComprovante(TransactionContext transaction)
     {

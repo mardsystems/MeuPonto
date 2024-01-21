@@ -24,7 +24,7 @@ public class CriarModel : FormPageModel
     {
         var transaction = User.CreateTransaction();
 
-        AberturaContrato = GestaoContratosService.InciarAberturaContrato(transaction);
+        AberturaContrato = GestaoContratosFacade.InciarAberturaContrato(transaction);
 
         ViewData["EmpregadorId"] = new SelectList(_db.Empregadores.Where(x => x.UserId == User.GetUserId()), "Id", "Nome").AddEmptyValue();
 

@@ -1,11 +1,10 @@
 ﻿using System.Transactions;
 using Timesheet.Models.Contratos;
 using Timesheet.Models.Folhas;
-using Timesheet.Models.Pontos;
 
 namespace Timesheet.Features.GestaoFolha;
 
-public static class GestaoFolhaService
+public static class GestaoFolhaFacade
 {
     public static Folha IniciarAberturaFolha(this TransactionContext transaction, Guid? id = null)
     {
@@ -13,7 +12,6 @@ public static class GestaoFolhaService
         {
             Id = id ?? Guid.NewGuid(),
             UserId = transaction.UserId,
-            PartitionKey = $"{transaction.UserId}",
             CreationDate = transaction.DateTime
         };
 
@@ -22,18 +20,14 @@ public static class GestaoFolhaService
 
     public static void RecontextualizaFolha(this TransactionContext transaction, Folha folha, Guid? id = null)
     {
-        folha.Id ??= id ?? Guid.NewGuid();
+        folha.Id = folha.Id ?? id ?? Guid.NewGuid();
         folha.UserId = transaction.UserId;
-        folha.PartitionKey = $"{folha.UserId}|{folha.Competencia:yyyy}";
-        folha.CreationDate ??= transaction.DateTime;
+        folha.CreationDate = transaction.DateTime;
     }
 
     public static void AssociarAo(this Folha folha, Contrato contrato)
     {
-        folha.Contrato = new ContratoRef
-        {
-            Nome = contrato.Nome
-        };
+        folha.Contrato = contrato;
 
         folha.ContratoId = contrato.Id;
     }

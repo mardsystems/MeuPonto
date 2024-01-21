@@ -4,7 +4,7 @@ using Timesheet.Models.Pontos;
 
 namespace Timesheet.Features.RegistroPontos;
 
-public static class RegistroPontosService
+public static class RegistroPontosFacade
 {
     public static Ponto CriaPonto(TransactionContext transaction, Guid? id = null)
     {

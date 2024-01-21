@@ -3,7 +3,7 @@ using Timesheet.Models.Contratos;
 
 namespace Timesheet.Features.GestaoContratos;
 
-public static class GestaoContratosService
+public static class GestaoContratosFacade
 {
     public static Contrato InciarAberturaContrato(TransactionContext transaction, Guid? id = null)
     {

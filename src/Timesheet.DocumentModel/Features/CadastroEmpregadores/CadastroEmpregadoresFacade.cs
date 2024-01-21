@@ -3,7 +3,7 @@ using Timesheet.Models.Contratos;
 
 namespace Timesheet.Features.CadastroEmpregadores;
 
-public static class CadastroEmpregadoresService
+public static class CadastroEmpregadoresFacade
 {
     public static Empregador CriaEmpregador(TransactionContext transaction, Guid? id = null)
     {

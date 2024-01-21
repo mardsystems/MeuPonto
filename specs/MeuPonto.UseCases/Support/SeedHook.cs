@@ -37,7 +37,7 @@ public class SeedHook
 
         var trabalhador = TrabalhadorFactory.CriaTrabalhador(transaction);
 
-        var contrato = GestaoContratosService.InciarAberturaContrato(transaction);
+        var contrato = GestaoContratosFacade.InciarAberturaContrato(transaction);
 
         contrato.Nome = userName;
         contrato.Ativo = true;
@@ -84,13 +84,13 @@ public class SeedHook
 
         gestaoContratos.Inicia(contrato);
 
-        var ponto = RegistroPontosService.CriaPonto(transaction);
+        var ponto = RegistroPontosFacade.CriaPonto(transaction);
 
         ponto.MomentoId = MomentoEnum.Entrada;
 
         registroPontos.Inicia(ponto);
 
-        var comprovante = BackupComprovantesService.CriaComprovante(transaction);
+        var comprovante = BackupComprovantesFacade.CriaComprovante(transaction);
 
         backupComprovantes.Inicia(comprovante);
 
@@ -100,7 +100,7 @@ public class SeedHook
 
         var competencia = new DateTime(hoje.Year, hoje.Month, 1);
 
-        var folha = GestaoFolhaService.IniciarAberturaFolha(transaction);
+        var folha = GestaoFolhaFacade.IniciarAberturaFolha(transaction);
 
         folha.AssociarAo(contrato);
 

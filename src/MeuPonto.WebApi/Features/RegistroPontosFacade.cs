@@ -1,9 +1,9 @@
 ﻿using MeuPonto.Models;
 using System.Transactions;
 
-namespace MeuPonto.Services;
+namespace MeuPonto.Features;
 
-public static class RegistroPontosService
+public static class RegistroPontosFacade
 {
     public static Ponto CriaPonto(TransactionContext transaction)
     {
