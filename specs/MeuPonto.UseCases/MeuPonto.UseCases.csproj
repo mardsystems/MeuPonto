@@ -1,0 +1,78 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>MeuPonto</RootNamespace>
+	<Configurations>Debug;Release;Debug_Cosmos;Release_Cosmos;Debug_Sqlite;Release_Sqlite;Debug_SqlServer;Release_SqlServer</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="specflow.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <SpecFlowObsoleteCodeBehindFiles Remove="Features\BackupComprovantes.feature.cs" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Features\GestaoContratos.feature.cs" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Features\GestaoFolhas.feature.cs" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Features\RegistroPontos.feature.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="specflow.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.0" />
+    <PackageReference Include="SpecFlow.Plus.LivingDocPlugin" Version="3.9.57" />
+    <PackageReference Include="SpecFlow.xUnit" Version="3.9.74" />
+    <PackageReference Include="xunit" Version="2.5.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Drivers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MeuPonto.UseCases.Web\MeuPonto.UseCases.Web.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Features\BackupComprovantes.feature.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Features\GestaoContratos.feature.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Features\GestaoFolhas.feature.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Features\RegistroPontos.feature.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <SpecFlowFeatureFiles Update="Features\BackupComprovantes.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Features\GestaoContratos.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Features\GestaoFolhas.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Features\RegistroPontos.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+  </ItemGroup>
+
+</Project>

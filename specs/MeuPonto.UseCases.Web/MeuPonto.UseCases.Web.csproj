@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>MeuPonto</RootNamespace>
+	<Configurations>Debug;Release;Debug_Cosmos;Release_Cosmos;Debug_Sqlite;Release_Sqlite;Debug_SqlServer;Release_SqlServer</Configurations>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>$(DefineConstants);INFRA_SQLITE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Sqlite|AnyCPU'">
+    <DefineConstants>$(DefineConstants);INFRA_SQLITE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_SqlServer|AnyCPU'">
+    <DefineConstants>$(DefineConstants);INFRA_SQLSERVER</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Cosmos|AnyCPU'">
+    <DefineConstants>$(DefineConstants);INFRA_COSMOS</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>$(DefineConstants);INFRA_SQLITE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Sqlite|AnyCPU'">
+    <DefineConstants>$(DefineConstants);INFRA_SQLITE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_SqlServer|AnyCPU'">
+    <DefineConstants>$(DefineConstants);INFRA_SQLSERVER</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Cosmos|AnyCPU'">
+    <DefineConstants>$(DefineConstants);INFRA_COSMOS</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="AngleSharp" Version="1.0.4" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.0" />
+    <PackageReference Include="SpecFlow" Version="3.9.74" />
+    <PackageReference Include="xunit" Version="2.5.0" />
+    <PackageReference Include="FluentAssertions" Version="6.11.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="7.0.9" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\MeuPonto.Web\MeuPonto.Web.csproj" />
+    <ProjectReference Include="..\..\src\System.Extensions\System.Extensions.csproj" />
+  </ItemGroup>
+</Project>

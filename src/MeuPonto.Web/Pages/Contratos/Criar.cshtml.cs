@@ -3,8 +3,8 @@ using MeuPonto.Extensions;
 using MeuPonto.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Timesheet.Features.GestaoContratos;
 using Timesheet.Models.Contratos;
-using Timesheet.Models.Contratos.GestaoContratos;
 
 namespace MeuPonto.Pages.Contratos;
 

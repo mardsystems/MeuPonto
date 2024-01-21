@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<RootNamespace>MeuPonto</RootNamespace>
+		<Configurations>Debug;Release;Debug_Cosmos;Release_Cosmos;Debug_Sqlite;Release_Sqlite;Debug_SqlServer;Release_SqlServer</Configurations>
+	</PropertyGroup>
+	<ItemGroup>
+		<None Remove="specflow.actions.json" />
+	</ItemGroup>
+	<ItemGroup>
+		<Content Include="specflow.actions.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="FluentAssertions" Version="6.11.0" />
+		<PackageReference Include="SpecFlow" Version="3.9.74" />
+		<PackageReference Include="SpecFlow.Actions.WindowsAppDriver" Version="0.1.350" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\src\MeuPonto.EntityFrameworkCore.Sqlite\MeuPonto.EntityFrameworkCore.Sqlite.csproj" />
+	</ItemGroup>
+</Project>

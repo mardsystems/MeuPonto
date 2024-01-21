@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
+using Timesheet.Features.BackupComprovantes;
+using Timesheet.Features.RegistroPontos;
 using Timesheet.Models.Pontos;
-using Timesheet.Models.Pontos.BackupComprovantes;
-using Timesheet.Models.Pontos.RegistroPontos;
 
 namespace MeuPonto.Pages.Pontos.Comprovantes;
 

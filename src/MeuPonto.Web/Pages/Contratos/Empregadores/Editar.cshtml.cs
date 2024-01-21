@@ -1,8 +1,8 @@
 ﻿using MeuPonto.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Timesheet.Features.CadastroEmpregadores;
 using Timesheet.Models.Contratos;
-using Timesheet.Models.Contratos.CadastroEmpregadores;
 
 namespace MeuPonto.Pages.Contratos.Empregadores;
 
