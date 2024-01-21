@@ -1,8 +1,9 @@
 ﻿using System.Transactions;
+using Timesheet.Models.Contratos;
 
-namespace Timesheet.Models.Contratos.CadastroEmpregadores;
+namespace Timesheet.Features.CadastroEmpregadores;
 
-public static class CadastroEmpregadoresService
+public static class CadastroEmpregadores
 {
     public static Empregador CriaEmpregador(TransactionContext transaction, Guid? id = null)
     {
@@ -10,7 +11,6 @@ public static class CadastroEmpregadoresService
         {
             Id = id ?? Guid.NewGuid(),
             UserId = transaction.UserId,
-            PartitionKey = transaction.UserId.ToString(),
             CreationDate = transaction.DateTime
         };
 
@@ -19,9 +19,8 @@ public static class CadastroEmpregadoresService
 
     public static void RecontextualizaEmpregador(this Empregador empregador, TransactionContext transaction, Guid? id = null)
     {
-        empregador.Id ??= id ?? Guid.NewGuid();
+        empregador.Id = empregador.Id ?? id ?? Guid.NewGuid();
         empregador.UserId = transaction.UserId;
-        empregador.PartitionKey = transaction.UserId.ToString();
-        empregador.CreationDate ??= transaction.DateTime;
+        empregador.CreationDate = transaction.DateTime;
     }
 }

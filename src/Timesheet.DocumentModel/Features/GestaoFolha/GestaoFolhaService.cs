@@ -1,8 +1,9 @@
 ﻿using System.Transactions;
 using Timesheet.Models.Contratos;
+using Timesheet.Models.Folhas;
 using Timesheet.Models.Pontos;
 
-namespace Timesheet.Models.Folhas.GestaoFolha;
+namespace Timesheet.Features.GestaoFolha;
 
 public static class GestaoFolhaService
 {

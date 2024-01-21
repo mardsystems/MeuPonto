@@ -1,8 +1,8 @@
 using MeuPonto.Data;
 using MeuPonto.Drivers;
 using MeuPonto.Support;
+using Timesheet.Features.RegistroPontos;
 using Timesheet.Models.Pontos;
-using Timesheet.Models.Pontos.RegistroPontos;
 
 namespace MeuPonto.StepDefinitions;
 

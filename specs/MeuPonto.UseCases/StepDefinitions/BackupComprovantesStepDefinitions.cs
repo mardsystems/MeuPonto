@@ -2,9 +2,9 @@ using MeuPonto.Data;
 using MeuPonto.Drivers;
 using MeuPonto.Support;
 using System.Transactions;
+using Timesheet.Features.BackupComprovantes;
+using Timesheet.Features.RegistroPontos;
 using Timesheet.Models.Pontos;
-using Timesheet.Models.Pontos.BackupComprovantes;
-using Timesheet.Models.Pontos.RegistroPontos;
 
 namespace MeuPonto.StepDefinitions;
 
