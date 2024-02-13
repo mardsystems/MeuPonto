@@ -229,33 +229,33 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
                             "dia semana",
                             "tempo"});
-                table3.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "Sunday",
                             "00:00:00"});
-                table3.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "Monday",
                             "08:00:00"});
-                table3.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "Tuesday",
                             "08:00:00"});
-                table3.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "Wednesday",
                             "08:00:00"});
-                table3.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "Thursday",
                             "08:00:00"});
-                table3.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "Friday",
                             "08:00:00"});
-                table3.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "Saturday",
                             "00:00:00"});
 #line 43
  testRunner.Given("que o trabalhador tem um contrato cadastrado com a seguinte jornada de trabalho s" +
-                        "emanal prevista:", ((string)(null)), table3, "Dado ");
+                        "emanal prevista:", ((string)(null)), table13, "Dado ");
 #line hidden
 #line 52
  testRunner.And(string.Format("que o trabalhador registrou a entrada no expediente às \'{0}\'", entrada), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
@@ -337,23 +337,23 @@ this.ScenarioInitialize(scenarioInfo);
 #line 76
  testRunner.And("que o ano/mês é \'2022/11\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
                             "data/hora",
                             "momento"});
-                table4.AddRow(new string[] {
+                table14.AddRow(new string[] {
                             "27/11/2022 09:14",
                             "Entrada"});
-                table4.AddRow(new string[] {
+                table14.AddRow(new string[] {
                             "27/11/2022 11:30",
                             "Saida"});
-                table4.AddRow(new string[] {
+                table14.AddRow(new string[] {
                             "27/11/2022 12:27",
                             "Entrada"});
-                table4.AddRow(new string[] {
+                table14.AddRow(new string[] {
                             "27/11/2022 18:03",
                             "Saida"});
 #line 77
- testRunner.And("que os pontos registrados foram:", ((string)(null)), table4, "E ");
+ testRunner.And("que os pontos registrados foram:", ((string)(null)), table14, "E ");
 #line hidden
 #line 83
  testRunner.When("o trabalhador fechar a folha de ponto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");

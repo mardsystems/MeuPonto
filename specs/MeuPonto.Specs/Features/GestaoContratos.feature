@@ -2,78 +2,16 @@
 
 Funcionalidade: Gestão Contratos
 
-Regra: O nome do contrato deve ter pelo menos 2 caracteres
+Regra: Identificação do vínculo do trabalhador com o empregador
 
-@basic
-Cenário: Trabalhador abre um contrato com nome maior que 1 caractere
-	Dado que o trabalhador quer abrir um contrato
-	Quando o trabalhador abrir um contrato como
-		| nome       |
-		| Contrato A |
-	Então o contrato deverá ser criado como esperado
+Cenário: Trabalhador cria um contrato para identificar seu vínculo com o empregador
+	Dado que o trabalhador não tem nenhum contrato cadastrado
+	E que o melhor nome que denota o vínculo entre o trabalhador e o empregador é 'Marcelo - Ateliex'
+	Quando o trabalhador criar um contrato
+	Então um contrato deverá ser cadastrado
+	E o nome do contrato deverá ser 'Marcelo - Ateliex'
 
-@basic
-Cenário: Trabalhador altera um contrato com nome maior que 1 caractere
-	Dado que existe um contrato qualquer
-	E que o trabalhador quer alterar esse contrato
-	Quando o trabalhador alterar esse contrato para
-		| nome       |
-		| Contrato A |
-	Então o contrato deverá ser alterado como esperado
-
-@basic
-Cenário: Trabalhador tenta abrir um contrato com nome menor que 2 caracteres
-	Dado que o trabalhador quer abrir um contrato
-	Quando o trabalhador tentar abrir um contrato como
-		| nome |
-		| A    |
-	Então a tentativa de abrir o contrato deverá falhar com um erro "'Nome' deve ser maior ou igual a 2 caracteres."
-
-@basic
-Cenário: Trabalhador tenta alterar um contrato com nome menor que 2 caracteres
-	Dado que o trabalhador quer alterar um contrato
-	E que existe um contrato qualquer
-	Quando o trabalhador tentar alterar esse contrato para
-		| nome |
-		| B    |
-	Então a tentativa de alterar o contrato deverá falhar com um erro "'Nome' deve ser maior ou igual a 2 caracteres."
-
-Regra: O nome do contrato deve ter no máximo 50 caracteres
-
-@basic
-Cenário: Trabalhador abre um contrato com nome menor que 51 caracteres
-	Dado que o trabalhador quer abrir um contrato
-	Quando o trabalhador abrir um contrato como
-		| nome       |
-		| Contrato A |
-	Então o contrato deverá ser criado como esperado
-
-@basic
-Cenário: Trabalhador tenta abrir um contrato com nome maior que 50 caracteres
-	Dado que o trabalhador quer abrir um contrato
-	Quando o trabalhador tentar abrir um contrato como
-		| nome                                                                                                     |
-		| Contrato de Trabalho Feito com uma Empresa do Ramo da Industria Farmacêutica do Estado do Rio de Janeiro |
-	Então a tentativa de cadastrar o contrato deverá falhar com um erro "'Nome' deve ser menor ou igual a 50 caracteres."
-
-
-
-
-
-
-
-
-
-
-Regra: Um contrato pode ser feito com um empregador
-
-Cenário: Trabalhador abre um contrato feito com um novo empregador
-	Dado que o trabalhador quer abrir um contrato feito com um novo empregador
-	Quando o trabalhador abrir um contrato feito com o empregador 'Empregador A'
-	Então um contrato deverá ser criado para o empregador 'Empregador A'
-	E o empregador do contrato deverá ser 'Empregador A'
-
-Cenário: Trabalhador abre um contrato feito com um empregador existente
+Cenário: Trabalhador cria um contrato para identificar seu novo vínculo com o empregador
 	Dado que o trabalhador já tem um contrato cadastrado
 	E que o melhor nome que denota o novo vínculo entre o trabalhador e o empregador é 'Marcelo - Ateliex - Consultor'
 	Quando o trabalhador criar um contrato

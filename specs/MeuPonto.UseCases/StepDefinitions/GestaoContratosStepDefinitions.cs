@@ -170,14 +170,89 @@ public class GestaoContratosStepDefinitions
         _gestaoContratos.Contrato.JornadaTrabalhoSemanalPrevista.Semana[i].Tempo = tempo;
     }
 
-    #region Criar Contrato
 
-    [When(@"o trabalhador criar um contrato")]
-    public void WhenOTrabalhadorCriarUmContrato()
+    [Given(@"que existe uma abertura de contrato em andamento")]
+    public void GivenQueExisteUmaAberturaDeContratoEmAndamento()
+    {
+        var contrato = _gestaoContratosInterface.IniciarAbrerturaContrato();
+
+        _gestaoContratos.Inicia(contrato);
+    }
+
+    [When(@"o trabalhador iniciar uma abertura de contrato")]
+    public void WhenOTrabalhadorIniciarUmaAberturaDeContrato()
+    {
+        var contrato = _gestaoContratosInterface.IniciarAbrerturaContrato();
+
+        _gestaoContratos.Inicia(contrato);
+    }
+
+    [When(@"o trabalhador abrir o contrato como:")]
+    public void WhenOTrabalhadorAbrirOContratoComo(Table table)
+    {
+        var contrato = _gestaoContratos.Contrato;
+
+        var data = table.CreateInstance(() => new AberturaContratoData
+        {
+            Nome = contrato.Nome,
+            Ativo = contrato.Ativo,
+            //Empregador = contrato.EmpregadorId,
+            Domingo = contrato.JornadaTrabalhoSemanalPrevista.Semana[0].Tempo,
+            Segunda = contrato.JornadaTrabalhoSemanalPrevista.Semana[1].Tempo,
+            Terca = contrato.JornadaTrabalhoSemanalPrevista.Semana[2].Tempo,
+            Quarta = contrato.JornadaTrabalhoSemanalPrevista.Semana[3].Tempo,
+            Quinta = contrato.JornadaTrabalhoSemanalPrevista.Semana[4].Tempo,
+            Sexta = contrato.JornadaTrabalhoSemanalPrevista.Semana[5].Tempo,
+            Sabado = contrato.JornadaTrabalhoSemanalPrevista.Semana[6].Tempo,
+        });
+
+        contrato.Nome = data.Nome;
+        contrato.Ativo = data.Ativo;
+        //contrato.EmpregadorId = data.Empregador;
+
+        contrato.JornadaTrabalhoSemanalPrevista.Semana[0].Tempo = data.Domingo;
+        contrato.JornadaTrabalhoSemanalPrevista.Semana[1].Tempo = data.Segunda;
+        contrato.JornadaTrabalhoSemanalPrevista.Semana[2].Tempo = data.Terca;
+        contrato.JornadaTrabalhoSemanalPrevista.Semana[3].Tempo = data.Quarta;
+        contrato.JornadaTrabalhoSemanalPrevista.Semana[4].Tempo = data.Quinta;
+        contrato.JornadaTrabalhoSemanalPrevista.Semana[5].Tempo = data.Sexta;
+        contrato.JornadaTrabalhoSemanalPrevista.Semana[6].Tempo = data.Sabado;
+
+        _gestaoContratosInterface.AbrirContrato(contrato);
+
+        var contratoCadastrado = _db.Contratos.FirstOrDefault(x => x.Nome == contrato.Nome);
+
+        _gestaoContratos.Define(contratoCadastrado);
+    }
+
+    [Then(@"um contrato deverá ser criado")]
+    public void ThenUmContratoDeveraSerCriado()
+    {
+        _gestaoContratos.Contrato.Should().NotBeNull();
+    }
+
+    [Then(@"o contrato deverá ser ativo")]
+    public void ThenOContratoDeveraSerAtivo()
+    {
+        _gestaoContratos.Contrato.Ativo.Should().BeTrue();
+    }
+
+    [Then(@"o contrato deverá prever a seguinte jornada de trabalho semanal:")]
+    public void ThenOContratoDeveraPreverASeguinteJornadaDeTrabalhoSemanal(Table jornadaTrabalhoSemanal)
+    {
+        var jornadaTrabalhoSemanalPrevista = _gestaoContratos.Contrato.JornadaTrabalhoSemanalPrevista;
+
+        jornadaTrabalhoSemanal.CompareToSet(jornadaTrabalhoSemanalPrevista.Semana);
+    }
+
+    #region Abrir Contrato
+
+    [When(@"o trabalhador abrir um contrato")]
+    public void WhenOTrabalhadorAbrirUmContrato()
     {
         //_gestaoContratosInterface.GoTo();
 
-        _gestaoContratosInterface.CriarContrato(_gestaoContratos.Contrato);
+        _gestaoContratosInterface.AbrirContrato(_gestaoContratos.Contrato);
 
         var contratoCadastrado = _db.Contratos.FirstOrDefault(x => x.Nome == _gestaoContratos.Contrato.Nome);
 

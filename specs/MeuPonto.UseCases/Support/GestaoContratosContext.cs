@@ -18,6 +18,11 @@ public class GestaoContratosContext
     {
         Contrato = contrato;
 
+        if (contrato == null)
+        {
+            throw new ArgumentNullException(nameof(contrato));
+        }
+
         NomeContrato = contrato.Nome;
     }
 
@@ -47,4 +52,18 @@ public class GestaoContratosContext
     }
 
     public Contrato ContratoCadastrado { get; private set; }
+}
+
+public class AberturaContratoData
+{
+    public string Nome { get; set; }    
+    public bool Ativo { get; set; }
+    public string Empregador { get; set; }
+    public TimeSpan? Domingo { get; set; }
+    public TimeSpan? Segunda { get; set; }
+    public TimeSpan? Terca { get; set; }
+    public TimeSpan? Quarta { get; set; }
+    public TimeSpan? Quinta { get; set; }
+    public TimeSpan? Sexta { get; set; }
+    public TimeSpan? Sabado { get; set; }
 }

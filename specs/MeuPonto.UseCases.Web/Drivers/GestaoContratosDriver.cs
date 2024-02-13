@@ -1,6 +1,7 @@
 ﻿using AngleSharp.Html.Dom;
 using MeuPonto.Helpers;
 using MeuPonto.Support;
+using Newtonsoft.Json.Linq;
 using Timesheet.Models.Contratos;
 
 namespace MeuPonto.Drivers;
@@ -11,7 +12,7 @@ public class GestaoContratosDriver
 
     public IHtmlDocument Document { get; private set; }
 
-    public IHtmlAnchorElement CriacaoContratoAnchor { get; private set; }
+    public IHtmlAnchorElement AberturaContratoAnchor { get; private set; }
 
     public IHtmlAnchorElement DetalheContratoAnchor { get; private set; }
 
@@ -30,9 +31,9 @@ public class GestaoContratosDriver
 
         //
 
-        CriacaoContratoAnchor = Document.GetAnchor("Criacao.Contrato");
+        AberturaContratoAnchor = Document.GetAnchor("Criacao.Contrato");
 
-        CriacaoContratoAnchor.Should().NotBeNull("a tela de contratos deve ter um link de criação de contrato");
+        AberturaContratoAnchor.Should().NotBeNull("a tela de contratos deve ter um link de criação de contrato");
     }
 
     private void Identifica(string nomeContrato)
@@ -60,11 +61,48 @@ public class GestaoContratosDriver
         ExclusaoContratoAnchor.Should().NotBeNull("a lista de contratos deve ter um link de exclusão do contrato cadastrado");
     }
 
-    public void CriarContrato(Contrato contrato)
+    public Contrato IniciarAbrerturaContrato()
     {
         GoTo();
 
-        Document = _angleSharp.GetDocument(CriacaoContratoAnchor.Href);
+        Document = _angleSharp.GetDocument(AberturaContratoAnchor.Href);
+
+        var form = Document.GetForm();
+
+        var contrato = new Contrato
+        {
+            Nome = form.GetInput("AberturaContrato.Nome").Value,
+            Ativo = form.GetInput("AberturaContrato.Ativo").IsChecked,
+        };
+
+        var daysOfWeek = Enum.GetValues<DayOfWeek>();
+
+        foreach (var dayOfWeek in daysOfWeek)
+        {
+            var i = (int)dayOfWeek;
+
+            var input = form.GetInput($"AberturaContrato.JornadaTrabalhoSemanalPrevista.Semana[{i}].Tempo");
+
+            if (input != null)
+            {
+                var tempo = input.Value;
+
+                contrato.JornadaTrabalhoSemanalPrevista.Semana.Add(new JornadaTrabalhoDiaria
+                {
+                    DiaSemana = dayOfWeek,
+                    Tempo = TimeSpan.Parse(tempo)
+                });
+            }
+        }
+
+        return contrato;
+    }
+
+    public void AbrirContrato(Contrato contrato)
+    {
+        GoTo();
+
+        Document = _angleSharp.GetDocument(AberturaContratoAnchor.Href);
 
         var form = Document.GetForm();
 
