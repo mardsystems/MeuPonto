@@ -15,6 +15,8 @@ public static class GestaoContratosFacade
             CreationDate = transaction.DateTime
         };
 
+        contrato.Ativo = true;
+
         return contrato;
     }
 
