@@ -108,6 +108,13 @@ public static class AngleSharpExtensions
         return erros;
     }
 
+    public static IHtmlSpanElement FirstSpan(this IEnumerable<IElement> elements)
+    {
+        var span = (IHtmlSpanElement)elements.First();
+
+        return span;
+    }
+
     public static IHtmlButtonElement GetSubmitButton(this IHtmlFormElement form, string selector = "button")
     {
         var button = (IHtmlButtonElement)form.QuerySelector(selector);

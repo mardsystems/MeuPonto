@@ -4,6 +4,14 @@ namespace MeuPonto.Support;
 
 public class GestaoContratosContext
 {
+    public Table Especificacao { get; set; }
+
+    public Contrato Contrato { get; private set; }
+
+    public string NomeContrato { get; private set; }
+
+    public string Erro { get; set; }
+
     public GestaoContratosContext()
     {
         //var contrato = new Contrato
@@ -14,7 +22,7 @@ public class GestaoContratosContext
         //Contrato = contrato;
     }
 
-    public void Inicia(Contrato contrato)
+    public void Iniciar(Contrato contrato)
     {
         Contrato = contrato;
 
@@ -33,8 +41,6 @@ public class GestaoContratosContext
         NomeContrato = contrato.Nome;
     }
 
-    public Contrato Contrato { get; private set; }
-
     public void DefineNomeContrato(string nomeContrato)
     {
         Contrato.Nome = nomeContrato;
@@ -42,16 +48,12 @@ public class GestaoContratosContext
         NomeContrato = nomeContrato;
     }
 
-    public string NomeContrato { get; private set; }
-
     public void Define(Contrato contratoCadastrado)
     {
-        ContratoCadastrado = contratoCadastrado;
+        Contrato = contratoCadastrado;
 
         NomeContrato = contratoCadastrado.Nome;
     }
-
-    public Contrato ContratoCadastrado { get; private set; }
 }
 
 public class AberturaContratoData

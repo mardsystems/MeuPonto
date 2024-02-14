@@ -82,7 +82,7 @@ public class SeedHook
                 })
         };
 
-        gestaoContratos.Inicia(contrato);
+        gestaoContratos.Iniciar(contrato);
 
         var ponto = RegistroPontosFacade.CriaPonto(transaction);
 

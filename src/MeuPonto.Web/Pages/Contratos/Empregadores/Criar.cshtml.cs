@@ -10,7 +10,7 @@ public class CriarModel : FormPageModel
     private readonly Data.MeuPontoDbContext _db;
 
     [BindProperty]
-    public Empregador Empregador { get; set; }
+    public Empregador CadastroEmpregador { get; set; }
 
     public CriarModel(Data.MeuPontoDbContext db)
     {
@@ -29,18 +29,18 @@ public class CriarModel : FormPageModel
     {
         var transaction = User.CreateTransaction();
 
-        Empregador.RecontextualizaEmpregador(transaction);
+        CadastroEmpregador.RecontextualizaEmpregador(transaction);
 
         if (!ModelState.IsValid)
         {
             return Page();
         }
 
-        _db.Empregadores.Add(Empregador);
+        _db.Empregadores.Add(CadastroEmpregador);
 
         await _db.SaveChangesAsync();
 
-        var detalharPage = Url.Page("Detalhar", new { id = Empregador.Id });
+        var detalharPage = Url.Page("Detalhar", new { id = CadastroEmpregador.Id });
 
         AddTempSuccessMessageWithDetailLink("Empregador criado com sucesso", detalharPage);
 

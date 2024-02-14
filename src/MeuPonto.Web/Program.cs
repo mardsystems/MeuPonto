@@ -7,6 +7,7 @@ using MeuPonto.Models.Trabalhadores;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
@@ -140,7 +141,11 @@ public class Program
             .AddSupportedCultures(supportedCultures)
             .AddSupportedUICultures(supportedCultures);
 
+        localizationOptions.ApplyCurrentCultureToResponseHeaders = true;
+
         app.UseRequestLocalization(localizationOptions);
+
+        app.UseMiddleware<RequestLocalizationMiddleware>();
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
