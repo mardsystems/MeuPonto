@@ -7,8 +7,8 @@ namespace Timesheet.Models.Contratos;
 public class Contrato : DocumentEntity
 {
     [Required]
-    [MinLength(3)]
-    [MaxLength(35)]
+    [MinLength(3, ErrorMessage = "'Nome' deve ser maior ou igual a 3 caracteres.")]
+    [MaxLength(35, ErrorMessage = "'Nome' deve ser menor ou igual a 35 caracteres.")]
     [DisplayName("Nome")]
     public string? Nome { get; set; }
 

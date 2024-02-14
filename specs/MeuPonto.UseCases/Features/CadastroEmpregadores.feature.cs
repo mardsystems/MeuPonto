@@ -98,17 +98,11 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 6
- testRunner.Given("que existe um contrato criado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
-#line hidden
 #line 7
  testRunner.When("o trabalhador iniciar um cadastro de empregador", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
 #line 8
- testRunner.Then("um trabalhador deverá ser criado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
-#line hidden
-#line 9
- testRunner.And("o trabalhador deverá ser associado ao contrato", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+ testRunner.Then("um empregador deverá ser criado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
                 TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                             "nome"});
@@ -118,10 +112,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.When("o trabalhador cadastrar o empregador como:", ((string)(null)), table1, "Quando ");
 #line hidden
 #line 14
- testRunner.Then("o empregador deverá ser cadastrado como esperado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
-#line hidden
-#line 15
- testRunner.And("o nome do empregador deverá ser \'Empregador A\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+ testRunner.Then("o nome do empregador deverá ser \'Empregador A\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
             }
             this.ScenarioCleanup();

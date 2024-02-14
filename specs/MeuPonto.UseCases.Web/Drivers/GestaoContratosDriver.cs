@@ -1,7 +1,6 @@
 ﻿using AngleSharp.Html.Dom;
 using MeuPonto.Helpers;
 using MeuPonto.Support;
-using Newtonsoft.Json.Linq;
 using Timesheet.Models.Contratos;
 
 namespace MeuPonto.Drivers;
@@ -98,7 +97,7 @@ public class GestaoContratosDriver
         return contrato;
     }
 
-    public void AbrirContrato(Contrato contrato)
+    public void AbrirContrato(Contrato contrato, bool attemptOnly = false)
     {
         GoTo();
 
@@ -107,6 +106,8 @@ public class GestaoContratosDriver
         var form = Document.GetForm();
 
         form.GetInput("AberturaContrato.Nome").Value = contrato.Nome;
+
+        form.GetInput("AberturaContrato.Ativo").IsChecked = contrato.Ativo;
 
         var daysOfWeek = Enum.GetValues<DayOfWeek>();
 
@@ -134,11 +135,20 @@ public class GestaoContratosDriver
 
         var hasErrors = Document.GetValidationErrors().Any();
 
-        hasErrors.Should().BeFalse();
+        if (hasErrors)
+        {
+            var erros = Document.GetValidationErrors();
 
-        //var contratoCadastrado = await ObtemDetalhes();
+            var span = erros.FirstSpan();
 
-        //return contratoCadastrado;
+            throw new Exception(span.InnerHtml);
+        }
+        else
+        {
+            //var contratoCadastrado = await ObtemDetalhes();
+
+            //return contratoCadastrado;
+        }
     }
 
     public Contrato DetalharContrato(string nomeContrato)
@@ -152,6 +162,45 @@ public class GestaoContratosDriver
         var contratoDetalhado = ObtemDetalhes();
 
         return contratoDetalhado;
+    }
+
+    public Contrato IniciarEdicaoContrato(string nomeContrato)
+    {
+        GoTo();
+
+        Identifica(nomeContrato);
+
+        Document = _angleSharp.GetDocument(EdicaoContratoAnchor.Href);
+
+        var form = Document.GetForm();
+
+        var contrato = new Contrato
+        {
+            Nome = form.GetInput("EdicaoContrato.Nome").Value,
+            Ativo = form.GetInput("EdicaoContrato.Ativo").IsChecked,
+        };
+
+        var daysOfWeek = Enum.GetValues<DayOfWeek>();
+
+        foreach (var dayOfWeek in daysOfWeek)
+        {
+            var i = (int)dayOfWeek;
+
+            var input = form.GetInput($"EdicaoContrato.JornadaTrabalhoSemanalPrevista.Semana[{i}].Tempo");
+
+            if (input != null)
+            {
+                var tempo = input.Value;
+
+                contrato.JornadaTrabalhoSemanalPrevista.Semana.Add(new JornadaTrabalhoDiaria
+                {
+                    DiaSemana = dayOfWeek,
+                    Tempo = TimeSpan.Parse(tempo)
+                });
+            }
+        }
+
+        return contrato;
     }
 
     public void EditarContrato(string nomeContrato, Contrato contratoCadastrado)
