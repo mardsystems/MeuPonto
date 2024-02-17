@@ -94,11 +94,20 @@ public class CadastroEmpregadoresDriver
 
         var hasErrors = Document.GetValidationErrors().Any();
 
-        hasErrors.Should().BeFalse();
+        if (hasErrors)
+        {
+            var erros = Document.GetValidationErrors();
 
-        //var empregadorCadastrado = await ObtemDetalhes();
+            var span = erros.FirstSpan();
 
-        //return empregadorCadastrado;
+            throw new Exception(span.InnerHtml);
+        }
+        else
+        {
+            //var empregadorCadastrado = await ObtemDetalhes();
+
+            //return empregadorCadastrado;
+        }
     }
 
     public Empregador DetalharEmpregador(string nomeEmpregador)

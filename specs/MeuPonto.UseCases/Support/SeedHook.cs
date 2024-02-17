@@ -2,6 +2,7 @@
 using MeuPonto.Models.Trabalhadores;
 using System.Transactions;
 using Timesheet.Features.BackupComprovantes;
+using Timesheet.Features.CadastroEmpregadores;
 using Timesheet.Features.GestaoContratos;
 using Timesheet.Features.GestaoFolha;
 using Timesheet.Features.RegistroPontos;
@@ -22,6 +23,7 @@ public class SeedHook
     [BeforeScenario]
     public void SetupTestUsers(
         ScenarioContext scenario,
+        CadastroEmpregadoresContext cadastroEmpregadores,
         GestaoContratosContext gestaoContratos,
         RegistroPontosContext registroPontos,
         BackupComprovantesContext backupComprovantes,
@@ -36,6 +38,12 @@ public class SeedHook
         var transaction = new TransactionContext(userId);
 
         var trabalhador = TrabalhadorFactory.CriaTrabalhador(transaction);
+
+        var empregador = CadastroEmpregadoresFacade.CriaEmpregador(transaction);
+
+        empregador.Nome = "Empregador Padrão";
+
+        cadastroEmpregadores.Iniciar(empregador);
 
         var contrato = GestaoContratosFacade.InciarAberturaContrato(transaction);
 
@@ -81,6 +89,9 @@ public class SeedHook
                     }
                 })
         };
+
+        //contrato.Empregador = empregador;
+        //contrato.EmpregadorId = empregador.Id;
 
         gestaoContratos.Iniciar(contrato);
 

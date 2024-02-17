@@ -3,6 +3,7 @@ using MeuPonto.Drivers;
 using MeuPonto.Support;
 using Microsoft.EntityFrameworkCore;
 using TechTalk.SpecFlow.Assist;
+using Timesheet.Features.GestaoContratos;
 
 namespace MeuPonto.StepDefinitions;
 
@@ -32,20 +33,11 @@ public class GestaoContratosStepDefinitions
         _db = db;
     }
 
-    [Given(@"que o trabalhador não tem nenhum contrato cadastrado")]
-    public void GivenQueOTrabalhadorNaoTemNenhumContratoCadastrado()
-    {
-        _db.Contratos.Count().Should().Be(0);
-
-        //_home.CriacaoContratoAnchor.Should().NotBeNull("quando não existe nenhum contrato cadastrado a tela inicial deve ter um link de criação de contrato");
-    }
-
-    [Given(@"que o trabalhador tem um contrato cadastrado")]
-    [Given(@"que o trabalhador já tem um contrato cadastrado")]
-    public async Task GivenQueOTrabalhadorTemUmContratoCadastrado()
+    [Given(@"que existe um contrato aberto")]
+    public void GivenQueExisteUmContratoAberto()
     {
         _db.Contratos.Add(_gestaoContratos.Contrato);
-        await _db.SaveChangesAsync();
+        _db.SaveChanges();
     }
 
     [Given(@"que existe um contrato aberto '([^']*)'")]
@@ -57,23 +49,13 @@ public class GestaoContratosStepDefinitions
         _db.SaveChanges();
     }
 
-    //[Given(@"que o trabalhador tem um contrato cadastrado com o nome '([^']*)'")]
-    //[Given(@"que o trabalhador já tem um contrato cadastrado com o nome '([^']*)'")]
-    //public async Task GivenQueOTrabalhadorTemUmContratoCadastradoComONome(string nome)
-    //{
-    //    _gestaoContratos.DefineNomeContrato(nome);
-
-    //    _db.Contratos.Add(_gestaoContratos.Contrato);
-    //    await _db.SaveChangesAsync();
-    //}
-
     [Given(@"que o trabalhador tem um contrato cadastrado com a seguinte jornada de trabalho semanal prevista:")]
-    public async Task GivenQueOTrabalhadorTemUmContratoCadastradoComASeguinteJornadaDeTrabalhoSemanalPrevista(Table table)
+    public void GivenQueOTrabalhadorTemUmContratoCadastradoComASeguinteJornadaDeTrabalhoSemanalPrevista(Table table)
     {
         DefineJornadaTrabalhoSemanalPrevistaDe(table);
 
         _db.Contratos.Add(_gestaoContratos.Contrato);
-        await _db.SaveChangesAsync();
+        _db.SaveChanges();
     }
 
     public void DefineJornadaTrabalhoSemanalPrevistaDe(Table table)
@@ -130,21 +112,8 @@ public class GestaoContratosStepDefinitions
         //_scenario["aberturaFolhaPontoAnchor"] = aberturaFolhaPontoAnchor;
     }
 
-    [Given(@"que o trabalhador identifica na lista o contrato cadastrado")]
-    public void GivenQueOTrabalhadorIdentificaNaListaOContratoCadastrado()
-    {
-        //_gestaoContratos.Identifica(_gestaoContratos.ContratoCadastrado);
-    }
-
     [Given(@"que o nome do trabalhador é '([^']*)'")]
     public void GivenQueONomeDoTrabalhadorE(string nome)
-    {
-        _gestaoContratos.Contrato.Nome = nome;
-    }
-
-    [Given(@"que o melhor nome que denota o vínculo entre o trabalhador e o empregador é '([^']*)'")]
-    [Given(@"que o melhor nome que denota o novo vínculo entre o trabalhador e o empregador é '([^']*)'")]
-    public void GivenQueOMelhorNomeQueDenotaOVinculoEntreOTrabalhadorEOEmpregadorE(string nome)
     {
         _gestaoContratos.Contrato.Nome = nome;
     }
@@ -155,8 +124,8 @@ public class GestaoContratosStepDefinitions
         _gestaoContratos.Contrato.Nome = nome;
     }
 
-    [Given(@"que o horário de trabalho é de '([^']*)' a '([^']*)' das '([^']*)' às '([^']*)' com '([^']*)' de almoço")]
-    public void GivenQueOHorarioDeTrabalhoEDeADasAsComDeAlmoco(DayOfWeek dayOfWeekInicio, DayOfWeek dayOfWeekTermino, TimeSpan horaInicio, TimeSpan horaTermino, TimeSpan tempoAlmoco)
+    [Given(@"que a jornada de trabalho semanal é de '([^']*)' a '([^']*)' das '([^']*)' às '([^']*)' com '([^']*)' de almoço")]
+    public void GivenQueAJornadaDeTrabalhoSemanalEDeADasAsComDeAlmoco(DayOfWeek dayOfWeekInicio, DayOfWeek dayOfWeekTermino, TimeSpan horaInicio, TimeSpan horaTermino, TimeSpan tempoAlmoco)
     {
         var tempo = horaTermino - horaInicio - tempoAlmoco;
 
@@ -170,8 +139,8 @@ public class GestaoContratosStepDefinitions
         }
     }
 
-    [Given(@"que o horário de trabalho de '([^']*)' é das '([^']*)' às '([^']*)'")]
-    public void GivenQueOHorarioDeTrabalhoDeEDasAs(DayOfWeek dayOfWeek, TimeSpan horaInicio, TimeSpan horaTermino)
+    [Given(@"que a jornada de trabalho de '([^']*)' é das '([^']*)' às '([^']*)'")]
+    public void GivenQueAJornadaDeTrabalhoDeEDasAs(DayOfWeek dayOfWeek, TimeSpan horaInicio, TimeSpan horaTermino)
     {
         var tempo = horaTermino - horaInicio;
 
@@ -180,11 +149,28 @@ public class GestaoContratosStepDefinitions
         _gestaoContratos.Contrato.JornadaTrabalhoSemanalPrevista.Semana[i].Tempo = tempo;
     }
 
-
     [Given(@"que existe uma abertura de contrato em andamento")]
     public void GivenQueExisteUmaAberturaDeContratoEmAndamento()
     {
         var contrato = _gestaoContratosInterface.IniciarAbrerturaContrato();
+
+        _gestaoContratos.Iniciar(contrato);
+    }
+
+    [Given(@"que existe uma abertura de contrato em andamento '([^']*)'")]
+    public void GivenQueExisteUmaAberturaDeContratoEmAndamento(string nome)
+    {
+        var contrato = _gestaoContratosInterface.IniciarAbrerturaContrato();
+
+        contrato.Nome = nome;
+
+        _gestaoContratos.Iniciar(contrato);
+    }
+
+    [Given(@"que existe uma alteração desse contrato em andamento '([^']*)'")]
+    public void GivenQueExisteUmaAlteracaoDesseContratoEmAndamento(string nome)
+    {
+        var contrato = _gestaoContratosInterface.IniciarEdicaoContrato(nome);
 
         _gestaoContratos.Iniciar(contrato);
     }
@@ -195,12 +181,6 @@ public class GestaoContratosStepDefinitions
         var contrato = _gestaoContratosInterface.IniciarAbrerturaContrato();
 
         _gestaoContratos.Iniciar(contrato);
-    }
-
-    [When(@"o trabahador cadastrar o empregador '([^']*)'")]
-    public void WhenOTrabahadorCadastrarOEmpregador(string nome)
-    {
-
     }
 
     [When(@"o trabalhador abrir o contrato como:")]
@@ -214,7 +194,7 @@ public class GestaoContratosStepDefinitions
         {
             Nome = contrato.Nome,
             Ativo = contrato.Ativo,
-            //Empregador = contrato.EmpregadorId,
+            Empregador = contrato.Empregador?.Nome,
             Domingo = contrato.JornadaTrabalhoSemanalPrevista.Semana[0].Tempo,
             Segunda = contrato.JornadaTrabalhoSemanalPrevista.Semana[1].Tempo,
             Terca = contrato.JornadaTrabalhoSemanalPrevista.Semana[2].Tempo,
@@ -226,7 +206,10 @@ public class GestaoContratosStepDefinitions
 
         contrato.Nome = data.Nome;
         contrato.Ativo = data.Ativo;
-        //contrato.EmpregadorId = data.Empregador;
+
+        var empregador = _db.Empregadores.FirstOrDefault(x => x.Nome == data.Empregador);
+        
+        contrato.FeitoCom(empregador);
 
         contrato.JornadaTrabalhoSemanalPrevista.Semana[0].Tempo = data.Domingo;
         contrato.JornadaTrabalhoSemanalPrevista.Semana[1].Tempo = data.Segunda;
@@ -238,11 +221,13 @@ public class GestaoContratosStepDefinitions
 
         _gestaoContratosInterface.AbrirContrato(contrato);
 
-        var contratoCadastrado = _db.Contratos
+        //_db.ChangeTracker.Clear();
+
+        var contratoAberto = _db.Contratos
             .Include(x => x.Empregador)
             .FirstOrDefault(x => x.Nome == contrato.Nome);
 
-        _gestaoContratos.Define(contratoCadastrado);
+        _gestaoContratos.Define(contratoAberto);
     }
 
     [When(@"o trabalhador tentar abrir um contrato como")]
@@ -256,7 +241,7 @@ public class GestaoContratosStepDefinitions
         {
             Nome = contrato.Nome,
             Ativo = contrato.Ativo,
-            //Empregador = contrato.EmpregadorId,
+            Empregador = contrato.Empregador?.Nome,
             Domingo = contrato.JornadaTrabalhoSemanalPrevista.Semana[0].Tempo,
             Segunda = contrato.JornadaTrabalhoSemanalPrevista.Semana[1].Tempo,
             Terca = contrato.JornadaTrabalhoSemanalPrevista.Semana[2].Tempo,
@@ -268,7 +253,10 @@ public class GestaoContratosStepDefinitions
 
         contrato.Nome = data.Nome;
         contrato.Ativo = data.Ativo;
-        //contrato.EmpregadorId = data.Empregador;
+
+        var empregador = _db.Empregadores.FirstOrDefault(x => x.Nome == data.Empregador);
+
+        contrato.FeitoCom(empregador);
 
         contrato.JornadaTrabalhoSemanalPrevista.Semana[0].Tempo = data.Domingo;
         contrato.JornadaTrabalhoSemanalPrevista.Semana[1].Tempo = data.Segunda;
@@ -299,7 +287,7 @@ public class GestaoContratosStepDefinitions
         {
             Nome = contrato.Nome,
             Ativo = contrato.Ativo,
-            //Empregador = contrato.EmpregadorId,
+            Empregador = contrato.Empregador?.Nome,
             Domingo = contrato.JornadaTrabalhoSemanalPrevista.Semana[0].Tempo,
             Segunda = contrato.JornadaTrabalhoSemanalPrevista.Semana[1].Tempo,
             Terca = contrato.JornadaTrabalhoSemanalPrevista.Semana[2].Tempo,
@@ -311,7 +299,10 @@ public class GestaoContratosStepDefinitions
 
         contrato.Nome = data.Nome;
         contrato.Ativo = data.Ativo;
-        //contrato.EmpregadorId = data.Empregador;
+
+        var empregador = _db.Empregadores.FirstOrDefault(x => x.Nome == data.Empregador);
+
+        contrato.FeitoCom(empregador);
 
         contrato.JornadaTrabalhoSemanalPrevista.Semana[0].Tempo = data.Domingo;
         contrato.JornadaTrabalhoSemanalPrevista.Semana[1].Tempo = data.Segunda;
@@ -325,11 +316,57 @@ public class GestaoContratosStepDefinitions
 
         _db.ChangeTracker.Clear();
 
-        var contratoCadastrado = _db.Contratos
+        var contratoAberto = _db.Contratos
             .Include(x => x.Empregador)
             .FirstOrDefault(x => x.Nome == contrato.Nome);
 
-        _gestaoContratos.Define(contratoCadastrado);
+        _gestaoContratos.Define(contratoAberto);
+    }
+
+    [When(@"o trabalhador tentar alterar esse contrato para")]
+    public void WhenOTrabalhadorTentarAlterarEsseContratoPara(Table table)
+    {
+        _gestaoContratos.Especificacao = table;
+
+        var contrato = _gestaoContratos.Contrato;
+
+        var data = table.CreateInstance(() => new AberturaContratoData
+        {
+            Nome = contrato.Nome,
+            Ativo = contrato.Ativo,
+            Empregador = contrato.Empregador?.Nome,
+            Domingo = contrato.JornadaTrabalhoSemanalPrevista.Semana[0].Tempo,
+            Segunda = contrato.JornadaTrabalhoSemanalPrevista.Semana[1].Tempo,
+            Terca = contrato.JornadaTrabalhoSemanalPrevista.Semana[2].Tempo,
+            Quarta = contrato.JornadaTrabalhoSemanalPrevista.Semana[3].Tempo,
+            Quinta = contrato.JornadaTrabalhoSemanalPrevista.Semana[4].Tempo,
+            Sexta = contrato.JornadaTrabalhoSemanalPrevista.Semana[5].Tempo,
+            Sabado = contrato.JornadaTrabalhoSemanalPrevista.Semana[6].Tempo,
+        });
+
+        contrato.Nome = data.Nome;
+        contrato.Ativo = data.Ativo;
+
+        var empregador = _db.Empregadores.FirstOrDefault(x => x.Nome == data.Empregador);
+
+        contrato.FeitoCom(empregador);
+
+        contrato.JornadaTrabalhoSemanalPrevista.Semana[0].Tempo = data.Domingo;
+        contrato.JornadaTrabalhoSemanalPrevista.Semana[1].Tempo = data.Segunda;
+        contrato.JornadaTrabalhoSemanalPrevista.Semana[2].Tempo = data.Terca;
+        contrato.JornadaTrabalhoSemanalPrevista.Semana[3].Tempo = data.Quarta;
+        contrato.JornadaTrabalhoSemanalPrevista.Semana[4].Tempo = data.Quinta;
+        contrato.JornadaTrabalhoSemanalPrevista.Semana[5].Tempo = data.Sexta;
+        contrato.JornadaTrabalhoSemanalPrevista.Semana[6].Tempo = data.Sabado;
+
+        try
+        {
+            _gestaoContratosInterface.EditarContrato(_gestaoContratos.NomeContrato, contrato);
+        }
+        catch (Exception ex)
+        {
+            _gestaoContratos.Erro = ex.Message;
+        }
     }
 
     [When(@"o trabalhador iniciar uma edição de contrato")]
@@ -355,21 +392,14 @@ public class GestaoContratosStepDefinitions
     [Then(@"o empregador '([^']*)' deverá ser associado ao contrato")]
     public void ThenOEmpregadorDeveraSerAssociadoAoContrato(string empregador)
     {
-        //_gestaoContratos.Contrato.Empregador.Should().NotBeNull();
+        _gestaoContratos.Contrato.Empregador.Should().NotBeNull();
 
-        //_gestaoContratos.Contrato.Empregador.Nome.Should().Be(empregador);
+        _gestaoContratos.Contrato.Empregador.Nome.Should().Be(empregador);
     }
 
     [Then(@"a jornada de trabalho semanal prevista no contrato deverá ser:")]
-    public void ThenAJornadaDeTrabalhoSemanalPrevistaNoContratoDeveraSer(Table jornadaTrabalhoSemanal)
-    {
-        var jornadaTrabalhoSemanalPrevista = _gestaoContratos.Contrato.JornadaTrabalhoSemanalPrevista;
-
-        jornadaTrabalhoSemanal.CompareToSet(jornadaTrabalhoSemanalPrevista.Semana);
-    }
-
     [Then(@"o contrato deverá prever a seguinte jornada de trabalho semanal:")]
-    public void ThenOContratoDeveraPreverASeguinteJornadaDeTrabalhoSemanal(Table jornadaTrabalhoSemanal)
+    public void ThenAJornadaDeTrabalhoSemanalPrevistaNoContratoDeveraSer(Table jornadaTrabalhoSemanal)
     {
         var jornadaTrabalhoSemanalPrevista = _gestaoContratos.Contrato.JornadaTrabalhoSemanalPrevista;
 
@@ -385,9 +415,9 @@ public class GestaoContratosStepDefinitions
 
         _gestaoContratosInterface.AbrirContrato(_gestaoContratos.Contrato);
 
-        var contratoCadastrado = _db.Contratos.FirstOrDefault(x => x.Nome == _gestaoContratos.Contrato.Nome);
+        var contratoAberto = _db.Contratos.FirstOrDefault(x => x.Nome == _gestaoContratos.Contrato.Nome);
 
-        _gestaoContratos.Define(contratoCadastrado);
+        _gestaoContratos.Define(contratoAberto);
     }
 
     [Then(@"um contrato deverá ser cadastrado")]
@@ -460,22 +490,20 @@ public class GestaoContratosStepDefinitions
         _gestaoContratos.Especificacao.CompareToSet(_db.Contratos);
     }
 
+    [Then(@"o contrato deverá ser alterado como esperado")]
+    public void ThenOContratoDeveraSerAlteradoComoEsperado()
+    {
+        _gestaoContratos.Especificacao.CompareToSet(_db.Contratos);
+    }
+
     [Then(@"o nome do contrato deverá ser '([^']*)'")]
     public void ThenONomeDoContratoDeveraSer(string nome)
     {
         _gestaoContratos.Contrato.Nome.Should().Be(nome);
     }
 
-    [Then(@"a jornada de trabalho semanal prevista deverá ser:")]
-    public void ThenAJornadaDeTrabalhoSemanalPrevistaDeveraSer(Table jornadaTrabalhoSemanal)
-    {
-        var jornadaTrabalhoSemanalPrevista = _gestaoContratos.Contrato.JornadaTrabalhoSemanalPrevista;
-
-        jornadaTrabalhoSemanal.CompareToSet(jornadaTrabalhoSemanalPrevista.Semana);
-    }
-
-    [Then(@"o tempo total da jornada de trabalho semanal prevista deverá ser '([^']*)'")]
-    public void ThenOTempoTotalDaJornadaDeTrabalhoSemanalPrevistaDeveraSer(TimeSpan tempoTotal)
+    [Then(@"o tempo total da jornada de trabalho semanal prevista no contrato deverá ser '([^']*)'")]
+    public void ThenOTempoTotalDaJornadaDeTrabalhoSemanalPrevistaNoContratoDeveraSer(TimeSpan tempoTotal)
     {
         var jornadaTrabalhoSemanalPrevista = _gestaoContratos.Contrato.JornadaTrabalhoSemanalPrevista;
 
@@ -484,6 +512,12 @@ public class GestaoContratosStepDefinitions
 
     [Then(@"a tentativa de abrir o contrato deverá falhar com um erro ""([^""]*)""")]
     public void ThenATentativaDeAbrirOContratoDeveraFalharComUmErro(string erro)
+    {
+        _gestaoContratos.Erro.Should().Be(erro);
+    }
+
+    [Then(@"a tentativa de alterar o contrato deverá falhar com um erro ""([^""]*)""")]
+    public void ThenATentativaDeAlterarOContratoDeveraFalharComUmErro(string erro)
     {
         _gestaoContratos.Erro.Should().Be(erro);
     }

@@ -28,6 +28,19 @@ public static class GestaoContratosFacade
         contrato.CreationDate ??= transaction.DateTime;
     }
 
+    public static void FeitoCom(this Contrato contrato, Empregador empregador)
+    {
+        if (empregador != null)
+        {
+            contrato.Empregador = new EmpregadorRef
+            {
+                Nome = empregador.Nome
+            };
+
+            contrato.EmpregadorId = empregador.Id;
+        }
+    }
+
     public static Contrato AbrirContrato(this Contrato contrato, Empregador empregador)
     {
         if (empregador != null)

@@ -12,4 +12,9 @@ public class EmpregadorRef
     [MaxLength(35)]
     [DisplayName("Nome")]
     public string? Nome { get; set; }
+
+    public override string ToString()
+    {
+        return Nome;
+    }
 }

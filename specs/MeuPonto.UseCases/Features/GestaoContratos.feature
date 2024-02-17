@@ -2,38 +2,17 @@
 
 Funcionalidade: Gestão Contratos
 
-Caso de Uso: Abrir Contrato
+Regra: Um contrato pode ser aberto
 
-Cenário: Trabalhador abre um contrato para um novo empregador
-	Quando o trabalhador iniciar uma abertura de contrato
-	Então um contrato deverá ser criado
-	Quando o trabahador cadastrar o empregador 'Empregador A'
-	E o trabalhador abrir o contrato como:
-		| nome       | ativo | empregador   | domingo  | segunda  | terça    | quarta   | quinta   | sexta    | sábado   |
-		| Contrato A | True  | Empregador A | 00:00:00 | 08:00:00 | 08:00:00 | 08:00:00 | 08:00:00 | 08:00:00 | 00:00:00 |
-	Então o nome do contrato deverá ser 'Contrato A'
-	E o contrato deverá ser ativo
-	E o empregador 'Empregador A' deverá ser associado ao contrato
-	E a jornada de trabalho semanal prevista no contrato deverá ser:
-		| dia semana | tempo    |
-		| Sunday     | 00:00:00 |
-		| Monday     | 08:00:00 |
-		| Tuesday    | 08:00:00 |
-		| Wednesday  | 08:00:00 |
-		| Thursday   | 08:00:00 |
-		| Friday     | 08:00:00 |
-		| Saturday   | 00:00:00 |
-
-Cenário: Trabalhador abre um contrato para um empregador cadastrado
-	Dado que existe um empregador cadastrado 'Empregador A'
+@main
+Cenário: Trabalhador abre um contrato
 	Quando o trabalhador iniciar uma abertura de contrato
 	Então um contrato deverá ser criado
 	Quando o trabalhador abrir o contrato como:
-		| nome       | ativo | empregador   | domingo  | segunda  | terça    | quarta   | quinta   | sexta    | sábado   |
-		| Contrato A | True  | Empregador A | 00:00:00 | 08:00:00 | 08:00:00 | 08:00:00 | 08:00:00 | 08:00:00 | 00:00:00 |
+		| nome       | ativo | domingo  | segunda  | terça    | quarta   | quinta   | sexta    | sábado   |
+		| Contrato A | True  | 00:00:00 | 08:00:00 | 08:00:00 | 08:00:00 | 08:00:00 | 08:00:00 | 00:00:00 |
 	Então o nome do contrato deverá ser 'Contrato A'
 	E o contrato deverá ser ativo
-	E o empregador 'Empregador A' deverá ser associado ao contrato
 	E a jornada de trabalho semanal prevista no contrato deverá ser:
 		| dia semana | tempo    |
 		| Sunday     | 00:00:00 |
@@ -43,11 +22,12 @@ Cenário: Trabalhador abre um contrato para um empregador cadastrado
 		| Thursday   | 08:00:00 |
 		| Friday     | 08:00:00 |
 		| Saturday   | 00:00:00 |
-	
+
+Regra: Um contrato pode ser alterado
+
+@main
 Cenário: Trabalhador altera um contrato para corrigir um erro de digitação no nome
 	Dado que existe um contrato aberto 'Marcello - Particular'
-	#E que o trabalhador identifica na lista o contrato cadastrado
-	#E que o nome do trabalhador é 'Marcelo - Particular'
 	Quando o trabalhador iniciar uma edição de contrato
 	E o trabalhador alterar esse contrato para
 		| nome                 |
@@ -56,6 +36,7 @@ Cenário: Trabalhador altera um contrato para corrigir um erro de digitação no
 
 Regra: Um novo contrato deve ser ativo
 
+@invariant
 Cenário: Trabalhador inicia um novo contrato ativo
 	Quando o trabalhador iniciar uma abertura de contrato
 	Então um contrato deverá ser criado
@@ -63,6 +44,7 @@ Cenário: Trabalhador inicia um novo contrato ativo
 
 Regra: Um novo contrato deve ter uma jornada de trabalho prevista
 
+@invariant
 Cenário: Trabalhador inicia um novo contrato com uma jornada de trabalho prevista
 	Quando o trabalhador iniciar uma abertura de contrato
 	Então um contrato deverá ser criado
@@ -76,25 +58,9 @@ Cenário: Trabalhador inicia um novo contrato com uma jornada de trabalho previs
 		| Friday     | 08:00:00 |
 		| Saturday   | 00:00:00 |
 
-Regra: Um contrato pode ser feito com um empregador
-
-Cenário: Trabalhador abre um contrato feito com um novo empregador
-	Dado que existe uma abertura de contrato em andamento
-	E o trabahador cadastrar o empregador 'Empregador A'
-	E o trabalhador informar que o contrato foi feito com o 'Empregador A'
-	Quando o trabalhador abrir o contrato
-	Então o empregador do contrato deverá ser 'Empregador A'
-
-Cenário: Trabalhador abre um contrato para um empregador já cadastrado (feito com um empregador existente)
-	Dado que existe um empregador cadastrado com o nome 'Empregador B'
-	Quando o trabalhador iniciar uma abertura de contrato
-	E o trabalhador informar que o contrato foi feito com o 'Empregador B'
-	E o trabalhador abrir o contrato
-	Então o empregador do contrato deverá ser 'Empregador B'
-
 Regra: O nome do contrato deve ter pelo menos 3 caracteres
 
-@basic
+@invariant @basic
 Cenário: Trabalhador abre um contrato com nome maior que 2 caractere
 	Dado que existe uma abertura de contrato em andamento
 	Quando o trabalhador abrir o contrato como:
@@ -102,16 +68,16 @@ Cenário: Trabalhador abre um contrato com nome maior que 2 caractere
 		| Contrato A |
 	Então o contrato deverá ser aberto como esperado
 
-@basic
+@invariant @basic
 Cenário: Trabalhador altera um contrato com nome maior que 2 caractere
-	Dado que existe um contrato qualquer
-	E que existe uma alteração desse contrato em andamento
+	Dado que existe um contrato aberto 'Contrato Feito'
+	E que existe uma alteração desse contrato em andamento 'Contrato Feito'
 	Quando o trabalhador alterar esse contrato para
 		| nome       |
 		| Contrato A |
 	Então o contrato deverá ser alterado como esperado
 
-@basic
+@invariant @exception @basic
 Cenário: Trabalhador tenta abrir um contrato com nome menor que 3 caracteres
 	Dado que existe uma abertura de contrato em andamento
 	Quando o trabalhador tentar abrir um contrato como
@@ -119,10 +85,10 @@ Cenário: Trabalhador tenta abrir um contrato com nome menor que 3 caracteres
 		| A    |
 	Então a tentativa de abrir o contrato deverá falhar com um erro "'Nome' deve ser maior ou igual a 3 caracteres."
 
-@basic
+@invariant @exception @basic
 Cenário: Trabalhador tenta alterar um contrato com nome menor que 3 caracteres
-	Dado que existe um contrato qualquer
-	E que existe uma alteração desse contrato em andamento
+	Dado que existe um contrato aberto 'Contrato Feito'
+	E que existe uma alteração desse contrato em andamento 'Contrato Feito'
 	Quando o trabalhador tentar alterar esse contrato para
 		| nome |
 		| B    |
@@ -130,7 +96,7 @@ Cenário: Trabalhador tenta alterar um contrato com nome menor que 3 caracteres
 
 Regra: O nome do contrato deve ter no máximo 35 caracteres
 
-@basic
+@invariant @basic
 Cenário: Trabalhador abre um contrato com nome menor que 36 caracteres
 	Dado que existe uma abertura de contrato em andamento
 	Quando o trabalhador abrir o contrato como:
@@ -138,7 +104,7 @@ Cenário: Trabalhador abre um contrato com nome menor que 36 caracteres
 		| Contrato A |
 	Então o contrato deverá ser aberto como esperado
 
-@basic
+@invariant @exception @basic
 Cenário: Trabalhador tenta abrir um contrato com nome maior que 35 caracteres
 	Dado que existe uma abertura de contrato em andamento
 	Quando o trabalhador tentar abrir um contrato como
@@ -148,11 +114,11 @@ Cenário: Trabalhador tenta abrir um contrato com nome maior que 35 caracteres
 
 Regra: Tempo Total = Tempo Monday + Tempo Tuesday + Tempo Wednesday + Tempo Thursday + Tempo Friday + Tempo Saturday + Tempo Sunday
 
-Cenário: Trabalhador cria um contrato com uma jornada de trabalho prevista de 40 horas semanais
-	Dado que o trabalhador não tem nenhum contrato cadastrado
-	E que o horário de trabalho é de 'Monday' a 'Friday' das '09:00' às '18:00' com '01:00' de almoço
+@invariant
+Cenário: Trabalhador abre um contrato com uma jornada de trabalho prevista de 40 horas semanais
+	Dado que a jornada de trabalho semanal é de 'Monday' a 'Friday' das '09:00' às '18:00' com '01:00' de almoço
 	Quando o trabalhador abrir um contrato
-	Então a jornada de trabalho semanal prevista deverá ser:
+	Então a jornada de trabalho semanal prevista no contrato deverá ser:
 		| dia semana | tempo    |
 		| Sunday     | 00:00:00 |
 		| Monday     | 08:00:00 |
@@ -161,14 +127,14 @@ Cenário: Trabalhador cria um contrato com uma jornada de trabalho prevista de 4
 		| Thursday   | 08:00:00 |
 		| Friday     | 08:00:00 |
 		| Saturday   | 00:00:00 |
-	E o tempo total da jornada de trabalho semanal prevista deverá ser '1.16:00'
+	E o tempo total da jornada de trabalho semanal prevista no contrato deverá ser '1.16:00'
 
-Cenário: Trabalhador cria um contrato com uma jornada de trabalho prevista de 44 horas semanais (incluindo sábado)
-	Dado que o trabalhador não tem nenhum contrato cadastrado
-	E que o horário de trabalho é de 'Monday' a 'Friday' das '09:00' às '18:00' com '01:00' de almoço
-	E que o horário de trabalho de 'Saturday' é das '08:00' às '12:00'
+@invariant
+Cenário: Trabalhador abre um contrato com uma jornada de trabalho prevista de 44 horas semanais (incluindo sábado)
+	Dado que a jornada de trabalho semanal é de 'Monday' a 'Friday' das '09:00' às '18:00' com '01:00' de almoço
+	E que a jornada de trabalho de 'Saturday' é das '08:00' às '12:00'
 	Quando o trabalhador abrir um contrato
-	Então a jornada de trabalho semanal prevista deverá ser:
+	Então a jornada de trabalho semanal prevista no contrato deverá ser:
 		| dia semana | tempo    |
 		| Sunday     | 00:00:00 |
 		| Monday     | 08:00:00 |
@@ -177,22 +143,21 @@ Cenário: Trabalhador cria um contrato com uma jornada de trabalho prevista de 4
 		| Thursday   | 08:00:00 |
 		| Friday     | 08:00:00 |
 		| Saturday   | 04:00:00 |
-	E o tempo total da jornada de trabalho semanal prevista deverá ser '1.20:00'
+	E o tempo total da jornada de trabalho semanal prevista no contrato deverá ser '1.20:00'
 
-Regra: Deve ser possível excluir um contrato
-	
-Cenário: Sucesso ao remover um contrato que não era necessário
+Regra: Um contrato pode ser excluído
+
+@main
+Cenário: Trabalhador exclui um contrato que não era necessário
 	Dado que existe um contrato aberto 'Marcelo - Ateliex'
-	#E que o trabalhador identifica na lista o contrato cadastrado
 	Quando o trabalhador excluir o contrato
 	Então o contrato deverá ser excluído
 
 Regra: Se existir dados relacionados a um contrato então ele não pode ser excluído
 
-@wip
-Cenário: Erro ao excluir um contrato com ponto(s) marcado(s)
+@exception @wip
+Cenário: Trabalhador tenta excluir excluir um contrato com ponto(s) marcado(s)
 	Dado que existe um contrato aberto 'Marcelo - Ateliex'
 	#E que o trabalhador qualifica o ponto com o contrato 'Marcelo - Ateliex'
-	#E que o trabalhador identifica na lista o contrato cadastrado
 	Quando o trabalhador excluir o contrato
 	Então o contrato não deverá ser excluído
