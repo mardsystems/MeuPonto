@@ -18,7 +18,7 @@ public class CadastroEmpregadoresContext
         //Empregador = empregador;
     }
 
-    public void Inicia(Empregador empregador)
+    public void Iniciar(Empregador empregador)
     {
         Empregador = empregador;
 

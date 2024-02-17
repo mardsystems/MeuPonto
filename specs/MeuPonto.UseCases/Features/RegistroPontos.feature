@@ -5,8 +5,8 @@ Funcionalidade: Registro Pontos
 Regra: Contrato qualifica o ponto
 
 Cenário: Trabalhador marca o ponto usando seu único contrato
-	Dado que o trabalhador tem um contrato cadastrado com o nome 'Marcelo - Ateliex'
-	Dado que o trabalhador qualifica o ponto com o contrato 'Marcelo - Ateliex'
+	Dado que existe um contrato aberto 'Marcelo - Ateliex'
+	E que o trabalhador qualifica o ponto com o contrato 'Marcelo - Ateliex'
 	Quando o trabalhador marcar o ponto
 	Então o ponto deverá ser marcado
 	E o contrato do ponto deverá deverá ser 'Marcelo - Ateliex'

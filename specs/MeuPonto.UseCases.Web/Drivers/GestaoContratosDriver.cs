@@ -109,6 +109,11 @@ public class GestaoContratosDriver
 
         form.GetInput("AberturaContrato.Ativo").IsChecked = contrato.Ativo;
 
+        if (contrato.Empregador != null)
+        {
+            form.GetSelect("AberturaContrato.EmpregadorId").GetOption(contrato.Empregador.Nome).IsSelected = true;
+        }
+
         var daysOfWeek = Enum.GetValues<DayOfWeek>();
 
         foreach (var dayOfWeek in daysOfWeek)
@@ -223,11 +228,20 @@ public class GestaoContratosDriver
 
         var hasErrors = Document.GetValidationErrors().Any();
 
-        hasErrors.Should().BeFalse();
+        if (hasErrors)
+        {
+            var erros = Document.GetValidationErrors();
 
-        //var contratoEditado = await ObtemDetalhes();
+            var span = erros.FirstSpan();
 
-        //return contratoEditado;
+            throw new Exception(span.InnerHtml);
+        }
+        else
+        {
+            //var contratoEditado = await ObtemDetalhes();
+
+            //return contratoEditado;
+        }
     }
 
     private Contrato ObtemDetalhes()

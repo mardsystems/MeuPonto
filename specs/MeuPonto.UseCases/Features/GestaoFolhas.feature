@@ -5,8 +5,8 @@ Funcionalidade: Gestão Folhas
 Regra: Contrato qualifica a folha de ponto
 
 Cenário: Trabalhador abre uma folha de ponto usando seu único contrato
-	Dado que o trabalhador tem um contrato cadastrado com o nome 'Marcelo - Ateliex'
-	Dado que o trabalhador qualifica a folha com o contrato 'Marcelo - Ateliex'
+	Dado que existe um contrato aberto 'Marcelo - Ateliex'
+	E que o trabalhador qualifica a folha com o contrato 'Marcelo - Ateliex'
 	Quando o trabalhador abrir uma folha de ponto
 	Então uma folha de ponto deverá ser aberta
 	E o contrato da folha de ponto deverá deverá ser 'Marcelo - Ateliex'
@@ -14,7 +14,7 @@ Cenário: Trabalhador abre uma folha de ponto usando seu único contrato
 Regra: Folha de ponto tem periodicidade mensal
 
 Cenário: Trabalhador abre uma folha ponto para o mês de novembro de 2022
-	Dado que o trabalhador tem um contrato cadastrado
+	Dado que existe um contrato aberto
 	E que o trabalhador deseja apurar a folha de ponto da competência '2022/11'
 	Quando o trabalhador abrir uma folha de ponto
 	Então uma folha de ponto deverá ser aberta
@@ -28,7 +28,7 @@ Cenário: Trabalhador abre uma folha ponto para o mês de novembro de 2022
 Regra: Folha de ponto com observação
 	
 Cenário: Trabalhador abre uma folha de ponto anotando que deve confirmar os feriados do mês
-	Dado que o trabalhador tem um contrato cadastrado
+	Dado que existe um contrato aberto
 	E que o trabalhador anota a seguinte observação na folha de ponto:
 		"""
 		Verificar se a última sexta-feira do mês vai ser feriado.

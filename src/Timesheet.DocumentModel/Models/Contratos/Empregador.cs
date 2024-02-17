@@ -13,4 +13,9 @@ public class Empregador : DocumentEntity
     public string? Nome { get; set; }
 
     public string? UserId { get; set; }
+
+    public override string ToString()
+    {
+        return Nome;
+    }
 }

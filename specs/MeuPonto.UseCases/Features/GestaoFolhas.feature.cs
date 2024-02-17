@@ -99,10 +99,10 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 8
- testRunner.Given("que o trabalhador tem um contrato cadastrado com o nome \'Marcelo - Ateliex\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+ testRunner.Given("que existe um contrato aberto \'Marcelo - Ateliex\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
 #line 9
- testRunner.Given("que o trabalhador qualifica a folha com o contrato \'Marcelo - Ateliex\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+ testRunner.And("que o trabalhador qualifica a folha com o contrato \'Marcelo - Ateliex\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
 #line 10
  testRunner.When("o trabalhador abrir uma folha de ponto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
@@ -136,7 +136,7 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 17
- testRunner.Given("que o trabalhador tem um contrato cadastrado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+ testRunner.Given("que existe um contrato aberto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
 #line 18
  testRunner.And("que o trabalhador deseja apurar a folha de ponto da competência \'2022/11\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
@@ -188,7 +188,7 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 31
- testRunner.Given("que o trabalhador tem um contrato cadastrado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+ testRunner.Given("que existe um contrato aberto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
 #line 32
  testRunner.And("que o trabalhador anota a seguinte observação na folha de ponto:", "Verificar se a última sexta-feira do mês vai ser feriado.", ((TechTalk.SpecFlow.Table)(null)), "E ");
