@@ -5,7 +5,7 @@ namespace Timesheet.Features.CadastroEmpregadores;
 
 public static class CadastroEmpregadoresFacade
 {
-    public static Empregador CriaEmpregador(TransactionContext transaction, Guid? id = null)
+    public static Empregador CriaEmpregador(this TransactionContext transaction, Guid? id = null)
     {
         var empregador = new Empregador
         {

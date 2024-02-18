@@ -4,6 +4,12 @@ namespace MeuPonto.Support;
 
 public class BackupComprovantesContext
 {
+    public Stream Imagem { get; private set; }
+
+    public Comprovante Comprovante { get; private set; }
+
+    public Ponto Ponto { get; private set; }
+
     public BackupComprovantesContext()
     {
         //Comprovante = new Comprovante();
@@ -32,16 +38,13 @@ public class BackupComprovantesContext
         Imagem = imagem;
     }
 
-    public Stream Imagem { get; private set; }
-
-    public Comprovante Comprovante { get; private set; }
-
-    public Ponto Ponto { get; private set; }
-
     public void Define(Comprovante comprovante)
     {
-        ComprovanteGuardado = comprovante;
+        Comprovante = comprovante;
     }
+}
 
-    public Comprovante ComprovanteGuardado { get; private set; }
+public class BackupComprovanteData
+{
+    
 }

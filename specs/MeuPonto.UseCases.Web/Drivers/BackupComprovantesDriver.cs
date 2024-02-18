@@ -28,7 +28,7 @@ public class BackupComprovantesDriver
         GuardarComprovanteAnchor.Should().NotBeNull("o backup de comprovantes deve ter um link para a guardar um comprovante");
     }
 
-    public Comprovante EscanearComprovante(Stream imagem, Comprovante comprovante, Ponto ponto)
+    public Comprovante IniciarBackupComprovante()
     {
         GoTo();
 
@@ -36,30 +36,58 @@ public class BackupComprovantesDriver
 
         var form = Document.GetForm();
 
-        using (var fileEntry = new FileEntry("Arquivo", "jpg", imagem))
+        var comprovante = new Comprovante
         {
-            form.GetInput("Imagem").Files.Add(fileEntry);
-            form.GetSelect("Comprovante.TipoImagemId").GetOption(comprovante.TipoImagemId.GetDisplayName()).IsSelected = true;
+            
+        };
 
-            form.GetSelect("Ponto.ContratoId").GetOption(ponto.Contrato.Nome).IsSelected = true;
-            form.GetInput("Ponto.DataHora").Value = ponto.DataHora.Value.ToString("yyyy-MM-dd\\THH:mm:ss");
-            form.GetInput("Ponto.MomentoId", ponto.MomentoId.GetDisplayName()).IsChecked = true;
-            if (ponto.PausaId != null)
-            {
-                form.GetInput("Ponto.PausaId", ponto.PausaId.GetDisplayName()).IsChecked = true;
-            }
-            form.GetTextArea("Ponto.Observacao").Value = ponto.Observacao;
+        return comprovante;
+    }
 
-            var submitButton = form.GetSubmitButton();
+    public void EscanearComprovante(Stream imagem, Comprovante comprovante, Ponto ponto)
+    {
+        GoTo();
 
-            var resultPage = _angleSharp.Send(form, submitButton);
+        Document = _angleSharp.GetDocument(GuardarComprovanteAnchor.Href);
 
-            Document = _angleSharp.GetDocument(resultPage);
+        var form = Document.GetForm();
+
+        using var fileEntry = new FileEntry("Arquivo", "jpg", imagem);
+
+        form.GetInput("Imagem").Files.Add(fileEntry);
+        form.GetSelect("Comprovante.TipoImagemId").GetOption(comprovante.TipoImagemId.GetDisplayName()).IsSelected = true;
+
+        form.GetSelect("Ponto.ContratoId").GetOption(ponto.Contrato.Nome).IsSelected = true;
+        form.GetInput("Ponto.DataHora").Value = ponto.DataHora.Value.ToString("yyyy-MM-dd\\THH:mm:ss");
+        form.GetInput("Ponto.MomentoId", ponto.MomentoId.GetDisplayName()).IsChecked = true;
+        if (ponto.PausaId != null)
+        {
+            form.GetInput("Ponto.PausaId", ponto.PausaId.GetDisplayName()).IsChecked = true;
         }
+        form.GetTextArea("Ponto.Observacao").Value = ponto.Observacao;
 
-        var comprovanteEscaneado = ObtemResultadoEscanearComprovante();
+        var submitButton = form.GetSubmitButton();
 
-        return comprovanteEscaneado;
+        var resultPage = _angleSharp.Send(form, submitButton);
+
+        Document = _angleSharp.GetDocument(resultPage);
+
+        var hasErrors = Document.GetValidationErrors().Any();
+
+        if (hasErrors)
+        {
+            var erros = Document.GetValidationErrors();
+
+            var span = erros.FirstSpan();
+
+            throw new Exception(span.InnerHtml);
+        }
+        else
+        {
+            //var comprovanteEscaneado = ObtemResultadoEscanearComprovante();
+
+            //return comprovanteEscaneado;
+        }
     }
 
     private Comprovante ObtemResultadoEscanearComprovante()

@@ -1,5 +1,6 @@
 ﻿using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
+using System.Security.Claims;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace MeuPonto.Helpers;
@@ -17,12 +18,22 @@ public static class AngleSharpExtensions
     {
         var anchor = (IHtmlAnchorElement)document.QuerySelector($"a.{selector}");
 
+        if (anchor == null)
+        {
+            throw new NullReferenceException($"a.{selector} not found");
+        }
+
         return anchor;
     }
 
     public static IHtmlAnchorElement GetAnchor(this IHtmlElement element, string selector)
     {
         var anchor = (IHtmlAnchorElement)element.QuerySelector($"a.{selector}");
+
+        if (anchor == null)
+        {
+            throw new NullReferenceException($"a.{selector} not found");
+        }
 
         return anchor;
     }
@@ -31,12 +42,22 @@ public static class AngleSharpExtensions
     {
         var table = (IHtmlTableElement)document.QuerySelector($"table.{@class}");
 
+        if (table == null)
+        {
+            throw new NullReferenceException($"table.{@class} not found");
+        }
+
         return table;
     }
 
     public static IHtmlTableRowElement GetTableRowByDataId(this IHtmlTableElement table, Guid? dataId)
     {
         var tableRow = (IHtmlTableRowElement)table.QuerySelector($"tr[data-id='{dataId}']");
+
+        if (tableRow == null)
+        {
+            throw new NullReferenceException($"tr[data-id='{dataId}'] not found");
+        }
 
         return tableRow;
     }
@@ -45,7 +66,24 @@ public static class AngleSharpExtensions
     {
         var tableRow = (IHtmlTableRowElement)table.QuerySelector($"tr[data-name='{name}']");
 
+        if (tableRow == null)
+        {
+            throw new NullReferenceException($"tr[data-name='{name}'] not found");
+        }
+
         return tableRow;
+    }
+
+    public static IHtmlInputElement GetInput(this IHtmlElement element)
+    {
+        var input = (IHtmlInputElement)element.QuerySelector("input");
+
+        if (input == null)
+        {
+            throw new NullReferenceException($"input not found");
+        }
+
+        return input;
     }
 
     public static IHtmlInputElement GetInput(this IHtmlFormElement form, string name)
@@ -151,6 +189,11 @@ public static class AngleSharpExtensions
     {
         var button = (IHtmlButtonElement)form.QuerySelector(selector);
 
+        if (button == null)
+        {
+            throw new NullReferenceException($"{selector} not found");
+        }
+
         return button;
     }
 
@@ -180,13 +223,6 @@ public static class AngleSharpExtensions
         var dataListItem = (IHtmlElement)element.QuerySelector($"dd.{@class}");
 
         return dataListItem;
-    }
-
-    public static IHtmlInputElement GetInput(this IHtmlElement element)
-    {
-        var input = (IHtmlInputElement)element.QuerySelector("input");
-
-        return input;
     }
 
     public static string GetString(this IHtmlElement element)

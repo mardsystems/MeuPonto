@@ -12,31 +12,139 @@ namespace MeuPonto.StepDefinitions;
 public class RegistroPontosStepDefinitions
 {
     private readonly ScenarioContext _scenario;
-
     private readonly RegistroPontosContext _registroPontos;
-
     private readonly RegistroPontosDriver _registroPontosInterface;
-
-    private readonly GestaoContratosContext _gestaoContratos;
-
     private readonly MeuPontoDbContext _db;
 
     public RegistroPontosStepDefinitions(
         ScenarioContext scenario,
         RegistroPontosContext registroPontos,
         RegistroPontosDriver registroPontosInterface,
-        GestaoContratosContext gestaoContratos,
         MeuPontoDbContext db)
     {
         _scenario = scenario;
-
         _registroPontos = registroPontos;
-
         _registroPontosInterface = registroPontosInterface;
-
-        _gestaoContratos = gestaoContratos;
-
         _db = db;
+    }
+
+    [Given(@"que existe um registro de ponto em andamento")]
+    public void GivenQueExisteUmRegistroDePontoEmAndamento()
+    {
+        var ponto = _registroPontosInterface.IniciarRegistroPonto();
+
+        var contrato = _db.Contratos.FirstOrDefault();
+
+        contrato.QualificaPonto(ponto);
+
+        var datetime = DateTime.Now;
+
+        ponto.DataHora = new DateTime(datetime.Year, datetime.Month, datetime.Day, datetime.Hour, datetime.Minute, 0);
+        ponto.MomentoId = MomentoEnum.Entrada;
+
+        _registroPontos.Inicia(ponto);
+    }
+
+    [When(@"o trabalhador iniciar um registro de ponto")]
+    public void WhenOTrabalhadorIniciarUmRegistroDePonto()
+    {
+        var ponto = _registroPontosInterface.IniciarRegistroPonto();
+
+        _registroPontos.Inicia(ponto);
+    }
+
+    [When(@"o trabalhador registrar o ponto como:")]
+    public void WhenOTrabalhadorRegistrarOPontoComo(Table table)
+    {
+        _registroPontos.Especificacao = table;
+
+        var ponto = _registroPontos.Ponto;
+
+        var data = table.CreateInstance(() => new RegistroPontoData
+        {
+            DataHora = ponto.DataHora,
+            Contrato = ponto.Contrato?.Nome,
+            MomentoId = ponto.MomentoId,
+            PausaId = ponto.PausaId,
+            Estimado = ponto.Estimado
+        });
+
+        var contrato = _db.Contratos.First(x => x.Nome == data.Contrato);
+
+        contrato.QualificaPonto(ponto);
+
+        ponto.DataHora = data.DataHora;
+        ponto.MomentoId = data.MomentoId;
+        ponto.PausaId = data.PausaId;
+        ponto.Estimado = data.Estimado;
+
+        _registroPontosInterface.RegistrarPonto(ponto);
+
+        var pontoRegistrado = _db.Pontos
+            .Include(x => x.Contrato)
+            .FirstOrDefault(x => x.DataHora == ponto.DataHora);
+
+        _registroPontos.Define(pontoRegistrado);
+    }
+
+    [When(@"o trabalhador tentar registrar o ponto como:")]
+    public void WhenOTrabalhadorTentarRegistrarOPontoComo(Table table)
+    {
+        _registroPontos.Especificacao = table;
+
+        var ponto = _registroPontos.Ponto;
+
+        var data = table.CreateInstance(() => new RegistroPontoData
+        {
+            Contrato = ponto.Contrato?.Nome,
+            MomentoId = ponto.MomentoId,
+            PausaId = ponto.PausaId,
+            Estimado = ponto.Estimado
+        });
+
+        var contrato = _db.Contratos.FirstOrDefault(x => x.Nome == data.Contrato);
+
+        if (contrato == null)
+        {
+            ponto.DesqualificaPonto();
+        }
+        else
+        {
+            contrato.QualificaPonto(ponto);
+        }
+
+        ponto.MomentoId = data.MomentoId;
+        ponto.PausaId = data.PausaId;
+        ponto.Estimado = data.Estimado;
+
+        try
+        {
+            _registroPontosInterface.MarcarPonto(ponto);
+        }
+        catch (Exception ex)
+        {
+            _registroPontos.Erro = ex.Message;
+        }
+    }
+
+    [When(@"o trabalhador registrar o ponto com a seguinte observação:")]
+    public void WhenOTrabalhadorRegistrarOPontoComASeguinteObservacao(string observacao)
+    {
+        var ponto = _registroPontos.Ponto;
+
+        var contrato = _db.Contratos.FirstOrDefault();
+
+        contrato.QualificaPonto(ponto);
+
+        ponto.Observacao = observacao;
+
+        _registroPontosInterface.RegistrarPonto(ponto);
+
+        var pontoRegistrado = _db.Pontos
+            .Include(x => x.Contrato)
+            .FirstOrDefault(x => x.DataHora == ponto.DataHora);
+
+        _registroPontos.Define(pontoRegistrado);
     }
 
     [Given(@"que é o momento de '([^']*)' do expediente")]
@@ -75,10 +183,16 @@ public class RegistroPontosStepDefinitions
         _registroPontos.Inicia(ponto);
     }
 
-    [Given(@"que existe uma marcacao de ponto em andamento")]
+    [Given(@"que existe uma marcação de ponto em andamento")]
     public void GivenQueExisteUmaMarcacaoDePontoEmAndamento()
     {
         var ponto = _registroPontosInterface.IniciarMarcacaoPonto();
+
+        var contrato = _db.Contratos.FirstOrDefault();
+
+        contrato.QualificaPonto(ponto);
+
+        ponto.MomentoId = MomentoEnum.Entrada;
 
         _registroPontos.Inicia(ponto);
     }
@@ -92,20 +206,9 @@ public class RegistroPontosStepDefinitions
     [When(@"o trabalhador marcar o ponto")]
     public void WhenOTrabalhadorMarcarOPonto()
     {
-        if (_registroPontos.Ponto.EstaSemQualificacao())
-        {
-            var contrato = _db.Contratos.FirstOrDefault();
+        var contrato = _db.Contratos.FirstOrDefault();
 
-            if (contrato == default)
-            {
-                contrato = _gestaoContratos.Contrato;
-
-                _db.Contratos.Add(contrato);
-                _db.SaveChanges();
-            }
-
-            contrato.QualificaPonto(_registroPontos.Ponto);
-        }
+        contrato.QualificaPonto(_registroPontos.Ponto);
 
         _registroPontosInterface.MarcarPonto(_registroPontos.Ponto);
 
@@ -127,8 +230,7 @@ public class RegistroPontosStepDefinitions
         {
             Contrato = ponto.Contrato?.Nome,
             MomentoId = ponto.MomentoId,
-            PausaId = ponto.PausaId,
-            Estimado = ponto.Estimado
+            PausaId = ponto.PausaId
         });
 
         var contrato = _db.Contratos.First(x => x.Nome == data.Contrato);
@@ -137,7 +239,6 @@ public class RegistroPontosStepDefinitions
 
         ponto.MomentoId = data.MomentoId;
         ponto.PausaId = data.PausaId;
-        ponto.Estimado = data.Estimado;
 
         _registroPontosInterface.MarcarPonto(ponto);
 
@@ -159,13 +260,22 @@ public class RegistroPontosStepDefinitions
         {
             Contrato = ponto.Contrato?.Nome,
             MomentoId = ponto.MomentoId,
-            PausaId = ponto.PausaId,
-            Estimado = ponto.Estimado
+            PausaId = ponto.PausaId
         });
+
+        var contrato = _db.Contratos.FirstOrDefault(x => x.Nome == data.Contrato);
+
+        if (contrato == null)
+        {
+            ponto.DesqualificaPonto();
+        }
+        else
+        {
+            contrato.QualificaPonto(ponto);
+        }
 
         ponto.MomentoId = data.MomentoId;
         ponto.PausaId = data.PausaId;
-        ponto.Estimado = data.Estimado;
 
         try
         {
@@ -181,13 +291,6 @@ public class RegistroPontosStepDefinitions
     public void WhenOTrabalhadorMarcarOPontoComASeguinteObservacao(string observacao)
     {
         var ponto = _registroPontos.Ponto;
-
-        var contrato = _gestaoContratos.Contrato;
-
-        _db.Contratos.Add(contrato);
-        _db.SaveChanges();
-
-        contrato.QualificaPonto(ponto);
 
         ponto.Observacao = observacao;
 

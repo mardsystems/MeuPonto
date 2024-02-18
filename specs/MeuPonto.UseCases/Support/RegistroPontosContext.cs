@@ -10,6 +10,10 @@ public class RegistroPontosContext
 
     public Ponto Ponto { get; set; }
 
+    public Stream Imagem { get; private set; }
+
+    public Comprovante Comprovante { get; private set; }
+
     public string Erro { get; set; }
 
     public RegistroPontosContext()
@@ -28,10 +32,38 @@ public class RegistroPontosContext
         Ponto = ponto;
     }
 
+    public void Inicia(Comprovante comprovante)
+    {
+        Comprovante = comprovante;
+    }
+
     public void Define(Ponto pontoRegistrado)
     {
         Ponto = pontoRegistrado;
     }
+
+    public void Define(Stream imagem)
+    {
+        Imagem = imagem;
+    }
+
+    public void Define(Comprovante comprovante)
+    {
+        Comprovante = comprovante;
+    }
+}
+
+public class RegistroPontoData
+{
+    public DateTime? DataHora { get; set; }
+
+    public string Contrato { get; set; }
+
+    public MomentoEnum? MomentoId { get; set; }
+
+    public PausaEnum? PausaId { get; set; }
+
+    public bool Estimado { get; set; }
 }
 
 public class MarcacaoPontoData
@@ -41,6 +73,4 @@ public class MarcacaoPontoData
     public MomentoEnum? MomentoId { get; set; }
 
     public PausaEnum? PausaId { get; set; }
-
-    public bool Estimado { get; set; }
 }

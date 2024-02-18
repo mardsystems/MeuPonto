@@ -90,7 +90,7 @@ namespace MeuPonto.Features
                     "main"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador registra o ponto com um comprovante", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 8
+#line 10
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -100,20 +100,33 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 9
- testRunner.Given("que existe um registro de ponto em andamento", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
-#line hidden
-#line 10
- testRunner.When("o trabalhador iniciar um backup de comprovante", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
-#line hidden
 #line 11
- testRunner.Then("um comprovante deverá ser criado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
+ testRunner.Given("que existe um contrato aberto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
 #line 12
- testRunner.When("o trabalhador escanear o comprovante com a data \'17/02/2023 17:07\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
+ testRunner.And("que existe um registro de ponto em andamento", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
 #line 13
+ testRunner.When("o trabalhador iniciar um backup de comprovante", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
+#line hidden
+#line 14
+ testRunner.Then("um comprovante deverá ser criado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
+#line hidden
+#line 15
+ testRunner.When("o trabalhador escanear o comprovante com a data \'17/02/2023 17:07\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
+#line hidden
+#line 16
  testRunner.Then("a data do ponto do comprovante deverá ser \'17/02/2023 17:07\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
+#line hidden
+                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                            "data/hora"});
+                table1.AddRow(new string[] {
+                            "17/02/2023 17:07"});
+#line 17
+ testRunner.When("o trabalhador registrar o ponto como:", ((string)(null)), table1, "Quando ");
+#line hidden
+#line 20
+ testRunner.Then("o comprovante \'17/02/2023 17:07\' deverá ser associado ao ponto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -129,7 +142,7 @@ this.ScenarioInitialize(scenarioInfo);
                     "formulated"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Sistema reconhece a data/hora no comprovante de ponto", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 18
+#line 25
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -139,13 +152,13 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 19
+#line 26
  testRunner.Given("que o trabalhador tem um comprovante de ponto com a data \'17/02/2023 17:07\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
-#line 20
+#line 27
  testRunner.When("o trabalhador escanear o comprovante de ponto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
-#line 21
+#line 28
  testRunner.Then("a data do ponto do comprovante deverá ser \'17/02/2023 17:07\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
             }
@@ -162,7 +175,7 @@ this.ScenarioInitialize(scenarioInfo);
                     "formulated"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador guarda o comprovante de ponto", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 26
+#line 33
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -172,16 +185,16 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 27
+#line 34
  testRunner.Given("que o trabalhador escaneou um comprovante de ponto com a data \'17/02/2023 17:07\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
-#line 28
+#line 35
  testRunner.When("o trabalhador guardar o comprovante de ponto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
-#line 29
+#line 36
  testRunner.Then("o comprovante de ponto deverá ser guardado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
-#line 30
+#line 37
  testRunner.And("a data do ponto do comprovante deverá ser \'17/02/2023 17:07\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
             }

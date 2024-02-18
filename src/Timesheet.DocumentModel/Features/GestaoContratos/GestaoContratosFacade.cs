@@ -5,7 +5,7 @@ namespace Timesheet.Features.GestaoContratos;
 
 public static class GestaoContratosFacade
 {
-    public static Contrato InciarAberturaContrato(TransactionContext transaction, Guid? id = null)
+    public static Contrato InciarAberturaContrato(this TransactionContext transaction, Guid? id = null)
     {
         var contrato = new Contrato
         {

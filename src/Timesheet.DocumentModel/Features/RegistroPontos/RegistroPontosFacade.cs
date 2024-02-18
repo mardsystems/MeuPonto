@@ -37,6 +37,13 @@ public static class RegistroPontosFacade
         ponto.ContratoId = contrato.Id;
     }
 
+    public static void DesqualificaPonto(this Ponto ponto)
+    {
+        ponto.Contrato = null;
+
+        ponto.ContratoId = null;
+    }
+
     public static bool EstaQualificado(this Ponto ponto)
     {
         return ponto.ContratoId.HasValue;
