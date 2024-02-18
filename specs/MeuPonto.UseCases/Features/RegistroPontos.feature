@@ -1,65 +1,79 @@
 ﻿# language: pt-br
 
 Funcionalidade: Registro Pontos
+	
+Regra: Um ponto pode ser marcado
 
-Regra: Contrato qualifica o ponto
+@main
+Delineação do Cenário: Trabalhador marca os pontos de entrada e saída do expediente
+	Dado que a data/hora do relógio é '<data/hora>'
+	E que existe um contrato aberto '<contrato>'
+	Quando o trabalhador iniciar uma marcação de ponto
+	Então um ponto deverá ser criado
+	Quando o trabalhador marcar o ponto como:
+		| data/hora   | contrato   | momento id   |
+		| <data/hora> | <contrato> | <momento id> |
+	Então a data do ponto deverá ser '<data/hora>'
+	E o ponto deverá ser qualificado pelo contrato '<contrato>'
+	E o momento do ponto deverá ser de '<momento id>'
+	Mas o ponto não deverá indicar que foi uma pausa
+	E o ponto não deverá indicar que foi estimado
+	E o ponto não deverá ter uma observação
 
-Cenário: Trabalhador marca o ponto usando seu único contrato
+Exemplos:
+	| data/hora        | contrato          | momento id |
+	| 27/11/2022 09:14 | Marcelo - Ateliex | Entrada    |
+	| 27/11/2022 18:05 | Marcelo - Ateliex | Saida      |
+
+Regra: Um ponto deve ser qualificado por um contrato
+
+@invariant
+Cenário: Trabalhador qualifica um ponto com um contrato
 	Dado que existe um contrato aberto 'Marcelo - Ateliex'
-	E que o trabalhador qualifica o ponto com o contrato 'Marcelo - Ateliex'
-	Quando o trabalhador marcar o ponto
-	Então o ponto deverá ser marcado
-	E o contrato do ponto deverá deverá ser 'Marcelo - Ateliex'
-	
-Regra: Registro do momento de entrada e saída do expediente
+	E que existe uma marcacao de ponto em andamento
+	Quando o trabalhador marcar o ponto como:
+		| contrato          |
+		| Marcelo - Ateliex |
+	Então o ponto deverá ser registrado como esperado
 
-Cenário: Trabalhador marca o ponto de entrada do expediente
-	Dado que a data/hora do relógio é '27/11/2022 09:14'
-	E que é o momento de 'Entrada' do expediente
-	Quando o trabalhador marcar o ponto
-	Então o ponto deverá ser marcado
-	E a data do ponto deverá ser '27/11/2022 09:14'
-	E o momento do ponto deverá ser de 'Entrada'
-	#TODO: Verificar se o trecho abaixo deve ser verificado aqui ou não.
-	E o ponto deverá indicar que não é almoço
-	E o ponto deverá indicar que não foi estimado
-	Mas o ponto não deverá ter uma observação
+@invariant
+Cenário: Trabalhador deixa de qualificar um ponto com um contrato
+	Dado que existe um contrato aberto 'Marcelo - Ateliex'
+	E que existe uma marcacao de ponto em andamento
+	Quando o trabalhador tentar marcar o ponto como:
+		| contrato |
+		| <null>   |
+	Então a tentativa de marcar o ponto deverá falhar com um erro "'Contrato' deve ser informado."
 
-Cenário: Trabalhador marca o ponto de saída do expediente
-	Dado que a data/hora do relógio é '27/11/2022 18:05'
-	E que é o momento de 'Saida' do expediente
-	Quando o trabalhador marcar o ponto
-	Então o ponto deverá ser marcado
-	E a data do ponto deverá ser '27/11/2022 18:05'
-	E o momento do ponto deverá ser de 'Saida'
-	#TODO: Verificar se o trecho abaixo deve ser verificado aqui ou não.
-	E o ponto deverá indicar que não é almoço
-	E o ponto deverá indicar que não foi estimado
-	Mas o ponto não deverá ter uma observação
+Regra: Um ponto pode indicar uma pausa
 
-Regra: Indicação de saída e retorno do almoço
+@alter
+Delineação do Cenário: Trabalhador marca os pontos de pausa do expediente
+	Dado que existe um contrato aberto '<contrato>'
+	Quando o trabalhador iniciar uma marcação de ponto
+	E o trabalhador marcar o ponto como:
+		| contrato   | momento id   | pausa id   |
+		| <contrato> | <momento id> | <pausa id> |
+	#Então o ponto deverá ser registrado como esperado
+	Então o momento do ponto deverá ser de '<momento id>'
+	E a pausa do ponto deverá ser '<pausa id>'
 
-Cenário: Trabalhador marca o ponto de saída do expediente para o almoço
-	Dado que é o momento de 'Saida' do expediente para o almoço
-	Quando o trabalhador marcar o ponto
-	Então o ponto deverá ser marcado
-	E o momento do ponto deverá ser de 'Saida'
-	E o ponto deverá indicar que é almoço
+Exemplos:
+	| contrato          | momento id | pausa id |
+	| Marcelo - Ateliex | Saida      | Almoco   |
+	| Marcelo - Ateliex | Entrada    | Almoco   |
 
-Cenário: Trabalhador marca o ponto de entrada do expediente da volta do almoço
-	Dado que é o momento de 'Entrada' do expediente da volta do almoço
-	Quando o trabalhador marcar o ponto
-	Então o ponto deverá ser marcado
-	E o momento do ponto deverá ser de 'Entrada'
-	E o ponto deverá indicar que é almoço
+Regra: Um ponto pode ser marcado com uma observação
 
-Regra: Ponto com observação
-	
+@alter
 Cenário: Trabalhador marca o ponto justificando porque chegou atrasado
-	Dado que o trabalhador anota a seguinte observação no ponto:
+	Quando o trabalhador iniciar uma marcação de ponto
+	E o trabalhador marcar o ponto com a seguinte observação:
 		"""
 		Hoje o trânsito estava lento.
 		"""
-	Quando o trabalhador marcar o ponto
-	Então o ponto deverá ser marcado
-	E o ponto deverá ter uma observação
+	Então a observação do ponto deverá ser:
+		"""
+		Hoje o trânsito estava lento.
+		"""
+

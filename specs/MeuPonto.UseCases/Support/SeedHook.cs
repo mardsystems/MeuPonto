@@ -1,6 +1,8 @@
 ﻿using BoDi;
 using MeuPonto.Models.Trabalhadores;
+using System;
 using System.Transactions;
+using TechTalk.SpecFlow.Infrastructure;
 using Timesheet.Features.BackupComprovantes;
 using Timesheet.Features.CadastroEmpregadores;
 using Timesheet.Features.GestaoContratos;
@@ -20,14 +22,16 @@ public class SeedHook
 
     }
 
-    [BeforeScenario]
+    [BeforeScenario(Order = 100)]
     public void SetupTestUsers(
         ScenarioContext scenario,
+        ISpecFlowOutputHelper specFlowOutputHelper,
         CadastroEmpregadoresContext cadastroEmpregadores,
         GestaoContratosContext gestaoContratos,
         RegistroPontosContext registroPontos,
         BackupComprovantesContext backupComprovantes,
-        GestaoFolhasContext gestaoFolhas)
+        GestaoFolhasContext gestaoFolhas,
+        DateTimeSnapshot dateTimeSnapshot)
     {
         var userId = Guid.Parse("d2fc8313-9bdc-455c-bf29-ccf709a2a692").ToString();
 
@@ -97,7 +101,13 @@ public class SeedHook
 
         var ponto = RegistroPontosFacade.CriaPonto(transaction);
 
+        specFlowOutputHelper.WriteLine($"SetupTest --> dateTimeSnapshot");
+
+        ponto.DataHora = dateTimeSnapshot.GetDateTimeUntilMinutes();
         ponto.MomentoId = MomentoEnum.Entrada;
+        ponto.PausaId = null;
+
+        contrato.QualificaPonto(ponto);
 
         registroPontos.Inicia(ponto);
 

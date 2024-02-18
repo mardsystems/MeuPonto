@@ -1,8 +1,18 @@
 ﻿# language: pt-br
 
 Funcionalidade: Backup Comprovantes
+	
+Regra: Um ponto pode ser legitimado por um comprovante
 
-Regra: Escaneamento de comprovante de ponto
+@main
+Cenário: Trabalhador registra o ponto com um comprovante
+	Dado que existe um registro de ponto em andamento
+	Quando o trabalhador iniciar um backup de comprovante
+	Então um comprovante deverá ser criado
+	Quando o trabalhador escanear o comprovante com a data '17/02/2023 17:07'
+	Então a data do ponto do comprovante deverá ser '17/02/2023 17:07'
+
+#Regra: Escaneamento de comprovante de ponto
 
 @formulated
 Cenário: Sistema reconhece a data/hora no comprovante de ponto
@@ -10,7 +20,7 @@ Cenário: Sistema reconhece a data/hora no comprovante de ponto
 	Quando o trabalhador escanear o comprovante de ponto
 	Então a data do ponto do comprovante deverá ser '17/02/2023 17:07'
 	
-Regra: Preservação de comprovante de ponto
+Regra: Um comprovante pode ser guardado
 	
 @formulated
 Cenário: Trabalhador guarda o comprovante de ponto

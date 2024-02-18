@@ -7,6 +7,11 @@ public static class DisplayAttributeExtensions
 {
     public static string GetDisplayName(this Enum enumValue)
     {
+        if (enumValue == null)
+        {
+            throw new ArgumentNullException(nameof(enumValue));
+        }
+
         var display = enumValue.GetType()
           .GetMember(enumValue.ToString())
           .First()
