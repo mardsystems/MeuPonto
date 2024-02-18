@@ -4,6 +4,8 @@ Funcionalidade: Gestão Contratos
 
 Regra: Um contrato pode ser aberto
 
+Caso de Uso: Abrir Contrato
+
 @main
 Cenário: Trabalhador abre um contrato
 	Quando o trabalhador iniciar uma abertura de contrato
@@ -24,6 +26,8 @@ Cenário: Trabalhador abre um contrato
 		| Saturday   | 00:00:00 |
 
 Regra: Um contrato pode ser alterado
+
+Caso de Uso: Alterar Contrato
 
 @main
 Cenário: Trabalhador altera um contrato para corrigir um erro de digitação no nome
@@ -69,7 +73,7 @@ Cenário: Trabalhador abre um contrato com nome maior que 2 caractere
 @invariant @basic
 Cenário: Trabalhador altera um contrato com nome maior que 2 caractere
 	Dado que existe um contrato aberto 'Contrato Feito'
-	E que existe uma alteração desse contrato em andamento 'Contrato Feito'
+	E que existe uma edição desse contrato em andamento 'Contrato Feito'
 	Quando o trabalhador alterar esse contrato para
 		| nome       |
 		| Contrato A |
@@ -86,7 +90,7 @@ Cenário: Trabalhador tenta abrir um contrato com nome menor que 3 caracteres
 @invariant @exception @basic
 Cenário: Trabalhador tenta alterar um contrato com nome menor que 3 caracteres
 	Dado que existe um contrato aberto 'Contrato Feito'
-	E que existe uma alteração desse contrato em andamento 'Contrato Feito'
+	E que existe uma edição desse contrato em andamento 'Contrato Feito'
 	Quando o trabalhador tentar alterar esse contrato para
 		| nome |
 		| B    |
@@ -114,7 +118,9 @@ Regra: Tempo Total = Tempo Monday + Tempo Tuesday + Tempo Wednesday + Tempo Thur
 
 @invariant
 Cenário: Trabalhador abre um contrato com uma jornada de trabalho prevista de 40 horas semanais
-	Dado que a jornada de trabalho semanal é de 'Monday' a 'Friday' das '09:00' às '18:00' com '01:00' de almoço
+	Dado que existe uma abertura de contrato em andamento
+	E que a jornada de trabalho semanal é de 'Monday' a 'Friday' das '09:00' às '18:00' com '01:00' de almoço
+	Mas que não tem jornada de trabalho no 'Saturday' e no 'Sunday'
 	Quando o trabalhador abrir um contrato
 	Então a jornada de trabalho semanal prevista no contrato deverá ser:
 		| dia semana | tempo    |
@@ -129,8 +135,10 @@ Cenário: Trabalhador abre um contrato com uma jornada de trabalho prevista de 4
 
 @invariant
 Cenário: Trabalhador abre um contrato com uma jornada de trabalho prevista de 44 horas semanais (incluindo sábado)
-	Dado que a jornada de trabalho semanal é de 'Monday' a 'Friday' das '09:00' às '18:00' com '01:00' de almoço
+	Dado que existe uma abertura de contrato em andamento
+	E que a jornada de trabalho semanal é de 'Monday' a 'Friday' das '09:00' às '18:00' com '01:00' de almoço
 	E que a jornada de trabalho de 'Saturday' é das '08:00' às '12:00'
+	Mas que não tem jornada de trabalho no 'Sunday'
 	Quando o trabalhador abrir um contrato
 	Então a jornada de trabalho semanal prevista no contrato deverá ser:
 		| dia semana | tempo    |
@@ -145,6 +153,8 @@ Cenário: Trabalhador abre um contrato com uma jornada de trabalho prevista de 4
 
 Regra: Um contrato pode ser excluído
 
+Caso de Uso: Excluir Contrato
+
 @main
 Cenário: Trabalhador exclui um contrato que não era necessário
 	Dado que existe um contrato aberto 'Marcelo - Ateliex'
@@ -152,6 +162,8 @@ Cenário: Trabalhador exclui um contrato que não era necessário
 	Então o contrato deverá ser excluído
 
 Regra: Se existir dados relacionados a um contrato então ele não pode ser excluído
+
+Caso de Uso: Excluir Contrato
 
 @exception @wip
 Cenário: Trabalhador tenta excluir excluir um contrato com ponto(s) marcado(s)

@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 #endif
 using System.Net.Http.Headers;
+using TechTalk.SpecFlow.Assist.ValueRetrievers;
+using TechTalk.SpecFlow.Assist;
 using TechTalk.SpecFlow.Infrastructure;
 
 namespace MeuPonto.Support;
@@ -124,5 +126,8 @@ public class WebHook //: IClassFixture<MeuPontoWebFactory<Program>>
 
         //ITestRunner from test thread container
         var threadId = testRunner.ThreadId;
+
+        Service.Instance.ValueRetrievers.Register(new NullValueRetriever("<null>"));
+        Service.Instance.ValueComparers.Register(new NullValueComparer("<null>"));
     }
 }

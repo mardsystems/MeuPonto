@@ -1,7 +1,9 @@
 using MeuPonto.Data;
 using MeuPonto.Drivers;
 using MeuPonto.Support;
+using System.Transactions;
 using TechTalk.SpecFlow.Assist;
+using Timesheet.Features.CadastroEmpregadores;
 
 namespace MeuPonto.StepDefinitions;
 
@@ -9,36 +11,41 @@ namespace MeuPonto.StepDefinitions;
 public class CadastroDeEmpregadoresStepDefinitions
 {
     private readonly ScenarioContext _scenario;
-
+    private readonly TransactionContext _transaction;
     private readonly CadastroEmpregadoresContext _cadastroEmpregadores;
-
     private readonly CadastroEmpregadoresDriver _cadastroEmpregadoresInterface;
-
     private readonly MeuPontoDbContext _db;
 
     public CadastroDeEmpregadoresStepDefinitions(
         ScenarioContext scenario,
+        TransactionContext transaction,
         CadastroEmpregadoresContext cadastroEmpregadores,
         CadastroEmpregadoresDriver cadastroEmpregadoresInterface,
         MeuPontoDbContext db)
     {
         _scenario = scenario;
-
+        _transaction = transaction;
         _cadastroEmpregadores = cadastroEmpregadores;
-
         _cadastroEmpregadoresInterface = cadastroEmpregadoresInterface;
-
         _db = db;
     }
-
 
     [Given(@"que existe um empregador cadastrado '([^']*)'")]
     public void GivenQueExisteUmEmpregadorCadastrado(string nome)
     {
-        _cadastroEmpregadores.DefineNomeEmpregador(nome);
+        var empregador = _db.Empregadores.FirstOrDefault(x => x.Nome == nome);
 
-        _db.Empregadores.Add(_cadastroEmpregadores.Empregador);
-        _db.SaveChanges();
+        if (empregador == null)
+        {
+            empregador = _transaction.CriaEmpregador();
+
+            empregador.Nome = nome;
+
+            _db.Empregadores.Add(empregador);
+            _db.SaveChanges();
+        }
+
+        _cadastroEmpregadores.Define(empregador);
     }
 
     [When(@"o trabalhador iniciar um cadastro de empregador")]

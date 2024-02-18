@@ -17,9 +17,11 @@ namespace MeuPonto.Support;
 [Binding]
 public class SeedHook
 {
+    private readonly IObjectContainer _objectContainer;
+
     public SeedHook(IObjectContainer objectContainer)
     {
-
+        _objectContainer = objectContainer;
     }
 
     [BeforeScenario(Order = 100)]
@@ -41,117 +43,61 @@ public class SeedHook
 
         var transaction = new TransactionContext(userId);
 
-        var trabalhador = TrabalhadorFactory.CriaTrabalhador(transaction);
+        _objectContainer.RegisterInstanceAs(transaction);
 
-        var empregador = CadastroEmpregadoresFacade.CriaEmpregador(transaction);
+        //var ponto = RegistroPontosFacade.CriaPonto(transaction);
 
-        empregador.Nome = "Empregador Padrão";
+        //specFlowOutputHelper.WriteLine($"SetupTest --> dateTimeSnapshot");
 
-        cadastroEmpregadores.Iniciar(empregador);
+        //ponto.DataHora = dateTimeSnapshot.GetDateTimeUntilMinutes();
+        //ponto.MomentoId = MomentoEnum.Entrada;
+        //ponto.PausaId = null;
 
-        var contrato = GestaoContratosFacade.InciarAberturaContrato(transaction);
+        //contrato.QualificaPonto(ponto);
 
-        contrato.Nome = userName;
-        contrato.Ativo = true;
-        contrato.JornadaTrabalhoSemanalPrevista = new JornadaTrabalhoSemanal
-        {
-            Semana = new List<JornadaTrabalhoDiaria>(new[]{
-                    new JornadaTrabalhoDiaria
-                    {
-                        DiaSemana = DayOfWeek.Monday,
-                        Tempo = new TimeSpan(8,0,0)
-                    },
-                    new JornadaTrabalhoDiaria
-                    {
-                        DiaSemana = DayOfWeek.Tuesday,
-                        Tempo = new TimeSpan(8,0,0)
-                    },
-                    new JornadaTrabalhoDiaria
-                    {
-                        DiaSemana = DayOfWeek.Wednesday,
-                        Tempo = new TimeSpan(8,0,0)
-                    },
-                    new JornadaTrabalhoDiaria
-                    {
-                        DiaSemana = DayOfWeek.Thursday,
-                        Tempo = new TimeSpan(8,0,0)
-                    },
-                    new JornadaTrabalhoDiaria
-                    {
-                        DiaSemana = DayOfWeek.Friday,
-                        Tempo = new TimeSpan(8,0,0)
-                    },
-                    new JornadaTrabalhoDiaria
-                    {
-                        DiaSemana = DayOfWeek.Saturday,
-                        Tempo = new TimeSpan(0,0,0)
-                    },
-                    new JornadaTrabalhoDiaria
-                    {
-                        DiaSemana = DayOfWeek.Sunday,
-                        Tempo = new TimeSpan(0,0,0)
-                    }
-                })
-        };
+        //registroPontos.Inicia(ponto);
 
-        //contrato.Empregador = empregador;
-        //contrato.EmpregadorId = empregador.Id;
+        //var comprovante = BackupComprovantesFacade.CriaComprovante(transaction);
 
-        gestaoContratos.Iniciar(contrato);
+        //backupComprovantes.Inicia(comprovante);
 
-        var ponto = RegistroPontosFacade.CriaPonto(transaction);
+        //backupComprovantes.Inicia(ponto);
 
-        specFlowOutputHelper.WriteLine($"SetupTest --> dateTimeSnapshot");
+        //var hoje = DateTime.Today;
 
-        ponto.DataHora = dateTimeSnapshot.GetDateTimeUntilMinutes();
-        ponto.MomentoId = MomentoEnum.Entrada;
-        ponto.PausaId = null;
+        //var competencia = new DateTime(hoje.Year, hoje.Month, 1);
 
-        contrato.QualificaPonto(ponto);
+        //var folha = GestaoFolhaFacade.IniciarAberturaFolha(transaction);
 
-        registroPontos.Inicia(ponto);
+        //folha.AssociarAo(contrato);
 
-        var comprovante = BackupComprovantesFacade.CriaComprovante(transaction);
+        //folha.Competencia = competencia;
 
-        backupComprovantes.Inicia(comprovante);
+        //var competenciaAtual = competencia;
 
-        backupComprovantes.Inicia(ponto);
+        //var competenciaPosterior = competenciaAtual.AddMonths(1);
 
-        var hoje = DateTime.Today;
+        //var dias = (competenciaPosterior - competenciaAtual).Days;
 
-        var competencia = new DateTime(hoje.Year, hoje.Month, 1);
+        //for (int dia = 1; dia <= dias; dia++)
+        //{
+        //    var data = competenciaAtual.AddDays(dia - 1);
 
-        var folha = GestaoFolhaFacade.IniciarAberturaFolha(transaction);
+        //    var apuracaoDiaria = new ApuracaoDiaria
+        //    {
+        //        Dia = dia,
+        //        TempoPrevisto = contrato.JornadaTrabalhoSemanalPrevista.Semana.Single(x => x.DiaSemana == data.DayOfWeek).Tempo,
+        //        TempoApurado = null,
+        //        DiferencaTempo = null,
+        //        Feriado = false,
+        //        Falta = false
+        //    };
 
-        folha.AssociarAo(contrato);
+        //    folha.ApuracaoMensal.Dias.Add(apuracaoDiaria);
+        //}
 
-        folha.Competencia = competencia;
+        //folha.ApuracaoMensal.TempoTotalPeriodoAnterior = TimeSpan.Zero;
 
-        var competenciaAtual = competencia;
-
-        var competenciaPosterior = competenciaAtual.AddMonths(1);
-
-        var dias = (competenciaPosterior - competenciaAtual).Days;
-
-        for (int dia = 1; dia <= dias; dia++)
-        {
-            var data = competenciaAtual.AddDays(dia - 1);
-
-            var apuracaoDiaria = new ApuracaoDiaria
-            {
-                Dia = dia,
-                TempoPrevisto = contrato.JornadaTrabalhoSemanalPrevista.Semana.Single(x => x.DiaSemana == data.DayOfWeek).Tempo,
-                TempoApurado = null,
-                DiferencaTempo = null,
-                Feriado = false,
-                Falta = false
-            };
-
-            folha.ApuracaoMensal.Dias.Add(apuracaoDiaria);
-        }
-
-        folha.ApuracaoMensal.TempoTotalPeriodoAnterior = TimeSpan.Zero;
-
-        gestaoFolhas.Inicia(folha);
+        //gestaoFolhas.Inicia(folha);
     }
 }
