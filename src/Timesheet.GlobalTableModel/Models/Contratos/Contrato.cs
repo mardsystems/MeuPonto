@@ -31,6 +31,11 @@ public class Contrato : GlobalTableEntity
     {
         JornadaTrabalhoSemanalPrevista = new JornadaTrabalhoSemanal();
     }
+
+    public override string ToString()
+    {
+        return Nome;
+    }
 }
 
 [Owned]

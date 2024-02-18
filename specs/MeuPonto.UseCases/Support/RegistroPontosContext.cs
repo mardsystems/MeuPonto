@@ -4,6 +4,14 @@ namespace MeuPonto.Support;
 
 public class RegistroPontosContext
 {
+    public Table Especificacao { get; set; }
+
+    public DateTime DataHora { get; set; }
+
+    public Ponto Ponto { get; set; }
+
+    public string Erro { get; set; }
+
     public RegistroPontosContext()
     {
         //var ponto = new Ponto
@@ -20,14 +28,19 @@ public class RegistroPontosContext
         Ponto = ponto;
     }
 
-    public DateTime DataHora { get; set; }
-
-    public Ponto Ponto { get; set; }
-
     public void Define(Ponto pontoRegistrado)
     {
-        PontoRegistrado = pontoRegistrado;
+        Ponto = pontoRegistrado;
     }
+}
 
-    public Ponto PontoRegistrado { get; set; }
+public class MarcacaoPontoData
+{
+    public string Contrato { get; set; }
+
+    public MomentoEnum? MomentoId { get; set; }
+
+    public PausaEnum? PausaId { get; set; }
+
+    public bool Estimado { get; set; }
 }

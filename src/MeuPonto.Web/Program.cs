@@ -128,7 +128,7 @@ public class Program
             })
             .AddMicrosoftIdentityUI();
 
-        builder.Services.AddTransient(p => new DateTimeSnapshot(DateTime.Now));
+        builder.Services.AddTransient(p => new DateTimeSnapshot(() => DateTime.Now));
 
         builder.Services.AddTransient<IClaimsTransformation, MyClaimsTransformation>();
 

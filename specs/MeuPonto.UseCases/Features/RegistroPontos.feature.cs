@@ -80,15 +80,27 @@ namespace MeuPonto.Features
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Trabalhador marca o ponto usando seu único contrato")]
+        [Xunit.SkippableTheoryAttribute(DisplayName="Trabalhador marca os pontos de entrada e saída do expediente")]
         [Xunit.TraitAttribute("FeatureTitle", "Registro Pontos")]
-        [Xunit.TraitAttribute("Description", "Trabalhador marca o ponto usando seu único contrato")]
-        public void TrabalhadorMarcaOPontoUsandoSeuUnicoContrato()
+        [Xunit.TraitAttribute("Description", "Trabalhador marca os pontos de entrada e saída do expediente")]
+        [Xunit.TraitAttribute("Category", "main")]
+        [Xunit.InlineDataAttribute("27/11/2022 09:14", "Marcelo - Ateliex", "Entrada", new string[0])]
+        [Xunit.InlineDataAttribute("27/11/2022 18:05", "Marcelo - Ateliex", "Saida", new string[0])]
+        public void TrabalhadorMarcaOsPontosDeEntradaESaidaDoExpediente(string dataHora, string contrato, string momentoId, string[] exampleTags)
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] @__tags = new string[] {
+                    "main"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador marca o ponto usando seu único contrato", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 7
+            argumentsOfScenario.Add("data/hora", dataHora);
+            argumentsOfScenario.Add("contrato", contrato);
+            argumentsOfScenario.Add("momento id", momentoId);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador marca os pontos de entrada e saída do expediente", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 8
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -98,83 +110,62 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 8
- testRunner.Given("que existe um contrato aberto \'Marcelo - Ateliex\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
-#line hidden
 #line 9
- testRunner.And("que o trabalhador qualifica o ponto com o contrato \'Marcelo - Ateliex\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+ testRunner.Given(string.Format("que a data/hora do relógio é \'{0}\'", dataHora), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
 #line 10
- testRunner.When("o trabalhador marcar o ponto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
+ testRunner.And(string.Format("que existe um contrato aberto \'{0}\'", contrato), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
 #line 11
- testRunner.Then("o ponto deverá ser marcado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
+ testRunner.When("o trabalhador iniciar uma marcação de ponto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
 #line 12
- testRunner.And("o contrato do ponto deverá deverá ser \'Marcelo - Ateliex\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+ testRunner.Then("um ponto deverá ser criado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [Xunit.SkippableFactAttribute(DisplayName="Trabalhador marca o ponto de entrada do expediente")]
-        [Xunit.TraitAttribute("FeatureTitle", "Registro Pontos")]
-        [Xunit.TraitAttribute("Description", "Trabalhador marca o ponto de entrada do expediente")]
-        public void TrabalhadorMarcaOPontoDeEntradaDoExpediente()
-        {
-            string[] tagsOfScenario = ((string[])(null));
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador marca o ponto de entrada do expediente", null, tagsOfScenario, argumentsOfScenario, featureTags);
+                TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
+                            "data/hora",
+                            "contrato",
+                            "momento id"});
+                table18.AddRow(new string[] {
+                            string.Format("{0}", dataHora),
+                            string.Format("{0}", contrato),
+                            string.Format("{0}", momentoId)});
+#line 13
+ testRunner.When("o trabalhador marcar o ponto como:", ((string)(null)), table18, "Quando ");
+#line hidden
 #line 16
-this.ScenarioInitialize(scenarioInfo);
+ testRunner.Then(string.Format("a data do ponto deverá ser \'{0}\'", dataHora), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
-            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
 #line 17
- testRunner.Given("que a data/hora do relógio é \'27/11/2022 09:14\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+ testRunner.And(string.Format("o ponto deverá ser qualificado pelo contrato \'{0}\'", contrato), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
 #line 18
- testRunner.And("que é o momento de \'Entrada\' do expediente", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+ testRunner.And(string.Format("o momento do ponto deverá ser de \'{0}\'", momentoId), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
 #line 19
- testRunner.When("o trabalhador marcar o ponto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
+ testRunner.But("o ponto não deverá indicar que foi uma pausa", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Mas ");
 #line hidden
 #line 20
- testRunner.Then("o ponto deverá ser marcado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
+ testRunner.And("o ponto não deverá indicar que foi estimado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
 #line 21
- testRunner.And("a data do ponto deverá ser \'27/11/2022 09:14\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
-#line hidden
-#line 22
- testRunner.And("o momento do ponto deverá ser de \'Entrada\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
-#line hidden
-#line 24
- testRunner.And("o ponto deverá indicar que não é almoço", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
-#line hidden
-#line 25
- testRunner.And("o ponto deverá indicar que não foi estimado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
-#line hidden
-#line 26
- testRunner.But("o ponto não deverá ter uma observação", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Mas ");
+ testRunner.And("o ponto não deverá ter uma observação", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Trabalhador marca o ponto de saída do expediente")]
+        [Xunit.SkippableFactAttribute(DisplayName="Trabalhador qualifica um ponto com um contrato")]
         [Xunit.TraitAttribute("FeatureTitle", "Registro Pontos")]
-        [Xunit.TraitAttribute("Description", "Trabalhador marca o ponto de saída do expediente")]
-        public void TrabalhadorMarcaOPontoDeSaidaDoExpediente()
+        [Xunit.TraitAttribute("Description", "Trabalhador qualifica um ponto com um contrato")]
+        [Xunit.TraitAttribute("Category", "invariant")]
+        public void TrabalhadorQualificaUmPontoComUmContrato()
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = new string[] {
+                    "invariant"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador marca o ponto de saída do expediente", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 28
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador qualifica um ponto com um contrato", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 31
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -184,46 +175,37 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 29
- testRunner.Given("que a data/hora do relógio é \'27/11/2022 18:05\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
-#line hidden
-#line 30
- testRunner.And("que é o momento de \'Saida\' do expediente", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
-#line hidden
-#line 31
- testRunner.When("o trabalhador marcar o ponto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
-#line hidden
 #line 32
- testRunner.Then("o ponto deverá ser marcado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
+ testRunner.Given("que existe um contrato aberto \'Marcelo - Ateliex\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
 #line 33
- testRunner.And("a data do ponto deverá ser \'27/11/2022 18:05\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+ testRunner.And("que existe uma marcacao de ponto em andamento", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
+                TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
+                            "contrato"});
+                table19.AddRow(new string[] {
+                            "Marcelo - Ateliex"});
 #line 34
- testRunner.And("o momento do ponto deverá ser de \'Saida\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
-#line hidden
-#line 36
- testRunner.And("o ponto deverá indicar que não é almoço", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+ testRunner.When("o trabalhador marcar o ponto como:", ((string)(null)), table19, "Quando ");
 #line hidden
 #line 37
- testRunner.And("o ponto deverá indicar que não foi estimado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
-#line hidden
-#line 38
- testRunner.But("o ponto não deverá ter uma observação", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Mas ");
+ testRunner.Then("o ponto deverá ser registrado como esperado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Trabalhador marca o ponto de saída do expediente para o almoço")]
+        [Xunit.SkippableFactAttribute(DisplayName="Trabalhador deixa de qualificar um ponto com um contrato")]
         [Xunit.TraitAttribute("FeatureTitle", "Registro Pontos")]
-        [Xunit.TraitAttribute("Description", "Trabalhador marca o ponto de saída do expediente para o almoço")]
-        public void TrabalhadorMarcaOPontoDeSaidaDoExpedienteParaOAlmoco()
+        [Xunit.TraitAttribute("Description", "Trabalhador deixa de qualificar um ponto com um contrato")]
+        [Xunit.TraitAttribute("Category", "invariant")]
+        public void TrabalhadorDeixaDeQualificarUmPontoComUmContrato()
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = new string[] {
+                    "invariant"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador marca o ponto de saída do expediente para o almoço", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 42
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador deixa de qualificar um ponto com um contrato", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 40
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -233,34 +215,48 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
+#line 41
+ testRunner.Given("que existe um contrato aberto \'Marcelo - Ateliex\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+#line hidden
+#line 42
+ testRunner.And("que existe uma marcacao de ponto em andamento", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+#line hidden
+                TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
+                            "contrato"});
+                table20.AddRow(new string[] {
+                            "<null>"});
 #line 43
- testRunner.Given("que é o momento de \'Saida\' do expediente para o almoço", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
-#line hidden
-#line 44
- testRunner.When("o trabalhador marcar o ponto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
-#line hidden
-#line 45
- testRunner.Then("o ponto deverá ser marcado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
+ testRunner.When("o trabalhador tentar marcar o ponto como:", ((string)(null)), table20, "Quando ");
 #line hidden
 #line 46
- testRunner.And("o momento do ponto deverá ser de \'Saida\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
-#line hidden
-#line 47
- testRunner.And("o ponto deverá indicar que é almoço", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+ testRunner.Then("a tentativa de marcar o ponto deverá falhar com um erro \"\'Contrato\' deve ser info" +
+                        "rmado.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Trabalhador marca o ponto de entrada do expediente da volta do almoço")]
+        [Xunit.SkippableTheoryAttribute(DisplayName="Trabalhador marca os pontos de pausa do expediente")]
         [Xunit.TraitAttribute("FeatureTitle", "Registro Pontos")]
-        [Xunit.TraitAttribute("Description", "Trabalhador marca o ponto de entrada do expediente da volta do almoço")]
-        public void TrabalhadorMarcaOPontoDeEntradaDoExpedienteDaVoltaDoAlmoco()
+        [Xunit.TraitAttribute("Description", "Trabalhador marca os pontos de pausa do expediente")]
+        [Xunit.TraitAttribute("Category", "alter")]
+        [Xunit.InlineDataAttribute("Marcelo - Ateliex", "Saida", "Almoco", new string[0])]
+        [Xunit.InlineDataAttribute("Marcelo - Ateliex", "Entrada", "Almoco", new string[0])]
+        public void TrabalhadorMarcaOsPontosDePausaDoExpediente(string contrato, string momentoId, string pausaId, string[] exampleTags)
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] @__tags = new string[] {
+                    "alter"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador marca o ponto de entrada do expediente da volta do almoço", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 49
+            argumentsOfScenario.Add("contrato", contrato);
+            argumentsOfScenario.Add("momento id", momentoId);
+            argumentsOfScenario.Add("pausa id", pausaId);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador marca os pontos de pausa do expediente", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 51
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -270,20 +266,28 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 50
- testRunner.Given("que é o momento de \'Entrada\' do expediente da volta do almoço", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
-#line hidden
-#line 51
- testRunner.When("o trabalhador marcar o ponto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
-#line hidden
 #line 52
- testRunner.Then("o ponto deverá ser marcado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
+ testRunner.Given(string.Format("que existe um contrato aberto \'{0}\'", contrato), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
 #line 53
- testRunner.And("o momento do ponto deverá ser de \'Entrada\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+ testRunner.When("o trabalhador iniciar uma marcação de ponto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
+                TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
+                            "contrato",
+                            "momento id",
+                            "pausa id"});
+                table21.AddRow(new string[] {
+                            string.Format("{0}", contrato),
+                            string.Format("{0}", momentoId),
+                            string.Format("{0}", pausaId)});
 #line 54
- testRunner.And("o ponto deverá indicar que é almoço", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+ testRunner.And("o trabalhador marcar o ponto como:", ((string)(null)), table21, "E ");
+#line hidden
+#line 58
+ testRunner.Then(string.Format("o momento do ponto deverá ser de \'{0}\'", momentoId), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
+#line hidden
+#line 59
+ testRunner.And(string.Format("a pausa do ponto deverá ser \'{0}\'", pausaId), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -292,12 +296,14 @@ this.ScenarioInitialize(scenarioInfo);
         [Xunit.SkippableFactAttribute(DisplayName="Trabalhador marca o ponto justificando porque chegou atrasado")]
         [Xunit.TraitAttribute("FeatureTitle", "Registro Pontos")]
         [Xunit.TraitAttribute("Description", "Trabalhador marca o ponto justificando porque chegou atrasado")]
+        [Xunit.TraitAttribute("Category", "alter")]
         public void TrabalhadorMarcaOPontoJustificandoPorqueChegouAtrasado()
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = new string[] {
+                    "alter"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador marca o ponto justificando porque chegou atrasado", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 58
+#line 69
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -307,17 +313,14 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 59
- testRunner.Given("que o trabalhador anota a seguinte observação no ponto:", "Hoje o trânsito estava lento.", ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+#line 70
+ testRunner.When("o trabalhador iniciar uma marcação de ponto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
-#line 63
- testRunner.When("o trabalhador marcar o ponto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
+#line 71
+ testRunner.And("o trabalhador marcar o ponto com a seguinte observação:", "Hoje o trânsito estava lento.", ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-#line 64
- testRunner.Then("o ponto deverá ser marcado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
-#line hidden
-#line 65
- testRunner.And("o ponto deverá ter uma observação", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+#line 75
+ testRunner.Then("a observação do ponto deverá ser:", "Hoje o trânsito estava lento.", ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
             }
             this.ScenarioCleanup();

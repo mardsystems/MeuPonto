@@ -1,5 +1,6 @@
 ﻿using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace MeuPonto.Helpers;
 
@@ -51,6 +52,22 @@ public static class AngleSharpExtensions
     {
         var input = (IHtmlInputElement)form.QuerySelector($"input[name='{name}']");
 
+        if (input == null)
+        {
+            throw new NullReferenceException($"input[name='{name}'] not found");
+        }
+
+        return input;
+    }
+
+    public static IHtmlInputElement? GetCheckedRadioInput(this IHtmlFormElement form, string name)
+    {
+        var elements = form.QuerySelectorAll($"input[name='{name}']");
+
+        var inputs = elements.Select(element => (IHtmlInputElement)element);
+
+        var input = inputs.FirstOrDefault(x => x.IsChecked);
+
         return input;
     }
 
@@ -75,12 +92,17 @@ public static class AngleSharpExtensions
             }
         }
 
-        return null;
+        throw new NullReferenceException($"input[name='{name}'] and {labelText} not found");
     }
 
     public static IHtmlSelectElement GetSelect(this IHtmlFormElement form, string name)
     {
         var select = (IHtmlSelectElement)form.QuerySelector($"select[name='{name}']");
+
+        if (select == null)
+        {
+            throw new NullReferenceException($"select[name='{name}'] not found");
+        }
 
         return select;
     }
@@ -91,12 +113,22 @@ public static class AngleSharpExtensions
             .Where(option => option.TextContent == text)
             .FirstOrDefault();
 
+        if (option == null)
+        {
+            throw new NullReferenceException($"option '{text}' not found");
+        }
+
         return option;
     }
 
     public static IHtmlTextAreaElement GetTextArea(this IHtmlFormElement form, string name)
     {
         var textArea = (IHtmlTextAreaElement)form.QuerySelector($"textarea[name='{name}']");
+
+        if (textArea == null)
+        {
+            throw new NullReferenceException($"textarea '{name}' not found");
+        }
 
         return textArea;
     }

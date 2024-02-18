@@ -39,16 +39,14 @@ Regra: Um novo contrato deve ser ativo
 @invariant
 Cenário: Trabalhador inicia um novo contrato ativo
 	Quando o trabalhador iniciar uma abertura de contrato
-	Então um contrato deverá ser criado
-	E o contrato deverá ser ativo
+	Então o contrato deverá ser ativo
 
 Regra: Um novo contrato deve ter uma jornada de trabalho prevista
 
 @invariant
 Cenário: Trabalhador inicia um novo contrato com uma jornada de trabalho prevista
 	Quando o trabalhador iniciar uma abertura de contrato
-	Então um contrato deverá ser criado
-	E o contrato deverá prever a seguinte jornada de trabalho semanal:
+	Então o contrato deverá prever a seguinte jornada de trabalho semanal:
 		| dia semana | tempo    |
 		| Sunday     | 00:00:00 |
 		| Monday     | 08:00:00 |

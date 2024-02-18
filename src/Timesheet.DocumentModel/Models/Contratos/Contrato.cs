@@ -31,6 +31,11 @@ public class Contrato : DocumentEntity
     {
         JornadaTrabalhoSemanalPrevista = new JornadaTrabalhoSemanal();
     }
+
+    public override string ToString()
+    {
+        return Nome;
+    }
 }
 
 [Owned]

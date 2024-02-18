@@ -62,9 +62,15 @@ public class WebHook //: IClassFixture<MeuPontoWebFactory<Program>>
         _db = scopedServices.GetRequiredService<MeuPontoDbContext>();
 
         objectContainer.RegisterInstanceAs(_db);
+
+        var dateTimeSnapshot = scopedServices.GetRequiredService<DateTimeSnapshot>();
+
+        objectContainer.RegisterInstanceAs(dateTimeSnapshot);
+
+        specFlowOutputHelper.WriteLine($"RegisterInstanceAs --> dateTimeSnapshot");
     }
 
-    [BeforeScenario]
+    [BeforeScenario(Order = 0)]
     public void InitializeWeb(FeatureContext feature, ScenarioContext scenario)
     {
         _specFlowOutputHelper.WriteLine("EnsureDeleted");

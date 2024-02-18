@@ -2,20 +2,22 @@
 
 public class DateTimeSnapshot
 {
-    private readonly DateTime _dateTime;
+    private readonly Func<DateTime> _getDateTime;
 
-    public DateTimeSnapshot(DateTime dateTime)
+    public DateTimeSnapshot(Func<DateTime> getDateTime)
     {
-        _dateTime = dateTime;
+        _getDateTime = getDateTime;
     }
 
     public DateTime GetDateTime()
     {
-        return _dateTime;
+        return _getDateTime();
     }
 
     public DateTime GetDateTimeUntilMinutes()
     {
-        return new DateTime(_dateTime.Year, _dateTime.Month, _dateTime.Day, _dateTime.Hour, _dateTime.Minute, 0);
+        var datetime = _getDateTime();
+
+        return new DateTime(datetime.Year, datetime.Month, datetime.Day, datetime.Hour, datetime.Minute, 0);
     }
 }

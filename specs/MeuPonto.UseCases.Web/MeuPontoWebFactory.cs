@@ -16,6 +16,13 @@ public class MeuPontoWebFactory<TProgram> : WebApplicationFactory<TProgram> wher
     {
         builder.ConfigureTestServices(services =>
         {
+            var dateTimeSnapshotDescriptor = services.SingleOrDefault(d =>
+                d.ServiceType == typeof(DateTimeSnapshot));
+
+            services.Remove(dateTimeSnapshotDescriptor);
+
+            services.AddTransient(container => new DateTimeSnapshot(() => DateTime.Now));
+
             services.AddAuthentication(defaultScheme: "TestScheme")
                 .AddScheme<AuthenticationSchemeOptions, TestAuthHandler>(
                     "TestScheme", options => { });
