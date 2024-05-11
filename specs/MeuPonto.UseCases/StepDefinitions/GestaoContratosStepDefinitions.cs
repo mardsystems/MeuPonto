@@ -4,8 +4,8 @@ using MeuPonto.Support;
 using Microsoft.EntityFrameworkCore;
 using System.Transactions;
 using TechTalk.SpecFlow.Assist;
-using Timesheet.Features.GestaoContratos;
-using Timesheet.Models.Contratos;
+using MeuPonto.Features.GestaoContratos;
+using MeuPonto.Models.Contratos;
 
 namespace MeuPonto.StepDefinitions;
 

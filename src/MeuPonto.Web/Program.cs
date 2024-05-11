@@ -1,9 +1,9 @@
-using Billing.Models;
 using MeuPonto.Authentication;
 using MeuPonto.Cache;
 using MeuPonto.Data;
 using MeuPonto.Infrastructure;
 using MeuPonto.Models.Trabalhadores;
+using MeuPonto.Modules.Billing;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;

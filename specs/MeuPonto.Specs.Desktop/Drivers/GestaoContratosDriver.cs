@@ -1,4 +1,4 @@
-﻿using Timesheet.Models.Contratos;
+﻿using MeuPonto.Models.Contratos;
 using OpenQA.Selenium;
 using SpecFlow.Actions.WindowsAppDriver;
 

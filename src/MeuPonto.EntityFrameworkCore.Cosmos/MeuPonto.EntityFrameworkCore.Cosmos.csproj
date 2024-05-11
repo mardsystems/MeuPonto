@@ -7,10 +7,8 @@
     <Configurations>Debug;Release;Debug_Cosmos;Release_Cosmos;Debug_Sqlite;Release_Sqlite;Debug_SqlServer;Release_SqlServer</Configurations>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Billing.DocumentModel\Billing.DocumentModel.csproj" />
     <ProjectReference Include="..\MeuPonto.DocumentModel\MeuPonto.DocumentModel.csproj" />
     <ProjectReference Include="..\System.Extensions\System.Extensions.csproj" />
-    <ProjectReference Include="..\Timesheet.DocumentModel\Timesheet.DocumentModel.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Cosmos" Version="7.0.9" />

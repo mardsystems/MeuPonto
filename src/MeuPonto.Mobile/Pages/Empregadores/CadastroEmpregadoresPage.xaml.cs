@@ -2,7 +2,7 @@ using MeuPonto.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using Timesheet.Models.Contratos;
+using MeuPonto.Models.Contratos;
 
 namespace MeuPonto.Pages.Empregadores;
 

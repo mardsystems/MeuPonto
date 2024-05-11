@@ -2,8 +2,8 @@
 using MeuPonto.Helpers;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
-using Timesheet.Models.Folhas;
-using Timesheet.Models.Pontos;
+using MeuPonto.Models.Folhas;
+using MeuPonto.Models.Pontos;
 
 namespace MeuPonto.Pages.Folhas;
 

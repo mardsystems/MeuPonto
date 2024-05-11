@@ -1,4 +1,4 @@
-﻿using Billing.Models;
+﻿using MeuPonto.Modules.Billing;
 using System.ComponentModel;
 
 namespace MeuPonto.Models.Trabalhadores;

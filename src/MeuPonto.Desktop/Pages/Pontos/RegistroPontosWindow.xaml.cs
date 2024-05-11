@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
-using Timesheet.Models.Pontos;
+using MeuPonto.Models.Pontos;
 
 namespace MeuPonto.Pages.Pontos;
 

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using MeuPonto.Pages.Shared;
 using MeuPonto.Extensions;
-using Timesheet.Models.Contratos;
+using MeuPonto.Models.Contratos;
 
 namespace MeuPonto.Pages.Contratos.Empregadores;
 

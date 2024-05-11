@@ -1,9 +1,9 @@
 ﻿using MeuPonto.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Timesheet.Models.Pontos;
-using Timesheet.Models.Contratos;
-using Timesheet.Models.Folhas;
+using MeuPonto.Models.Pontos;
+using MeuPonto.Models.Contratos;
+using MeuPonto.Models.Folhas;
 using MeuPonto.Models.Trabalhadores;
 
 namespace MeuPonto.Data;

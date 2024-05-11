@@ -6,7 +6,7 @@ using MeuPonto.Pages.Shared;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MeuPonto.Helpers;
 using MeuPonto.Extensions;
-using Timesheet.Models.Contratos;
+using MeuPonto.Models.Contratos;
 
 namespace MeuPonto.Pages.Contratos;
 

@@ -2,7 +2,7 @@
 using MeuPonto.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Timesheet.Models.Contratos;
+using MeuPonto.Models.Contratos;
 
 namespace MeuPonto.Pages.Contratos;
 

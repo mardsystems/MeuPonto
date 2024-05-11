@@ -1,5 +1,5 @@
-﻿using Timesheet.Models.Contratos;
-using Timesheet.Models.Pontos;
+﻿using MeuPonto.Models.Contratos;
+using MeuPonto.Models.Pontos;
 using Microsoft.EntityFrameworkCore;
 
 namespace MeuPonto.Data;

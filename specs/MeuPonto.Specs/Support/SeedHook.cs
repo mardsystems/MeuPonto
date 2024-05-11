@@ -1,13 +1,13 @@
 ﻿using BoDi;
 using MeuPonto.Models.Trabalhadores;
 using System.Transactions;
-using Timesheet.Features.BackupComprovantes;
-using Timesheet.Features.GestaoContratos;
-using Timesheet.Features.GestaoFolha;
-using Timesheet.Features.RegistroPontos;
-using Timesheet.Models.Contratos;
-using Timesheet.Models.Folhas;
-using Timesheet.Models.Pontos;
+using MeuPonto.Features.BackupComprovantes;
+using MeuPonto.Features.GestaoContratos;
+using MeuPonto.Features.GestaoFolha;
+using MeuPonto.Features.RegistroPontos;
+using MeuPonto.Models.Contratos;
+using MeuPonto.Models.Folhas;
+using MeuPonto.Models.Pontos;
 
 namespace MeuPonto.Support;
 

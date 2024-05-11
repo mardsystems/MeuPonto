@@ -1,16 +1,6 @@
 ﻿using BoDi;
-using MeuPonto.Models.Trabalhadores;
-using System;
 using System.Transactions;
 using TechTalk.SpecFlow.Infrastructure;
-using Timesheet.Features.BackupComprovantes;
-using Timesheet.Features.CadastroEmpregadores;
-using Timesheet.Features.GestaoContratos;
-using Timesheet.Features.GestaoFolha;
-using Timesheet.Features.RegistroPontos;
-using Timesheet.Models.Contratos;
-using Timesheet.Models.Folhas;
-using Timesheet.Models.Pontos;
 
 namespace MeuPonto.Support;
 
