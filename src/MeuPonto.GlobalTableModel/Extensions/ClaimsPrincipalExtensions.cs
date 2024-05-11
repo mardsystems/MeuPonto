@@ -1,4 +1,4 @@
-﻿using Billing.Models;
+﻿using MeuPonto.Modules.Billing;
 using System.Security.Claims;
 using System.Transactions;
 

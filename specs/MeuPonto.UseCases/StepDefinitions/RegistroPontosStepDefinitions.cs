@@ -3,8 +3,8 @@ using MeuPonto.Drivers;
 using MeuPonto.Support;
 using Microsoft.EntityFrameworkCore;
 using TechTalk.SpecFlow.Assist;
-using Timesheet.Features.RegistroPontos;
-using Timesheet.Models.Pontos;
+using MeuPonto.Features.RegistroPontos;
+using MeuPonto.Models.Pontos;
 
 namespace MeuPonto.StepDefinitions;
 

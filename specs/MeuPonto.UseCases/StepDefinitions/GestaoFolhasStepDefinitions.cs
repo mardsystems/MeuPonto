@@ -2,10 +2,10 @@ using MeuPonto.Data;
 using MeuPonto.Drivers;
 using MeuPonto.Support;
 using System.Transactions;
-using Timesheet.Features.GestaoFolha;
-using Timesheet.Features.RegistroPontos;
-using Timesheet.Models.Folhas;
-using Timesheet.Models.Pontos;
+using MeuPonto.Features.GestaoFolha;
+using MeuPonto.Features.RegistroPontos;
+using MeuPonto.Models.Folhas;
+using MeuPonto.Models.Pontos;
 
 namespace MeuPonto.StepDefinitions;
 

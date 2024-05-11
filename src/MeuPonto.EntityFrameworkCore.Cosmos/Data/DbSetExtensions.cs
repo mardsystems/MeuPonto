@@ -1,7 +1,7 @@
 ﻿using Microsoft.Azure.Cosmos;
 using Microsoft.EntityFrameworkCore;
-using Timesheet.Models.Pontos;
-using Timesheet.Models.Contratos;
+using MeuPonto.Models.Pontos;
+using MeuPonto.Models.Contratos;
 
 namespace MeuPonto.Data;
 

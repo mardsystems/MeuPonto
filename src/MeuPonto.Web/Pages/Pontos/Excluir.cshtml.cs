@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
-using Timesheet.Models.Pontos;
+using MeuPonto.Models.Pontos;
 
 namespace MeuPonto.Pages.Pontos;
 

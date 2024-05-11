@@ -4,8 +4,8 @@ using MeuPonto.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Timesheet.Features.GestaoContratos;
-using Timesheet.Models.Contratos;
+using MeuPonto.Features.GestaoContratos;
+using MeuPonto.Models.Contratos;
 
 namespace MeuPonto.Pages.Contratos;
 

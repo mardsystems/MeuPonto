@@ -3,8 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using MeuPonto.Pages.Shared;
 using Microsoft.AspNetCore.Authorization;
-using Billing.Models;
 using MeuPonto.Models.Trabalhadores;
+using MeuPonto.Modules.Billing;
 
 namespace MeuPonto.Pages.Trabalhadores;
 

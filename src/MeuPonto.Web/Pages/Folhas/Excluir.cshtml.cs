@@ -1,7 +1,7 @@
 ﻿using MeuPonto.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Timesheet.Models.Folhas;
+using MeuPonto.Models.Folhas;
 
 namespace MeuPonto.Pages.Pontos.Folhas;
 

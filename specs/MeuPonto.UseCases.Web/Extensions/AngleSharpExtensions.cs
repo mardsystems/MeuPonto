@@ -1,7 +1,5 @@
 ﻿using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
-using System.Security.Claims;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace MeuPonto.Helpers;
 
