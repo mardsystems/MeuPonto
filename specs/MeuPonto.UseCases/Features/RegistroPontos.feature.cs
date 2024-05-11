@@ -84,12 +84,14 @@ namespace MeuPonto.Features
         [Xunit.TraitAttribute("FeatureTitle", "Registro Pontos")]
         [Xunit.TraitAttribute("Description", "Trabalhador registra os pontos de entrada e saída do expediente")]
         [Xunit.TraitAttribute("Category", "main")]
+        [Xunit.TraitAttribute("Category", "wip")]
         [Xunit.InlineDataAttribute("27/11/2022 09:14", "Marcelo - Ateliex", "Entrada", new string[0])]
         [Xunit.InlineDataAttribute("27/11/2022 18:05", "Marcelo - Ateliex", "Saida", new string[0])]
         public void TrabalhadorRegistraOsPontosDeEntradaESaidaDoExpediente(string dataHora, string contrato, string momentoId, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "main"};
+                    "main",
+                    "wip"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
@@ -274,10 +276,12 @@ this.ScenarioInitialize(scenarioInfo);
         [Xunit.TraitAttribute("FeatureTitle", "Registro Pontos")]
         [Xunit.TraitAttribute("Description", "Trabalhador deixa de qualificar um ponto com um contrato")]
         [Xunit.TraitAttribute("Category", "invariant")]
+        [Xunit.TraitAttribute("Category", "wip")]
         public void TrabalhadorDeixaDeQualificarUmPontoComUmContrato()
         {
             string[] tagsOfScenario = new string[] {
-                    "invariant"};
+                    "invariant",
+                    "wip"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador deixa de qualificar um ponto com um contrato", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 67
@@ -372,10 +376,12 @@ this.ScenarioInitialize(scenarioInfo);
         [Xunit.TraitAttribute("FeatureTitle", "Registro Pontos")]
         [Xunit.TraitAttribute("Description", "Trabalhador registra o ponto justificando porque chegou atrasado")]
         [Xunit.TraitAttribute("Category", "alter")]
+        [Xunit.TraitAttribute("Category", "wip")]
         public void TrabalhadorRegistraOPontoJustificandoPorqueChegouAtrasado()
         {
             string[] tagsOfScenario = new string[] {
-                    "alter"};
+                    "alter",
+                    "wip"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador registra o ponto justificando porque chegou atrasado", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 100

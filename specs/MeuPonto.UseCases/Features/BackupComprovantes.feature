@@ -6,7 +6,7 @@ Regra: Um ponto pode ser legitimado por um comprovante
 
 Caso de Uso: Guardar Comprovante
 
-@main
+@main @wip
 Cenário: Trabalhador registra o ponto com um comprovante
 	Dado que existe um contrato aberto
 	E que existe um registro de ponto em andamento
@@ -21,7 +21,7 @@ Cenário: Trabalhador registra o ponto com um comprovante
 
 #Regra: Escaneamento de comprovante de ponto
 
-@formulated
+@formulated @wip
 Cenário: Sistema reconhece a data/hora no comprovante de ponto
 	Dado que o trabalhador tem um comprovante de ponto com a data '17/02/2023 17:07'
 	Quando o trabalhador escanear o comprovante de ponto
@@ -29,7 +29,7 @@ Cenário: Sistema reconhece a data/hora no comprovante de ponto
 	
 Regra: Um comprovante pode ser guardado
 	
-@formulated
+@formulated @wip
 Cenário: Trabalhador guarda o comprovante de ponto
 	Dado que o trabalhador escaneou um comprovante de ponto com a data '17/02/2023 17:07'
 	Quando o trabalhador guardar o comprovante de ponto

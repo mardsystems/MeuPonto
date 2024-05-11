@@ -84,10 +84,12 @@ namespace MeuPonto.Features
         [Xunit.TraitAttribute("FeatureTitle", "Backup Comprovantes")]
         [Xunit.TraitAttribute("Description", "Trabalhador registra o ponto com um comprovante")]
         [Xunit.TraitAttribute("Category", "main")]
+        [Xunit.TraitAttribute("Category", "wip")]
         public void TrabalhadorRegistraOPontoComUmComprovante()
         {
             string[] tagsOfScenario = new string[] {
-                    "main"};
+                    "main",
+                    "wip"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador registra o ponto com um comprovante", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 10
@@ -136,10 +138,12 @@ this.ScenarioInitialize(scenarioInfo);
         [Xunit.TraitAttribute("FeatureTitle", "Backup Comprovantes")]
         [Xunit.TraitAttribute("Description", "Sistema reconhece a data/hora no comprovante de ponto")]
         [Xunit.TraitAttribute("Category", "formulated")]
+        [Xunit.TraitAttribute("Category", "wip")]
         public void SistemaReconheceADataHoraNoComprovanteDePonto()
         {
             string[] tagsOfScenario = new string[] {
-                    "formulated"};
+                    "formulated",
+                    "wip"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Sistema reconhece a data/hora no comprovante de ponto", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 25
@@ -169,10 +173,12 @@ this.ScenarioInitialize(scenarioInfo);
         [Xunit.TraitAttribute("FeatureTitle", "Backup Comprovantes")]
         [Xunit.TraitAttribute("Description", "Trabalhador guarda o comprovante de ponto")]
         [Xunit.TraitAttribute("Category", "formulated")]
+        [Xunit.TraitAttribute("Category", "wip")]
         public void TrabalhadorGuardaOComprovanteDePonto()
         {
             string[] tagsOfScenario = new string[] {
-                    "formulated"};
+                    "formulated",
+                    "wip"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador guarda o comprovante de ponto", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 33

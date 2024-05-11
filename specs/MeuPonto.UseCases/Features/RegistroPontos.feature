@@ -6,7 +6,7 @@ Regra: Um ponto pode ser registrado
 
 Caso de Uso: Registrar Ponto
 
-@main
+@main @wip
 Delineação do Cenário: Trabalhador registra os pontos de entrada e saída do expediente
 	Dado que a data/hora do relógio é '<data/hora>'
 	E que existe um contrato aberto '<contrato>'
@@ -63,7 +63,7 @@ Cenário: Trabalhador qualifica um ponto com um contrato
 		| Marcelo - Ateliex |
 	Então o ponto deverá ser registrado como esperado
 
-@invariant
+@invariant @wip
 Cenário: Trabalhador deixa de qualificar um ponto com um contrato
 	Dado que existe um contrato aberto 'Marcelo - Ateliex'
 	E que existe um registro de ponto em andamento
@@ -96,7 +96,7 @@ Regra: Um ponto pode ser registrado com uma observação
 
 Caso de Uso: Registrar Ponto
 
-@alter
+@alter @wip
 Cenário: Trabalhador registra o ponto justificando porque chegou atrasado
 	Dado que existe um contrato aberto
 	E que existe um registro de ponto em andamento
