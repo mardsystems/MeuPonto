@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 #endif
 using System.Net.Http.Headers;
+using TechTalk.SpecFlow.Assist.ValueRetrievers;
+using TechTalk.SpecFlow.Assist;
 using TechTalk.SpecFlow.Infrastructure;
 
 namespace MeuPonto.Support;
@@ -62,9 +64,15 @@ public class WebHook //: IClassFixture<MeuPontoWebFactory<Program>>
         _db = scopedServices.GetRequiredService<MeuPontoDbContext>();
 
         objectContainer.RegisterInstanceAs(_db);
+
+        var dateTimeSnapshot = scopedServices.GetRequiredService<DateTimeSnapshot>();
+
+        objectContainer.RegisterInstanceAs(dateTimeSnapshot);
+
+        specFlowOutputHelper.WriteLine($"RegisterInstanceAs --> dateTimeSnapshot");
     }
 
-    [BeforeScenario]
+    [BeforeScenario(Order = 0)]
     public void InitializeWeb(FeatureContext feature, ScenarioContext scenario)
     {
         _specFlowOutputHelper.WriteLine("EnsureDeleted");
@@ -118,5 +126,8 @@ public class WebHook //: IClassFixture<MeuPontoWebFactory<Program>>
 
         //ITestRunner from test thread container
         var threadId = testRunner.ThreadId;
+
+        Service.Instance.ValueRetrievers.Register(new NullValueRetriever("<null>"));
+        Service.Instance.ValueComparers.Register(new NullValueComparer("<null>"));
     }
 }

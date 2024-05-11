@@ -6,7 +6,7 @@ namespace Timesheet.Models.Pontos;
 
 public class Ponto : GlobalTableEntity
 {
-    [Required]
+    [Required(ErrorMessage = "'Contrato' deve ser informado.")]
     [DisplayName("Contrato")]
     public Guid? ContratoId { get; set; }
 

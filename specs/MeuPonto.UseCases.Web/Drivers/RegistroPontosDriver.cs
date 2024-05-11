@@ -12,6 +12,8 @@ public class RegistroPontosDriver
 
     public IHtmlDocument Document { get; private set; }
 
+    public IHtmlAnchorElement RegistroPontoAnchor { get; private set; }
+
     public IHtmlAnchorElement MarcacaoPontoAnchor { get; private set; }
 
     public RegistroPontosDriver(AngleSharpContext angleSharp)
@@ -23,21 +25,68 @@ public class RegistroPontosDriver
     {
         Document = _angleSharp.GetDocument("/Pontos");
 
+        RegistroPontoAnchor = Document.GetAnchor("Criacao.Ponto");
+
+        RegistroPontoAnchor.Should().NotBeNull("o registro de pontos deve ter um link para o registro de ponto");
+
         MarcacaoPontoAnchor = Document.GetAnchor("Marcacao.Ponto");
 
         MarcacaoPontoAnchor.Should().NotBeNull("o registro de pontos deve ter um link para a marcação de ponto");
     }
 
-    public Ponto MarcarPonto(Ponto ponto)
+    public Ponto IniciarRegistroPonto()
     {
         GoTo();
 
-        Document = _angleSharp.GetDocument(MarcacaoPontoAnchor.Href);
+        Document = _angleSharp.GetDocument(RegistroPontoAnchor.Href);
 
         var form = Document.GetForm();
 
-        form.GetSelect("Ponto.ContratoId").GetOption(ponto.Contrato.Nome).IsSelected = true;
-        form.GetInput("Ponto.MomentoId", ponto.MomentoId.GetDisplayName()).IsChecked = true;
+        var dataHoraInput = form.GetInput("Ponto.DataHora");
+        var momentoInput = form.GetCheckedRadioInput("Ponto.MomentoId");
+        var pausaInput = form.GetCheckedRadioInput("Ponto.PausaId");
+
+        var dataHoraValue = string.IsNullOrEmpty(dataHoraInput.Value) ? new DateTime?() : DateTime.Parse(dataHoraInput.Value);
+        var momentoValue = momentoInput == null ? null : momentoInput.Value;
+        var pausaValue = pausaInput == null ? null : pausaInput.Value;
+
+        var ponto = new Ponto
+        {
+            DataHora = dataHoraValue,
+            ContratoId = null,
+            MomentoId = string.IsNullOrEmpty(momentoValue) ? null : (MomentoEnum)Enum.Parse(typeof(MomentoEnum), momentoValue),
+            PausaId = string.IsNullOrEmpty(pausaValue) ? null : (PausaEnum)Enum.Parse(typeof(PausaEnum), pausaValue),
+            Observacao = form.GetTextArea("Ponto.Observacao").Value
+        };
+
+        return ponto;
+    }
+
+    public void RegistrarPonto(Ponto ponto)
+    {
+        GoTo();
+
+        Document = _angleSharp.GetDocument(RegistroPontoAnchor.Href);
+
+        var form = Document.GetForm();
+
+        if (ponto.Contrato != null)
+        {
+            var contratoIdOption = form.GetSelect("Ponto.ContratoId").GetOption(ponto.Contrato.Nome);
+
+            if (contratoIdOption != null)
+            {
+                contratoIdOption.IsSelected = true;
+            }
+        }
+        if (ponto.DataHora != null)
+        {
+            form.GetInput("Ponto.DataHora").ValueAsDate = ponto.DataHora;
+        }
+        if (ponto.MomentoId != null)
+        {
+            form.GetInput("Ponto.MomentoId", ponto.MomentoId.GetDisplayName()).IsChecked = true;
+        }
         if (ponto.PausaId != null)
         {
             form.GetInput("Ponto.PausaId", ponto.PausaId.GetDisplayName()).IsChecked = true;
@@ -50,9 +99,99 @@ public class RegistroPontosDriver
 
         Document = _angleSharp.GetDocument(resultPage);
 
-        var pontoRegistrado = ObtemDetalhes();
+        var hasErrors = Document.GetValidationErrors().Any();
 
-        return pontoRegistrado;
+        if (hasErrors)
+        {
+            var erros = Document.GetValidationErrors();
+
+            var span = erros.FirstSpan();
+
+            throw new Exception(span.InnerHtml);
+        }
+        else
+        {
+            //var pontoRegistrado = ObtemDetalhes();
+
+            //return pontoRegistrado;
+        }
+    }
+
+    public Ponto IniciarMarcacaoPonto()
+    {
+        GoTo();
+
+        Document = _angleSharp.GetDocument(MarcacaoPontoAnchor.Href);
+
+        var form = Document.GetForm();
+
+        var momentoInput = form.GetCheckedRadioInput("Ponto.MomentoId");
+        var pausaInput = form.GetCheckedRadioInput("Ponto.PausaId");
+
+        var momentoValue = momentoInput == null ? null : momentoInput.Value;
+        var pausaValue = pausaInput == null ? null : pausaInput.Value;
+
+        var ponto = new Ponto
+        {
+            DataHora = DateTime.Parse(form.GetInput("Ponto.DataHora").Value),
+            ContratoId = null,
+            MomentoId = string.IsNullOrEmpty(momentoValue) ? null : (MomentoEnum)Enum.Parse(typeof(MomentoEnum), momentoValue),
+            PausaId = string.IsNullOrEmpty(pausaValue) ? null : (PausaEnum)Enum.Parse(typeof(PausaEnum), pausaValue),
+            Observacao = form.GetTextArea("Ponto.Observacao").Value
+        };
+
+        return ponto;
+    }
+
+    public void MarcarPonto(Ponto ponto)
+    {
+        GoTo();
+
+        Document = _angleSharp.GetDocument(MarcacaoPontoAnchor.Href);
+
+        var form = Document.GetForm();
+
+        if (ponto.Contrato != null)
+        {
+            var contratoIdOption = form.GetSelect("Ponto.ContratoId").GetOption(ponto.Contrato.Nome);
+
+            if (contratoIdOption != null)
+            {
+                contratoIdOption.IsSelected = true;
+            }
+        }
+        if (ponto.MomentoId != null)
+        {
+            form.GetInput("Ponto.MomentoId", ponto.MomentoId.GetDisplayName()).IsChecked = true;
+        }
+        if (ponto.PausaId != null)
+        {
+            form.GetInput("Ponto.PausaId", ponto.PausaId.GetDisplayName()).IsChecked = true;
+        }
+        form.GetTextArea("Ponto.Observacao").Value = ponto.Observacao;
+
+        var submitButton = form.GetSubmitButton();
+
+        var resultPage = _angleSharp.Send(form, submitButton);
+
+        Document = _angleSharp.GetDocument(resultPage);
+
+        var hasErrors = Document.GetValidationErrors().Any();
+
+        if (hasErrors)
+        {
+            var erros = Document.GetValidationErrors();
+
+            var span = erros.FirstSpan();
+
+            throw new Exception(span.InnerHtml);
+        }
+        else
+        {
+            //var pontoRegistrado = ObtemDetalhes();
+
+            //return pontoRegistrado;
+        }
     }
 
     private Ponto ObtemDetalhes()

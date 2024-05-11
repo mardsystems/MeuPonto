@@ -5,7 +5,7 @@ namespace Timesheet.Features.GestaoContratos;
 
 public static class GestaoContratosFacade
 {
-    public static Contrato InciarAberturaContrato(TransactionContext transaction, Guid? id = null)
+    public static Contrato InciarAberturaContrato(this TransactionContext transaction, Guid? id = null)
     {
         var contrato = new Contrato
         {
@@ -14,6 +14,8 @@ public static class GestaoContratosFacade
             PartitionKey = transaction.UserId.ToString(),
             CreationDate = transaction.DateTime
         };
+
+        contrato.Ativo = true;
 
         return contrato;
     }
@@ -24,6 +26,19 @@ public static class GestaoContratosFacade
         contrato.UserId = transaction.UserId;
         contrato.PartitionKey = transaction.UserId.ToString();
         contrato.CreationDate ??= transaction.DateTime;
+    }
+
+    public static void FeitoCom(this Contrato contrato, Empregador empregador)
+    {
+        if (empregador != null)
+        {
+            contrato.Empregador = new EmpregadorRef
+            {
+                Nome = empregador.Nome
+            };
+
+            contrato.EmpregadorId = empregador.Id;
+        }
     }
 
     public static Contrato AbrirContrato(this Contrato contrato, Empregador empregador)

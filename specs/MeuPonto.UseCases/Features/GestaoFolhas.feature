@@ -4,17 +4,19 @@ Funcionalidade: Gestão Folhas
 	
 Regra: Contrato qualifica a folha de ponto
 
+@wip
 Cenário: Trabalhador abre uma folha de ponto usando seu único contrato
-	Dado que o trabalhador tem um contrato cadastrado com o nome 'Marcelo - Ateliex'
-	Dado que o trabalhador qualifica a folha com o contrato 'Marcelo - Ateliex'
+	Dado que existe um contrato aberto 'Marcelo - Ateliex'
+	E que o trabalhador qualifica a folha com o contrato 'Marcelo - Ateliex'
 	Quando o trabalhador abrir uma folha de ponto
 	Então uma folha de ponto deverá ser aberta
 	E o contrato da folha de ponto deverá deverá ser 'Marcelo - Ateliex'
 
 Regra: Folha de ponto tem periodicidade mensal
 
+@wip
 Cenário: Trabalhador abre uma folha ponto para o mês de novembro de 2022
-	Dado que o trabalhador tem um contrato cadastrado
+	Dado que existe um contrato aberto
 	E que o trabalhador deseja apurar a folha de ponto da competência '2022/11'
 	Quando o trabalhador abrir uma folha de ponto
 	Então uma folha de ponto deverá ser aberta
@@ -26,9 +28,10 @@ Cenário: Trabalhador abre uma folha ponto para o mês de novembro de 2022
 	E a folha de ponto não deverá ter uma observação
 
 Regra: Folha de ponto com observação
-	
+
+@wip
 Cenário: Trabalhador abre uma folha de ponto anotando que deve confirmar os feriados do mês
-	Dado que o trabalhador tem um contrato cadastrado
+	Dado que existe um contrato aberto
 	E que o trabalhador anota a seguinte observação na folha de ponto:
 		"""
 		Verificar se a última sexta-feira do mês vai ser feriado.
@@ -39,6 +42,7 @@ Cenário: Trabalhador abre uma folha de ponto anotando que deve confirmar os fer
 
 Regra: Para toda entrada deverá existir uma saída
 
+@wip
 Esquema do Cenário: Trabalhador registra a entrada e a saída do expediente
 	Dado que o trabalhador tem um contrato cadastrado com a seguinte jornada de trabalho semanal prevista:
 		| dia semana | tempo    |
@@ -62,6 +66,7 @@ Exemplos:
 
 Regra: O fechamento deve ser representado por um status
 
+@wip
 Cenário: Trabalhador confirma que uma folha de ponto aberta foi fechada
 	Dado que o trabalhador tem uma folha de ponto aberta na competência '2022/11'
 	E que o ano/mês é '2022/11'
@@ -71,6 +76,7 @@ Cenário: Trabalhador confirma que uma folha de ponto aberta foi fechada
 
 Regra: Guarda da apuração
 
+@wip
 Cenário: Trabalhador guarda a apuração mensal dos pontos registrados
 	Dado que o trabalhador tem uma folha de ponto aberta na competência '2022/11'
 	E que o ano/mês é '2022/11'

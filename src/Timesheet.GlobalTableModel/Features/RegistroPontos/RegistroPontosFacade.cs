@@ -25,6 +25,13 @@ public static class RegistroPontosFacade
         ponto.ContratoId = contrato.Id;
     }
 
+    public static void DesqualificaPonto(this Ponto ponto)
+    {
+        ponto.Contrato = null;
+
+        ponto.ContratoId = null;
+    }
+
     public static void RecontextualizaPonto(this Ponto ponto, TransactionContext transaction, Guid? id = null)
     {
         ponto.Id = ponto.Id ?? id ?? Guid.NewGuid();
