@@ -98,8 +98,8 @@ public class GestaoContratosStepDefinitions
         _gestaoContratos.Define(contrato);
     }
 
-    [Given(@"que o trabalhador tem um contrato cadastrado com a seguinte jornada de trabalho semanal prevista:")]
-    public void GivenQueOTrabalhadorTemUmContratoCadastradoComASeguinteJornadaDeTrabalhoSemanalPrevista(Table table)
+    [Given(@"que existe um contrato aberto com a seguinte jornada de trabalho semanal prevista:")]
+    public void GivenQueExisteUmContratoAbertoComASeguinteJornadaDeTrabalhoSemanalPrevista(Table table)
     {
         DefineJornadaTrabalhoSemanalPrevistaDe(table);
 
@@ -213,13 +213,13 @@ public class GestaoContratosStepDefinitions
     [Given(@"que existe uma abertura de contrato em andamento")]
     public void GivenQueExisteUmaAberturaDeContratoEmAndamento()
     {
-        GivenQueExisteUmaAberturaDeContratoEmAndamento("Contrato em Andamento");
+        GivenQueExisteUmaAberturaDeContratoEmAndamento("Contrato Novo");
     }
 
     [Given(@"que existe uma abertura de contrato em andamento '([^']*)'")]
     public void GivenQueExisteUmaAberturaDeContratoEmAndamento(string nome)
     {
-        var contrato = _gestaoContratosInterface.IniciarAbrerturaContrato();
+        var contrato = _gestaoContratosInterface.SolicitarAbrerturaContrato();
 
         contrato.Nome = nome;
 
@@ -234,10 +234,10 @@ public class GestaoContratosStepDefinitions
         _gestaoContratos.Iniciar(contrato);
     }
 
-    [When(@"o trabalhador iniciar uma abertura de contrato")]
-    public void WhenOTrabalhadorIniciarUmaAberturaDeContrato()
+    [When(@"o trabalhador solicitar a abertura de um contrato")]
+    public void WhenOTrabalhadorSolicitarAAberturaDeUmContrato()
     {
-        var contrato = _gestaoContratosInterface.IniciarAbrerturaContrato();
+        var contrato = _gestaoContratosInterface.SolicitarAbrerturaContrato();
 
         _gestaoContratos.Iniciar(contrato);
     }
@@ -253,7 +253,6 @@ public class GestaoContratosStepDefinitions
         {
             Nome = contrato.Nome ?? "Contrato Padrão",
             Ativo = contrato.Ativo,
-            Empregador = contrato.Empregador?.Nome,
             Domingo = contrato.JornadaTrabalhoSemanalPrevista.Semana[0].Tempo,
             Segunda = contrato.JornadaTrabalhoSemanalPrevista.Semana[1].Tempo,
             Terca = contrato.JornadaTrabalhoSemanalPrevista.Semana[2].Tempo,
@@ -265,10 +264,6 @@ public class GestaoContratosStepDefinitions
 
         contrato.Nome = data.Nome;
         contrato.Ativo = data.Ativo;
-
-        var empregador = _db.Empregadores.FirstOrDefault(x => x.Nome == data.Empregador);
-
-        contrato.FeitoCom(empregador);
 
         contrato.JornadaTrabalhoSemanalPrevista.Semana[0].Tempo = data.Domingo;
         contrato.JornadaTrabalhoSemanalPrevista.Semana[1].Tempo = data.Segunda;
@@ -283,7 +278,6 @@ public class GestaoContratosStepDefinitions
         //_db.ChangeTracker.Clear();
 
         var contratoAberto = _db.Contratos
-            .Include(x => x.Empregador)
             .FirstOrDefault(x => x.Nome == contrato.Nome);
 
         _gestaoContratos.Define(contratoAberto);
@@ -436,24 +430,10 @@ public class GestaoContratosStepDefinitions
         _gestaoContratos.Iniciar(contrato);
     }
 
-    [Then(@"um contrato deverá ser criado")]
-    public void ThenUmContratoDeveraSerCriado()
-    {
-        _gestaoContratos.Contrato.Should().NotBeNull();
-    }
-
     [Then(@"o contrato deverá ser ativo")]
     public void ThenOContratoDeveraSerAtivo()
     {
         _gestaoContratos.Contrato.Ativo.Should().BeTrue();
-    }
-
-    [Then(@"o empregador '([^']*)' deverá ser associado ao contrato")]
-    public void ThenOEmpregadorDeveraSerAssociadoAoContrato(string empregador)
-    {
-        _gestaoContratos.Contrato.Empregador.Should().NotBeNull();
-
-        _gestaoContratos.Contrato.Empregador.Nome.Should().Be(empregador);
     }
 
     [Then(@"a jornada de trabalho semanal prevista no contrato deverá ser:")]
@@ -525,6 +505,18 @@ public class GestaoContratosStepDefinitions
 
     #endregion
 
+    [When(@"o trabalhador encerrar o contrato")]
+    public void WhenOTrabalhadorEncerrarOContrato()
+    {
+        throw new PendingStepException();
+    }
+
+    [Then(@"o contrato deverá ser encerrado")]
+    public void ThenOContratoDeveraSerEncerrado()
+    {
+        throw new PendingStepException();
+    }
+
     #region Excluir Contrato
 
     [When(@"o trabalhador excluir o contrato")]
@@ -543,14 +535,20 @@ public class GestaoContratosStepDefinitions
 
     #endregion
 
-    [Then(@"o contrato deverá ser aberto como esperado")]
-    public void ThenOContratoDeveraSerAbertoComoEsperado()
+    [Then(@"o sistema deverá apresentar um contrato novo")]
+    public void ThenOSistemaDeveraApresentarUmContratoNovo()
+    {
+        _gestaoContratos.Contrato.Should().NotBeNull();
+    }
+
+    [Then(@"o sistema deverá registrar o contrato como esperado")]
+    public void ThenOSistemaDeveraRegistrarOContratoComoEsperado()
     {
         _gestaoContratos.Especificacao.CompareToSet(_db.Contratos);
     }
 
-    [Then(@"o contrato deverá ser alterado como esperado")]
-    public void ThenOContratoDeveraSerAlteradoComoEsperado()
+    [Then(@"o sistema deverá alterar o contrato como esperado")]
+    public void ThenOSistemaDeveraAlterarOContratoComoEsperado()
     {
         _gestaoContratos.Especificacao.CompareToSet(_db.Contratos);
     }

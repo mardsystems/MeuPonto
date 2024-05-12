@@ -4,6 +4,8 @@ namespace MeuPonto.Support;
 
 public class CadastroEmpregadoresContext
 {
+    public Table Especificacao { get; set; }
+
     public Empregador Empregador { get; private set; }
 
     public string NomeEmpregador { get; private set; }

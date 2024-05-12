@@ -28,7 +28,7 @@ public class BackupComprovantesDriver
         GuardarComprovanteAnchor.Should().NotBeNull("o backup de comprovantes deve ter um link para a guardar um comprovante");
     }
 
-    public Comprovante IniciarBackupComprovante()
+    public Comprovante SolicitarBackupComprovante()
     {
         GoTo();
 

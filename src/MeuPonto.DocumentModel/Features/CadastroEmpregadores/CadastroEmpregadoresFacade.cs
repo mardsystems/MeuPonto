@@ -25,4 +25,17 @@ public static class CadastroEmpregadoresFacade
         empregador.PartitionKey = transaction.UserId.ToString();
         empregador.CreationDate ??= transaction.DateTime;
     }
+
+    public static void FeitoCom(this Contrato contrato, Empregador empregador)
+    {
+        if (empregador != null)
+        {
+            contrato.Empregador = new EmpregadorRef
+            {
+                Nome = empregador.Nome
+            };
+
+            contrato.EmpregadorId = empregador.Id;
+        }
+    }
 }

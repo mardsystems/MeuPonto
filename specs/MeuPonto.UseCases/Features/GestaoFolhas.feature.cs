@@ -40,7 +40,8 @@ namespace MeuPonto.Features
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("pt-br"), "Features", "Gestão Folhas", null, ProgrammingLanguage.CSharp, featureTags);
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("pt-br"), "Features", "Gestão Folhas", "O sistema deverá fornecer para o trabalhador a capacidade de gerenciar suas folha" +
+                    "s.", ProgrammingLanguage.CSharp, featureTags);
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -80,17 +81,17 @@ namespace MeuPonto.Features
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Trabalhador abre uma folha de ponto usando seu único contrato")]
+        [Xunit.SkippableFactAttribute(DisplayName="[Abrir Folha] Trabalhador abre uma folha de ponto usando seu único contrato")]
         [Xunit.TraitAttribute("FeatureTitle", "Gestão Folhas")]
-        [Xunit.TraitAttribute("Description", "Trabalhador abre uma folha de ponto usando seu único contrato")]
+        [Xunit.TraitAttribute("Description", "[Abrir Folha] Trabalhador abre uma folha de ponto usando seu único contrato")]
         [Xunit.TraitAttribute("Category", "wip")]
-        public void TrabalhadorAbreUmaFolhaDePontoUsandoSeuUnicoContrato()
+        public void AbrirFolhaTrabalhadorAbreUmaFolhaDePontoUsandoSeuUnicoContrato()
         {
             string[] tagsOfScenario = new string[] {
                     "wip"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador abre uma folha de ponto usando seu único contrato", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 8
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[Abrir Folha] Trabalhador abre uma folha de ponto usando seu único contrato", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 10
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -100,36 +101,36 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 9
+#line 11
  testRunner.Given("que existe um contrato aberto \'Marcelo - Ateliex\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
-#line 10
+#line 12
  testRunner.And("que o trabalhador qualifica a folha com o contrato \'Marcelo - Ateliex\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-#line 11
+#line 13
  testRunner.When("o trabalhador abrir uma folha de ponto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
-#line 12
+#line 14
  testRunner.Then("uma folha de ponto deverá ser aberta", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
-#line 13
+#line 15
  testRunner.And("o contrato da folha de ponto deverá deverá ser \'Marcelo - Ateliex\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Trabalhador abre uma folha ponto para o mês de novembro de 2022")]
+        [Xunit.SkippableFactAttribute(DisplayName="[Abrir Folha] Trabalhador abre uma folha ponto para o mês de novembro de 2022")]
         [Xunit.TraitAttribute("FeatureTitle", "Gestão Folhas")]
-        [Xunit.TraitAttribute("Description", "Trabalhador abre uma folha ponto para o mês de novembro de 2022")]
+        [Xunit.TraitAttribute("Description", "[Abrir Folha] Trabalhador abre uma folha ponto para o mês de novembro de 2022")]
         [Xunit.TraitAttribute("Category", "wip")]
-        public void TrabalhadorAbreUmaFolhaPontoParaOMesDeNovembroDe2022()
+        public void AbrirFolhaTrabalhadorAbreUmaFolhaPontoParaOMesDeNovembroDe2022()
         {
             string[] tagsOfScenario = new string[] {
                     "wip"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador abre uma folha ponto para o mês de novembro de 2022", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 18
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[Abrir Folha] Trabalhador abre uma folha ponto para o mês de novembro de 2022", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 20
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -139,51 +140,51 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 19
+#line 21
  testRunner.Given("que existe um contrato aberto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
-#line 20
+#line 22
  testRunner.And("que o trabalhador deseja apurar a folha de ponto da competência \'2022/11\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-#line 21
+#line 23
  testRunner.When("o trabalhador abrir uma folha de ponto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
-#line 22
+#line 24
  testRunner.Then("uma folha de ponto deverá ser aberta", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
-#line 23
+#line 25
  testRunner.And("o status da folha de ponto deverá ser \'Aberta\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-#line 24
+#line 26
  testRunner.And("a folha de ponto deverá ter \'30\' dias", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-#line 26
+#line 28
  testRunner.But("a folha de ponto não deverá ter tempo total apurado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Mas ");
 #line hidden
-#line 27
+#line 29
  testRunner.And("a folha de ponto não deverá ter tempo total período anterior", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-#line 28
+#line 30
  testRunner.And("a folha de ponto não deverá ter uma observação", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Trabalhador abre uma folha de ponto anotando que deve confirmar os feriados do mê" +
-            "s")]
+        [Xunit.SkippableFactAttribute(DisplayName="[Abrir Folha] Trabalhador abre uma folha de ponto anotando que deve confirmar os " +
+            "feriados do mês")]
         [Xunit.TraitAttribute("FeatureTitle", "Gestão Folhas")]
-        [Xunit.TraitAttribute("Description", "Trabalhador abre uma folha de ponto anotando que deve confirmar os feriados do mê" +
-            "s")]
+        [Xunit.TraitAttribute("Description", "[Abrir Folha] Trabalhador abre uma folha de ponto anotando que deve confirmar os " +
+            "feriados do mês")]
         [Xunit.TraitAttribute("Category", "wip")]
-        public void TrabalhadorAbreUmaFolhaDePontoAnotandoQueDeveConfirmarOsFeriadosDoMes()
+        public void AbrirFolhaTrabalhadorAbreUmaFolhaDePontoAnotandoQueDeveConfirmarOsFeriadosDoMes()
         {
             string[] tagsOfScenario = new string[] {
                     "wip"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador abre uma folha de ponto anotando que deve confirmar os feriados do mê" +
-                    "s", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 33
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[Abrir Folha] Trabalhador abre uma folha de ponto anotando que deve confirmar os " +
+                    "feriados do mês", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 35
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -193,113 +194,36 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 34
+#line 36
  testRunner.Given("que existe um contrato aberto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
-#line 35
+#line 37
  testRunner.And("que o trabalhador anota a seguinte observação na folha de ponto:", "Verificar se a última sexta-feira do mês vai ser feriado.", ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-#line 39
+#line 41
  testRunner.When("o trabalhador abrir uma folha de ponto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
-#line 40
+#line 42
  testRunner.Then("uma folha de ponto deverá ser aberta", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
-#line 41
+#line 43
  testRunner.And("a folha de ponto deverá ter uma observação", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableTheoryAttribute(DisplayName="Trabalhador registra a entrada e a saída do expediente")]
+        [Xunit.SkippableFactAttribute(DisplayName="[Fechar Folha] Trabalhador confirma que uma folha de ponto aberta foi fechada")]
         [Xunit.TraitAttribute("FeatureTitle", "Gestão Folhas")]
-        [Xunit.TraitAttribute("Description", "Trabalhador registra a entrada e a saída do expediente")]
+        [Xunit.TraitAttribute("Description", "[Fechar Folha] Trabalhador confirma que uma folha de ponto aberta foi fechada")]
         [Xunit.TraitAttribute("Category", "wip")]
-        [Xunit.InlineDataAttribute("27/11/2022 09:14", "27/11/2022 11:30", "02:16", new string[0])]
-        [Xunit.InlineDataAttribute("27/11/2022 12:27", "27/11/2022 18:03", "05:36", new string[0])]
-        public void TrabalhadorRegistraAEntradaEASaidaDoExpediente(string entrada, string saida, string apurado, string[] exampleTags)
-        {
-            string[] @__tags = new string[] {
-                    "wip"};
-            if ((exampleTags != null))
-            {
-                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
-            }
-            string[] tagsOfScenario = @__tags;
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("entrada", entrada);
-            argumentsOfScenario.Add("saída", saida);
-            argumentsOfScenario.Add("apurado", apurado);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador registra a entrada e a saída do expediente", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 46
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-                TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
-                            "dia semana",
-                            "tempo"});
-                table17.AddRow(new string[] {
-                            "Sunday",
-                            "00:00:00"});
-                table17.AddRow(new string[] {
-                            "Monday",
-                            "08:00:00"});
-                table17.AddRow(new string[] {
-                            "Tuesday",
-                            "08:00:00"});
-                table17.AddRow(new string[] {
-                            "Wednesday",
-                            "08:00:00"});
-                table17.AddRow(new string[] {
-                            "Thursday",
-                            "08:00:00"});
-                table17.AddRow(new string[] {
-                            "Friday",
-                            "08:00:00"});
-                table17.AddRow(new string[] {
-                            "Saturday",
-                            "00:00:00"});
-#line 47
- testRunner.Given("que o trabalhador tem um contrato cadastrado com a seguinte jornada de trabalho s" +
-                        "emanal prevista:", ((string)(null)), table17, "Dado ");
-#line hidden
-#line 56
- testRunner.And(string.Format("que o trabalhador registrou a entrada no expediente às \'{0}\'", entrada), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
-#line hidden
-#line 57
- testRunner.And(string.Format("que o trabalhador registrou a saída no expediente às \'{0}\'", saida), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
-#line hidden
-#line 58
- testRunner.And("que o trabalhador tem uma folha de ponto aberta na competência \'2022/11\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
-#line hidden
-#line 59
- testRunner.When("o trabalhador apurar a folha de ponto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
-#line hidden
-#line 60
- testRunner.Then(string.Format("o tempo total apurado da folha de ponto deverá ser de \'{0}\'", apurado), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [Xunit.SkippableFactAttribute(DisplayName="Trabalhador confirma que uma folha de ponto aberta foi fechada")]
-        [Xunit.TraitAttribute("FeatureTitle", "Gestão Folhas")]
-        [Xunit.TraitAttribute("Description", "Trabalhador confirma que uma folha de ponto aberta foi fechada")]
-        [Xunit.TraitAttribute("Category", "wip")]
-        public void TrabalhadorConfirmaQueUmaFolhaDePontoAbertaFoiFechada()
+        public void FecharFolhaTrabalhadorConfirmaQueUmaFolhaDePontoAbertaFoiFechada()
         {
             string[] tagsOfScenario = new string[] {
                     "wip"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador confirma que uma folha de ponto aberta foi fechada", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 70
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[Fechar Folha] Trabalhador confirma que uma folha de ponto aberta foi fechada", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 48
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -309,36 +233,36 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 71
+#line 49
  testRunner.Given("que o trabalhador tem uma folha de ponto aberta na competência \'2022/11\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
-#line 72
+#line 50
  testRunner.And("que o ano/mês é \'2022/11\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-#line 73
+#line 51
  testRunner.When("o trabalhador fechar a folha de ponto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
-#line 74
+#line 52
  testRunner.Then("a folha de ponto deverá ser fechada", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
-#line 75
+#line 53
  testRunner.And("o status da folha de ponto deverá ser \'Fechada\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Trabalhador guarda a apuração mensal dos pontos registrados")]
+        [Xunit.SkippableFactAttribute(DisplayName="[Fechar Folha] Trabalhador guarda a apuração mensal dos pontos registrados")]
         [Xunit.TraitAttribute("FeatureTitle", "Gestão Folhas")]
-        [Xunit.TraitAttribute("Description", "Trabalhador guarda a apuração mensal dos pontos registrados")]
+        [Xunit.TraitAttribute("Description", "[Fechar Folha] Trabalhador guarda a apuração mensal dos pontos registrados")]
         [Xunit.TraitAttribute("Category", "wip")]
-        public void TrabalhadorGuardaAApuracaoMensalDosPontosRegistrados()
+        public void FecharFolhaTrabalhadorGuardaAApuracaoMensalDosPontosRegistrados()
         {
             string[] tagsOfScenario = new string[] {
                     "wip"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador guarda a apuração mensal dos pontos registrados", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 80
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[Fechar Folha] Trabalhador guarda a apuração mensal dos pontos registrados", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 58
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -348,40 +272,40 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 81
+#line 59
  testRunner.Given("que o trabalhador tem uma folha de ponto aberta na competência \'2022/11\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
-#line 82
+#line 60
  testRunner.And("que o ano/mês é \'2022/11\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-                TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
                             "data/hora",
                             "momento"});
-                table18.AddRow(new string[] {
+                table19.AddRow(new string[] {
                             "27/11/2022 09:14",
                             "Entrada"});
-                table18.AddRow(new string[] {
+                table19.AddRow(new string[] {
                             "27/11/2022 11:30",
                             "Saida"});
-                table18.AddRow(new string[] {
+                table19.AddRow(new string[] {
                             "27/11/2022 12:27",
                             "Entrada"});
-                table18.AddRow(new string[] {
+                table19.AddRow(new string[] {
                             "27/11/2022 18:03",
                             "Saida"});
-#line 83
- testRunner.And("que os pontos registrados foram:", ((string)(null)), table18, "E ");
+#line 61
+ testRunner.And("que os pontos registrados foram:", ((string)(null)), table19, "E ");
 #line hidden
-#line 89
+#line 67
  testRunner.When("o trabalhador fechar a folha de ponto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
-#line 90
+#line 68
  testRunner.Then("a folha de ponto deverá ser fechada", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
-#line 91
+#line 69
  testRunner.And("o tempo total apurado deverá ser \'07:52\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-#line 92
+#line 70
  testRunner.But("o tempo total período anterior deverá ser nulo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Mas ");
 #line hidden
             }
