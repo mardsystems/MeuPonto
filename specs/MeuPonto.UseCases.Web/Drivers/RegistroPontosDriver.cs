@@ -34,7 +34,7 @@ public class RegistroPontosDriver
         MarcacaoPontoAnchor.Should().NotBeNull("o registro de pontos deve ter um link para a marcação de ponto");
     }
 
-    public Ponto IniciarRegistroPonto()
+    public Ponto SolicitarRegistroPonto()
     {
         GoTo();
 
@@ -117,7 +117,7 @@ public class RegistroPontosDriver
         }
     }
 
-    public Ponto IniciarMarcacaoPonto()
+    public Ponto SolicitarMarcacaoPonto()
     {
         GoTo();
 

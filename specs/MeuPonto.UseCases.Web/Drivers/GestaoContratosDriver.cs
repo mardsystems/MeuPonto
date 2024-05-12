@@ -60,7 +60,7 @@ public class GestaoContratosDriver
         ExclusaoContratoAnchor.Should().NotBeNull("a lista de contratos deve ter um link de exclusão do contrato cadastrado");
     }
 
-    public Contrato IniciarAbrerturaContrato()
+    public Contrato SolicitarAbrerturaContrato()
     {
         GoTo();
 

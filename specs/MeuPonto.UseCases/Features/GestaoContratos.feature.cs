@@ -40,7 +40,8 @@ namespace MeuPonto.Features
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("pt-br"), "Features", "Gestão Contratos", null, ProgrammingLanguage.CSharp, featureTags);
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("pt-br"), "Features", "Gestão Contratos", "O sistema deverá fornecer para o trabalhador a capacidade de gerenciar seus contr" +
+                    "atos.", ProgrammingLanguage.CSharp, featureTags);
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -80,16 +81,18 @@ namespace MeuPonto.Features
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Trabalhador abre um contrato")]
+        [Xunit.SkippableFactAttribute(DisplayName="[Abrir Contrato] Trabalhador abre um contrato")]
         [Xunit.TraitAttribute("FeatureTitle", "Gestão Contratos")]
-        [Xunit.TraitAttribute("Description", "Trabalhador abre um contrato")]
+        [Xunit.TraitAttribute("Description", "[Abrir Contrato] Trabalhador abre um contrato")]
         [Xunit.TraitAttribute("Category", "main")]
-        public void TrabalhadorAbreUmContrato()
+        [Xunit.TraitAttribute("Category", "wip")]
+        public void AbrirContratoTrabalhadorAbreUmContrato()
         {
             string[] tagsOfScenario = new string[] {
-                    "main"};
+                    "main",
+                    "wip"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador abre um contrato", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[Abrir Contrato] Trabalhador abre um contrato", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 10
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -101,163 +104,13 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 11
- testRunner.When("o trabalhador iniciar uma abertura de contrato", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
+ testRunner.When("o trabalhador solicitar a abertura de um contrato", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
 #line 12
- testRunner.Then("um contrato deverá ser criado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
+ testRunner.Then("o sistema deverá apresentar um contrato novo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
-                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
-                            "nome",
-                            "ativo",
-                            "domingo",
-                            "segunda",
-                            "terça",
-                            "quarta",
-                            "quinta",
-                            "sexta",
-                            "sábado"});
-                table5.AddRow(new string[] {
-                            "Contrato A",
-                            "True",
-                            "00:00:00",
-                            "08:00:00",
-                            "08:00:00",
-                            "08:00:00",
-                            "08:00:00",
-                            "08:00:00",
-                            "00:00:00"});
 #line 13
- testRunner.When("o trabalhador abrir o contrato como:", ((string)(null)), table5, "Quando ");
-#line hidden
-#line 16
- testRunner.Then("o nome do contrato deverá ser \'Contrato A\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
-#line hidden
-#line 17
  testRunner.And("o contrato deverá ser ativo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
-#line hidden
-                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
-                            "dia semana",
-                            "tempo"});
-                table6.AddRow(new string[] {
-                            "Sunday",
-                            "00:00:00"});
-                table6.AddRow(new string[] {
-                            "Monday",
-                            "08:00:00"});
-                table6.AddRow(new string[] {
-                            "Tuesday",
-                            "08:00:00"});
-                table6.AddRow(new string[] {
-                            "Wednesday",
-                            "08:00:00"});
-                table6.AddRow(new string[] {
-                            "Thursday",
-                            "08:00:00"});
-                table6.AddRow(new string[] {
-                            "Friday",
-                            "08:00:00"});
-                table6.AddRow(new string[] {
-                            "Saturday",
-                            "00:00:00"});
-#line 18
- testRunner.And("a jornada de trabalho semanal prevista no contrato deverá ser:", ((string)(null)), table6, "E ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [Xunit.SkippableFactAttribute(DisplayName="Trabalhador altera um contrato para corrigir um erro de digitação no nome")]
-        [Xunit.TraitAttribute("FeatureTitle", "Gestão Contratos")]
-        [Xunit.TraitAttribute("Description", "Trabalhador altera um contrato para corrigir um erro de digitação no nome")]
-        [Xunit.TraitAttribute("Category", "main")]
-        public void TrabalhadorAlteraUmContratoParaCorrigirUmErroDeDigitacaoNoNome()
-        {
-            string[] tagsOfScenario = new string[] {
-                    "main"};
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador altera um contrato para corrigir um erro de digitação no nome", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 33
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-#line 34
- testRunner.Given("que existe um contrato aberto \'Marcello - Particular\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
-#line hidden
-#line 35
- testRunner.When("o trabalhador iniciar uma edição de contrato", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
-#line hidden
-                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
-                            "nome"});
-                table7.AddRow(new string[] {
-                            "Marcelo - Particular"});
-#line 36
- testRunner.And("o trabalhador alterar esse contrato para", ((string)(null)), table7, "E ");
-#line hidden
-#line 39
- testRunner.Then("o nome do contrato deverá ser \'Marcelo - Particular\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [Xunit.SkippableFactAttribute(DisplayName="Trabalhador inicia um novo contrato ativo")]
-        [Xunit.TraitAttribute("FeatureTitle", "Gestão Contratos")]
-        [Xunit.TraitAttribute("Description", "Trabalhador inicia um novo contrato ativo")]
-        [Xunit.TraitAttribute("Category", "invariant")]
-        public void TrabalhadorIniciaUmNovoContratoAtivo()
-        {
-            string[] tagsOfScenario = new string[] {
-                    "invariant"};
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador inicia um novo contrato ativo", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 44
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-#line 45
- testRunner.When("o trabalhador iniciar uma abertura de contrato", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
-#line hidden
-#line 46
- testRunner.Then("o contrato deverá ser ativo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [Xunit.SkippableFactAttribute(DisplayName="Trabalhador inicia um novo contrato com uma jornada de trabalho prevista")]
-        [Xunit.TraitAttribute("FeatureTitle", "Gestão Contratos")]
-        [Xunit.TraitAttribute("Description", "Trabalhador inicia um novo contrato com uma jornada de trabalho prevista")]
-        [Xunit.TraitAttribute("Category", "invariant")]
-        public void TrabalhadorIniciaUmNovoContratoComUmaJornadaDeTrabalhoPrevista()
-        {
-            string[] tagsOfScenario = new string[] {
-                    "invariant"};
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador inicia um novo contrato com uma jornada de trabalho prevista", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 51
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-#line 52
- testRunner.When("o trabalhador iniciar uma abertura de contrato", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
                 TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                             "dia semana",
@@ -283,65 +136,53 @@ this.ScenarioInitialize(scenarioInfo);
                 table8.AddRow(new string[] {
                             "Saturday",
                             "00:00:00"});
-#line 53
- testRunner.Then("o contrato deverá prever a seguinte jornada de trabalho semanal:", ((string)(null)), table8, "Então ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [Xunit.SkippableFactAttribute(DisplayName="Trabalhador abre um contrato com nome maior que 2 caractere")]
-        [Xunit.TraitAttribute("FeatureTitle", "Gestão Contratos")]
-        [Xunit.TraitAttribute("Description", "Trabalhador abre um contrato com nome maior que 2 caractere")]
-        [Xunit.TraitAttribute("Category", "invariant")]
-        [Xunit.TraitAttribute("Category", "basic")]
-        public void TrabalhadorAbreUmContratoComNomeMaiorQue2Caractere()
-        {
-            string[] tagsOfScenario = new string[] {
-                    "invariant",
-                    "basic"};
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador abre um contrato com nome maior que 2 caractere", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 66
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-#line 67
- testRunner.Given("que existe uma abertura de contrato em andamento", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+#line 14
+ testRunner.And("o contrato deverá prever a seguinte jornada de trabalho semanal:", ((string)(null)), table8, "E ");
 #line hidden
                 TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
-                            "nome"});
+                            "nome",
+                            "ativo",
+                            "domingo",
+                            "segunda",
+                            "terça",
+                            "quarta",
+                            "quinta",
+                            "sexta",
+                            "sábado"});
                 table9.AddRow(new string[] {
-                            "Contrato A"});
-#line 68
+                            "Contrato A",
+                            "True",
+                            "00:00:00",
+                            "08:00:00",
+                            "08:00:00",
+                            "08:00:00",
+                            "08:00:00",
+                            "08:00:00",
+                            "00:00:00"});
+#line 23
  testRunner.When("o trabalhador abrir o contrato como:", ((string)(null)), table9, "Quando ");
 #line hidden
-#line 71
- testRunner.Then("o contrato deverá ser aberto como esperado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
+#line 26
+ testRunner.Then("o sistema deverá registrar o contrato como esperado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Trabalhador altera um contrato com nome maior que 2 caractere")]
+        [Xunit.SkippableFactAttribute(DisplayName="[Alterar Contrato] Trabalhador altera um contrato para corrigir um erro de digita" +
+            "ção no nome")]
         [Xunit.TraitAttribute("FeatureTitle", "Gestão Contratos")]
-        [Xunit.TraitAttribute("Description", "Trabalhador altera um contrato com nome maior que 2 caractere")]
-        [Xunit.TraitAttribute("Category", "invariant")]
-        [Xunit.TraitAttribute("Category", "basic")]
-        public void TrabalhadorAlteraUmContratoComNomeMaiorQue2Caractere()
+        [Xunit.TraitAttribute("Description", "[Alterar Contrato] Trabalhador altera um contrato para corrigir um erro de digita" +
+            "ção no nome")]
+        [Xunit.TraitAttribute("Category", "main")]
+        public void AlterarContratoTrabalhadorAlteraUmContratoParaCorrigirUmErroDeDigitacaoNoNome()
         {
             string[] tagsOfScenario = new string[] {
-                    "invariant",
-                    "basic"};
+                    "main"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador altera um contrato com nome maior que 2 caractere", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 74
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[Alterar Contrato] Trabalhador altera um contrato para corrigir um erro de digita" +
+                    "ção no nome", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 31
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -351,41 +192,37 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 75
- testRunner.Given("que existe um contrato aberto \'Contrato Feito\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+#line 32
+ testRunner.Given("que existe um contrato aberto \'Marcello - Particular\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
-#line 76
- testRunner.And("que existe uma edição desse contrato em andamento \'Contrato Feito\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+#line 33
+ testRunner.When("o trabalhador iniciar uma edição de contrato", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
                 TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                             "nome"});
                 table10.AddRow(new string[] {
-                            "Contrato A"});
-#line 77
- testRunner.When("o trabalhador alterar esse contrato para", ((string)(null)), table10, "Quando ");
+                            "Marcelo - Particular"});
+#line 34
+ testRunner.And("o trabalhador alterar esse contrato para", ((string)(null)), table10, "E ");
 #line hidden
-#line 80
- testRunner.Then("o contrato deverá ser alterado como esperado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
+#line 37
+ testRunner.Then("o nome do contrato deverá ser \'Marcelo - Particular\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Trabalhador tenta abrir um contrato com nome menor que 3 caracteres")]
+        [Xunit.SkippableFactAttribute(DisplayName="[Abrir Contrato] Trabalhador abre um contrato com nome maior que 2 caractere")]
         [Xunit.TraitAttribute("FeatureTitle", "Gestão Contratos")]
-        [Xunit.TraitAttribute("Description", "Trabalhador tenta abrir um contrato com nome menor que 3 caracteres")]
-        [Xunit.TraitAttribute("Category", "invariant")]
-        [Xunit.TraitAttribute("Category", "exception")]
-        [Xunit.TraitAttribute("Category", "basic")]
-        public void TrabalhadorTentaAbrirUmContratoComNomeMenorQue3Caracteres()
+        [Xunit.TraitAttribute("Description", "[Abrir Contrato] Trabalhador abre um contrato com nome maior que 2 caractere")]
+        [Xunit.TraitAttribute("Category", "secondary")]
+        public void AbrirContratoTrabalhadorAbreUmContratoComNomeMaiorQue2Caractere()
         {
             string[] tagsOfScenario = new string[] {
-                    "invariant",
-                    "exception",
-                    "basic"};
+                    "secondary"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador tenta abrir um contrato com nome menor que 3 caracteres", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 83
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[Abrir Contrato] Trabalhador abre um contrato com nome maior que 2 caractere", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 42
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -395,17 +232,97 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 84
+#line 43
  testRunner.Given("que existe uma abertura de contrato em andamento", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
                 TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
                             "nome"});
                 table11.AddRow(new string[] {
-                            "A"});
-#line 85
- testRunner.When("o trabalhador tentar abrir um contrato como", ((string)(null)), table11, "Quando ");
+                            "Contrato B"});
+#line 44
+ testRunner.When("o trabalhador abrir o contrato como:", ((string)(null)), table11, "Quando ");
 #line hidden
-#line 88
+#line 47
+ testRunner.Then("o sistema deverá registrar o contrato como esperado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="[Alterar Contrato] Trabalhador altera um contrato com nome maior que 2 caractere")]
+        [Xunit.TraitAttribute("FeatureTitle", "Gestão Contratos")]
+        [Xunit.TraitAttribute("Description", "[Alterar Contrato] Trabalhador altera um contrato com nome maior que 2 caractere")]
+        [Xunit.TraitAttribute("Category", "secondary")]
+        public void AlterarContratoTrabalhadorAlteraUmContratoComNomeMaiorQue2Caractere()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "secondary"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[Alterar Contrato] Trabalhador altera um contrato com nome maior que 2 caractere", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 50
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 51
+ testRunner.Given("que existe um contrato aberto \'Contrato Feito\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+#line hidden
+#line 52
+ testRunner.And("que existe uma edição desse contrato em andamento \'Contrato Feito\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+#line hidden
+                TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+                            "nome"});
+                table12.AddRow(new string[] {
+                            "Contrato B"});
+#line 53
+ testRunner.When("o trabalhador alterar esse contrato para", ((string)(null)), table12, "Quando ");
+#line hidden
+#line 56
+ testRunner.Then("o sistema deverá alterar o contrato como esperado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="[Abrir Contrato] Trabalhador tenta abrir um contrato com nome menor que 3 caracte" +
+            "res")]
+        [Xunit.TraitAttribute("FeatureTitle", "Gestão Contratos")]
+        [Xunit.TraitAttribute("Description", "[Abrir Contrato] Trabalhador tenta abrir um contrato com nome menor que 3 caracte" +
+            "res")]
+        [Xunit.TraitAttribute("Category", "exception")]
+        public void AbrirContratoTrabalhadorTentaAbrirUmContratoComNomeMenorQue3Caracteres()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "exception"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[Abrir Contrato] Trabalhador tenta abrir um contrato com nome menor que 3 caracte" +
+                    "res", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 59
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 60
+ testRunner.Given("que existe uma abertura de contrato em andamento", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+#line hidden
+                TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+                            "nome"});
+                table13.AddRow(new string[] {
+                            "A"});
+#line 61
+ testRunner.When("o trabalhador tentar abrir um contrato como", ((string)(null)), table13, "Quando ");
+#line hidden
+#line 64
  testRunner.Then("a tentativa de abrir o contrato deverá falhar com um erro \"\'Nome\' deve ser maior " +
                         "ou igual a 3 caracteres.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
@@ -413,21 +330,20 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Trabalhador tenta alterar um contrato com nome menor que 3 caracteres")]
+        [Xunit.SkippableFactAttribute(DisplayName="[Alterar Contrato] Trabalhador tenta alterar um contrato com nome menor que 3 car" +
+            "acteres")]
         [Xunit.TraitAttribute("FeatureTitle", "Gestão Contratos")]
-        [Xunit.TraitAttribute("Description", "Trabalhador tenta alterar um contrato com nome menor que 3 caracteres")]
-        [Xunit.TraitAttribute("Category", "invariant")]
+        [Xunit.TraitAttribute("Description", "[Alterar Contrato] Trabalhador tenta alterar um contrato com nome menor que 3 car" +
+            "acteres")]
         [Xunit.TraitAttribute("Category", "exception")]
-        [Xunit.TraitAttribute("Category", "basic")]
-        public void TrabalhadorTentaAlterarUmContratoComNomeMenorQue3Caracteres()
+        public void AlterarContratoTrabalhadorTentaAlterarUmContratoComNomeMenorQue3Caracteres()
         {
             string[] tagsOfScenario = new string[] {
-                    "invariant",
-                    "exception",
-                    "basic"};
+                    "exception"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador tenta alterar um contrato com nome menor que 3 caracteres", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 91
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[Alterar Contrato] Trabalhador tenta alterar um contrato com nome menor que 3 car" +
+                    "acteres", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 67
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -437,20 +353,20 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 92
+#line 68
  testRunner.Given("que existe um contrato aberto \'Contrato Feito\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
-#line 93
+#line 69
  testRunner.And("que existe uma edição desse contrato em andamento \'Contrato Feito\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-                TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
                             "nome"});
-                table12.AddRow(new string[] {
+                table14.AddRow(new string[] {
                             "B"});
-#line 94
- testRunner.When("o trabalhador tentar alterar esse contrato para", ((string)(null)), table12, "Quando ");
+#line 70
+ testRunner.When("o trabalhador tentar alterar esse contrato para", ((string)(null)), table14, "Quando ");
 #line hidden
-#line 97
+#line 73
  testRunner.Then("a tentativa de alterar o contrato deverá falhar com um erro \"\'Nome\' deve ser maio" +
                         "r ou igual a 3 caracteres.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
@@ -458,19 +374,17 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Trabalhador abre um contrato com nome menor que 36 caracteres")]
+        [Xunit.SkippableFactAttribute(DisplayName="[Abrir Contrato] Trabalhador abre um contrato com nome menor que 36 caracteres")]
         [Xunit.TraitAttribute("FeatureTitle", "Gestão Contratos")]
-        [Xunit.TraitAttribute("Description", "Trabalhador abre um contrato com nome menor que 36 caracteres")]
-        [Xunit.TraitAttribute("Category", "invariant")]
-        [Xunit.TraitAttribute("Category", "basic")]
-        public void TrabalhadorAbreUmContratoComNomeMenorQue36Caracteres()
+        [Xunit.TraitAttribute("Description", "[Abrir Contrato] Trabalhador abre um contrato com nome menor que 36 caracteres")]
+        [Xunit.TraitAttribute("Category", "secondary")]
+        public void AbrirContratoTrabalhadorAbreUmContratoComNomeMenorQue36Caracteres()
         {
             string[] tagsOfScenario = new string[] {
-                    "invariant",
-                    "basic"};
+                    "secondary"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador abre um contrato com nome menor que 36 caracteres", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 102
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[Abrir Contrato] Trabalhador abre um contrato com nome menor que 36 caracteres", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 78
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -480,38 +394,37 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 103
+#line 79
  testRunner.Given("que existe uma abertura de contrato em andamento", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
-                TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
                             "nome"});
-                table13.AddRow(new string[] {
-                            "Contrato A"});
-#line 104
- testRunner.When("o trabalhador abrir o contrato como:", ((string)(null)), table13, "Quando ");
+                table15.AddRow(new string[] {
+                            "Contrato B"});
+#line 80
+ testRunner.When("o trabalhador abrir o contrato como:", ((string)(null)), table15, "Quando ");
 #line hidden
-#line 107
- testRunner.Then("o contrato deverá ser aberto como esperado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
+#line 83
+ testRunner.Then("o sistema deverá registrar o contrato como esperado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Trabalhador tenta abrir um contrato com nome maior que 35 caracteres")]
+        [Xunit.SkippableFactAttribute(DisplayName="[Abrir Contrato] Trabalhador tenta abrir um contrato com nome maior que 35 caract" +
+            "eres")]
         [Xunit.TraitAttribute("FeatureTitle", "Gestão Contratos")]
-        [Xunit.TraitAttribute("Description", "Trabalhador tenta abrir um contrato com nome maior que 35 caracteres")]
-        [Xunit.TraitAttribute("Category", "invariant")]
+        [Xunit.TraitAttribute("Description", "[Abrir Contrato] Trabalhador tenta abrir um contrato com nome maior que 35 caract" +
+            "eres")]
         [Xunit.TraitAttribute("Category", "exception")]
-        [Xunit.TraitAttribute("Category", "basic")]
-        public void TrabalhadorTentaAbrirUmContratoComNomeMaiorQue35Caracteres()
+        public void AbrirContratoTrabalhadorTentaAbrirUmContratoComNomeMaiorQue35Caracteres()
         {
             string[] tagsOfScenario = new string[] {
-                    "invariant",
-                    "exception",
-                    "basic"};
+                    "exception"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador tenta abrir um contrato com nome maior que 35 caracteres", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 110
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[Abrir Contrato] Trabalhador tenta abrir um contrato com nome maior que 35 caract" +
+                    "eres", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 86
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -521,18 +434,18 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 111
+#line 87
  testRunner.Given("que existe uma abertura de contrato em andamento", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
-                TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
                             "nome"});
-                table14.AddRow(new string[] {
+                table16.AddRow(new string[] {
                             "Contrato de Trabalho Feito com uma Empresa do Ramo da Industria Farmacêutica do E" +
                                 "stado do Rio de Janeiro"});
-#line 112
- testRunner.When("o trabalhador tentar abrir um contrato como", ((string)(null)), table14, "Quando ");
+#line 88
+ testRunner.When("o trabalhador tentar abrir um contrato como", ((string)(null)), table16, "Quando ");
 #line hidden
-#line 115
+#line 91
  testRunner.Then("a tentativa de abrir o contrato deverá falhar com um erro \"\'Nome\' deve ser menor " +
                         "ou igual a 35 caracteres.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
@@ -540,20 +453,20 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Trabalhador abre um contrato com uma jornada de trabalho prevista de 40 horas sem" +
-            "anais")]
+        [Xunit.SkippableFactAttribute(DisplayName="[Abrir Contrato] Trabalhador abre um contrato com uma jornada de trabalho previst" +
+            "a de 40 horas semanais")]
         [Xunit.TraitAttribute("FeatureTitle", "Gestão Contratos")]
-        [Xunit.TraitAttribute("Description", "Trabalhador abre um contrato com uma jornada de trabalho prevista de 40 horas sem" +
-            "anais")]
-        [Xunit.TraitAttribute("Category", "invariant")]
-        public void TrabalhadorAbreUmContratoComUmaJornadaDeTrabalhoPrevistaDe40HorasSemanais()
+        [Xunit.TraitAttribute("Description", "[Abrir Contrato] Trabalhador abre um contrato com uma jornada de trabalho previst" +
+            "a de 40 horas semanais")]
+        [Xunit.TraitAttribute("Category", "secondary")]
+        public void AbrirContratoTrabalhadorAbreUmContratoComUmaJornadaDeTrabalhoPrevistaDe40HorasSemanais()
         {
             string[] tagsOfScenario = new string[] {
-                    "invariant"};
+                    "secondary"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador abre um contrato com uma jornada de trabalho prevista de 40 horas sem" +
-                    "anais", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 120
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[Abrir Contrato] Trabalhador abre um contrato com uma jornada de trabalho previst" +
+                    "a de 40 horas semanais", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 96
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -563,47 +476,47 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 121
+#line 97
  testRunner.Given("que existe uma abertura de contrato em andamento", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
-#line 122
+#line 98
  testRunner.And("que a jornada de trabalho semanal é de \'Monday\' a \'Friday\' das \'09:00\' às \'18:00\'" +
                         " com \'01:00\' de almoço", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-#line 123
+#line 99
  testRunner.But("que não tem jornada de trabalho no \'Saturday\' e no \'Sunday\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Mas ");
 #line hidden
-#line 124
+#line 100
  testRunner.When("o trabalhador abrir um contrato", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
-                TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
                             "dia semana",
                             "tempo"});
-                table15.AddRow(new string[] {
+                table17.AddRow(new string[] {
                             "Sunday",
                             "00:00:00"});
-                table15.AddRow(new string[] {
+                table17.AddRow(new string[] {
                             "Monday",
                             "08:00:00"});
-                table15.AddRow(new string[] {
+                table17.AddRow(new string[] {
                             "Tuesday",
                             "08:00:00"});
-                table15.AddRow(new string[] {
+                table17.AddRow(new string[] {
                             "Wednesday",
                             "08:00:00"});
-                table15.AddRow(new string[] {
+                table17.AddRow(new string[] {
                             "Thursday",
                             "08:00:00"});
-                table15.AddRow(new string[] {
+                table17.AddRow(new string[] {
                             "Friday",
                             "08:00:00"});
-                table15.AddRow(new string[] {
+                table17.AddRow(new string[] {
                             "Saturday",
                             "00:00:00"});
-#line 125
- testRunner.Then("a jornada de trabalho semanal prevista no contrato deverá ser:", ((string)(null)), table15, "Então ");
+#line 101
+ testRunner.Then("a jornada de trabalho semanal prevista no contrato deverá ser:", ((string)(null)), table17, "Então ");
 #line hidden
-#line 134
+#line 110
  testRunner.And("o tempo total da jornada de trabalho semanal prevista no contrato deverá ser \'1.1" +
                         "6:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
@@ -611,20 +524,20 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Trabalhador abre um contrato com uma jornada de trabalho prevista de 44 horas sem" +
-            "anais (incluindo sábado)")]
+        [Xunit.SkippableFactAttribute(DisplayName="[Abrir Contrato] Trabalhador abre um contrato com uma jornada de trabalho previst" +
+            "a de 44 horas semanais (incluindo sábado)")]
         [Xunit.TraitAttribute("FeatureTitle", "Gestão Contratos")]
-        [Xunit.TraitAttribute("Description", "Trabalhador abre um contrato com uma jornada de trabalho prevista de 44 horas sem" +
-            "anais (incluindo sábado)")]
-        [Xunit.TraitAttribute("Category", "invariant")]
-        public void TrabalhadorAbreUmContratoComUmaJornadaDeTrabalhoPrevistaDe44HorasSemanaisIncluindoSabado()
+        [Xunit.TraitAttribute("Description", "[Abrir Contrato] Trabalhador abre um contrato com uma jornada de trabalho previst" +
+            "a de 44 horas semanais (incluindo sábado)")]
+        [Xunit.TraitAttribute("Category", "secondary")]
+        public void AbrirContratoTrabalhadorAbreUmContratoComUmaJornadaDeTrabalhoPrevistaDe44HorasSemanaisIncluindoSabado()
         {
             string[] tagsOfScenario = new string[] {
-                    "invariant"};
+                    "secondary"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador abre um contrato com uma jornada de trabalho prevista de 44 horas sem" +
-                    "anais (incluindo sábado)", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 137
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[Abrir Contrato] Trabalhador abre um contrato com uma jornada de trabalho previst" +
+                    "a de 44 horas semanais (incluindo sábado)", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 113
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -634,50 +547,50 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 138
+#line 114
  testRunner.Given("que existe uma abertura de contrato em andamento", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
-#line 139
+#line 115
  testRunner.And("que a jornada de trabalho semanal é de \'Monday\' a \'Friday\' das \'09:00\' às \'18:00\'" +
                         " com \'01:00\' de almoço", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-#line 140
+#line 116
  testRunner.And("que a jornada de trabalho de \'Saturday\' é das \'08:00\' às \'12:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-#line 141
+#line 117
  testRunner.But("que não tem jornada de trabalho no \'Sunday\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Mas ");
 #line hidden
-#line 142
+#line 118
  testRunner.When("o trabalhador abrir um contrato", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
-                TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
                             "dia semana",
                             "tempo"});
-                table16.AddRow(new string[] {
+                table18.AddRow(new string[] {
                             "Sunday",
                             "00:00:00"});
-                table16.AddRow(new string[] {
+                table18.AddRow(new string[] {
                             "Monday",
                             "08:00:00"});
-                table16.AddRow(new string[] {
+                table18.AddRow(new string[] {
                             "Tuesday",
                             "08:00:00"});
-                table16.AddRow(new string[] {
+                table18.AddRow(new string[] {
                             "Wednesday",
                             "08:00:00"});
-                table16.AddRow(new string[] {
+                table18.AddRow(new string[] {
                             "Thursday",
                             "08:00:00"});
-                table16.AddRow(new string[] {
+                table18.AddRow(new string[] {
                             "Friday",
                             "08:00:00"});
-                table16.AddRow(new string[] {
+                table18.AddRow(new string[] {
                             "Saturday",
                             "04:00:00"});
-#line 143
- testRunner.Then("a jornada de trabalho semanal prevista no contrato deverá ser:", ((string)(null)), table16, "Então ");
+#line 119
+ testRunner.Then("a jornada de trabalho semanal prevista no contrato deverá ser:", ((string)(null)), table18, "Então ");
 #line hidden
-#line 152
+#line 128
  testRunner.And("o tempo total da jornada de trabalho semanal prevista no contrato deverá ser \'1.2" +
                         "0:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
@@ -685,17 +598,19 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Trabalhador exclui um contrato que não era necessário")]
+        [Xunit.SkippableFactAttribute(DisplayName="[Encerrar Contrato] Trabalhador encerra um contrato")]
         [Xunit.TraitAttribute("FeatureTitle", "Gestão Contratos")]
-        [Xunit.TraitAttribute("Description", "Trabalhador exclui um contrato que não era necessário")]
+        [Xunit.TraitAttribute("Description", "[Encerrar Contrato] Trabalhador encerra um contrato")]
         [Xunit.TraitAttribute("Category", "main")]
-        public void TrabalhadorExcluiUmContratoQueNaoEraNecessario()
+        [Xunit.TraitAttribute("Category", "wip")]
+        public void EncerrarContratoTrabalhadorEncerraUmContrato()
         {
             string[] tagsOfScenario = new string[] {
-                    "main"};
+                    "main",
+                    "wip"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador exclui um contrato que não era necessário", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 159
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[Encerrar Contrato] Trabalhador encerra um contrato", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 133
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -705,32 +620,68 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 160
- testRunner.Given("que existe um contrato aberto \'Marcelo - Ateliex\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+#line 134
+ testRunner.Given("que existe um contrato aberto \'Contrato A\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
-#line 161
+#line 135
+ testRunner.When("o trabalhador encerrar o contrato", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
+#line hidden
+#line 136
+ testRunner.Then("o contrato deverá ser encerrado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="[Excluir Contrato] Trabalhador exclui um contrato que não era necessário")]
+        [Xunit.TraitAttribute("FeatureTitle", "Gestão Contratos")]
+        [Xunit.TraitAttribute("Description", "[Excluir Contrato] Trabalhador exclui um contrato que não era necessário")]
+        [Xunit.TraitAttribute("Category", "main")]
+        public void ExcluirContratoTrabalhadorExcluiUmContratoQueNaoEraNecessario()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "main"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[Excluir Contrato] Trabalhador exclui um contrato que não era necessário", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 141
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 142
+ testRunner.Given("que existe um contrato aberto \'Contrato A\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+#line hidden
+#line 143
  testRunner.When("o trabalhador excluir o contrato", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
-#line 162
+#line 144
  testRunner.Then("o contrato deverá ser excluído", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Trabalhador tenta excluir excluir um contrato com ponto(s) marcado(s)")]
+        [Xunit.SkippableFactAttribute(DisplayName="[Excluir Contrato] Trabalhador tenta excluir excluir um contrato com ponto(s) mar" +
+            "cado(s)")]
         [Xunit.TraitAttribute("FeatureTitle", "Gestão Contratos")]
-        [Xunit.TraitAttribute("Description", "Trabalhador tenta excluir excluir um contrato com ponto(s) marcado(s)")]
+        [Xunit.TraitAttribute("Description", "[Excluir Contrato] Trabalhador tenta excluir excluir um contrato com ponto(s) mar" +
+            "cado(s)")]
         [Xunit.TraitAttribute("Category", "exception")]
         [Xunit.TraitAttribute("Category", "wip")]
-        public void TrabalhadorTentaExcluirExcluirUmContratoComPontoSMarcadoS()
+        public void ExcluirContratoTrabalhadorTentaExcluirExcluirUmContratoComPontoSMarcadoS()
         {
             string[] tagsOfScenario = new string[] {
                     "exception",
                     "wip"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Trabalhador tenta excluir excluir um contrato com ponto(s) marcado(s)", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 169
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[Excluir Contrato] Trabalhador tenta excluir excluir um contrato com ponto(s) mar" +
+                    "cado(s)", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 149
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -740,13 +691,13 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 170
- testRunner.Given("que existe um contrato aberto \'Marcelo - Ateliex\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+#line 150
+ testRunner.Given("que existe um contrato aberto \'Contrato C\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
-#line 172
+#line 152
  testRunner.When("o trabalhador excluir o contrato", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
-#line 173
+#line 153
  testRunner.Then("o contrato não deverá ser excluído", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
             }

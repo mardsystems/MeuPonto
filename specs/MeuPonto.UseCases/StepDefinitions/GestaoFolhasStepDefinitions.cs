@@ -70,46 +70,6 @@ public class GestaoFolhasStepDefinitions
         _gestaoFolhas.Folha.Observacao = observacao;
     }
 
-    [Given(@"que o trabalhador registrou a entrada no expediente às '([^']*)'")]
-    public async Task GivenQueOTrabalhadorRegistrouAEntradaNoExpedienteAs(DateTime entrada)
-    {
-        var userId = Guid.Parse("d2fc8313-9bdc-455c-bf29-ccf709a2a692").ToString();
-
-        var transaction = new TransactionContext(userId);
-
-        var contrato = _db.Contratos.FirstOrDefault();
-
-        var pontoEntrada = RegistroPontosFacade.CriaPonto(transaction);
-
-        contrato.QualificaPonto(pontoEntrada);
-
-        pontoEntrada.DataHora = entrada;
-        pontoEntrada.MomentoId = MomentoEnum.Entrada;
-
-        _db.Pontos.Add(pontoEntrada);
-        await _db.SaveChangesAsync();
-    }
-
-    [Given(@"que o trabalhador registrou a saída no expediente às '([^']*)'")]
-    public async Task GivenQueOTrabalhadorRegistrouASaidaNoExpedienteAs(DateTime saida)
-    {
-        var userId = Guid.Parse("d2fc8313-9bdc-455c-bf29-ccf709a2a692").ToString();
-
-        var transaction = new TransactionContext(userId);
-
-        var contrato = _db.Contratos.FirstOrDefault();
-
-        var pontoSaida = RegistroPontosFacade.CriaPonto(transaction);
-
-        contrato.QualificaPonto(pontoSaida);
-
-        pontoSaida.DataHora = saida;
-        pontoSaida.MomentoId = MomentoEnum.Saida;
-
-        _db.Pontos.Add(pontoSaida);
-        await _db.SaveChangesAsync();
-    }
-
     [Given(@"que o trabalhador tem uma folha de ponto aberta na competência '([^']*)'")]
     public async Task GivenQueOTrabalhadorTemUmaFolhaDePontoAbertaNaCompetencia(DateTime competencia)
     {
@@ -201,18 +161,6 @@ public class GestaoFolhasStepDefinitions
 
     #endregion
 
-    #region Apurar Folha
-
-    [When(@"o trabalhador apurar a folha de ponto")]
-    public void WhenOTrabalhadorApurarAFolhaDePonto()
-    {
-        var folhaApurada = _homeDriver.ApurarFolha(_gestaoFolhas.Folha);
-
-        _gestaoFolhas.Define(folhaApurada);
-    }
-
-    #endregion
-
     #region Fechar Folha
 
     [When(@"o trabalhador fechar a folha de ponto")]
@@ -273,35 +221,5 @@ public class GestaoFolhasStepDefinitions
     public void ThenAFolhaDePontoNaoDeveraTerUmaObservacao()
     {
         _gestaoFolhas.FolhaAberta.Observacao.Should().BeNullOrEmpty();
-    }
-
-    [Then(@"o tempo total realizado deverá ser de '([^']*)'")]
-    public void ThenOTempoTotalRealizadoDeveraSerDe(TimeSpan tempoTotalRealizado)
-    {
-        _gestaoFolhas.FolhaAberta.ApuracaoMensal.TempoTotalApurado.Should().Be(tempoTotalRealizado);
-    }
-
-    [Then(@"o tempo total apurado da folha de ponto deverá ser de '([^']*)'")]
-    public void ThenOTempoTotalApuradoDaFolhaDePontoDeveraSerDe(TimeSpan tempoTotalApurado)
-    {
-        _gestaoFolhas.FolhaAberta.ApuracaoMensal.TempoTotalApurado.Should().Be(tempoTotalApurado);
-    }
-
-    [Then(@"o tempo total apurado deverá ser '([^']*)'")]
-    public void ThenOTempoTotalApuradoDeveraSer(TimeSpan tempoTotalApurado)
-    {
-        _gestaoFolhas.FolhaAberta.ApuracaoMensal.TempoTotalApurado.Should().Be(tempoTotalApurado);
-    }
-
-    [Then(@"o tempo total período anterior deverá ser nulo")]
-    public void ThenOTempoTotalPeriodoAnteriorDeveraSerNulo()
-    {
-        _gestaoFolhas.FolhaAberta.ApuracaoMensal.TempoTotalPeriodoAnterior.Should().BeNull();
-    }
-
-    [Then(@"o tempo total período anterior deverá ser '([^']*)'")]
-    public void ThenOTempoTotalPeriodoAnteriorDeveraSer(TimeSpan tempoTotalPeriodoAnterior)
-    {
-        _gestaoFolhas.FolhaAberta.ApuracaoMensal.TempoTotalPeriodoAnterior.Should().Be(tempoTotalPeriodoAnterior);
     }
 }

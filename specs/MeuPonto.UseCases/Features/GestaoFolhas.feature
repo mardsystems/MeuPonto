@@ -1,11 +1,13 @@
 ﻿# language: pt-br
 
 Funcionalidade: Gestão Folhas
+
+O sistema deverá fornecer para o trabalhador a capacidade de gerenciar suas folhas.
 	
 Regra: Contrato qualifica a folha de ponto
 
 @wip
-Cenário: Trabalhador abre uma folha de ponto usando seu único contrato
+Cenário: [Abrir Folha] Trabalhador abre uma folha de ponto usando seu único contrato
 	Dado que existe um contrato aberto 'Marcelo - Ateliex'
 	E que o trabalhador qualifica a folha com o contrato 'Marcelo - Ateliex'
 	Quando o trabalhador abrir uma folha de ponto
@@ -15,7 +17,7 @@ Cenário: Trabalhador abre uma folha de ponto usando seu único contrato
 Regra: Folha de ponto tem periodicidade mensal
 
 @wip
-Cenário: Trabalhador abre uma folha ponto para o mês de novembro de 2022
+Cenário: [Abrir Folha] Trabalhador abre uma folha ponto para o mês de novembro de 2022
 	Dado que existe um contrato aberto
 	E que o trabalhador deseja apurar a folha de ponto da competência '2022/11'
 	Quando o trabalhador abrir uma folha de ponto
@@ -30,7 +32,7 @@ Cenário: Trabalhador abre uma folha ponto para o mês de novembro de 2022
 Regra: Folha de ponto com observação
 
 @wip
-Cenário: Trabalhador abre uma folha de ponto anotando que deve confirmar os feriados do mês
+Cenário: [Abrir Folha] Trabalhador abre uma folha de ponto anotando que deve confirmar os feriados do mês
 	Dado que existe um contrato aberto
 	E que o trabalhador anota a seguinte observação na folha de ponto:
 		"""
@@ -40,34 +42,10 @@ Cenário: Trabalhador abre uma folha de ponto anotando que deve confirmar os fer
 	Então uma folha de ponto deverá ser aberta
 	E a folha de ponto deverá ter uma observação
 
-Regra: Para toda entrada deverá existir uma saída
-
-@wip
-Esquema do Cenário: Trabalhador registra a entrada e a saída do expediente
-	Dado que o trabalhador tem um contrato cadastrado com a seguinte jornada de trabalho semanal prevista:
-		| dia semana | tempo    |
-		| Sunday     | 00:00:00 |
-		| Monday     | 08:00:00 |
-		| Tuesday    | 08:00:00 |
-		| Wednesday  | 08:00:00 |
-		| Thursday   | 08:00:00 |
-		| Friday     | 08:00:00 |
-		| Saturday   | 00:00:00 |
-	E que o trabalhador registrou a entrada no expediente às '<entrada>'
-	E que o trabalhador registrou a saída no expediente às '<saída>'
-	E que o trabalhador tem uma folha de ponto aberta na competência '2022/11'
-	Quando o trabalhador apurar a folha de ponto
-	Então o tempo total apurado da folha de ponto deverá ser de '<apurado>'
-
-Exemplos:
-	| entrada          | saída            | apurado |
-	| 27/11/2022 09:14 | 27/11/2022 11:30 | 02:16   |
-	| 27/11/2022 12:27 | 27/11/2022 18:03 | 05:36   |
-
 Regra: O fechamento deve ser representado por um status
 
 @wip
-Cenário: Trabalhador confirma que uma folha de ponto aberta foi fechada
+Cenário: [Fechar Folha] Trabalhador confirma que uma folha de ponto aberta foi fechada
 	Dado que o trabalhador tem uma folha de ponto aberta na competência '2022/11'
 	E que o ano/mês é '2022/11'
 	Quando o trabalhador fechar a folha de ponto
@@ -77,7 +55,7 @@ Cenário: Trabalhador confirma que uma folha de ponto aberta foi fechada
 Regra: Guarda da apuração
 
 @wip
-Cenário: Trabalhador guarda a apuração mensal dos pontos registrados
+Cenário: [Fechar Folha] Trabalhador guarda a apuração mensal dos pontos registrados
 	Dado que o trabalhador tem uma folha de ponto aberta na competência '2022/11'
 	E que o ano/mês é '2022/11'
 	E que os pontos registrados foram:

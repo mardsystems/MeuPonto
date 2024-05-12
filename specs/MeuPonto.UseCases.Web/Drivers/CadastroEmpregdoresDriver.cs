@@ -60,7 +60,7 @@ public class CadastroEmpregadoresDriver
         ExclusaoEmpregadorAnchor.Should().NotBeNull("a lista de empregadores deve ter um link de exclusão do empregador cadastrado");
     }
 
-    public Empregador IniciarCadastroEmpregador()
+    public Empregador SolicitarCadastroEmpregador()
     {
         GoTo();
 

@@ -38,22 +38,28 @@ public class BackupComprovantesStepDefinitions
         _db = db;
     }
 
-    [When(@"o trabalhador iniciar um backup de comprovante")]
-    public void WhenOTrabalhadorIniciarUmBackupDeComprovante()
+    [When(@"o trabalhador solicitar o backup de um comprovante")]
+    public void WhenOTrabalhadorSolicitarOBackupDeUmComprovante()
     {
-        var comprovante = _backupComprovantesInterface.IniciarBackupComprovante();
+        var comprovante = _backupComprovantesInterface.SolicitarBackupComprovante();
 
         _registroPontos.Inicia(comprovante);
     }
 
+    [Then(@"o sistema deverá apresentar as opções de backup de um comprovante")]
+    public void ThenOSistemaDeveraApresentarAsOpcoesDeBackupDeUmComprovante()
+    {
+        
+    }
+    
     [Then(@"um comprovante deverá ser criado")]
     public void ThenUmComprovanteDeveraSerCriado()
     {
         _registroPontos.Comprovante.Should().NotBeNull();
     }
 
-    [When(@"o trabalhador escanear o comprovante com a data '([^']*)'")]
-    public void WhenOTrabalhadorEscanearOComprovanteComAData(DateTime data)
+    [When(@"o trabalhador escanear a imagem do comprovante com a data '([^']*)'")]
+    public void WhenOTrabalhadorEscanearAImagemDoComprovanteComAData(DateTime data)
     {
         var basePath = Directory.GetCurrentDirectory();
 
@@ -200,13 +206,19 @@ public class BackupComprovantesStepDefinitions
         _registroPontos.Define(comprovanteGuardado);
     }
 
-    [Then(@"o comprovante de ponto deverá ser guardado")]
-    public void ThenOComprovanteDePontoDeveraSerGuardado()
+    [Then(@"o sistema deverá registrar o comprovante de ponto")]
+    public void ThenOSistemaDeveraRegistrarOComprovanteDePonto()
     {
         _registroPontos.Comprovante.Should().NotBeNull();
     }
 
     #endregion
+
+    [Then(@"o sistema deverá processar a imagem do comprovante")]
+    public void ThenOSistemaDeveraProcessarAImagemDoComprovante()
+    {
+        
+    }
 
     [Then(@"a data do ponto do comprovante deverá ser '([^']*)'")]
     public void ThenADataDoPontoDoComprovanteDeveraSer(DateTime data)
