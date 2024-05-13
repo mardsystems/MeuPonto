@@ -128,16 +128,16 @@ this.ScenarioInitialize(scenarioInfo);
 #line 15
  testRunner.Then("o sistema deverá apresentar um ponto novo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
-                TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
                             "data/hora",
                             "contrato",
                             "momento id"});
-                table20.AddRow(new string[] {
+                table21.AddRow(new string[] {
                             string.Format("{0}", dataHora),
                             string.Format("{0}", contrato),
                             string.Format("{0}", momentoId)});
 #line 16
- testRunner.When("o trabalhador registrar o ponto como:", ((string)(null)), table20, "Quando ");
+ testRunner.When("o trabalhador registrar o ponto como:", ((string)(null)), table21, "Quando ");
 #line hidden
 #line 19
  testRunner.Then("o sistema deverá registrar o ponto como esperado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
@@ -192,12 +192,12 @@ this.ScenarioInitialize(scenarioInfo);
 #line 37
  testRunner.And("que existe um registro de ponto em andamento", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-                TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
                             "contrato"});
-                table21.AddRow(new string[] {
+                table22.AddRow(new string[] {
                             "Marcelo - Ateliex"});
 #line 38
- testRunner.When("o trabalhador registrar o ponto como:", ((string)(null)), table21, "Quando ");
+ testRunner.When("o trabalhador registrar o ponto como:", ((string)(null)), table22, "Quando ");
 #line hidden
 #line 41
  testRunner.Then("o ponto deverá ser registrado como esperado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
@@ -234,12 +234,12 @@ this.ScenarioInitialize(scenarioInfo);
 #line 46
  testRunner.And("que existe um registro de ponto em andamento", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-                TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
                             "contrato"});
-                table22.AddRow(new string[] {
+                table23.AddRow(new string[] {
                             "<null>"});
 #line 47
- testRunner.When("o trabalhador registrar o ponto como:", ((string)(null)), table22, "Quando ");
+ testRunner.When("o trabalhador registrar o ponto como:", ((string)(null)), table23, "Quando ");
 #line hidden
 #line 50
  testRunner.Then("a tentativa de registrar o ponto deverá falhar com um erro \"\'Contrato\' deve ser i" +
@@ -287,16 +287,16 @@ this.ScenarioInitialize(scenarioInfo);
 #line 57
  testRunner.When("o trabalhador solicitar um registro de ponto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
-                TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table24 = new TechTalk.SpecFlow.Table(new string[] {
                             "contrato",
                             "momento id",
                             "pausa id"});
-                table23.AddRow(new string[] {
+                table24.AddRow(new string[] {
                             string.Format("{0}", contrato),
                             string.Format("{0}", momentoId),
                             string.Format("{0}", pausaId)});
 #line 58
- testRunner.And("o trabalhador registrar o ponto como:", ((string)(null)), table23, "E ");
+ testRunner.And("o trabalhador registrar o ponto como:", ((string)(null)), table24, "E ");
 #line hidden
 #line 62
  testRunner.Then(string.Format("o momento do ponto deverá ser de \'{0}\'", momentoId), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");

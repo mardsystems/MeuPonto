@@ -4,6 +4,15 @@ Funcionalidade: Gestão Contratos
 
 O sistema deverá fornecer para o trabalhador a capacidade de gerenciar seus contratos.
 
+Abrir Contrato
+
+O sistema deverá fornecer para o trabalhador a capacidade de abrir um contrato.
+
+1. Trabalhador solicita abertura de contrato
+2. Sistema apresenta um contrato novo
+3. Trabalhador abre o contrato (nome, ativo, segunda, terça, …) (E2)
+4. Sistema registra o contrato
+
 Regra: O sistema deverá fornecer para o trabalhador a capacidade de abrir um contrato
 
 @main @wip

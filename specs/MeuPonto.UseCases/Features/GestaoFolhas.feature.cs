@@ -278,23 +278,23 @@ this.ScenarioInitialize(scenarioInfo);
 #line 60
  testRunner.And("que o ano/mês é \'2022/11\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-                TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
                             "data/hora",
                             "momento"});
-                table19.AddRow(new string[] {
+                table20.AddRow(new string[] {
                             "27/11/2022 09:14",
                             "Entrada"});
-                table19.AddRow(new string[] {
+                table20.AddRow(new string[] {
                             "27/11/2022 11:30",
                             "Saida"});
-                table19.AddRow(new string[] {
+                table20.AddRow(new string[] {
                             "27/11/2022 12:27",
                             "Entrada"});
-                table19.AddRow(new string[] {
+                table20.AddRow(new string[] {
                             "27/11/2022 18:03",
                             "Saida"});
 #line 61
- testRunner.And("que os pontos registrados foram:", ((string)(null)), table19, "E ");
+ testRunner.And("que os pontos registrados foram:", ((string)(null)), table20, "E ");
 #line hidden
 #line 67
  testRunner.When("o trabalhador fechar a folha de ponto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
