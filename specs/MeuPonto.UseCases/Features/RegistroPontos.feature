@@ -44,7 +44,7 @@ Cenário: [Registrar Ponto] Trabalhador qualifica um ponto com um contrato
 Cenário: [Registrar Ponto] Trabalhador deixa de qualificar um ponto com um contrato
 	Dado que existe um contrato aberto 'Marcelo - Ateliex'
 	E que existe um registro de ponto em andamento
-	Quando o trabalhador registrar o ponto como:
+	Quando o trabalhador tentar registrar o ponto como:
 		| contrato |
 		| <null>   |
 	Então a tentativa de registrar o ponto deverá falhar com um erro "'Contrato' deve ser informado."

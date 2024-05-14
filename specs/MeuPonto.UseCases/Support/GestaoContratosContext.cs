@@ -4,25 +4,20 @@ namespace MeuPonto.Support;
 
 public class GestaoContratosContext
 {
-    public Table Especificacao { get; set; }
+    public Table Especificacao { get; private set; }
 
     public Contrato Contrato { get; private set; }
 
-    public string NomeContrato { get; private set; }
+    public string NomeContrato { get; private set; } // TODO: Remover.
 
     public string Erro { get; set; }
 
-    public GestaoContratosContext()
+    public void Especificar(Table especificacao)
     {
-        //var contrato = new Contrato
-        //{
-        //    Nome = "Test user",
-        //};
-
-        //Contrato = contrato;
+        Especificacao = especificacao;
     }
 
-    public void Iniciar(Contrato contrato)
+    public void Contextualizar(Contrato contrato)
     {
         Contrato = contrato;
 
@@ -33,32 +28,11 @@ public class GestaoContratosContext
 
         NomeContrato = contrato.Nome;
     }
-
-    public void ConsideraQueExiste(Contrato contrato)
-    {
-        Contrato = contrato;
-
-        NomeContrato = contrato.Nome;
-    }
-
-    public void DefineNomeContrato(string nomeContrato)
-    {
-        Contrato.Nome = nomeContrato;
-
-        NomeContrato = nomeContrato;
-    }
-
-    public void Define(Contrato contratoCadastrado)
-    {
-        Contrato = contratoCadastrado;
-
-        NomeContrato = contratoCadastrado.Nome;
-    }
 }
 
 public class AberturaContratoData
 {
-    public string Nome { get; set; }    
+    public string Nome { get; set; }
     public bool Ativo { get; set; }
     public string Empregador { get; set; }
     public TimeSpan? Domingo { get; set; }

@@ -136,7 +136,7 @@ public class CadastroDeEmpregadoresStepDefinitions
     [When(@"o trabalhador abrir o contrato feito com um empregador como:")]
     public void WhenOTrabalhadorAbrirOContratoFeitoComUmEmpregadorComo(Table table)
     {
-        _gestaoContratos.Especificacao = table;
+        _gestaoContratos.Especificar(table);
 
         var contrato = _gestaoContratos.Contrato;
 
@@ -177,7 +177,7 @@ public class CadastroDeEmpregadoresStepDefinitions
             .Include(x => x.Empregador)
             .FirstOrDefault(x => x.Nome == contrato.Nome);
 
-        _gestaoContratos.Define(contratoAberto);
+        _gestaoContratos.Contextualizar(contratoAberto);
     }
 
     [Then(@"o sistema deverá registrar o empregador como esperado")]

@@ -20,6 +20,11 @@ public static class RegistroPontosFacade
 
     public static void QualificaPonto(this Contrato contrato, Ponto ponto)
     {
+        if (contrato == null)
+        {
+            return;
+        }
+
         ponto.Contrato = contrato;
 
         ponto.ContratoId = contrato.Id;

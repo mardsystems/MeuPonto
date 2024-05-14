@@ -70,7 +70,7 @@ public class RegistroPontosStepDefinitions
             Estimado = ponto.Estimado
         });
 
-        var contrato = _db.Contratos.First(x => x.Nome == data.Contrato);
+        var contrato = _db.Contratos.FirstOrDefault(x => x.Nome == data.Contrato);
 
         contrato.QualificaPonto(ponto);
 
@@ -190,9 +190,11 @@ public class RegistroPontosStepDefinitions
         contrato.QualificaPonto(pontoEntrada);
 
         pontoEntrada.DataHora = entrada;
+
         pontoEntrada.MomentoId = MomentoEnum.Entrada;
 
         _db.Pontos.Add(pontoEntrada);
+
         await _db.SaveChangesAsync();
     }
 
@@ -210,9 +212,33 @@ public class RegistroPontosStepDefinitions
         contrato.QualificaPonto(pontoSaida);
 
         pontoSaida.DataHora = saida;
+
         pontoSaida.MomentoId = MomentoEnum.Saida;
 
         _db.Pontos.Add(pontoSaida);
+
+        await _db.SaveChangesAsync();
+    }
+
+    [Given(@"que existe um ponto qualificado com o contrato '([^']*)'")]
+    public async Task GivenQueExisteUmPontoQualificadoComOContrato(string nomeContrato)
+    {
+        var userId = Guid.Parse("d2fc8313-9bdc-455c-bf29-ccf709a2a692").ToString();
+
+        var transaction = new TransactionContext(userId);
+
+        var contrato = _db.Contratos.FirstOrDefault(x => x.Nome == nomeContrato);
+
+        var pontoEntrada = RegistroPontosFacade.CriaPonto(transaction);
+
+        contrato.QualificaPonto(pontoEntrada);
+
+        pontoEntrada.DataHora = DateTime.Now;
+
+        pontoEntrada.MomentoId = MomentoEnum.Entrada;
+
+        _db.Pontos.Add(pontoEntrada);
+
         await _db.SaveChangesAsync();
     }
 
@@ -265,11 +291,11 @@ public class RegistroPontosStepDefinitions
     }
 
     [Then(@"o ponto deverá ser qualificado pelo contrato '([^']*)'")]
-    public void ThenOPontoDeveraSerQualificadoPeloContrato(string nome)
+    public void ThenOPontoDeveraSerQualificadoPeloContrato(string nomeContrato)
     {
         _registroPontos.Ponto.Contrato.Should().NotBeNull();
 
-        _registroPontos.Ponto.Contrato.Nome.Should().Be(nome);
+        _registroPontos.Ponto.Contrato.Nome.Should().Be(nomeContrato);
     }
 
     [Then(@"a data do ponto deverá ser '([^']*)'")]

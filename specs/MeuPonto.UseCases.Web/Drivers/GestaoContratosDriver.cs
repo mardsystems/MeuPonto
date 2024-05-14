@@ -169,7 +169,7 @@ public class GestaoContratosDriver
         return contratoDetalhado;
     }
 
-    public Contrato IniciarEdicaoContrato(string nomeContrato)
+    public Contrato SolicitarEdicaoContrato(string nomeContrato)
     {
         GoTo();
 
