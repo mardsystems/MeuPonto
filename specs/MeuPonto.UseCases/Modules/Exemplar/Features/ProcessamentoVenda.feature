@@ -1,6 +1,6 @@
 ﻿# language: pt-br
 
-Funcionalidade: Exemplar
+Funcionalidade: Processamento de Venda
 
 Processar Venda
 

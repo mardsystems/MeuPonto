@@ -126,34 +126,34 @@ this.ScenarioInitialize(scenarioInfo);
 #line 28
  testRunner.And("o contrato deverá ser ativo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-                TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                             "dia semana",
                             "tempo"});
-                table12.AddRow(new string[] {
+                table9.AddRow(new string[] {
                             "Sunday",
                             "00:00:00"});
-                table12.AddRow(new string[] {
+                table9.AddRow(new string[] {
                             "Monday",
                             "08:00:00"});
-                table12.AddRow(new string[] {
+                table9.AddRow(new string[] {
                             "Tuesday",
                             "08:00:00"});
-                table12.AddRow(new string[] {
+                table9.AddRow(new string[] {
                             "Wednesday",
                             "08:00:00"});
-                table12.AddRow(new string[] {
+                table9.AddRow(new string[] {
                             "Thursday",
                             "08:00:00"});
-                table12.AddRow(new string[] {
+                table9.AddRow(new string[] {
                             "Friday",
                             "08:00:00"});
-                table12.AddRow(new string[] {
+                table9.AddRow(new string[] {
                             "Saturday",
                             "00:00:00"});
 #line 29
- testRunner.And("o contrato deverá prever a seguinte jornada de trabalho semanal:", ((string)(null)), table12, "E ");
+ testRunner.And("o contrato deverá prever a seguinte jornada de trabalho semanal:", ((string)(null)), table9, "E ");
 #line hidden
-                TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                             "nome",
                             "ativo",
                             "domingo",
@@ -163,7 +163,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "quinta",
                             "sexta",
                             "sábado"});
-                table13.AddRow(new string[] {
+                table10.AddRow(new string[] {
                             "Contrato A",
                             "True",
                             "00:00:00",
@@ -174,7 +174,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "08:00:00",
                             "00:00:00"});
 #line 38
- testRunner.When("o trabalhador abrir o contrato como:", ((string)(null)), table13, "Quando ");
+ testRunner.When("o trabalhador abrir o contrato como:", ((string)(null)), table10, "Quando ");
 #line hidden
 #line 41
  testRunner.Then("o sistema deverá registrar o contrato como esperado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
@@ -212,12 +212,12 @@ this.ScenarioInitialize(scenarioInfo);
 #line 48
  testRunner.When("o trabalhador solicitar a edição do contrato \'Marcello - Particular\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
-                TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
                             "nome"});
-                table14.AddRow(new string[] {
+                table11.AddRow(new string[] {
                             "Marcelo - Particular"});
 #line 49
- testRunner.And("o trabalhador alterar o contrato para", ((string)(null)), table14, "E ");
+ testRunner.And("o trabalhador alterar o contrato para", ((string)(null)), table11, "E ");
 #line hidden
 #line 52
  testRunner.Then("o nome do contrato deverá ser \'Marcelo - Particular\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
@@ -249,12 +249,12 @@ this.ScenarioInitialize(scenarioInfo);
 #line 58
  testRunner.Given("que existe uma abertura de contrato em andamento", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
-                TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                             "nome"});
-                table15.AddRow(new string[] {
+                table12.AddRow(new string[] {
                             "Contrato B"});
 #line 59
- testRunner.When("o trabalhador abrir o contrato como:", ((string)(null)), table15, "Quando ");
+ testRunner.When("o trabalhador abrir o contrato como:", ((string)(null)), table12, "Quando ");
 #line hidden
 #line 62
  testRunner.Then("o sistema deverá registrar o contrato como esperado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
@@ -289,12 +289,12 @@ this.ScenarioInitialize(scenarioInfo);
 #line 67
  testRunner.And("que existe uma edição do contrato \'Contrato Feito\' em andamento", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-                TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
                             "nome"});
-                table16.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "Contrato B"});
 #line 68
- testRunner.When("o trabalhador alterar o contrato para", ((string)(null)), table16, "Quando ");
+ testRunner.When("o trabalhador alterar o contrato para", ((string)(null)), table13, "Quando ");
 #line hidden
 #line 71
  testRunner.Then("o sistema deverá alterar o contrato como esperado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
@@ -329,12 +329,12 @@ this.ScenarioInitialize(scenarioInfo);
 #line 75
  testRunner.Given("que existe uma abertura de contrato em andamento", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
-                TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
                             "nome"});
-                table17.AddRow(new string[] {
+                table14.AddRow(new string[] {
                             "A"});
 #line 76
- testRunner.When("o trabalhador tentar abrir o contrato como", ((string)(null)), table17, "Quando ");
+ testRunner.When("o trabalhador tentar abrir o contrato como", ((string)(null)), table14, "Quando ");
 #line hidden
 #line 79
  testRunner.Then("a tentativa de abrir o contrato deverá falhar com um erro \"\'Nome\' deve ser maior " +
@@ -373,12 +373,12 @@ this.ScenarioInitialize(scenarioInfo);
 #line 84
  testRunner.And("que existe uma edição do contrato \'Contrato Feito\' em andamento", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-                TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
                             "nome"});
-                table18.AddRow(new string[] {
+                table15.AddRow(new string[] {
                             "B"});
 #line 85
- testRunner.When("o trabalhador tentar alterar o contrato para", ((string)(null)), table18, "Quando ");
+ testRunner.When("o trabalhador tentar alterar o contrato para", ((string)(null)), table15, "Quando ");
 #line hidden
 #line 88
  testRunner.Then("a tentativa de alterar o contrato deverá falhar com um erro \"\'Nome\' deve ser maio" +
@@ -411,12 +411,12 @@ this.ScenarioInitialize(scenarioInfo);
 #line 94
  testRunner.Given("que existe uma abertura de contrato em andamento", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
-                TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
                             "nome"});
-                table19.AddRow(new string[] {
+                table16.AddRow(new string[] {
                             "Contrato B"});
 #line 95
- testRunner.When("o trabalhador abrir o contrato como:", ((string)(null)), table19, "Quando ");
+ testRunner.When("o trabalhador abrir o contrato como:", ((string)(null)), table16, "Quando ");
 #line hidden
 #line 98
  testRunner.Then("o sistema deverá registrar o contrato como esperado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
@@ -451,13 +451,13 @@ this.ScenarioInitialize(scenarioInfo);
 #line 102
  testRunner.Given("que existe uma abertura de contrato em andamento", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
-                TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
                             "nome"});
-                table20.AddRow(new string[] {
+                table17.AddRow(new string[] {
                             "Contrato de Trabalho Feito com uma Empresa do Ramo da Industria Farmacêutica do E" +
                                 "stado do Rio de Janeiro"});
 #line 103
- testRunner.When("o trabalhador tentar abrir o contrato como", ((string)(null)), table20, "Quando ");
+ testRunner.When("o trabalhador tentar abrir o contrato como", ((string)(null)), table17, "Quando ");
 #line hidden
 #line 106
  testRunner.Then("a tentativa de abrir o contrato deverá falhar com um erro \"\'Nome\' deve ser menor " +
@@ -503,32 +503,32 @@ this.ScenarioInitialize(scenarioInfo);
 #line 115
  testRunner.When("o trabalhador abrir o contrato", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
-                TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
                             "dia semana",
                             "tempo"});
-                table21.AddRow(new string[] {
+                table18.AddRow(new string[] {
                             "Sunday",
                             "00:00:00"});
-                table21.AddRow(new string[] {
+                table18.AddRow(new string[] {
                             "Monday",
                             "08:00:00"});
-                table21.AddRow(new string[] {
+                table18.AddRow(new string[] {
                             "Tuesday",
                             "08:00:00"});
-                table21.AddRow(new string[] {
+                table18.AddRow(new string[] {
                             "Wednesday",
                             "08:00:00"});
-                table21.AddRow(new string[] {
+                table18.AddRow(new string[] {
                             "Thursday",
                             "08:00:00"});
-                table21.AddRow(new string[] {
+                table18.AddRow(new string[] {
                             "Friday",
                             "08:00:00"});
-                table21.AddRow(new string[] {
+                table18.AddRow(new string[] {
                             "Saturday",
                             "00:00:00"});
 #line 116
- testRunner.Then("a jornada de trabalho semanal prevista no contrato deverá ser:", ((string)(null)), table21, "Então ");
+ testRunner.Then("a jornada de trabalho semanal prevista no contrato deverá ser:", ((string)(null)), table18, "Então ");
 #line hidden
 #line 125
  testRunner.And("o tempo total da jornada de trabalho semanal prevista no contrato deverá ser \'1.1" +
@@ -577,32 +577,32 @@ this.ScenarioInitialize(scenarioInfo);
 #line 133
  testRunner.When("o trabalhador abrir o contrato", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
-                TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
                             "dia semana",
                             "tempo"});
-                table22.AddRow(new string[] {
+                table19.AddRow(new string[] {
                             "Sunday",
                             "00:00:00"});
-                table22.AddRow(new string[] {
+                table19.AddRow(new string[] {
                             "Monday",
                             "08:00:00"});
-                table22.AddRow(new string[] {
+                table19.AddRow(new string[] {
                             "Tuesday",
                             "08:00:00"});
-                table22.AddRow(new string[] {
+                table19.AddRow(new string[] {
                             "Wednesday",
                             "08:00:00"});
-                table22.AddRow(new string[] {
+                table19.AddRow(new string[] {
                             "Thursday",
                             "08:00:00"});
-                table22.AddRow(new string[] {
+                table19.AddRow(new string[] {
                             "Friday",
                             "08:00:00"});
-                table22.AddRow(new string[] {
+                table19.AddRow(new string[] {
                             "Saturday",
                             "04:00:00"});
 #line 134
- testRunner.Then("a jornada de trabalho semanal prevista no contrato deverá ser:", ((string)(null)), table22, "Então ");
+ testRunner.Then("a jornada de trabalho semanal prevista no contrato deverá ser:", ((string)(null)), table19, "Então ");
 #line hidden
 #line 143
  testRunner.And("o tempo total da jornada de trabalho semanal prevista no contrato deverá ser \'1.2" +

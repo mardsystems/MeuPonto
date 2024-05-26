@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace MeuPonto.Features
+namespace MeuPonto.Modules.Exemplar.Features
 {
     using TechTalk.SpecFlow;
     using System;
@@ -19,7 +19,7 @@ namespace MeuPonto.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class ExemplarFeature : object, Xunit.IClassFixture<ExemplarFeature.FixtureData>, System.IDisposable
+    public partial class ProcessamentoDeVendaFeature : object, Xunit.IClassFixture<ProcessamentoDeVendaFeature.FixtureData>, System.IDisposable
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -28,10 +28,10 @@ namespace MeuPonto.Features
         
         private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
-#line 1 "Exemplar.feature"
+#line 1 "ProcessamentoVenda.feature"
 #line hidden
         
-        public ExemplarFeature(ExemplarFeature.FixtureData fixtureData, MeuPonto_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public ProcessamentoDeVendaFeature(ProcessamentoDeVendaFeature.FixtureData fixtureData, MeuPonto_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
             this.TestInitialize();
@@ -40,7 +40,7 @@ namespace MeuPonto.Features
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("pt-br"), "Features", "Exemplar", @"Processar Venda
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("pt-br"), "Modules/Exemplar/Features", "Processamento de Venda", @"Processar Venda
 
 1. Cliente chega à saída do PDV com bens ou serviços para adquirir.
 2. Caixa começa uma nova venda.
@@ -93,7 +93,7 @@ Caixa repete os passos 3 e 4 até que indique ter terminado.
         }
         
         [Xunit.SkippableFactAttribute(DisplayName="[Processar Venda] Caixa efetua nova venda")]
-        [Xunit.TraitAttribute("FeatureTitle", "Exemplar")]
+        [Xunit.TraitAttribute("FeatureTitle", "Processamento de Venda")]
         [Xunit.TraitAttribute("Description", "[Processar Venda] Caixa efetua nova venda")]
         [Xunit.TraitAttribute("Category", "wip")]
         public void ProcessarVendaCaixaEfetuaNovaVenda()
@@ -153,7 +153,7 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [Xunit.SkippableFactAttribute(DisplayName="[Processar Venda] Caixa efetua nova venda com sucesso")]
-        [Xunit.TraitAttribute("FeatureTitle", "Exemplar")]
+        [Xunit.TraitAttribute("FeatureTitle", "Processamento de Venda")]
         [Xunit.TraitAttribute("Description", "[Processar Venda] Caixa efetua nova venda com sucesso")]
         [Xunit.TraitAttribute("Category", "wip")]
         public void ProcessarVendaCaixaEfetuaNovaVendaComSucesso()
@@ -175,54 +175,54 @@ this.ScenarioInitialize(scenarioInfo);
 #line 35
  testRunner.When("o caixa iniciar uma nova venda", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
-                TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table27 = new TechTalk.SpecFlow.Table(new string[] {
                             "id item",
                             "quantidade"});
-                table9.AddRow(new string[] {
+                table27.AddRow(new string[] {
                             "B0002",
                             "10"});
-                table9.AddRow(new string[] {
+                table27.AddRow(new string[] {
                             "A0001",
                             "5"});
-                table9.AddRow(new string[] {
+                table27.AddRow(new string[] {
                             "C0007",
                             "2"});
 #line 36
- testRunner.And("o caixa entrar um item como:", ((string)(null)), table9, "E ");
+ testRunner.And("o caixa entrar um item como:", ((string)(null)), table27, "E ");
 #line hidden
-                TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table28 = new TechTalk.SpecFlow.Table(new string[] {
                             "descrição",
                             "preço",
                             "total"});
-                table10.AddRow(new string[] {
+                table28.AddRow(new string[] {
                             "Biscoito",
                             "R$ 1,99",
                             "19,90"});
-                table10.AddRow(new string[] {
+                table28.AddRow(new string[] {
                             "Sabonete",
                             "R$ 3,50",
                             "17,50"});
-                table10.AddRow(new string[] {
+                table28.AddRow(new string[] {
                             "Arroz (1 kg)",
                             "R$ 5,70",
                             "11,4"});
 #line 41
  testRunner.Then("o sistema deverá registrar a linha de item da venda e apresentar uma descrição do" +
-                        " item, seu preço e total parcial da venda", ((string)(null)), table10, "Então ");
+                        " item, seu preço e total parcial da venda", ((string)(null)), table28, "Então ");
 #line hidden
 #line 46
  testRunner.When("o caixa terminar a venda", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
-                TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table29 = new TechTalk.SpecFlow.Table(new string[] {
                             "total",
                             "impostos",
                             "total com impostos"});
-                table11.AddRow(new string[] {
+                table29.AddRow(new string[] {
                             "R$ 48,8",
                             "R$ 4,88",
                             "R$ 53,68"});
 #line 47
- testRunner.Then("o sistema deverá apresentar o total com impostos calculados", ((string)(null)), table11, "Então ");
+ testRunner.Then("o sistema deverá apresentar o total com impostos calculados", ((string)(null)), table29, "Então ");
 #line hidden
 #line 50
  testRunner.When("o cliente fazer o pagamento de \'R$ 53,68\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
@@ -255,12 +255,12 @@ this.ScenarioInitialize(scenarioInfo);
             
             public FixtureData()
             {
-                ExemplarFeature.FeatureSetup();
+                ProcessamentoDeVendaFeature.FeatureSetup();
             }
             
             void System.IDisposable.Dispose()
             {
-                ExemplarFeature.FeatureTearDown();
+                ProcessamentoDeVendaFeature.FeatureTearDown();
             }
         }
     }
