@@ -339,7 +339,10 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.When("o trabalhador registrar o ponto com a seguinte observação:", "Hoje o trânsito estava lento.", ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
 #line 81
- testRunner.Then("a observação do ponto deverá ser:", "Hoje o trânsito estava lento.", ((TechTalk.SpecFlow.Table)(null)), "Então ");
+ testRunner.Then("o ponto deverá ser registrado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
+#line hidden
+#line 82
+ testRunner.And("a observação do ponto deverá ser:", "Hoje o trânsito estava lento.", ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
             }
             this.ScenarioCleanup();

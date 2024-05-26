@@ -97,6 +97,7 @@ public class RegistroPontosStepDefinitions
 
         var data = especificacao.CreateInstance(() => new RegistroPontoData
         {
+            DataHora = ponto.DataHora,
             Contrato = ponto.Contrato?.Nome,
             MomentoId = ponto.MomentoId,
             PausaId = ponto.PausaId,
@@ -114,6 +115,7 @@ public class RegistroPontosStepDefinitions
             contrato.QualificaPonto(ponto);
         }
 
+        ponto.DataHora = data.DataHora;
         ponto.MomentoId = data.MomentoId;
         ponto.PausaId = data.PausaId;
         ponto.Estimado = data.Estimado;
@@ -140,12 +142,6 @@ public class RegistroPontosStepDefinitions
         ponto.Observacao = observacao;
 
         _registroPontosInterface.RegistrarPonto(ponto);
-
-        var pontoRegistrado = _db.Pontos
-            .Include(x => x.Contrato)
-            .FirstOrDefault(x => x.DataHora == ponto.DataHora);
-
-        _registroPontos.Contextualizar(pontoRegistrado);
     }
 
     [Given(@"que é o momento de '([^']*)' do expediente")]
@@ -270,6 +266,16 @@ public class RegistroPontosStepDefinitions
     public void ThenOSistemaDeveraRegistrarOPontoComoEsperado()
     {
         _registroPontos.Especificacao.CompareToSet(_db.Pontos);
+    }
+
+    [Then(@"o ponto deverá ser registrado")]
+    public async Task ThenOPontoDeveraSerRegistrado()
+    {
+        var pontoRegistrado = _db.Pontos
+            .Include(x => x.Contrato)
+            .FirstOrDefault(x => x.DataHora == _registroPontos.Ponto.DataHora);
+
+        _registroPontos.Contextualizar(pontoRegistrado);
     }
 
     [Then(@"o ponto deverá ser registrado como esperado")]

@@ -78,7 +78,9 @@ Cenário: [Registrar Ponto] Trabalhador registra o ponto justificando porque che
 		"""
 		Hoje o trânsito estava lento.
 		"""
-	Então a observação do ponto deverá ser:
+	#Então o sistema deverá registrar o ponto?
+	Então o ponto deverá ser registrado
+	E a observação do ponto deverá ser:
 		"""
 		Hoje o trânsito estava lento.
 		"""
