@@ -5,7 +5,7 @@ using MeuPonto.Models.Folhas;
 
 namespace MeuPonto.Drivers;
 
-public class HomeDriver
+public class ApuracaoPontosDriver
 {
     private readonly AngleSharpContext _angleSharp;
 
@@ -19,7 +19,7 @@ public class HomeDriver
 
     public IHtmlAnchorElement CriacaoContratoAnchor { get; private set; }
 
-    public HomeDriver(AngleSharpContext angleSharp)
+    public ApuracaoPontosDriver(AngleSharpContext angleSharp)
     {
         _angleSharp = angleSharp;
     }

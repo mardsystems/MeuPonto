@@ -13,26 +13,26 @@ namespace MeuPonto.StepDefinitions;
 public class BackupComprovantesStepDefinitions
 {
     private readonly ScenarioContext _scenario;
-    private readonly RegistroPontosContext _registroPontos;
-    private readonly RegistroPontosDriver _registroPontosInterface;
-    //private readonly BackupComprovantesContext _backupComprovantes;
+    //private readonly RegistroPontosContext _registroPontos;
+    //private readonly RegistroPontosDriver _registroPontosInterface;
+    private readonly BackupComprovantesContext _backupComprovantes;
     private readonly BackupComprovantesDriver _backupComprovantesInterface;
     private readonly GestaoContratosContext _gestaoContratos;
     private readonly MeuPontoDbContext _db;
 
     public BackupComprovantesStepDefinitions(
         ScenarioContext scenario,
-        RegistroPontosContext registroPontos,
-        RegistroPontosDriver registroPontosInterface,
-        //BackupComprovantesContext backupComprovantes,
+        //RegistroPontosContext registroPontos,
+        //RegistroPontosDriver registroPontosInterface,
+        BackupComprovantesContext backupComprovantes,
         BackupComprovantesDriver backupComprovantesInterface,
         GestaoContratosContext gestaoContratos,
         MeuPontoDbContext db)
     {
         _scenario = scenario;
-        _registroPontos = registroPontos;
-        _registroPontosInterface = registroPontosInterface;
-        //_backupComprovantes = backupComprovantes;
+        //_registroPontos = registroPontos;
+        //_registroPontosInterface = registroPontosInterface;
+        _backupComprovantes = backupComprovantes;
         _backupComprovantesInterface = backupComprovantesInterface;
         _gestaoContratos = gestaoContratos;
         _db = db;
@@ -43,7 +43,7 @@ public class BackupComprovantesStepDefinitions
     {
         var comprovante = _backupComprovantesInterface.SolicitarBackupComprovante();
 
-        _registroPontos.Inicia(comprovante);
+        _backupComprovantes.Contextualizar(comprovante);
     }
 
     [Then(@"o sistema deverá apresentar as opções de backup de um comprovante")]
@@ -55,7 +55,7 @@ public class BackupComprovantesStepDefinitions
     [Then(@"um comprovante deverá ser criado")]
     public void ThenUmComprovanteDeveraSerCriado()
     {
-        _registroPontos.Comprovante.Should().NotBeNull();
+        _backupComprovantes.Comprovante.Should().NotBeNull();
     }
 
     [When(@"o trabalhador escanear a imagem do comprovante com a data '([^']*)'")]
@@ -77,20 +77,20 @@ public class BackupComprovantesStepDefinitions
 
         var file = new FileStream(filePath, FileMode.Open);
 
-        _registroPontos.Define(file);
+        _backupComprovantes.Contextualizar(file);
 
-        _registroPontos.Comprovante.TipoImagemId = TipoImagemEnum.Original;
+        _backupComprovantes.Comprovante.TipoImagemId = TipoImagemEnum.Original;
 
         _backupComprovantesInterface.EscanearComprovante(
-            _registroPontos.Imagem,
-            _registroPontos.Comprovante,
-            _registroPontos.Ponto);
+            _backupComprovantes.Imagem,
+            _backupComprovantes.Comprovante,
+            _backupComprovantes.Ponto);
 
         var comprovanteGuardado = _db.Comprovantes
             .Include(x => x.Ponto)
-            .FirstOrDefault(x => x.PontoId == _registroPontos.Ponto.Id);
+            .FirstOrDefault(x => x.PontoId == _backupComprovantes.Ponto.Id);
 
-        _registroPontos.Define(comprovanteGuardado);
+        _backupComprovantes.Contextualizar(comprovanteGuardado);
     }
 
     [Given(@"que o trabalhador tem um comprovante de ponto com a data '([^']*)'")]
@@ -115,13 +115,13 @@ public class BackupComprovantesStepDefinitions
 
         var file = new FileStream(filePath, FileMode.Open);
 
-        _registroPontos.Define(file);
+        _backupComprovantes.Contextualizar(file);
 
-        _registroPontos.Comprovante.TipoImagemId = TipoImagemEnum.Original;
+        _backupComprovantes.Comprovante.TipoImagemId = TipoImagemEnum.Original;
 
-        _gestaoContratos.Contrato.QualificaPonto(_registroPontos.Ponto);
-        _registroPontos.Ponto.DataHora = new DateTime(2023, 02, 17, 17, 07, 0);
-        _registroPontos.Ponto.MomentoId = MomentoEnum.Saida;
+        _gestaoContratos.Contrato.QualificaPonto(_backupComprovantes.Ponto);
+        _backupComprovantes.Ponto.DataHora = new DateTime(2023, 02, 17, 17, 07, 0);
+        _backupComprovantes.Ponto.MomentoId = MomentoEnum.Saida;
     }
 
     [Given(@"que o trabalhador tem um comprovante de ponto guardado com a data '([^']*)'")]
@@ -171,13 +171,13 @@ public class BackupComprovantesStepDefinitions
 
         var file = new FileStream(filePath, FileMode.Open);
 
-        _registroPontos.Define(file);
+        _backupComprovantes.Contextualizar(file);
 
-        _registroPontos.Comprovante.TipoImagemId = TipoImagemEnum.Original;
+        _backupComprovantes.Comprovante.TipoImagemId = TipoImagemEnum.Original;
 
-        _gestaoContratos.Contrato.QualificaPonto(_registroPontos.Ponto);
-        _registroPontos.Ponto.DataHora = new DateTime(2023, 02, 17, 17, 07, 0);
-        _registroPontos.Ponto.MomentoId = MomentoEnum.Saida;
+        _gestaoContratos.Contrato.QualificaPonto(_backupComprovantes.Ponto);
+        _backupComprovantes.Ponto.DataHora = new DateTime(2023, 02, 17, 17, 07, 0);
+        _backupComprovantes.Ponto.MomentoId = MomentoEnum.Saida;
     }
 
     #region Guardar Comprovante
@@ -186,30 +186,30 @@ public class BackupComprovantesStepDefinitions
     public void WhenOTrabalhadorEscanearOComprovanteDePonto()
     {
         _backupComprovantesInterface.EscanearComprovante(
-            _registroPontos.Imagem,
-            _registroPontos.Comprovante,
-            _registroPontos.Ponto);
+            _backupComprovantes.Imagem,
+            _backupComprovantes.Comprovante,
+            _backupComprovantes.Ponto);
 
-        var comprovanteGuardado = _db.Comprovantes.FirstOrDefault(x => x.PontoId == _registroPontos.Ponto.Id);
+        var comprovanteGuardado = _db.Comprovantes.FirstOrDefault(x => x.PontoId == _backupComprovantes.Ponto.Id);
 
-        _registroPontos.Define(comprovanteGuardado);
+        _backupComprovantes.Contextualizar(comprovanteGuardado);
     }
 
     [When(@"o trabalhador guardar o comprovante de ponto")]
     public void WhenOTrabalhadorGuardarOComprovanteDePonto()
     {
         var comprovanteGuardado = _backupComprovantesInterface.GuardarComprovante(
-            _registroPontos.Imagem,
-            _registroPontos.Comprovante,
-            _registroPontos.Ponto);
+            _backupComprovantes.Imagem,
+            _backupComprovantes.Comprovante,
+            _backupComprovantes.Ponto);
 
-        _registroPontos.Define(comprovanteGuardado);
+        _backupComprovantes.Contextualizar(comprovanteGuardado);
     }
 
     [Then(@"o sistema deverá registrar o comprovante de ponto")]
     public void ThenOSistemaDeveraRegistrarOComprovanteDePonto()
     {
-        _registroPontos.Comprovante.Should().NotBeNull();
+        _backupComprovantes.Comprovante.Should().NotBeNull();
     }
 
     #endregion
@@ -223,12 +223,12 @@ public class BackupComprovantesStepDefinitions
     [Then(@"a data do ponto do comprovante deverá ser '([^']*)'")]
     public void ThenADataDoPontoDoComprovanteDeveraSer(DateTime data)
     {
-        _registroPontos.Comprovante.Ponto.DataHora.Should().Be(data);
+        _backupComprovantes.Comprovante.Ponto.DataHora.Should().Be(data);
     }
 
     [Then(@"o comprovante '([^']*)' deverá ser associado ao ponto")]
     public void ThenOComprovanteDeveraSerAssociadoAoPonto(DateTime data)
     {
-        _registroPontos.Comprovante.Ponto.Should().NotBeNull(); // TODO: inverter a associação!?
+        _backupComprovantes.Comprovante.Ponto.Should().NotBeNull(); // TODO: inverter a associação!?
     }
 }

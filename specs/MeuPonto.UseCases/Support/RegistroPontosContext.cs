@@ -4,52 +4,34 @@ namespace MeuPonto.Support;
 
 public class RegistroPontosContext
 {
-    public Table Especificacao { get; set; }
+    public DateTime? DataHoraPonto { get; private set; }
 
-    public DateTime DataHora { get; set; }
+    public Table Especificacao { get; private set; }
 
-    public Ponto Ponto { get; set; }
+    public Ponto Ponto { get; private set; }
 
-    public Stream Imagem { get; private set; }
+    public string Erro { get; private set; }
 
-    public Comprovante Comprovante { get; private set; }
-
-    public string Erro { get; set; }
-
-    public RegistroPontosContext()
+    public void Especificar(Table especificacao)
     {
-        //var ponto = new Ponto
-        //{
-        //    Momento = Momento.Entrada,
-        //    Pausa = null
-        //};
-
-        //Ponto = ponto;
+        Especificacao = especificacao;
     }
 
-    public void Inicia(Ponto ponto)
+    public void Contextualizar(Ponto ponto)
     {
+        if (ponto == null)
+        {
+            throw new ArgumentNullException(nameof(ponto));
+        }
+
         Ponto = ponto;
+
+        DataHoraPonto = ponto.DataHora;
     }
 
-    public void Inicia(Comprovante comprovante)
+    public void CapturarErro(string erro)
     {
-        Comprovante = comprovante;
-    }
-
-    public void Define(Ponto pontoRegistrado)
-    {
-        Ponto = pontoRegistrado;
-    }
-
-    public void Define(Stream imagem)
-    {
-        Imagem = imagem;
-    }
-
-    public void Define(Comprovante comprovante)
-    {
-        Comprovante = comprovante;
+        Erro = erro;
     }
 }
 

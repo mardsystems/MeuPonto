@@ -38,21 +38,21 @@ public class CadastroDeEmpregadoresStepDefinitions
     }
 
     [Given(@"que existe um empregador cadastrado '([^']*)'")]
-    public void GivenQueExisteUmEmpregadorCadastrado(string nome)
+    public void GivenQueExisteUmEmpregadorCadastrado(string nomeEmpregador)
     {
-        var empregador = _db.Empregadores.FirstOrDefault(x => x.Nome == nome);
+        var empregador = _db.Empregadores.FirstOrDefault(x => x.Nome == nomeEmpregador);
 
         if (empregador == null)
         {
             empregador = _transaction.CriaEmpregador();
 
-            empregador.Nome = nome;
+            empregador.Nome = nomeEmpregador;
 
             _db.Empregadores.Add(empregador);
             _db.SaveChanges();
         }
 
-        _cadastroEmpregadores.Define(empregador);
+        _cadastroEmpregadores.Contextualizar(empregador);
     }
 
     [Given(@"que existe um cadastro de empregador em andamento")]
@@ -62,13 +62,21 @@ public class CadastroDeEmpregadoresStepDefinitions
     }
 
     [Given(@"que existe um cadastro de empregador em andamento '([^']*)'")]
-    public void GivenQueExisteUmCadastroDeEmpregadorEmAndamento(string nome)
+    public void GivenQueExisteUmCadastroDeEmpregadorEmAndamento(string nomeEmpregador)
     {
         var empregador = _cadastroEmpregadoresInterface.SolicitarCadastroEmpregador();
 
-        empregador.Nome = nome;
+        empregador.Nome = nomeEmpregador;
 
-        _cadastroEmpregadores.Iniciar(empregador);
+        _cadastroEmpregadores.Contextualizar(empregador);
+    }
+
+    [When(@"o trabalhador solicitar a abertura de um contrato a partir de um empregador")]
+    public void WhenOTrabalhadorSolicitarAAberturaDeUmContratoAPartirDeUmEmpregador()
+    {
+        var contrato = _gestaoContratosInterface.SolicitarAbrerturaContrato(); // TODO: Incluir o empregador
+
+        _gestaoContratos.Contextualizar(contrato);
     }
 
     [When(@"o trabalhador solicitar o cadastro de um empregador")]
@@ -76,7 +84,7 @@ public class CadastroDeEmpregadoresStepDefinitions
     {
         var empregador = _cadastroEmpregadoresInterface.SolicitarCadastroEmpregador();
 
-        _cadastroEmpregadores.Iniciar(empregador);
+        _cadastroEmpregadores.Contextualizar(empregador);
     }
 
     [Then(@"o sistema deverá apresentar um empregador novo")]
@@ -115,7 +123,7 @@ public class CadastroDeEmpregadoresStepDefinitions
     [When(@"o trabalhador cadastrar o empregador como:")]
     public void WhenOTrabalhadorCadastrarOEmpregadorComo(Table table)
     {
-        _cadastroEmpregadores.Especificacao = table;
+        _cadastroEmpregadores.Especificar(table);
 
         var empregador = _cadastroEmpregadores.Empregador;
 
@@ -130,7 +138,7 @@ public class CadastroDeEmpregadoresStepDefinitions
 
         var empregadorCadastrado = _db.Empregadores.FirstOrDefault(x => x.Nome == empregador.Nome);
 
-        _cadastroEmpregadores.Define(empregadorCadastrado);
+        _cadastroEmpregadores.Contextualizar(empregadorCadastrado);
     }
 
     [When(@"o trabalhador abrir o contrato feito com um empregador como:")]
@@ -193,10 +201,18 @@ public class CadastroDeEmpregadoresStepDefinitions
     }
 
     [Then(@"o empregador '([^']*)' deverá ser associado ao contrato")]
-    public void ThenOEmpregadorDeveraSerAssociadoAoContrato(string empregador)
+    public void ThenOEmpregadorDeveraSerAssociadoAoContrato(string nomeEmpregador)
     {
         _gestaoContratos.Contrato.Empregador.Should().NotBeNull();
 
-        _gestaoContratos.Contrato.Empregador.Nome.Should().Be(empregador);
+        _gestaoContratos.Contrato.Empregador.Nome.Should().Be(nomeEmpregador);
+    }
+
+    [Then(@"o contrato deverá ser feito com o empregador '([^']*)'")]
+    public void ThenOContratoDeveraSerFeitoComOEmpregador(string nomeEmpregador)
+    {
+        _gestaoContratos.Contrato.Empregador.Should().NotBeNull();
+
+        _gestaoContratos.Contrato.Empregador.Nome.Should().Be(nomeEmpregador);
     }
 }

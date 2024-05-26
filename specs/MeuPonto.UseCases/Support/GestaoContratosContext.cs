@@ -4,13 +4,13 @@ namespace MeuPonto.Support;
 
 public class GestaoContratosContext
 {
+    public string NomeContrato { get; private set; }
+
     public Table Especificacao { get; private set; }
 
     public Contrato Contrato { get; private set; }
 
-    public string NomeContrato { get; private set; } // TODO: Remover.
-
-    public string Erro { get; set; }
+    public string Erro { get; private set; }
 
     public void Especificar(Table especificacao)
     {
@@ -19,14 +19,19 @@ public class GestaoContratosContext
 
     public void Contextualizar(Contrato contrato)
     {
-        Contrato = contrato;
-
         if (contrato == null)
         {
             throw new ArgumentNullException(nameof(contrato));
         }
 
+        Contrato = contrato;
+
         NomeContrato = contrato.Nome;
+    }
+
+    public void CapturarErro(string erro)
+    {
+        Erro = erro;
     }
 }
 

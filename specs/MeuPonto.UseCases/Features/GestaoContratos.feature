@@ -13,7 +13,13 @@ O sistema deverá fornecer para o trabalhador a capacidade de abrir um contrato.
 3. Trabalhador abre o contrato (nome, ativo, segunda, terça, …) (E2)
 4. Sistema registra o contrato
 
-Regra: O sistema deverá fornecer para o trabalhador a capacidade de abrir um contrato
+O sistema deverá fornecer para o trabalhador a capacidade de alterar um contrato
+
+O sistema deverá fornecer para o trabalhador a capacidade de encerrar um contrato
+
+O sistema deverá fornecer para o trabalhador a capacidade de excluir um contrato
+
+Regra: Um contrato pode ser aberto
 
 @main @wip
 Cenário: [Abrir Contrato] Trabalhador abre um contrato
@@ -34,7 +40,7 @@ Cenário: [Abrir Contrato] Trabalhador abre um contrato
 		| Contrato A | True  | 00:00:00 | 08:00:00 | 08:00:00 | 08:00:00 | 08:00:00 | 08:00:00 | 00:00:00 |
 	Então o sistema deverá registrar o contrato como esperado
 
-Regra: O sistema deverá fornecer para o trabalhador a capacidade de alterar um contrato
+Regra: Um contrato pode ser alterado
 
 @main
 Cenário: [Alterar Contrato] Trabalhador altera um contrato para corrigir um erro de digitação no nome
@@ -136,7 +142,7 @@ Cenário: [Abrir Contrato] Trabalhador abre um contrato com uma jornada de traba
 		| Saturday   | 04:00:00 |
 	E o tempo total da jornada de trabalho semanal prevista no contrato deverá ser '1.20:00'
 
-Regra: O sistema deverá fornecer para o trabalhador a capacidade de encerrar um contrato
+Regra: Um contrato pode ser encerrado
 
 @main @wip
 Cenário: [Encerrar Contrato] Trabalhador encerra um contrato
@@ -145,13 +151,14 @@ Cenário: [Encerrar Contrato] Trabalhador encerra um contrato
 	E o trabalhador encerrar o contrato 'Contrato A'
 	Então o contrato deverá ser encerrado
 
-Regra: O sistema deverá fornecer para o trabalhador a capacidade de excluir um contrato
+Regra: Um contrato pode ser excluído
 
 @main
 Cenário: [Excluir Contrato] Trabalhador exclui um contrato que não era necessário
 	Dado que existe um contrato aberto 'Contrato A'
 	Quando o trabalhador solicitar a exclusão do contrato 'Contrato A'
-	E o trabalhador excluir o contrato 'Contrato A'
+	#E o trabalhador excluir o contrato 'Contrato A'
+	E o trabalhador excluir esse contrato
 	Então o contrato deverá ser excluído
 
 Regra: Se existir dados relacionados a um contrato então ele não pode ser excluído
@@ -161,5 +168,6 @@ Cenário: [Excluir Contrato] Trabalhador tenta excluir excluir um contrato com p
 	Dado que existe um contrato aberto 'Contrato C'
 	E que existe um ponto qualificado com o contrato 'Contrato C'
 	Quando o trabalhador solicitar a exclusão do contrato 'Contrato C'
-	E o trabalhador excluir o contrato 'Contrato C'
+	#E o trabalhador excluir o contrato 'Contrato C'
+	E o trabalhador excluir esse contrato
 	Então o contrato não deverá ser excluído

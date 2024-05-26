@@ -68,15 +68,15 @@ public class CadastroEmpregadoresDriver
 
         var form = Document.GetForm();
 
-        var empregador = new Empregador
+        var cadastroEmpregador = new Empregador
         {
             Nome = form.GetInput("CadastroEmpregador.Nome").Value,
         };
 
-        return empregador;
+        return cadastroEmpregador;
     }
 
-    public void CadastrarEmpregador(Empregador empregador)
+    public void CadastrarEmpregador(Empregador cadastroEmpregador)
     {
         GoTo();
 
@@ -84,7 +84,7 @@ public class CadastroEmpregadoresDriver
 
         var form = Document.GetForm();
 
-        form.GetInput("CadastroEmpregador.Nome").Value = empregador.Nome;
+        form.GetInput("CadastroEmpregador.Nome").Value = cadastroEmpregador.Nome;
 
         var submitButton = form.GetSubmitButton();
 
@@ -123,7 +123,7 @@ public class CadastroEmpregadoresDriver
         return empregadorDetalhado;
     }
 
-    public void EditarEmpregador(string nomeEmpregador, Empregador empregadorCadastrado)
+    public void EditarEmpregador(string nomeEmpregador, Empregador cadastroEmpregador)
     {
         GoTo();
 
@@ -133,7 +133,7 @@ public class CadastroEmpregadoresDriver
 
         var form = Document.GetForm();
 
-        form.GetInput("EdicaoEmpregador.Nome").Value = empregadorCadastrado.Nome;
+        form.GetInput("EdicaoEmpregador.Nome").Value = cadastroEmpregador.Nome;
 
         var submitButton = form.GetSubmitButton();
 

@@ -4,47 +4,40 @@ namespace MeuPonto.Support;
 
 public class BackupComprovantesContext
 {
+    public DateTime? DataHoraPonto { get; private set; }
+
     public Stream Imagem { get; private set; }
 
     public Comprovante Comprovante { get; private set; }
 
     public Ponto Ponto { get; private set; }
 
-    public BackupComprovantesContext()
-    {
-        //Comprovante = new Comprovante();
+    public string Erro { get; private set; }
 
-        //var ponto = new Ponto
-        //{
-        //    Momento = Momento.Entrada,
-        //    Pausa = null
-        //};
-
-        //Ponto = ponto;
-    }
-
-    public void Inicia(Comprovante comprovante)
-    {
-        Comprovante = comprovante;
-    }
-
-    public void Inicia(Ponto ponto)
-    {
-        Ponto = ponto;
-    }
-
-    public void Define(Stream imagem)
+    public void Contextualizar(Stream imagem)
     {
         Imagem = imagem;
     }
 
-    public void Define(Comprovante comprovante)
+    public void Contextualizar(Comprovante comprovante)
     {
+        if (comprovante == null)
+        {
+            throw new ArgumentNullException(nameof(comprovante));
+        }
+
         Comprovante = comprovante;
+
+        DataHoraPonto = comprovante.Ponto.DataHora;
+    }
+
+    public void CapturarErro(string erro)
+    {
+        Erro = erro;
     }
 }
 
 public class BackupComprovanteData
 {
-    
+
 }

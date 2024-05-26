@@ -1,6 +1,8 @@
-﻿namespace MeuPonto.Drivers;
+﻿using MeuPonto.Models.Folhas;
 
-public class HomeDriver
+namespace MeuPonto.Drivers;
+
+public class ApuracaoPontosDriver
 {
     public void GoTo()
     {

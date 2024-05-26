@@ -40,7 +40,11 @@ namespace MeuPonto.Features
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("pt-br"), "Features", "Cadastro de Empregadores", null, ProgrammingLanguage.CSharp, featureTags);
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("pt-br"), "Features", "Cadastro de Empregadores", @"O sistema deverá fornecer para o trabalhador a capacidade de cadastrar um empregador
+
+O sistema deverá fornecer para o trabalhador a capacidade de abrir um contrato feito com um empregador novo
+
+O sistema deverá fornecer para o trabalhador a capacidade de abrir um contrato feito com um empregador existente", ProgrammingLanguage.CSharp, featureTags);
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -90,7 +94,7 @@ namespace MeuPonto.Features
                     "main"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[Cadastrar Empregador] Trabalhador cadastra um empregador", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 8
+#line 14
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -100,20 +104,20 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 9
+#line 15
  testRunner.When("o trabalhador solicitar o cadastro de um empregador", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
-#line 10
+#line 16
  testRunner.Then("o sistema deverá apresentar um empregador novo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
                 TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                             "nome"});
                 table3.AddRow(new string[] {
                             "Empregador A"});
-#line 11
+#line 17
  testRunner.When("o trabalhador cadastrar o empregador como:", ((string)(null)), table3, "Quando ");
 #line hidden
-#line 14
+#line 20
  testRunner.Then("o sistema deverá registrar o empregador como esperado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
             }
@@ -133,7 +137,7 @@ this.ScenarioInitialize(scenarioInfo);
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[Abrir Contrato com Empregador Novo] Trabalhador abre um contrato feito com um em" +
                     "pregador novo", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 19
+#line 25
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -143,30 +147,30 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 20
+#line 26
  testRunner.Given("que existe uma abertura de contrato em andamento", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
-#line 21
+#line 27
  testRunner.When("o trabalhador solicitar o cadastro de um empregador", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
-#line 22
+#line 28
  testRunner.Then("o sistema deverá apresentar um empregador novo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
                 TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                             "nome"});
                 table4.AddRow(new string[] {
                             "Empregador Novo"});
-#line 23
+#line 29
  testRunner.When("o trabalhador cadastrar o empregador como:", ((string)(null)), table4, "Quando ");
 #line hidden
                 TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                             "empregador"});
                 table5.AddRow(new string[] {
                             "Empregador Novo"});
-#line 27
+#line 33
  testRunner.When("o trabalhador abrir o contrato feito com um empregador como:", ((string)(null)), table5, "Quando ");
 #line hidden
-#line 30
+#line 36
  testRunner.Then("o sistema deverá registrar o contrato como esperado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
             }
@@ -186,7 +190,7 @@ this.ScenarioInitialize(scenarioInfo);
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[Abrir Contrato com Empregador Existente] Trabalhador abre um contrato feito com " +
                     "um empregador existente", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 36
+#line 42
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -196,21 +200,69 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 37
+#line 43
  testRunner.Given("que existe um empregador cadastrado \'Empregador Existente\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
-#line 38
+#line 44
  testRunner.And("que existe uma abertura de contrato em andamento", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
                 TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                             "empregador"});
                 table6.AddRow(new string[] {
                             "Empregador Existente"});
-#line 39
+#line 45
  testRunner.When("o trabalhador abrir o contrato feito com um empregador como:", ((string)(null)), table6, "Quando ");
 #line hidden
-#line 42
+#line 48
  testRunner.Then("o sistema deverá registrar o contrato como esperado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="[Abrir Contrato] Trabalhador abre um contrato a partir de um empregador")]
+        [Xunit.TraitAttribute("FeatureTitle", "Cadastro de Empregadores")]
+        [Xunit.TraitAttribute("Description", "[Abrir Contrato] Trabalhador abre um contrato a partir de um empregador")]
+        [Xunit.TraitAttribute("Category", "main")]
+        [Xunit.TraitAttribute("Category", "wip")]
+        public void AbrirContratoTrabalhadorAbreUmContratoAPartirDeUmEmpregador()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "main",
+                    "wip"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[Abrir Contrato] Trabalhador abre um contrato a partir de um empregador", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 54
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 55
+ testRunner.Given("que existe um empregador cadastrado \'Empregador Existente\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+#line hidden
+#line 56
+ testRunner.When("o trabalhador solicitar a abertura de um contrato a partir de um empregador", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
+#line hidden
+#line 57
+ testRunner.Then("o sistema deverá apresentar um contrato novo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
+#line hidden
+                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                            "empregador"});
+                table7.AddRow(new string[] {
+                            "Empregador Existente"});
+#line 59
+ testRunner.When("o trabalhador abrir o contrato como:", ((string)(null)), table7, "Quando ");
+#line hidden
+#line 62
+ testRunner.Then("o sistema deverá registrar o contrato como esperado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
+#line hidden
+#line 63
+ testRunner.And("o contrato deverá ser feito com o empregador \'Empregador Existente\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -229,7 +281,7 @@ this.ScenarioInitialize(scenarioInfo);
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[Cadastrar Empregador] Trabalhador cadastra um empregador com nome maior que 2 ca" +
                     "ractere", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 48
+#line 68
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -239,17 +291,17 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 49
+#line 69
  testRunner.Given("que existe um cadastro de empregador em andamento", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
-                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                             "nome"});
-                table7.AddRow(new string[] {
+                table8.AddRow(new string[] {
                             "Empregador B"});
-#line 50
- testRunner.When("o trabalhador cadastrar o empregador como:", ((string)(null)), table7, "Quando ");
+#line 70
+ testRunner.When("o trabalhador cadastrar o empregador como:", ((string)(null)), table8, "Quando ");
 #line hidden
-#line 53
+#line 73
  testRunner.Then("o sistema deverá registrar o empregador como esperado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
             }

@@ -2,7 +2,13 @@
 
 Funcionalidade: Cadastro de Empregadores
 
-Regra: O sistema deverá fornecer para o trabalhador a capacidade de cadastrar um empregador
+O sistema deverá fornecer para o trabalhador a capacidade de cadastrar um empregador
+
+O sistema deverá fornecer para o trabalhador a capacidade de abrir um contrato feito com um empregador novo
+
+O sistema deverá fornecer para o trabalhador a capacidade de abrir um contrato feito com um empregador existente
+
+Regra: Um empregador pode ser cadastrado
 
 @main
 Cenário: [Cadastrar Empregador] Trabalhador cadastra um empregador
@@ -13,7 +19,7 @@ Cenário: [Cadastrar Empregador] Trabalhador cadastra um empregador
 		| Empregador A |
 	Então o sistema deverá registrar o empregador como esperado
 
-Regra: O sistema deverá fornecer para o trabalhador a capacidade de abrir um contrato feito com um empregador novo
+Regra: Um contrato pode ser feito com um empregador novo
 
 @extension
 Cenário: [Abrir Contrato com Empregador Novo] Trabalhador abre um contrato feito com um empregador novo
@@ -30,7 +36,7 @@ Cenário: [Abrir Contrato com Empregador Novo] Trabalhador abre um contrato feit
 	Então o sistema deverá registrar o contrato como esperado
 	#Então o empregador 'Empregador Novo' deverá ser associado ao contrato
 
-Regra: O sistema deverá fornecer para o trabalhador a capacidade de abrir um contrato feito com um empregador existente
+Regra: Um contrato pode ser feito com um empregador existente
 
 @extension
 Cenário: [Abrir Contrato com Empregador Existente] Trabalhador abre um contrato feito com um empregador existente
@@ -41,6 +47,20 @@ Cenário: [Abrir Contrato com Empregador Existente] Trabalhador abre um contrato
 		| Empregador Existente |
 	Então o sistema deverá registrar o contrato como esperado
 	#Então o empregador 'Empregador Existente' deverá ser associado ao contrato
+
+Regra: Um contrato pode ser aberto a partir de um empregador
+
+@main @wip
+Cenário: [Abrir Contrato] Trabalhador abre um contrato a partir de um empregador
+	Dado que existe um empregador cadastrado 'Empregador Existente'
+	Quando o trabalhador solicitar a abertura de um contrato a partir de um empregador
+	Então o sistema deverá apresentar um contrato novo
+	#E o contrato deverá ser feito com o empregador 'Empregador Existente'
+	Quando o trabalhador abrir o contrato como:
+		| empregador           |
+		| Empregador Existente |
+	Então o sistema deverá registrar o contrato como esperado
+	E o contrato deverá ser feito com o empregador 'Empregador Existente'
 
 Regra: O nome do empregador deve ter pelo menos 3 caracteres
 

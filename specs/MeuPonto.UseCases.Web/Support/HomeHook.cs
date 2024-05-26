@@ -5,9 +5,9 @@ namespace MeuPonto.Support;
 //[Binding]
 public class HomeHook
 {
-    private readonly HomeDriver _homePageDriver;
+    private readonly ApuracaoPontosDriver _homePageDriver;
 
-    public HomeHook(HomeDriver homePageDriver)
+    public HomeHook(ApuracaoPontosDriver homePageDriver)
     {
         _homePageDriver = homePageDriver;
     }

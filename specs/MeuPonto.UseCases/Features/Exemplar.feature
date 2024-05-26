@@ -16,6 +16,7 @@ Caixa repete os passos 3 e 4 até que indique ter terminado.
 9. Sistema apresenta recibo.
 10. Cliente vai embora com recibo e mercadorias (se houver).
 
+@wip
 Cenário: [Processar Venda] Caixa efetua nova venda
 	Quando o caixa começar uma nova venda
 	E o caixa inserir o identificador do item
@@ -28,7 +29,8 @@ Cenário: [Processar Venda] Caixa efetua nova venda
 	E o sistema deverá enviar informações de venda e pagamento para sistema externo de contabilidade
 	E o sistema deverá enviar informações de venda e pagamento para sistema externo de estoque
 	E o sistema deverá apresentar o recibo
-	
+
+@wip	
 Cenário: [Processar Venda] Caixa efetua nova venda com sucesso
 	Quando o caixa iniciar uma nova venda
 	E o caixa entrar um item como:

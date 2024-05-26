@@ -4,53 +4,34 @@ namespace MeuPonto.Support;
 
 public class CadastroEmpregadoresContext
 {
-    public Table Especificacao { get; set; }
+    public string NomeEmpregador { get; private set; }
+
+    public Table Especificacao { get; private set; }
 
     public Empregador Empregador { get; private set; }
 
-    public string NomeEmpregador { get; private set; }
+    public string Erro { get; private set; }
 
-    public CadastroEmpregadoresContext()
+    public void Especificar(Table especificacao)
     {
-        //var empregador = new Empregador
-        //{
-        //    Nome = "Test user",
-        //};
-
-        //Empregador = empregador;
+        Especificacao = especificacao;
     }
 
-    public void Iniciar(Empregador empregador)
+    public void Contextualizar(Empregador empregador)
     {
-        Empregador = empregador;
-
         if (empregador == null)
         {
             throw new ArgumentNullException(nameof(empregador));
         }
 
-        NomeEmpregador = empregador.Nome;
-    }
-
-    public void ConsideraQueExiste(Empregador empregador)
-    {
         Empregador = empregador;
 
         NomeEmpregador = empregador.Nome;
     }
 
-    public void DefineNomeEmpregador(string nomeEmpregador)
+    public void CapturarErro(string erro)
     {
-        Empregador.Nome = nomeEmpregador;
-
-        NomeEmpregador = nomeEmpregador;
-    }
-
-    public void Define(Empregador empregadorCadastrado)
-    {
-        Empregador = empregadorCadastrado;
-
-        NomeEmpregador = empregadorCadastrado.Nome;
+        Erro = erro;
     }
 }
 

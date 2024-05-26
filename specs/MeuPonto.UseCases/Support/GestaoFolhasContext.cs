@@ -4,34 +4,29 @@ namespace MeuPonto.Support;
 
 public class GestaoFolhasContext
 {
-    public GestaoFolhasContext()
-    {
-        //var hoje = DateTime.Today;
-
-        //var folhaNova = new Folha
-        //{
-        //    Competencia = new DateTime(hoje.Year, hoje.Month, 1)
-        //};
-
-        //Folha = folhaNova;
-    }
+    public Table Especificacao { get; private set; }
 
     public Folha Folha { get; private set; }
 
-    public void Inicia(Folha folha)
+    public string Erro { get; private set; }
+
+    public void Especificar(Table especificacao)
     {
+        Especificacao = especificacao;
+    }
+
+    public void Contextualizar(Folha folha)
+    {
+        if (folha == null)
+        {
+            throw new ArgumentNullException(nameof(folha));
+        }
+
         Folha = folha;
     }
 
-    public void ConsideraQueExiste(Folha folha)
+    public void CapturarErro(string erro)
     {
-        Folha = folha;
+        Erro = erro;
     }
-
-    public void Define(Folha folhaAberta)
-    {
-        FolhaAberta = folhaAberta;
-    }
-
-    public Folha FolhaAberta { get; private set; }
 }

@@ -16,7 +16,7 @@
 }
 
 @section Title {
-    @ViewData["Title"] <span class="badge bg-secondary">@Html.DisplayFor(model => model.Contrato.Nome)</span>
+    @ViewData["Title"] <span class="badge bg-secondary">@Html.DisplayFor(model => model.ExclusaoContrato.Nome)</span>
 }
 
 @section CardHeader {
@@ -28,13 +28,13 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" asp-page="./Detalhar" asp-route-id="@Model.Contrato?.Id">
+            <a class="nav-link" asp-page="./Detalhar" asp-route-id="@Model.ExclusaoContrato?.Id">
                 <i class="bi bi-card-text"></i>
                 <span class="d-none d-sm-inline">Detalhar</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" asp-page="./Editar" asp-route-id="@Model.Contrato?.Id" target="_modal">
+            <a class="nav-link" asp-page="./Editar" asp-route-id="@Model.ExclusaoContrato?.Id" target="_modal">
                 <i class="bi bi-pencil"></i>
                 <span class="d-none d-sm-inline">Editar</span>
             </a>
@@ -51,27 +51,27 @@
 <div class="alert alert-danger" role="alert">
     Tem certeza que deseja excluir isso?
 </div>
-<dl class="row g-3 contrato">
-    <dt class="col-sm-3 nome">
-        @Html.DisplayNameFor(model => model.Contrato.Nome)
+<dl class="row g-3 Contrato">
+    <dt class="col-sm-3 Nome">
+        @Html.DisplayNameFor(model => model.ExclusaoContrato.Nome)
     </dt>
-    <dd class="col-sm-9 nome">
-        @Html.DisplayFor(model => model.Contrato.Nome)
+    <dd class="col-sm-9 Nome">
+        @Html.DisplayFor(model => model.ExclusaoContrato.Nome)
     </dd>
-    <dt class="col-sm-3">
-        @Html.DisplayNameFor(model => model.Contrato.Ativo)
+    <dt class="col-sm-3 Ativo">
+        @Html.DisplayNameFor(model => model.ExclusaoContrato.Ativo)
     </dt>
-    <dd class="col-sm-9">
-        @Html.DisplayFor(model => model.Contrato.Ativo)
+    <dd class="col-sm-9 Ativo">
+        @Html.DisplayFor(model => model.ExclusaoContrato.Ativo)
     </dd>
     <dt class="col-sm-3 Empregador">
-        @Html.DisplayNameFor(model => model.Contrato.Empregador)
+        @Html.DisplayNameFor(model => model.ExclusaoContrato.Empregador)
     </dt>
     <dd class="col-sm-9 Empregador">
-        @if (Model.Contrato.Empregador != null)
+        @if (Model.ExclusaoContrato.Empregador != null)
         {
-            <a class="text-decoration-none" asp-page="/Contratos/Empregadores/Detalhar" asp-route-id="@Model.Contrato.EmpregadorId" title="Detalhar Empregador" target="_blank">
-                @Html.DisplayFor(model => model.Contrato.Empregador.Nome)
+            <a class="text-decoration-none" asp-page="/Contratos/Empregadores/Detalhar" asp-route-id="@Model.ExclusaoContrato.EmpregadorId" title="Detalhar Empregador" target="_blank">
+                @Html.DisplayFor(model => model.ExclusaoContrato.Empregador.Nome)
                 <i class="bi bi-link-45deg"></i>
             </a>
         }
@@ -88,10 +88,10 @@
             <div class="accordion-body">
                 <dl class="row g-3">
                     <dt class="col-sm-3">
-                        @Html.DisplayNameFor(model => model.Contrato.Id)
+                        @Html.DisplayNameFor(model => model.ExclusaoContrato.Id)
                     </dt>
                     <dd class="col-sm-9">
-                        @Html.DisplayFor(model => model.Contrato.Id)
+                        @Html.DisplayFor(model => model.ExclusaoContrato.Id)
                     </dd>
                     @*<dt class="col-sm-3">
                     @Html.DisplayNameFor(model => model.Contrato.PartitionKey)
@@ -100,16 +100,16 @@
                     @Html.DisplayFor(model => model.Contrato.PartitionKey)
                     </dd>*@
                     <dt class="col-sm-3">
-                        @Html.DisplayNameFor(model => model.Contrato.CreationDate)
+                        @Html.DisplayNameFor(model => model.ExclusaoContrato.CreationDate)
                     </dt>
                     <dd class="col-sm-9">
-                        @Html.DisplayFor(model => model.Contrato.CreationDate)
+                        @Html.DisplayFor(model => model.ExclusaoContrato.CreationDate)
                     </dd>
                     <dt class="col-sm-3">
-                        @Html.DisplayNameFor(model => model.Contrato.Version)
+                        @Html.DisplayNameFor(model => model.ExclusaoContrato.Version)
                     </dt>
                     <dd class="col-sm-9">
-                        @Html.DisplayFor(model => model.Contrato.Version)
+                        @Html.DisplayFor(model => model.ExclusaoContrato.Version)
                     </dd>
                 </dl>
             </div>
@@ -118,7 +118,7 @@
 </div>
 
 @section FormActions {
-    <input type="hidden" asp-for="Contrato.Id" />
+    <input type="hidden" asp-for="ExclusaoContrato.Id" />
     <input type="hidden" asp-for="RefererUrl" />
     <button type="submit" value="Excluir" class="btn btn-danger">
         Excluir

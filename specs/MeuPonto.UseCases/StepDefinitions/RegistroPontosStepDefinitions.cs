@@ -43,7 +43,7 @@ public class RegistroPontosStepDefinitions
         ponto.DataHora = new DateTime(datetime.Year, datetime.Month, datetime.Day, datetime.Hour, datetime.Minute, 0);
         ponto.MomentoId = MomentoEnum.Entrada;
 
-        _registroPontos.Inicia(ponto);
+        _registroPontos.Contextualizar(ponto);
     }
 
     [When(@"o trabalhador solicitar um registro de ponto")]
@@ -51,17 +51,17 @@ public class RegistroPontosStepDefinitions
     {
         var ponto = _registroPontosInterface.SolicitarRegistroPonto();
 
-        _registroPontos.Inicia(ponto);
+        _registroPontos.Contextualizar(ponto);
     }
 
     [When(@"o trabalhador registrar o ponto como:")]
-    public void WhenOTrabalhadorRegistrarOPontoComo(Table table)
+    public void WhenOTrabalhadorRegistrarOPontoComo(Table especificacao)
     {
-        _registroPontos.Especificacao = table;
+        _registroPontos.Especificar(especificacao);
 
         var ponto = _registroPontos.Ponto;
 
-        var data = table.CreateInstance(() => new RegistroPontoData
+        var data = especificacao.CreateInstance(() => new RegistroPontoData
         {
             DataHora = ponto.DataHora,
             Contrato = ponto.Contrato?.Nome,
@@ -85,17 +85,17 @@ public class RegistroPontosStepDefinitions
             .Include(x => x.Contrato)
             .FirstOrDefault(x => x.DataHora == ponto.DataHora);
 
-        _registroPontos.Define(pontoRegistrado);
+        _registroPontos.Contextualizar(pontoRegistrado);
     }
 
     [When(@"o trabalhador tentar registrar o ponto como:")]
-    public void WhenOTrabalhadorTentarRegistrarOPontoComo(Table table)
+    public void WhenOTrabalhadorTentarRegistrarOPontoComo(Table especificacao)
     {
-        _registroPontos.Especificacao = table;
+        _registroPontos.Especificar(especificacao);
 
         var ponto = _registroPontos.Ponto;
 
-        var data = table.CreateInstance(() => new RegistroPontoData
+        var data = especificacao.CreateInstance(() => new RegistroPontoData
         {
             Contrato = ponto.Contrato?.Nome,
             MomentoId = ponto.MomentoId,
@@ -124,7 +124,7 @@ public class RegistroPontosStepDefinitions
         }
         catch (Exception ex)
         {
-            _registroPontos.Erro = ex.Message;
+            _registroPontos.CapturarErro(ex.Message);
         }
     }
 
@@ -145,7 +145,7 @@ public class RegistroPontosStepDefinitions
             .Include(x => x.Contrato)
             .FirstOrDefault(x => x.DataHora == ponto.DataHora);
 
-        _registroPontos.Define(pontoRegistrado);
+        _registroPontos.Contextualizar(pontoRegistrado);
     }
 
     [Given(@"que é o momento de '([^']*)' do expediente")]
@@ -168,12 +168,6 @@ public class RegistroPontosStepDefinitions
         _registroPontos.Ponto.MomentoId = momento;
 
         _registroPontos.Ponto.PausaId = PausaEnum.Almoco;
-    }
-
-    [Given(@"que a data/hora do relógio é '([^']*)'")]
-    public void GivenQueADataHoraDoRelogioE(DateTime dataHora)
-    {
-        _registroPontos.DataHora = dataHora;
     }
 
     [Given(@"que o trabalhador registrou a entrada no expediente às '([^']*)'")]
@@ -245,9 +239,9 @@ public class RegistroPontosStepDefinitions
     [When(@"o trabalhador iniciar um registro de ponto")]
     public void WhenOTrabalhadorIniciarUmRegistroDePonto()
     {
-        var ponto = _registroPontosInterface.SolicitarMarcacaoPonto();
+        var ponto = _registroPontosInterface.SolicitarRegistroPonto();
 
-        _registroPontos.Inicia(ponto);
+        _registroPontos.Contextualizar(ponto);
     }
 
     [Then(@"o sistema deverá apresentar um ponto novo")]
@@ -269,7 +263,7 @@ public class RegistroPontosStepDefinitions
             .Include(x => x.Contrato)
             .FirstOrDefault(x => x.DataHora == _registroPontos.Ponto.DataHora);
 
-        _registroPontos.Define(pontoRegistrado);
+        _registroPontos.Contextualizar(pontoRegistrado);
     }
 
     [Then(@"o sistema deverá registrar o ponto como esperado")]
@@ -299,9 +293,9 @@ public class RegistroPontosStepDefinitions
     }
 
     [Then(@"a data do ponto deverá ser '([^']*)'")]
-    public void ThenADataDoPontoDeveraSer(DateTime data)
+    public void ThenADataDoPontoDeveraSer(DateTime dataHora)
     {
-        //TODO: _registroPontos.PontoRegistrado.Data.Should().Be(data);
+        //TODO: _registroPontos.Ponto.DataHora.Should().Be(dataHora);
     }
 
     [Then(@"a pausa do ponto deverá ser '([^']*)'")]

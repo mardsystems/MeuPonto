@@ -323,7 +323,7 @@ public class GestaoContratosStepDefinitions
         }
         catch (Exception ex)
         {
-            _gestaoContratos.Erro = ex.Message;
+            _gestaoContratos.CapturarErro(ex.Message);
         }
     }
 
@@ -416,7 +416,7 @@ public class GestaoContratosStepDefinitions
         }
         catch (Exception ex)
         {
-            _gestaoContratos.Erro = ex.Message;
+            _gestaoContratos.CapturarErro(ex.Message);
         }
     }
 
@@ -528,9 +528,15 @@ public class GestaoContratosStepDefinitions
     [When(@"o trabalhador solicitar a exclusão do contrato '([^']*)'")]
     public void WhenOTrabalhadorSolicitarAExclusaoDoContrato(string nomeContrato)
     {
-        throw new PendingStepException();
+        var form = _gestaoContratosInterface.SolicitarExclusaoContrato(nomeContrato);
 
-        _gestaoContratos.Contextualizar(null);
+        _gestaoContratos.Contextualizar(form);
+    }
+
+    [When(@"o trabalhador excluir esse contrato")]
+    public void WhenOTrabalhadorExcluirEsseContrato()
+    {
+        WhenOTrabalhadorExcluirOContrato(_gestaoContratos.NomeContrato);
     }
 
     [When(@"o trabalhador excluir o contrato '([^']*)'")]

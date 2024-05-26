@@ -3,9 +3,10 @@
 Funcionalidade: Backup Comprovantes
 	
 O sistema deverá fornecer para o trabalhador a capacidade de guardar seus comprovantes.
-Um ponto pode ser legitimado por um comprovante.
 
-Regra: O sistema deverá fornecer para o trabalhador a capacidade de guardar um comprovante
+O sistema deverá fornecer para o trabalhador a capacidade de guardar um comprovante
+
+Regra: Um ponto pode ser legitimado por um comprovante
 
 @extension @wip
 Cenário: [Registrar Ponto com um Comprovante] Trabalhador registra um ponto com um comprovante

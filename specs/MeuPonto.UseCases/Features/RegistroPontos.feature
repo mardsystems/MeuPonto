@@ -3,11 +3,12 @@
 Funcionalidade: Registro Pontos
 
 O sistema deverá fornecer para o trabalhador a capacidade de registrar seus pontos.
-Isso pode ser chamado também de Marcação de Ponto.
-	
-Regra: O sistema deverá fornecer para o trabalhador a capacidade de registrar um ponto
 
-@main @wip
+O sistema deverá fornecer para o trabalhador a capacidade de registrar um ponto
+
+Regra: Um ponto pode ser registrado
+
+@main
 Delineação do Cenário: [Registrar Ponto] Trabalhador registra os pontos de entrada e saída do expediente
 	Dado que a data/hora do relógio é '<data/hora>'
 	E que existe um contrato aberto '<contrato>'
@@ -31,7 +32,7 @@ Exemplos:
 
 Regra: Um ponto deve ser qualificado por um contrato
 
-@secondary @wip
+@alter
 Cenário: [Registrar Ponto] Trabalhador qualifica um ponto com um contrato
 	Dado que existe um contrato aberto 'Marcelo - Ateliex'
 	E que existe um registro de ponto em andamento
@@ -40,7 +41,7 @@ Cenário: [Registrar Ponto] Trabalhador qualifica um ponto com um contrato
 		| Marcelo - Ateliex |
 	Então o ponto deverá ser registrado como esperado
 
-@secondary @wip
+@alter @wip
 Cenário: [Registrar Ponto] Trabalhador deixa de qualificar um ponto com um contrato
 	Dado que existe um contrato aberto 'Marcelo - Ateliex'
 	E que existe um registro de ponto em andamento
@@ -51,25 +52,25 @@ Cenário: [Registrar Ponto] Trabalhador deixa de qualificar um ponto com um cont
 
 Regra: Um ponto pode indicar uma pausa
 
-@alter @wip
+@alter
 Delineação do Cenário: [Registrar Ponto] Trabalhador registra os pontos de pausa do expediente
 	Dado que existe um contrato aberto '<contrato>'
 	Quando o trabalhador solicitar um registro de ponto
 	E o trabalhador registrar o ponto como:
-		| contrato   | momento id   | pausa id   |
-		| <contrato> | <momento id> | <pausa id> |
+		| data/hora   | contrato   | momento id   | pausa id   |
+		| <data/hora> | <contrato> | <momento id> | <pausa id> |
 	#Então o ponto deverá ser registrado como esperado
 	Então o momento do ponto deverá ser de '<momento id>'
 	E a pausa do ponto deverá ser '<pausa id>'
 
 Exemplos:
-	| contrato          | momento id | pausa id |
-	| Marcelo - Ateliex | Saida      | Almoco   |
-	| Marcelo - Ateliex | Entrada    | Almoco   |
+	| data/hora        | contrato          | momento id | pausa id |
+	| 27/11/2022 12:07 | Marcelo - Ateliex | Saida      | Almoco   |
+	| 27/11/2022 13:05 | Marcelo - Ateliex | Entrada    | Almoco   |
 
 Regra: Um ponto pode ser registrado com uma observação
 
-@alter @wip
+@alter
 Cenário: [Registrar Ponto] Trabalhador registra o ponto justificando porque chegou atrasado
 	Dado que existe um contrato aberto
 	E que existe um registro de ponto em andamento

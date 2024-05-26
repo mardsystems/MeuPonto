@@ -6,15 +6,15 @@ using MeuPonto.Models.Pontos;
 
 namespace MeuPonto.Drivers;
 
-public class RegistroPontosDriver
+public class MarcacaoPontosDriver
 {
     private readonly AngleSharpContext _angleSharp;
 
     public IHtmlDocument Document { get; private set; }
 
-    public IHtmlAnchorElement RegistroPontoAnchor { get; private set; }
+    public IHtmlAnchorElement MarcacaoPontoAnchor { get; private set; }
 
-    public RegistroPontosDriver(AngleSharpContext angleSharp)
+    public MarcacaoPontosDriver(AngleSharpContext angleSharp)
     {
         _angleSharp = angleSharp;
     }
@@ -23,30 +23,28 @@ public class RegistroPontosDriver
     {
         Document = _angleSharp.GetDocument("/Pontos");
 
-        RegistroPontoAnchor = Document.GetAnchor("Criacao.Ponto");
+        MarcacaoPontoAnchor = Document.GetAnchor("Marcacao.Ponto");
 
-        RegistroPontoAnchor.Should().NotBeNull("o registro de pontos deve ter um link para o registro de ponto");
+        MarcacaoPontoAnchor.Should().NotBeNull("o registro de pontos deve ter um link para a marcação de ponto");
     }
 
-    public Ponto SolicitarRegistroPonto()
+    public Ponto SolicitarMarcacaoPonto()
     {
         GoTo();
 
-        Document = _angleSharp.GetDocument(RegistroPontoAnchor.Href);
+        Document = _angleSharp.GetDocument(MarcacaoPontoAnchor.Href);
 
         var form = Document.GetForm();
 
-        var dataHoraInput = form.GetInput("Ponto.DataHora");
         var momentoInput = form.GetCheckedRadioInput("Ponto.MomentoId");
         var pausaInput = form.GetCheckedRadioInput("Ponto.PausaId");
 
-        var dataHoraValue = string.IsNullOrEmpty(dataHoraInput.Value) ? new DateTime?() : DateTime.Parse(dataHoraInput.Value);
         var momentoValue = momentoInput == null ? null : momentoInput.Value;
         var pausaValue = pausaInput == null ? null : pausaInput.Value;
 
         var ponto = new Ponto
         {
-            DataHora = dataHoraValue,
+            DataHora = DateTime.Parse(form.GetInput("Ponto.DataHora").Value),
             ContratoId = null,
             MomentoId = string.IsNullOrEmpty(momentoValue) ? null : (MomentoEnum)Enum.Parse(typeof(MomentoEnum), momentoValue),
             PausaId = string.IsNullOrEmpty(pausaValue) ? null : (PausaEnum)Enum.Parse(typeof(PausaEnum), pausaValue),
@@ -56,11 +54,11 @@ public class RegistroPontosDriver
         return ponto;
     }
 
-    public void RegistrarPonto(Ponto ponto)
+    public void MarcarPonto(Ponto ponto)
     {
         GoTo();
 
-        Document = _angleSharp.GetDocument(RegistroPontoAnchor.Href);
+        Document = _angleSharp.GetDocument(MarcacaoPontoAnchor.Href);
 
         var form = Document.GetForm();
 
@@ -72,10 +70,6 @@ public class RegistroPontosDriver
             {
                 contratoIdOption.IsSelected = true;
             }
-        }
-        if (ponto.DataHora != null)
-        {
-            form.GetInput("Ponto.DataHora").Value = ponto.DataHora.Value.ToString("yyyy-MM-dd\\THH:mm:ss");
         }
         if (ponto.MomentoId != null)
         {
@@ -109,36 +103,5 @@ public class RegistroPontosDriver
 
             //return pontoRegistrado;
         }
-    }
-
-    private Ponto ObtemDetalhes()
-    {
-        var hasErrors = Document.GetValidationErrors().Any();
-
-        hasErrors.Should().BeFalse();
-
-        var dl = Document.GetDefinitionList("Ponto");
-
-        //bool estimado = false;
-
-        //bool.TryParse(((IHtmlSelectElement)dl.QuerySelector("dd.estimado > select")).Value, out estimado);
-
-        var momentoValue = dl.GetDataListItem("Momento").GetInput().Value;
-        var pausaValue = dl.GetDataListItem("Pausa").GetInput().Value;
-
-        var pontoRegistrado = new Ponto
-        {
-            Contrato = new()
-            {
-                Nome = dl.GetDataListItem("Contrato").GetString()
-            },
-            DataHora = DateTime.Parse(dl.GetDataListItem("DataHora").GetString()),
-            MomentoId = (MomentoEnum)Enum.Parse(typeof(MomentoEnum), momentoValue),
-            PausaId = string.IsNullOrEmpty(pausaValue) ? null : (PausaEnum)Enum.Parse(typeof(PausaEnum), pausaValue),
-            Estimado = dl.GetDataListItem("Estimado").GetInput().IsChecked,
-            Observacao = dl.GetDataListItem("Observacao").TextContent
-        };
-
-        return pontoRegistrado;
     }
 }

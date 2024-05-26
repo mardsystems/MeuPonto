@@ -11,7 +11,7 @@ public class ExcluirModel : FormPageModel
     private readonly MeuPontoDbContext _db;
 
     [BindProperty]
-    public Contrato Contrato { get; set; }
+    public Contrato ExclusaoContrato { get; set; }
 
     public ExcluirModel(MeuPontoDbContext db)
     {
@@ -33,7 +33,7 @@ public class ExcluirModel : FormPageModel
         }
         else
         {
-            Contrato = contrato;
+            ExclusaoContrato = contrato;
         }
 
         HoldRefererUrl();
@@ -52,9 +52,9 @@ public class ExcluirModel : FormPageModel
 
         if (contrato != null)
         {
-            Contrato = contrato;
+            ExclusaoContrato = contrato;
 
-            _db.Contratos.Remove(Contrato);
+            _db.Contratos.Remove(ExclusaoContrato);
             
             await _db.SaveChangesAsync();
         }

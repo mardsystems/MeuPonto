@@ -20,10 +20,6 @@ public class GestaoFolhasStepDefinitions
 
     private readonly GestaoContratosContext _gestaoContratos;
 
-    private readonly HomeContext _home;
-
-    private readonly HomeDriver _homeDriver;
-
     private readonly MeuPontoDbContext _db;
 
     public GestaoFolhasStepDefinitions(
@@ -31,8 +27,6 @@ public class GestaoFolhasStepDefinitions
         GestaoFolhasContext gestaoFolhas,
         GestaoFolhasDriver gestaoFolhasDriver,
         GestaoContratosContext gestaoContratos,
-        HomeContext home,
-        HomeDriver homeDriver,
         MeuPontoDbContext db)
     {
         _scenario = scenario;
@@ -42,10 +36,6 @@ public class GestaoFolhasStepDefinitions
         _gestaoFolhasDriver = gestaoFolhasDriver;
 
         _gestaoContratos = gestaoContratos;
-
-        _home = home;
-
-        _homeDriver = homeDriver;
 
         _db = db;
     }
@@ -150,13 +140,13 @@ public class GestaoFolhasStepDefinitions
 
         var folhaAberta = _gestaoFolhasDriver.AbrirFolha(_gestaoFolhas.Folha);
 
-        _gestaoFolhas.Define(folhaAberta);
+        _gestaoFolhas.Contextualizar(folhaAberta);
     }
 
     [Then(@"uma folha de ponto deverá ser aberta")]
     public void ThenUmaFolhaDePontoDeveraSerAberta()
     {
-        _gestaoFolhas.FolhaAberta.Should().NotBeNull();
+        _gestaoFolhas.Folha.Should().NotBeNull();
     }
 
     #endregion
@@ -168,13 +158,13 @@ public class GestaoFolhasStepDefinitions
     {
         var folhaFechada = _gestaoFolhasDriver.FecharFolha(_gestaoFolhas.Folha);
 
-        _gestaoFolhas.Define(folhaFechada);
+        _gestaoFolhas.Contextualizar(folhaFechada);
     }
 
     [Then(@"a folha de ponto deverá ser fechada")]
     public void ThenAFolhaDePontoDeveraSerFechada()
     {
-        _gestaoFolhas.FolhaAberta.StatusId.Should().Be(StatusFolhaEnum.Fechada);
+        _gestaoFolhas.Folha.StatusId.Should().Be(StatusFolhaEnum.Fechada);
     }
 
     #endregion
@@ -182,7 +172,7 @@ public class GestaoFolhasStepDefinitions
     [Then(@"o contrato da folha de ponto deverá deverá ser '([^']*)'")]
     public void ThenOContratoDaFolhaDePontoDeveraDeveraSer(string nome)
     {
-        var contrato = _gestaoFolhas.FolhaAberta.Contrato;
+        var contrato = _gestaoFolhas.Folha.Contrato;
 
         contrato.Nome.Should().Be(nome);
     }
@@ -190,36 +180,36 @@ public class GestaoFolhasStepDefinitions
     [Then(@"o status da folha de ponto deverá ser '([^']*)'")]
     public void ThenOStatusDaFolhaDePontoDeveraSer(StatusFolhaEnum status)
     {
-        _gestaoFolhas.FolhaAberta.StatusId.Should().Be(status);
+        _gestaoFolhas.Folha.StatusId.Should().Be(status);
     }
 
     [Then(@"a folha de ponto deverá ter '([^']*)' dias")]
     public void ThenAFolhaDePontoDeveraTerDias(int dias)
     {
-        // TODO: _gestaoFolhas.FolhaAberta.ApuracaoMensal.QuantidadeDiaria.Should().Be(dias);
+        // TODO: _gestaoFolhas.Folha.ApuracaoMensal.QuantidadeDiaria.Should().Be(dias);
     }
 
     [Then(@"a folha de ponto não deverá ter tempo total apurado")]
     public void ThenAFolhaDePontoNaoDeveraTerTempoTotalApurado()
     {
-        _gestaoFolhas.FolhaAberta.ApuracaoMensal.TempoTotalApurado.Should().BeNull();
+        _gestaoFolhas.Folha.ApuracaoMensal.TempoTotalApurado.Should().BeNull();
     }
 
     [Then(@"a folha de ponto não deverá ter tempo total período anterior")]
     public void ThenAFolhaDePontoNaoDeveraTerTempoTotalPeriodoAnterior()
     {
-        _gestaoFolhas.FolhaAberta.ApuracaoMensal.TempoTotalPeriodoAnterior.Should().BeNull();
+        _gestaoFolhas.Folha.ApuracaoMensal.TempoTotalPeriodoAnterior.Should().BeNull();
     }
 
     [Then(@"a folha de ponto deverá ter uma observação")]
     public void ThenAFolhaDePontoDeveraTerUmaObservacao()
     {
-        _gestaoFolhas.FolhaAberta.Observacao.Should().NotBeNullOrEmpty();
+        _gestaoFolhas.Folha.Observacao.Should().NotBeNullOrEmpty();
     }
 
     [Then(@"a folha de ponto não deverá ter uma observação")]
     public void ThenAFolhaDePontoNaoDeveraTerUmaObservacao()
     {
-        _gestaoFolhas.FolhaAberta.Observacao.Should().BeNullOrEmpty();
+        _gestaoFolhas.Folha.Observacao.Should().BeNullOrEmpty();
     }
 }
