@@ -5,6 +5,7 @@ using System.Transactions;
 using TechTalk.SpecFlow.Assist;
 using MeuPonto.Features.CadastroEmpregadores;
 using Microsoft.EntityFrameworkCore;
+using MeuPonto.Models.Contratos;
 
 namespace MeuPonto.StepDefinitions;
 
@@ -142,13 +143,32 @@ public class CadastroDeEmpregadoresStepDefinitions
     }
 
     [When(@"o trabalhador abrir o contrato feito com um empregador como:")]
-    public void WhenOTrabalhadorAbrirOContratoFeitoComUmEmpregadorComo(Table table)
+    public void WhenOTrabalhadorAbrirOContratoFeitoComUmEmpregadorComo(Table especificacao)
     {
-        _gestaoContratos.Especificar(table);
+        _gestaoContratos.EspecificaAberturaContrato(especificacao);
 
         var contrato = _gestaoContratos.Contrato;
 
-        var data = table.CreateInstance(() => new AberturaContratoData
+        var data = especificacao.CreateInstance(() => MapToData(contrato));
+
+        _gestaoContratosInterface.AbrirContrato(data);
+
+        //_db.ChangeTracker.Clear();
+
+        contrato = _db.Contratos
+            .Include(x => x.Empregador)
+            .FirstOrDefault(x => x.Nome == data.Nome);
+
+        _gestaoContratos.Recontextualizar(contrato);
+
+        data = MapToData(contrato);
+
+        _gestaoContratos.GuardaAberturaContrato(data);
+    }
+
+    private AberturaContratoData MapToData(Contrato contrato)
+    {
+        var data = new AberturaContratoData
         {
             Nome = contrato.Nome ?? "Contrato Padrão",
             Ativo = contrato.Ativo,
@@ -160,32 +180,9 @@ public class CadastroDeEmpregadoresStepDefinitions
             Quinta = contrato.JornadaTrabalhoSemanalPrevista.Semana[4].Tempo,
             Sexta = contrato.JornadaTrabalhoSemanalPrevista.Semana[5].Tempo,
             Sabado = contrato.JornadaTrabalhoSemanalPrevista.Semana[6].Tempo,
-        });
+        };
 
-        contrato.Nome = data.Nome;
-        contrato.Ativo = data.Ativo;
-
-        var empregador = _db.Empregadores.FirstOrDefault(x => x.Nome == data.Empregador);
-
-        contrato.FeitoCom(empregador);
-
-        contrato.JornadaTrabalhoSemanalPrevista.Semana[0].Tempo = data.Domingo;
-        contrato.JornadaTrabalhoSemanalPrevista.Semana[1].Tempo = data.Segunda;
-        contrato.JornadaTrabalhoSemanalPrevista.Semana[2].Tempo = data.Terca;
-        contrato.JornadaTrabalhoSemanalPrevista.Semana[3].Tempo = data.Quarta;
-        contrato.JornadaTrabalhoSemanalPrevista.Semana[4].Tempo = data.Quinta;
-        contrato.JornadaTrabalhoSemanalPrevista.Semana[5].Tempo = data.Sexta;
-        contrato.JornadaTrabalhoSemanalPrevista.Semana[6].Tempo = data.Sabado;
-
-        _gestaoContratosInterface.AbrirContrato(contrato);
-
-        //_db.ChangeTracker.Clear();
-
-        var contratoAberto = _db.Contratos
-            .Include(x => x.Empregador)
-            .FirstOrDefault(x => x.Nome == contrato.Nome);
-
-        _gestaoContratos.Contextualizar(contratoAberto);
+        return data;
     }
 
     [Then(@"o sistema deverá registrar o empregador como esperado")]

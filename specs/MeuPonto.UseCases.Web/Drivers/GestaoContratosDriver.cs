@@ -97,7 +97,7 @@ public class GestaoContratosDriver
         return aberturaContrato;
     }
 
-    public void AbrirContrato(Contrato aberturaContrato, bool attemptOnly = false)
+    public void AbrirContrato(AberturaContratoData aberturaContrato, bool attemptOnly = false)
     {
         GoTo();
 
@@ -111,26 +111,89 @@ public class GestaoContratosDriver
 
         if (aberturaContrato.Empregador != null)
         {
-            form.GetSelect("AberturaContrato.EmpregadorId").GetOption(aberturaContrato.Empregador.Nome).IsSelected = true;
+            form.GetSelect("AberturaContrato.EmpregadorId").GetOption(aberturaContrato.Empregador).IsSelected = true;
         }
 
-        var daysOfWeek = Enum.GetValues<DayOfWeek>();
-
-        foreach (var dayOfWeek in daysOfWeek)
+        if (aberturaContrato.Domingo.HasValue)
         {
-            var jornadaTrabalhoDiaria = aberturaContrato.JornadaTrabalhoSemanalPrevista.Semana.SingleOrDefault(x => x.DiaSemana == dayOfWeek);
-
-            var i = (int)dayOfWeek;
-
-            if (jornadaTrabalhoDiaria == default)
-            {
-                form.GetInput($"AberturaContrato.JornadaTrabalhoSemanalPrevista.Semana[{i}].Tempo").Value = "00:00";
-            }
-            else
-            {
-                form.GetInput($"AberturaContrato.JornadaTrabalhoSemanalPrevista.Semana[{i}].Tempo").Value = jornadaTrabalhoDiaria.Tempo.Value.ToString("hh\\:mm");
-            }
+            form.GetInput($"AberturaContrato.JornadaTrabalhoSemanalPrevista.Semana[0].Tempo").Value = aberturaContrato.Domingo.Value.ToString("hh\\:mm");
         }
+        else
+        {
+            form.GetInput($"AberturaContrato.JornadaTrabalhoSemanalPrevista.Semana[0].Tempo").Value = "00:00";
+        }
+
+        if (aberturaContrato.Segunda.HasValue)
+        {
+            form.GetInput($"AberturaContrato.JornadaTrabalhoSemanalPrevista.Semana[1].Tempo").Value = aberturaContrato.Segunda.Value.ToString("hh\\:mm");
+        }
+        else
+        {
+            form.GetInput($"AberturaContrato.JornadaTrabalhoSemanalPrevista.Semana[1].Tempo").Value = "00:00";
+        }
+
+        if (aberturaContrato.Terca.HasValue)
+        {
+            form.GetInput($"AberturaContrato.JornadaTrabalhoSemanalPrevista.Semana[2].Tempo").Value = aberturaContrato.Terca.Value.ToString("hh\\:mm");
+        }
+        else
+        {
+            form.GetInput($"AberturaContrato.JornadaTrabalhoSemanalPrevista.Semana[2].Tempo").Value = "00:00";
+        }
+
+        if (aberturaContrato.Quarta.HasValue)
+        {
+            form.GetInput($"AberturaContrato.JornadaTrabalhoSemanalPrevista.Semana[3].Tempo").Value = aberturaContrato.Quarta.Value.ToString("hh\\:mm");
+        }
+        else
+        {
+            form.GetInput($"AberturaContrato.JornadaTrabalhoSemanalPrevista.Semana[3].Tempo").Value = "00:00";
+        }
+
+        if (aberturaContrato.Quinta.HasValue)
+        {
+            form.GetInput($"AberturaContrato.JornadaTrabalhoSemanalPrevista.Semana[4].Tempo").Value = aberturaContrato.Quinta.Value.ToString("hh\\:mm");
+        }
+        else
+        {
+            form.GetInput($"AberturaContrato.JornadaTrabalhoSemanalPrevista.Semana[4].Tempo").Value = "00:00";
+        }
+
+        if (aberturaContrato.Sexta.HasValue)
+        {
+            form.GetInput($"AberturaContrato.JornadaTrabalhoSemanalPrevista.Semana[5].Tempo").Value = aberturaContrato.Sexta.Value.ToString("hh\\:mm");
+        }
+        else
+        {
+            form.GetInput($"AberturaContrato.JornadaTrabalhoSemanalPrevista.Semana[5].Tempo").Value = "00:00";
+        }
+
+        if (aberturaContrato.Sabado.HasValue)
+        {
+            form.GetInput($"AberturaContrato.JornadaTrabalhoSemanalPrevista.Semana[6].Tempo").Value = aberturaContrato.Sabado.Value.ToString("hh\\:mm");
+        }
+        else
+        {
+            form.GetInput($"AberturaContrato.JornadaTrabalhoSemanalPrevista.Semana[6].Tempo").Value = "00:00";
+        }
+
+        //var daysOfWeek = Enum.GetValues<DayOfWeek>();
+
+        //foreach (var dayOfWeek in daysOfWeek)
+        //{
+        //    var jornadaTrabalhoDiaria = aberturaContrato.JornadaTrabalhoSemanalPrevista.Semana.SingleOrDefault(x => x.DiaSemana == dayOfWeek);
+
+        //    var i = (int)dayOfWeek;
+
+        //    if (jornadaTrabalhoDiaria == default)
+        //    {
+        //        form.GetInput($"AberturaContrato.JornadaTrabalhoSemanalPrevista.Semana[{i}].Tempo").Value = "00:00";
+        //    }
+        //    else
+        //    {
+        //        form.GetInput($"AberturaContrato.JornadaTrabalhoSemanalPrevista.Semana[{i}].Tempo").Value = jornadaTrabalhoDiaria.Tempo.Value.ToString("hh\\:mm");
+        //    }
+        //}
 
         var submitButton = form.GetSubmitButton();
 
@@ -208,7 +271,7 @@ public class GestaoContratosDriver
         return edicaoContrato;
     }
 
-    public void EditarContrato(string nomeContrato, Contrato edicaoContrato)
+    public void EditarContrato(string nomeContrato, AberturaContratoData edicaoContrato)
     {
         GoTo();
 
@@ -361,4 +424,18 @@ public class GestaoContratosDriver
             //return contratoEditado;
         }
     }
+}
+
+public class AberturaContratoData
+{
+    public string Nome { get; set; }
+    public bool Ativo { get; set; }
+    public string Empregador { get; set; }
+    public TimeSpan? Domingo { get; set; }
+    public TimeSpan? Segunda { get; set; }
+    public TimeSpan? Terca { get; set; }
+    public TimeSpan? Quarta { get; set; }
+    public TimeSpan? Quinta { get; set; }
+    public TimeSpan? Sexta { get; set; }
+    public TimeSpan? Sabado { get; set; }
 }

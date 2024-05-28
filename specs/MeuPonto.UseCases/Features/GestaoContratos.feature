@@ -21,7 +21,7 @@ O sistema deverá fornecer para o trabalhador a capacidade de excluir um contrat
 
 Regra: Um contrato pode ser aberto
 
-@main @wip
+@main
 Cenário: [Abrir Contrato] Trabalhador abre um contrato
 	Quando o trabalhador solicitar a abertura de um contrato
 	Então o sistema deverá apresentar um contrato novo
@@ -49,7 +49,8 @@ Cenário: [Alterar Contrato] Trabalhador altera um contrato para corrigir um err
 	E o trabalhador alterar o contrato para
 		| nome                 |
 		| Marcelo - Particular |
-	Então o nome do contrato deverá ser 'Marcelo - Particular'
+	Então o sistema deverá alterar o contrato como esperado
+	#Então o nome do contrato deverá ser 'Marcelo - Particular'
 
 Regra: O nome do contrato deve ter pelo menos 3 caracteres
 
