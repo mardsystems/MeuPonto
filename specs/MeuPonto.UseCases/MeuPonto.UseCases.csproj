@@ -8,6 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ReqnrollObsoleteCodeBehindFiles Remove="Features\AberturaContrato - Copy.feature.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.7" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
     <PackageReference Include="Reqnroll.xUnit" Version="2.0.2" />
     <PackageReference Include="xunit" Version="2.8.1" />
@@ -17,7 +23,23 @@
 
   <ItemGroup>
     <Folder Include="Drivers\" />
-    <Folder Include="Support\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\MeuPonto.Web\MeuPonto.Web.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Features\EncerramentoContrato.feature.cs">
+      <DependentUpon>EncerramentoContrato.feature</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ReqnrollFeatureFiles Update="Features\EncerramentoContrato.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </ReqnrollFeatureFiles>
   </ItemGroup>
 
 </Project>
